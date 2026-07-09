@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "build:seo": "vite build && python ../../_archive/seo_inject.py"
+    "build:seo": "vite build && python ../../_archive/seo_inject.py",
+    "lint:portal": "node scripts/check-fixed-elements.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

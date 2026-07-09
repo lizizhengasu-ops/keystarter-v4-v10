@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { products } from "./data/products";
+import Portal from "../Portal";
 
 
 export default function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -32,7 +33,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
 
   if (!open) return null;
 
-  return (
+  return <Portal>
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, zIndex: 100,
       background: "rgba(0,0,0,0.4)", backdropFilter: "blur(20px)",
@@ -119,6 +120,6 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
         )}
       </div>
     </div>
-  );
+  </Portal>);
 }
 
