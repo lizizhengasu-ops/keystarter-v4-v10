@@ -1,0 +1,67 @@
+export default function SupportPage() {
+  const products = [
+    {t:"mPhone 11 Pro",d:"Specs, features, troubleshooting, and repairs.",h:"mphone-11-pro"},
+    {t:"mPhone X",d:"Display, camera, battery, and performance issues.",h:"mphone-x"},
+    {t:"mPhone 6",d:"iOS updates, Touch ID, and hardware support.",h:"mphone-6"},
+    {t:"mPhone 5S",d:"Legacy device support, upgrades, and trade-in.",h:"mphone-5s"}
+  ];
+  const topics = [
+    {t:"Billing & Subscriptions",d:"Manage payments, view invoices, update plans."},
+    {t:"Returns & Refunds",d:"Start a return, track refund status, check policy."},
+    {t:"Shipping & Delivery",d:"Track orders, check estimates, manage addresses."},
+    {t:"Warranty & Repairs",d:"Check coverage, schedule repair, request replacement."},
+    {t:"Security & Privacy",d:"Report issues, manage settings, review policies."},
+    {t:"Account Recovery",d:"Reset password, recover account, update security."}
+  ];
+  return (
+    <>
+      <section style={{padding:"48px 20px 0",maxWidth:1068,margin:"0 auto"}}>
+        <h1 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,marginBottom:4,color:"#1d1d1f"}}>Support.</h1>
+        <p style={{fontSize:21,fontWeight:300,color:"#1d1d1f",marginBottom:40,lineHeight:1.19048,letterSpacing:".011em"}}>Get help with your mifan products and services.</p>
+      </section>
+
+      <section className="section-in" style={{padding:"0 20px 32px",maxWidth:1068,margin:"0 auto"}}>
+        <div style={{display:"flex",gap:12,marginBottom:32,flexWrap:"wrap"}}>
+          {[
+            {t:"Call us",d:"1-800-MY-MIFAN",icon:"*"},
+            {t:"Chat online",d:"Start a live chat with our team.",icon:"*"},
+            {t:"Email us",d:"We respond within 24 hours.",icon:"*"}
+          ].map((x,i) => (
+            <div key={i} className="card-hover" style={{flex:1,background:"#f5f5f7",borderRadius:18,padding:"24px",border:"1px solid #e6e6ea",minWidth:180,textAlign:"center"}}>
+              <p style={{fontSize:28,fontWeight:600,color:"#0071e3",marginBottom:4}}>{x.icon}</p>
+              <h3 style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{x.t}</h3>
+              <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059}}>{x.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={{fontSize:24,fontWeight:600,color:"#1d1d1f",marginBottom:16,lineHeight:1.16667}}>Product Support</h2>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:32}}>
+          {products.map((x,i) => (
+            <div key={i} className="stagger-item card-hover" style={{background:"#f5f5f7",borderRadius:18,padding:"24px",border:"1px solid #e6e6ea"}}>
+              <h3 style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:4}}>{x.t}</h3>
+              <p style={{fontSize:14,color:"#6e6e73",marginBottom:12,lineHeight:1.47059}}>{x.d}</p>
+              <a className="btn-link" style={{fontSize:15}} href={"/product/"+x.h}>Get support &gt;</a>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={{fontSize:24,fontWeight:600,color:"#1d1d1f",marginBottom:16,lineHeight:1.16667}}>Help Topics</h2>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:32}}>
+          {topics.map((h,i) => (
+            <div key={i} className="card-hover" style={{background:"#f5f5f7",borderRadius:18,padding:"20px",border:"1px solid #e6e6ea"}}>
+              <h3 style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:4}}>{h.t}</h3>
+              <p style={{fontSize:13,color:"#6e6e73",lineHeight:1.47059}}>{h.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-in" style={{padding:"48px 20px",background:"#000",textAlign:"center"}}>
+        <h2 style={{fontSize:24,fontWeight:600,color:"#f5f5f7",marginBottom:8,lineHeight:1.16667}}>Still need help?</h2>
+        <p style={{fontSize:14,color:"#86868b",marginBottom:16,lineHeight:1.47059}}>Our support team is available 24/7.</p>
+        <a className="hero-link-large" style={{color:"#2997ff",fontSize:24,fontWeight:600}}>Contact support &gt;</a>
+      </section>
+    </>
+  );
+}

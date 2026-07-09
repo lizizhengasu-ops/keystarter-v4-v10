@@ -1,0 +1,33 @@
+<nav class="glassmorphism border-b border-[#e8e8ed] fixed top-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-12">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="scrollToSection('hero')">
+                <div class="grid grid-cols-2 gap-0.5 w-5 h-5">
+                    <div class="bg-[#f25022] w-2 h-2"></div>
+                    <div class="bg-[#7fba00] w-2 h-2"></div>
+                    <div class="bg-[#00a4ef] w-2 h-2"></div>
+                    <div class="bg-[#ffb900] w-2 h-2"></div>
+                </div>
+                <span class="font-semibold text-sm tracking-tight text-[#1d1d1f]">KeyStarter</span>
+                <span class="bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">Partner</span>
+            </div>
+            
+            <!-- Center Menu Links -->
+            <div class="hidden md:flex space-x-8 text-xs font-normal text-[#1d1d1f]/80">
+                <a href="#store" onclick="scrollToSection('store')" class="hover:text-black transition">商店 / Store</a>
+                <a href="#business" onclick="scrollToSection('business')" class="hover:text-black transition">企业合规 / B2B</a>
+                <a href="#compare" onclick="scrollToSection('compare')" class="hover:text-black transition">机型对比</a>
+                <a href="#support" onclick="scrollToSection('support')" class="hover:text-black transition">技术支持</a>
+                <a href="#portal" onclick="scrollToSection('portal')" class="hover:text-black transition" id="nav-portal-btn">交付中心 <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500 -top-1 ml-0.5"></span></a>
+            </div>
+
+            <!-- Right CTA Button -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openCheckoutDrawer('Windows 11 Pro', 19.99)" class="bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-medium px-3.5 py-1.5 rounded-full transition shadow-sm">
+                    立即询价 <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

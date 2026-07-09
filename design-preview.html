@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KeyStarter — 3 Versions Comparison</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+         background: #fff; color: #1d1d1f; }
+  
+  .header { text-align: center; padding: 48px 20px 32px; background: linear-gradient(180deg,#f5f5f7 0%,#fff 100%); }
+  .header h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.003em; margin-bottom: 6px; }
+  .header p { font-size: 16px; color: #6e6e73; font-weight: 300; }
+  .header .nav-pills { margin-top: 16px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .nav-pills a { padding: 6px 16px; border-radius: 20px; font-size: 13px; color: #0071e3; text-decoration: none; background: #f5f5f7; transition: all 0.2s; }
+  .nav-pills a:hover { background: #0071e3; color: #fff; }
+  
+  .version-banner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .version-tag { text-align: center; padding: 12px; font-size: 14px; font-weight: 600; }
+  .v1-tag { background: #fff3e0; color: #e65100; }
+  .v2-tag { background: #e3f2fd; color: #1565c0; }
+  .v3-tag { background: #e8f5e9; color: #2e7d32; }
+  
+  .section-title-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 16px 20px; border-bottom: 1px solid #f0f0f2; position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 10; }
+  .section-title-row .col { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #6e6e73; }
+  .section-title-row .col span { color: #1d1d1f; }
+  
+  .comparison-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 20px; border-bottom: 1px solid #f0f0f2; }
+  .comparison-row .col { min-width: 0; }
+  .comparison-row .col .label { font-size: 11px; font-weight: 600; color: #6e6e73; margin-bottom: 8px; display: none; }
+  
+  /* V1 — Current (Microsoft style / phone remnants) */
+  .v1 .hero-blue { background: #0078D4; color: #fff; padding: 24px 16px; text-align: center; border-radius: 8px; }
+  .v1 .hero-blue h3 { font-size: 22px; font-weight: 500; }
+  .v1 .hero-blue p { font-size: 13px; font-weight: 200; }
+  .v1 .cat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 8px; }
+  .v1 .cat-item { background: #f5f5f5; padding: 12px; border-radius: 4px; text-align: center; }
+  .v1 .cat-item .hdr { font-size: 14px; font-weight: 600; }
+  .v1 .cat-item .sub { font-size: 11px; color: #616161; }
+  .v1 .prod-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 8px; }
+  .v1 .prod-item { background: #f5f5f5; padding: 10px; border-radius: 4px; }
+  .v1 .prod-item .nm { font-size: 12px; font-weight: 600; }
+  .v1 .prod-item .pr { font-size: 12px; color: #0067b8; }
+  .v1 .btn-ms { background: #0078D4; color: #fff; padding: 4px 10px; border-radius: 2px; font-size: 11px; display: inline-block; cursor: pointer; }
+  .v1 .hero-dark-ms { background: #000; color: #fff; padding: 24px 16px; text-align: center; border-radius: 8px; margin-top: 8px; }
+  .v1 .b2b-hero { background: linear-gradient(135deg,#1a1a2e,#16213e); color: #fff; padding: 24px 16px; text-align: center; border-radius: 8px; }
+  .v1 .b2b-sol-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 8px; }
+  .v1 .b2b-sol { background: #f5f5f5; padding: 12px; border-radius: 4px; text-align: center; }
+  .v1 .support-card { background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 6px; }
+  .v1 .ms-stat { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 8px; text-align: center; }
+  
+  /* V2 — Apple Structure + Software */
+  .v2 .hero-apple { background: linear-gradient(180deg,#f5f5f7 0%,#fff 100%); text-align: center; padding: 20px 16px; border-radius: 12px; }
+  .v2 .hero-apple h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.003em; }
+  .v2 .hero-apple p { font-size: 12px; color: #6e6e73; margin-bottom: 8px; }
+  .v2 .pill-b { display: inline-block; background: #0071e3; color: #fff; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .v2 .tile-d { background: #000; padding: 20px 16px; text-align: center; border-radius: 12px; margin-top: 6px; }
+  .v2 .tile-d h4 { font-size: 18px; font-weight: 600; color: #f5f5f7; }
+  .v2 .tile-d p { font-size: 12px; color: #86868b; }
+  .v2 .grid-4 { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-top: 6px; }
+  .v2 .card-a { background: #f5f5f7; border-radius: 12px; padding: 10px; text-align: center; border: 1px solid #e6e6ea; }
+  .v2 .card-a .box { height: 50px; background: linear-gradient(135deg,#e8e8ed,#f0f0f2); border-radius: 8px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .v2 .card-a h4 { font-size: 12px; font-weight: 600; }
+  .v2 .card-a .pr { font-size: 12px; color: #0071e3; font-weight: 600; }
+  .v2 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+  .v2 .promo { padding: 16px; border-radius: 12px; text-align: center; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .v2 .promo h4 { font-size: 15px; font-weight: 600; }
+  .v2 .promo p { font-size: 11px; color: #6e6e73; }
+  .v2 .link-b { color: #0071e3; text-decoration: none; font-size: 12px; }
+  .v2 .hero-dark-wide { background: #1c1c1e; padding: 24px 16px; text-align: center; border-radius: 12px; color: #f5f5f7; }
+  .v2 .stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; text-align: center; margin-top: 8px; }
+  .v2 .stat-num { font-size: 22px; font-weight: 700; color: #0071e3; }
+  .v2 .stat-lbl { font-size: 10px; color: #6e6e73; }
+  .v2 .sup-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-top: 6px; }
+  .v2 .sup-card { background: #f5f5f7; padding: 10px; border-radius: 12px; min-height: 60px; }
+  .v2 .sup-card h4 { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .v2 .sup-card p { font-size: 10px; color: #6e6e73; }
+  .v2 .search-bar { background: linear-gradient(180deg,#f5f5f7 0%,#fff 100%); padding: 16px 12px; text-align: center; border-radius: 12px; margin-bottom: 6px; }
+  .v2 .search-bar input { width: 90%; padding: 8px 12px; border: 1px solid #e6e6ea; border-radius: 10px; font-size: 12px; }
+  .v2 .b2b-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
+  .v2 .b2b-card { background: #f5f5f7; padding: 12px; border-radius: 12px; }
+  .v2 .b2b-card .ic { width: 28px; height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; }
+  .v2 .b2b-card h4 { font-size: 13px; font-weight: 600; }
+  .v2 .b2b-card p { font-size: 10px; color: #6e6e73; }
+  .v2 .testimonial { background: #f5f5f7; padding: 12px; border-radius: 12px; }
+  .v2 .testimonial p { font-size: 10px; color: #6e6e73; font-style: italic; }
+  .v2 .testimonial .auth { font-size: 11px; font-weight: 600; margin-top: 4px; }
+  .v2 .account-form { background: #f5f5f7; padding: 16px; border-radius: 12px; }
+  .v2 .account-form input { width: 100%; padding: 7px 10px; border: 1px solid #e6e6ea; border-radius: 8px; font-size: 12px; margin-bottom: 8px; }
+  .v2 .order-card { background: #f5f5f7; padding: 10px; border-radius: 12px; margin-bottom: 6px; }
+  
+  /* V3 — Premium Software Marketplace */
+  .v3 .hero-premium { text-align: center; padding: 28px 16px; border-radius: 14px; position: relative; overflow: hidden; }
+  .v3 .hero-premium.bg-dark { background: linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); color: #fff; }
+  .v3 .hero-premium h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+  .v3 .hero-premium p { font-size: 13px; opacity: 0.8; margin-bottom: 12px; }
+  .v3 .hero-premium .glow { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(0,113,227,0.15), transparent); top: -50px; right: -50px; }
+  .v3 .pill-g { display: inline-block; background: linear-gradient(135deg,#0071e3,#00A4EF); color: #fff; padding: 6px 18px; border-radius: 22px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 14px rgba(0,113,227,0.3); }
+  .v3 .pill-link-b { color: #0071e3; text-decoration: none; font-size: 13px; font-weight: 500; margin-left: 12px; }
+  .v3 .cat-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 8px; }
+  .v3 .cat-card { border-radius: 14px; padding: 14px; position: relative; overflow: hidden; }
+  .v3 .cat-card .icon-bg { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; margin-bottom: 8px; }
+  .v3 .cat-card h4 { font-size: 14px; font-weight: 600; }
+  .v3 .cat-card p { font-size: 11px; color: #6e6e73; }
+  .v3 .cat-card .count { font-size: 10px; color: #0071e3; font-weight: 600; margin-top: 4px; }
+  .v3 .prod-showcase { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-top: 6px; }
+  .v3 .prod-card { border-radius: 12px; padding: 10px; border: 1px solid #e6e6ea; }
+  .v3 .prod-card .prod-badge { display: inline-block; background: #ffd60a; font-size: 8px; font-weight: 700; padding: 1px 4px; border-radius: 3px; margin-left: 4px; }
+  .v3 .prod-card .nm { font-size: 12px; font-weight: 600; }
+  .v3 .prod-card .pr { font-size: 13px; font-weight: 700; color: #0071e3; }
+  .v3 .prod-card .old { font-size: 10px; color: #6e6e73; text-decoration: line-through; }
+  .v3 .b2b-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .v3 .b2b-stat { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; text-align: center; }
+  .v3 .b2b-stat .num { font-size: 20px; font-weight: 700; }
+  .v3 .b2b-stat .lbl { font-size: 10px; opacity: 0.7; }
+  .v3 .solution-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .v3 .sol-card { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+  .v3 .sol-card h4 { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+  .v3 .sol-card p { font-size: 10px; opacity: 0.6; }
+  .v3 .sup-topics { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; margin-top: 6px; }
+  .v3 .sup-topic { background: #f5f5f7; padding: 10px; border-radius: 10px; }
+  .v3 .sup-topic .ic { font-size: 14px; margin-bottom: 4px; }
+  .v3 .sup-topic h4 { font-size: 11px; font-weight: 600; }
+  .v3 .sup-topic p { font-size: 9px; color: #6e6e73; }
+  .v3 .articles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+  .v3 .article-item { padding: 8px; border-radius: 8px; }
+  .v3 .article-item .cat-tag { font-size: 8px; color: #0071e3; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .v3 .account-card { background: linear-gradient(135deg,#f5f5f7,#fff); padding: 16px; border-radius: 14px; }
+  .v3 .account-card input { width: 100%; padding: 8px 10px; border: 1px solid #e6e6ea; border-radius: 8px; font-size: 12px; margin-bottom: 8px; }
+  
+  .section-title-sm { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  
+  .footer-info { text-align: center; padding: 24px; color: #6e6e73; font-size: 11px; border-top: 1px solid #f0f0f2; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>KeyStarter — 三版横屏对比</h1>
+  <p>V1: 当前版本 · V2: Apple 结构 + 软件内容 · V3: Premium 软件市场</p>
+  <div class="nav-pills">
+    <a href="#store">Store</a>
+    <a href="#b2b">B2B</a>
+    <a href="#support">Support</a>
+    <a href="#account">Account</a>
+  </div>
+</div>
+
+<div class="version-banner">
+  <div class="version-tag v1-tag">V1 · 当前版本</div>
+  <div class="version-tag v2-tag">V2 · Apple 结构 + 软件</div>
+  <div class="version-tag v3-tag">V3 · Premium 软件市场</div>
+</div>
+
+<!-- STORE -->
+<div id="store">
+<div class="section-title-row">
+  <div class="col"><span>/ Store</span> 微软蓝色 Hero + 分类列表</div>
+  <div class="col"><span>/ Store</span> Apple 白色卡片 + 圆角网格</div>
+  <div class="col"><span>/ Store</span> 沉浸式 Hero + 渐变品牌卡片</div>
+</div>
+<div class="comparison-row">
+  <!-- V1 STORE -->
+  <div class="col v1">
+    <div class="hero-blue">
+      <h3>Microsoft Store</h3>
+      <p>Save big on Surface, Xbox, and more.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-item"><div class="hdr">Windows</div><div class="sub">Surface Pro, Laptop</div></div>
+      <div class="cat-item"><div class="hdr">Office</div><div class="sub">Microsoft 365</div></div>
+    </div>
+  </div>
+  <!-- V2 STORE -->
+  <div class="col v2">
+    <div class="hero-apple">
+      <h3>KeyStarter Store</h3>
+      <p>Genuine Microsoft software.</p>
+      <span class="pill-b">Shop now</span>
+    </div>
+    <div class="grid-4">
+      <div class="card-a"><div class="box" style="background:linear-gradient(135deg,#0078D4,#00A4EF);color:#fff;">Win</div><h4>Windows</h4><div class="pr">Pro, Server</div></div>
+      <div class="card-a"><div class="box" style="background:linear-gradient(135deg,#D83B01,#FF8C42);color:#fff;">Off</div><h4>Office</h4><div class="pr">2016-2024 Pro</div></div>
+    </div>
+  </div>
+  <!-- V3 STORE -->
+  <div class="col v3">
+    <div class="hero-premium bg-dark">
+      <div class="glow"></div>
+      <h3>KeyStarter Store</h3>
+      <p>Premium Microsoft licenses, instant delivery.</p>
+      <span class="pill-g">Explore deals</span>
+      <a class="pill-link-b" style="color:#2997ff;">Learn more ›</a>
+    </div>
+    <div class="cat-cards">
+      <div class="cat-card" style="background:#f0f7ff;"><div class="icon-bg" style="background:linear-gradient(135deg,#0078D4,#00A4EF);">W</div><h4>Windows</h4><p>10 Pro · 11 Pro · Server</p><div class="count">4 products</div></div>
+      <div class="cat-card" style="background:#fff5f0;"><div class="icon-bg" style="background:linear-gradient(135deg,#D83B01,#FF8C42);">O</div><h4>Office</h4><p>2016 · 2019 · 2021 · 2024</p><div class="count">4 products</div></div>
+      <div class="cat-card" style="background:#f5f5ff;"><div class="icon-bg" style="background:linear-gradient(135deg,#5C2E91,#9B59B6);">S</div><h4>Server</h4><p>2019 · 2022 · SQL · Exchange</p><div class="count">4 products</div></div>
+      <div class="cat-card" style="background:#f0fff0;"><div class="icon-bg" style="background:linear-gradient(135deg,#107C10,#2ECC40);">B</div><h4>Bundles</h4><p>Windows + Office combos</p><div class="count">6 bundles</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- B2B -->
+<div id="b2b">
+<div class="section-title-row">
+  <div class="col"><span>/ B2B</span> 暗色渐变 + 企业方案列表</div>
+  <div class="col"><span>/ B2B</span> Apple 暗色全出血 + 统计数据 + 案例</div>
+  <div class="col"><span>/ B2B</span> 深色沉浸式 + 发光效果 + 方案卡片</div>
+</div>
+<div class="comparison-row">
+  <div class="col v1">
+    <div class="b2b-hero">
+      <h3 style="font-size:20px;font-weight:600;">KeyStarter for Business</h3>
+      <p style="font-size:13px;font-weight:200;">Enterprise solutions.</p>
+    </div>
+    <div class="b2b-sol-grid">
+      <div class="b2b-sol"><h4 style="font-size:13px;">Volume Licensing</h4><p style="font-size:11px;">Enterprise agreements.</p></div>
+      <div class="b2b-sol"><h4 style="font-size:13px;">OEM</h4><p style="font-size:11px;">Hardware partnerships.</p></div>
+    </div>
+  </div>
+  <div class="col v2">
+    <div class="hero-dark-wide">
+      <h3 style="font-size:20px;">KeyStarter for Business</h3>
+      <p style="font-size:12px;">Volume pricing, dedicated support.</p>
+      <span class="pill-b" style="background:#f5f5f7;color:#1d1d1f;">Contact Sales</span>
+    </div>
+    <div class="stats">
+      <div><div class="stat-num">50K+</div><div class="stat-lbl">Licenses</div></div>
+      <div><div class="stat-num">98.7%</div><div class="stat-lbl">Satisfaction</div></div>
+    </div>
+  </div>
+  <div class="col v3">
+    <div class="hero-premium bg-dark">
+      <div class="glow"></div>
+      <h3>KeyStarter for Business</h3>
+      <p>Enterprise licensing for teams of all sizes.</p>
+      <span class="pill-g">Contact Sales</span>
+      <a class="pill-link-b" style="color:#2997ff;">View plans ›</a>
+    </div>
+    <div class="b2b-stats">
+      <div class="b2b-stat"><div class="num">50K+</div><div class="lbl">Licenses</div></div>
+      <div class="b2b-stat"><div class="num">98.7%</div><div class="lbl">Satisfaction</div></div>
+      <div class="b2b-stat"><div class="num">10min</div><div class="lbl">Delivery</div></div>
+      <div class="b2b-stat"><div class="num">24/7</div><div class="lbl">Support</div></div>
+    </div>
+    <div class="solution-cards">
+      <div class="sol-card"><h4>Volume Licensing</h4><p>5+ licenses · dedicated manager</p></div>
+      <div class="sol-card"><h4>OEM Partnerships</h4><p>Pre-install on hardware</p></div>
+      <div class="sol-card"><h4>Education</h4><p>Special pricing for schools</p></div>
+      <div class="sol-card"><h4>Government</h4><p>GSA schedules · compliant</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SUPPORT -->
+<div id="support">
+<div class="section-title-row">
+  <div class="col"><span>/ Support</span> 暗色 Hero + 列表</div>
+  <div class="col"><span>/ Support</span> Apple 渐变搜索 + 圆角卡片网格</div>
+  <div class="col"><span>/ Support</span> 浅色 Hero + Emoji 图标卡片 + 文章</div>
+</div>
+<div class="comparison-row">
+  <div class="col v1">
+    <div class="b2b-hero" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+      <h3 style="font-size:18px;">KeyStarter Support</h3>
+    </div>
+    <div class="support-card"><h4 style="font-size:12px;">Windows Activation</h4><p style="font-size:10px;">Guide to activate.</p></div>
+  </div>
+  <div class="col v2">
+    <div class="search-bar">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:4px;">How can we help?</h3>
+      <p style="font-size:11px;color:#6e6e73;margin-bottom:8px;">Search activation guides and FAQs.</p>
+      <input placeholder="Search support...">
+    </div>
+    <div class="sup-grid">
+      <div class="sup-card"><h4>Windows Activation</h4><p>Activate with your key</p></div>
+      <div class="sup-card"><h4>Office Install</h4><p>Setup Pro Plus</p></div>
+      <div class="sup-card"><h4>Server Setup</h4><p>Config guides</p></div>
+      <div class="sup-card"><h4>License Transfer</h4><p>Move to new PC</p></div>
+    </div>
+  </div>
+  <div class="col v3">
+    <div class="hero-premium" style="background:linear-gradient(135deg,#f5f5f7,#fff);">
+      <h3>How can we help you?</h3>
+      <p style="font-size:12px;">Search articles, guides, and tutorials.</p>
+      <input placeholder="Search support topics..." style="width:90%;padding:8px 12px;border:1px solid #e6e6ea;border-radius:10px;font-size:12px;">
+    </div>
+    <div class="sup-topics">
+      <div class="sup-topic"><div class="ic">🔑</div><h4>Activation</h4><p>Win & Office keys</p></div>
+      <div class="sup-topic"><div class="ic">📦</div><h4>Installation</h4><p>Setup guides</p></div>
+      <div class="sup-topic"><div class="ic">🖥️</div><h4>Server</h4><p>Config help</p></div>
+      <div class="sup-topic"><div class="ic">🔄</div><h4>Transfer</h4><p>Move license</p></div>
+    </div>
+    <div class="articles">
+      <div class="article-item"><div class="cat-tag">Activation</div><h4 style="font-size:11px;font-weight:600;margin:2px 0;">Windows 11 Pro Guide</h4><p style="font-size:9px;color:#6e6e73;">Complete setup steps.</p></div>
+      <div class="article-item"><div class="cat-tag">Office</div><h4 style="font-size:11px;font-weight:600;margin:2px 0;">Office 2021 Install</h4><p style="font-size:9px;color:#6e6e73;">Step-by-step tutorial.</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ACCOUNT -->
+<div id="account">
+<div class="section-title-row">
+  <div class="col"><span>/ Account</span> 暗色 Hero + 简单表单</div>
+  <div class="col"><span>/ Account</span> Apple 浅灰卡片 + 订单记录</div>
+  <div class="col"><span>/ Account</span> 渐变卡片 + 双列快捷入口 + 订单</div>
+</div>
+<div class="comparison-row">
+  <div class="col v1">
+    <div class="b2b-hero" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+      <h3 style="font-size:18px;">Your Account</h3>
+    </div>
+    <div style="background:#f5f5f5;padding:12px;border-radius:4px;margin-top:8px;">
+      <div style="font-size:12px;">Email</div>
+      <input placeholder="you@example.com" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:2px;font-size:12px;">
+    </div>
+  </div>
+  <div class="col v2">
+    <div class="account-form">
+      <h3 style="font-size:15px;font-weight:600;text-align:center;margin-bottom:12px;">Sign in</h3>
+      <input placeholder="Email">
+      <input placeholder="Password" type="password">
+      <div class="pill-b" style="width:100%;text-align:center;">Sign In</div>
+    </div>
+    <div class="order-card"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;"><span>Windows 11 Pro</span><span style="font-size:10px;color:#6e6e73;">Jul 1</span></div><div style="font-size:10px;color:#6e6e73;">Status: <span style="color:#107C10;">Activated ✓</span></div></div>
+  </div>
+  <div class="col v3">
+    <div class="account-card">
+      <h3 style="font-size:16px;font-weight:700;text-align:center;margin-bottom:10px;">Welcome back</h3>
+      <input placeholder="Email address">
+      <input placeholder="Password" type="password">
+      <div class="pill-g" style="width:100%;text-align:center;">Sign in</div>
+    </div>
+    <div style="display:flex;gap:6px;margin-top:8px;">
+      <div style="flex:1;background:#f5f5f7;padding:10px;border-radius:10px;text-align:center;font-size:11px;font-weight:600;color:#0071e3;">My Licenses</div>
+      <div style="flex:1;background:#f5f5f7;padding:10px;border-radius:10px;text-align:center;font-size:11px;font-weight:600;color:#0071e3;">Orders</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer-info">
+  KeyStarter — 3 Versions Comparison · Hover to compare · 2026-07-06
+</div>
+
+</body>
+</html>

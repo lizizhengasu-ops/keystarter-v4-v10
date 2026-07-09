@@ -1,0 +1,54 @@
+function AccountPage() {
+  const sections = [
+    {t:"Profile & Settings",d:"Name, email, password, and security settings."},
+    {t:"My Devices",d:"Manage registered mPhones and accessories."},
+    {t:"Purchase History",d:"View all orders, invoices, and receipts."},
+    {t:"Payment & Billing",d:"Manage credit cards, PayPal, and billing address."},
+    {t:"iCloud & Storage",d:"Manage iCloud storage, backups, and sync."},
+    {t:"Privacy & Security",d:"Review app permissions and data sharing."}
+  ];
+  return (
+    <>
+      <section style={{padding:"48px 20px 0",maxWidth:900,margin:"0 auto"}}>
+        <h1 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,marginBottom:4,color:"#1d1d1f"}}>Account.</h1>
+        <p style={{fontSize:21,fontWeight:300,color:"#1d1d1f",marginBottom:32,lineHeight:1.19048,letterSpacing:".011em"}}>Manage your devices, purchases, and settings.</p>
+      </section>
+
+      <section className="section-in" style={{padding:"0 20px 40px",maxWidth:900,margin:"0 auto"}}>
+        <div className="card-hover" style={{background:"linear-gradient(135deg,#0071e3,#0077ed)",borderRadius:18,padding:"32px 28px",textAlign:"center",marginBottom:24,cursor:"pointer",boxShadow:"0 4px 20px rgba(0,113,227,0.3)"}}>
+          <p style={{fontSize:21,fontWeight:600,color:"#fff",marginBottom:4}}>Sign in with your mifan ID</p>
+          <p style={{fontSize:14,color:"rgba(255,255,255,0.85)"}}>One account for all mifan services.</p>
+        </div>
+        <div className="stagger-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16}}>
+          {sections.map((s,i) => (
+            <div key={i} className="stagger-item card-hover" style={{background:"#f5f5f7",borderRadius:18,padding:"28px 24px",border:"1px solid #e6e6ea"}}>
+              <h3 style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:6}}>{s.t}</h3>
+              <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059}}>{s.d}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{textAlign:"center",marginTop:24}}>
+          <a className="btn-link" style={{fontSize:17}}>Manage your mifan ID &gt;</a>
+        </div>
+      </section>
+
+      <section className="section-in" style={{padding:"40px 20px",background:"#f5f5f7"}}>
+        <h2 style={{fontSize:24,fontWeight:600,lineHeight:1.16667,textAlign:"center",marginBottom:24,color:"#1d1d1f"}}>Recent Activity</h2>
+        <div className="stagger-grid" style={{maxWidth:700,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12}}>
+          {[
+            {t:"Order #MF-28491",d:"mPhone 11 Pro - Shipped",date:"Jun 28"},
+            {t:"Order #MF-28490",d:"mifan Leather Case - Delivered",date:"Jun 25"},
+            {t:"Subscription",d:"iCloud+ 200GB - Active",date:"Monthly"},
+            {t:"Repair Request",d:"Battery service - In Progress",date:"Jun 22"}
+          ].map((a,i) => (
+            <div key={i} className="stagger-item card-hover" style={{background:"#fff",borderRadius:14,padding:"16px 20px",border:"1px solid #e6e6ea",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div><p style={{fontSize:14,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{a.t}</p><p style={{fontSize:12,color:"#6e6e73"}}>{a.d}</p></div>
+              <p style={{fontSize:11,color:"#0071e3",fontWeight:600}}>{a.date}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+export default AccountPage;

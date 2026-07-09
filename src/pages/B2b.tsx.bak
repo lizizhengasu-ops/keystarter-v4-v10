@@ -1,0 +1,29 @@
+export default function B2b() {
+  const features = [
+    {t:"Volume Pricing",d:"Save on purchases of 50+ units. Custom configurations available for your organization."},
+    {t:"Device Management",d:"MDM, DEP, and zero-touch deployment for your entire fleet."},
+    {t:"Security & Compliance",d:"Enterprise-grade encryption. SOC 2 certified. GDPR compliant."},
+    {t:"Dedicated Support",d:"24/7 priority support with a dedicated account manager."},
+    {t:"Flexible Financing",d:"Leasing and payment plans tailored to your business needs."},
+    {t:"Custom Integration",d:"API access, custom configurations, and white-glove setup."}
+  ];
+  return (
+    <section style={{padding:"48px 20px 56px",maxWidth:900,margin:"0 auto"}}>
+      <h1 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,textAlign:"center",marginBottom:8,color:"#1d1d1f"}}>B2B & Enterprise.</h1>
+      <p style={{fontSize:21,fontWeight:300,color:"#1d1d1f",textAlign:"center",lineHeight:1.19048,letterSpacing:".011em",marginBottom:40}}>Empower your business with mifan technology.</p>
+      <div className="stagger-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16,marginBottom:32}}>
+        {features.map((s,i) => (
+          <div key={i} className="stagger-item card-hover" style={{background:"#f5f5f7",borderRadius:18,padding:"28px 24px",border:"1px solid #e6e6ea"}}>
+            <h3 style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:6}}>{s.t}</h3>
+            <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059}}>{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <div className="card-hover" style={{background:"#0071e3",borderRadius:18,padding:"36px 28px",textAlign:"center",boxShadow:"0 4px 20px rgba(0,113,227,0.3)"}}>
+        <h2 style={{fontSize:24,fontWeight:600,color:"#fff",marginBottom:8,lineHeight:1.16667}}>Get started with Enterprise</h2>
+        <p style={{fontSize:14,color:"#fff",opacity:0.9,marginBottom:16}}>Talk to our B2B team for custom pricing.</p>
+        <a className="btn-primary" style={{display:"inline-block",background:"#fff",color:"#0071e3",padding:"12px 22px",borderRadius:980,textDecoration:"none",fontSize:17,fontWeight:400}}>Contact Sales</a>
+      </div>
+    </section>
+  );
+}

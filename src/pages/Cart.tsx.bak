@@ -1,0 +1,44 @@
+import {Link} from "react-router-dom";
+import {useCart} from "../CartContext";
+
+export default function CartPage() {
+  const cart = useCart();
+
+  if (cart.items.length === 0) {
+    return (
+      <section style={{padding:"80px 20px",maxWidth:500,margin:"0 auto",textAlign:"center"}}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" strokeWidth="1" style={{marginBottom:16}}>
+          <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <h1 style={{fontSize:28,fontWeight:600,lineHeight:1.1,marginBottom:8,color:"#1d1d1f"}}>Your bag is empty.</h1>
+        <p style={{fontSize:15,color:"#6e6e73",marginBottom:24}}>Browse our latest products and find something you love.</p>
+        <Link to="/store" style={{display:"inline-block",fontSize:14,background:"#0071e3",color:"#fff",padding:"10px 22px",borderRadius:980,textDecoration:"none"}}>Continue Shopping</Link>
+      </section>
+    );
+  }
+
+  return (
+    <section style={{padding:"48px 20px 56px",maxWidth:800,margin:"0 auto"}}>
+      <h1 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,marginBottom:8,color:"#1d1d1f"}}>Cart.</h1>
+      <p style={{fontSize:17,color:"#6e6e73",marginBottom:32}}>Review your items before checkout.</p>
+      <div style={{borderTop:"1px solid #d2d2d7"}}>
+        {cart.items.map((x,i) => (
+          <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"20px 0",borderBottom:"1px solid #d2d2d7"}}>
+            <div>
+              <p style={{fontSize:17,fontWeight:600,color:"#1d1d1f"}}>{x.name}</p>
+              <p style={{fontSize:12,color:"#6e6e73",marginTop:2}}>Qty: {x.qty}</p>
+            </div>
+            <div style={{display:"flex",alignItems:"center",gap:16}}>
+              <p style={{fontSize:17,color:"#1d1d1f"}}>${x.price * x.qty}</p>
+              <div onClick={() => cart.remove(x.slug)} style={{fontSize:12,color:"#6e6e73",cursor:"pointer",textDecoration:"underline"}}>Remove</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{display:"flex",justifyContent:"space-between",padding:"20px 0",fontSize:20,fontWeight:600}}>
+        <span>Total</span><span>${cart.total}</span>
+      </div>
+      <div style={{display:"inline-block",fontSize:17,background:"#0071e3",color:"#fff",padding:"12px 30px",borderRadius:980,cursor:"pointer",marginTop:20,letterSpacing:"0.216px",fontWeight:600}} role="button" tabIndex={0} aria-label="Proceed to checkout" onKeyDown={e=>e.key==="Enter"&&alert("Checkout coming soon")}>Check Out</div>
+    </section>
+  );
+}

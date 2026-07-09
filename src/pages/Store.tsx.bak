@@ -1,0 +1,98 @@
+import {Link} from 'react-router-dom';
+const items = [
+  {n:'mPhone 11 Pro',p:999,s:'mphone-11-pro',c:'#1d1d1f',d:'Triple 12MP',disp:'6.1in XDR',chip:'A13',badge:'New'},
+  {n:'mPhone X',p:899,s:'mphone-x',c:'#000',d:'Dual 12MP',disp:'5.8in OLED',chip:'A11',badge:''},
+  {n:'mPhone 6',p:699,s:'mphone-6',c:'#ff9500',d:'8MP',disp:'4.7in Retina HD',chip:'A8',badge:''},
+  {n:'mPhone 5S',p:599,s:'mphone-5s',c:'#ffd60a',d:'8MP slo-mo',disp:'4in Retina',chip:'A7',badge:''},
+  {n:'mPhone 5',p:499,s:'mphone-5',c:'#007aff',d:'8MP',disp:'4in Retina',chip:'A6',badge:''},
+  {n:'mPhone 4S',p:449,s:'mphone-4s',c:'#2c2c2e',d:'8MP 1080p',disp:'3.5in Retina',chip:'A5',badge:''}
+];
+export default function StorePage() {
+  return (
+    <>
+      <section style={{padding:'48px 20px 24px',maxWidth:1068,margin:'0 auto'}}>
+        <h1 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,marginBottom:4,color:'#1d1d1f'}}>Store.</h1>
+        <p className='feature-subhead' style={{color:'#6e6e73',marginBottom:32}}>The best way to buy the products you love.</p>
+        <div style={{display:'flex',gap:16,flexWrap:'wrap',marginBottom:32}}>
+          <div className='card-hover' style={{flex:1,background:'#f5f5f7',borderRadius:18,padding:'20px',border:'1px solid #e6e6ea',minWidth:200,display:'flex',alignItems:'center',gap:16}}>
+            <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='#0071e3' strokeWidth='1.5'><circle cx='12' cy='12' r='10'/><path d='M12 16v-4M12 8h.01'/></svg>
+            <div><p style={{fontSize:13,fontWeight:600,color:'#1d1d1f'}}>Personal Setup</p><p style={{fontSize:12,color:'#6e6e73'}}>Get help setting up.</p></div>
+          </div>
+          <div className='card-hover' style={{flex:1,background:'#f5f5f7',borderRadius:18,padding:'20px',border:'1px solid #e6e6ea',minWidth:200,display:'flex',alignItems:'center',gap:16}}>
+            <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='#0071e3' strokeWidth='1.5'><path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/></svg>
+            <div><p style={{fontSize:13,fontWeight:600,color:'#1d1d1f'}}>Chat with a Specialist</p><p style={{fontSize:12,color:'#6e6e73'}}>Ask us anything.</p></div>
+          </div>
+          <div className='card-hover' style={{flex:1,background:'#f5f5f7',borderRadius:18,padding:'20px',border:'1px solid #e6e6ea',minWidth:200,display:'flex',alignItems:'center',gap:16}}>
+            <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='#0071e3' strokeWidth='1.5'><polyline points='22 12 18 12 15 21 9 3 6 12 2 12'/></svg>
+            <div><p style={{fontSize:13,fontWeight:600,color:'#1d1d1f'}}>Trade In</p><p style={{fontSize:12,color:'#6e6e73'}}>Get credit toward new.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section className='section-in' style={{padding:'0 20px 40px',maxWidth:1068,margin:'0 auto'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:12}}>
+          {items.slice(0,3).map(x => (
+            <Link to={'/product/'+x.s} key={x.s} className='card-hover' style={{display:'flex',gap:0,background:'#f5f5f7',borderRadius:18,overflow:'hidden',textDecoration:'none',color:'inherit',border:'1px solid #e6e6ea'}}>
+              <div style={{width:130,minHeight:130,display:'flex',alignItems:'center',justifyContent:'center',padding:16,background:'#f5f5f7'}}>
+                <img src={'/products/'+x.s+'.jpg'} alt={x.n} style={{width:90,height:90,objectFit:'contain'}} />
+              </div>
+              <div style={{flex:1,padding:'20px 20px 20px 0',display:'flex',flexDirection:'column',justifyContent:'center'}}>
+                {x.badge&&<p style={{fontSize:12,color:'#0071e3',fontWeight:600,textTransform:'uppercase',letterSpacing:'.05em',marginBottom:2}}>{x.badge}</p>}
+                <h2 style={{fontSize:24,fontWeight:600,color:'#1d1d1f',marginBottom:2,lineHeight:1.16667}}>{x.n}</h2>
+                <p style={{fontSize:14,color:'#6e6e73',marginBottom:4}}>{x.d} | {x.disp} | {x.chip}</p>
+                <p style={{fontSize:17,color:'#1d1d1f'}}>From ${x.p}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div style={{textAlign:'center',marginTop:20}}>
+          <Link to='/product/mphone-11-pro' className='hero-link-large' style={{fontSize:17,fontWeight:400,color:'#0071e3'}}>See all models &gt;</Link>
+        </div>
+      </section>
+
+      <section className='section-in' style={{padding:'48px 20px',background:'#f5f5f7'}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:'center',marginBottom:32,color:'#1d1d1f',lineHeight:1.47059}}>Why shop at mifan?</h2>
+        <div className='stagger-grid' style={{maxWidth:900,margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
+          {[
+            {t:'Free Delivery',d:'Free no-contact delivery on all orders.',icon:'**'},
+            {t:'0% Financing',d:'Pay over time. As low as $41.62/mo.',icon:'**'},
+            {t:'Trade In',d:'$200-$650 credit toward new mPhone.',icon:'**'},
+            {t:'Personal Setup',d:'Help setting up your new device.',icon:'**'},
+            {t:'24/7 Support',d:'Expert support whenever you need.',icon:'**'},
+            {t:'Free Returns',d:'14-day return. No restocking fee.',icon:'**'}
+          ].map((f,i)=>(
+            <div key={i} className='stagger-item card-hover' style={{background:'#fff',borderRadius:18,padding:'24px',textAlign:'center',border:'1px solid #e6e6ea'}}>
+              <p style={{fontSize:28,marginBottom:8,color:'#0071e3',fontWeight:600}}>{f.icon}</p>
+              <h3 style={{fontSize:15,fontWeight:600,color:'#1d1d1f',marginBottom:4}}>{f.t}</h3>
+              <p style={{fontSize:13,color:'#6e6e73',lineHeight:1.47059}}>{f.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className='section-in' style={{padding:'40px 20px',background:'#fff'}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:'center',marginBottom:20,color:'#1d1d1f',lineHeight:1.47059}}>Compare all mPhones</h2>
+        <div style={{maxWidth:900,margin:'0 auto',overflowX:'auto'}}>
+          <table style={{width:'100%',borderCollapse:'collapse',fontSize:13,background:'#fff',borderRadius:14,overflow:'hidden',boxShadow:'0 2px 12px rgba(0,0,0,0.06)'}}>
+            <thead><tr style={{background:'#f5f5f7'}}>
+              <th style={{padding:'12px 16px',textAlign:'left',fontWeight:600,color:'#1d1d1f'}}>Model</th>
+              <th style={{padding:'12px 16px',textAlign:'center',fontWeight:600,color:'#1d1d1f'}}>Display</th>
+              <th style={{padding:'12px 16px',textAlign:'center',fontWeight:600,color:'#1d1d1f'}}>Camera</th>
+              <th style={{padding:'12px 16px',textAlign:'center',fontWeight:600,color:'#1d1d1f'}}>Chip</th>
+              <th style={{padding:'12px 16px',textAlign:'right',fontWeight:600,color:'#1d1d1f'}}>Price</th>
+            </tr></thead>
+            <tbody>{items.map(x=>(
+              <tr key={x.s} className='card-hover' style={{borderTop:'1px solid #e6e6ea',cursor:'pointer'}}>
+                <td style={{padding:'12px 16px',fontWeight:600,color:'#1d1d1f'}}><Link to={'/product/'+x.s} style={{color:'inherit',textDecoration:'none'}}>{x.n}</Link></td>
+                <td style={{padding:'12px 16px',textAlign:'center',color:'#6e6e73'}}>{x.disp}</td>
+                <td style={{padding:'12px 16px',textAlign:'center',color:'#6e6e73'}}>{x.d}</td>
+                <td style={{padding:'12px 16px',textAlign:'center',color:'#6e6e73'}}>{x.chip}</td>
+                <td style={{padding:'12px 16px',textAlign:'right',fontWeight:600,color:'#0071e3'}}>${x.p}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        </div>
+      </section>
+    </>
+  );
+}

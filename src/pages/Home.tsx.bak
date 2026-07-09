@@ -1,0 +1,238 @@
+import {Link} from 'react-router-dom';
+import PhoneSVG from '../components/PhoneSVG';
+import {useCart} from '../CartContext';
+export default function HomePage() {
+  const cart = useCart();
+  return (
+    <>
+      {/* HERO */}
+      <section className="section section-hero" style={{background:"linear-gradient(180deg,#f5f5f7 0%,#fefefe 100%)",display:"flex",justifyContent:"center",padding:"48px 0 56px",overflow:"clip"}}>
+        <div className="tile-wrapper" style={{display:"flex",justifyContent:"center",width:"100%",minHeight:620}}>
+          <div className="tile-content" style={{display:"flex",flexDirection:"column",alignItems:"center",textAlign:"center",padding:"0 20px"}}>
+            <div className="tile-image-wrapper"><div className="hero-image"><PhoneSVG color="#1d1d1f" large={true} image="/products/mphone-11-pro.jpg" /></div></div>
+            <div className="tile-copy-wrapper" style={{marginTop:28}}>
+              <h2 className="hero-title" style={{fontSize:34,lineHeight:1.47059,fontWeight:600,color:"#1d1d1f",marginBottom:4}}>mPhone 11 Pro</h2>
+              <p className="hero-subtitle" style={{fontSize:24,fontWeight:600,color:"#1d1d1f",lineHeight:1.16667,marginBottom:8,letterSpacing:"0.216px"}}>Pro cameras. Pro performance.</p>
+              <p style={{fontSize:17,color:"#6e6e73",maxWidth:500,lineHeight:1.47059,marginBottom:8}}>Triple-camera system. ProMotion XDR display. A13 Bionic chip.</p>
+              <p style={{fontSize:17,color:"#6e6e73",maxWidth:500,lineHeight:1.47059,marginBottom:16}}>From $999. Free delivery. No-interest financing available.</p>
+              <p style={{fontSize:17,color:"#1d1d1f",marginBottom:20}}>From $999</p>
+              <div className="hero-cta tile-ctas" style={{display:"flex",gap:18,justifyContent:"center"}}>
+                <div onClick={() => cart.add({slug:"mphone-11-pro",name:"mPhone 11 Pro",price:999})} className="btn-primary" tabIndex={0} role="button" onKeyDown={e=>e.key==="Enter"&&cart.add({slug:"mphone-11-pro",name:"mPhone 11 Pro",price:999})}>Buy</div>
+                <Link to="/product/mphone-11-pro" className="hero-link-large" tabIndex={0}>Learn more</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRODUCTS */}
+      <section style={{padding:"48px 20px 56px",background:"#fff"}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:"center",marginBottom:32,lineHeight:1.47059}}>The mPhone lineup</h2>
+        <div className="card-grid" style={{maxWidth:1068,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16}}>
+          {[{n:"mPhone 11 Pro",p:999,s:"mphone-11-pro",c:"#1d1d1f",d:"Pro cameras.",img:"/products/mphone-11-pro.jpg"},{n:"mPhone X",p:899,s:"mphone-x",c:"#000",d:"All-screen OLED.",img:"/products/mphone-x.jpg"},{n:"mPhone 6",p:699,s:"mphone-6",c:"#ff9500",d:"Bigger than bigger.",img:"/products/mphone-6.jpg"},{n:"mPhone 5S",p:599,s:"mphone-5s",c:"#ffd60a",d:"Touch ID. Gold.",img:"/products/mphone-5s.jpg"},{n:"mPhone 5",p:499,s:"mphone-5",c:"#007aff",d:"Lightning fast.",img:"/products/mphone-5.jpg"},{n:"mPhone 4S",p:449,s:"mphone-4s",c:"#2c2c2e",d:"Siri arrives.",img:"/products/mphone-4s.jpg"},{n:"mPhone 4",p:399,s:"mphone-4",c:"#1c1c1e",d:"Retina display.",img:"/products/mphone-4.jpg"},{n:"mPhone 3GS",p:349,s:"mphone-3gs",c:"#48484a",d:"Video recording.",img:"/products/mphone-3gs.jpg"}].map((x,i) => (
+            <div key={i} onClick={() => cart.add({slug:x.s,name:x.n,price:x.p})} className="card-item card-hover" tabIndex={0} role="button" onKeyDown={e=>e.key==="Enter"&&cart.add({slug:x.s,name:x.n,price:x.p})} style={{background:"#f5f5f7",borderRadius:18,overflow:"hidden",cursor:"pointer",border:"1px solid #e6e6ea",display:"block",boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}}>
+            <div style={{padding:20,textAlign:"center",minHeight:170,display:"flex",alignItems:"center",justifyContent:"center"}}><PhoneSVG color={x.c} image={x.img} /></div>
+              <div style={{padding:"16px 14px",textAlign:"center",background:"#fff"}}>
+                <h3 style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{x.n}</h3>
+                <p style={{fontSize:11,color:"#6e6e73",marginBottom:4}}>{x.d}</p>
+                <p style={{fontSize:15,color:"#0071e3",fontWeight:400,marginTop:4}}>${x.p}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      
+      {/* GALLERY */}
+      <section style={{padding:"48px 20px",background:"#f5f5f7"}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:"center",marginBottom:32,lineHeight:1.47059}}>Discover mPhone</h2>
+        <div style={{display:"flex",gap:16,overflowX:"auto",padding:"0 0 16px 20px",maxWidth:1068,margin:"0 auto",scrollSnapType:"x mandatory"}}>
+          {[{n:"mPhone 11 Pro",c:"#1d1d1f",img:"/products/mphone-11-pro.jpg",d:"Triple cameras",s:"mphone-11-pro"},{n:"mPhone X",c:"#000",img:"/products/mphone-x.jpg",d:"All-screen OLED",s:"mphone-x"},{n:"mPhone 6",c:"#ff9500",img:"/products/mphone-6.jpg",d:"Retina HD display",s:"mphone-6"},{n:"mPhone 5S",c:"#ffd60a",img:"/products/mphone-5s.jpg",d:"Touch ID",s:"mphone-5s"}].map((g,i) => (
+            <Link key={i} to={"/product/"+g.s} style={{flex:"0 0 260",background:"#fff",borderRadius:18,padding:"24px",border:"1px solid #e6e6ea",textAlign:"center",textDecoration:"none",color:"inherit",display:"block",transition:"all 0.3s"}} className="card-hover">
+              <div style={{width:120,height:180,background:"#f5f5f7",borderRadius:12,margin:"0 auto 16px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <PhoneSVG color={g.c} />
+              </div>
+              <p style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{g.n}</p>
+              <p style={{fontSize:12,color:"#6e6e73"}}>{g.d}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+{/* WHY MPHONE */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#f5f5f7"}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:"center",marginBottom:40,lineHeight:1.47059}}>Why mPhone</h2>
+        <div className="stagger-grid" style={{maxWidth:900,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20}}>
+          {[{t:"Custom Silicon",d:"A-series chips designed for mPhone. Up to 40% faster performance per generation. Each new A-series chip delivers industry-leading CPU and GPU improvements, with a 16-core Neural Engine that powers advanced machine learning capabilities. The result is a phone that feels instant, responsive, and ready for anything."},{t:"Privacy by Design",d:"Your data stays yours ? always. On-device processing keeps your personal information private. Face ID data never leaves your device. iCloud data is encrypted end-to-end. Location data is shared only with your permission, and Safari prevents trackers from profiling you."},{t:"Seamless Ecosystem",d:"Works perfectly with all your Apple devices. Handoff calls between iPhone and Mac. Universal Clipboard for copy-paste across devices. AirDrop for instant file sharing. Continuity Camera lets you use your iPhone camera on your Mac. All powered by iCloud."}].map((f,i) => (
+            <div key={i} className="stagger-item card-hover" style={{background:"#fff",borderRadius:18,padding:"32px 24px",border:"1px solid #e6e6ea",transition:"all 0.3s"}}>
+              <p style={{fontSize:17,fontWeight:600,color:"#1d1d1f",marginBottom:8}}>{f.t}</p>
+              <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059}}>{f.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ECOSYSTEM - expanded */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#000",color:"#f5f5f7"}}>
+        <h2 style={{fontSize:34,fontWeight:600,textAlign:"center",marginBottom:32,lineHeight:1.47059,lineHeight:1.1}}>The mifan Ecosystem</h2>
+        <div className="stagger-grid" style={{maxWidth:900,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:20}}>
+          {[{t:"mifan Watch",d:"Track your health with advanced sensors including blood oxygen and ECG. Get notifications, take calls, and unlock your Mac. All from your wrist. With sleep tracking, workout detection, and fall detection, it is your ultimate health companion."},{t:"mifan AirPods",d:"Seamless pairing across all devices. Spatial audio with dynamic head tracking creates an immersive listening experience. Automatic device switching so you can go from iPhone to Mac without missing a beat. Up to 30 hours of battery life."},{t:"mifan iPad",d:"Universal Clipboard lets you copy on iPhone and paste on iPad. Sidecar turns your iPad into a second display for your Mac. Handoff calls and messages across devices. With iCloud, your documents, photos, and notes stay in sync everywhere."}].map((e,i) => (
+            <div key={i} style={{background:"#1c1c1e",borderRadius:18,padding:"28px 24px",border:"1px solid #38383a"}}>
+              <p style={{fontSize:17,fontWeight:600,color:"#f5f5f7",marginBottom:8}}>{e.t}</p>
+              <p style={{fontSize:14,color:"#86868b",lineHeight:1.47059}}>{e.d}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{textAlign:"center",marginTop:24}}>
+          <a className="hero-link-large" style={{color:"#2997ff",fontSize:"24px",fontWeight:600}}>Explore the ecosystem</a>
+        </div>
+      </section>
+
+      
+      {/* TRADE IN - dark tile */}
+      <section className="tile-wrapper theme-dark section-in" style={{background:"#000",padding:"48px 20px",textAlign:"center"}}>
+        <div className="tile-content" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+          <div className="tile-copy-wrapper">
+            <h2 style={{fontSize:34,fontWeight:600,color:"#f5f5f7",lineHeight:1.47059,marginBottom:8}}>Trade in your current phone.</h2>
+            <p style={{fontSize:24,fontWeight:600,color:"#86868b",lineHeight:1.17648,marginBottom:16,letterSpacing:"0.216px"}}>Get $200-$650 credit toward a new mPhone. It's good for you and the planet.</p>
+            <a className="hero-link-large" style={{color:"#2997ff",fontSize:"24px",fontWeight:600}}>Get your estimate</a>
+          </div>
+        </div>
+      </section>
+
+
+      {/* CARD - dark tile */}
+      <section className="tile-wrapper theme-dark section-in" style={{background:"#1c1c1e",padding:"48px 20px",textAlign:"center"}}>
+        <div className="tile-content" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+          <div className="tile-copy-wrapper">
+            <h2 style={{fontSize:34,fontWeight:600,color:"#f5f5f7",lineHeight:1.47059,marginBottom:8}}>Pay over time with mifan Card.</h2>
+            <p style={{fontSize:24,fontWeight:600,color:"#86868b",lineHeight:1.17648,marginBottom:16,letterSpacing:"0.216px"}}>Get 3% Daily Cash back. 0% APR financing available.</p>
+            <a className="hero-link-large" style={{color:"#2997ff",fontSize:"24px",fontWeight:600}}>Learn more</a>
+          </div>
+        </div>
+      </section>
+
+
+      {/* CARE+ - warranty tile */}
+      <section className="scale-in" style={{padding:"48px 20px",background:"#fff",textAlign:"center",borderBottom:"1px solid #f0f0f2"}}>
+        <h2 style={{fontSize:24,fontWeight:600,lineHeight:1.33349,marginBottom:8,color:"#1d1d1f"}}>mifan Care+</h2>
+        <p style={{fontSize:15,color:"#6e6e73",maxWidth:600,margin:"0 auto 16px",lineHeight:1.6}}>Get unlimited repairs, priority support, and express replacement. Starting at $7.99/mo.</p>
+        <a style={{fontSize:15,fontWeight:400,color:"#0071e3",textDecoration:"none",cursor:"pointer"}}>Learn more {">"}</a>
+      </section>
+
+
+      {/* COMPARE */}
+      <section className="scale-in section-title" style={{padding:"48px 20px",background:"#fff",textAlign:"center"}}>
+        <h2 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,marginBottom:12}}>Which mPhone is right for you?</h2>
+        <p style={{fontSize:17,color:"#6e6e73",marginBottom:20}}>Compare specs across every generation. From the original to the latest Pro.</p>
+        <a href="/store" className="btn-link" style={{fontSize:17}}>Compare all models {">"}</a>
+      </section>
+
+
+      {/* NEWSLETTER - dark */}
+      <section className="scale-in" style={{padding:"48px 20px",background:"#000",color:"#f5f5f7",textAlign:"center"}}>
+        <h2 className="section-title" style={{fontSize:24,fontWeight:600,lineHeight:1.33349,marginBottom:8,color:"#1d1d1f"}}>Stay in the loop.</h2>
+        <p style={{fontSize:14,color:"#86868b",marginBottom:20,maxWidth:400,margin:"0 auto 20px"}}>Get the latest news, updates, and offers from mifan.</p>
+        <div style={{display:"flex",gap:8,maxWidth:400,margin:"0 auto",justifyContent:"center"}}>
+          <input type="email" placeholder="Email address" style={{flex:1,padding:"10px 16px",borderRadius:12,border:"1px solid #38383a",background:"#1c1c1e",color:"#f5f5f7",fontSize:14,outline:"none",fontFamily:"inherit"}} />
+          <div className="btn-primary" style={{padding:"10px 20px",fontSize:14}}>Sign Up</div>
+        </div>
+      </section>
+
+
+      {/* VIDEO */}
+      <section className="scale-in" style={{padding:"48px 20px",background:"#000",textAlign:"center",color:"#f5f5f7"}}>
+        <h2 className="section-title" style={{fontSize:24,fontWeight:600,lineHeight:1.33349,marginBottom:8,color:"#1d1d1f"}}>See mPhone 11 Pro in action.</h2>
+        <p style={{fontSize:14,color:"#86868b",marginBottom:24}}>Watch the product film.</p>
+        <div style={{maxWidth:600,margin:"0 auto",background:"#1c1c1e",borderRadius:18,padding:"60px 20px",border:"1px solid #38383a",cursor:"pointer"}}>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{margin:"0 auto 12px",display:"block"}}>
+            <polygon points="5 3 19 12 5 21 5 3" fill="#fff"/>
+          </svg>
+          <p style={{fontSize:13,color:"#86868b"}}>Play film — 1:30</p>
+        </div>
+      </section>
+
+
+
+      
+
+      
+
+      {/* VIDEO - mPhone 11 Pro film */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#000",textAlign:"center"}}>
+        <h2 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,color:"#f5f5f7",marginBottom:8}}>See mPhone 11 Pro in action</h2>
+        <p style={{fontSize:17,fontWeight:300,color:"#86868b",marginBottom:24,lineHeight:1.47059}}>Watch the product film.</p>
+        <div className="card-hover" style={{maxWidth:700,margin:"0 auto",background:"#1c1c1e",borderRadius:18,padding:"80px 20px",border:"1px solid #38383a",cursor:"pointer",position:"relative",overflow:"hidden"}} role="button" tabIndex={0} aria-label="Play product film" onKeyDown={e=>e.key==="Enter"&&alert('Video would play')}>
+          <div style={{width:60,height:60,borderRadius:"50%",background:"#0071e3",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 16px",transition:"transform 0.3s"}} className="play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <p style={{fontSize:14,color:"#86868b"}}>Play film ? 1:30</p>
+        </div>
+      </section>
+      
+
+      {/* PRODUCT SPECS */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#fff"}}>
+        <h2 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,textAlign:"center",marginBottom:32,color:"#1d1d1f"}}>mPhone 11 Pro Tech Specs</h2>
+        <div style={{maxWidth:800,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12}}>
+          {[
+            {t:"Chip",d:"A13 Bionic chip with third-generation Neural Engine"},
+            {t:"Display",d:"6.1-inch Super Retina XDR display with ProMotion"},
+            {t:"Camera",d:"Triple 12MP system: Ultra Wide, Wide, Telephoto"},
+            {t:"Battery",d:"Up to 20 hours video playback. Fast charge capable."},
+            {t:"Storage",d:"64GB / 256GB / 512GB internal storage options"},
+            {t:"Water Resistance",d:"IP68 rating ? water resistant to 6 meters for 30 minutes"}
+          ].map((s,i) => (
+            <div key={i} className="card-hover" style={{background:"#f5f5f7",borderRadius:14,padding:"20px",border:"1px solid #e6e6ea"}}>
+              <p style={{fontSize:13,fontWeight:600,color:"#0071e3",marginBottom:4,textTransform:"uppercase",letterSpacing:".05em"}}>{s.t}</p>
+              <p style={{fontSize:14,color:"#1d1d1f",lineHeight:1.47059}}>{s.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* CUSTOMER REVIEWS */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#f5f5f7"}}>
+        <h2 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,textAlign:"center",marginBottom:32,color:"#1d1d1f"}}>What Our Customers Say</h2>
+        <div className="stagger-grid" style={{maxWidth:900,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16}}>
+          {[
+            {n:"Sarah M.",t:"mPhone 11 Pro",r:5,c:"Best phone I have ever owned! The camera is incredible and the battery lasts all day."},
+            {n:"James K.",t:"mPhone X",r:5,c:"Smooth upgrade from my old phone. Face ID works flawlessly and the OLED display is stunning."},
+            {n:"Lisa C.",t:"mPhone 6",r:4,c:"Great value for the price. Solid performance and the Retina HD display looks beautiful."}
+          ].map((r,i) => (
+            <div key={i} className="stagger-item card-hover" style={{background:"#fff",borderRadius:18,padding:"28px 24px",border:"1px solid #e6e6ea"}}>
+              <p style={{color:"#f5a623",fontSize:16,marginBottom:8,letterSpacing:3}}>{'\u2605'.repeat(r.r)}{'\u2606'.repeat(5-r.r)}</p>
+              <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059,marginBottom:12,fontStyle:"italic"}}>"{r.c}"</p>
+              <p style={{fontSize:13,color:"#1d1d1f",fontWeight:600}}>{r.n}</p>
+              <p style={{fontSize:12,color:"#0071e3"}}>{r.t}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* FAQ */}
+      <section className="section-in" style={{padding:"48px 20px",background:"#fff"}}>
+        <h2 style={{fontSize:34,fontWeight:600,lineHeight:1.47059,textAlign:"center",marginBottom:32,color:"#1d1d1f"}}>Frequently Asked Questions</h2>
+        <div style={{maxWidth:700,margin:"0 auto"}}>
+          {[
+            {q:"What is mPhone 11 Pro?",a:"mPhone 11 Pro features a triple-camera system, ProMotion XDR display, and the A13 Bionic chip ? our most advanced chip ever."},
+            {q:"How does trade-in work?",a:"You can trade in your current phone for credit toward a new mPhone. Get - depending on the model and condition."},
+            {q:"Is financing available?",a:"Yes, we offer 0% APR financing for qualified buyers. Payments as low as .62 per month."},
+            {q:"What is the return policy?",a:"You have 14 days to return your mPhone for a full refund. Items must be in original condition."},
+            {q:"Does mPhone come with a warranty?",a:"Every mPhone comes with a 1-year limited warranty. Extend coverage with mifan Care+."},
+            {q:"Can I switch from Android?",a:"Yes. The Move to mifan app makes switching easy ? it transfers your contacts, photos, and more."}
+          ].map((f,i) => (
+            <details key={i} className="card-hover" style={{borderTop:i===0?"1px solid #d2d2d7":"1px solid #d2d2d7",padding:"16px 0",cursor:"pointer"}}>
+              <summary style={{fontSize:15,fontWeight:600,color:"#1d1d1f",outline:"none",transition:"color 0.2s"}}>{f.q}</summary>
+              <p style={{fontSize:14,color:"#6e6e73",lineHeight:1.47059,marginTop:8,paddingRight:20}}>{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <div style={{borderBottom:"1px solid #d2d2d7",marginTop:0}} />
+      </section>
+      {/* FINANCING */}
+      <section style={{padding:"32px 20px",background:"#fff",textAlign:"center"}}>
+        <p style={{fontSize:14,color:"#6e6e73",marginBottom:4}}>Get $200-$650 for your current phone with trade-in. From $41.62/mo. at 0% APR.</p>
+        <p style={{fontSize:14,color:"#6e6e73"}}>Free delivery. No-contact shipping.</p>
+      </section>
+    </>
+  );
+}
