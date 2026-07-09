@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "build:seo": "vite build && python ../../_archive/seo_inject.py",
-    "lint:portal": "node scripts/check-fixed-elements.mjs"
+    "lint:portal": "node scripts/check-fixed-elements.mjs",
+    "postinstall": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "ssh2": "^1.17.0",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   }

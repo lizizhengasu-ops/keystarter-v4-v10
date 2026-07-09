@@ -913,7 +913,7 @@ export default function App() {
             </div>
           </div>
         </div>
-      )}</Portal>
+      </Portal>}
 
       {}
       {/* Global Interactive Notification Toast */}
@@ -922,7 +922,7 @@ export default function App() {
           <span>{toast.icon}</span>
           <span>{toast.message}</span>
         </div>
-      )}</Portal>
+      </Portal>}
 
     </div>
   );

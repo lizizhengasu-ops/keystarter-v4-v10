@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { products } from "./data/products";
-import Portal from "../Portal";
+import Portal from "./Portal";
 
 
 export default function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -120,6 +120,6 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
         )}
       </div>
     </div>
-  </Portal>);
+  </Portal>;
 }
 
