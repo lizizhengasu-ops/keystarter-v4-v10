@@ -16,7 +16,7 @@
 body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark); -webkit-font-smoothing:antialiased; }
 
 /* V5.2 - Page Transition */
-@keyframes v5fadeIn { 0%{opacity:0;transform:translateY(8px)} 100%{opacity:1;transform:translateY(0)} }
+@keyframes v5fadeIn { from { opacity:0 } to { opacity:1 } }
 .page-enter { animation:v5fadeIn 0.35s ease-out forwards; }
 
 /* V5.2 - Unified Card Hover */

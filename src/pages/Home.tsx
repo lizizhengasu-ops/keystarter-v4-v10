@@ -827,13 +827,13 @@ export default function App() {
       {/* Checkout side drawer with pure React state binding */}
       {isDrawerOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="fixed inset-0 bg-black/40 z-40" onClick={closeCheckoutDrawer}></div>
+          <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" onClick={closeCheckoutDrawer}></div>
           
-          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md">
-            <div className="w-full h-full bg-white border-l border-[#e8e8ed] shadow-2xl flex flex-col">
+          <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
+            <div className="w-screen max-w-md bg-white border-l border-[#e8e8ed] shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out">
               
               {/* Header */}
-              <div className="shrink-0 p-6 border-b border-[#e8e8ed]">
+              <div className="p-6 border-b border-[#e8e8ed]">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-[#1d1d1f]">🔒 安全结算与激活交付</h3>
                   <button onClick={closeCheckoutDrawer} className="text-gray-400 hover:text-gray-500 text-lg">×</button>
@@ -842,7 +842,7 @@ export default function App() {
               </div>
 
               {/* Form Content */}
-              <div className="flex-1 overflow-y-auto p-6"><form onSubmit={handlePurchase} className="space-y-6">
+              <form onSubmit={handlePurchase} className="flex-1 overflow-y-auto p-6 space-y-6">
                 
                 <div className="bg-[#f5f5f7] p-4 rounded-xl border border-[#e8e8ed]">
                   <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">选购产品：</span>
@@ -909,7 +909,6 @@ export default function App() {
                   <p className="text-[10px] text-center text-gray-400 mt-2">点击将自动在后台为您下发订单密钥！</p>
                 </div>
               </form>
-              </div>
             </div>
           </div>
         </div>
