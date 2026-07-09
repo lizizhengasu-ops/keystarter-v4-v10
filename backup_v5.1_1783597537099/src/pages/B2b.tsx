@@ -35,7 +35,7 @@ export default function B2BPage() {
         <p className="text-sm text-[#86868b] mb-8">为各种企业需求量身定制的授权方案。</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {solutions.map((s,i)=>(
-            <div key={i} className="v5-card bg-white rounded-2xl p-6 border border-[#e8e8ed] hover:shadow-lg transition-shadow">
+            <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] hover:shadow-lg transition-shadow">
               <div className="w-10 h-10 rounded-xl mb-3" style={{background:s.c}}></div>
               <div className="text-lg font-bold mb-2">{s.t}</div>
               <div className="text-sm text-[#86868b]">{s.d}</div>

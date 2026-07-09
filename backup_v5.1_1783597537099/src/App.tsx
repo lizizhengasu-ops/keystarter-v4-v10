@@ -1,4 +1,4 @@
-﻿import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CartProvider, useCart } from "./CartContext";
 import SearchOverlay from "./SearchOverlay";
@@ -29,6 +29,7 @@ function Layout({ children }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
+  const [pageLoad, setPageLoad] = useState(false);
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
@@ -36,11 +37,17 @@ function Layout({ children }) {
     window.scrollTo(0, 0);
     setSearchOpen(false);
     setShowCart(false);
+    setPageLoad(true);
+    const t = setTimeout(() => setPageLoad(false), 350);
+    return () => clearTimeout(t);
   }, [location.pathname]);
 
   useEffect(() => {
     const h = (e) => {
-      if (e.key === "/" && !searchOpen && e.target.tagName !== "INPUT") { e.preventDefault(); setSearchOpen(true); }
+      if (e.key === "/" && !searchOpen && e.target.tagName !== "INPUT") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
       if (e.key === "Escape") setShowCart(false);
     };
     window.addEventListener("keydown", h);
@@ -48,36 +55,50 @@ function Layout({ children }) {
   }, [searchOpen]);
 
   useEffect(() => {
-    const h = () => { const s = document.documentElement; setScrollPct((s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100); };
+    const h = () => {
+      const s = document.documentElement;
+      setScrollPct((s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100);
+    };
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
-    if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 48; window.scrollTo({ top: y, behavior: "smooth" }); }
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 48;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
+    <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 h-[2px] bg-[#0071e3] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
 
+      {pageLoad && (
+        <div className="fixed top-[2px] left-0 w-full h-[2px] bg-[#0071e3] z-[9998]" style={{ animation: "pageLoadAnim 0.35s ease-out forwards", opacity: pageLoad ? 1 : 0, transition: "opacity 0.2s" }} />
+      )}
+
+      {/* Unified Navbar - V4 KeyStarter Style */}
       <nav className="fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
+          <Link to="/" className="flex items-center space-x-2" aria-label="KeyStarter Home">
             <MicrosoftLogo />
             <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">KeyStarter</span>
             <span className="hidden sm:inline bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">Partner</span>
           </Link>
+
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
-                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">商店 / Store</button>
-                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">企业合规 / B2B</button>
-                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">机型对比</button>
-                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">技术支持</button>
-                <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">交付中心</button>
+                <button onClick={() => scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">商店 / Store</button>
+                <button onClick={() => scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">企业合规 / B2B</button>
+                <button onClick={() => scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">机型对比</button>
+                <button onClick={() => scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">技术支持</button>
+                <button onClick={() => scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">交付中心</button>
               </>
             ) : (
               <>
@@ -88,14 +109,24 @@ function Layout({ children }) {
               </>
             )}
           </div>
+
           <div className="flex items-center space-x-4">
-            <button onClick={()=>setSearchOpen(true)} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Search">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <button onClick={() => setSearchOpen(true)} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
             </button>
+
             <div className="relative">
-              <button onClick={()=>setShowCart(!showCart)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={"Cart (" + cart.count + ")"}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                {cart.count > 0 && (<span className="absolute -top-1.5 -right-1.5 bg-[#0071e3] text-white text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center leading-none">{cart.count}</span>)}
+              <button onClick={() => setShowCart(!showCart)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={"Cart (" + cart.count + ")"}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+                {cart.count > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#0071e3] text-white text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center leading-none">
+                    {cart.count}
+                  </span>
+                )}
               </button>
               <CartFlyout open={showCart} onClose={() => setShowCart(false)} />
             </div>
@@ -105,11 +136,11 @@ function Layout({ children }) {
 
       <AnimInit />
 
-      {/* V5.2: Page enter animation */}
-      <main key={location.pathname} className="page-enter pt-12">
+      <main className="pt-12">
         {children}
       </main>
 
+      {/* V4 Dark Footer */}
       <footer className="bg-[#161617] text-white py-16 border-t border-white/5">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
@@ -123,7 +154,7 @@ function Layout({ children }) {
             </div>
           </div>
           <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
-            <p>&copy; 2026 KeyStarter. All Rights Reserved. 微软系统及产品设计版权归微软（Microsoft）公司所有。</p>
+            <p>&copy; 2026 KeyStarter. All Rights Reserved. 微软系统及产品设计版权归微软（Microsoft）公司所有。本站由正规合作伙伴授权运营。</p>
             <div className="flex space-x-4">
               <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">免责声明</button>
               <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">隐私协议</button>
@@ -133,7 +164,8 @@ function Layout({ children }) {
         </div>
       </footer>
 
-      <div className="back-top" id="back-top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} role="button" aria-label="Back to top" tabIndex={0} onKeyDown={(e)=>e.key==="Enter"&&window.scrollTo({top:0,behavior:"smooth"})}>
+      {/* Back to top */}
+      <div className="back-top" id="back-top" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} role="button" aria-label="Back to top" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && window.scrollTo({ top: 0, behavior: "smooth" })}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
       </div>
     </div>

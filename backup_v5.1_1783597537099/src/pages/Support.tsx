@@ -23,7 +23,7 @@ export default function SupportPage() {
         <h2 className="text-2xl font-bold mb-6">热门主题</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {topics.map((t,i)=>(
-            <div key={i} className="v5-card-light bg-white rounded-2xl p-5 border border-[#e8e8ed] hover:shadow-md transition cursor-pointer">
+            <div key={i} className="bg-white rounded-2xl p-5 border border-[#e8e8ed] hover:shadow-md transition cursor-pointer">
               <div className="text-sm font-bold mb-2">{t.t}</div>
               <div className="text-xs text-[#86868b]">{t.d}</div>
             </div>
