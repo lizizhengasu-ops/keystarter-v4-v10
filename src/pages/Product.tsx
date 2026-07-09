@@ -61,7 +61,7 @@ export default function ProductPage() {
           </div>
 
           <button onClick={()=>cart.add({slug:p.slug,name:p.n,price:p.p})}
-            className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3.5 rounded-xl transition mb-2">
+            className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             加入购物车
           </button>
           <p className="text-[10px] text-[#86868b] text-center">正版产品 · 即时发货 · 安全结算</p>

@@ -12,7 +12,7 @@ export default function AccountPage() {
         <p className="text-base font-light text-white/80">管理您的授权、订单和账户设置。</p>
       </div>
       <div className="max-w-lg mx-auto px-6 py-12">
-        <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed]">
+        <div className="v5-card bg-white rounded-2xl p-8 border border-[#e8e8ed]">
           <h2 className="text-xl font-bold mb-6 text-center">登录账户</h2>
           <div className="mb-4">
             <label className="block text-xs font-semibold mb-1.5">邮箱地址</label>

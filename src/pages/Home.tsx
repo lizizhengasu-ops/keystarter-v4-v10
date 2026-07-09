@@ -434,7 +434,7 @@ export default function App() {
             {filteredSkus.map((sku) => (
               <div 
                 key={sku.id} 
-                className="bg-white rounded-2xl border border-[#e8e8ed] p-6 transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] hover:-translate-y-1 flex flex-col justify-between"
+                className="bg-white v5-card rounded-2xl border border-[#e8e8ed] p-6 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -510,14 +510,14 @@ export default function App() {
               </p>
 
               <div className="space-y-4">
-                <div className="flex space-x-4 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
+                <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#0078d4] text-xl pt-0.5">🛡️</div>
                   <div>
                     <h4  className="text-sm font-semibold">100% 通过官方合规验证</h4>
                     <p className="text-xs text-[#86868b] mt-1">完美符合企业合规要求，提供正规采购链条合同，支持通过任何国家或地区的本地软件合规审计。</p>
                   </div>
                 </div>
-                <div className="flex space-x-4 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
+                <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#34c759] text-xl pt-0.5">💰</div>
                   <div>
                     <h4  className="text-sm font-semibold">批量定价折扣（Up to 70% Off）</h4>
@@ -645,19 +645,19 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+            <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">🔑</div>
               <h4 className="text-base font-bold mb-2">激活码常见问题 (Activation Guide)</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何正确在设备中输入 Retail 密钥并完成和个人微信号的官方云绑定。</p>
               <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#0078d4] hover:underline focus:outline-none text-left">立即前往用户后台查看 &gt;</button>
             </div>
-            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+            <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📦</div>
               <h4 className="text-base font-bold mb-2">Office 部署安装指南 (Setup)</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何完全清除电脑里的野蛮盗版 Office残留并干净地完成 Microsoft 365 部署。</p>
               <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0078d4] hover:underline">前往微软官方激活网 &gt;</a>
             </div>
-            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+            <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
               <h4 className="text-base font-bold mb-2">服务器与 SQL 本地激活 (Volume)</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">解决 Server 激活报错问题，提供官方原生 ISO 下载验证渠道。</p>
@@ -755,7 +755,7 @@ export default function App() {
               {purchasedLicenses.map((lic) => (
                 <div 
                   key={lic.id} 
-                  className="bg-white p-5 rounded-2xl border border-[#e8e8ed] flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-500/30 transition shadow-sm"
+                  className="v5-card-light bg-white p-5 rounded-2xl border border-[#e8e8ed] flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-500/30 transition shadow-sm"
                 >
                   <div className="flex items-start space-x-3.5">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center border mt-1 md:mt-0 ${lic.isOffice ? 'bg-red-50 border-red-100' : 'bg-blue-50 border-blue-100'}`}>
