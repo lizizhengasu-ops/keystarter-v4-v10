@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Portal from '../Portal';
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
 // To eliminate any external CDN load latency or render flickering.
@@ -825,7 +826,7 @@ export default function App() {
 
       {}
       {/* Checkout side drawer with pure React state binding */}
-      {isDrawerOpen && (
+      {isDrawerOpen && <Portal>
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" onClick={closeCheckoutDrawer}></div>
           
@@ -912,16 +913,16 @@ export default function App() {
             </div>
           </div>
         </div>
-      )}
+      )}</Portal>
 
       {}
       {/* Global Interactive Notification Toast */}
-      {toast.visible && (
+      {toast.visible && <Portal>
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#1d1d1f] text-white text-xs font-medium px-5 py-3.5 rounded-full shadow-2xl flex items-center space-x-2.5 border border-white/10 transition-all duration-300">
           <span>{toast.icon}</span>
           <span>{toast.message}</span>
         </div>
-      )}
+      )}</Portal>
 
     </div>
   );
