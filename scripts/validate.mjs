@@ -77,6 +77,7 @@ function checkPositionFixed(dir) {
     const fp = path.join(dir, e.name);
     if (e.isDirectory()) { checkPositionFixed(fp); continue; }
     if (!/\.(tsx|jsx)$/i.test(e.name)) continue;
+    if (fp.indexOf("reactbits") >= 0) continue;  // skip third-party
     const content = readFileSync(fp, "utf-8");
     const lines = content.split("\n");
     // Layout elements that are exempt
