@@ -35,16 +35,16 @@ const PREMIUM_SKUS = [
     id: 'win-11-pro',
     category: 'windows',
     title: 'Windows 11 Pro',
-    subtitle: '适合高级个人、程序员和企业开发人员',
+    subtitle: 'For senior professionals, developers, and enterprises',
     price: 19.99,
     originalPrice: 199.00,
-    tag: '秒级闪电发货',
-    type: 'Retail 零售版',
-    auditInfo: '支持SAM审计',
+    tag: 'Instant Delivery',
+    type: 'Retail',
+    auditInfo: 'Supports SAM Audit',
     features: [
-      '100% 绑定个人微软账号 (MSA)',
-      '支持设备无限次重装与重置',
-      '官方原生下载及全功能更新'
+      '100% Tied to Microsoft Account (MSA)',
+      'Unlimited device reinstalls & resets',
+      'Official ISO downloads & full updates'
     ],
     icon: <WindowsIcon />
   },
@@ -52,15 +52,15 @@ const PREMIUM_SKUS = [
     id: 'win-11-home',
     category: 'windows',
     title: 'Windows 11 Home',
-    subtitle: '适合家庭及个人日常办公娱乐使用',
+    subtitle: 'For home & personal daily use',
     price: 14.99,
     originalPrice: 139.00,
-    tag: '秒级闪电发货',
-    type: 'Retail 零售版',
+    tag: 'Instant Delivery',
+    type: 'Retail',
     features: [
-      '支持一次激活永久使用',
-      '无缝自动获取安全更新',
-      '支持官方正品防伪验证'
+      'One activation, lifetime use',
+      'Seamless automatic security updates',
+      'Official anti-counterfeit verification'
     ],
     icon: <WindowsIcon colorClass="text-[#00a4ef]" />
   },
@@ -68,111 +68,111 @@ const PREMIUM_SKUS = [
     id: 'win-10-pro',
     category: 'windows',
     title: 'Windows 10 Pro',
-    subtitle: '针对老款配置电脑深度优化的稳定系统',
+    subtitle: 'Stable OS optimized for older hardware',
     price: 16.99,
     originalPrice: 149.00,
-    tag: '秒级闪电发货',
-    type: 'Retail 零售版',
+    tag: 'Instant Delivery',
+    type: 'Retail',
     features: [
-      '经典稳定系统，支持硬件升级',
-      '极佳的旧软件与工业软件兼容性',
-      '一键升级 Windows 11 专业版特权'
+      'Classic stable system, supports hardware upgrades',
+      'Excellent legacy & industrial software compatibility',
+      'One-click upgrade to Windows 11 Pro'
     ],
     icon: <WindowsIcon colorClass="text-[#7fba00]" />
   },
   {
     id: 'm365-personal',
     category: 'office',
-    title: 'Microsoft 365 个人版',
-    subtitle: '包含 1TB OneDrive 极速云盘及所有 Office 组件',
+    title: 'Microsoft 365 Personal',
+    subtitle: 'Includes 1TB OneDrive cloud storage & all Office apps',
     price: 29.99,
     originalPrice: 69.99,
-    tag: '秒级闪电发货',
-    type: '1年个人订阅',
+    tag: 'Instant Delivery',
+    type: '1-Year Personal Subscription',
     features: [
-      '支持 5 台设备同时在线登录使用',
-      '绑定个人微软账户，自动续期激活',
-      '内含高级版 Word, Excel, PPT, Outlook'
+      'Use on up to 5 devices simultaneously',
+      'Bind to Microsoft account, auto-renewal activation',
+      'Includes premium Word, Excel, PPT, Outlook'
     ],
     icon: <OfficeIcon />
   },
   {
     id: 'm365-family',
     category: 'office',
-    title: 'Microsoft 365 家庭版',
-    subtitle: '支持多达 6 位家庭成员独立分配、独享 6TB 空间',
+    title: 'Microsoft 365 Family',
+    subtitle: 'Up to 6 family members, each with 1TB (6TB total)',
     price: 39.99,
     originalPrice: 99.99,
-    tag: '性价比之王',
-    type: '1年家庭订阅',
+    tag: 'Best Value',
+    type: '1-Year Family Subscription',
     features: [
-      '每个账户独立 1TB 云存储，安全隔离',
-      '支持 6 个微软邮箱独立加入绑定',
-      '每位成员可在 5 台设备同时使用'
+      'Each member gets 1TB isolated cloud storage',
+      'Supports 6 independent Microsoft account bindings',
+      'Each member on up to 5 devices'
     ],
     icon: <OfficeIcon />
   },
   {
     id: 'm365-business',
     category: 'office',
-    title: 'M365 商业标准版',
-    subtitle: '专为中小企业合规审计设计的云+本地办公套餐',
+    title: 'M365 Business Standard',
+    subtitle: 'Cloud + local office suite for SMB compliance audits',
     price: 49.99,
     originalPrice: 150.00,
-    tag: '秒级闪电发货',
-    type: '1年商业订阅',
+    tag: 'Instant Delivery',
+    type: '1-Year Business Subscription',
     features: [
-      '支持自定义企业邮箱域名 (Exchange)',
-      '包含 Team, SharePoint 等协同工具',
-      '提供完整的商业合规授权凭证'
+      'Custom business email domain (Exchange)',
+      'Includes Teams, SharePoint collaboration tools',
+      'Complete business compliance credentials'
     ],
     icon: <OfficeIcon />
   },
   {
     id: 'office-2026-pro',
     category: 'office',
-    title: 'Office 2026 专业增强版',
-    subtitle: '经典永久买断，一次性购买终身激活使用',
+    title: 'Office 2026 Professional Plus',
+    subtitle: 'Classic perpetual license, one-time purchase, lifetime use',
     price: 34.99,
     originalPrice: 439.00,
-    tag: '秒级闪电发货',
-    type: '永久买断版',
+    tag: 'Instant Delivery',
+    type: 'Perpetual License',
     features: [
-      '无需年费，支持重装与硬件检测绑定',
-      '经典 Access, Publisher 独家完整版',
-      '企业合规首选，完全规避授权审计'
+      'No annual fee, supports reinstalls & hardware binding',
+      'Classic Access & Publisher full versions',
+      'Enterprise Compliance , full audit protection'
     ],
     icon: <OfficeIcon />
   },
   {
     id: 'office-2026-home',
     category: 'office',
-    title: 'Office 2026 家庭学生版',
-    subtitle: '专为 Mac 或 PC 用户深度定制的官方版',
+    title: 'Office 2026 Home & Student',
+    subtitle: 'Official edition tailored for Mac or PC users',
     price: 24.99,
     originalPrice: 149.00,
-    tag: '秒级闪电发货',
-    type: '永久买断版',
+    tag: 'Instant Delivery',
+    type: 'Perpetual License',
     features: [
-      '绑定个人 MSA 账号，无封锁危险',
-      '支持 Mac 设备与 Windows 双系统',
-      '经典核心 3 件套，轻量化部署'
+      'Bind to Microsoft account, no blocking risk',
+      'Supports Mac & Windows dual platform',
+      'Core 3-app suite, lightweight deployment'
     ],
     icon: <OfficeIcon />
   },
   {
     id: 'server-2025',
     category: 'server',
-    title: 'Win Server 2025 标准版',
-    subtitle: '包含 16 Core 授权，针对新一代硬件深度优化',
+    title: 'Windows Server 2025 Standard',
+    subtitle: 'Includes 16 Core license, optimized for next-gen hardware',
     price: 89.99,
     originalPrice: 1069.00,
-    tag: '秒级闪电发货',
-    type: 'Volume 批量版',
+    tag: 'Instant Delivery',
+    type: 'Volume License',
     features: [
-      '支持物理机本地虚拟化与云端服务器部署',
-      '高级别安全性与多层合规保护机制',
-      '满足大企业 IT 架构审计要求'
+      'Supports on-premise virtualization & cloud deployment',
+      'High-level security & multi-layer compliance protection',
+      'Meets enterprise IT audit requirements'
     ],
     icon: <DatabaseIcon />
   },
@@ -180,15 +180,15 @@ const PREMIUM_SKUS = [
     id: 'sql-2025',
     category: 'server',
     title: 'SQL Server 25 Standard',
-    subtitle: '高并发、高性能数据库官方安全授权密钥',
+    subtitle: 'High-concurrency, high-performance official DB license',
     price: 149.99,
     originalPrice: 1899.00,
-    tag: '企业级首选',
+    tag: 'Enterprise Choice',
     type: 'SQL Server',
     features: [
-      '包含标准 5 CAL 访问授权许可',
-      '激活状态永久保持有效，全生命期支持',
-      '原版离线 ISO 物理验证激活'
+      'Includes 5 CAL access licenses',
+      'Permanent activation status, full lifecycle support',
+      'Official offline ISO verification activation'
     ],
     icon: <DatabaseIcon />
   }
@@ -203,7 +203,7 @@ export default function App() {
     {
       id: 'demo-win',
       title: 'Windows 11 Professional Retail',
-      licenseType: '绑定账户版',
+      licenseType: 'Account-Bound',
       key: 'W269N-WFGWX-YVC9B-4J6C9-T83GX',
       isOffice: false,
       link: 'https://www.microsoft.com/zh-cn/software-download/windows11'
@@ -211,7 +211,7 @@ export default function App() {
     {
       id: 'demo-office',
       title: 'Microsoft 365 Family Account',
-      licenseType: '1年订阅绑定',
+      licenseType: '1-Year Subscription',
       key: 'Activated via official mail: customer-link-m365',
       isOffice: true,
       link: 'https://setup.office.com'
@@ -262,9 +262,9 @@ export default function App() {
     tempTextArea.select();
     try {
       document.execCommand('copy');
-      showToast("激活码/直连复制成功！快去激活吧！", "🟢");
+      showToast("License key copied! Go activate now!", "🟢");
     } catch (err) {
-      showToast("复制失败，请手动选取复制。", "🔴");
+      showToast("Copy failed, please select and copy manually.", "🔴");
     }
     document.body.removeChild(tempTextArea);
   };
@@ -281,7 +281,7 @@ export default function App() {
   const handlePurchase = (e) => {
     e.preventDefault();
     if (!checkoutEmail || !checkoutEmail.includes('@')) {
-      showToast("请输入合规且正确的邮箱地址以便接受激活码。", "⚠️");
+      showToast("Please enter a valid email to receive the license key.", "⚠️");
       return;
     }
 
@@ -297,21 +297,21 @@ export default function App() {
       const newLicense = {
         id: 'mock-' + Date.now(),
         title: checkoutProduct.title,
-        licenseType: '官方正版授权',
+        licenseType: 'Official Genuine License',
         key: mockKey,
         isOffice: isOfficeProduct,
         link: isOfficeProduct ? 'https://setup.office.com' : 'https://www.microsoft.com/zh-cn/software-download/'
       };
 
       setPurchasedLicenses(prev => [newLicense, ...prev]);
-      showToast(`模拟下发 [${checkoutProduct.title}] 激活密钥！`, "🟢");
+      showToast(`Simulated dispatch [${checkoutProduct.title}] License Key!`, "🟢");
       scrollToSection('portal');
     }, 500);
   };
 
   const handleB2BSubmit = (e) => {
     e.preventDefault();
-    showToast("报价申请成功提交！专员将立即核发邮件给您！", "🔵");
+    showToast("Quote submitted! A specialist will email you shortly.", "🔵");
     e.target.reset();
   };
 
@@ -319,13 +319,13 @@ export default function App() {
     const newLicense = {
       id: 'sim-' + Date.now(),
       title: productName,
-      licenseType: '官方正版授权',
+      licenseType: 'Official Genuine License',
       key: key,
       isOffice: isOffice,
       link: isOffice ? 'https://setup.office.com' : 'https://www.microsoft.com/zh-cn/software-download/'
     };
     setPurchasedLicenses(prev => [newLicense, ...prev]);
-    showToast(`成功！模拟下发 [${productName}] 激活密钥！`, "🟢");
+    showToast(`Success! Simulated dispatch [${productName}] License Key!`, "🟢");
     scrollToSection('portal');
   };
 
@@ -348,10 +348,10 @@ export default function App() {
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
           <p className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mb-3">Genuine Microsoft Software Solutions</p>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#1d1d1f] mb-6 leading-tight">
-            正版，从未如此轻松。
+            Genuine software, never this easy.
           </h1>
           <p className="text-lg sm:text-xl text-[#86868b] font-normal mb-8 max-w-2xl mx-auto leading-relaxed">
-            微软官方授权合作伙伴。全线 10 款核心 SKU 现货直发，10 分钟内极速安全交付。专为企业合规审计与高级个人量身打造。
+            Microsoft authorized partner. All 10 core SKUs in stock, delivered securely within 10 minutes. Built for enterprise compliance audits and premium personal use.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 mb-16 sm:flex-row">
@@ -359,13 +359,13 @@ export default function App() {
               onClick={() => scrollToSection('store')} 
               className="w-full sm:w-auto bg-[#0078d4] hover:bg-[#0062b1] text-white font-medium px-8 py-3 rounded-full transition shadow-lg shadow-blue-500/10 text-center"
             >
-              立即选购正版密钥
+              Buy Genuine License Now
             </button>
             <button 
               onClick={() => scrollToSection('business')} 
               className="w-full sm:w-auto border border-[#d2d2d7] hover:bg-[#f5f5f7] text-[#1d1d1f] font-medium px-8 py-3 rounded-full transition text-center"
             >
-              企业批量授权方案 <span className="ml-1 text-xs">{" > "}</span>
+              Enterprise Volume Licensing <span className="ml-1 text-xs">{" > "}</span>
             </button>
           </div>
 
@@ -373,19 +373,19 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#f5f5f7]">
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">10 Min</span>
-              <span className="text-xs text-[#86868b] mt-1">🕒 自动闪电交付</span>
+              <span className="text-xs text-[#86868b] mt-1">🕒 Auto Lightning Delivery</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">98.7%</span>
-              <span className="text-xs text-[#86868b] mt-1">⭐️ 客户满意好评率</span>
+              <span className="text-xs text-[#86868b] mt-1">⭐️ Customer Satisfaction Rate</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">50K+</span>
-              <span className="text-xs text-[#86868b] mt-1">🛡️ 正版安全合规激活</span>
+              <span className="text-xs text-[#86868b] mt-1">🛡️ Genuine Secure Activation</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">100%</span>
-              <span className="text-xs text-[#86868b] mt-1">✅ 官方在线/电话验证</span>
+              <span className="text-xs text-[#86868b] mt-1">✅ Official Online/Phone Verification</span>
             </div>
           </div>
         </div>
@@ -396,8 +396,8 @@ export default function App() {
       <section id="store" className="py-20 bg-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">精心打磨的 10 款核心正版授权</h2>
-            <p className="text-sm text-[#86868b]">按类目快速筛选。每个卡片均自带正版交付标签，保障您的资产合规无忧。</p>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">10 Premium Genuine Licenses</h2>
+            <p className="text-sm text-[#86868b]">Browse by category. Each card includes a genuine delivery guarantee for worry-free compliance.</p>
           </div>
 
           {/* Filter Categories */}
@@ -407,25 +407,25 @@ export default function App() {
                 onClick={() => setActiveTab('all')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'all' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                全部商品 (10)
+                All Products (10)
               </button>
               <button 
                 onClick={() => setActiveTab('windows')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'windows' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                Windows 系统 (3)
+                Windows (3)
               </button>
               <button 
                 onClick={() => setActiveTab('office')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'office' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                Office 办公 (5)
+                Office (5)
               </button>
               <button 
                 onClick={() => setActiveTab('server')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'server' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                服务器/SQL (2)
+                Server / SQL (2)
               </button>
             </div>
           </div>
@@ -480,7 +480,7 @@ export default function App() {
                     onClick={() => openCheckoutDrawer(sku.title, sku.price)} 
                     className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-1"
                   >
-                    <span>立即购买</span> <span className="text-[10px]">{" > "}</span>
+                    <span>Buy Now</span> <span className="text-[10px]">{" > "}</span>
                   </button>
                 </div>
               </div>
@@ -504,25 +504,25 @@ export default function App() {
                 Enterprise B2B Compliance
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6 mb-6 leading-tight">
-                企业正版化合规与 SAM 审计专家支持
+                Enterprise Compliance & SAM Audit Support
               </h2>
               <p className="text-sm text-[#86868b] leading-relaxed mb-8">
-                在面临微软官方合规审计（SAM Audit）时，不透明的采购链条常使企业处于被动地位。我们提供符合官方资质的批量授权（Volume Licensing）证书与正版密钥，助力中小企业低成本、极速实现百分之百资产合规，避免高昂法律红线处罚。
+                When facing a Microsoft SAM Audit, opaque procurement chains put enterprises at risk. We provide Volume Licensing certificates and genuine keys for 100% compliance at low cost, avoiding legal penalties.
               </p>
 
               <div className="space-y-4">
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#0078d4] text-xl pt-0.5">🛡️</div>
                   <div>
-                    <h4  className="text-sm font-semibold">100% 通过官方合规验证</h4>
-                    <p className="text-xs text-[#86868b] mt-1">完美符合企业合规要求，提供正规采购链条合同，支持通过任何国家或地区的本地软件合规审计。</p>
+                    <h4  className="text-sm font-semibold">100% Official Compliance Verified</h4>
+                    <p className="text-xs text-[#86868b] mt-1">Fully compliant with enterprise requirements, includes proper procurement contracts and passes local software audits worldwide.</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#34c759] text-xl pt-0.5">💰</div>
                   <div>
-                    <h4  className="text-sm font-semibold">批量定价折扣（Up to 70% Off）</h4>
-                    <p className="text-xs text-[#86868b] mt-1">支持 5+ 账号及系统部署规模，无最低起征门槛，提供更灵活的企业云迁移授权机制（CSP）。</p>
+                    <h4  className="text-sm font-semibold">Volume Pricing Discounts (Up to 70% Off)</h4>
+                    <p className="text-xs text-[#86868b] mt-1">Supports 5+ accounts with no minimum order. Flexible CSP licensing for enterprise cloud migration.</p>
                   </div>
                 </div>
               </div>
@@ -530,53 +530,53 @@ export default function App() {
 
             {/* B2B Interactive Intake Form */}
             <div className="bg-white text-[#1d1d1f] p-8 rounded-2xl border border-[#e8e8ed] shadow-2xl relative">
-              <h3 className="text-xl font-bold mb-2">获取免费企业正版化方案</h3>
-              <p className="text-xs text-[#86868b] mb-6">我们的专家将提供一对一选型服务，并在 30 分钟内为您输出高性价比省钱报价书。</p>
+              <h3 className="text-xl font-bold mb-2">Get Free Compliance Consultation</h3>
+              <p className="text-xs text-[#86868b] mb-6">Our experts provide one-on-one consultation with a cost-effective quote within 30 minutes.</p>
               
               <form onSubmit={handleB2BSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#1d1d1f] mb-1">企业/机构名称</label>
-                  <input type="text" required placeholder="如：北京智合科技有限公司" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
+                  <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Company / Organization Name</label>
+                  <input type="text" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">预估需要授权数量</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Estimated Licenses Needed</label>
                     <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
-                      <option>5 - 20 套</option>
-                      <option>21 - 50 套</option>
-                      <option>51 - 100 套</option>
-                      <option>100套以上</option>
+                      <option>5 - 20 Units</option>
+                      <option>21 - 50 Units</option>
+                      <option>51 - 100 Units</option>
+                      <option>100+ Units</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">主要产品需求</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Primary Product Needs</label>
                     <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
-                      <option>Windows 11 系列</option>
-                      <option>Microsoft 365 商业版</option>
+                      <option>Windows 11 Series</option>
+                      <option>Microsoft 365 Business</option>
                       <option>Windows Server / SQL</option>
-                      <option>全线整体合规方案</option>
+                      <option>Full Compliance Package</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">联系人姓名</label>
-                    <input type="text" required placeholder="张经理" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Contact Name</label>
+                    <input type="text" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">联系电话 / 邮箱</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Phone / Email</label>
                     <input type="text" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                   </div>
                 </div>
 
                 <div>
                   <button type="submit" className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-bold py-3.5 rounded-lg transition shadow-lg shadow-blue-500/10">
-                    免费获取定制报价与方案
+                    Get Free Custom Quote
                   </button>
                 </div>
-                <p className="text-[10px] text-center text-[#86868b] mt-3">🔒 您的隐私受欧盟GDPR与中国个人信息保护法加密保护，绝对不泄露予任何官方三方审计。</p>
+                <p className="text-[10px] text-center text-[#86868b] mt-3">🔒 Your privacy is protected by GDPR and Chinese data protection laws. Never shared with third parties.</p>
               </form>
             </div>
 
@@ -590,44 +590,44 @@ export default function App() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
             <p className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Comparison Matrix</p>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">哪款授权模式适合您的团队？</h2>
-            <p className="text-sm text-[#86868b] mt-3">通过经典的对比维度，快速定位最合算的方案购买类型。</p>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Which License Model Fits Your Team?</h2>
+            <p className="text-sm text-[#86868b] mt-3">Compare editions to find the most cost-effective option.</p>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-[#e8e8ed] shadow-sm">
             <table className="w-full text-left border-collapse bg-white">
               <thead>
                 <tr className="bg-[#f5f5f7] border-b border-[#e8e8ed]">
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">对比维度</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">个人与工作室 (Retail)</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">中小企业首选 (CSP/ESD)</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">大型集团与服务器 (Volume)</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Comparison Dimension</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Personal & Studio (Retail)</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">SMB Choice (CSP/ESD)</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Enterprise & Server (Volume)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f5f5f7] text-xs text-[#1d1d1f]/80">
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">核心特点</td>
-                  <td className="p-6">价格最低、绑定微软账户、一机一码。</td>
-                  <td className="p-6">管理简便，支持绑定公司邮箱/域。</td>
-                  <td className="p-6">一个主密钥多激活、支持纯局域网脱机合规激活。</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">Key Features</td>
+                  <td className="p-6">Lowest price, Microsoft account binding, per-machine license.</td>
+                  <td className="p-6">Easy management, supports company email/domain binding.</td>
+                  <td className="p-6">One key, multiple activations, supports offline LAN activation.</td>
                 </tr>
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">授权所有权</td>
-                  <td className="p-6">个人持有 / 永久属于该账户</td>
-                  <td className="p-6">企业集中管理 / 随时回收重分配</td>
-                  <td className="p-6">企业法人终身拥有 / 合规证明齐全</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">License Ownership</td>
+                  <td className="p-6">Personal / Permanent account ownership</td>
+                  <td className="p-6">Centralized management / Reassignable</td>
+                  <td className="p-6">Corporate ownership / Full compliance documentation</td>
                 </tr>
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">重装与重置支持</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ 完美支持</span> (无限制)</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ 完美支持</span> (随时解绑)</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ 完美支持</span> (后台静默自动)</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">Reinstall & Reset Support</td>
+                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unlimited)</td>
+                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unbind anytime)</td>
+                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Silent auto-reactivation)</td>
                 </tr>
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">支持官方审计 (SAM)</td>
-                  <td className="p-6">✓ 属于个人资产合规</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ 完美合规通过</span></td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ 顶级合规金牌保障</span></td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">SAM Audit Support</td>
+                  <td className="p-6">✓ Personal asset compliance</td>
+                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full compliance pass</span></td>
+                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Premium compliance guarantee</span></td>
                 </tr>
               </tbody>
             </table>
@@ -641,34 +641,34 @@ export default function App() {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Help & Guides</span>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">全方位的技术支持中心</h2>
-            <p className="text-sm text-[#86868b] mt-3">支持自助查询激活常见指南。我们承诺不仅向您售卖密钥，更包办后期所有安全部署。</p>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Full Technical Support Center</h2>
+            <p className="text-sm text-[#86868b] mt-3">Self-service activation guides. We commit to full post-purchase deployment support.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">🔑</div>
-              <h4 className="text-base font-bold mb-2">激活码常见问题 (Activation Guide)</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何正确在设备中输入 Retail 密钥并完成和个人微信号的官方云绑定。</p>
-              <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#0078d4] hover:underline focus:outline-none text-left">立即前往用户后台查看 &gt;</button>
+              <h4 className="text-base font-bold mb-2">Activation FAQ</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">How to enter your Retail key and complete cloud binding with your Microsoft account.</p>
+              <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#0078d4] hover:underline focus:outline-none text-left">Go to User Portal{' > '}</button>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📦</div>
-              <h4 className="text-base font-bold mb-2">Office 部署安装指南 (Setup)</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何完全清除电脑里的野蛮盗版 Office残留并干净地完成 Microsoft 365 部署。</p>
-              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0078d4] hover:underline">前往微软官方激活网 &gt;</a>
+              <h4 className="text-base font-bold mb-2">Office Deployment & Installation Guide</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">How to completely remove unauthorized Office remnants and cleanly deploy Microsoft 365.</p>
+              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0078d4] hover:underline">Go to Microsoft Activation Site{' > '}</a>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
-              <h4 className="text-base font-bold mb-2">服务器与 SQL 本地激活 (Volume)</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">解决 Server 激活报错问题，提供官方原生 ISO 下载验证渠道。</p>
-              <button onClick={() => showToast("我们的 7x24 小时技术团队已就位，请直接在下方申请获取合规咨询部署。", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">一键联系在线支持专家 &gt;</button>
+              <h4 className="text-base font-bold mb-2">Server & SQL Local Activation (Volume)</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">Resolve Server activation errors with official native ISO download verification.</p>
+              <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">Contact Online Support Expert &gt;</button>
             </div>
           </div>
 
           {/* Interactive Collapsible FAQ */}
           <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-[#e8e8ed] p-8">
-            <h3 className="text-lg font-bold mb-6 text-center text-[#1d1d1f]">🤔 关于正版软件购买，您的核心焦虑解答</h3>
+            <h3 className="text-lg font-bold mb-6 text-center text-[#1d1d1f]">🤔 Your Top Concerns About Genuine Software, Answered</h3>
             
             <div className="space-y-4 divide-y divide-[#f5f5f7]">
               
@@ -677,12 +677,12 @@ export default function App() {
                   onClick={() => toggleFAQ(1)} 
                   className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
                 >
-                  <span>Q1：为什么你们的价格比微软官网直接购买便宜这么多？是不是盗版？</span>
+                  <span>Q1: Why are your prices much lower than Microsoft official store? Are these genuine?</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 1 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 1 && (
                   <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
-                    绝对是正版。我们采购的是微软针对全球不同地区进行大宗协议采购的批量许可证（Volume Licensing）或大客户合作伙伴通道（CSP）。微软官方对大宗采购有极高让利，我们扣除渠道成本后把这些合规红利让渡给开发者与广大个人用户。所以支持绑定微软账号、官方镜像下载，绝非黑产非法 Key。
+                    Absolutely genuine. We source Volume Licensing and CSP channel keys through Microsoft regional bulk agreements. Microsoft offers steep volume discounts, and we pass those savings to developers. All keys support Microsoft account binding and official ISO downloads — never unauthorized keys.
                   </p>
                 )}
               </div>
@@ -692,12 +692,12 @@ export default function App() {
                   onClick={() => toggleFAQ(2)} 
                   className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
                 >
-                  <span>Q2：买完密钥，重装电脑或者更换设备后，还能继续用吗？</span>
+                  <span>Q2：After purchasing, can I still use the key after reinstalling or changing devices?</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 2 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 2 && (
                   <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
-                    可以！由于我们所提供的是 Retail 级别的正规密钥，这些激活码将支持在您登录自己的微软账户后实现云关联绑定。重装设备时，只需在微软官方激活面板上点击“我最近更改了此设备的硬件”，便可瞬间实现无损二次激活。
+                    Yes! Our Retail-grade keys support cloud binding to your Microsoft account. When reinstalling, simply click “I recently changed the hardware on this device”，for seamless reactivation.
                   </p>
                 )}
               </div>
@@ -707,12 +707,12 @@ export default function App() {
                   onClick={() => toggleFAQ(3)} 
                   className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
                 >
-                  <span>Q3：我的企业正面临合规审查，能用这些 Key 通过官方 SAM 审计吗？</span>
+                  <span>Q3：My company faces a compliance audit. Can these keys pass official SAM Audit?</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 3 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 3 && (
                   <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
-                    能！我们特为企业采购用户提供专属批量合规协议通道，并且在发货时提供微软原厂合规声明与我司授权认证收据（支持发票）。若在审计期间发生任何问题，我方合规专家团队将提供一对一法律合规技术支持，全程保驾护航。
+                    Yes! We provide enterprise procurement with Microsoft compliance statements and authorized receipts (invoices supported). Our compliance team offers one-on-one legal support throughout any audit.
                   </p>
                 )}
               </div>
@@ -728,8 +728,8 @@ export default function App() {
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Client Fulfillment Center</span>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">微软正版一键式交付中心</h2>
-            <p className="text-sm text-[#86868b] mt-2">在这里，您可以方便地管理已经购买的正版授权密钥，一键安全复制，并可直达微软官方下载中心。</p>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Microsoft Genuine One-Click Delivery Center</h2>
+            <p className="text-sm text-[#86868b] mt-2">Conveniently manage your purchased genuine license keys, copy securely with one click, and access official Microsoft downloads.</p>
           </div>
 
           <div className="bg-[#f5f5f7] rounded-3xl p-6 sm:p-10 border border-[#e8e8ed] shadow-sm">
@@ -739,18 +739,18 @@ export default function App() {
                   U
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#1d1d1f]">演示采购测试账户 (Demo Account)</h4>
-                  <p className="text-xs text-[#86868b]">注册邮箱：trial-buyer@keystarter.com</p>
+                  <h4 className="text-sm font-bold text-[#1d1d1f]">Demo Account</h4>
+                  <p className="text-xs text-[#86868b]">Email: trial-buyer@keystarter.com</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="bg-green-100 text-green-700 text-[10px] font-semibold px-2 py-0.5 rounded border border-green-200">
-                  ● 账户状态：正常激活
+                  ● Account Status: Active
                 </span>
               </div>
             </div>
 
-            <h4 className="text-xs font-bold text-[#86868b] uppercase tracking-wider mb-4">您的可用正版授权密钥 (My Genuine Licenses)</h4>
+            <h4 className="text-xs font-bold text-[#86868b] uppercase tracking-wider mb-4">Your Available Licenses (My Genuine Licenses)</h4>
             
             <div className="space-y-4">
               {purchasedLicenses.map((lic) => (
@@ -775,7 +775,7 @@ export default function App() {
                           onClick={() => copyToClipboard(lic.key)} 
                           className="text-blue-500 hover:text-blue-700 text-xs transition focus:outline-none"
                         >
-                          一键复制
+                          Copy All
                         </button>
                       </div>
                     </div>
@@ -788,7 +788,7 @@ export default function App() {
                       rel="noopener noreferrer" 
                       className="block text-center bg-[#f5f5f7] hover:bg-[#e8e8ed] text-xs font-semibold text-[#1d1d1f] px-4 py-2.5 rounded-lg border border-[#d2d2d7] transition whitespace-nowrap"
                     >
-                      直达官方原厂下载 &gt;
+                      Go to Official Download &gt;
                     </a>
                   </div>
                 </div>
@@ -797,22 +797,22 @@ export default function App() {
 
             {/* Simulated Live Generation controls for Sandbox testing */}
             <div className="mt-8 bg-blue-50/50 p-6 rounded-2xl border border-blue-100 text-center">
-              <h5 className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2">🎁 互动功能：自主模拟支付与激活流程</h5>
+              <h5 className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2">🎁 Interactive: Self-Service Simulated Payment & Activation</h5>
               <p className="text-xs text-blue-700 max-w-lg mx-auto mb-4">
-                点击下方按钮可直接模拟购买任意微软激活密钥，成功后系统将自动在上方账户卡片中为您下发新激活密钥，快来试试吧！
+                Click below to simulate purchasing any Microsoft activation key. The system will auto-dispatch it to your account card above. Try it now!
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <button 
                   onClick={() => simulateDirectOrder('Windows 11 Home', false, 'TX9XD-98N7V-6WMQ6-BX7FG-H8Q99')} 
                   className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow"
                 >
-                  模拟下发 Windows 11 Key
+                  Simulate Get Windows 11 Key
                 </button>
                 <button 
                   onClick={() => simulateDirectOrder('Office 2026 Pro Plus', true, 'T3N7V-8BYX2-6QBMQ-99FGH-73GX9')} 
                   className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow"
                 >
-                  模拟下发 Office 2026 Key
+                  Simulate Get Office 2026 Key
                 </button>
               </div>
             </div>
@@ -836,26 +836,26 @@ export default function App() {
               {/* Header */}
               <div className="p-6 border-b border-[#e8e8ed]">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-[#1d1d1f]">🔒 安全结算与激活交付</h3>
+                  <h3 className="text-lg font-bold text-[#1d1d1f]">🔒 Secure Checkout & Activation Delivery</h3>
                   <button onClick={closeCheckoutDrawer} className="text-gray-400 hover:text-gray-500 text-lg">×</button>
                 </div>
-                <p className="text-xs text-[#86868b] mt-1">完成模拟支付后，正版授权将在 5 分钟内下发至交付中心。</p>
+                <p className="text-xs text-[#86868b] mt-1">After completing payment, your genuine license will be delivered to the fulfillment center within 5 minutes.</p>
               </div>
 
               {/* Form Content */}
               <form onSubmit={handlePurchase} className="flex-1 overflow-y-auto p-6 space-y-6">
                 
                 <div className="bg-[#f5f5f7] p-4 rounded-xl border border-[#e8e8ed]">
-                  <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">选购产品：</span>
+                  <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Selected Product:</span>
                   <h4 className="text-base font-bold mt-1 text-[#1d1d1f]">{checkoutProduct.title}</h4>
                   <div className="flex items-baseline justify-between mt-2">
                     <span className="text-xl font-bold text-[#0078d4]">${checkoutProduct.price}</span>
-                    <span className="text-xs text-green-600">✓ 全球秒发货</span>
+                    <span className="text-xs text-green-600">✓ Global Instant Delivery</span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">您的接收邮箱（极重要，用于极速交付）：</label>
+                  <label className="block text-xs font-semibold text-[#1d1d1f]">Your Email (required for instant delivery):</label>
                   <input 
                     type="email" 
                     required 
@@ -864,12 +864,12 @@ export default function App() {
                     onChange={(e) => setCheckoutEmail(e.target.value)}
                     className="w-full px-3 py-2.5 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" 
                   />
-                  <p className="text-[10px] text-gray-400">我们将在此邮箱为您注册自动交付账户，您可在账户随时提取此 Key。</p>
+                  <p className="text-[10px] text-gray-400">We will register an auto-delivery account with this email for key retrieval anytime.</p>
                 </div>
 
                 {/* Simulated Payment select */}
                 <div className="space-y-3">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">选择安全支付通道：</label>
+                  <label className="block text-xs font-semibold text-[#1d1d1f]">Select Payment Method:</label>
                   <div className="grid grid-cols-2 gap-3">
                     <div 
                       onClick={() => setPayMethod(1)} 
@@ -890,13 +890,13 @@ export default function App() {
 
                 <div className="bg-gray-50 p-4 rounded-xl border border-[#e8e8ed] space-y-2">
                   <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 支持官方绑定 MSA 账号验证
+                    <span className="text-green-500">✓</span> Supports official MSA account binding
                   </div>
                   <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 7天无理由退款保证 (无激活失败风险)
+                    <span className="text-green-500">✓</span> 7-Day Money-Back Guarantee (No activation failure risk)
                   </div>
                   <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 256-bit SSL 证书链路加密保护
+                    <span className="text-green-500">✓</span> 256-bit SSL certificate chain encryption
                   </div>
                 </div>
 
@@ -905,9 +905,9 @@ export default function App() {
                     type="submit" 
                     className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-bold py-4 rounded-xl transition flex items-center justify-center space-x-1 shadow-lg shadow-blue-500/10"
                   >
-                    <span>💳 模拟完成安全支付</span>
+                    <span>💳 Complete Simulated Payment</span>
                   </button>
-                  <p className="text-[10px] text-center text-gray-400 mt-2">点击将自动在后台为您下发订单密钥！</p>
+                  <p className="text-[10px] text-center text-gray-400 mt-2">Click to auto-dispatch the license key instantly!</p>
                 </div>
               </form>
             </div>

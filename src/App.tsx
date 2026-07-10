@@ -1,4 +1,4 @@
-﻿import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CartProvider, useCart } from "./CartContext";
 import SearchOverlay from "./SearchOverlay";
@@ -73,18 +73,18 @@ function Layout({ children }) {
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
-                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">商店 / Store</button>
-                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">企业合规 / B2B</button>
-                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">机型对比</button>
-                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">技术支持</button>
-                <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">交付中心</button>
+                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">Store</button>
+                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">Enterprise / B2B</button>
+                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">Compare</button>
+                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">Tech Support</button>
+                <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">Fulfillment Center</button>
               </>
             ) : (
               <>
-                <Link to="/#store" className="hover:text-[#0078d4] transition-colors">商店</Link>
-                <Link to="/#business" className="hover:text-[#0078d4] transition-colors">企业合规</Link>
-                <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">产品对比</Link>
-                <Link to="/#support" className="hover:text-[#0078d4] transition-colors">支持</Link>
+                <Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
+                <Link to="/#business" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
+                <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
+                <Link to="/#support" className="hover:text-[#0078d4] transition-colors">Support</Link>
               </>
             )}
           </div>
@@ -115,7 +115,7 @@ function Layout({ children }) {
           <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
             <div>
               <span className="text-lg font-bold text-white">KeyStarter Partner Solutions</span>
-              <p className="text-xs text-[#86868b] mt-1">正规、安全、高效的 B2B & B2C 微软授权供应链服务商。</p>
+              <p className="text-xs text-[#86868b] mt-1">Reliable, secure, efficient B2B & B2C Microsoft authorized supply chain services.</p>
             </div>
             <div className="flex items-center space-x-4 text-white/50 text-xs">
               <span>256-bit SSL Secured</span>
@@ -123,11 +123,11 @@ function Layout({ children }) {
             </div>
           </div>
           <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
-            <p>&copy; 2026 KeyStarter. All Rights Reserved. 微软系统及产品设计版权归微软（Microsoft）公司所有。</p>
+            <p>&copy; 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.</p>
             <div className="flex space-x-4">
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">免责声明</button>
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">隐私协议</button>
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">授权说明</button>
+              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Disclaimer</button>
+              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Privacy Policy</button>
+              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Licensing Terms</button>
             </div>
           </div>
         </div>
