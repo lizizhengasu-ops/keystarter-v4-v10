@@ -1,12 +1,17 @@
-﻿#!/bin/sh
-# .githooks/pre-commit
-# 提交前自动检查 position:fixed 元素是否被 Portal 保护
-
-echo "🔍 [pre-commit] 检查 position:fixed 元素..."
-node scripts/check-fixed-elements.mjs
-if [ $? -ne 0 ]; then
-  echo "❌ [pre-commit] 存在未受 Portal 保护的 position:fixed 元素，提交已阻止"
-  echo "   修复后重新提交，或使用 git commit --no-verify 跳过"
-  exit 1
-fi
-echo "✅ [pre-commit] 通过"
+#!/usr/bin/env node
+import{execSync}from"child_process";
+import{fileURLToPath}from"url";
+import path from"path";
+var __dirname=path.dirname(fileURLToPath(import.meta.url));
+var cwd=path.resolve(__dirname,"..");
+try{
+  var out=execSync("node scripts/validate.mjs",{cwd:cwd,stdio:"pipe"});
+  console.log(out.toString());
+  console.log("[pre-commit] PASSED");
+  process.exit(0);
+}catch(e){
+  var out=e.stdout?e.stdout.toString():"";
+  console.log(out||e.message);
+  console.log("[pre-commit] FAILED - fix issues or use --no-verify to skip");
+  process.exit(1);
+}

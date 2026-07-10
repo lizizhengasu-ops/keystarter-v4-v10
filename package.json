@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "build:seo": "vite build && python ../../_archive/seo_inject.py",
     "lint:portal": "node scripts/check-fixed-elements.mjs",
-    "postinstall": "git config core.hooksPath .githooks"
+    "postinstall": "git config core.hooksPath .githooks",
+    "validate": "node scripts/validate.mjs",
+    "validate:fix": "node scripts/validate.mjs --fix"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
