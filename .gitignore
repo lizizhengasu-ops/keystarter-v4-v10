@@ -38,3 +38,9 @@ scripts/check-*.cjs
 scripts/wp-*.cjs
 scripts/get-*.cjs
 bak/
+deploy-key.cjs
+add-ignore.cjs
+insert-line.cjs
+exclude-reactbits.cjs
+setup-enforcement.cjs
+fix-*.cjs
