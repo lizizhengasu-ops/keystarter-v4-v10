@@ -10,6 +10,8 @@ import CartPage from "./pages/Cart";
 import AccountPage from "./pages/Account";
 import SupportPage from "./pages/Support";
 import B2bPage from "./pages/B2b";
+import BlogPage from "./pages/Blog";
+import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 
 function MicrosoftLogo() {
@@ -77,15 +79,17 @@ function Layout({ children }) {
                 <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">Enterprise / B2B</button>
                 <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">Compare</button>
                 <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">Tech Support</button>
-                <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">Fulfillment Center</button>
-              </>
+               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">Fulfillment Center</button>
+                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#0078d4] transition-colors">Blog</button>
+</>
             ) : (
               <>
                 <Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
                 <Link to="/#business" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
                 <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
-                <Link to="/#support" className="hover:text-[#0078d4] transition-colors">Support</Link>
-              </>
+               <Link to="/#support" className="hover:text-[#0078d4] transition-colors">Support</Link>
+                <Link to="/blog" className="hover:text-[#0078d4] transition-colors">Blog</Link>
+</>
             )}
           </div>
           <div className="flex items-center space-x-4">
@@ -154,6 +158,8 @@ export default function App() {
             <Route path="/account" element={<AccountPage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/b2b" element={<B2bPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogArticlePage />} />
           </Routes>
         </Layout>
       </CartProvider>

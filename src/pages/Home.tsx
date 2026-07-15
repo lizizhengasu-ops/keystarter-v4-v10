@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
@@ -195,8 +196,11 @@ const PREMIUM_SKUS = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('all');
-  const [openFaqId, setOpenFaqId] = useState(null);
+  const [apiProducts, setApiProducts] = useState(null);
+  useEffect(() => { fetchProducts().then(setApiProducts).catch(function(e){console.warn("API fetch failed:",e)}); }, []);
+const [activeTab, setActiveTab] = useState('all');
+ const [openFaqId, setOpenFaqId] = useState(null);
+  const [blogPosts, setBlogPosts] = useState([]);
   
   // Simulated Licenses purchased in this session
   const [purchasedLicenses, setPurchasedLicenses] = useState([
@@ -330,7 +334,14 @@ export default function App() {
   };
 
   // Filtered SKUs
-  const filteredSkus = PREMIUM_SKUS.filter(sku => 
+  const getLiveData = (sku) => {
+    if (!apiProducts) return sku;
+    const live = apiProducts.find(p => p.name === sku.title);
+    if (!live) return sku;
+    return { ...sku, price: live.price, originalPrice: live.regular_price };
+  };
+
+const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
   );
 
@@ -468,8 +479,8 @@ export default function App() {
                 <div>
                   <div className="flex items-baseline justify-between mb-4">
                     <div>
-                      <span className="text-2xl font-extrabold text-[#1d1d1f]">${sku.price}</span>
-                      <span className="text-xs text-[#86868b] line-through ml-1.5">${sku.originalPrice}</span>
+                      <span className="text-2xl font-extrabold text-[#1d1d1f]">${getLiveData(sku).price}</span>
+                      <span className="text-xs text-[#86868b] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
                     </div>
                     {sku.auditInfo && (
                       <span className="text-[11px] text-[#0078d4] font-medium">✓ {sku.auditInfo}</span>
@@ -720,10 +731,40 @@ export default function App() {
             </div>
           </div>
         </div>
-      </section>
+     </section>
 
+     {}
+     {/* Deliver & Account Portal Section */}
+      {/* Latest from Blog */}
+      <section id="blog-preview" className="py-20 bg-[#f5f5f7]">
+        <div className="max-w-4xl px-4 mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Latest from Our Blog</span>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Guides &amp; Resources</h2>
+            <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">Expert guides, comparisons, and tips for Microsoft software licensing.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {blogPosts.length === 0 ? (
+              <div className="md:col-span-3 text-center text-sm text-[#86868b] py-8">Loading latest articles...</div>
+            ) : blogPosts.slice(0, 3).map(post => (
+              <a key={post.id} href={post.link} className="block bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group">
+                <div className="p-5">
+                  <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#0078d4] transition-colors mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                  <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                  <span className="text-xs text-[#0078d4] font-medium">Read more &rarr;</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <a href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-[#0078d4] hover:text-[#005a9e] transition-colors">
+              View All Articles
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
       {}
-      {/* Deliver & Account Portal Section */}
       <section id="portal" className="py-20 bg-white border-t border-[#e8e8ed]">
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
