@@ -1,4 +1,4 @@
-﻿import { createPortal } from "react-dom";
+import { createPortal } from "react-dom";
 
 /**
  * Portal — 将子元素渲染到 <body> 层
