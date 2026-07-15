@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ChatBot V2 - Portal Views</title><style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#f5f5f7;color:#1d1d1f}
+.hdr{background:#1d1d1f;color:#fff;padding:20px 16px;text-align:center}.hdr h1{font-size:22px}.hdr p{font-size:12px;color:#888}
+.tabs{display:flex;gap:4px;padding:10px 16px;background:#fff;border-bottom:1px solid #e8e8ed;position:sticky;top:0;z-index:100}
+.tabs button{flex:1;padding:8px;border:1px solid #e8e8ed;border-radius:8px;background:#fff;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.tabs button.act{background:#0071e3;color:#fff;border-color:#0071e3}.tabs button:hover{background:#f0f0f0}.tabs button.act:hover{background:#0077ed}
+.vp{display:none;min-height:500px}.vp.act{display:block}
+</style></head><body>
+<div class="hdr"><h1>ChatBot V2 &mdash; Three Portal Views</h1><p>The same chatbot, three different interfaces</p></div>
+<div class="tabs" id="mainTabs"><button class="act" onclick="showView('enduser')">&#x1F4AC; End User (Widget Only)</button><button onclick="showView('client')">&#x1F4CA; Client (Tenant Dashboard)</button><button onclick="showView('admin')">&#x2699;&#xFE0F; Admin (Management Panel)</button></div>
+<div id="v-enduser" class="vp act" style="background:#fff">
+<div style="padding:40px 20px;text-align:center">
+<div style="font-size:32px;font-weight:700;margin-bottom:4px;color:#1d1d1f">Acme Corp</div>
+<div style="font-size:14px;color:#888;margin-bottom:24px">Enterprise Solutions</div>
+<div style="max-width:600px;margin:0 auto;text-align:left;color:#555;font-size:14px;line-height:1.7">
+<p>Welcome to Acme Corp. We provide enterprise-grade solutions for businesses of all sizes.</p>
+<p style="margin-top:12px">Browse our products and services. Need help? Click the chat bubble below!</p>
+</div></div>
+<div style="position:fixed;bottom:80px;right:20px;text-align:right;font-size:12px;color:#888">End User sees ONLY this page + chat widget. No dashboard, no billing, no config.</div>
+</div>
+<div id="v-client" class="vp" style="background:#f0f4ff">
+<div style="max-width:800px;margin:0 auto;padding:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div><b style="font-size:16px">Tenant Dashboard</b><br><span style="font-size:12px;color:#888">Acme Corp</span></div>
+<span class="b bg" style="font-size:11px">Active</span></div>
+<div style="background:#fff;border:1px solid #e8e8ed;border-radius:10px;padding:14px;margin-bottom:10px">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+<div><b style="font-size:14px">Subscription</b> <span class="b bg">Pro Plan</span> <span style="font-size:12px;color:#888">Expires in 18 days</span></div>
+<button onclick="alert('Renewed! New expiry: Aug 10, 2026')" style="background:#ff9500;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer">&#x26A0; Renew Now</button></div>
+<div style="margin-top:8px;background:#e8e8ed;height:6px;border-radius:3px"><div style="width:60%;background:#34c759;height:100%;border-radius:3px"></div></div>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:2px"><span>300/500 chats used</span><span style="color:#ff9500">10 days to renewal reminder</span></div></div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
+<div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700">142</div><div style="font-size:11px;color:#888">Chats</div></div>
+<div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#34c759">89%</div><div style="font-size:11px;color:#888">Answered</div></div>
+<div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#ff9500">12</div><div style="font-size:11px;color:#888">Leads</div></div>
+<div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#0071e3">98%</div><div style="font-size:11px;color:#888">Uptime</div></div></div>
+<div style="display:flex;gap:6px;margin-bottom:10px;font-size:12px;flex-wrap:wrap">
+<span class="b bl" style="cursor:pointer;padding:6px 12px" onclick="clientTab('dash')" id="ct-dash">Dashboard</span>
+<span style="cursor:pointer;padding:6px 12px;background:#f0f0f0;color:#555;border-radius:6px" onclick="clientTab('kb')" id="ct-kb">Knowledge Base</span>
+<span style="cursor:pointer;padding:6px 12px;background:#f0f0f0;color:#555;border-radius:6px" onclick="clientTab('config')" id="ct-config">Widget Config</span>
+<span style="cursor:pointer;padding:6px 12px;background:#f0f0f0;color:#555;border-radius:6px" onclick="clientTab('bill')" id="ct-bill">Billing</span></div>
+<div id="c-dash"><div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:14px;font-size:13px;color:#555">Chat volume up 12% this month. Top question: &ldquo;How to activate?&rdquo; (34 times). Peak hours 2-4 PM EST.</div></div>
+<div id="c-kb" style="display:none"><div style="background:#fff;border:2px dashed #ccc;border-radius:8px;padding:24px;text-align:center;font-size:13px;color:#888"><p style="font-size:24px">&#128196;</p><p>Upload products.json, faq.json, or policies.md</p><button style="background:#0071e3;color:#fff;border:none;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:12px;cursor:pointer">Choose Files</button></div></div>
+<div id="c-config" style="display:none"><div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:14px;font-size:13px;color:#555">Widget color: #0071e3 | Position: Bottom-Right | Bot name: Acme Assistant | Welcome: Hi there!</div></div>
+<div id="c-bill" style="display:none"><div style="background:#fff;border:1px solid #e8e8ed;border-radius:8px;padding:14px;font-size:13px;color:#555">Next payment: $29.99 on Jul 10, 2026. Payment method: Visa ending in 4242.</div></div>
+</div>
+<div style="position:fixed;bottom:80px;right:20px;text-align:right;font-size:12px;color:#888">Client sees: Dashboard + subscription + KB management + analytics. Same widget as end user.</div>
+</div>
+<div id="v-admin" class="vp" style="background:#1d1d1f;color:#e8e8ed;min-height:600px">
+<div style="max-width:800px;margin:0 auto;padding:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div><b style="font-size:16px">Admin Panel</b><br><span style="font-size:12px;color:#888">admin.YOUR-DOMAIN.com</span></div>
+<span class="b bl" style="font-size:11px">Super Admin</span></div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
+<div style="background:#2c2c2e;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700">12</div><div style="font-size:11px;color:#888">Tenants</div></div>
+<div style="background:#2c2c2e;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#34c759">8</div><div style="font-size:11px;color:#888">Active</div></div>
+<div style="background:#2c2c2e;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700;color:#0071e3">$79.92</div><div style="font-size:11px;color:#888">MRR</div></div>
+<div style="background:#2c2c2e;border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:700">41</div><div style="font-size:11px;color:#888">Chats Today</div></div></div>
+<div style="background:#2c2c2e;border-radius:8px;padding:14px">
+<div style="display:flex;gap:6px;margin-bottom:10px;font-size:12px;flex-wrap:wrap">
+<span style="color:#0071e3;font-weight:600;cursor:pointer" onclick="adminTab('tenants')" id="at-tenants">Tenants</span><span style="color:#888;cursor:pointer" onclick="adminTab('billing')" id="at-billing">Billing</span><span style="color:#888;cursor:pointer" onclick="adminTab('analytics')" id="at-analytics">Analytics</span><span style="color:#888;cursor:pointer" onclick="adminTab('settings')" id="at-settings">Settings</span></div>
+<div id="a-tenants">
+<table style="width:100%;font-size:12px;border-collapse:collapse">
+<tr style="color:#888;border-bottom:1px solid #3a3a3c"><th style="padding:6px;text-align:left;font-weight:400">Tenant</th><th style="padding:6px;text-align:left;font-weight:400">Plan</th><th style="padding:6px;text-align:left;font-weight:400">Status</th><th style="padding:6px;text-align:left;font-weight:400">Expires</th></tr>
+<tr style="border-bottom:1px solid #3a3a3c;cursor:pointer" onclick="alert('Managing Acme Corp')"><td style="padding:6px">Acme Corp</td><td style="padding:6px"><span class="b bg">Pro</span></td><td style="padding:6px"><span class="b bg">Active</span></td><td style="padding:6px">18 days</td></tr>
+<tr style="border-bottom:1px solid #3a3a3c;cursor:pointer" onclick="alert('Managing Other Store')"><td style="padding:6px">Other Store</td><td style="padding:6px"><span class="b bl">Basic</span></td><td style="padding:6px"><span class="b bg">Active</span></td><td style="padding:6px">25 days</td></tr>
+<tr style="border-bottom:1px solid #3a3a3c;cursor:pointer" onclick="alert('Managing Third Shop')"><td style="padding:6px">Third Shop</td><td style="padding:6px"><span class="b bl">Basic</span></td><td style="padding:6px"><span class="b bo">Expiring</span></td><td style="padding:6px">3 days</td></tr>
+<tr style="cursor:pointer" onclick="alert('Managing Old Store')"><td style="padding:6px">Old Store</td><td style="padding:6px"><span class="b br">Expired</span></td><td style="padding:6px"><span class="b br">Inactive</span></td><td style="padding:6px">-30 days</td></tr></table></div>
+<div id="a-billing" style="display:none;font-size:13px;color:#e8e8ed">Upcoming renewals: Acme Corp $29.99 (18d) | Other Store $9.99 (25d) | Third Shop $9.99 (3d)</div>
+<div id="a-analytics" style="display:none;font-size:13px;color:#e8e8ed">Cross-tenant: 423 total chats, 87% avg answer rate, 38 leads generated.</div>
+<div id="a-settings" style="display:none;font-size:13px;color:#e8e8ed">AI: DeepSeek. Pricing: Basic $9.99/mo, Pro $29.99/mo. Trial: 7 days.</div>
+</div></div>
+<div style="position:fixed;bottom:80px;right:20px;text-align:right;font-size:12px;color:#888">Admin sees: All tenants, global billing, system config. No widget needed here.</div>
+</div>
+<div id="chat-widget" style="position:fixed;bottom:20px;right:20px;z-index:9998">
+<div id="chat-panel" style="display:none;width:340px;height:460px;background:#fff;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.15);margin-bottom:8px;flex-direction:column;overflow:hidden;font-size:13px">
+<div id="chat-header" style="background:#0071e3;color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer" title="5 clicks = admin">
+<b id="chat-title" style="font-size:14px">Acme Assistant</b>
+<div><span id="admin-badge" style="font-size:10px;opacity:.4"></span><button onclick="event.stopPropagation();toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer">x</button></div></div>
+<div id="admin-bar" style="display:none;background:#1d1d1f;color:#e8e8ed;padding:6px 10px;font-size:11px;align-items:center;gap:6px">
+<span style="color:#ff9500">ADMIN</span><select id="tenant-sel" style="background:#2c2c2e;color:#fff;border:1px solid #3a3a3c;border-radius:4px;padding:2px 6px;font-size:11px;flex:1"><option value="acme">Tenant: Acme Corp</option><option value="other">Tenant: Other Store</option></select></div>
+<div id="chat-msgs" style="flex:1;overflow-y:auto;padding:10px 12px">
+<div class="mb"><div style="background:#f0f0f0;border-radius:12px 12px 12px 4px;padding:10px 12px;display:inline-block;max-width:85%">Hi! Ask me about products, pricing, and activation.</div></div></div>
+<div style="border-top:1px solid #e8e8ed;padding:8px 10px;display:flex;gap:6px">
+<input id="chat-inp" type="text" placeholder="Type..." style="flex:1;border:1px solid #e8e8ed;border-radius:20px;padding:8px 12px;font-size:13px;outline:none" onkeydown="if(event.key==='Enter')sendMsg()">
+<button onclick="sendMsg()" style="background:#0071e3;color:#fff;border:none;border-radius:20px;padding:8px 14px;font-size:13px;cursor:pointer">Send</button></div></div>
+<button id="chat-btn" onclick="toggleChat()" style="width:54px;height:54px;background:#0071e3;color:#fff;border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 12px rgba(0,113,227,.4);float:right"><span id="chat-icon">&#x1F4AC;</span></button>
+</div>
+<style>.mb{margin-bottom:6px}.mbot{text-align:left}.muser{text-align:right}.muser>div{background:#0071e3;color:#fff;border-radius:12px 12px 4px 12px;padding:10px 12px;display:inline-block;max-width:85%}.typing{display:inline-flex;gap:3px;background:#f0f0f0;border-radius:12px;padding:10px 12px}.typing span{width:6px;height:6px;background:#999;border-radius:50%;animation:dot 1.4s infinite}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}@keyframes dot{0%,60%,100%{opacity:.3}30%{opacity:1}}</style>
+<script>
+var R={acme:{'windows':'Windows 11 Pro is $19.99. Retail, account-bound.','price':'$14.99 (Home) to $149.99 (SQL Server).','activate':'Settings > Activation > Change product key.','default':'I can help with Microsoft license purchases and activation.'},other:{'default':'Welcome! Ask me about our products.'}};
+var tenant='acme';var clicks=0;
+function toggleChat(){var p=document.getElementById('chat-panel'),b=document.getElementById('chat-btn'),i=document.getElementById('chat-icon');p.style.display=p.style.display==='flex'?'none':'flex';i.innerHTML=p.style.display==='flex'?'x':'&#x1F4AC;'}
+document.getElementById('chat-header').addEventListener('click',function(e){if(e.target.tagName==='BUTTON')return;clicks++;if(clicks>=5){document.getElementById('admin-bar').style.display='flex';document.getElementById('admin-badge').textContent='ADMIN';clicks=0}});
+function typeMsg(t,c){var m=document.getElementById('chat-msgs'),d=document.createElement('div');d.style.textAlign=c==='user'?'right':'left';var x=document.createElement('div');x.style.background=c==='user'?'#0071e3':'#f0f0f0';x.style.color=c==='user'?'#fff':'#1d1d1f';x.style.borderRadius=c==='user'?'12px 12px 4px 12px':'12px 12px 12px 4px';x.style.padding='10px 12px';x.style.display='inline-block';x.style.maxWidth='85%';x.textContent=t;d.appendChild(x);m.appendChild(d);m.scrollTop=m.scrollHeight}
+function showT(){var m=document.getElementById('chat-msgs'),d=document.createElement('div');d.id='t';var x=document.createElement('div');x.className='typing';x.innerHTML='<span></span><span></span><span></span>';d.appendChild(x);m.appendChild(d);m.scrollTop=m.scrollHeight}
+function hideT(){var t=document.getElementById('t');if(t)t.remove()}
+function findR(q){q=q.toLowerCase();for(var k in R[tenant]){if(k!=='default'&&q.indexOf(k)>=0)return R[tenant][k]}return R[tenant]['default']}
+function sendMsg(){var i=document.getElementById('chat-inp'),t=i.value.trim();if(!t)return;typeMsg(t,'user');i.value='';showT();setTimeout(function(){hideT();typeMsg(findR(t),'bot')},500+Math.random()*500)}
+document.getElementById('tenant-sel').addEventListener('change',function(){tenant=this.value;document.getElementById('chat-title').textContent=tenant==='acme'?'Acme Assistant':'Other Assistant';document.getElementById('chat-msgs').innerHTML='<div class="mb"><div style="background:#f0f0f0;border-radius:12px;padding:10px 12px;display:inline-block;max-width:85%">'+(tenant==='acme'?R.acme.default:R.other.default)+'</div></div>'})
+function showView(v){['enduser','client','admin'].forEach(function(p){var el=document.getElementById('v-'+p);if(el)el.classList.toggle('act',p===v)});document.querySelectorAll('#mainTabs button').forEach(function(b){b.classList.toggle('act',b.textContent.toLowerCase().indexOf({enduser:'widget',client:'tenant',admin:'admin'}[v])>=0)})}
+function clientTab(t){['dash','kb','config','bill'].forEach(function(p){var el=document.getElementById('c-'+p);if(el)el.style.display=p===t?'block':'none';var bt=document.getElementById('ct-'+p);if(bt)bt.style.background=p===t?'#0071e3':'#f0f0f0';if(bt)bt.style.color=p===t?'#fff':'#555'})}
+function adminTab(t){['tenants','billing','analytics','settings'].forEach(function(p){var el=document.getElementById('a-'+p);if(el)el.style.display=p===t?'block':'none'})}
+</script>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>AI Sales Assistant V6 — Final Preview</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f5f5f7;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.page{max-width:900px;width:100%;position:relative}
+.store{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px 16px 0 0}
+.store-top{background:rgba(255,255,255,.05);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.store-top h2{color:#fff;font-size:15px;font-weight:600}.store-top span{color:#8888aa;font-size:11px}
+.products{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#f5f5f7;border:1px solid #e8e8ed;border-top:none;border-radius:0 0 16px 16px}
+.prod{background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8ed;display:flex;gap:12px;align-items:center}
+.prod-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.prod-info{flex:1}.prod-info h4{font-size:13px;margin:0;color:#1d1d1f}.prod-info p{font-size:11px;color:#86868b;margin:2px 0}.prod-info .price{font-size:15px;font-weight:700;color:#1d1d1f}
+.chat-btn{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6a30a0,#8a50c0);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 20px rgba(106,48,160,.4);display:flex;align-items:center;justify-content:center;z-index:999}
+.chat-btn .badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#ff3b30;border:2px solid #fff}
+.chat-panel{position:fixed;bottom:90px;right:24px;width:380px;height:580px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.15);display:none;flex-direction:column;z-index:998;overflow:hidden}
+.chat-panel.open{display:flex}
+.chat-hdr{background:linear-gradient(135deg,#6a30a0,#8a50c0);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-hdr .av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.chat-hdr .info{flex:1;text-align:left}.chat-hdr .info h3{font-size:13px;margin:0;font-weight:600}.chat-hdr .info p{font-size:10px;margin:0;color:rgba(255,255,255,.7)}.chat-hdr .close{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;opacity:.7;padding:2px;flex-shrink:0}
+.chat-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;background:#f5f5f7;min-height:0}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5;text-align:left;animation:fadeIn .3s}
+.msg.bot{background:#fff;border:1px solid #e8e8ed;align-self:flex-start;border-bottom-left-radius:4px;color:#1d1d1f}
+.msg.user{background:#6a30a0;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg .tm{font-size:10px;color:#999;margin-top:5px}.msg.user .tm{color:rgba(255,255,255,.6)}
+.typing{display:flex;gap:4px;padding:12px 16px;background:#fff;border:1px solid #e8e8ed;border-radius:14px;align-self:flex-start;border-bottom-left-radius:4px;animation:fadeIn .3s}
+.typing span{width:6px;height:6px;border-radius:50%;background:#999;animation:bounce 1.4s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{opacity:.3}30%{opacity:1;transform:translateY(-4px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.chat-footer{background:#fff;border-top:1px solid #f0f0f0;flex-shrink:0}
+.qr{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px 4px}
+.qr button{background:#f0e6ff;color:#6a30a0;border:1px solid #d0b0ff;border-radius:16px;padding:5px 12px;font-size:11px;cursor:pointer;font-weight:500}
+.qr button:hover{background:#6a30a0;color:#fff;border-color:#6a30a0}
+.inp{display:flex;gap:6px;padding:4px 12px 10px}
+.inp input{flex:1;border:1px solid #e0e0e0;border-radius:20px;padding:8px 14px;font-size:12px;outline:none}
+.inp input:focus{border-color:#6a30a0}.inp button{background:#6a30a0;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:11px;cursor:pointer;font-weight:600}
+</style></head><body>
+<div class=page>
+<div class=store><div class=store-top><h2>🛒 KeyStarter Store</h2><span>🔒 Genuine Microsoft Licenses</span></div></div>
+<div class=products>
+<div class=prod><div class=prod-icon style=background:#e8f0ff>💻</div><div class=prod-info><h4>Windows 11 Pro</h4><p>Need: Win 10+, 4GB RAM<br>Retail · $19.99</p></div></div>
+<div class=prod><div class=prod-icon style=background:#fff0e8>🏠</div><div class=prod-info><h4>Windows 11 Home</h4><p>Need: Win 10+, 4GB RAM<br>Retail · $14.99</p></div></div>
+<div class=prod><div class=prod-icon style=background:#e8fff0>📄</div><div class=prod-info><h4>Office 2026 Pro Plus</h4><p>Win 10/Mac, 2GB RAM<br>Perpetual · $34.99</p></div></div>
+<div class=prod><div class=prod-icon style=background:#fff8e8>👨‍👩‍👧‍👦</div><div class=prod-info><h4>M365 Family</h4><p>Win/Mac/iOS/Android<br>1 Year · $39.99</p></div></div>
+</div></div>
+
+<button class=chat-btn id=chatBtn onclick=tC()>💬<span class=badge></span></button>
+<div class=chat-panel id=panel>
+<div class=chat-hdr><div class=av>🤖</div><div class=info><h3>KeyStarter AI</h3><p>🟢 Online · Compatibility-aware</p></div><button class=close onclick=tC()>✕</button></div>
+<div class=chat-body id=body></div>
+<div class=chat-footer>
+<div class=qr id=qr></div>
+<div class=inp><input id=txt placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')s()"><button onclick=s()>Send</button></div></div></div>
+
+<script>
+var B=document.getElementById('body'),Q=document.getElementById('qr'),I=document.getElementById('txt'),st=false,rc=0,cp=0;
+function a(t,r){var d=document.createElement('div');d.className='msg '+r;d.innerHTML=t+(r=='bot'?'<div class=tm>Just now</div>':'');B.appendChild(d);B.scrollTop=B.scrollHeight}
+function ty(on){var t=document.getElementById('_t');if(on){if(!t){var d=document.createElement('div');d.className='typing';d.id='_t';d.innerHTML='<span></span><span></span><span></span>';B.appendChild(d);B.scrollTop=B.scrollHeight}}else{if(t)t.remove()}}
+function q(opts){Q.innerHTML='';opts.forEach(function(o){var b=document.createElement('button');b.textContent=o;b.onclick=function(){h(o)};Q.appendChild(b)})}
+function h(c){a(c,'user');q([]);ty(true);setTimeout(function(){ty(false);var r=R(c);if(r){a(r.text,'bot');q(r.options||[])}else a("I am not quite sure what you are looking for. 😊<br><br>Are you interested in <b>Windows</b>, <b>Office</b>, or something else?<div class=tm>Just now</div>",'bot')},500+Math.random()*500)}
+function s(){var v=I.value.trim();if(!v)return;I.value='';h(v)}
+function tC(){var p=document.getElementById('panel');if(p.classList.contains('open')){p.classList.remove('open');return}p.classList.add('open');if(!st){st=true;ty(true);setTimeout(function(){ty(false);a("Hey there! 👋 Welcome to KeyStarter!<br><br>We have <b>genuine Microsoft licenses at 85-92% off</b> retail.<br><br>Looking for something today?<div class=tm>Just now</div>",'bot');q(["I need Windows","I need Office","What version fits me?","Will it work on my PC?"])},1000)}}
+function R(c){
+  var l=c.toLowerCase().trim();
+
+  /* ===== COMPATIBILITY: "will this work", "compatible", "fit", "support", "my pc", "my computer", "能装", "适配", "兼容", "支持" ===== */
+  if(/(compat|will.*work|will.*fit|support|my (pc|computer|device|mac|notebook|system)|run on|need.*spec|最低配置|能装|适配|兼容|支持.*吗|可以.*用|适合.*电脑)/i.test(l)&&!/(适合|推荐|哪个好)/i.test(l)){
+    if(cp===0){cp=1;return{text:"Great question! Let me check compatibility for you. 🖥️<br><br>First — what system are you currently running?<br><br>🪟 <b>Windows 10 or 11</b> — all our products work fine<br>🍎 <b>Mac</b> — Office works, Windows needs Boot Camp<br>❓ <b>Not sure</b> — I can help you figure it out!<div class=tm>Just now</div>",options:["Windows PC","Mac","I am not sure"]};
+    }else if(cp===1&&/(mac|apple)/i.test(l)){cp=0;return{text:"Good news — <b>Office 2026 Pro Plus</b> works natively on Mac! ($34.99, one-time purchase) 🍎<br><br>For Windows itself, you would need to run it via Boot Camp or Parallels on a Mac. We have Windows licenses available too ($19.99).<br><br>Which one were you looking for?<div class=tm>Just now</div>",options:["Office for Mac $34.99","Windows for Boot Camp","What do you recommend?"]};
+    }else if(cp>=1){cp=0;return{text:"All our products support <b>Windows 10, Windows 11, and Windows Server</b> (where applicable).<br><br>✅ <b>Min specs:</b> 4GB RAM, 64-bit processor, 20GB storage<br>✅ <b>Office</b> also works on Mac and mobile<br><br>Your PC should be good to go! What are you looking to get? 😊<div class=tm>Just now</div>",options:["Windows 11 Pro $19.99","Windows 11 Home $14.99","Office 2026 $34.99"]};
+    }
+  }
+
+  /* ===== RECOMMENDATION + COMPATIBILITY CHECK: "适合我", "推荐", "哪个好", "该买什么", "for me", "should i get" ===== */
+  if(/(适合|推荐|哪个好|选哪个|该买|for me|right for me|should i (get|buy)|recommend|suggest)/i.test(l)){
+    if(rc===0){rc=1;cp=0;return{text:"Happy to help you find the perfect fit! 🎯<br><br>First, let me check compatibility.<br><br>What system are you using — <b>Windows PC or Mac</b>?<div class=tm>Just now</div>",options:["Windows PC","Mac","I need both"]};
+    }else if(rc===1){rc=2;return{text:"Got it! And what will you use it for?<br><br>💼 <b>Work / business</b> — need encryption, remote desktop?<br>🎮 <b>Personal / gaming</b> — standard use, entertainment?<br>📚 <b>Student</b> — schoolwork, Office documents?<br>🏢 <b>Both</b> — work and personal?<div class=tm>Just now</div>",options:["Work / business","Personal / gaming","Student"]};
+    }else if(rc===2){rc=0;var rcmd=(/(work|business|办公|工作|pro)/i.test(l))?"I would recommend <b>Windows 11 Pro $19.99</b> — it has BitLocker encryption and Remote Desktop. Paired with Office 2026 Pro Plus $34.99, you have a complete professional setup for <b>$54.98</b>.":(/(student|school|学生|学)/i.test(l))?"<b>Windows 11 Home $14.99</b> + <b>Office 2026 Pro Plus $34.99</b> = <b>$49.98</b> for a complete student setup. Both are genuine, lifetime licenses.":"<b>Windows 11 Home $14.99</b> is perfect for daily use. If you need Office too, the combo with Office 2026 at $34.99 is great value.";
+      return{text:"Based on what you told me:<br><br>"+rcmd+"<br><br>All our licenses are genuine retail — bind to your Microsoft account, lifetime activation. 😊<div class=tm>Just now</div>",options:["Sounds great, I will buy!","Tell me more","Let me think about it"]};
+    }
+  }
+
+  /* ===== TRUST ===== */
+  if(/(real|genuin|legit|scam|fake|safe|trust|authentic|正版|真的|假|靠谱)/i.test(l)){rc=0;cp=0;return{text:"Totally fair question! 👍<br><br>We are an authorized Microsoft partner. These keys come directly from Microsoft distributors — same ones you would get from Microsoft.com. You can bind them to your Microsoft account to verify.<br><br>Plus, <b>30-day money-back guarantee</b>. If anything is off, we make it right. No questions asked.<div class=tm>Just now</div>",options:["That puts my mind at ease!","Do you have Windows 11 Pro?","What about Office?"]};
+  }
+  /* ===== PRICE ===== */
+  if(/(expensive|cheap|discount|afford|budget|price|cost|save|价|贵|便宜|折扣)/i.test(l)){rc=0;cp=0;return{text:"I hear you! 😊 Let me put it in perspective:<br><br>Same Windows 11 Pro on Microsoft.com is <b>$199</b>. Here it is <b>$19.99</b>. Same key — you save <b>90%</b>.<br><br>Volume purchasing lets us pass the savings. And <b>30-day money-back guarantee</b> — zero risk.<br><br>Does that help? 🙌<div class=tm>Just now</div>",options:["Great deal, I will buy","What about Office pricing?","How is it so cheap?"]};
+  }
+  /* ===== BUY ===== */
+  if(/(buy|purchas|order|take it|grab|get it|want.*(window|office|pro|home|365)|下单|购买|来一个)/i.test(l)){rc=0;cp=0;return{text:"Great choice! 🎉<br><br>1️⃣ Click the <b>Buy</b> button on the product card<br>2️⃣ Checkout takes 30 seconds<br>3️⃣ License key arrives by <b>email within 5 minutes</b><br><br>You will love it! 😊<div class=tm>Just now</div>",options:["Buying now! 🔥","I have a question first","What about delivery?"]};
+  }
+  /* ===== WINDOWS ===== */
+  if(/(window|microsoft)/i.test(l)&&!/(office|365)/i.test(l)){rc=0;cp=0;return{text:"We have Windows covered! 😊<br><br>• <b>Windows 11 Pro</b> $19.99 — encryption, remote desktop<br>• <b>Windows 11 Home</b> $14.99 — personal use<br><br>Personal or business? Helps me point you right!<div class=tm>Just now</div>",options:["Personal use","Business use","What is the difference?"]};
+  }
+  /* ===== OFFICE ===== */
+  if(/(office|365|word|excel|ppt|outlook)/i.test(l)){rc=0;cp=0;return{text:"Two Office options! 📄<br><br>• <b>Office 2026 Pro Plus</b> $34.99 — one-time payment<br>• <b>M365 Family</b> $39.99/yr — 6 users, 1TB cloud each<br><br>Which sounds right?<div class=tm>Just now</div>",options:["One-time (Office 2026)","Subscription (M365)","Compare both"]};
+  }
+  /* ===== DELIVERY ===== */
+  if(/(delivery|shipping|how long|email.*key|activate|发货|多久|激活|收到)/i.test(l)){rc=0;cp=0;return{text:"Key arrives by <b>email within 5 minutes</b>! ⚡<br><br>Activate: Settings > Activation > Change product key. Done!<br><br>Check spam if it does not show right away.<div class=tm>Just now</div>",options:["Sounds good, I will buy","What about refunds?"]};
+  }
+  /* ===== REFUND ===== */
+  if(/(refund|return|money back|cancel|退|换)/i.test(l)){rc=0;cp=0;return{text:"<b>30-day money-back guarantee</b> 🛡️<br><br>Key not working? Changed your mind? Full refund, no questions asked.<br><br>Deal? 😊<div class=tm>Just now</div>",options:["Deal! I am buying","Good to know, thanks!"]};
+  }
+  /* ===== EXIT ===== */
+  if(/(bye|goodbye|thanks.*bye|exit|再见|拜拜|*/i.test(l)){rc=0;cp=0;return{text:"You are welcome! 😊 If you ever need help again, just click the chat bubble. Have a great day! 🎉<div class=tm>Just now</div>",options:[]};}
+  return null;}
+</script></body></html>

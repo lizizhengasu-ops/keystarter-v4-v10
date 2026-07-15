@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>V8 最终审核 — 总结与逻辑检查</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}
+.w{max-width:960px;margin:0 auto}
+h1{font-size:26px;font-weight:700;margin-bottom:4px}
+.sub{font-size:14px;color:#86868b;margin-bottom:28px}
+h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}
+h3{font-size:14px;margin:20px 0 10px}
+.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}
+.card b{color:#1d1d1f}
+.alert{background:#fff0f0;border:1px solid #ffc0c0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#883333}
+.alert b{color:#cc3333}
+.ok{background:#f0fff0;border:1px solid #c0ffc0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#338833}
+.ok b{color:#33aa33}
+.warn{background:#fff9e6;border:1px solid #ffe0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#886633}
+.warn b{color:#cc8833}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th{background:#f0f0f2;padding:8px 10px;text-align:left;border:1px solid #e0e0e0;font-weight:600}
+td{padding:7px 10px;border:1px solid #e0e0e0;color:#515154}
+.flex{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+.flex>div{flex:1;min-width:200px;border-radius:8px;padding:14px;background:#f8f8fa;border:1px solid #e8e8ed;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class=w>
+
+<h1>V8 最终审核报告</h1>
+<p class=sub>全量总结 + 逻辑检查 + 发现的问题</p>
+
+<!-- ===== 一、V8 全量总结 ===== -->
+<h2>一、V8 全量总结</h2>
+
+<div class=card>
+<b>一句话：</b>一套后端服务 → 两条交付路径（插件+预埋）→ 意图识别销售助理 → 知识库硬约束 → 微信/支付宝计费 → 每店物理隔离。
+</div>
+
+<h3>1.1 架构</h3>
+<div class=flex>
+<div><h4>🟣 你的 VPS</h4>Master（网关+意图路由+计费）<br>Worker 池（每店独立进程）<br>/kb/店名/<br>Qdrant per-tenant<br>SQLite</div>
+<div><h4>🧠 AI 引擎</h4>DeepSeek API<br>V8 意图识别提示词<br>动态 KB 注入<br>8 类意图分类<br>OOS 拒答机制</div>
+<div><h4>📋 客户 Dashboard</h4>产品管理 · FAQ · 政策<br>样式配置 · 分析面板<br>订阅状态 · 续费</div>
+<div><h4>🛤️ 两条交付路</h4>路径 A：WordPress 插件<br>路径 B：预嵌入建站<br>同一套后端服务</div>
+</div>
+
+<h3>1.2 意图识别（V8 核心）</h3>
+<table>
+<tr><th>意图分类</th><th>客户真实想法</th><th>对应的销售框架</th></tr>
+<tr><td>PRICE_OBJECTION</td><td>怕花冤枉钱</td><td>价值论证（零售价对比+90%折扣+30天退款）</td></tr>
+<tr><td>TRUST_OBJECTION</td><td>怕被骗</td><td>信任建立（授权经销商+可验证+退款保证）</td></tr>
+<tr><td>COMPARISON</td><td>需要信息做决定</td><td>顾问建议（场景化推荐）</td></tr>
+<tr><td>BUY_INTENT</td><td>准备购买</td><td>轻松成交（三步流程+预期管理）</td></tr>
+<tr><td>PRODUCT_QUESTION</td><td>确认是否满足需求</td><td>回答+挖需求+推荐</td></tr>
+<tr><td>PROCESS_QUESTION</td><td>减少购买焦虑</td><td>具体回答+时间预期+保证</td></tr>
+<tr><td>BROWSING</td><td>不确定要什么</td><td>引导发现需求</td></tr>
+<tr><td>OOS</td><td>问了知识库外的问题</td><td>"Let me check on that"</td></tr>
+</table>
+
+<h3>1.3 完整用户生命周期</h3>
+<div class=card>
+<code>
+新注册 → 7天试用（trial）→ 到期 → expired → 付款 → active（30天）→ 到期 → expired<br>
+试用期内付款 → 直接从 trial 跳转到 active（付款日+30天，不折算试用天数）<br>
+到期前10天 → dashboard 显示续费横幅（每天提醒）<br>
+到期后 → 新 WebSocket 连接返回 403 → 浮窗不工作
+</code>
+</div>
+
+<!-- ===== 二、逻辑检查 ===== -->
+<h2>二、逻辑检查 — 发现问题</h2>
+
+<!-- 问题 1：KB 为空时 chatbot 提前上线 -->
+<div class=alert>
+<b>🔴 问题 1：知识库为空时 Chatbot 不能上线</b><br><br>
+<b>当前流程：</b>注册试用 → chatbot 开始工作 → 用户上传知识库<br>
+<b>问题：</b>如果知识库还是空的，AI 没有任何信息可以回答。客户第一印象："这个机器人什么都不知道"→ 不会续费。<br><br>
+<b>修复方案：</b>
+<code>
+注册试用/付款 → ❌ chatbot 不工作 → 你必须先上传知识库 → ✅ 上传完成后 chatbot 开始工作
+</code>
+<br>
+<b>具体做法：</b>服务器检查 /kb/客户名/ 目录中 products.json 是否有内容。为空则不响应 AI 请求，Widget 显示"正在准备中..."。
+</div>
+
+<!-- 问题 2：意图识别需要二次确认 -->
+<div class=alert>
+<b>🟡 问题 2：AI 可能误判客户意图</b><br><br>
+<b>例子：</b>客户说"能帮我吗？" → 可能是 PRODUCT_QUESTION、BROWSING、甚至 BUY_INTENT<br>
+<b>风险：</b>AI 猜错意图 → 给出不合适的回应 → 客户觉得文不对题<br><br>
+<b>修复方案：</b>在提示词中加入：<br>
+<code>
+If the intent is unclear, ask a clarifying question instead of guessing.
+Example: "Sure! Are you looking for Windows, Office, or something else?"
+</code>
+</div>
+
+<!-- 问题 3：trial 到期断开的体验 -->
+<div class=warn>
+<b>🟡 问题 3：试用期到期断连的体验</b><br><br>
+<b>场景：</b>客户正在跟机器人聊天，到期的瞬间 WebSocket 被 403 断开。<br>
+<b>风险：</b>客户体验极差，可能因为这个细节不续费。<br><br>
+<b>修复方案：</b>到期时不在对话中断开。在当前对话结束后，才在下一次打开时提示"试用已结束"。
+</div>
+
+<!-- 问题 4：插件需要 WooCommerce 自动同步 -->
+<div class=warn>
+<b>🟡 问题 4：WordPress 插件应自动同步商品</b><br><br>
+<b>场景：</b>客户安装插件后，还需要手动录入所有产品数据。<br>
+<b>风险：</b>客户觉得麻烦，放弃使用。<br><br>
+<b>修复方案：</b>插件安装时自动执行一次 WooCommerce 商品同步，创建 products.json。后续在插件后台提供"重新同步"按钮。
+</div>
+
+<!-- 问题 5：VPS 承载量 -->
+<div class=warn>
+<b>🟡 问题 5：1GB VPS 的承载上限</b><br><br>
+<b>当前假设：</b>$20/年 1GB VPS 跑所有业务。<br>
+<b>风险：</b>20 个客户同时在线聊天时，内存可能不够。<br><br>
+<b>修复方案：</b>架构已经支持水平扩展（多个 VPS 节点分片）。初期 1GB 够用，客户超过 20 个时加节点即可。每个 VPS $20/年，成本极低。
+</div>
+
+<!-- 问题 6：WordPress 插件版本兼容 -->
+<div class=warn>
+<b>🟡 问题 6：插件版本兼容性</b><br><br>
+<b>场景：</b>你更新了后端 API，旧版插件用的老接口无法工作。<br>
+<b>风险：</b>客户网站没更新插件 → chatbot 坏了 → 找你。<br><br>
+<b>修复方案：</b>API 保持向下兼容（加版本号 /api/v1/、/api/v2/）。插件检测后端版本，不匹配时在后台显示提示。
+</div>
+
+<!-- ===== 三、环节顺序检查 ===== -->
+<h2>三、环节顺序检查</h2>
+
+<div class=card>
+<b>检查目标：</b>有没有流程的顺序放错了，导致某个环节无法推进？<br><br>
+
+<table>
+<tr><th>环节</th><th>顺序</th><th>正确吗？</th></tr>
+<tr><td>建站 → 预埋 ChatWidget</td><td>1️⃣</td><td>✅ 正确。建站时组件已在内</td></tr>
+<tr><td>客户后台有AI菜单 → 点击看到付款/试用</td><td>2️⃣</td><td>✅ 正确。建站时就做好了</td></tr>
+<tr><td>客户试用/付款 → 激活</td><td>3️⃣</td><td>✅ 正确</td></tr>
+<tr><td>🔴 激活后 → Chatbot 开始工作</td><td>4️⃣</td><td><b>❌ 错误！</b>应该先检查知识库有没有内容。空的就不工作。</td></tr>
+<tr><td>上传知识库 → AI 使用 KB 回答</td><td>5️⃣</td><td>✅ 正确。放对位置了</td></tr>
+<tr><td>到期前 10 天 → 横幅提醒</td><td>6️⃣</td><td>✅ 正确</td></tr>
+<tr><td>到期 → 停用</td><td>7️⃣</td><td>✅ 正确</td></tr>
+</table>
+
+<br>
+<b>🔴 修复后的正确顺序：</b><br>
+<code>
+建站预埋 → 后台有菜单 → 客户试用/付款 → <b>上传KB</b> → KB有内容 → Chatbot工作 → 到期前横幅 → 到期停用
+</code>
+</div>
+
+<!-- ===== 四、总结 ===== -->
+<h2>四、总结</h2>
+
+<div class=ok>
+<b>✅ 没有结构性缺陷。V8 框架本身是正确的。</b>
+</div>
+
+<div class=card>
+<b>发现的 6 个问题按紧急度排列：</b><br><br>
+<b>🔴 P0 必须修（Phase 1 之前）：</b><br>
+1. KB 为空时 chatbot 不能提前上线 → 加「内容检查」门控<br>
+<br>
+<b>🟡 P1 建议修（Phase 1 期间）：</b><br>
+2. 意图不清晰时 AI 应反问确认，不要猜<br>
+3. 试用期到期不在对话中断开，等下一次打开时提示<br>
+4. WordPress 插件应有 WooCommerce 自动同步功能<br>
+<br>
+<b>🟢 P2 以后再说：</b><br>
+5. VPS 承载量：1GB 够用 → 超 20 客户再加节点<br>
+6. 插件版本兼容性：API 用版本号 + 插件自检提示<br>
+</div>
+
+<div class=card>
+<b>其余所有环节的顺序和逻辑都是正确的。</b><br><br>
+从 web-main 线程的 V2 三门户+物理隔离，到这个线程的 V3-V8 销售行为+意图识别+KB管理+WeChat支付，整个框架是完整的、自洽的、可执行的。<br><br>
+<b>下一个动作：</b>等你确认这个审核没有问题后，进入 Phase 1 开始写代码。
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+#!/bin/bash
+# pre-push hook - validate before push, remind about deploy verification
+echo "[pre-push] Validating local files..."
+cd "$(dirname "$0")/.."
+node scripts/validate.mjs
+if [ $? -ne 0 ]; then
+    echo "[pre-push] FAILED - fix issues or use --no-verify to skip"
+    exit 1
+fi
+echo "[pre-push] Validation PASSED"
+echo "[pre-push] REMINDER: After pushing, run verify-deploy.sh"
+exit 0

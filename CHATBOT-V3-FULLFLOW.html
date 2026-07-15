@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1.0><title>ChatBot V3 全量工作流（修正版）</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0a0a1a;color:#ddd;padding:20px}
+.w{max-width:1100px;margin:0 auto}h1{font-size:24px;color:#fff;margin-bottom:4px}.sub{font-size:13px;color:#888;margin-bottom:24px}
+.you{background:#2a1040;border:1px solid #6a30a0;color:#c080ff}.you-bg{background:#6a30a0}
+.cli{background:#2a2010;border:1px solid #a06020;color:#ffb060}.cli-bg{background:#a06020}
+.usr{background:#102a20;border:1px solid #20a060;color:#60ffa0}.usr-bg{background:#20a060}
+.roles{display:flex;gap:14px;margin-bottom:24px}.role{flex:1;border-radius:10px;padding:16px;text-align:center}.role .icon{font-size:32px;margin-bottom:6px}.role h3{font-size:14px;margin-bottom:2px}.role p{font-size:11px;opacity:.7}.role .tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;margin-top:6px;color:#fff;opacity:1}
+.tag-y{background:#6a30a0}.tag-c{background:#a06020}.tag-u{background:#20a060}
+.sec{background:#111128;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid #222244}.sec h2{font-size:15px;color:#ccc;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #222244}.sec h2 em{font-size:11px;color:#666;font-style:normal;margin-left:6px}
+.st{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px 12px;border-radius:6px;opacity:.45;transition:all .3s;font-size:12px}.st.on{opacity:1;background:rgba(255,255,255,.04)}
+.sn{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;color:#fff}.sn-y{background:#6a30a0}.sn-c{background:#a06020}.sn-u{background:#20a060}.sn-g{background:#555}.sn-r{background:#a03030}
+.wh{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;min-width:58px;text-align:center;flex-shrink:0;color:#fff}.wy{background:#6a30a0}.wc{background:#a06020}.wu{background:#20a060}.ws{background:#444;color:#aaa}
+.ar{font-size:13px;flex-shrink:0}.st.on .ar{color:#ffd700}
+.de{font-size:12px;color:#888;line-height:1.4}.st.on .de{color:#ccc}.de b{color:#fff}.de em{font-style:normal;color:#88cc88}
+.nb{background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.12);border-radius:8px;padding:12px 16px;margin:14px 0 0;font-size:12px;line-height:1.6;color:#bba}.nb strong{color:#ffd700}.nb .r{color:#ff6b6b}.nb .g{color:#60ffa0}.nb .p{color:#c080ff}
+.ctrl{display:flex;gap:8px;align-items:center;margin-bottom:12px}.btn{padding:4px 14px;border-radius:4px;border:none;font-size:11px;cursor:pointer;color:#fff}.b1{background:#6a30a0}.b2{background:#444}.cnt{margin-left:auto;font-size:12px;color:#555}
+.grid2{display:flex;gap:16px;margin:10px 0;flex-wrap:wrap}.grid2>div{flex:1;min-width:200px;border-radius:8px;padding:14px;border:1px solid #333;font-size:12px;line-height:1.5}.grid2 h4{font-size:13px;margin-bottom:6px}
+</style></head><body>
+<div class=w>
+<h1>ChatBot V3 全量工作流（修正版）</h1>
+<p class=sub>你给中国老板建整套独立站 → 聊天机器人预埋在站里 → 老板后台管理付费</p>
+<div class=roles>
+<div class="role you"><div class=icon>🟣</div><h3>你（平台方）</h3><p>给中国老板建整套独立站<br>前端+后端+商品+聊天机器人<br>运行AI知识库和所有计费</p><span class="tag tag-y">你的 VPS</span></div>
+<div class="role cli"><div class=icon>🟠</div><h3>客户（中国老板）</h3><p>从你这里买独立站<br>网站已经包含聊天机器人<br>后台管理：付chatbot费、看聊天记录</p><span class="tag tag-c">客户 VPS 或你的 VPS</span></div>
+<div class="role usr"><div class=icon>🟢</div><h3>终端用户（欧美消费者）</h3><p>在独立站购物<br>跟预埋的AI聊天机器人对话</p><span class="tag tag-u">他的浏览器</span></div>
+</div>
+<div class=sec><h2>阶段一：你给中国老板建站+预埋机器人 <em>建站时就装好了</em></h2>
+<div class=grid2>
+<div style=background:#1a102a;border-color:#4a2070><h4 style=color:#c080ff>🟣 你做的事</h4>1. 给中国老板建整套独立站（WordPress + WooCommerce + React SPA）<br>2. 聊天机器人组件已经预埋在前端代码里<br>3. 管理后台里已经有"AI 聊天机器人"菜单项<br>4. 部署到：客户的 VPS 或你的 VPS<br>5. 立即可用，不需要老板自己装任何东西</div>
+<div style=background:#2a1a10;border-color:#704020><h4 style=color:#ffb060>🟠 客户收到的</h4>• 完整独立站（可卖商品给欧美）<br>• 网站已经带了聊天机器人<br>• 后台登录账号密码<br>• 后台左侧菜单有"AI聊天机器人"选项<br>• 点进去就能：付款开通 / 看聊天记录 / 配置机器人</div>
+</div>
+<div class=nb><strong>💡 跟一般chatbot的区别：</strong>你不是给客户一行script叫他贴——你是给他建<em>整套网站</em>，机器人已经装好了。他什么都不用装。</div>
+</div>
+<div class=sec><h2>阶段二：客户后台操作 <em>登录后台 → 付款开通 → 看到数据</em></h2>
+<div class=ctrl><button class="btn b2" onclick="ns(0)">◀</button><button class="btn b1" onclick="tp(0)">▶</button><button class="btn b2" onclick="ns(0)">▶</button><span class=cnt id=cn0>1/5</span></div>
+<div id=steps0>
+<div class=st data-s=0><span class="sn sn-c">1</span><span class="wh wc">🟠 客户</span><span class=ar>➡️</span><span class="wh ws">后台登录</span><span class=de>用账号密码登录独立站管理后台</span></div>
+<div class=st data-s=1><span class="sn sn-c">2</span><span class="wh wc">🟠 客户</span><span class=ar>➡️</span><span class="wh ws">左侧菜单</span><span class=de>看到"AI 聊天机器人"菜单项，点进去</span></div>
+<div class=st data-s=2><span class="sn sn-c">3</span><span class="wh wc">🟠 客户</span><span class=ar>➡️</span><span class="wh wy">🟣 你的 VPS</span><span class=de>看到付款页面 → 微信/支付宝扫码付 $99/月 或 $299/月</span></div>
+<div class=st data-s=3><span class="sn sn-y">4</span><span class="wh wy">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh ws">内部</span><span class=de>付款成功 → 激活 chatbot：创建该店的 KB 目录、生成 HMAC token、设置 expires_at=now+30天</span></div>
+<div class=st data-s=4><span class="sn sn-c">5</span><span class="wh wc">🟠 客户后台</span><span class=ar>🟢</span><span class="wh ws">面板</span><span class=de>AI 聊天机器人页面出现面板：<b>聊天记录</b>（每个终端的对话）、<b>续费状态</b>（还剩多少天）、<b>配置</b>（机器人名字、语气）<br> 到期前10天：页面顶部显示黄色续费横幅，每天提醒</span></div>
+</div>
+<div class=nb><strong>⚡ 关键：</strong>客户的聊天机器人页面里能看到 <em>每个终端用户的聊天记录</em>。这是他的卖点——他能看到消费者在关心什么，什么产品问得多。</div>
+</div>
+<div class=sec><h2>阶段三：终端用户聊天 <em>消费者在店里跟AI对话</em></h2>
+<div class=ctrl><button class="btn b2" onclick="ns(1)">◀</button><button class="btn b1" onclick="tp(1)">▶</button><button class="btn b2" onclick="ns(1)">▶</button><span class=cnt id=cn1>1/6</span></div>
+<div id=steps1>
+<div class=st data-s=0><span class="sn sn-u">1</span><span class="wh wu">🟢 终端用户</span><span class=ar>➡️</span><span class="wh wu">浏览器</span><span class=de>打开独立站 → 右下角聊天浮窗已经显示（预埋的，不需要加载外部脚本）</span></div>
+<div class=st data-s=1><span class="sn sn-u">2</span><span class="wh wu">🟢 浏览器</span><span class=ar>➡️</span><span class="wh wy">🟣 你的 VPS</span><span class=de>直接 WebSocket 连接你的服务（chat.你的域名:3002），发送内置 token</span></div>
+<div class=st data-s=2><span class="sn sn-y">3</span><span class="wh wy">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh ws">内部验证</span><span class=de>验证 token → 确认是该店的机器人 → 检查订阅是否有效 ✅</span></div>
+<div class=st data-s=3><span class="sn sn-u">4</span><span class="wh wu">🟢 终端用户</span><span class=ar>➡️</span><span class="wh wy">🟣 你的 VPS</span><span class=de>打字："Windows 11 Pro 多少钱？" → WebSocket 发送到你的 VPS</span></div>
+<div class=st data-s=4><span class="sn sn-y">5</span><span class="wh wy">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh ws">AI 处理</span><span class=de>查该店的知识库（产品数据、FAQ）→ 调 DeepSeek → 只基于知识库回答</span></div>
+<div class=st data-s=5><span class="sn sn-y">6</span><span class="wh wy">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wu">🟢 终端浏览器</span><span class=de>回复发回浮窗显示。同时<b>记录到该店的聊天记录</b>，客户后台里能看到</span></div>
+</div>
+<div class=nb><strong>🔗 数据流：</strong>终端浏览器 ↔ 你的 VPS（WebSocket全程）。客户的VPS <span class=r>不参与对话</span>。预埋在代码里 ≠ 数据经过客户VPS。预埋只是在网站前端加了个组件，它直连你的VPS。</div>
+</div>
+<div class=sec><h2>阶段四：多人多店场景 <em>你控制全部，每店隔离</em></h2>
+<div style=display:flex;gap:16px;flex-wrap:wrap>
+<div class="role you" style=flex:1;min-width:180px;text-align:left><div class=icon>🟣</div><h3>你的 VPS</h3>
+<div style=font-size:11px;line-height:1.6>🔹 店A 工人（独立进程）<br>🔹 店B 工人（独立进程）<br>🔹 店C 工人（独立进程）<br>...<br><b>每店独立 KB 目录</b><br><b>每店独立 Qdrant 集合</b></div></div>
+<div style=flex:2;min-width:220px;padding:8px;font-size:12px;line-height:1.7>
+<b style=color:#ffb060>中国老板 A</b> → 独立站（他的 VPS） → 机器人已预埋 → 后台付了费 → 能看聊天记录<br>
+<b style=color:#ffb060>中国老板 B</b> → 独立站（你的 VPS） → 机器人已预埋 → 还没付费 → 后台显示付款页<br>
+<b style=color:#ffb060>中国老板 C</b> → 独立站（他的 VPS） → 机器人已预埋 → 付了费但到期了 → 浮窗不工作<br>
+<br><span style=color:#888>不管客户的站跑在谁的 VPS 上，预埋的机器人直连你的服务。</span><br>
+<span style=color:#888>你 VPS 上运行 N 个 Worker 进程，每店一个。数据和知识库完全独立。</span></div>
+</div>
+<div class=nb><strong>🧱 隔离：</strong>店A的工人看不到店B的产品数据。店B的工人看不到店C的FAQ。每店的知识库目录是独立的文件系统目录。</div>
+</div>
+<div class=sec><h2>阶段五：计费生命周期</h2>
+<div class=ctrl><button class="btn b2" onclick="ns(2)">◀</button><button class="btn b1" onclick="tp(2)">▶</button><button class="btn b2" onclick="ns(2)">▶</button><span class=cnt id=cn2>1/5</span></div>
+<div id=steps2>
+<div class=st data-s=0><span class="sn sn-y">1</span><span class="wh wy">🟣 你</span><span class=ar>➡️</span><span class="wh ws">系统</span><span class=de>客户付款后：expires_at = now+30天，状态 active。预埋的机器人开始工作</span></div>
+<div class=st data-s=1><span class="sn sn-y">2</span><span class="wh wy">🟣 你</span><span class=ar>➡️</span><span class="wh ws">每天定时</span><span class=de>每天凌晨检查所有店的 expires_at</span></div>
+<div class=st data-s=2><span class="sn sn-c">3</span><span class="wh wc">🟠 客户后台</span><span class=ar>🟡</span><span class="wh ws">≤10天</span><span class=de>还剩≤10天 → 后台 AI 聊天机器人页面顶部显示黄色横幅："还剩X天，立即续费"</span></div>
+<div class=st data-s=3><span class="sn sn-c">4</span><span class="wh wc">🟠 客户</span><span class=ar>➡️</span><span class="wh wy">🟣 你</span><span class=de>点续费 → 微信/支付宝再付 → expires_at +30天 → 横幅消失</span></div>
+<div class=st data-s=4><span class="sn sn-r">5</span><span class="wh wy">🟣 你</span><span class=ar>⛔</span><span class="wh wu">🟢 浮窗</span><span class=de>到期未续费 → status=expired → WebSocket 连接时返回 403 → 浮窗不显示 → AI 不回答</span></div>
+</div>
+</div>
+<div class=nb><strong>🎯 一句话总结：</strong>你给中国老板建整套独立站。机器人预埋在站里。老板后台付钱开通。终端用户跟AI聊。所有AI在你VPS上处理。每店独立隔离。老板到期的付钱才能继续用。</div>
+</div>
+<script>
+var s=[[],[],[]];var c=[0,0,0];var p=[false,false,false];var t=[null,null,null];
+for(var i=0;i<3;i++){s[i]=document.getElementById("steps"+i);if(s[i])s[i]=s[i].querySelectorAll("[data-s]");}
+function g(si,n){if(!s[si]||!s[si][n])return;s[si].forEach(function(e,i){e.classList.toggle("on",i===n)});c[si]=n;var e=document.getElementById("cn"+si);if(e)e.textContent=(n+1)+"/"+s[si].length;}
+function ns(si){var n=(c[si]+1)%s[si].length;g(si,n);}
+function tp(si){if(p[si]){clearInterval(t[si]);p[si]=false}else{p[si]=true;t[si]=setInterval(function(){ns(si)},2500);}}
+for(var i=0;i<3;i++){if(s[i]&&s[i].length>0)g(i,0);}
+</script>
+</body></html>

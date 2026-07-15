@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>ChatBot V5 免费试用方案</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}
+.w{max-width:960px;margin:0 auto}
+h1{font-size:26px;font-weight:700;margin-bottom:4px}
+.sub{font-size:14px;color:#86868b;margin-bottom:28px}
+h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}
+h3{font-size:14px;margin:16px 0 8px}
+.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}
+.card b{color:#1d1d1f}
+.flex{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+.flex>div{flex:1;min-width:200px;border-radius:8px;padding:14px;background:#f8f8fa;border:1px solid #e8e8ed;font-size:12px;line-height:1.6}
+.flex>div h4{font-size:13px;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th{background:#f0f0f2;padding:8px 10px;text-align:left;border:1px solid #e0e0e0;font-weight:600}
+td{padding:7px 10px;border:1px solid #e0e0e0;color:#515154}
+.alert{background:#fff9e6;border:1px solid #ffe0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#665530}
+.alert b{color:#d09020}
+.ok{color:#20a060;font-weight:600}
+</style>
+</head>
+<body>
+<div class=w>
+
+<h1>ChatBot V5 — 7 天免费试用方案</h1>
+<p class=sub>基于 V4 全量方案 + 新增免费试用逻辑</p>
+
+<div class=alert><b>⚠️ 不覆盖 V4。</b>V5 在 V4 基础上增加免费试用机制。V4 文件保留用于对比。</div>
+
+<h2>一、试用逻辑</h2>
+<div class=card>
+<b>核心规则：</b><br><br>
+• <b>新客户注册 → 自动获得 7 天免费试用</b><br>
+• 试用期内：全部功能可用（AI 聊天、知识库、聊天记录查看）<br>
+• 试用结束后：必须付款才能继续使用<br>
+• <b>每个邮箱/域名只能试用一次</b><br>
+• 试用到期后不付款 → 跟付费到期一样返回 403<br><br>
+<b>计费状态流转：</b><br>
+<code>新注册 → trial（7天）→ 到期 → expired → 付款 → active（30天）→ 到期 → expired</code><br>
+<code>新注册 → trial（7天）→ 第3天付款 → active（30天从付款日起算）</code><br>
+<code>trial 到期 → 第10天才付款 → active（30天从付款日起算）</code><br>
+<br>
+<b>无论客户什么时候付款，都是从付款日 +30 天到期。试用天数不折算。</b>
+</div>
+
+<h2>二、数据库变化</h2>
+<div class=card>
+<code style=font-size:12px;line-height:1.6>
+tenants 表新增字段：<br>
+&nbsp;&nbsp;trial_started_at TEXT &nbsp;&nbsp;-- 试用开始日期，NULL=未试用过<br>
+&nbsp;&nbsp;trial_used INTEGER DEFAULT 0 &nbsp;&nbsp;-- 0=未用过试用，1=已用过<br><br>
+status 可选值：<br>
+&nbsp;&nbsp;'inactive' &nbsp;→ 刚注册，未激活<br>
+&nbsp;&nbsp;'trial' &nbsp;&nbsp; &nbsp;→ 试用中<br>
+&nbsp;&nbsp;'active' &nbsp; &nbsp;→ 已付款，正常服务<br>
+&nbsp;&nbsp;'expired' &nbsp; → 到期（试用到期或付款到期）<br>
+</code>
+</div>
+
+<h2>三、续费横幅逻辑（分情况）</h2>
+<table>
+<tr><th>状态</th><th>总时长</th><th>横幅出现时间</th><th>横幅内容</th></tr>
+<tr><td>试用期</td><td>7 天</td><td>第 5 天开始</td><td>还剩 X 天试用结束，立即付费</td></tr>
+<tr><td>付费期</td><td>30 天</td><td>第 20 天开始（=剩 10 天）</td><td>还剩 X 天到期，立即续费</td></tr>
+</table>
+<div class=card>
+<b>横幅显示位置：</b><br>
+• 客户后台（dashboard.你的域名）顶部 — 每次登录都看到<br>
+• WordPress 插件后台（如果用了插件版）— 插件设置页顶部<br>
+• <b>不在终端用户的聊天浮窗里显示</b>
+</div>
+
+<h2>四、两条路径的试用流程</h2>
+<div class=flex>
+<div><h4 style=color:#6a30a0>路径 A：WordPress 插件</h4>
+1. 下载安装插件<br>
+2. 在插件设置页输入邮箱注册<br>
+3. 系统发验证邮件<br>
+4. 验证通过 → 7 天试用开始<br>
+5. 插件显示倒计时<br>
+6. 到期 → 插件设置页显示付款二维码<br>
+7. 付了 → 30 天正常使用</div>
+<div><h4 style=color:#20a060>路径 B：预嵌入建站</h4>
+1. 你给客户建好站<br>
+2. 客户登录后台 → 「AI 聊天机器人」菜单<br>
+3. 点击「开始 7 天免费试用」<br>
+4. 试用开始 → 聊天浮窗出现<br>
+5. dashboard 显示倒计时<br>
+6. 到期 → dashboard 显示付款二维码<br>
+7. 付了 → 30 天正常使用</div>
+</div>
+
+<h2>五、防止滥用</h2>
+<div class=card>
+• <b>一个邮箱只能试一次</b>（数据库 unique 约束 + 验证邮件）<br>
+• <b>一个域名只能试一次</b>（域名白名单里记录已用过的域名）<br>
+• 试用结束 → 必须付款 → 没有第二次试用<br>
+• 一个黑名单邮箱（临时邮箱）列表可以后续加上<br>
+• 技术上跟付费用户用同一套 Worker 和 KB 目录，没有区别对待</div>
+
+<h2>六、定时任务逻辑（更新）</h2>
+<div class=card>
+<code style=font-size:12px;line-height:1.6>
+每天凌晨定时任务：<br><br>
+FOR EACH tenant:<br>
+&nbsp;&nbsp;IF status = 'trial' AND expires_at &lt; now:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status = 'expired'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;trial_used = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;（不删除 KB，保留数据，付款后恢复）<br>
+<br>
+&nbsp;&nbsp;IF status = 'active' AND expires_at &lt; now:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status = 'expired'<br>
+<br>
+&nbsp;&nbsp;IF (status = 'trial' AND expires_at - now &lt;= 2 days):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;renewal_banner = 1（试用到期提醒）<br>
+<br>
+&nbsp;&nbsp;IF (status = 'active' AND expires_at - now &lt;= 10 days):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;renewal_banner = 1（付费到期提醒）<br>
+</code>
+</div>
+
+<h2>七、跟 V4 的关系</h2>
+<div class=card>
+V5 不改变 V4 的任何架构设计。只在 V4 基础上增加：<br><br>
+• tenants 表 +2 字段<br>
+• status +1 个可选值（'trial'）<br>
+• 注册时无付款 → 自动 7 天试用<br>
+• 横幅逻辑分情况（试用剩 2 天 / 付费剩 10 天）<br>
+• 定时任务增加 trial 过期检查<br>
+• 防止滥用机制（邮箱+域名唯一）</div>
+
+<div class=alert><b>下一步：</b>先以 V5 方案做第一个客户验证（建站含 chatbot + 7 天试用）。验证通过后出 V6 加入完整 WordPress 插件。</div>
+</div>
+</body>
+</html>

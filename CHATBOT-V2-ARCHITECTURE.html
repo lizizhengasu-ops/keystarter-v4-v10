@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ChatBot V2 架构全景图</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f7;color:#1d1d1f;padding:0}
+.header{background:linear-gradient(135deg,#1d1d1f,#3a3a3c);color:#fff;padding:48px 40px 32px}
+.header h1{font-size:32px;font-weight:700;margin-bottom:8px}
+.header p{font-size:16px;color:#86868b;max-width:700px}
+.container{max-width:1200px;margin:0 auto;padding:32px 24px}
+.section{margin-bottom:48px}
+.section h2{font-size:22px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e8e8ed}
+.section h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:#0078d4}
+.section p{font-size:14px;line-height:1.6;color:#515154;margin-bottom:12px}
+.mermaid-wrap{background:#fff;border-radius:12px;padding:24px;margin:16px 0;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
+.box-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0}
+.box{border-radius:12px;padding:20px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.box h4{font-size:14px;font-weight:600;margin-bottom:8px}
+.box p,.box li{font-size:13px;line-height:1.5;color:#515154}
+.box ul{padding-left:16px}
+.box li{margin-bottom:4px}
+.tag{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-right:4px}
+.tag.red{background:#fce4ec;color:#c62828}
+.tag.blue{background:#e3f2fd;color:#1565c0}
+.tag.orange{background:#fff3e0;color:#e65100}
+.tag.purple{background:#f3e5f5;color:#6a1b9a}
+.flow-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.flow-step{background:#f5f5f7;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;text-align:center;min-width:60px}
+.flow-arrow{font-size:18px;color:#86868b}
+.flow-step.highlight{background:#0078d4;color:#fff}
+.flow-step.warn{background:#ff9800;color:#fff}
+.flow-step.danger{background:#d32f2f;color:#fff}
+.legend{margin:16px 0;padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:12px;color:#515154}
+.legend span{margin-right:16px}
+.feature-list{list-style:none;padding:0}
+.feature-list li{padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px;line-height:1.5}
+.feature-list li:last-child{border:none}
+.feature-list strong{color:#1d1d1f}
+@media(max-width:768px){.header{padding:32px 20px}.header h1{font-size:24px}.container{padding:24px 16px}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>ChatBot V2 架构全景图</h1>
+<p>三个门户（管理后台/客户后台/聊天浮窗） + 物理隔离 + 付费计时 + 反破解</p>
+</div>
+<div class="container">
+
+<div class="section">
+<h2>一、三门户架构（谁是给谁看的）</h2>
+<div class="box-grid">
+<div class="box" style="border-top:3px solid #d32f2f">
+<h4>🏛️ 管理后台</h4>
+<p style="font-size:12px;color:#86868b;margin-bottom:8px">admin.你的域名.com</p>
+<p><span class="tag red">只有你</span>能看到</p>
+<ul>
+<li>查看所有租户列表</li>
+<li>管理订阅、价格方案</li>
+<li>跨租户数据分析</li>
+<li>租户切换器（你可一键切换看任何客户的后台）</li>
+<li>系统设置：AI模型、费率</li>
+</ul>
+</div>
+<div class="box" style="border-top:3px solid #1565c0">
+<h4>👤 客户后台</h4>
+<p style="font-size:12px;color:#86868b;margin-bottom:8px">dashboard.你的域名.com</p>
+<p><span class="tag blue">付款客户</span>登录后看到</p>
+<ul>
+<li>⚠️ 续费横幅（到期前10天每天显示）</li>
+<li>订阅卡片：剩余天数、用量</li>
+<li>知识库管理（上传产品/FAQ）</li>
+<li>聊天浮窗样式配置</li>
+<li>使用分析</li>
+<li>账单和付款历史</li>
+</ul>
+</div>
+<div class="box" style="border-top:3px solid #e65100">
+<h4>💬 聊天浮窗</h4>
+<p style="font-size:12px;color:#86868b;margin-bottom:8px">嵌入客户网站</p>
+<p><span class="tag orange">网站访客</span>看到</p>
+<ul>
+<li>右下角聊天气泡</li>
+<li>AI 回复（仅基于知识库内容）</li>
+<li>自动转邮件没人回答时</li>
+<li><strong>看不到任何账单/租户/管理信息</strong></li>
+<li><strong>看不到任何代码内部</strong>——就一行 <code>&lt;script&gt;</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>二、系统架构总览</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TB
+    subgraph Client["你的客户的网站"]
+        Script["&lt;script src=&#39;chat.YOUR-DOMAIN.com/w.js&#39;&gt;"]
+    end
+
+    subgraph YourVPS["你的 VPS（全部控制权）"]
+        direction TB
+        Nginx["nginx :443 -> :3002"]
+
+        subgraph Master["Master 主进程"]
+            GW["API 网关"]
+            TR["租户路由器<br>解密 HMAC token -> 路由工人"]
+            SM["订阅检查器<br>过期了？停用"]
+            BH["计费处理器<br>Stripe 收款结果"]
+            CR["定时任务<br>每天检查过期、横幅"]
+        end
+
+        subgraph Workers["工人池——每个租户独立进程"]
+            WA["租户 A 工人<br>·独立 Node 进程<br>·独立知识库目录<br>·独立向量库"]
+            WB["租户 B 工人<br>同上，独立"]
+            WC["更多租户..."]
+        end
+
+        subgraph Storage["存储——每个租户隔离"]
+            KB["/kb/租户名/<br>·products.json<br>·faq.json<br>·policies.md"]
+            QD["Qdrant 向量库<br>·租户A_docs_768<br>·租户B_docs_768"]
+            DB[("SQLite<br>·租户表<br>·订阅表")]
+        end
+    end
+
+    subgraph AI["AI 层"]
+        DS["DeepSeek API (云端)"]
+        Local["你的本地 DeepSeek (后备)"]
+    end
+
+    subgraph Billing["收款"]
+        Stripe["Stripe Checkout"]
+    end
+
+    subgraph Portals["门户系统"]
+        AdminPortal["管理后台<br>admin.YOUR-DOMAIN.com"]
+        TenantPortal["客户后台<br>dashboard.YOUR-DOMAIN.com"]
+    end
+
+    Client -->|网页打开加载脚本| Nginx
+    Nginx --> Master
+    Master -->|按租户分配| WA
+    Master -->|按租户分配| WB
+    WA --> KB
+    WB --> KB
+    WA --> QD
+    WA -->|AI 提问| DS
+    WA -->|备选| Local
+    Master --> DB
+    Master --> BH
+    BH --> Stripe
+    CR --> Master
+    AdminPortal --> Master
+    TenantPortal --> Master
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>三、消息怎么走的（一条聊天消息的旅行）</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+sequenceDiagram
+    participant Visitor as 网站访客
+    participant Widget as 聊天浮窗 (客户网站)
+    participant Nginx as nginx
+    participant Master as Master 进程
+    participant Worker as 该租户的工人
+    participant KB as 知识库
+    participant AI as AI (DeepSeek)
+
+    Visitor->>Widget: 打字: "Windows 11 Pro多少钱？"
+    Widget->>Nginx: WebSocket 发送 (加密token + 消息)
+    Nginx->>Master: 转发 :3002
+    Master->>Master: 1. 解密 token → 确认租户
+    Master->>Master: 2. 检查订阅是否过期
+    Master->>Master: 3. 域名白名单检查
+    Master->>Worker: 4. 发给该租户的工人
+    Worker->>KB: 5. 在知识库里搜相关产品数据
+    KB-->>Worker: 6. 找到 "Windows 11 Pro $19.99"
+    Worker->>AI: 7. 把产品数据 + 用户问题发给 AI
+    AI-->>Worker: 8. AI 生成回复
+    Worker-->>Master: 9. 回复内容
+    Master-->>Widget: 10. 发回给浮窗
+    Widget-->>Visitor: 11. 显示: "Windows 11 Pro 是 $19.99"
+</div>
+</div>
+<div class="legend">
+<strong>关键安全点：</strong>
+<span>🔒 步骤 2：订阅已过期→直接返回"服务已停用"，AI 都不问</span>
+<span>🛡️ 步骤 3：域名不对→直接返回 403，消息都不处理</span>
+</div>
+</div>
+
+<div class="section">
+<h2>四、付费流程（计时 + 横幅）</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    A["客户到你网站选择套餐<br>$9.99/月 或 $29.99/月"] --> B["Stripe Checkout<br>付款页面"]
+    B --> C{"付款成功?"}
+    C -->|是| D["Stripe 发通知到你的服务器"]
+    C -->|否| E["显示失败，客户重试"]
+    D --> F["激活租户<br>·expires_at = 现在+30天<br>·生成 widget token<br>·创建知识库目录"]
+    F --> G["客户收到邮件:<br>·portal 登录链接<br>·widget 嵌入代码"]
+    G --> H["客户把 &lt;script&gt; 贴到自己网站"]
+    H --> I["聊天浮窗出现，开始工作"]
+
+    subgraph Cron["每天定时任务（在你服务器上）"]
+        J["检查所有租户"] --> K{"还剩多少天?"}
+        K -->|"≤10天且活跃"| L["客户后台显示续费横幅<br>'还剩X天，立即续费'"]
+        K -->|"≤0天"| M["自动停用<br>·status = expired<br>·widget 返回 403"]
+        L --> N["客户点击续费<br>→ Stripe 再收一次钱"]
+        N --> O["延长 expires_at +30天<br>横幅消失"]
+    end
+
+    I --> Cron
+</div>
+</div>
+<div class="box-grid">
+<div class="box">
+<h4>⏱️ 计时原理</h4>
+<p><strong>注意：计时在你服务器上，不在客户网站。</strong></p>
+<ul>
+<li>客户付了款 → 服务器记下 expires_at</li>
+<li>客户网站不知道什么时候过期——它只是每次发消息时问服务器"我还能用吗"</li>
+<li>服务器说"过期了"→ 浮窗就停用了</li>
+<li>客户改不了本地时间，也绕不过去</li>
+</ul>
+</div>
+<div class="box">
+<h4>🚩 续费横幅逻辑</h4>
+<ul>
+<li>横幅出现在<strong>客户后台（dashboard）</strong>，不在聊天浮窗里</li>
+<li>到期前10天 → 每天登录 dashboard 都看到黄条</li>
+<li>点击续费 → Stripe 再收一次 → 自动加30天</li>
+<li><strong>客户的网站访客永远看不到任何续费信息</strong></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>五、反破解（怎么保护你的代码）</h2>
+<div class="box-grid">
+<div class="box">
+<h4>客户网站上有啥？</h4>
+<p style="font-size:20px;font-weight:700;color:#1565c0;margin:12px 0">就一行</p>
+<code style="display:block;background:#f5f5f7;padding:12px;border-radius:8px;font-size:12px;word-break:break-all">&lt;script src="https://chat.你的域名.com/w.js" data-t="加密字符串" defer&gt;&lt;/script&gt;</code>
+<p style="margin-top:12px;font-size:13px"><strong>没有 API key、没有 AI 逻辑、没有知识库、没有你的商业逻辑。</strong> 客户拿到的只是一段被压缩混淆到无法阅读的 JS。</p>
+</div>
+<div class="box">
+<h4>6 层防护</h4>
+<ol style="font-size:13px;line-height:1.8;padding-left:16px">
+<li><strong>代码混淆：</strong>esbuild + terser 压缩成乱码，不产生 sourcemap</li>
+<li><strong>Token 加密：</strong> data-t 里是 HMAC 签名，只有你服务器能解密出租户身份</li>
+<li><strong>域名白名单：</strong>服务器检查 Origin 头，不在名单的直接返回 403</li>
+<li><strong>JWT 短时效：</strong>每次连接发 2 小时有效的 token，超时重新签发</li>
+<li><strong>限流：</strong>每个租户每分钟最多 30 条消息</li>
+<li><strong>CORS：</strong>只允许白名单域名跨域连接</li>
+</ol>
+</div>
+</div>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    A["黑客复制 widget 代码<br>贴到自己网站"] --> B["请求到达你的服务器"]
+    B --> C{域名白名单?}
+    C -->|"不在名单"| D["403 拒绝<br>不知道你是谁"]
+    C -->|"在名单"| E{Token 是否有效?}
+    E -->|"伪造的 token"| F["403 拒绝<br>HMAC 不匹配"]
+    E -->|"真的 token"| G{订阅有效吗?}
+    G -->|"过期了"| H["返回: 服务已停用"]
+    G -->|"有效"| I["正常回答"]
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>六、物理隔离（租户之间怎么隔开的）</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    subgraph VPS["你的 VPS"]
+        M["Master 进程"]
+        
+        M -->|fork 出独立进程| P1["租户 A 的工人进程"]
+        M -->|fork 出独立进程| P2["租户 B 的工人进程"]
+        M -->|fork 出独立进程| P3["租户 C 的工人进程"]
+
+        P1 -->|只能读自己的| KB1["/kb/A/<br>products.json<br>faq.json"]
+        P2 -->|只能读自己的| KB2["/kb/B/<br>products.json<br>faq.json"]
+        P3 -->|只能读自己的| KB3["/kb/C/..."]
+
+        P1 -->|只能搜自己的| Q1["Qdrant 集合: tenant_A_docs"]
+        P2 -->|只能搜自己的| Q2["Qdrant 集合: tenant_B_docs"]
+
+        M --> CFG["配置文件<br>tenants/A.json<br>tenants/B.json"]
+    end
+
+    style P1 fill:#e3f2fd
+    style P2 fill:#fce4ec
+    style P3 fill:#f3e5f5
+    style KB1 fill:#e8f5e9
+    style KB2 fill:#e8f5e9
+    style KB3 fill:#e8f5e9
+</div>
+</div>
+<div class="legend">
+<strong>隔离开的东西：</strong>
+<span>🔧 进程：每个租户一个独立的 Node.js 子进程</span>
+<span>📁 文件：每个租户一套独立的知识库目录</span>
+<span>🗃️ 向量：每个租户一套独立的 Qdrant 集合</span>
+<span>🔑 配置：每个租户一个独立的 JSON 配置文件</span>
+</div>
+</div>
+
+<div class="section">
+<h2>七、加一个新客户要多久？</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    A["客户在你的<br>收款页面付款"] --> B["服务器自动<br>·创建租户配置<br>·创建知识库目录<br>·生成 widget token"]
+    B --> C["客户邮箱收到<br>·widget 嵌入代码<br>·portal 登录链接"]
+    C --> D["客户花 2 分钟<br>把 &lt;script&gt; 贴到网站"]
+    D --> E["聊天浮窗出现<br>开始工作"]
+    E --> F["客户上传产品/FAQ<br>完善知识库"]
+</div>
+</div>
+<div class="box-grid">
+<div class="box">
+<h4>你的操作量：0</h4>
+<p style="font-size:13px">全部自动化。客户付款后，服务器自动创建一切。</p>
+</div>
+<div class="box">
+<h4>客户操作量：2 分钟</h4>
+<p style="font-size:13px">粘贴一行代码到网站。上传产品数据（或你帮他们做）。</p>
+</div>
+<div class="box">
+<h4>扩容：加配置就行</h4>
+<p style="font-size:13px">新客户 = 新 JSON 配置文件 + 新知识库目录。不需要改代码。</p>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>八、部署路线</h2>
+<div class="box-grid">
+<div class="box">
+<h4>Phase 1（3-4 天）</h4>
+<ul>
+<li>Chat Widget 浮窗（vanilla JS, Shadow DOM）</li>
+<li>Master 主进程 + Worker 工人模板</li>
+<li>WebSocket 通信</li>
+<li>租户配置管理</li>
+<li>可用的聊天服务（纯 RAG，不含用户门户）</li>
+</ul>
+</div>
+<div class="box">
+<h4>Phase 2（2 天）</h4>
+<ul>
+<li>Stripe 收款对接</li>
+<li>订阅计时 + 自动过期</li>
+<li>续费流程</li>
+<li>域名白名单 + 反破解</li>
+</ul>
+</div>
+<div class="box">
+<h4>Phase 3（5 天）</h4>
+<ul>
+<li>客户后台 (dashboard.*) 全部功能</li>
+<li>管理后台 (admin.*) 全部功能</li>
+<li>知识库管理界面</li>
+<li>分析面板</li>
+<li>上线第一个真实客户</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+<script>mermaid.initialize({startOnLoad:true,theme:'neutral',fontFamily:'Inter'})</script>
+</body>
+</html>

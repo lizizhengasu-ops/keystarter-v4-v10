@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>AI Sales Assistant - Interactive Demo</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f5f7;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.page{max-width:900px;width:100%;position:relative}
+/* store header */
+.store{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px 16px 0 0;overflow:hidden}
+.store-top{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.store-top h2{color:#fff;font-size:15px;font-weight:600}.store-top span{color:#8888aa;font-size:11px}
+.nav{display:flex;gap:20px;padding:10px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.nav a{color:#8888aa;font-size:12px;text-decoration:none}.nav a:hover{color:#fff}
+/* products */
+.products{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#f5f5f7;border:1px solid #e8e8ed;border-top:none;border-radius:0 0 16px 16px}
+.prod{background:#fff;border-radius:10px;padding:14px;border:1px solid #e8e8ed;display:flex;gap:12px;align-items:center;cursor:pointer;transition:box-shadow .2s}
+.prod:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.prod-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.prod-info{flex:1}
+.prod-info h4{font-size:13px;margin:0;color:#1d1d1f}
+.prod-info p{font-size:11px;color:#86868b;margin:2px 0}
+.prod-info .price{font-size:15px;font-weight:700;color:#1d1d1f;margin-top:2px}
+.btn-buy{background:#0071e3;color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;cursor:pointer;font-weight:600}
+.btn-buy:hover{background:#0077ed}
+/* chat */
+.chat-btn{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6a30a0,#8a50c0);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 20px rgba(106,48,160,.4);display:flex;align-items:center;justify-content:center;z-index:999;transition:transform .2s}
+.chat-btn:hover{transform:scale(1.08)}
+.chat-btn .badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:#ff3b30;border:2px solid #fff}
+.chat-panel{position:fixed;bottom:90px;right:24px;width:360px;max-height:520px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.15);display:none;flex-direction:column;z-index:998;overflow:hidden}
+.chat-panel.open{display:flex}
+.chat-hdr{background:linear-gradient(135deg,#6a30a0,#8a50c0);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.chat-hdr .av{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.chat-hdr .info{flex:1;text-align:left}
+.chat-hdr .info h3{font-size:13px;margin:0;font-weight:600}
+.chat-hdr .info p{font-size:10px;margin:0;color:rgba(255,255,255,.7)}
+.chat-hdr .close{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;opacity:.7;padding:4px}
+.chat-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:300px;max-height:360px;background:#f5f5f7}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5;text-align:left;animation:fadeIn .3s}
+.msg.bot{background:#fff;border:1px solid #e8e8ed;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:#6a30a0;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg .tm{font-size:10px;color:#999;margin-top:4px;opacity:.7}
+.msg.user .tm{color:rgba(255,255,255,.6)}
+.typing{display:flex;gap:4px;padding:12px 16px;background:#fff;border:1px solid #e8e8ed;border-radius:14px;align-self:flex-start;border-bottom-left-radius:4px}
+.typing span{width:6px;height:6px;border-radius:50%;background:#999;animation:bounce 1.4s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.options{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px 12px;background:#fff;border-top:1px solid #f0f0f0}
+.opt{background:#f0e6ff;color:#6a30a0;border:1px solid #d0b0ff;border-radius:16px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .15s;font-weight:500}
+.opt:hover{background:#6a30a0;color:#fff;border-color:#6a30a0}
+.opt.hidden{display:none}
+.chat-inp{display:none;padding:8px 12px;border-top:1px solid #e8e8ed;background:#fff;gap:6px}
+.chat-inp input{flex:1;border:1px solid #e0e0e0;border-radius:20px;padding:7px 12px;font-size:12px;outline:none}
+.chat-inp input:focus{border-color:#6a30a0}
+.chat-inp button{background:#6a30a0;color:#fff;border:none;border-radius:20px;padding:7px 14px;font-size:11px;cursor:pointer;font-weight:600}
+.demo-note{text-align:center;font-size:11px;color:#999;padding:8px;background:#fff;border-top:1px solid #f0f0f0}
+</style>
+</head>
+<body>
+<div class=page>
+<div class=store>
+<div class=store-top><h2>🛒 KeyStarter Store</h2><span>🔒 Genuine Microsoft Licenses</span></div>
+<div class=nav><a href=#>Store</a><a href=#>Products</a><a href=#>Support</a><a href=#>Cart</a></div></div>
+<div class=products>
+<div class=prod><div class=prod-icon style=background:#e8f0ff>💻</div><div class=prod-info><h4>Windows 11 Pro</h4><p>Retail · Lifetime</p><div class=price>$19.99</div></div><button class=btn-buy>Buy</button></div>
+<div class=prod><div class=prod-icon style=background:#fff0e8>🏠</div><div class=prod-info><h4>Windows 11 Home</h4><p>Retail · Lifetime</p><div class=price>$14.99</div></div><button class=btn-buy>Buy</button></div>
+<div class=prod><div class=prod-icon style=background:#e8fff0>📄</div><div class=prod-info><h4>Office 2026 Pro Plus</h4><p>Perpetual · 1 PC</p><div class=price>$34.99</div></div><button class=btn-buy>Buy</button></div>
+<div class=prod><div class=prod-icon style=background:#fff8e8>👨‍👩‍👧‍👦</div><div class=prod-info><h4>M365 Family</h4><p>1 Year · 6 Users</p><div class=price>$39.99</div></div><button class=btn-buy>Buy</button></div></div></div>
+
+<button class=chat-btn id=chatBtn onclick=toggleChat()>💬<span class=badge></span></button>
+<div class=chat-panel id=chatPanel>
+<div class=chat-hdr><div class=av>🤖</div><div class=info><h3>AI Sales Assistant</h3><p>🟢 Online · Let me help you!</p></div><button class=close onclick=toggleChat()>✕</button></div>
+<div class=chat-body id=chatBody></div>
+<div class=options id=options></div>
+<div class=chat-inp id=chatInput><input id=txtInput placeholder="Type..." onkeydown="if(event.key==='Enter')sendText()"><button onclick=sendText()>Send</button></div>
+<div class=demo-note>💬 Interactive demo · Responses are pre-scripted</div></div>
+
+<script>
+const chatBody=document.getElementById('chatBody');
+const optionsEl=document.getElementById('options');
+const chatInput=document.getElementById('chatInput');
+step=0;
+function addMsg(text,role){const d=document.createElement('div');d.className='msg '+role;d.innerHTML=text+(role=='bot'?'<div class=tm>Just now</div>':'');chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight}
+function showTyping(){const d=document.createElement('div');d.className='typing';d.id='typing';d.innerHTML='<span></span><span></span><span></span>';chatBody.appendChild(d);chatBody.scrollTop=chatBody.scrollHeight}
+function hideTyping(){const t=document.getElementById('typing');if(t)t.remove()}
+function showOptions(opts){optionsEl.innerHTML='';opts.forEach(function(o){const b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=function(){handleChoice(o)};optionsEl.appendChild(b)})}
+function showInput(){chatInput.style.display='flex'}
+function askFloating(){document.getElementById('chatBtn').click()}
+function handleChoice(c){addMsg(c,'user');hideOptions();step++;processStep(c)}
+function hideOptions(){optionsEl.innerHTML=''}
+function processStep(c){
+  showTyping();
+  setTimeout(function(){
+    hideTyping();
+    var r=getResponse(c);
+    addMsg(r.text,'bot');
+    if(r.options){if(r.input)showInput();showOptions(r.options)}else if(r.input){showInput()}else if(r.end){setTimeout(function(){addMsg('Thanks for chatting! Click the bubble anytime.','bot')},500)}
+  },800)
+}
+function getResponse(c){
+  var s=step;
+  switch(s){
+    case 1:return{text:"Hi! I'm your AI Sales Assistant! 🎉 Looking for Microsoft software today?<br>I can help you find the <b>right license at the best price</b>.",options:["I need Windows for a new PC","I need Office for work","Just browsing","What do you recommend?"]};
+    case 2:
+      if(c.includes("Windows"))return{text:"Great choice! Is this for <b>personal use</b> or <b>business use</b>?<br><br>💡 This helps me recommend the right edition.",options:["Personal use","Business use","What's the difference?"]};
+      if(c.includes("Office"))return{text:"Awesome! Do you prefer a <b>one-time purchase</b> (perpetual license) or a <b>subscription</b> (Microsoft 365)?<br><br>💡 One-time is cheaper long-term, subscription includes 1TB cloud storage.",options:["One-time purchase","Subscription (1TB cloud)","What's better for me?"]};
+      if(c.includes("browsing")||c.includes("recommend"))return{text:"No problem! Here's a quick overview:<br><br>🔥 <b>Best Sellers:</b><br>• Windows 11 Pro — $19.99 (for professionals)<br>• Office 2026 Pro Plus — $34.99 (one-time)<br>• M365 Family — $39.99/yr (6 users)<br><br>What interests you?",options:["Tell me about Windows 11 Pro","Tell me about Office 2026","What is the best deal?"]};
+      return{text:"I'm not sure I understand. Could you try one of these?",options:["I need Windows","I need Office","I need help deciding"]};
+    case 3:
+      if(c.includes("Personal")||c.includes("Home"))return{text:"Perfect! For personal use, I recommend <b>Windows 11 Home</b> at <b>$14.99</b>.<br><br>📌 It comes with lifetime activation and is great for daily home use, gaming, and schoolwork.<br><br>If you need advanced features like encryption or remote desktop, you may want Windows 11 Pro ($19.99).",options:["Windows 11 Home sounds good","I want Windows 11 Pro instead","How do I get it?"]};
+      if(c.includes("Business")||c.includes("Pro"))return{text:"Excellent! For business use, <b>Windows 11 Pro</b> at <b>$19.99</b> is the way to go.<br><br>🔐 Includes BitLocker encryption, Remote Desktop, Hyper-V virtualization, and Group Policy support.<br><br>It's a retail license — bind to your Microsoft account and reuse on future devices!",options:["I want to buy Windows 11 Pro","Can I use it on multiple PCs?","Compare with Windows 11 Home"]};
+      if(c.includes("One-time")||c.includes("perpetual"))return{text:"<b>Office 2026 Professional Plus</b> at <b>$34.99</b> — one-time payment, lifetime use.<br><br>📦 Includes: Word, Excel, PowerPoint, Outlook, Publisher, Access.<br><br>Compatible with Windows 10/11 and macOS (via separate license).<br><br>This is our most popular Office choice for professionals!",options:["Buy Office 2026 Pro Plus","What about M365 subscription?","Any discount?"]};
+      if(c.includes("Subscription")||c.includes("365"))return{text:"<b>Microsoft 365 Family</b> at <b>$39.99/year</b> — best value!<br><br>👨‍👩‍👧‍👦 Up to 6 users, each gets 1TB OneDrive cloud storage + full Office apps.<br><br>That's <b>$6.67/user/year</b> — incredible value for families or small teams!",options:["Buy M365 Family","Can I share with my team?","Compare with Office 2026"]};
+      if(c.includes("deal")||c.includes("best"))return{text:"🔥 <b>Best value bundle:</b><br><br>• Windows 11 Pro $19.99<br>• Office 2026 Pro Plus $34.99<br>• <b>Total: $54.98</b><br><br>✅ That's a complete professional setup!<br><br>Or if you need cloud storage for a team, M365 Family at $39.99/year covers 6 people.",options:["I'll take the bundle","I want Windows 11 Pro only","I want Office only"]};
+      if(c.includes("difference")||c.includes("Compare"))return{text:"Great question!<br><br>🏠 <b>Windows 11 Home</b> $14.99 — Personal use, gaming, basic features<br>💼 <b>Windows 11 Pro</b> $19.99 — Business features: encryption, remote desktop, virtualization<br><br>💡 For most users: Home is enough. If you work remotely or need security features, go Pro.",options:["Buy Windows 11 Home $14.99","Buy Windows 11 Pro $19.99","I need more help"]};
+      if(c.includes("price")||c.includes("discount"))return{text:"I understand! Our prices are already heavily discounted compared to Microsoft's official pricing:<br><br>• Windows 11 Pro: <b>$19.99</b> (retail $199)<br>• Office 2026 Pro Plus: <b>$34.99</b> (retail $439)<br><br>You're saving <b>85-92%</b> on genuine retail licenses with instant email delivery!",options:["I want to buy!","What if it doesn't work?","Show me all products"]};
+      return{text:"Let me connect you with the best option. What exactly are you looking for?",options:["I need Windows","I need Office","I need help"]};
+    case 4:
+      if(c.includes("buy")||c.includes("Buy")||c.includes("want"))return{text:"<b>Great decision! 🎉</b><br><br>Here's how to purchase:<br><br>1️⃣ Click the <b>Buy</b> button on the product card above<br>2️⃣ Choose your payment method<br>3️⃣ You'll receive the license key via <b>email within 5 minutes</b><br><br>✅ Instant delivery<br>✅ Genuine retail license<br>✅ Lifetime activation<br>✅ 24/7 support",options:["I'll buy now!","Is it really instant?","Any other questions?"],end:false};
+      return{text:"I want to make sure you get exactly what you need! What would help you decide?",options:["Tell me more about the product","What about refunds?","I want to buy now"],end:false};
+    case 5:
+      return{text:"Absolutely! All our licenses are <b>genuine Microsoft retail keys</b>.<br><br>✅ 100% Authentic — sourced from Microsoft partners<br>✅ Instant delivery via email<br>✅ Lifetime activation — no expiration<br>✅ Full support included<br><br>Ready to start? Click the <b>Buy</b> button on any product above! 🚀",options:["Buy Windows 11 Pro $19.99","Buy Office 2026 $34.99","I'll come back later"],end:true};
+    default:return{text:"Thanks for chatting! Feel free to reach out anytime. 😊",options:[],end:true};
+  }
+}
+var started=false;
+function toggleChat(){
+  var p=document.getElementById('chatPanel');
+  if(p.classList.contains('open')){p.classList.remove('open');return}
+  p.classList.add('open');
+  if(!started){started=true;
+    showTyping();
+    setTimeout(function(){hideTyping();
+      addMsg("Hi! I'm your AI Sales Assistant! 🎉 Looking for Microsoft software today?<br>I can help you find the <b>right license at the best price</b>.<div class=tm>Just now</div>","bot");
+      showOptions(["I need Windows for a new PC","I need Office for work","Just browsing","What do you recommend?"]);
+    },1000);
+  }
+}
+function sendText(){var t=document.getElementById('txtInput');if(t.value.trim()){handleChoice(t.value.trim());t.value=''}}
+</script>
+</body>
+</html>

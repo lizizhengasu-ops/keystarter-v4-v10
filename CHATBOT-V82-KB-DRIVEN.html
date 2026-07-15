@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>V8.2 — KB 驱动的兼容性框架</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}
+.w{max-width:960px;margin:0 auto}
+h1{font-size:26px;font-weight:700;margin-bottom:4px}
+.sub{font-size:14px;color:#86868b;margin-bottom:28px}
+h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}
+.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}
+.card b{color:#1d1d1f}
+.code{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:14px;font-family:monospace;font-size:11px;line-height:1.6;white-space:pre-wrap;margin:8px 0}
+.flex{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+.flex>div{flex:1;min-width:200px;border-radius:8px;padding:14px;background:#f8f8fa;border:1px solid #e8e8ed;font-size:12px;line-height:1.5}
+.green{background:#f0fff0;border:1px solid #c0ffc0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#338833}
+.green b{color:#33aa33}
+.alert{background:#fff9e6;border:1px solid #ffe0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#665530}
+.alert b{color:#d09020}
+</style>
+</head>
+<body>
+<div class=w>
+
+<h1>V8.2 — KB 驱动的兼容性框架</h1>
+<p class=sub>核心变化：AI 不硬编码任何产品兼容性问题，全靠读知识库自己判断</p>
+
+<h2>一、之前错在哪</h2>
+<div class=alert>
+<b>V8.1 的错误写法（硬编码）：</b>
+<div class=code>
+IF store sells software → ask about OS and RAM
+IF store sells furniture → ask about room dimensions
+IF store sells clothing → ask about size
+</div>
+这样换了产品类别就要改代码。不通用。<br><br>
+<b>V8.2 的正确写法（KB 驱动）：</b>
+<div class=code>
+For every product, check if it has a "compatibility" field in the KB.
+If yes → ask the customer about that field.
+If no → give a generic "please check" guidance.
+</div>
+AI 不关心店卖什么。它只读 KB 里的数据，有就问，没有就不问。
+</div>
+
+<h2>二、KB 数据示例</h2>
+<div class=card>
+<b>卖软件的知识库（products.json 示例）：</b>
+<div class=code>
+[
+  {
+    "name": "Windows 11 Pro",
+    "price": 19.99,
+    "compatibility": "Requires Windows 10 or newer, 64-bit processor, 4GB RAM"
+  },
+  {
+    "name": "Gaming Chair",
+    "price": 299,
+    "compatibility": "Supports up to 150kg, seat height 45-55cm"
+  }
+]
+</div>
+<br>
+<b>AI 读取后自动生成的提问：</b><br>
+• 看到 Windows 11 Pro 的 compatibility → 问"你的系统是 Win 10 以上吗？内存够 4GB 吗？"<br>
+• 看到 Gaming Chair 的 compatibility → 问"你的体重在 150kg 以下吗？桌面高度合适吗？"<br><br>
+<b>不需要写 if-else。AI 读到了就是读到了。没读到就不问。</b>
+</div>
+
+<h2>三、系统提示词（兼容性部分）</h2>
+<div class=code>
+## COMPATIBILITY HANDLING (generic, KB-driven)
+
+When a customer asks about compatibility, fit, or whether a product works for them:
+
+1. Read the product(s) in the Knowledge Base
+2. Check if the product has a "compatibility" field
+3. If the compatibility field exists:
+   - Ask the customer about the specific requirements listed in that field
+   - Use the EXACT wording from the field, not a generic question
+   - Example: if field says "Requires Windows 10+", ask "Are you on Windows 10 or newer?"
+4. If the product does NOT have a compatibility field:
+   - Tell the customer: "I don't have specific compatibility data for this product. Here is what I recommend checking: [general guidance based on product type]"
+5. After confirming compatibility → proceed to recommendation or purchase
+
+IMPORTANT: Never hardcode what to ask. Always derive the question from the KB data.
+</div>
+
+<h2>四、Dashboard 操作</h2>
+<div class=card>
+客户在 Dashboard 的「产品管理」栏目中，每个产品可以填一个「兼容性要求」字段。<br><br>
+• 填了 → AI 自动问客户相关问题<br>
+• 没填 → AI 不提问，或给通用指导<br>
+• 客户随时可以修改<br><br>
+<b>这个字段不是必填的。但填了能提高成交率——客户知道产品适合自己，更敢下单。</b>
+</div>
+
+<h2>五、跟之前版本的关系</h2>
+<div class=card>
+<div class=green><b>V8.1 → V8.2 的唯一变化：</b><br>
+兼容性处理从「按产品类别硬编码」改成「全由 KB 驱动」。<br><br>
+V8.1 的提示词里有 if-else 判断（如果软件就...如果家具就...）。<br>
+V8.2 删掉了所有 if-else，改成：
+<div class=code>每个产品读 compatibility 字段 → 有就按字段问 → 没有就不问</div>
+</div>
+其他部分（意图识别、四修复、Dashboard）不变。
+</div>
+
+<h2>六、保存位置</h2>
+<div class=card>
+本文档保存为项目知识库文件：<br>
+<code>C:\Users\31961\Documents\microsoft web\_projects\keystarter-v4\CHATBOT-V82-KB-DRIVEN.html</code><br><br>
+同时记录到 Codex 知识库扩展中。<br>
+版本索引：<code>CHATBOT-VERSION-INDEX.md</code>
+</div>
+
+</div>
+</body>
+</html>

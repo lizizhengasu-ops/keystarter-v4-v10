@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>V9 — ChatBot 全量框架（最终版）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:26px;font-weight:700;margin-bottom:4px}
+.sub{font-size:14px;color:#86868b;margin-bottom:28px}
+h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}
+h3{font-size:14px;margin:20px 0 8px}
+.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}
+.card b{color:#1d1d1f}
+.code{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:14px;font-family:monospace;font-size:11px;line-height:1.6;white-space:pre-wrap;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th{background:#f0f0f2;padding:8px 10px;text-align:left;border:1px solid #e0e0e0;font-weight:600}
+td{padding:7px 10px;border:1px solid #e0e0e0;color:#515154}
+.flex{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+.flex>div{flex:1;min-width:200px;border-radius:8px;padding:14px;background:#f8f8fa;border:1px solid #e8e8ed;font-size:12px;line-height:1.5}
+.flex>div h4{font-size:13px;margin-bottom:4px}
+.cr{background:#fff0f0;border:1px solid #ffc0c0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#883333}
+.cr b{color:#cc3333}
+.grn{background:#f0fff0;border:1px solid #c0ffc0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#338833}
+.grn b{color:#33aa33}
+.ylw{background:#fff9e6;border:1px solid #ffe0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#886633}
+.ylw b{color:#cc8833}
+</style>
+</head>
+<body>
+<div class=w>
+
+<h1>V9 — ChatBot 全量框架（最终版）</h1>
+<p class=sub>基于 V1-V8.4 所有迭代 + 各修复 + 风险检查 + agent-skills</p>
+
+<h2>一、架构总览</h2>
+<div class=card>
+<b>一句话：</b>一套后端服务 → 两条交付路径（插件+预埋）→ 10 类意图识别 → 销售助理话术 → KB 驱动兼容性 → 微信/支付宝计费 → 每店物理隔离 → 对话进化学习
+</div>
+
+<div class=flex>
+<div><h4>🟣 你的 VPS</h4>Master（网关+意图路由+计费）<br>Worker（单进程+数据隔离）<br>/kb/店名/<br>Qdrant per-tenant<br>SQLite</div>
+<div><h4>🧠 AI 引擎</h4>DeepSeek API<br>V9 提示词（10类意图+兼容性+无关信息）<br>动态 KB 注入<br>系统提示词不可客户修改</div>
+<div><h4>📋 客户 Dashboard</h4>产品管理 · FAQ · 政策 <br>样式配置 · 兼容性信息<br>对话日志 · 进化建议 · 订阅</div>
+<div><h4>🛤️ 两条路径</h4>路径 A：WordPress 插件<br>路径 B：预嵌入建站<br>同一套后端服务</div>
+</div>
+
+<h2>二、两条交付路径</h2>
+<div class=flex>
+<div><h4>路径 A：WordPress 插件</h4>• 目标：已有独立站的老板<br>• 安装插件 → 注册 → 7天试用 → 付款<br>• 插件自动同步 WooCommerce 商品<br>• 插件自动扫描页面建知识库<br>• 约 450 行 PHP + JS</div>
+<div><h4>路径 B：预嵌入建站</h4>• 目标：需要建新站的老板<br>• 你建完整站（WP+WC+React SPA）<br>• ChatWidget 预埋在 SPA 中编译<br>• 不修改 WooCommerce 任何后端代码<br>• 约 200 行 React</div>
+</div>
+
+<h2>三、10 类意图识别（V8）</h2>
+<table>
+<tr><th>意图</th><th>客户真实意思</th><th>AI 怎么做</th></tr>
+<tr><td>1.PRICE_OBJECTION</td><td>怕花冤枉钱</td><td>价值论证（零售价对比+90%折扣+30天退款）</td></tr>
+<tr><td>2.TRUST_OBJECTION</td><td>怕被骗</td><td>信任建立（授权经销商+可验证+退款保证）</td></tr>
+<tr><td>3.COMPARISON</td><td>需要信息做决定</td><td>顾问建议（场景化推荐）</td></tr>
+<tr><td>4.COMPATIBILITY</td><td>这适合我吗？</td><td>读 KB 产品规格 → 反问客户 → 确认兼容</td></tr>
+<tr><td>5.RECOMMENDATION</td><td>推荐哪个？</td><td>先兼容性确认 → 再按场景推荐</td></tr>
+<tr><td>6.BUY_INTENT</td><td>我要买</td><td>三步成交流程</td></tr>
+<tr><td>7.PRODUCT_QUESTION</td><td>这产品有什么功能？</td><td>直接回答 + 顺势问场景</td></tr>
+<tr><td>8.PROCESS_QUESTION</td><td>怎么发货/激活？</td><td>具体回答 + 时间预期 + 保证</td></tr>
+<tr><td>9.BROWSING</td><td>随便看看</td><td>引导发现需求</td></tr>
+<tr><td>10.OOS</td><td>问了知识库外问题</td><td>"Let me check" 转人工</td></tr>
+</table>
+
+<h2>四、KB 驱动兼容性（V8.2）</h2>
+<div class=card>
+<b>核心规则：AI 不硬编码任何产品类别。全靠读知识库。</b><br><br>
+<div class=code>
+COMPATIBILITY HANDLING (generic, KB-driven):
+- Read the product spec from the KB
+- If the product has spec/requirements → ask customer about them
+- If no spec → give generic guidance
+- NEVER hardcode what to ask for specific product categories
+</div>
+<br>
+AI 不关心店卖软件还是卖家具。它只读 KB 里的 spec 字段，有就问，没有就不问。
+</div>
+
+<h2>五、无关信息处理（V8.3）</h2>
+<div class=card>
+<b>客户说无关内容时 AI 的处理方式：</b><br><br>
+<div class=code>
+IRRELEVANT INFORMATION:
+When customer mentions unrelated info:
+1. ACKNOWLEDGE — Brief response to show you heard them
+2. EXPLAIN — Why it is not relevant
+3. REDIRECT — Steer back to products naturally
+</div>
+<br>
+例子：客户说"我有 GTX 1050 Ti" → AI:"好显卡！不过软件兼容性不依赖显卡。你的系统是 Windows 10 以上就行。"
+</div>
+
+<h2>六、销售话术框架（V7）</h2>
+<div class=flex>
+<div><h4>SPIN Selling</h4>Situation → Problem → Implication → Need-payoff</div>
+<div><h4>Challenger Sale</h4>Teach → Tailor → Take Control</div>
+<div><h4>AIDA</h4>Attention → Interest → Desire → Action</div>
+<div><h4>LAARC 异议处理</h4>Listen → Acknowledge → Assess → Respond → Confirm</div>
+</div>
+
+<h2>七、对话学习与进化（V8.4）</h2>
+<div class=card>
+<b>每天凌晨每个租户独立运行：</b><br>
+1. 提取未回答问题 → 建议补充 FAQ<br>
+2. 识别高频问题 → 检查 KB 是否足够<br>
+3. 对比成交/未成交对话 → 找出有效话术<br>
+4. 产出建议 → 客户在 Dashboard 确认 → 一键应用<br><br>
+<b>日志存储：</b>/kb/tenant_X/conversations/YYY-MM-DD.jsonl<br>
+<b>分析引擎：</b>DeepSeek 批量分析<br>
+<b>每次分析成本：</b>约 2000 tokens → 几乎免费
+</div>
+
+<h2>八、四修复（V8.1）</h2>
+<div class=grn><b>✅ 修复 1：意图不清晰时反问确认</b><br>AI 不确定意图时 → 反问澄清，不猜测。</div>
+<div class=grn><b>✅ 修复 2：到期不断连</b><br>到期不中断当前对话。下次打开时提示。</div>
+<div class=grn><b>✅ 修复 3：插件自动同步 WC 商品</b><br>激活时自动拉取商品列表。后台可重新同步。</div>
+<div class=grn><b>✅ 修复 4：自动建简易知识库</b><br>注册后自动扫描网站生成 products.json + faq.json。</div>
+
+<h2>九、客户生命周期</h2>
+<div class=card>
+<code>
+新注册 → 7天试用（trial）→ KB 自动扫描建好 → Chatbot 开始工作
+→ 到期前 10 天横幅 → 到期 → expired → 付款（微信/支付宝）
+→ active（30天）→ 到期前 10 天横幅 → 续费
+</code>
+<br><br>
+<b>注意：建站含 chatbot 时，KB 在建站时由你上传。插件版 KB 由插件自动同步。</b>
+</div>
+
+<h2>十、已安装的工具</h2>
+<div class=flex>
+<div><h4>agent-skills（24个）</h4>• planning-and-task-breakdown<br>• code-review-and-quality<br>• debugging-and-error-recovery<br>• frontend-ui-engineering<br>• test-driven-development<br>• security-and-hardening<br>• performance-optimization<br>• 等 24 个</div>
+<div><h4>路径</h4>C:\Users\31961\.agents\skills\</div>
+</div>
+
+<h2>十一、🔴 执行前必须解决的 3 个问题</h2>
+<div class=cr><b>1. 进程隔离 → 改单进程 + 数据隔离</b><br>原方案每租户一个独立子进程，1GB VPS 撑不住。改为单进程 + 文件系统隔离 + 代码级数据隔离。</div>
+<div class=cr><b>2. 微信/支付宝收款 → 确认支付通道</b><br>个人身份开不了微信商户。需确认：<br>• 用 Stripe 收 Alipay（最快）<br>• 用 PayJS 聚合支付<br>• 或者其他方式？<br><b>等你确认。</b></div>
+<div class=cr><b>3. AI 线上表现 → 先验证再铺开</b><br>预览是模拟的。真实 DeepSeek API 有延迟、成本、偶发偏离。Phase 1 先接 DeepSeek 跑 10 条对话验证。</div>
+
+<h2>十二、已完成的代码修复</h2>
+<div class=grn><b>✅ Home.tsx bug 修复（已推线上）</b><br>
+• catch(() ={}) 改为 console.warn → 错误不会被静默吞掉<br>
+• getLiveData 缩进修复 → 函数体 4 空格<br>
+• if (!live) return sku 本已存在 → 不会崩溃</div>
+
+<h2>十三、Phase 1 任务</h2>
+<div class=card>
+按 planning-and-task-breakdown 技能规划：<br><br>
+1. ChatWidget.tsx（React 组件，~200行）<br>
+2. master.mjs（WebSocket 主进程，~150行）<br>
+3. auth.mjs（HMAC + 域名白名单 + 限流，~80行）<br>
+4. worker.mjs（消息处理 + KB 访问，~150行）<br>
+5. ai.mjs（DeepSeek API + V9 提示词，~100行）<br>
+6. 部署 VPS + nginx + systemd + 10 条对话验证<br>
+<div class=cr><b>注意：任务 5（DeepSeek 集成）必须先跑 10 条对话验证，确认可行再继续其他任务。</b></div>
+</div>
+
+</div>
+</body>
+</html>

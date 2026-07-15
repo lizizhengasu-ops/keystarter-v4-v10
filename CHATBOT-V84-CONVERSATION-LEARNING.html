@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1.0><title>V8.4 — 对话学习与自我进化</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}.w{max-width:960px;margin:0 auto}h1{font-size:26px;font-weight:700;margin-bottom:4px}.sub{font-size:14px;color:#86868b;margin-bottom:28px}h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}.card b{color:#1d1d1f}.code{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:6px;padding:14px;font-family:monospace;font-size:11px;line-height:1.6;white-space:pre-wrap;margin:8px 0}.flex{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}.flex>div{flex:1;min-width:200px;border-radius:8px;padding:14px;background:#f8f8fa;border:1px solid #e8e8ed;font-size:12px;line-height:1.5}.alert{background:#fff0e8;border:1px solid #ffc0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#884422}.alert b{color:#aa5522}
+</style></head><body><div class=w>
+
+<h1>V8.4 — 对话学习与自我进化</h1>
+<p class=sub>每个 chatbot 从自己的对话中学习，自动优化话术和知识库</p>
+
+<h2>行业做法（搜索结论）</h2>
+<div class=flex>
+<div><h4>Intercom</h4>追踪未回答问题<br>AI 建议回复<br>人工确认后生效</div>
+<div><h4>Zendesk Answer Bot</h4>从已解决的工单学习<br>自动匹配最佳回答<br>需要人工审核</div>
+<div><h4>Watson Assistant</h4>Content Mining 分析对话<br>自动发现知识库缺口<br>建议新增 FAQ</div>
+<div><h4>Ada</h4>AI 自动检测对话盲区<br>建议更新话术<br>A/B 测试优化</div>
+</div>
+<div class=alert>行业通用做法：日志 → 分析 → 建议 → 确认 → 更新。不自动上线，需人工确认。</div>
+
+<h2>架构</h2>
+<div class=card>
+<b>两层分离：</b><br><br>
+<b>层 1 — 对话日志（实时）：</b>每次对话结束后，整段对话写入 /kb/tenant_X/conversations/YYY-MM-DD.jsonl<br>
+<b>层 2 — 定时分析（每日）：</b>每天凌晨，用 DeepSeek 批量分析日志，输出建议。<br><br>
+<b>不自动更新知识库。AI 只生产建议，你自己（或客户）审核后确认。</b>
+</div>
+
+<h2>对话日志格式</h2>
+<div class=code>
+{
+  "tenant": "client_a",
+  "session_id": "abc123",
+  "timestamp": "2026-07-11T14:32:00Z",
+  "messages": [
+    {"role": "customer", "text": "Windows 11 Pro多少钱"},
+    {"role": "ai", "text": "$19.99...", "intent": "PRODUCT_QUESTION"},
+    {"role": "customer", "text": "太贵了"},
+    {"role": "ai", "text": "市场价$199...", "intent": "PRICE_OBJECTION"}
+  ],
+  "resolved": true,
+  "purchase_made": false
+}
+</div>
+
+<h2>每日分析（空闲时运行）</h2>
+<div class=card>
+每天凌晨，对每个租户独立执行：<br><br>
+<b>1. 提取未回答问题：</b><br>
+扫描对话日志中的 customer 消息，找出 AI 没有回答（OOS 响应）的问题。<br>
+→ 建议：添加到 FAQ。<br><br>
+<b>2. 识别高频问题：</b><br>
+统计最近 7 天内客户问得最多的问题。<br>
+→ 如果知识库里没有，建议补充。如果已经有了，确认回答是否准确。<br><br>
+<b>3. 分析成交模式：</b><br>
+对比"最终购买了"和"没购买"的对话，找出差异。<br>
+→ 什么话术让客户下单了？什么话术让客户走了？<br>
+→ 输出：话术优化建议。<br><br>
+<b>4. 结果存储：</b><br>
+分析结果写入 /kb/tenant_X/recommendations/YYY-MM-DD.json<br>
+客户在 Dashboard 的「进化建议」栏目里看到，人工确认后一键应用。
+</div>
+
+<h2>Dashboard 新增栏目</h2>
+<div class=card>
+客户在 Dashboard 的 AI 聊天机器人菜单下，新增：<br><br>
+<b>📈 进化建议</b><br>
+• 建议新增的 FAQ（由 AI 分析对话自动生成）<br>
+• 建议优化的产品描述<br>
+• 话术改进提示<br>
+• 每个建议都带来源对话链接<br>
+• 一键确认/忽略<br><br>
+<b>🗣️ 对话日志</b><br>
+• 查看最近的对话记录<br>
+• 搜索特定问题<br>
+• 标记有用/无用的回答
+</div>
+
+<h2>技术实现</h2>
+<div class=card>
+<b>对话日志：</b>每次 WebSocket 会话结束时，Worker 写入 JSONL 文件。代码约 30 行。<br><br>
+<b>每日分析：</b>一个 Node.js 脚本，用 DeepSeek 分析日志。代码约 100 行。<br><br>
+<b>Dashboard 展示：</b>前端列表页 + 确认按钮。代码约 150 行。<br><br>
+<b>工作量：</b>约 1 天（Codex 时间）。<br><br>
+<b>API 成本：</b>每天每租户分析一次，每次约 2000 tokens。DeepSeek 价格 ≈ 忽略不计。</div>
+
+<h2>跟 V8.3 的关系</h2>
+<div class=card>V8.4 在 V8.3 基础上增加对话学习能力。V8.3 的所有框架（意图识别、KB兼容性、无关信息处理、四修复）不变。不影响现有流程。</div>
+
+</div></body></html>

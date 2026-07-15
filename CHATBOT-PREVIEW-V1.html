@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content=width=device-width,initial-scale=1.0>
+<title>ChatWidget 预览</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#1a1a2e;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.wrap{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border-radius:16px;padding:24px;max-width:440px;width:100%;border:1px solid rgba(255,255,255,.08)}
+.wrap h1{color:#fff;font-size:20px;margin:0 0 16px;text-align:center}
+/* store */
+.store{border-radius:12px;overflow:hidden;margin-bottom:14px}
+.store-hdr{background:#16213e;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.store-hdr h3{color:#fff;font-size:13px;margin:0}
+.store-hdr span{color:#8888aa;font-size:11px}
+.store-prod{background:#16213e;padding:14px 16px;display:flex;gap:12px;align-items:center;border-top:1px solid rgba(255,255,255,.05)}
+.store-ic{width:50px;height:50px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.store-prod h4{color:#fff;font-size:13px;margin:0}
+.store-prod p{color:#888;font-size:11px;margin:2px 0}
+.store-prod .pr{color:#60ffa0;font-size:14px;font-weight:700}
+/* chat widget */
+.widget{border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.w-hdr{background:linear-gradient(135deg,#6a30a0,#8a50c0);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+.w-hdr .av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.w-hdr .nm{flex:1;text-align:left}
+.w-hdr .nm h4{font-size:12px;margin:0;font-weight:600}
+.w-hdr .nm p{font-size:10px;margin:0;color:rgba(255,255,255,.7)}
+.w-body{background:#f5f5f7;padding:12px;min-height:200px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.4;text-align:left}
+.msg.b{background:#fff;border:1px solid #e8e8ed;align-self:flex-start;border-bottom-left-radius:3px}
+.msg.u{background:#6a30a0;color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.msg .tm{font-size:9px;color:#999;margin-top:3px;opacity:.8}
+.w-inp{display:flex;padding:8px 12px;border-top:1px solid #e8e8ed;background:#fff;gap:6px}
+.w-inp input{flex:1;border:1px solid #e0e0e0;border-radius:16px;padding:6px 12px;font-size:12px;outline:none}
+.w-inp input:focus{border-color:#6a30a0}
+.w-inp button{background:#6a30a0;color:#fff;border:none;border-radius:16px;padding:6px 14px;font-size:11px;cursor:pointer;font-weight:600}
+.info{color:#8888aa;font-size:11px;margin-top:16px;text-align:center;line-height:1.5}
+</style>
+</head>
+<body>
+<div class=wrap>
+<h1>ChatWidget 预览</h1>
+<p style=color:#666;font-size:12px;text-align:center;margin:-10px 0 20px>这是嵌入在独立站右下角的AI聊天机器人</p>
+
+<div class=store>
+<div class=store-hdr><h3>🛒 Premium Tech Store</h3><span>SSL Secured</span></div>
+<div class=store-prod><div class=store-ic>💻</div><div style=flex:1;text-align:left><h4>Windows 11 Pro</h4><p>Retail License · Lifetime Activation</p><div class=pr>$19.99</div></div></div>
+</div>
+
+<div class=widget>
+<div class=w-hdr><div class=av>🤖</div><div class=nm><h4>AI Assistant</h4><p>Online · Answers in seconds</p></div></div>
+<div class=w-body>
+<div class="msg b">Hi! Need help with Microsoft licenses?<div class=tm>Just now</div></div>
+<div class="msg u">How much is Windows 11 Pro?</div>
+<div class="msg b">Windows 11 Pro is <b>$19.99</b> — Retail license with lifetime activation. Includes Microsoft Account binding.<div class=tm>Just now</div></div>
+</div>
+<div class=w-inp><input placeholder="Type your question..." value="What about Office 2026?"><button>Send</button></div>
+</div>
+
+<div class=info>💡 终端用户在独立站右下角看到这个浮窗。<br>点气泡 → 打开面板 → 跟AI直接对话。<br>所有消息直连你的VPS（WebSocket），不经过客户VPS。</div>
+</div>
+</body>
+</html>

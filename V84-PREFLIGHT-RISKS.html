@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1.0><title>V8.4 执行前风险检查</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:30px 20px}.w{max-width:960px;margin:0 auto}h1{font-size:26px;font-weight:700;margin-bottom:4px}.sub{font-size:14px;color:#86868b;margin-bottom:28px}h2{font-size:16px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid #e8e8ed}.card{background:#fff;border-radius:10px;padding:16px 18px;border:1px solid #e8e8ed;margin-bottom:12px;font-size:13px;line-height:1.7}
+.cr{background:#fff0f0;border:1px solid #ffc0c0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#883333}.cr b{color:#cc3333}
+.hi{background:#fff9e6;border:1px solid #ffe0a0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#886633}.hi b{color:#cc8833}
+.mi{background:#f0fff0;border:1px solid #c0ffc0;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12px;line-height:1.6;color:#338833}.mi b{color:#33aa33}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}th{background:#f0f0f2;padding:8px 10px;text-align:left;border:1px solid #e0e0e0;font-weight:600}td{padding:7px 10px;border:1px solid #e0e0e0;color:#515154}
+</style></head><body><div class=w>
+<h1>V8.4 执行前风险检查</h1>
+<p class=sub>实话实说：哪些能跑，哪些有坑</p>
+
+<h2>🔴 确定不行、必须改的</h2>
+
+<div class=cr><b>1. 每个租户一个独立子进程 — 1GB VPS 撑不住</b><br><br>
+方案里写的：child_process.fork() 每租户一个独立进程 → 物理隔离<br>
+实际：每个 Node 子进程约 30-50MB。30 个租户 = 900-1500MB，还没算 Master 和操作系统。1GB VPS 跑不了。<br><br>
+修正方案：一个进程 + 文件系统隔离。不是"进程隔离"，是"数据隔离"。每租户的 KB 目录分开，代码里禁止跨租户访问。95% 的 SaaS（包括 Intercom 早期）都是这么干的。1GB VPS 可以跑 50-80 个租户。</div>
+
+<div class=cr><b>2. 微信/支付宝收款 — 个人身份可能开不了</b><br><br>
+方案里写的：微信/支付宝扫码收款<br>
+实际：微信支付商户号需要企业资质。支付宝当面收可以用个人。Stripe 支持 Alipay 作为付款方式。<br><br>
+修正方案：需要你确认——你目前有没有支付通道？用 Stripe 收 Alipay 是最简单的（Stripe 已装好），走 WeChat 可能要用 PayJS 这类聚合支付。</div>
+
+<div class=cr><b>3. DeepSeek API 线上表现跟预览完全不同</b><br><br>
+方案里写的：预览版对话跟线上一样<br>
+实际：预览是写死的模拟。线上用 DeepSeek API 会有：延迟 2-5 秒、偶尔偏离提示词、可能拒绝回答、费用按用量走。<br><br>
+修正方案：Phase 1 先不搞全功能。先接上 DeepSeek 跑 10 条真实对话，验证延迟、质量、成本。确认可行再往下做。</div>
+
+<h2>🟡 有风险但能解决的</h2>
+
+<div class=hi><b>4. 自动扫描网站建 KB — 不太靠谱</b><br><br>
+很多 WooCommerce 站点没有标准页面。先只做 WooCommerce API 自动同步（可靠），网页扫描当 bonus。</div>
+
+<div class=hi><b>5. Dashboard 工作量被低估</b><br><br>
+6 个栏目实际是 600-1000 行代码，2-3 天。Phase 2 只做核心 3 个栏目（产品 + FAQ + 订阅），分析放 Phase 3。</div>
+
+<div class=hi><b>6. $20/年 VPS 跑生产有风险</b><br><br>
+RackNerd 的 $20 套餐 CPU 一般。初期够用。如果性能不够，升级到 $5/月 DigitalOcean（$60/年，好很多）。</div>
+
+<h2>🟢 没问题的</h2>
+<div class=mi>• ChatWidget 组件 — 200 行标准 React ✅<br>
+• Master + WebSocket — 标准 Node.js ✅<br>
+• HMAC token + 域名白名单 — 标准安全模式 ✅<br>
+• SQLite — 对几十个租户够用 ✅<br>
+• 7 天试用 — 两个字段的事 ✅<br>
+• 对话日志 — 30 行代码 ✅<br>
+• WordPress 插件 — 150 行 PHP ✅<br>
+• 每日分析 LLM 调用 — 100 行代码 ✅</div>
+
+<h2>最终 verdict</h2>
+<div class=cr>框架本身是对的，产品逻辑也没问题。但 3 件事必须在 Phase 1 前搞清楚：<br><br>
+1. 进程隔离 → 改单进程 + 数据隔离（不改物理隔离了，1GB 撑不住）<br>
+2. 收款方式 → 你确认目前有没有能收微信/支付宝的通道<br>
+3. AI 线上表现 → Phase 1 先接 DeepSeek 跑 10 条对话，不直接铺开<br><br>
+这三件定了，剩下的都是标准开发工作，没有不可控风险。</div></div></body></html>

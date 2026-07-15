@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1.0><title>ChatBot V2 全量工作流</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#0a0a1a;color:#ddd;padding:20px}
+.w{max-width:1100px;margin:0 auto}h1{font-size:24px;color:#fff;margin-bottom:4px}.sub{font-size:13px;color:#888;margin-bottom:24px}
+.you{background:#2a1040;border:1px solid #6a30a0;color:#c080ff}.you-bg{background:#6a30a0}
+.cli{background:#2a2010;border:1px solid #a06020;color:#ffb060}.cli-bg{background:#a06020}
+.usr{background:#102a20;border:1px solid #20a060;color:#60ffa0}.usr-bg{background:#20a060}
+.roles{display:flex;gap:14px;margin-bottom:30px}.role{flex:1;border-radius:10px;padding:16px;text-align:center}.role .icon{font-size:32px;margin-bottom:6px}.role h3{font-size:14px;margin-bottom:2px}.role p{font-size:11px;opacity:.7}.role .tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;margin-top:6px;color:#fff}
+.tag-you{background:#6a30a0}.tag-cli{background:#a06020}.tag-usr{background:#20a060}
+.sec{background:#111128;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid #222244}.sec h2{font-size:16px;color:#aaa;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #222244}.sec h2 span{font-size:12px;color:#666;font-weight:400;margin-left:8px}
+.st{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px 12px;border-radius:6px;opacity:.45;transition:all .3s;font-size:13px}.st.on{opacity:1;background:rgba(255,255,255,.04)}
+.sn{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;color:#fff}.sn-y{background:#6a30a0}.sn-c{background:#a06020}.sn-u{background:#20a060}.sn-g{background:#555}
+.wh{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600;min-width:60px;text-align:center;flex-shrink:0;color:#fff} .wh-y{background:#6a30a0}.wh-c{background:#a06020}.wh-u{background:#20a060}.wh-s{background:#444;color:#aaa}
+.ar{font-size:14px;flex-shrink:0}.st.on .ar{color:#ffd700}
+.de{font-size:12px;color:#888;line-height:1.3}.st.on .de{color:#ccc}.de b{color:#fff}.de em{font-style:normal;color:#88cc88}
+.note-box{background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.12);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:12px;line-height:1.6;color:#bba}
+.note-box strong{color:#ffd700}.note-box .r{color:#ff6b6b}.note-box .g{color:#60ffa0}
+.ctrl{display:flex;gap:8px;align-items:center;margin-bottom:12px}.btn{padding:4px 14px;border-radius:4px;border:none;font-size:12px;cursor:pointer;color:#fff}.btn1{background:#6a30a0}.btn2{background:#444}.btn3{background:#20a060}.cnt{margin-left:auto;font-size:12px;color:#555}
+</style></head><body>
+<div class=w>
+<h1>ChatBot V2 全量工作流</h1>
+<p class=sub>三个角色 · 五个阶段 · 完整信息链路</p>
+<div class=roles>
+<div class="role you"><div class=icon>🟣</div><h3>你（平台方）</h3><p>卖 chatbot 给中国老板<br>你的 VPS 运行全部 AI 和计费</p><span class="tag tag-you">你的 VPS</span></div>
+<div class="role cli"><div class=icon>🟠</div><h3>客户（中国老板）</h3><p>开独立站卖产品给欧美<br>买你的 chatbot 服务嵌入自己站</p><span class="tag tag-cli">客户 VPS</span></div>
+<div class="role usr"><div class=icon>🟢</div><h3>终端用户（欧美消费者）</h3><p>在客户独立站购物<br>跟 AI 聊天问产品问题</p><span class="tag tag-usr">浏览器</span></div>
+</div>
+<div class=sec data-sec=0>
+<h2>阶段一：客户购买机器人 <span>中国老板 → 你 → 激活</span></h2>
+<div class=ctrl><button class="btn btn2" onclick="prevS()">◀</button><button class="btn btn1" onclick="toggleP()">▶ 播放</button><button class="btn btn2" onclick="nextS()">▶</button><span class=cnt id=c0>1/6</span></div>
+<div id=sec0-steps>
+<div class=st data-s=0><span class="sn sn-c">1</span><span class="wh wh-c">🟠 客户</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你</span><span class=de>打开你的收款页面 billing.你的域名，选套餐，付款</span></div>
+<div class=st data-s=1><span class="sn sn-c">2</span><span class="wh wh-c">🟠 客户</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你</span><span class=de>微信/支付宝扫码支付 $99 或 $299</span></div>
+<div class=st data-s=2><span class="sn sn-y">3</span><span class="wh wh-y">🟣 你</span><span class=ar>➡️</span><span class="wh wh-s">内部</span><span class=de>服务器处理：创建租户配置 → 生成 HMAC token → 创建知识库目录 → 设置 expires_at = now+30天</span></div>
+<div class=st data-s=3><span class="sn sn-y">4</span><span class="wh wh-y">🟣 你</span><span class=ar>➡️</span><span class="wh wh-c">🟠 客户</span><span class=de>客户邮箱收到：portal 登录链接 + widget 嵌入代码</span></div>
+<div class=st data-s=4><span class="sn sn-c">5</span><span class="wh wh-c">🟠 客户</span><span class=ar>➡️</span><span class="wh wh-c">客户 VPS</span><span class=de>把代码贴到自己独立站的 HTML 中：<b>&lt;script src=&quot;https://chat.你的域名/w.js&quot;&gt;</b></span></div>
+<div class=st data-s=5><span class="sn sn-c">6</span><span class="wh wh-c">🟠 客户</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你</span><span class=de>登录 portal，上传产品数据、FAQ、政策，完善知识库</span></div>
+</div>
+<div class=note-box><strong>💰 关键：</strong>客户付款后 <b>30 天倒计时开始</b>。到期前 10 天 portal 显示续费横幅。不续费 → 自动停用。</div>
+</div>
+<div class=sec data-sec=1>
+<h2>阶段二：技术部署 <span>客户 VPS → 终端用户浏览器 → 你的 VPS</span></h2>
+<div class=ctrl><button class="btn btn2" onclick="prevS(1)">◀</button><button class="btn btn1" onclick="toggleP(1)">▶ 播放</button><button class="btn btn2" onclick="nextS(1)">▶</button><span class=cnt id=c1>1/4</span></div>
+<div id=sec1-steps>
+<div class=st data-s=0><span class="sn sn-c">1</span><span class="wh wh-c">🟠 客户 VPS</span><span class=ar>➡️</span><span class="wh wh-u">🟢 终端用户浏览器</span><span class=de>独立站输出 HTML 页面，包含你的 widget script 标签。这是客户 VPS <b>唯一</b>做的事</span></div>
+<div class=st data-s=1><span class="sn sn-u">2</span><span class="wh wh-u">🟢 终端用户浏览器</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你的 VPS</span><span class=de>自动加载 widget.js（<em>HTTPS GET</em>），从你的服务器下载脚本</span></div>
+<div class=st data-s=2><span class="sn sn-y">3</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-u">🟢 终端用户浏览器</span><span class=de>返回 widget.js（混淆压缩、无 sourcemap）。脚本执行，建立 WebSocket 连接<br>发送加密 HMAC token → 服务器验证订阅 ✅ 域名 ✅ → <b>连接建立</b></span></div>
+<div class=st data-s=3><span class="sn sn-u">4</span><span class="wh wh-u">🟢 终端用户浏览器</span><span class=ar>⇄</span><span class="wh wh-y">🟣 你的 VPS</span><span class=de><b>WebSocket 长连接持续存在</b>。此后所有消息走这条线。<br>客户 VPS <span class=r>不再参与</span>。终端用户 VPS 都不用管是谁的。</span></div>
+</div>
+<div class=note-box><strong>🔗 核心：</strong>客户 VPS 和你的 VPS <span class=r>不直接通信</span>。路径是 <span class=g>客户 VPS → 终端浏览器 → 你的 VPS</span>。加载完页面后客户 VPS 退出。终端用户的浏览器是唯一桥梁。</div>
+</div>
+<div class=sec data-sec=2>
+<h2>阶段三：终端用户提问 → AI 回答 <span>完整消息链路</span></h2>
+<div class=ctrl><button class="btn btn2" onclick="prevS(2)">◀</button><button class="btn btn1" onclick="toggleP(2)">▶ 播放</button><button class="btn btn2" onclick="nextS(2)">▶</button><span class=cnt id=c2>1/6</span></div>
+<div id=sec2-steps>
+<div class=st data-s=0><span class="sn sn-u">1</span><span class="wh wh-u">🟢 终端用户</span><span class=ar>➡️</span><span class="wh wh-u">浏览器</span><span class=de>在客户独立站上看到右下角聊天气泡，点击打开，打字："Windows 11 Pro 多少钱？"</span></div>
+<div class=st data-s=1><span class="sn sn-u">2</span><span class="wh wh-u">🟢 终端浏览器</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你的 VPS</span><span class=de>通过 WebSocket 发送消息 + HMAC token 到 chat.你的域名:3002</span></div>
+<div class=st data-s=2><span class="sn sn-y">3</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-s">内部验证</span><span class=de>Master 进程：解密 token → 识别租户 → 域名白名单检查 ✅ → 订阅状态检查 ✅ → 路由到该租户的 Worker 进程</span></div>
+<div class=st data-s=3><span class="sn sn-y">4</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-s">知识库</span><span class=de>Worker 进程：在租户独立的 KB 目录搜索 → 找到 Windows 11 Pro 价格 $19.99 → 准备上下文</span></div>
+<div class=st data-s=4><span class="sn sn-y">5</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-s">AI 推理</span><span class=de>将产品数据 + FAQ + 用户问题组装成提示词 → 发给 DeepSeek → <b>只基于知识库回答</b>，不编造</span></div>
+<div class=st data-s=5><span class="sn sn-y">6</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-u">🟢 终端浏览器</span><span class=de>AI 回复通过 WebSocket 发回 → 浮窗显示"Windows 11 Pro 是 $19.99，商业授权"<br>同时记录日志、更新用量统计、检查过期状态</span></div>
+</div>
+</div>
+<div class=sec data-sec=3>
+<h2>阶段四：多人多站场景 <span>你控制全部，独立隔离</span></h2>
+<div class=st style=opacity:1;flex-wrap:wrap>
+<div style=display:flex;gap:20px;flex-wrap:wrap;width:100%>
+<div class="role you" style=flex:none;width:auto;min-width:160px><div class=icon>🟣</div><h3>你的 VPS</h3><div style=font-size:11px;line-height:1.5;text-align:left;padding:4px>租户 A 工人<br>租户 B 工人<br>租户 C 工人<br>...<br><span style=color:#888>每个独立进程</span></div></div>
+<div style=flex:1;min-width:200px;padding:4px;font-size:12px>
+<b style=color:#60ffa0>10 个中国老板</b> → 每人付款 $99-$299 → 各有一个独立 Worker 进程<br>
+<b style=color:#ffb060>各自独立站</b> → 可能在各自的 VPS 上，也可能在你这<br>
+<b style=color:#c080ff>终端用户</b> → 分布在欧美各国，各连各的 WebSocket<br><br>
+<span style=color:#888>每个租户的 Worker：</span>独立进程、独立 KB 目录、独立 Qdrant 集合、独立配置。<b>互不可见。</b><br>
+<span style=color:#888>你的控制：</span>全部代码在你 VPS 上。客户 VPS 上只有一行 script 标签。</div>
+</div>
+</div>
+<div class=note-box><strong>🧱 物理隔离：</strong>10 个客户 = 10 个独立进程 + 10 套独立知识库。每个进程只能读自己的数据。A 看不到 B 的产品数据。B 看不到 C 的 FAQ。互不影响。</div>
+</div>
+<div class=sec data-sec=4>
+<h2>阶段五：计费与续费 <span>自动计时 · 到期停用</span></h2>
+<div class=ctrl><button class="btn btn2" onclick="prevS(4)">◀</button><button class="btn btn1" onclick="toggleP(4)">▶ 播放</button><button class="btn btn2" onclick="nextS(4)">▶</button><span class=cnt id=c4>1/5</span></div>
+<div id=sec4-steps>
+<div class=st data-s=0><span class="sn sn-y">1</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-s">数据库</span><span class=de>付款成功 → 写入 expires_at = now + 30 天 → 状态 = active</span></div>
+<div class=st data-s=1><span class="sn sn-y">2</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>➡️</span><span class="wh wh-s">每天定时任务</span><span class=de>每天凌晨检查所有租户：还剩多少天？</span></div>
+<div class=st data-s=2><span class="sn sn-c">3</span><span class="wh wh-c">🟠 客户 portal</span><span class=ar>🟡</span><span class="wh wh-s">≤10 天</span><span class=de>还剩≤10天 → portal 顶部显示"还剩 X 天，点击续费"黄色横幅（每天显示）</span></div>
+<div class=st data-s=3><span class="sn sn-r">4</span><span class="wh wh-c">🟠 客户</span><span class=ar>➡️</span><span class="wh wh-y">🟣 你</span><span class=de>客户点击续费 → 微信/支付宝再付一个月 → 服务器延长 expires_at +30 天</span></div>
+<div class=st data-s=4><span class="sn sn-g">5</span><span class="wh wh-y">🟣 你的 VPS</span><span class=ar>⛔</span><span class="wh wh-u">🟢 终端浏览器</span><span class=de>到期未续费 → 状态变 expired → Widget 每次连接返回 403"服务已到期" → AI 不回答<br><b>计时在服务器上，客户改不了。</b></span></div>
+</div>
+</div>
+</div>
+<script>
+var allSecs=document.querySelectorAll("[data-sec]");var curSec=0;var st=[];var curSt=[];var playing=[];var timers=[];
+allSecs.forEach(function(s,i){var steps=s.querySelectorAll("[data-s]");st[i]=steps;curSt[i]=0;playing[i]=false;timers[i]=null;showS(i,0);});
+function showS(si,n){if(!st[si])return;st[si].forEach(function(e,i){e.classList.toggle("on",i===n)});curSt[si]=n;var c=document.getElementById("c"+si);if(c)c.textContent=(n+1)+"/"+st[si].length;}
+function nextS(si){if(si===undefined){si=curSec}var n=(curSt[si]+1)%st[si].length;showS(si,n);}
+function prevS(si){if(si===undefined){si=curSec}var n=(curSt[si]-1+st[si].length)%st[si].length;showS(si,n);}
+function toggleP(si){if(si===undefined){si=curSec}if(playing[si]){clearInterval(timers[si]);playing[si]=false}else{playing[si]=true;timers[si]=setInterval(function(){nextS(si)},2500);}}
+</script>
+</body></html>

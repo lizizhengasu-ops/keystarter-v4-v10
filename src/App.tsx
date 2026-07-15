@@ -13,6 +13,7 @@ import B2bPage from "./pages/B2b";
 import BlogPage from "./pages/Blog";
 import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
+import NavDrawer from "./NavDrawer";
 
 function MicrosoftLogo() {
   return (
@@ -31,6 +32,7 @@ function Layout({ children }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
@@ -63,11 +65,15 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
       <div className="fixed top-0 left-0 h-[2px] bg-[#0071e3] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
 
       <nav className="fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
+                    <button onClick={()=>setNavOpen(true)} className="md:hidden text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors mr-2" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+<Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
             <MicrosoftLogo />
             <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">KeyStarter</span>
             <span className="hidden sm:inline bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">Partner</span>
@@ -96,6 +102,9 @@ function Layout({ children }) {
             <button onClick={()=>setSearchOpen(true)} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Search">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
+              <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Account">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </button>
             <div className="relative">
               <button onClick={()=>setShowCart(!showCart)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={"Cart (" + cart.count + ")"}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
