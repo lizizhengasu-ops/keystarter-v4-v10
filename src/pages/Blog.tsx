@@ -18,8 +18,9 @@ export default function BlogPage() {
     fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=20")
       .then(r => r.json())
       .then((data: Post[]) => { setPosts(data); setLoading(false); })
-      .catch(() => setLoading(false));
-  }, []);
+     .catch(() => setLoading(false));
+ }, []);
+  useEffect(() => { document.title = "Blog | KeyStarter"; }, []);
 
   if (loading) {
     return (

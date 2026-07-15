@@ -15,7 +15,8 @@ export default function BlogArticlePage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [slug]);
+ }, [slug]);
+  useEffect(() => { if (article) { document.title = article.title.rendered.replace(/<[^>]*>/g, '') + " | KeyStarter"; } }, [article]);
 
   if (loading) {
     return (
