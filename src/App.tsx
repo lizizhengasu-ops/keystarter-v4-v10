@@ -85,9 +85,9 @@ function Layout({ children }) {
             ) : (
               <>
                 <Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
-                <Link to="/#business" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
+                <Link to="/b2b" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
                 <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
-               <Link to="/#support" className="hover:text-[#0078d4] transition-colors">Support</Link>
+               <Link to="/support" className="hover:text-[#0078d4] transition-colors">Support</Link>
                 <Link to="/blog" className="hover:text-[#0078d4] transition-colors">Blog</Link>
 </>
             )}
