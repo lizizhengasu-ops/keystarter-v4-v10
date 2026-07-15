@@ -200,7 +200,8 @@ export default function App() {
   useEffect(() => { fetchProducts().then(setApiProducts).catch(function(e){console.warn("API fetch failed:",e)}); }, []);
 const [activeTab, setActiveTab] = useState('all');
  const [openFaqId, setOpenFaqId] = useState(null);
-  const [blogPosts, setBlogPosts] = useState([]);
+ const [blogPosts, setBlogPosts] = useState([]);
+  useEffect(() => { fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=3").then(r=>r.json()).then(setBlogPosts).catch(()=>{}); }, []);
   
   // Simulated Licenses purchased in this session
   const [purchasedLicenses, setPurchasedLicenses] = useState([
