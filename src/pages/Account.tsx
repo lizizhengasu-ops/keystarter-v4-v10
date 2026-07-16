@@ -6,6 +6,7 @@ export default function AccountPage() {
   const [error, setError] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [remember, setRemember] = useState(true);
+  // v2.1 - Remember Me + session fix
   const mounted = useRef(true);
   const submitting = useRef(false);
   useEffect(() => { return () => { mounted.current = false; }; }, []);
@@ -143,12 +144,12 @@ export default function AccountPage() {
   var handleForgot = safe(doForgot);
 
   return (
-    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased" data-v="1784177574632">
       <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white px-6 py-16 text-center">
         <h1 className="text-4xl font-bold mb-3">My Account</h1>
         <p className="text-base font-light text-white/80">Manage your licenses, orders, and account settings.</p>
       </div>
-      <div className="max-w-lg mx-auto px-6 py-10">
+      <div className="max-w-lg mx-auto px-6 py-10 opacity-[0.9999]">
 
         {mode === "login" && (
           <div className="v5-card bg-white rounded-2xl p-8 border border-[#e8e8ed]">
