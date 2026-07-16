@@ -20,11 +20,11 @@ export default function StorePage() {
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div className="bg-gradient-to-r from-[#0078D4] via-[#106EBE] to-[#005A9E] text-white px-6 sm:px-12 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">全部商品</h1>
-        <p className="text-lg font-light max-w-2xl mx-auto">微软官方授权软件，全线产品正品保障，即买即发。</p>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">All Products</h1>
+        <p className="text-lg font-light max-w-2xl mx-auto">Microsoft authorized software. Genuine products guaranteed. Instant digital delivery.</p>
       </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-8">商品分类</h2>
+        <h2 className="text-2xl font-bold mb-8">Categories</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16">
           {categories.map((c,i)=>(
             <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] hover:shadow-lg transition-shadow">
@@ -37,11 +37,11 @@ export default function StorePage() {
                   <span className="text-[#86868b]">{it}</span>
                 </div>
               ))}
-              <Link to={"/products"} className="inline-block mt-3 text-xs font-semibold text-[#0078d4] hover:underline">查看详情 &gt;</Link>
+              <Link to={"/products"} className="inline-block mt-3 text-xs font-semibold text-[#0078d4] hover:underline">View Details &gt;</Link>
             </div>
           ))}
         </div>
-        <h2 className="text-2xl font-bold mb-8">推荐商品</h2>
+        <h2 className="text-2xl font-bold mb-8">Featured</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {featured.map((x,i)=>(
             <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
@@ -53,7 +53,7 @@ export default function StorePage() {
               <div className="text-xs text-[#86868b] mb-2">{x.desc}</div>
               <div className="text-lg font-extrabold text-[#0078d4] mb-3">${x.p.toFixed(2)}</div>
               <button onClick={()=>addToCart({slug:x.s,name:x.n,price:x.p})}
-                className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition">加入购物车</button>
+                className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition">Add to Cart</button>
             </div>
           ))}
         </div>
