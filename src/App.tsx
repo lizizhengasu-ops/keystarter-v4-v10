@@ -18,6 +18,8 @@ import NotFound from "./pages/NotFound";
 import PricingPage from "./pages/Pricing";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
+import AboutPage from "./pages/About";
+import ChangelogPage from "./pages/Changelog";
 
 function MicrosoftLogo() {
   return (
@@ -150,8 +152,8 @@ function Layout({ children }) {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Company</h4>
             <div className="space-y-2">
               <button onClick={()=>window.location.href="/blog"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Blog</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">About</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Contact</button>
+              <button onClick={()=>window.location.href="/about"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">About</button>
+              <button onClick={()=>window.location.href="/contact"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Contact</button>
             </div>
           </div>
           <div>
@@ -161,6 +163,14 @@ function Layout({ children }) {
               <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Terms of Service</button>
               <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Refund Policy</button>
             </div>
+          </div>
+        </div>
+        <div className="border-b border-white/5 mb-8 pb-8 text-center">
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">Stay Updated</h4>
+          <p className="text-xs text-white/50 mb-4">Get the latest deals and news delivered to your inbox.</p>
+          <div className="flex max-w-sm mx-auto gap-2">
+            <input id="newsletter-email" type="email" placeholder="your@email.com" className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#0078d4]" />
+            <button onClick={function(){ var e=document.getElementById("newsletter-email"); if(e&&e.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e.value})}).then(function(r){return r.json()}).then(function(d){ e.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#0078d4] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#0062b1] transition border-none cursor-pointer">Subscribe</button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
@@ -210,6 +220,8 @@ export default function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
