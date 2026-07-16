@@ -1,14 +1,17 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 type Item = { slug: string; name: string; price: number; qty: number };
-type Ctx = { items: Item[]; add: (i:Omit<Item,'qty'>)=>void; remove: (s:string)=>void; updateQty: (slug:string, delta:number)=>void; total: number; count: number; toast: string };
+type Ctx = { items: Item[]; add: (i:Omit<Item,"qty">)=>void; remove: (s:string)=>void; updateQty: (slug:string, delta:number)=>void; total: number; count: number; toast: string };
 const C = createContext<Ctx>(null!);
 export function CartProvider({children}:{children:React.ReactNode}) {
-  const [items,set] = useState<Item[]>([]);
-  const [toast, setToast] = useState('');
-  const add = (item:Omit<Item,'qty'>) => {
+  const [items,set] = useState<Item[]>(() => {
+    try { var s = localStorage.getItem("ks_cart"); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
+  const [toast, setToast] = useState("");
+  useEffect(() => { try { localStorage.setItem("ks_cart", JSON.stringify(items)); } catch {} }, [items]);
+  const add = (item:Omit<Item,"qty">) => {
     set(p => { const e=p.find(x=>x.slug===item.slug); if(e) return p.map(x=>x.slug===item.slug?{...x,qty:x.qty+1}:x); return [...p,{...item,qty:1}]; });
-    setToast(item.name + ' added to Bag');
-    setTimeout(() => setToast(''), 2500);
+    setToast(item.name + " added to Bag");
+    setTimeout(() => setToast(""), 2500);
   };
   const remove = (slug:string) => set(p => p.filter(x=>x.slug!==slug));
   const updateQty = (slug:string, delta:number) => set(p => p.map(x=>x.slug===slug?{...x,qty:Math.max(0,x.qty+delta)}:x).filter(x=>x.qty>0));
