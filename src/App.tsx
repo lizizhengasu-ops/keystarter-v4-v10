@@ -14,6 +14,10 @@ import BlogPage from "./pages/Blog";
 import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
+import NotFound from "./pages/NotFound";
+import PricingPage from "./pages/Pricing";
+import FaqPage from "./pages/Faq";
+import ContactPage from "./pages/Contact";
 
 function MicrosoftLogo() {
   return (
@@ -90,7 +94,7 @@ function Layout({ children }) {
 </>
             ) : (
               <>
-                <Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
+                <Link to="/pricing" className="hover:text-[#0078d4] transition-colors">Pricing</Link><Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
                 <Link to="/b2b" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
                 <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
                <Link to="/support" className="hover:text-[#0078d4] transition-colors">Support</Link>
@@ -124,27 +128,61 @@ function Layout({ children }) {
       </main>
 
       <footer className="bg-[#161617] text-white py-16 border-t border-white/5">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
-            <div>
-              <span className="text-lg font-bold text-white">KeyStarter Partner Solutions</span>
-              <p className="text-xs text-[#86868b] mt-1">Reliable, secure, efficient B2B & B2C Microsoft authorized supply chain services.</p>
-            </div>
-            <div className="flex items-center space-x-4 text-white/50 text-xs">
-              <span>256-bit SSL Secured</span>
-              <span>PayPal, Stripe, Bank Wire</span>
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/5 mb-8">
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Products</h4>
+            <div className="space-y-2">
+              <button onClick={()=>window.location.href="/pricing"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Pricing</button>
+              <button onClick={()=>window.location.href="/#store"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Store</button>
+              <button onClick={()=>window.location.href="/b2b"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Enterprise / B2B</button>
             </div>
           </div>
-          <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
-            <p>&copy; 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.</p>
-            <div className="flex space-x-4">
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Disclaimer</button>
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Privacy Policy</button>
-              <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Licensing Terms</button>
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Support</h4>
+            <div className="space-y-2">
+              <button onClick={()=>window.location.href="/support"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Help Center</button>
+              <button onClick={()=>window.location.href="/#compare"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Compare</button>
+              <button onClick={()=>window.location.href="/#portal"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Fulfillment</button>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Company</h4>
+            <div className="space-y-2">
+              <button onClick={()=>window.location.href="/blog"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Blog</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">About</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Contact</button>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Legal</h4>
+            <div className="space-y-2">
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Privacy Policy</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Terms of Service</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Refund Policy</button>
             </div>
           </div>
         </div>
-      </footer>
+        <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
+          <div>
+            <span className="text-lg font-bold text-white">KeyStarter Partner Solutions</span>
+            <p className="text-xs text-[#86868b] mt-1">Reliable, secure, efficient B2B & B2C Microsoft authorized supply chain services.</p>
+          </div>
+          <div className="flex items-center space-x-4 text-white/50 text-xs">
+            <span>256-bit SSL Secured</span>
+            <span>PayPal, Stripe, Bank Wire</span>
+          </div>
+        </div>
+        <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
+          <p>&copy; 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.</p>
+          <div className="flex space-x-4">
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Disclaimer</button>
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Privacy Policy</button>
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Licensing Terms</button>
+          </div>
+        </div>
+      </div>
+    </footer>
 
       <div className="back-top" id="back-top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} role="button" aria-label="Back to top" tabIndex={0} onKeyDown={(e)=>e.key==="Enter"&&window.scrollTo({top:0,behavior:"smooth"})}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
@@ -169,6 +207,10 @@ export default function App() {
             <Route path="/b2b" element={<B2bPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </CartProvider>
