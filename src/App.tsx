@@ -20,6 +20,8 @@ import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
+import { I18nProvider } from "./I18nContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function MicrosoftLogo() {
   return (
@@ -108,6 +110,7 @@ function Layout({ children }) {
             <button onClick={()=>setSearchOpen(true)} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Search">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
+          <LanguageSwitcher />
               <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Account">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </button>
@@ -205,7 +208,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <Layout>
+        <I18nProvider>
+          <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/store" element={<StorePage />} />
@@ -225,6 +229,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
+        </I18nProvider>
       </CartProvider>
     </BrowserRouter>
   );
