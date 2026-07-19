@@ -48,7 +48,7 @@ export default function CartPage() {
             <div className="flex justify-between text-xs mb-3"><span>预估税费</span><span>${tax.toFixed(2)}</span></div>
             <div className="border-t border-[#e8e8ed] my-4 pt-4 flex justify-between text-lg font-bold"><span>合计</span><span>${(total + tax).toFixed(2)}</span></div>
             <p className="text-[10px] text-green-600 mb-4 text-center">付款后密钥将通过邮件立即发送</p>
-            <button className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3 rounded-xl transition cursor-pointer">去结算</button>
+                        <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));window.location.href="/checkout.html";}} className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3 rounded-xl transition cursor-pointer">去结算</button>
             <Link to="/store" className="block text-center py-2 text-xs text-[#0078d4] hover:underline mt-3">继续购物</Link>
           </div>
         </div>
