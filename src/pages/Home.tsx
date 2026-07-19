@@ -230,6 +230,7 @@ const [activeTab, setActiveTab] = useState('all');
   const [payMethod, setPayMethod] = useState(1);
 
   // Custom Toast State
+  const [testimonials, setTestimonials] = useState([]);
   const [toast, setToast] = useState({ visible: false, message: '', icon: '🚀' });
 
   // Helper smooth scrolling for single page navigation
@@ -345,6 +346,24 @@ const [activeTab, setActiveTab] = useState('all');
 const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
   );
+
+  useEffect(() => {
+    var pids = [13, 14, 19, 16, 22];
+    var all = [];
+    var loaded = 0;
+    pids.forEach(function(id) {
+      fetch('/wp-json/keystarter/v1/reviews/' + id)
+        .then(function(r) { return r.json(); })
+        .then(function(revs) {
+          all = all.concat(revs);
+          loaded++;
+          if (loaded === pids.length) {
+            all.sort(function() { return 0.5 - Math.random(); });
+            setTestimonials(all.slice(0, 3));
+          }
+        });
+    });
+  }, []);
 
   return (
     <div className="overflow-x-hidden bg-[#f5f5f7] text-[#1d1d1f] antialiased font-sans">
@@ -958,6 +977,27 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       </Portal>}
 
       {}
+
+          {testimonials.length > 0 && (
+          <section className="max-w-7xl mx-auto px-6 py-16">
+            <h2 className="text-2xl font-bold text-center mb-4">Why Our Customers Trust Us</h2>
+            <p className="text-sm text-[#86868b] text-center mb-10 max-w-xl mx-auto">Real reviews from verified buyers</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {testimonials.map(function(t, i) {
+                var stars = "";
+                for (var s = 0; s < 5; s++) stars += s < t.rating ? String.fromCharCode(9733) : String.fromCharCode(9734);
+                return (
+                  <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] shadow-sm">
+                    <div className="text-yellow-500 text-sm mb-3">{stars}</div>
+                    <div className="text-xs text-[#86868b] italic mb-3">{"\u201c"}{t.text}{"\u201d"}</div>
+                    <div className="text-xs font-semibold text-[#1d1d1f]">- {t.author}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+          )}
+
       {/* Global Interactive Notification Toast */}
       {toast.visible && <Portal>
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#1d1d1f] text-white text-xs font-medium px-5 py-3.5 rounded-full shadow-2xl flex items-center space-x-2.5 border border-white/10 transition-all duration-300">
