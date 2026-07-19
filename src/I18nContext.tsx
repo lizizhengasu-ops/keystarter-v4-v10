@@ -13,6 +13,9 @@
    es: () => fetch("/i18n/es.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
    fr: () => fetch("/i18n/fr.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
    de: () => fetch("/i18n/de.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
+  pt: () => fetch("/i18n/pt.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
+  it: () => fetch("/i18n/it.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
+  ru: () => fetch("/i18n/ru.json").then(r => r.ok ? r.json() : {}).catch(() => ({})),
  };
  
  type Ctx = {
@@ -42,7 +45,7 @@
      dict[key] || fallback || key;
  
    const setLang = (l: Lang) => setLangState(l);
-   const available: Lang[] = ["en", "ja"];
+   const available: Lang[] = ["en", "ja", "ko", "es", "fr", "de", "pt", "it", "ru"];
  
    return <C.Provider value={{ lang, t, setLang, available }}>{children}</C.Provider>;
  }

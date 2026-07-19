@@ -1,13 +1,19 @@
-// KeyStarter API service - fetches product data from WooCommerce
-const API_BASE = "/wp-json/ks/v1";
-
-export async function fetchProducts() {
-  const res = await fetch(API_BASE + "/products");
-  if (!res.ok) throw new Error("API error: " + res.status);
-  return await res.json();
-}
-
-export function getProductData(apiProducts, name) {
-  if (!apiProducts || apiProducts.length === 0) return null;
-  return apiProducts.find(p => p.name === name) || null;
-}
+ // KeyStarter API service - fetches product data with multi-language support
+ import { fetchProducts as fetchProductsMapped, fetchProduct } from "../data/mapProduct";
+ 
+ export { fetchProduct };
+ export type { SPAProduct };
+ 
+ export async function fetchProducts(lang = "en"): Promise<SPAProduct[]> {
+   return await fetchProductsMapped(lang, false);
+ }
+ 
+ export function getProductData(
+   apiProducts: SPAProduct[],
+   slug: string
+ ): SPAProduct | null {
+   if (!apiProducts || apiProducts.length === 0) return null;
+   return apiProducts.find(p => p.slug === slug) || null;
+ }
+ 
+ export { fetchProductsMapped };

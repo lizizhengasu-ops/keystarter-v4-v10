@@ -21,11 +21,13 @@ export default function CartFlyout({open,onClose}) {
             <p style={{fontSize:13,fontWeight:600,color:"#1d1d1f"}}>{x.name}</p>
             <p style={{fontSize:12,color:"#6e6e73"}}>Qty: {x.qty}</p>
           </div>
-          <p style={{fontSize:13,color:"#1d1d1f"}}>${x.price*x.qty}</p>
+          <p style={{fontSize:13,color:"#1d1d1f"}}>
+            {new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(x.price*x.qty)}
+          </p>
         </div>
       ))}
       <div style={{display:"flex",justifyContent:"space-between",fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:16}}>
-        <span>Subtotal</span><span>${cart.total}</span>
+        <span>Subtotal</span><span>{new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(cart.total)}</span>
       </div>
       <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:14,background:"#0071e3",color:"#fff",padding:"10px 18px",borderRadius:980,textDecoration:"none",textAlign:"center",marginBottom:8}}>Check Out</Link>
       <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:13,color:"#0071e3",textDecoration:"none",textAlign:"center"}}>View Cart</Link>

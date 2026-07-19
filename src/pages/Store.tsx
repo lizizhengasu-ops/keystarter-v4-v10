@@ -1,5 +1,9 @@
 import { useCart } from "../CartContext";
+import { useLanguage } from "../I18nContext";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../api/woocommerce";
+import type { SPAProduct } from "../api/woocommerce";
 
 const categories = [
   {name:"Windows 11 Pro", slug:"windows-11-pro", color:"#0078D4", items:["Single PC","2 PCs","Pro + Office Bundle","Pro + Office + Visio"]},
@@ -8,23 +12,33 @@ const categories = [
   {name:"Server and Tools", slug:"win-svr-2022", color:"#005A9E", items:["Server 2019","Server 2022","Exchange 2019","SQL Server 2019"]}
 ];
 
-const featured = [
-  {n:"Windows 11 Pro",p:14.99,s:"windows-11-pro",desc:"Latest OS, Copilot AI"},
-  {n:"Office 2021 Pro Plus",p:24.99,s:"office-2021-pro",desc:"Word, Excel, PowerPoint"},
-  {n:"Windows Server 2022",p:11.99,s:"win-svr-2022",desc:"Enterprise server"},
-  {n:"Office 2024 Pro Plus",p:8.99,s:"office-2024-pro",desc:"Latest suite release"},
-];
-
 export default function StorePage() {
-  const { addToCart } = useCart();
+  const { add } = useCart();
+  const { t, lang } = useLanguage();
+  const [products, setProducts] = useState<SPAProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError("");
+    fetchProducts(lang).then(data => {
+      if (!cancelled) { setProducts(data); setLoading(false); }
+    }).catch(err => {
+      if (!cancelled) { setError(err.message); setLoading(false); }
+    });
+    return () => { cancelled = true; };
+  }, [lang]);
+
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div className="bg-gradient-to-r from-[#0078D4] via-[#106EBE] to-[#005A9E] text-white px-6 sm:px-12 py-20 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">All Products</h1>
-        <p className="text-lg font-light max-w-2xl mx-auto">Microsoft authorized software. Genuine products guaranteed. Instant digital delivery.</p>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("store.title")}</h1>
+        <p className="text-lg font-light max-w-2xl mx-auto">{t("store.desc")}</p>
       </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-8">Categories</h2>
+        <h2 className="text-2xl font-bold mb-8">{t("store.categories")}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16">
           {categories.map((c,i)=>(
             <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] hover:shadow-lg transition-shadow">
@@ -41,22 +55,46 @@ export default function StorePage() {
             </div>
           ))}
         </div>
-        <h2 className="text-2xl font-bold mb-8">Featured</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {featured.map((x,i)=>(
-            <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
-              <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#0078D4]/10 to-[#005A9E]/10 flex items-center justify-center">
-                <span className="text-4xl font-bold text-[#0078D4]/30">{x.n[0]}</span>
+        <h2 className="text-2xl font-bold mb-8">{t("store.featured")}</h2>
+        
+        {loading && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[1,2,3,4].map(i => (
+              <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed]">
+                <div className="shimmer w-full h-[140px] rounded-xl mb-3" />
+                <div className="shimmer h-4 w-3/4 mb-2 rounded" />
+                <div className="shimmer h-3 w-1/2 mb-2 rounded" />
+                <div className="shimmer h-8 w-full rounded-xl" />
               </div>
-              <div className="text-[10px] text-[#86868b] font-semibold uppercase tracking-wider mb-1">Microsoft License</div>
-              <div className="text-sm font-bold mb-1">{x.n}</div>
-              <div className="text-xs text-[#86868b] mb-2">{x.desc}</div>
-              <div className="text-lg font-extrabold text-[#0078d4] mb-3">${x.p.toFixed(2)}</div>
-              <button onClick={()=>addToCart({slug:x.s,name:x.n,price:x.p})}
-                className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition">Add to Cart</button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+        
+        {error && <div className="text-red-500 text-center py-8">{t("store.load_error")}</div>}
+        
+        {!loading && !error && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {products.slice(0, 8).map((x,i) => (
+              <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
+                <Link to={`/product/${x.slug}`}>
+                  <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#0078D4]/10 to-[#005A9E]/10 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-[#0078D4]/30">{x.name[0]}</span>
+                  </div>
+                </Link>
+                <div className="text-[10px] text-[#86868b] font-semibold uppercase tracking-wider mb-1">Microsoft License</div>
+                <Link to={`/product/${x.slug}`}>
+                  <div className="text-sm font-bold mb-1">{x.name}</div>
+                </Link>
+                <div className="text-xs text-[#86868b] mb-2">{x.description?.substring(0, 50)}</div>
+                <div className="text-lg font-extrabold text-[#0078d4] mb-3">
+                  {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
+                </div>
+                <button onClick={()=>add({slug:x.slug,name:x.name,price:x.price})}
+                  className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
