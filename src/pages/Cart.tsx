@@ -38,17 +38,17 @@ export default function CartPage() {
                   <select value={it.qty} onChange={e=>updateQty(it.slug,Number(e.target.value))} className="p-1.5 border border-[#e8e8ed] rounded-lg text-xs bg-white">
                     {[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}
                   </select>
-                  <div className="text-sm font-bold w-16 text-right">${"${(it.price * it.qty).toFixed(2)}"}</div>
+                  <div className="text-sm font-bold w-16 text-right">${(it.price * it.qty).toFixed(2)}</div>
                 </div>
               </div>
             ))}
           </div>
           <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] h-fit">
             <h2 className="text-lg font-bold mb-4">{t("cart.order_summary")}</h2>
-            <div className="flex justify-between text-xs mb-3"><span>{t("cart.subtotal")}</span><span>${"${total.toFixed(2)}"}</span></div>
+            <div className="flex justify-between text-xs mb-3"><span>{t("cart.subtotal")}</span><span>${total.toFixed(2)}</span></div>
             <div className="flex justify-between text-xs mb-3 text-green-600"><span>{t("cart.shipping")}</span><span>{t("cart.free")}</span></div>
-            <div className="flex justify-between text-xs mb-3"><span>{t("cart.tax")}</span><span>${"${tax.toFixed(2)}"}</span></div>
-            <div className="border-t border-[#e8e8ed] my-4 pt-4 flex justify-between text-lg font-bold"><span>{t("cart.total")}</span><span>${"${(total + tax).toFixed(2)}"}</span></div>
+            <div className="flex justify-between text-xs mb-3"><span>{t("cart.tax")}</span><span>${tax.toFixed(2)}</span></div>
+            <div className="border-t border-[#e8e8ed] my-4 pt-4 flex justify-between text-lg font-bold"><span>{t("cart.total")}</span><span>${(total + tax).toFixed(2)}</span></div>
             <p className="text-[10px] text-green-600 mb-4 text-center">{t("cart.pay_hint")}</p>
             <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));window.location.href="/checkout.html";}} className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3 rounded-xl transition cursor-pointer">{t("cart.checkout")}</button>
             <Link to="/store" className="block text-center py-2 text-xs text-[#0078d4] hover:underline mt-3">{t("cart.continue")}</Link>

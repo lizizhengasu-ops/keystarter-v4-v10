@@ -1,54 +1,31 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useLanguage } from "../I18nContext";
 
 export default function BlogArticlePage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { t } = useLanguage();
+  const { slug } = useParams();
   const [article, setArticle] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     if (!slug) return;
-    fetch("https://keys-starter.com/wp-json/wp/v2/posts?slug=" + slug)
-      .then(r => r.json())
-      .then((data: any[]) => {
-        if (data.length > 0) setArticle(data[0]);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
- }, [slug]);
-  useEffect(() => { if (article) { document.title = article.title.rendered.replace(/<[^>]*>/g, '') + " | KeyStarter"; } }, [article]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#f5f5f7] pt-12 flex items-center justify-center">
-        <div className="animate-pulse text-sm text-[#86868b]">Loading article...</div>
-      </div>
-    );
-  }
-
-  if (!article) {
-    return (
-      <div className="min-h-screen bg-[#f5f5f7] pt-12">
-        <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-          <h1 className="text-2xl font-bold text-[#1d1d1f] mb-4">Article not found</h1>
-          <Link to="/blog" className="text-[#0078d4] text-sm hover:underline">Back to Blog</Link>
-        </div>
-      </div>
-    );
-  }
-
+    fetch("https://keys-starter.com/wp-json/wp/v2/posts?slug="+slug)
+      .then(r => r.json()).then((d:any[]) => { if (d.length>0) setArticle(d[0]); setLoading(false); }).catch(() => setLoading(false));
+  }, [slug]);
+  if (loading) return <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12"><div className="max-w-3xl mx-auto text-center py-20 text-[#86868b]">{t("blog.loading_article")}</div></div>;
+  if (!article) return (
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
+      <div className="max-w-3xl mx-auto text-center py-20"><div className="text-lg text-[#86868b] mb-4">{t("blog.not_found")}</div>
+      <Link to="/blog" className="text-sm text-[#0078d4] hover:underline">{t("blog.back")}</Link></div>
+    </div>
+  );
   return (
-    <div className="min-h-screen bg-[#f5f5f7] pt-12">
-      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <Link to="/blog" className="text-[#0078d4] text-xs font-medium hover:underline mb-6 inline-block">&larr; Back to Blog</Link>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#1d1d1f] mb-4"
-            dangerouslySetInnerHTML={{ __html: article.title.rendered }} />
-        <div className="text-xs text-[#86868b] mb-8">
-          {new Date(article.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-        </div>
-        <div className="prose prose-sm sm:prose-base max-w-none text-[#1d1d1f]"
-             dangerouslySetInnerHTML={{ __html: article.content.rendered }} />
-      </article>
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
+      <div className="max-w-3xl mx-auto">
+        <Link to="/blog" className="text-sm text-[#0078d4] hover:underline mb-6 inline-block">&larr; {t("blog.back")}</Link>
+        <h1 className="text-3xl font-bold mb-4" dangerouslySetInnerHTML={{__html: article.title.rendered}} />
+        <div className="text-sm text-[#1d1d1f] leading-relaxed" dangerouslySetInnerHTML={{__html: article.content.rendered}} />
+      </div>
     </div>
   );
 }

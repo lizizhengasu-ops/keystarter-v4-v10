@@ -1,42 +1,34 @@
-import { Link } from "react-router-dom";
+import { useLanguage } from "../I18nContext";
 
 const topics = [
-  {t:"Windows Activation Guide",d:"Windows 10/11 Pro digital license activation steps"},
-  {t:"Office Installation",d:"Office 2016-2024 Professional Plus install & activate"},
-  {t:"Server Setup",d:"Windows Server / SQL / Exchange deployment guide"},
-  {t:"Bundle Activation",d:"Multi-product bundle activation method"},
-  {t:"License Transfer",d:"Transfer licenses after changing devices"},
-  {t:"FAQ",d:"Activation error codes and solutions"},
+  {n:"Activation", d:"How to activate your Windows, Office, or Server license."},
+  {n:"Installation", d:"Step-by-step installation guides for all Microsoft products."},
+  {n:"Licensing", d:"Understanding digital licenses, retail vs OEM, and transfer policies."},
+  {n:"Account", d:"Managing your orders, keys, and account settings."},
+  {n:"Payments", d:"Payment methods, invoices, and billing questions."},
+  {n:"Refunds", d:"Our 30-day money-back guarantee and refund process."},
 ];
 
 export default function SupportPage() {
+  const { t } = useLanguage();
   return (
-    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
-      <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white px-6 py-20 text-center">
-        <h1 className="text-4xl font-bold mb-3">Tech Support</h1>
-        <p className="text-base font-light text-white/80 mb-8">Get help with activation, installation, and licensing.</p>
-        <div className="max-w-xl mx-auto">
-          <input type="text" placeholder="Search support topics..." className="w-full p-3.5 text-sm border-none rounded-xl outline-none text-[#1d1d1f]" />
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-bold mb-6">Popular Topics</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          {topics.map((t,i)=>(
-            <div key={i} className="v5-card-light bg-white rounded-2xl p-5 border border-[#e8e8ed] hover:shadow-md transition cursor-pointer">
-              <div className="text-sm font-bold mb-2">{t.t}</div>
-              <div className="text-xs text-[#86868b]">{t.d}</div>
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-2">{t("support.title")}</h1>
+        <p className="text-[#86868b] mb-10">{t("support.desc")}</p>
+        <h2 className="text-xl font-bold mb-4">{t("support.topics")}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+          {topics.map((tp,i) => (
+            <div key={i} className="bg-white rounded-2xl p-5 border border-[#e8e8ed]">
+              <h3 className="font-semibold text-sm mb-1">{tp.n}</h3>
+              <p className="text-xs text-[#86868b]">{tp.d}</p>
             </div>
           ))}
         </div>
-      </div>
-      <div className="bg-white border-t border-[#e8e8ed] py-8">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div>
-            <div className="text-base font-bold">Need More Help?</div>
-            <div className="text-xs text-[#86868b]">Email us at support@keystarter.com</div>
-          </div>
-          <Link to="/" className="bg-[#0078d4] hover:bg-[#0062b1] text-white px-6 py-2.5 text-sm font-semibold rounded-xl transition">Contact Us</Link>
+        <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
+          <h2 className="text-xl font-bold mb-2">{t("support.more")}</h2>
+          <p className="text-sm text-[#86868b] mb-4">{t("support.email")}</p>
+          <a href="mailto:support@keystarter.com" className="inline-block bg-[#0078d4] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#0062b1] transition">{t("support.contact")}</a>
         </div>
       </div>
     </div>
