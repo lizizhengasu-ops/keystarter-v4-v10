@@ -125,5 +125,11 @@
   "pricing.popular": "Most Popular",
   "pricing.get_started": "Get Started",
   "changelog.title": "Changelog",
-  "changelog.desc": "Track our progress and updates."
+  "changelog.desc": "Track our progress and updates.",
+  "hero.title": "Genuine Microsoft Software Solutions",
+  "hero.subtitle": "Genuine Licenses, Delivered Instantly.",
+  "hero.desc": "Authorized Microsoft software reseller. 10 core SKUs in stock, delivered within 10 minutes.",
+  "hero.cta": "Shop Licenses Now",
+  "hero.enterprise": "Enterprise Licensing →",
+  "hero.trust": "Your trusted partner for genuine Microsoft software licenses worldwide."
 }
