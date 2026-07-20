@@ -1,4 +1,4 @@
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 const solutions = [
   {n:"Volume Licensing", d:"Microsoft Enterprise Agreement and Open License programs for organizations of all sizes."},
@@ -8,7 +8,7 @@ const solutions = [
 ];
 
 export default function B2bPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div className="bg-gradient-to-r from-[#005A9E] to-[#1a1a2e] text-white px-6 sm:px-12 py-20 text-center">

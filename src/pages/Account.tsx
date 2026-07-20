@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 export default function AccountPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   const [mode, setMode] = useState("login");
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">

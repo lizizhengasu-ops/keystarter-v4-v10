@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 type Post = { id: number; title: { rendered: string }; excerpt: { rendered: string }; slug: string; date: string };
 
 export default function BlogPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

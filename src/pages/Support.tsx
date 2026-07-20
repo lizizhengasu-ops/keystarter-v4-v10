@@ -1,4 +1,4 @@
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 const topics = [
   {n:"Activation", d:"How to activate your Windows, Office, or Server license."},
@@ -10,7 +10,7 @@ const topics = [
 ];
 
 export default function SupportPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-4xl mx-auto">

@@ -1,10 +1,10 @@
 import { useCart } from "../CartContext";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
   const { items, remove, updateQty, total } = useCart();
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   const tax = total * 0.08;
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">

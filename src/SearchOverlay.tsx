@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { products } from "./data/products";
 import Portal from "./Portal";
+import { useTranslation } from "react-i18next";
 
 
 export default function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t } = useTranslation();
   const [q, setQ] = useState("");
   const inputRef = useRef(null);
   const results = q.length >= 1 ? products.filter(p => p.n.toLowerCase().includes(q.toLowerCase()) || p.d.toLowerCase().includes(q.toLowerCase())) : [];
@@ -51,7 +53,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86868b" strokeWidth="1.5" style={{flexShrink:0}}>
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <input ref={inputRef} autoFocus placeholder="Search KeyStarter.com" value={q} onChange={e => setQ(e.target.value)}
+          <input ref={inputRef} autoFocus placeholder={t("search.placeholder")} value={q} onChange={e => setQ(e.target.value)}
             style={{
               width: "100%", fontSize: 21, padding: "14px 14px", border: "none",
               background: "transparent", color: "#f5f5f7", outline: "none",
@@ -74,12 +76,12 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
           }}>
             {results.length === 0 ? (
               <div style={{padding:"24px 18px",textAlign:"center",color:"#6e6e73",fontSize:15}}>
-                No results found for "{q}"
+                {t("search.no_results")} "{q}"
               </div>
             ) : (
               <>
                 <div style={{padding:"12px 18px 4px",fontSize:11,fontWeight:600,color:"#6e6e73",textTransform:"uppercase",letterSpacing:".05em"}}>
-                  Products
+                  {t("search.products", "Products")}
                 </div>
                 {results.map((p,i) => (
                   
@@ -110,9 +112,9 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
             background: "#fff", borderRadius: 14, marginTop: 8, overflow: "hidden",
             boxShadow: "0 8px 30px rgba(0,0,0,0.2)", padding: "18px"
           }}>
-            <p style={{fontSize:11,fontWeight:600,color:"#6e6e73",textTransform:"uppercase",letterSpacing:".05em",marginBottom:12}}>Quick Links</p>
+            <p style={{fontSize:11,fontWeight:600,color:"#6e6e73",textTransform:"uppercase",letterSpacing:".05em",marginBottom:12}}>{t("search.quick_links")}</p>
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
-              {[{n:"Windows 11 Pro - ",s:"windows-11-pro"},{n:"Windows 10 Pro - ",s:"windows-10-pro"},{n:"Office 2021 Pro - ",s:"office-2021-pro"},{n:"Win Server 2022 - ",s:"win-svr-2022"},{n:"All Products",s:"store",a:"/store"}].map((l,i) => (
+              {[{n:"Windows 11 Pro - ",s:"windows-11-pro"},{n:"Windows 10 Pro - ",s:"windows-10-pro"},{n:"Office 2021 Pro - ",s:"office-2021-pro"},{n:"Win Server 2022 - ",s:"win-svr-2022"},{n:t("store.title"),s:"store",a:"/store"}].map((l,i) => (
                 <Link key={i} to={l.a||"/product/"+l.s} onClick={onClose} style={{display:"block",fontSize:15,fontWeight:400,color:"#0071e3",textDecoration:"none",padding:"6px 0",borderBottom:i<4?"1px solid #f0f0f2":"none",transition:"color 0.2s"}} onMouseEnter={e=>e.currentTarget.style.color="#0077ed"} onMouseLeave={e=>e.currentTarget.style.color="#0071e3"}>{l.n}</Link>
               ))}
             </div>

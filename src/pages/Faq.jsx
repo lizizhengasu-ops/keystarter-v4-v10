@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 const faqs = [
   {q:"How do I activate my license?", a:"Your license key will be emailed immediately after purchase. Follow the activation guide included in the email."},
@@ -12,7 +12,7 @@ const faqs = [
 ];
 
 export default function FaqPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(-1);
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">

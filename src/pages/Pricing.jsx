@@ -1,4 +1,4 @@
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 const plans = [
   {n:"Starter", p:"$0", d:"Perfect for getting started", popular:false, f:["Basic support","1 license","Email delivery"]},
@@ -7,7 +7,7 @@ const plans = [
 ];
 
 export default function PricingPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-5xl mx-auto">

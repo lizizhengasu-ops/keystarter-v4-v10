@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 export default function BlogArticlePage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   const { slug } = useParams();
   const [article, setArticle] = useState<any>(null);
   const [loading, setLoading] = useState(true);

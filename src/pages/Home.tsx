@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
+import { useTranslation } from 'react-i18next';
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
 // To eliminate any external CDN load latency or render flickering.
@@ -196,6 +197,7 @@ const PREMIUM_SKUS = [
 ];
 
 export default function App() {
+  const { t } = useTranslation();
   const [apiProducts, setApiProducts] = useState(null);
   useEffect(() => { fetchProducts().then(setApiProducts).catch(function(e){console.warn("API fetch failed:",e)}); }, []);
 const [activeTab, setActiveTab] = useState('all');
@@ -377,12 +379,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-green-300/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
-          <p className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mb-3">Genuine Microsoft Software Solutions</p>
+          <p className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mb-3">{t("hero.title")}</p>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#1d1d1f] mb-6 leading-tight">
-            Genuine software, never this easy.
+            {t('home.hero.headline')}
           </h1>
           <p className="text-lg sm:text-xl text-[#86868b] font-normal mb-8 max-w-2xl mx-auto leading-relaxed">
-            Microsoft authorized partner. All 10 core SKUs in stock, delivered securely within 10 minutes. Built for enterprise compliance audits and premium personal use.
+            {t('hero.desc')}
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 mb-16 sm:flex-row">
@@ -390,13 +392,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               onClick={() => scrollToSection('store')} 
               className="w-full sm:w-auto bg-[#0078d4] hover:bg-[#0062b1] text-white font-medium px-8 py-3 rounded-full transition shadow-lg shadow-blue-500/10 text-center"
             >
-              Buy Genuine License Now
+              {t('hero.cta')}
             </button>
             <button 
               onClick={() => scrollToSection('business')} 
               className="w-full sm:w-auto border border-[#d2d2d7] hover:bg-[#f5f5f7] text-[#1d1d1f] font-medium px-8 py-3 rounded-full transition text-center"
             >
-              Enterprise Volume Licensing <span className="ml-1 text-xs">{" > "}</span>
+              {t('hero.enterprise')} <span className="ml-1 text-xs">{" > "}</span>
             </button>
           </div>
 

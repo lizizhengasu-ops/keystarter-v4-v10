@@ -20,7 +20,6 @@ import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
-import { I18nProvider } from "./I18nContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 function MicrosoftLogo() {
@@ -208,7 +207,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <I18nProvider>
           <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -229,7 +227,6 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
-        </I18nProvider>
       </CartProvider>
     </BrowserRouter>
   );

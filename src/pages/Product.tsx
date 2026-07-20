@@ -1,7 +1,7 @@
 import {useParams, Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {useCart} from "../CartContext";
-import {useLanguage} from "../I18nContext";
+import {useTranslation} from "react-i18next";
 import {fetchProduct} from "../api/woocommerce";
 import type {SPAProduct} from "../api/woocommerce";
 
@@ -20,7 +20,7 @@ const features = [
 export default function ProductPage() {
   const {slug} = useParams();
   const cart = useCart();
-  const {t, lang} = useLanguage();
+  const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [selEdition, setSelEdition] = useState(1);
@@ -30,7 +30,7 @@ export default function ProductPage() {
     if (!slug) return;
     let cancelled = false;
     setLoading(true);
-    fetchProduct(slug, lang).then(p => {
+    fetchProduct(slug, i18n.language).then(p => {
       if (!cancelled) { setProduct(p); setLoading(false); }
     }).catch(() => {
       if (!cancelled) setLoading(false);

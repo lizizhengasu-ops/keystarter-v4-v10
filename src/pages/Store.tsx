@@ -1,5 +1,5 @@
 import { useCart } from "../CartContext";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/woocommerce";
@@ -14,7 +14,7 @@ const categories = [
 
 export default function StorePage() {
   const { add } = useCart();
-  const { t, lang } = useLanguage();
+  const { t, i18n } = useTranslation();
   const [products, setProducts] = useState<SPAProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -23,7 +23,7 @@ export default function StorePage() {
     let cancelled = false;
     setLoading(true);
     setError("");
-    fetchProducts(lang).then(data => {
+    fetchProducts(i18n.language).then(data => {
       if (!cancelled) { setProducts(data); setLoading(false); }
     }).catch(err => {
       if (!cancelled) { setError(err.message); setLoading(false); }

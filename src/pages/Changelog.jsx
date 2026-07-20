@@ -1,4 +1,4 @@
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 const versions = [
   {v:"4.0.0", d:"Multi-language support, Polylang integration, product translations"},
@@ -11,7 +11,7 @@ const versions = [
 ];
 
 export default function ChangelogPage() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-3xl mx-auto">

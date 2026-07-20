@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Portal from "./Portal";
+import { useTranslation } from "react-i18next";
 
 interface NavDrawerProps {
   open: boolean;
@@ -8,6 +9,7 @@ interface NavDrawerProps {
 }
 
 export default function NavDrawer({ open, onClose, isHomepage }: NavDrawerProps) {
+  const { t } = useTranslation();
   useEffect(() => {
     if (!open) return;
     const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -18,13 +20,13 @@ export default function NavDrawer({ open, onClose, isHomepage }: NavDrawerProps)
   if (!open) return null;
 
   const links = [
-    { label: "My Account", to: "/account" },
-    { label: "Store", to: "/#store" },
-    { label: isHomepage ? "Enterprise / B2B" : "Enterprise", to: isHomepage ? "/#business" : "/b2b" },
-    { label: "Compare", to: "/#compare" },
-    { label: isHomepage ? "Tech Support" : "Support", to: isHomepage ? "/#support" : "/support" },
-    ...(isHomepage ? [{ label: "Fulfillment Center", to: "/#portal" }] : []),
-    { label: "Blog", to: "/blog" },
+    { label: t("nav.account", "My Account"), to: "/account" },
+    { label: t("nav.store"), to: "/#store" },
+    { label: isHomepage ? t("nav.enterprise", "Enterprise / B2B") : t("nav.enterprise_short", "Enterprise"), to: isHomepage ? "/#business" : "/b2b" },
+    { label: t("nav.compare"), to: "/#compare" },
+    { label: isHomepage ? t("nav.support", "Tech Support") : t("nav.support_short", "Support"), to: isHomepage ? "/#support" : "/support" },
+    ...(isHomepage ? [{ label: t("nav.portal"), to: "/#portal" }] : []),
+    { label: t("nav.blog"), to: "/blog" },
   ];
 
   return (
@@ -33,8 +35,8 @@ export default function NavDrawer({ open, onClose, isHomepage }: NavDrawerProps)
       <div className="fixed inset-0 bg-black/30 transition-opacity" onClick={onClose} />
       <div className="fixed left-0 top-0 h-full w-72 bg-white shadow-xl">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#e8e8ed]">
-          <span className="text-sm font-semibold text-[#1d1d1f]">Menu</span>
-          <button onClick={onClose} className="text-[#86868b] hover:text-[#1d1d1f] transition-colors text-lg leading-none" aria-label="Close menu">X</button>
+          <span className="text-sm font-semibold text-[#1d1d1f]">{t("nav.menu", "Menu")}</span>
+          <button onClick={onClose} className="text-[#86868b] hover:text-[#1d1d1f] transition-colors text-lg leading-none" aria-label={t("nav.close_menu", "Close menu")}>X</button>
         </div>
         <nav className="px-3 py-3 space-y-0.5">
           {links.map((link) => (

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useLanguage } from "../I18nContext";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-[#f5f5f7] flex items-center justify-center px-6">
       <div className="text-center">
