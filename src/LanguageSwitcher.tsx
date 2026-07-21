@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 
 const LANG_NAMES: Record<string, string> = {
   en: "EN", ja: "\u65e5\u672c\u8a9e", ko: "\ud55c\uad6d\uc5b4",
-  es: "Espa\u00f1ol", fr: "Fran\u00e7ais", de: "Deutsch",
-  pt: "Portugu\u00eas", it: "Italiano", ru: "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+  es: "Espa\u00f1ol",
+  pt: "Portugu\u00eas"
 };
 
 export default function LanguageSwitcher() {
@@ -39,3 +39,4 @@ export default function LanguageSwitcher() {
     </div>
   );
 }
+

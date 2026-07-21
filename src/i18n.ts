@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
-    supportedLngs: ["en", "ja", "ko", "es", "fr", "de", "pt", "it", "ru"],
+    supportedLngs: ["en", "ja", "ko", "es", "pt"],
     detection: {
       order: ["localStorage", "navigator"],
       caches: ["localStorage"],
