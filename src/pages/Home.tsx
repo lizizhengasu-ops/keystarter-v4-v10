@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
+import { useCart } from '../CartContext';
 import { useTranslation } from 'react-i18next';
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
@@ -198,6 +199,7 @@ const PREMIUM_SKUS = [
 
 export default function App() {
   const { t } = useTranslation();
+  const cart = useCart();
   const [apiProducts, setApiProducts] = useState(null);
   useEffect(() => { fetchProducts().then(setApiProducts).catch(function(e){console.warn("API fetch failed:",e)}); }, []);
 const [activeTab, setActiveTab] = useState('all');
@@ -509,12 +511,20 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     )}
                   </div>
                   
-                  <button 
-                    onClick={() => openCheckoutDrawer(sku.title, sku.price)} 
-                    className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-1"
-                  >
-                    <span>{t('product.buy_now', 'Buy Now')}</span> <span className="text-[10px]">{" > "}</span>
-                  </button>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price})} 
+                      className="flex-1 border-2 border-[#0078d4] text-[#0078d4] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"
+                    >
+                      {t('product.add_to_cart', 'Add to Cart')}
+                    </button>
+                    <button 
+                      onClick={() => {cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price});window.location.href='/cart';}} 
+                      className="flex-1 bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition"
+                    >
+                      {t('product.buy_now', 'Buy Now')}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
