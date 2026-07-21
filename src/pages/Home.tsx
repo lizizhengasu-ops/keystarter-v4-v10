@@ -408,19 +408,19 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#f5f5f7]">
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">10 Min</span>
-              <span className="text-xs text-[#86868b] mt-1">🕒 Auto Lightning Delivery</span>
+              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.delivery")}</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">98.7%</span>
-              <span className="text-xs text-[#86868b] mt-1">⭐️ Customer Satisfaction Rate</span>
+              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.satisfaction")}</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">50K+</span>
-              <span className="text-xs text-[#86868b] mt-1">🛡️ Genuine Secure Activation</span>
+              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.activation")}</span>
             </div>
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">100%</span>
-              <span className="text-xs text-[#86868b] mt-1">✅ Official Online/Phone Verification</span>
+              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.verification")}</span>
             </div>
           </div>
         </div>
@@ -431,8 +431,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="store" className="py-20 bg-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">10 Premium Genuine Licenses</h2>
-            <p className="text-sm text-[#86868b]">Browse by category. Each card includes a genuine delivery guarantee for worry-free compliance.</p>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("store.section_title")}</h2>
+            <p className="text-sm text-[#86868b]">{t("store.section_desc")}</p>
           </div>
 
           {/* Filter Categories */}
@@ -697,14 +697,14 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📦</div>
-              <h4 className="text-base font-bold mb-2">Office Deployment & Installation Guide</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">How to completely remove unauthorized Office remnants and cleanly deploy Microsoft 365.</p>
+              <h4 className="text-base font-bold mb-2">{t("support.download_title")}</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.download_desc")}</p>
               <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0078d4] hover:underline">Go to Microsoft Activation Site{' > '}</a>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
-              <h4 className="text-base font-bold mb-2">Server & SQL Local Activation (Volume)</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">Resolve Server activation errors with official native ISO download verification.</p>
+              <h4 className="text-base font-bold mb-2">{t("support.server_title")}</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.server_desc")}</p>
               <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">Contact Online Support Expert &gt;</button>
             </div>
           </div>
@@ -720,7 +720,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   onClick={() => toggleFAQ(1)} 
                   className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
                 >
-                  <span>Q1: Why are your prices much lower than Microsoft official store? Are these genuine?</span>
+                  <span>{t("faq.q1.question")}</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 1 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 1 && (
@@ -771,9 +771,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="blog-preview" className="py-20 bg-[#f5f5f7]">
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Latest from Our Blog</span>
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
             <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Guides &amp; Resources</h2>
-            <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">Expert guides, comparisons, and tips for Microsoft software licensing.</p>
+            <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">{t("blog.section_desc")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {blogPosts.length === 0 ? (
@@ -800,9 +800,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="portal" className="py-20 bg-white border-t border-[#e8e8ed]">
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Client Fulfillment Center</span>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Microsoft Genuine One-Click Delivery Center</h2>
-            <p className="text-sm text-[#86868b] mt-2">Conveniently manage your purchased genuine license keys, copy securely with one click, and access official Microsoft downloads.</p>
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("portal.label")}</span>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("portal.title")}</h2>
+            <p className="text-sm text-[#86868b] mt-2">{t("portal.desc")}</p>
           </div>
 
           <div className="bg-[#f5f5f7] rounded-3xl p-6 sm:p-10 border border-[#e8e8ed] shadow-sm">
@@ -812,7 +812,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   U
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#1d1d1f]">Demo Account</h4>
+                  <h4 className="text-sm font-bold text-[#1d1d1f]">{t("portal.demo_name")}</h4>
                   <p className="text-xs text-[#86868b]">Email: trial-buyer@keystarter.com</p>
                 </div>
               </div>
@@ -823,7 +823,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               </div>
             </div>
 
-            <h4 className="text-xs font-bold text-[#86868b] uppercase tracking-wider mb-4">Your Available Licenses (My Genuine Licenses)</h4>
+            <h4 className="text-xs font-bold text-[#86868b] uppercase tracking-wider mb-4">{t("portal.licenses_title")}</h4>
             
             <div className="space-y-4">
               {purchasedLicenses.map((lic) => (
@@ -992,8 +992,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
           {testimonials.length > 0 && (
           <section className="max-w-7xl mx-auto px-6 py-16">
-            <h2 className="text-2xl font-bold text-center mb-4">Why Our Customers Trust Us</h2>
-            <p className="text-sm text-[#86868b] text-center mb-10 max-w-xl mx-auto">Real reviews from verified buyers</p>
+            <h2 className="text-2xl font-bold text-center mb-4">{t("testimonial.title")}</h2>
+            <p className="text-sm text-[#86868b] text-center mb-10 max-w-xl mx-auto">{t("testimonial.desc")}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {testimonials.map(function(t, i) {
                 var stars = "";
