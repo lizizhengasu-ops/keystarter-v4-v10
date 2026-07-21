@@ -328,28 +328,28 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     ))}
                   </ul>
                 </div>
-                <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <span className="text-xl font-bold text-[#ff6b35]">{chr(0x0024)}{sku.price}</span>
-                      <span className="text-xs text-[#86868b] line-through ml-2">{chr(0x0024)}{sku.originalPrice}</span>
-                      <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
-                    </div>
+               <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
+                  <div className="flex items-baseline justify-between mb-4">
+                   <div>
+                      <span className="text-2xl font-extrabold text-[#ff6b35]">{chr(0x0024)}{sku.price}</span>
+                      <span className="text-xs text-[#86868b] line-through ml-1.5">{chr(0x0024)}{sku.originalPrice}</span>
+                     <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
+                   </div>
+                 </div>
+                  <div className="flex gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: sku.price}); }}
+                      className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
+                      {t('product.add_to_cart', 'Add to Cart')}
+                    </button>
+                    <button onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: sku.price}); window.location.href='/cart'; }}
+                      className="flex-1 bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-semibold py-2.5 rounded-xl transition">
+                      {t('product.buy_now', 'Buy Now')}
+                    </button>
                   </div>
-                  <button onClick={(e) => { e.stopPropagation(); window.location.href="/product/"+sku.id; }}
-                    className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-bold py-2.5 rounded-lg transition">View Deal {chr(0x2192)}</button>
-                </div>
-              </div>
-            ))}
-                  </ul>
-                </div>
-                <button onClick={(e) => { e.stopPropagation(); window.location.href="/product/"+sku.id; }}
-                  className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-[11px] font-bold py-2 rounded-lg transition">
-                  {t("home.offer.view_deal")}
-                </button>
-              </div>
-            ))}
-          </div>
+               </div>
+             </div>
+           ))}
+         </div>
         </div>
       </section>
       )}
@@ -399,16 +399,17 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 onClick={() => window.location.href='/product/'+sku.id} 
                 className={`bg-white v5-card rounded-2xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"border-[#ff6b35]/30":"border-[#e8e8ed]"} p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow relative`}
               >
+                {SPECIAL_OFFER_IDS.includes(sku.id) && <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>}
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-green-50 text-green-600 rounded border border-green-200">
+                    <span className={`text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 text-orange-600 border-orange-200":"bg-green-50 text-green-600 border-green-200"}`}>
                       ⚡ {t('home.sku.'+sku.id.replace(/-/g,'')+'.tag', sku.tag)}
                     </span>
                     <span className="text-xs text-[#86868b]">{t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type)}</span>
                   </div>
                   
                   <div className="flex items-center space-x-3.5 mb-4">
-                    <div className="flex items-center justify-center w-12 h-12 bg-gray-50 rounded-xl border border-gray-100">
+                    <div className={`flex items-center justify-center w-12 h-12 rounded-xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 border-orange-100":"bg-gray-50 border-gray-100"}`}>
                       {sku.icon}
                     </div>
                     <div>
