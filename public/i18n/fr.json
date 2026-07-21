@@ -142,5 +142,7 @@
   "footer.rights_ext": "(c) 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.",
   "footer.email_placeholder": "your@email.com",
   "nav.account": "Account",
-  "nav.cart": "Cart"
+  "nav.cart": "Cart",
+  "home.hero.headline": "Your Trusted Source for Genuine Microsoft Software",
+  "product.buy_now": "Buy Now"
 }
