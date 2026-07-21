@@ -233,7 +233,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <span className="hidden sm:inline text-lg">🔥</span>
               <span className="font-semibold whitespace-nowrap">{t("home.offer.title")}</span>
               <span className="text-white/80">{t("home.offer.desc")}</span>
-              <button onClick={() => scrollToSection("store")} className="bg-white text-[#0078d4] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
+              <button onClick={() => scrollToSection("special-offer")} className="bg-white text-[#0078d4] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -296,9 +296,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </section>
 
-      {/* Special Offer Section */}
-      {specialOfferSkus.length > 0 && (
-      <section className="py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7]">
+     {/* Special Offer Section */}
+     {specialOfferSkus.length > 0 && (
+      <section id="special-offer" className="py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-8 text-center">
             <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
