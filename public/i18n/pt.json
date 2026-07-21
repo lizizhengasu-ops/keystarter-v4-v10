@@ -252,5 +252,8 @@
   "home.offer.title": "🔥 Special Offer",
   "home.offer.desc": "Save up to 40% on Microsoft licenses this month!",
   "home.offer.cta": "Shop Deals Now",
-  "home.offer.dismiss": "Close"
+  "home.offer.dismiss": "Close",
+  "home.offer.section_title": "Special Offers - Limited Time Deals",
+  "home.offer.section_desc": "Grab the best deals on premium Microsoft licenses before they expire",
+  "home.offer.view_deal": "View Deal"
 }

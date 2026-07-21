@@ -348,6 +348,8 @@ const [activeTab, setActiveTab] = useState('all');
     return { ...sku, price: live.price, originalPrice: live.regular_price };
   };
 
+const SPECIAL_OFFER_IDS = ['win-11-pro', 'm365-family', 'office-2026-pro', 'server-2025'];
+const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
   );
@@ -442,8 +444,54 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </section>
 
-      {}
-      {/* Store Section */}
+      {/* Special Offer Section */}
+      {specialOfferSkus.length > 0 && (
+      <section className="py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7]">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto mb-8 text-center">
+            <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f]">{t("home.offer.section_title")}</h2>
+            <p className="text-sm text-[#86868b] mt-1">{t("home.offer.section_desc")}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {specialOfferSkus.map((sku) => (
+              <div key={sku.id} onClick={() => window.location.href="/product/"+sku.id}
+                className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-5 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>
+                <div>
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 border border-gray-100">
+                      {sku.category === "windows" ? <WindowsIcon /> : sku.category === "office" ? <OfficeIcon /> : <DatabaseIcon />}
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-bold text-[#1d1d1f] truncate">{sku.title}</h3>
+                      <p className="text-[10px] text-[#86868b] truncate">{sku.subtitle}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-baseline gap-1.5 mb-3">
+                    <span className="text-xl font-extrabold text-[#ff6b35]">${sku.price}</span>
+                    <span className="text-[10px] text-[#86868b] line-through">${sku.originalPrice}</span>
+                  </div>
+                  <ul className="space-y-1 mb-3">
+                    {sku.features.slice(0, 2).map((feat, idx) => (
+                      <li key={idx} className="flex items-center gap-1.5 text-[10px] text-[#1d1d1f]/70">
+                        <span className="text-green-500">✓</span>
+                        <span className="truncate">{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button onClick={(e) => { e.stopPropagation(); window.location.href="/product/"+sku.id; }}
+                  className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-[11px] font-bold py-2 rounded-lg transition">
+                  {t("home.offer.view_deal")}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      )}
+
       <section id="store" className="py-20 bg-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">

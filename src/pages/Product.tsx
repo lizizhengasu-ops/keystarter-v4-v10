@@ -23,8 +23,8 @@ export default function ProductPage() {
     'win-11-pro': 'windows-11-pro', 'win-11-home': 'windows-11-home',
     'win-10-pro': 'windows-10-pro', 'm365-personal': 'm365-personal',
     'm365-family': 'm365-family', 'm365-business': 'm365-business-standard',
-    'office-2026-pro': 'office-2026', 'office-2026-home': 'office-2026-home',
-    'server-2025': 'server-2025', 'sql-2025': 'sql-server-2025',
+    'office-2026-pro': 'office-2026-professional-plus', 'office-2026-home': 'office-2026-home-student',
+    'server-2025': 'win-server-2025', 'sql-2025': 'sql-server-2025',
   };
   const wcSlug = slugMap[slug || ''] || slug;
 
