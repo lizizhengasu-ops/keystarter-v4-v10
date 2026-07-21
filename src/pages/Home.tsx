@@ -35,166 +35,102 @@ const DatabaseIcon = () => (
 
 const PREMIUM_SKUS = [
   {
-    id: 'win-11-pro',
+    id: 'windows-11-pro',
     category: 'windows',
-    title: 'Windows 11 Pro',
-    subtitle: 'For senior professionals, developers, and enterprises',
-    price: 19.99,
+    title: 'Windows 11 Pro OEM Key',
+    subtitle: 'OEM license - 1 PC, lifetime activation',
+    price: 18,
     originalPrice: 199.00,
-    tag: 'Instant Delivery',
-    type: 'Retail',
-    auditInfo: 'Supports SAM Audit',
+    tag: 'Special Price',
+    type: 'OEM',
+    auditInfo: 'Microsoft authorized OEM key',
     features: [
-      '100% Tied to Microsoft Account (MSA)',
-      'Unlimited device reinstalls & resets',
-      'Official ISO downloads & full updates'
+      'OEM license for 1 PC - lifetime activation',
+      'Microsoft account binding supported',
+      'Official ISO downloads & updates',
     ],
     icon: <WindowsIcon />
   },
   {
-    id: 'win-11-home',
+    id: 'windows-10-pro',
     category: 'windows',
-    title: 'Windows 11 Home',
-    subtitle: 'For home & personal daily use',
-    price: 14.99,
-    originalPrice: 139.00,
-    tag: 'Instant Delivery',
-    type: 'Retail',
-    features: [
-      'One activation, lifetime use',
-      'Seamless automatic security updates',
-      'Official anti-counterfeit verification'
-    ],
-    icon: <WindowsIcon colorClass="text-[#00a4ef]" />
-  },
-  {
-    id: 'win-10-pro',
-    category: 'windows',
-    title: 'Windows 10 Pro',
-    subtitle: 'Stable OS optimized for older hardware',
-    price: 16.99,
+    title: 'Windows 10 Pro OEM Key',
+    subtitle: 'OEM license - 1 PC, lifetime activation',
+    price: 18,
     originalPrice: 149.00,
-    tag: 'Instant Delivery',
-    type: 'Retail',
+    tag: 'Special Price',
+    type: 'OEM',
     features: [
-      'Classic stable system, supports hardware upgrades',
-      'Excellent legacy & industrial software compatibility',
-      'One-click upgrade to Windows 11 Pro'
+      'OEM license for 1 PC - lifetime activation',
+      'Stable and proven platform',
+      'Official ISO downloads & updates',
     ],
     icon: <WindowsIcon colorClass="text-[#7fba00]" />
   },
   {
-    id: 'm365-personal',
-    category: 'office',
-    title: 'Microsoft 365 Personal',
-    subtitle: 'Includes 1TB OneDrive cloud storage & all Office apps',
-    price: 29.99,
-    originalPrice: 69.99,
-    tag: 'Instant Delivery',
-    type: '1-Year Personal Subscription',
-    features: [
-      'Use on up to 5 devices simultaneously',
-      'Bind to Microsoft account, auto-renewal activation',
-      'Includes premium Word, Excel, PPT, Outlook'
-    ],
-    icon: <OfficeIcon />
-  },
-  {
-    id: 'm365-family',
-    category: 'office',
-    title: 'Microsoft 365 Family',
-    subtitle: 'Up to 6 family members, each with 1TB (6TB total)',
-    price: 39.99,
-    originalPrice: 99.99,
+    id: 'windows-11-home',
+    category: 'windows',
+    title: 'Windows 11 Home OEM Key',
+    subtitle: 'OEM license - 1 PC, home use',
+    price: 13,
+    originalPrice: 139.00,
     tag: 'Best Value',
-    type: '1-Year Family Subscription',
+    type: 'OEM',
     features: [
-      'Each member gets 1TB isolated cloud storage',
-      'Supports 6 independent Microsoft account bindings',
-      'Each member on up to 5 devices'
+      'OEM license for 1 PC - home use',
+      'Windows 11 modern UI & security',
+      'Seamless updates & support',
     ],
-    icon: <OfficeIcon />
+    icon: <WindowsIcon colorClass="text-[#00a4ef]" />
   },
   {
-    id: 'm365-business',
-    category: 'office',
-    title: 'M365 Business Standard',
-    subtitle: 'Cloud + local office suite for SMB compliance audits',
-    price: 49.99,
-    originalPrice: 150.00,
-    tag: 'Instant Delivery',
-    type: '1-Year Business Subscription',
+    id: 'windows-10-home',
+    category: 'windows',
+    title: 'Windows 10 Home OEM Key',
+    subtitle: 'OEM license - 1 PC, home use',
+    price: 13,
+    originalPrice: 139.00,
+    tag: 'Best Value',
+    type: 'OEM',
     features: [
-      'Custom business email domain (Exchange)',
-      'Includes Teams, SharePoint collaboration tools',
-      'Complete business compliance credentials'
+      'OEM license for 1 PC - home use',
+      'Reliable Windows 10 experience',
+      'Official updates & support',
     ],
-    icon: <OfficeIcon />
+    icon: <WindowsIcon colorClass="text-[#00a4ef]" />
   },
   {
-    id: 'office-2026-pro',
+    id: 'office-2019-pro-plus',
     category: 'office',
-    title: 'Office 2026 Professional Plus',
-    subtitle: 'Classic perpetual license, one-time purchase, lifetime use',
-    price: 34.99,
+    title: 'Office 2019 Professional Plus',
+    subtitle: '1 Device - lifetime license',
+    price: 48,
     originalPrice: 439.00,
     tag: 'Instant Delivery',
     type: 'Perpetual License',
     features: [
-      'No annual fee, supports reinstalls & hardware binding',
-      'Classic Access & Publisher full versions',
-      'Enterprise Compliance , full audit protection'
+      'Classic Office suite for 1 device',
+      'Word, Excel, PowerPoint, Outlook & more',
+      'Lifetime license, no subscription',
     ],
     icon: <OfficeIcon />
   },
   {
-    id: 'office-2026-home',
+    id: 'office-2021-pro-plus',
     category: 'office',
-    title: 'Office 2026 Home & Student',
-    subtitle: 'Official edition tailored for Mac or PC users',
-    price: 24.99,
-    originalPrice: 149.00,
+    title: 'Office 2021 Professional Plus',
+    subtitle: '1 Device - latest classic Office',
+    price: 58,
+    originalPrice: 439.00,
     tag: 'Instant Delivery',
     type: 'Perpetual License',
     features: [
-      'Bind to Microsoft account, no blocking risk',
-      'Supports Mac & Windows dual platform',
-      'Core 3-app suite, lightweight deployment'
+      'Latest Office classic suite for 1 PC',
+      'Word, Excel, PowerPoint, Outlook & more',
+      'Lifetime license, no subscription needed',
     ],
     icon: <OfficeIcon />
   },
-  {
-    id: 'server-2025',
-    category: 'server',
-    title: 'Windows Server 2025 Standard',
-    subtitle: 'Includes 16 Core license, optimized for next-gen hardware',
-    price: 89.99,
-    originalPrice: 1069.00,
-    tag: 'Instant Delivery',
-    type: 'Volume License',
-    features: [
-      'Supports on-premise virtualization & cloud deployment',
-      'High-level security & multi-layer compliance protection',
-      'Meets enterprise IT audit requirements'
-    ],
-    icon: <DatabaseIcon />
-  },
-  {
-    id: 'sql-2025',
-    category: 'server',
-    title: 'SQL Server 25 Standard',
-    subtitle: 'High-concurrency, high-performance official DB license',
-    price: 149.99,
-    originalPrice: 1899.00,
-    tag: 'Enterprise Choice',
-    type: 'SQL Server',
-    features: [
-      'Includes 5 CAL access licenses',
-      'Permanent activation status, full lifecycle support',
-      'Official offline ISO verification activation'
-    ],
-    icon: <DatabaseIcon />
-  }
 ];
 
 export default function App() {
@@ -348,7 +284,7 @@ const [activeTab, setActiveTab] = useState('all');
     return { ...sku, price: live.price, originalPrice: live.regular_price };
   };
 
-const SPECIAL_OFFER_IDS = ['win-11-pro', 'm365-family', 'office-2026-pro', 'server-2025'];
+const SPECIAL_OFFER_IDS = ['windows-11-pro', 'windows-10-pro'];
 const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
