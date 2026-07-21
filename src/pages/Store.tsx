@@ -28,8 +28,8 @@ export default function StorePage() {
     }).catch(err => {
       if (!cancelled) { setError(err.message); setLoading(false); }
     });
-    return () => { cancelled = true; };
-  }, [lang]);
+   return () => { cancelled = true; };
+   }, [i18n.language]);
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
