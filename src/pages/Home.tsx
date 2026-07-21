@@ -547,7 +547,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 Enterprise B2B Compliance
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6 mb-6 leading-tight">
-                Enterprise Compliance & SAM Audit Support
+                Enterprise Compliance & {t("home.compare.audit")}
               </h2>
               <p className="text-sm text-[#86868b] leading-relaxed mb-8">
                 When facing a Microsoft SAM Audit, opaque procurement chains put enterprises at risk. We provide Volume Licensing certificates and genuine keys for 100% compliance at low cost, avoiding legal penalties.
@@ -558,7 +558,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <div className="text-[#0078d4] text-xl pt-0.5">🛡️</div>
                   <div>
                     <h4  className="text-sm font-semibold">100% Official Compliance Verified</h4>
-                    <p className="text-xs text-[#86868b] mt-1">Fully compliant with enterprise requirements, includes proper procurement contracts and passes local software audits worldwide.</p>
+                    <p className="text-xs text-[#86868b] mt-1">{t("home.compare.enterprise_desc")}</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
@@ -573,18 +573,18 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
             {/* B2B Interactive Intake Form */}
             <div className="bg-white text-[#1d1d1f] p-8 rounded-2xl border border-[#e8e8ed] shadow-2xl relative">
-              <h3 className="text-xl font-bold mb-2">Get Free Compliance Consultation</h3>
-              <p className="text-xs text-[#86868b] mb-6">Our experts provide one-on-one consultation with a cost-effective quote within 30 minutes.</p>
+              <h3 className="text-xl font-bold mb-2">{t("home.b2b.contact_title")}</h3>
+              <p className="text-xs text-[#86868b] mb-6">{t("home.b2b.quote")}</p>
               
               <form onSubmit={handleB2BSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Company / Organization Name</label>
+                  <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.company")}</label>
                   <input type="text" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Estimated Licenses Needed</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.employees")}</label>
                     <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
                       <option>5 - 20 Units</option>
                       <option>21 - 50 Units</option>
@@ -593,23 +593,23 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Primary Product Needs</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.needs")}</label>
                     <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
-                      <option>Windows 11 Series</option>
-                      <option>Microsoft 365 Business</option>
-                      <option>Windows Server / SQL</option>
-                      <option>Full Compliance Package</option>
+                      <option>{t("home.b2b.windows")}</option>
+                      <option>{t("home.b2b.m365")}</option>
+                      <option>{t("home.b2b.server")}</option>
+                      <option>{t("home.b2b.compliance")}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Contact Name</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.contact_name")}</label>
                     <input type="text" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">Phone / Email</label>
+                    <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.phone")}</label>
                     <input type="text" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
                   </div>
                 </div>
@@ -632,8 +632,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="compare" className="py-20 bg-white">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
-            <p className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Comparison Matrix</p>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Which License Model Fits Your Team?</h2>
+            <p className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("home.compare.title")}</p>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.compare.subtitle")}</h2>
             <p className="text-sm text-[#86868b] mt-3">Compare editions to find the most cost-effective option.</p>
           </div>
 
@@ -641,27 +641,27 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <table className="w-full text-left border-collapse bg-white">
               <thead>
                 <tr className="bg-[#f5f5f7] border-b border-[#e8e8ed]">
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Comparison Dimension</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Personal & Studio (Retail)</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">SMB Choice (CSP/ESD)</th>
-                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">Enterprise & Server (Volume)</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">{t("home.compare.dimension")}</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">{t("home.compare.retail")}</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">{t("home.compare.smb")}</th>
+                  <th className="p-6 text-sm font-semibold text-[#1d1d1f] w-1/4">{t("home.compare.enterprise")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f5f5f7] text-xs text-[#1d1d1f]/80">
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">Key Features</td>
-                  <td className="p-6">Lowest price, Microsoft account binding, per-machine license.</td>
-                  <td className="p-6">Easy management, supports company email/domain binding.</td>
-                  <td className="p-6">One key, multiple activations, supports offline LAN activation.</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">{t("home.compare.features")}</td>
+                  <td className="p-6">{t("home.compare.lowest_price")}</td>
+                  <td className="p-6">{t("home.compare.retail_desc")}</td>
+                  <td className="p-6">{t("home.compare.smb_desc")}</td>
                 </tr>
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">License Ownership</td>
-                  <td className="p-6">Personal / Permanent account ownership</td>
-                  <td className="p-6">Centralized management / Reassignable</td>
-                  <td className="p-6">Corporate ownership / Full compliance documentation</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">{t("home.compare.ownership")}</td>
+                  <td className="p-6">{t("home.compare.retail_ownership")}</td>
+                  <td className="p-6">{t("home.compare.smb_ownership")}</td>
+                  <td className="p-6">{t("home.compare.enterprise_ownership")}</td>
                 </tr>
                 <tr>
-                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">Reinstall & Reset Support</td>
+                  <td className="p-6 font-semibold text-[#1d1d1f] text-sm">{t("home.compare.reinstall")}</td>
                   <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unlimited)</td>
                   <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unbind anytime)</td>
                   <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Silent auto-reactivation)</td>
@@ -683,16 +683,16 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="support" className="py-20 bg-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Help & Guides</span>
-            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Full Technical Support Center</h2>
-            <p className="text-sm text-[#86868b] mt-3">Self-service activation guides. We commit to full post-purchase deployment support.</p>
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("home.support.help_guides")}</span>
+            <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.support.tech_center")}</h2>
+            <p className="text-sm text-[#86868b] mt-3">{t("home.b2b.self_service")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">🔑</div>
-              <h4 className="text-base font-bold mb-2">Activation FAQ</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">How to enter your Retail key and complete cloud binding with your Microsoft account.</p>
+              <h4 className="text-base font-bold mb-2">{t("home.support.activation_faq")}</h4>
+              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("home.support.activation_guide")}</p>
               <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#0078d4] hover:underline focus:outline-none text-left">Go to User Portal{' > '}</button>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
@@ -705,7 +705,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="text-3xl mb-4">📡</div>
               <h4 className="text-base font-bold mb-2">{t("support.server_title")}</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.server_desc")}</p>
-              <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">Contact Online Support Expert &gt;</button>
+              <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">{t("home.support.contact_expert")} &gt;</button>
             </div>
           </div>
 
@@ -772,7 +772,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
-            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">Guides &amp; Resources</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.blog.guides_resources")}</h2>
             <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">{t("blog.section_desc")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -783,7 +783,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="p-5">
                   <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#0078d4] transition-colors mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                   <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-                  <span className="text-xs text-[#0078d4] font-medium">Read more &rarr;</span>
+                  <span className="text-xs text-[#0078d4] font-medium">{t("home.blog.read_more")}</span>
                 </div>
               </a>
             ))}
@@ -919,7 +919,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <form onSubmit={handlePurchase} className="flex-1 overflow-y-auto p-6 space-y-6">
                 
                 <div className="bg-[#f5f5f7] p-4 rounded-xl border border-[#e8e8ed]">
-                  <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Selected Product:</span>
+                  <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">{t("home.drawer.selected")}</span>
                   <h4 className="text-base font-bold mt-1 text-[#1d1d1f]">{checkoutProduct.title}</h4>
                   <div className="flex items-baseline justify-between mt-2">
                     <span className="text-xl font-bold text-[#0078d4]">${checkoutProduct.price}</span>
@@ -928,7 +928,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">Your Email (required for instant delivery):</label>
+                  <label className="block text-xs font-semibold text-[#1d1d1f]">{t("home.drawer.email_label")}</label>
                   <input 
                     type="email" 
                     required 
@@ -942,7 +942,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
                 {/* Simulated Payment select */}
                 <div className="space-y-3">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">Select Payment Method:</label>
+                  <label className="block text-xs font-semibold text-[#1d1d1f]">{t("home.drawer.payment_label")}</label>
                   <div className="grid grid-cols-2 gap-3">
                     <div 
                       onClick={() => setPayMethod(1)} 
@@ -980,7 +980,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   >
                     <span>💳 Complete Simulated Payment</span>
                   </button>
-                  <p className="text-[10px] text-center text-gray-400 mt-2">Click to auto-dispatch the license key instantly!</p>
+                  <p className="text-[10px] text-center text-gray-400 mt-2">{t("home.drawer.payment_click")}</p>
                 </div>
               </form>
             </div>
