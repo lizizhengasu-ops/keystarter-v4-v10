@@ -3,6 +3,7 @@ import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
 import { useCart } from '../CartContext';
 import { useTranslation } from 'react-i18next';
+import { TESTIMONIALS } from '../data/testimonials';
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
 // To eliminate any external CDN load latency or render flickering.
@@ -292,6 +293,33 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">100%</span>
               <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.verification")}</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Carousel */}
+      <section id="testimonials" className="py-12 bg-white border-b border-[#f5f5f7] overflow-hidden">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase">Why Our Customers Trust Us</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Real reviews from verified buyers</h2>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="flex animate-scroll gap-4 px-4" style={{width:"max-content"}}>
+            {[...TESTIMONIALS,...TESTIMONIALS].map((t,i) => (
+              <div key={i} className="flex-shrink-0 w-[300px] sm:w-[340px] bg-[#f5f5f7] rounded-2xl p-5 border border-[#e8e8ed]">
+                <div className="text-yellow-500 text-sm mb-2">
+                  {[...Array(5)].map((_,s) => (
+                    <span key={s} className={s < t.stars ? "text-yellow-500" : "text-gray-300"}>
+                      {s < t.stars ? String.fromCharCode(9733) : String.fromCharCode(9734)}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-[#1d1d1f]/80 leading-relaxed mb-3 italic">&ldquo;{t.text}&rdquo;</p>
+                <p className="text-[11px] font-semibold text-[#1d1d1f]">- {t.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

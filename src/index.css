@@ -47,3 +47,7 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 .back-top.visible { opacity:1; visibility:visible; }
 .back-top:hover { background:#000; }
 @media(max-width:768px){ .nav-item .nav-dropdown { display:none!important; } }
+
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.animate-scroll { animation: scroll 60s linear infinite; }
+.animate-scroll:hover { animation-play-state: paused; }
