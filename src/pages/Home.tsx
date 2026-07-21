@@ -34,103 +34,19 @@ const DatabaseIcon = () => (
 );
 
 const PREMIUM_SKUS = [
-  {
-    id: 'windows-11-pro',
-    category: 'windows',
-    title: 'Windows 11 Pro OEM Key',
-    subtitle: 'OEM license - 1 PC, lifetime activation',
-    price: 18,
-    originalPrice: 199.00,
-    tag: 'Special Price',
-    type: 'OEM',
-    auditInfo: 'Microsoft authorized OEM key',
-    features: [
-      'OEM license for 1 PC - lifetime activation',
-      'Microsoft account binding supported',
-      'Official ISO downloads & updates',
-    ],
-    icon: <WindowsIcon />
-  },
-  {
-    id: 'windows-10-pro',
-    category: 'windows',
-    title: 'Windows 10 Pro OEM Key',
-    subtitle: 'OEM license - 1 PC, lifetime activation',
-    price: 18,
-    originalPrice: 149.00,
-    tag: 'Special Price',
-    type: 'OEM',
-    features: [
-      'OEM license for 1 PC - lifetime activation',
-      'Stable and proven platform',
-      'Official ISO downloads & updates',
-    ],
-    icon: <WindowsIcon colorClass="text-[#7fba00]" />
-  },
-  {
-    id: 'windows-11-home',
-    category: 'windows',
-    title: 'Windows 11 Home OEM Key',
-    subtitle: 'OEM license - 1 PC, home use',
-    price: 13,
-    originalPrice: 139.00,
-    tag: 'Best Value',
-    type: 'OEM',
-    features: [
-      'OEM license for 1 PC - home use',
-      'Windows 11 modern UI & security',
-      'Seamless updates & support',
-    ],
-    icon: <WindowsIcon colorClass="text-[#00a4ef]" />
-  },
-  {
-    id: 'windows-10-home',
-    category: 'windows',
-    title: 'Windows 10 Home OEM Key',
-    subtitle: 'OEM license - 1 PC, home use',
-    price: 13,
-    originalPrice: 139.00,
-    tag: 'Best Value',
-    type: 'OEM',
-    features: [
-      'OEM license for 1 PC - home use',
-      'Reliable Windows 10 experience',
-      'Official updates & support',
-    ],
-    icon: <WindowsIcon colorClass="text-[#00a4ef]" />
-  },
-  {
-    id: 'office-2019-pro-plus',
-    category: 'office',
-    title: 'Office 2019 Professional Plus',
-    subtitle: '1 Device - lifetime license',
-    price: 48,
-    originalPrice: 439.00,
-    tag: 'Instant Delivery',
-    type: 'Perpetual License',
-    features: [
-      'Classic Office suite for 1 device',
-      'Word, Excel, PowerPoint, Outlook & more',
-      'Lifetime license, no subscription',
-    ],
-    icon: <OfficeIcon />
-  },
-  {
-    id: 'office-2021-pro-plus',
-    category: 'office',
-    title: 'Office 2021 Professional Plus',
-    subtitle: '1 Device - latest classic Office',
-    price: 58,
-    originalPrice: 439.00,
-    tag: 'Instant Delivery',
-    type: 'Perpetual License',
-    features: [
-      'Latest Office classic suite for 1 PC',
-      'Word, Excel, PowerPoint, Outlook & more',
-      'Lifetime license, no subscription needed',
-    ],
-    icon: <OfficeIcon />
-  },
+  {id:'windows-11-pro-official',category:'windows',title:'Windows 11 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:199.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon />},
+  {id:'windows-10-pro-official',category:'windows',title:'Windows 10 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:149.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
+  {id:'windows-11-home-official',category:'windows',title:'Windows 11 Home OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'windows-10-home-official',category:'windows',title:'Windows 10 Home OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'windows-11-pro',category:'windows',title:'Windows 11 Pro OEM Key',subtitle:'Special price - email delivery',price:18,originalPrice:199.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - lifetime activation','Email delivery','Official ISO downloads & updates'],icon:<WindowsIcon />},
+  {id:'windows-10-pro',category:'windows',title:'Windows 10 Pro OEM Key',subtitle:'Special price - email delivery',price:18,originalPrice:149.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - lifetime activation','Email delivery','Official ISO downloads & updates'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
+  {id:'windows-11-home',category:'windows',title:'Windows 11 Home OEM Key',subtitle:'Special price - email delivery',price:13,originalPrice:139.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - home use','Email delivery','Seamless updates & support'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'windows-10-home',category:'windows',title:'Windows 10 Home OEM Key',subtitle:'Special price - email delivery',price:13,originalPrice:139.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - home use','Email delivery','Official updates & support'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'office-2019-pro-plus',category:'office',title:'Office 2019 Professional Plus',subtitle:'1 Device - lifetime license',price:48,originalPrice:439.00,tag:'Special Price',type:'Perpetual License',features:['Classic Office suite for 1 device','Word,Excel,PowerPoint,Outlook & more','Lifetime license, no subscription'],icon:<OfficeIcon />},
+  {id:'office-2021-pro-plus',category:'office',title:'Office 2021 Professional Plus',subtitle:'1 Device - latest classic Office',price:58,originalPrice:439.00,tag:'Special Price',type:'Perpetual License',features:['Latest Office classic suite for 1 PC','Word,Excel,PowerPoint,Outlook & more','Lifetime license, no subscription'],icon:<OfficeIcon />},
+  {id:'win-11-iot-2024-entry',category:'server',title:'Win 11 IoT Ent LTSC 2024 Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2024 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
+  {id:'win-10-iot-2021-entry',category:'server',title:'Win 10 IoT Ent 2021 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2021 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
+  {id:'win-10-iot-2019-entry',category:'server',title:'Win 10 IoT Ent 2019 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2019 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
 ];
 
 export default function App() {
@@ -284,7 +200,7 @@ const [activeTab, setActiveTab] = useState('all');
     return { ...sku, price: live.price, originalPrice: live.regular_price };
   };
 
-const SPECIAL_OFFER_IDS = ['windows-11-pro', 'windows-10-pro'];
+const SPECIAL_OFFER_IDS = ['windows-11-pro','windows-10-pro','windows-11-home','windows-10-home','office-2019-pro-plus','office-2021-pro-plus'];
 const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
@@ -442,25 +358,25 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 onClick={() => setActiveTab('all')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'all' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                All Products (10)
+                All Products (13)
               </button>
               <button 
                 onClick={() => setActiveTab('windows')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'windows' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                Windows (3)
+                Windows (8)
               </button>
               <button 
                 onClick={() => setActiveTab('office')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'office' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                Office (5)
+                Office (2)
               </button>
               <button 
                 onClick={() => setActiveTab('server')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'server' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                Server / SQL (2)
+                Server / SQL (3)
               </button>
             </div>
           </div>
