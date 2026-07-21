@@ -37,4 +37,10 @@ export const products = [
    specs:{version:"Svr2019 + Office 2021",platform:"Server + PC",lang:"English",activation:"Digital License",type:"Bundle",support:"Lifetime"}},
   {slug:"office-visio-bundle", n:"Office 2021 + Visio 2021 Bundle", p:34.09, c:"#D83B01", d:"Professional bundle. Office 2021 Pro Plus + Visio 2021 Professional.",
    specs:{version:"Office + Visio 2021",platform:"Windows PC",lang:"English",activation:"Digital License",type:"Bundle",support:"Lifetime"}}
+,
+  {slug:"windows-11-home", n:"Windows 11 Home", p:14.99, c:"#00a4ef", d:"Genuine Windows 11 Home", specs:{version:"Windows 11 Home",platform:"PC / 64-bit",lang:"Multi-language",activation:"Digital License",type:"Retail / OEM",support:"Lifetime"}},
+  {slug:"m365-business-standard", n:"Microsoft 365 Business Standard", p:49.99, c:"#D83B01", d:"Genuine Microsoft 365 Business Standard", specs:{version:"Microsoft 365 Business Standard",platform:"PC / 64-bit",lang:"Multi-language",activation:"Digital License",type:"Retail / OEM",support:"Lifetime"}},
+  {slug:"office-2026-home", n:"Office 2026 Home & Student", p:24.99, c:"#D83B01", d:"Genuine Office 2026 Home & Student", specs:{version:"Office 2026 Home & Student",platform:"PC / 64-bit",lang:"Multi-language",activation:"Digital License",type:"Retail / OEM",support:"Lifetime"}},
+  {slug:"win-server-2025", n:"Windows Server 2025 Standard", p:89.99, c:"#005A9E", d:"Genuine Windows Server 2025 Standard", specs:{version:"Windows Server 2025 Standard",platform:"PC / 64-bit",lang:"Multi-language",activation:"Digital License",type:"Retail / OEM",support:"Lifetime"}},
+  {slug:"sql-server-2025", n:"SQL Server 2025 Standard", p:149.99, c:"#CC2927", d:"Genuine SQL Server 2025 Standard", specs:{version:"SQL Server 2025 Standard",platform:"PC / 64-bit",lang:"Multi-language",activation:"Digital License",type:"Retail / OEM",support:"Lifetime"}}
 ];
