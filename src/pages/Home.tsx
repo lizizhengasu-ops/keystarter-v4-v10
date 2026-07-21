@@ -205,6 +205,7 @@ export default function App() {
 const [activeTab, setActiveTab] = useState('all');
  const [openFaqId, setOpenFaqId] = useState(null);
  const [blogPosts, setBlogPosts] = useState([]);
+  const [showOffer, setShowOffer] = useState(true);
   useEffect(() => { fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=3").then(r=>r.json()).then(setBlogPosts).catch(()=>{}); }, []);
   
   // Simulated Licenses purchased in this session
@@ -371,6 +372,21 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
   return (
     <div className="overflow-x-hidden bg-[#f5f5f7] text-[#1d1d1f] antialiased font-sans">
+      {showOffer && (
+        <div className="relative bg-gradient-to-r from-[#0078d4] to-[#005a9e] text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3 text-sm">
+              <span className="hidden sm:inline text-lg">🔥</span>
+              <span className="font-semibold whitespace-nowrap">{t("home.offer.title")}</span>
+              <span className="text-white/80">{t("home.offer.desc")}</span>
+              <button onClick={() => scrollToSection("store")} className="bg-white text-[#0078d4] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
+            </div>
+            <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      )}
       
       {/* Navigation Bar */}
 
@@ -470,7 +486,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             {filteredSkus.map((sku) => (
               <div 
                 key={sku.id} 
-                className="bg-white v5-card rounded-2xl border border-[#e8e8ed] p-6 flex flex-col justify-between"
+                onClick={() => window.location.href='/product/'+sku.id} 
+                className="bg-white v5-card rounded-2xl border border-[#e8e8ed] p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -513,13 +530,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   
                   <div className="flex gap-2">
                     <button 
-                      onClick={() => cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price})} 
+                      onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price}); }} 
                       className="flex-1 border-2 border-[#0078d4] text-[#0078d4] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
                     <button 
-                      onClick={() => {cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price});window.location.href='/cart';}} 
+                      onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price});window.location.href='/cart';}} 
                       className="flex-1 bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.buy_now', 'Buy Now')}

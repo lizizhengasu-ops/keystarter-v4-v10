@@ -248,5 +248,9 @@
   "home.drawer.payment_label": "支払い方法を選択してください:",
   "home.drawer.email_hint": "このメールを使用して自動配信アカウントを登録し、いつでもキーを取得できるようにします。",
   "home.drawer.complete_payment": "模擬支払いを完了する",
-  "home.drawer.payment_click": "クリックするとライセンス キーが即座に自動送信されます。"
+  "home.drawer.payment_click": "クリックするとライセンス キーが即座に自動送信されます。",
+  "home.offer.title": "🔥 Special Offer",
+  "home.offer.desc": "Save up to 40% on Microsoft licenses this month!",
+  "home.offer.cta": "Shop Deals Now",
+  "home.offer.dismiss": "Close"
 }

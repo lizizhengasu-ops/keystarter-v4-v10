@@ -248,5 +248,9 @@
   "home.drawer.payment_label": "결제 수단 선택: |||| 언제든지 키 검색을 위해 이 이메일에 자동 배달 계정을 등록합니다.",
   "home.drawer.email_hint": "모의 결제를 완료하세요.",
   "home.drawer.complete_payment": "클릭하면 라이선스 키가 즉시 자동 발송됩니다!",
-  "home.drawer.payment_click": "라이센스 키를 즉시 자동 발송하려면 클릭하세요!"
+  "home.drawer.payment_click": "라이센스 키를 즉시 자동 발송하려면 클릭하세요!",
+  "home.offer.title": "🔥 Special Offer",
+  "home.offer.desc": "Save up to 40% on Microsoft licenses this month!",
+  "home.offer.cta": "Shop Deals Now",
+  "home.offer.dismiss": "Close"
 }

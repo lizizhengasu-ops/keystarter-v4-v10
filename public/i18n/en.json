@@ -248,5 +248,9 @@
   "home.drawer.payment_label": "Select Payment Method:",
   "home.drawer.email_hint": "We will register an auto-delivery account with this email for key retrieval anytime.",
   "home.drawer.complete_payment": "Complete Simulated Payment",
-  "home.drawer.payment_click": "Click to auto-dispatch the license key instantly!"
+  "home.drawer.payment_click": "Click to auto-dispatch the license key instantly!",
+  "home.offer.title": "🔥 Special Offer",
+  "home.offer.desc": "Save up to 40% on Microsoft licenses this month!",
+  "home.offer.cta": "Shop Deals Now",
+  "home.offer.dismiss": "Close"
 }

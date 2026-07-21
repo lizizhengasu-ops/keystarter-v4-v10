@@ -248,5 +248,9 @@
   "home.drawer.payment_label": "Selecione a forma de pagamento:",
   "home.drawer.email_hint": "Registraremos uma conta de entrega automática com este e-mail para recuperação da chave a qualquer momento.",
   "home.drawer.complete_payment": "Concluir pagamento simulado",
-  "home.drawer.payment_click": "Clique para despachar automaticamente a chave de licença instantaneamente!"
+  "home.drawer.payment_click": "Clique para despachar automaticamente a chave de licença instantaneamente!",
+  "home.offer.title": "🔥 Special Offer",
+  "home.offer.desc": "Save up to 40% on Microsoft licenses this month!",
+  "home.offer.cta": "Shop Deals Now",
+  "home.offer.dismiss": "Close"
 }
