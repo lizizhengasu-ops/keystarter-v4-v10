@@ -31,16 +31,16 @@
    // Try to find local product for specs/color fallback
    const local = localProducts.find(p => p.slug === apiItem.slug);
    
-   return {
-     slug: apiItem.slug,
-     name: apiItem.name || apiItem.title || local?.n || apiItem.slug,
-     price: parseFloat(apiItem.prices?.price || apiItem.price || local?.p || "0"),
-     description: apiItem.description || apiItem.short_description || local?.d || "",
-     specs: local?.specs || DEFAULT_SPECS,
-     color: local?.c || "#0078D4",
-     category: apiItem.categories?.[0]?.name || "",
-     image: apiItem.images?.[0]?.src || "",
-   };
+ return {
+   slug: apiItem.slug,
+   name: apiItem.name || apiItem.title || local?.n || apiItem.slug,
+    price: apiItem.prices?.price ? parseFloat(apiItem.prices.price) / 100 : (local?.p || 0),
+   description: apiItem.description || apiItem.short_description || local?.d || "",
+   specs: local?.specs || DEFAULT_SPECS,
+   color: local?.c || "#0078D4",
+   category: apiItem.categories?.[0]?.name || "",
+   image: apiItem.images?.[0]?.src || "",
+ };
  }
  
  // Map WC REST API v3 product to SPA format
@@ -49,11 +49,11 @@
    
    const local = localProducts.find(p => p.slug === apiItem.slug);
    
-   return {
-     slug: apiItem.slug,
-     name: apiItem.name || local?.n || apiItem.slug,
-     price: parseFloat(apiItem.price || local?.p || "0"),
-     description: apiItem.short_description || apiItem.description || local?.d || "",
+ return {
+   slug: apiItem.slug,
+   name: apiItem.name || local?.n || apiItem.slug,
+    price: apiItem.price ? parseFloat(apiItem.price) / 100 : (local?.p || 0),
+   description: apiItem.short_description || apiItem.description || local?.d || "",
      specs: local?.specs || DEFAULT_SPECS,
      color: local?.c || "#0078D4",
      category: apiItem.categories?.[0]?.name || "",
