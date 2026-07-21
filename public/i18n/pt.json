@@ -10,7 +10,7 @@
   "nav.pricing": "Preços",
   "nav.products": "Produtos",
   "nav.company": "Empresa",
-  "nav.legal": "Aviso legal",
+  "nav.legal": "Legal",
   "lang.label": "Idioma",
   "lang.switch": "PT",
   "cart.title": "Carrinho",
@@ -131,5 +131,16 @@
   "hero.desc": "Authorized Microsoft software reseller. 10 core SKUs in stock, delivered within 10 minutes.",
   "hero.cta": "Shop Licenses Now",
   "hero.enterprise": "Enterprise Licensing →",
-  "hero.trust": "Your trusted partner for genuine Microsoft software licenses worldwide."
+  "hero.trust": "Your trusted partner for genuine Microsoft software licenses worldwide.",
+  "footer.support": "Support",
+  "footer.help_center": "Help Center",
+  "footer.fulfillment": "Fulfillment",
+  "footer.about": "About",
+  "footer.contact": "Contact",
+  "footer.brand_title": "KeyStarter Partner Solutions",
+  "footer.brand_desc": "Reliable, secure, efficient B2B and B2C Microsoft authorized supply chain services.",
+  "footer.rights_ext": "(c) 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.",
+  "footer.email_placeholder": "your@email.com",
+  "nav.account": "Account",
+  "nav.cart": "Cart"
 }

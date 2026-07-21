@@ -21,6 +21,7 @@ import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function MicrosoftLogo() {
   return (
@@ -40,6 +41,7 @@ function Layout({ children }) {
   const [showCart, setShowCart] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
@@ -82,25 +84,25 @@ function Layout({ children }) {
           </button>
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
             <MicrosoftLogo />
-            <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">KeyStarter</span>
-            <span className="hidden sm:inline bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">Partner</span>
+            <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
+            <span className="hidden sm:inline bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
-                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">Store</button>
-                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">Enterprise / B2B</button>
-                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">Compare</button>
-                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">Tech Support</button>
-               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">Fulfillment Center</button>
-                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#0078d4] transition-colors">Blog</button>
+                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">{t("nav.store")}</button>
+                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">{t("nav.enterprise")}</button>
+                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">{t("nav.compare")}</button>
+                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">{t("nav.support")}</button>
+               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">{t("nav.portal")}</button>
+                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#0078d4] transition-colors">{t("nav.blog")}</button>
 </>
             ) : (
               <>
-                <Link to="/pricing" className="hover:text-[#0078d4] transition-colors">Pricing</Link><Link to="/#store" className="hover:text-[#0078d4] transition-colors">Store</Link>
-                <Link to="/b2b" className="hover:text-[#0078d4] transition-colors">Enterprise</Link>
+                <Link to="/pricing" className="hover:text-[#0078d4] transition-colors">{t("nav.pricing")}</Link><Link to="/#store" className="hover:text-[#0078d4] transition-colors">{t("nav.store")}</Link>
+                <Link to="/b2b" className="hover:text-[#0078d4] transition-colors">{t("nav.enterprise")}</Link>
                 <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
-               <Link to="/support" className="hover:text-[#0078d4] transition-colors">Support</Link>
+               <Link to="/support" className="hover:text-[#0078d4] transition-colors">{t("nav.support")}</Link>
                 <Link to="/blog" className="hover:text-[#0078d4] transition-colors">Blog</Link>
 </>
             )}
@@ -110,7 +112,7 @@ function Layout({ children }) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
           <LanguageSwitcher />
-              <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Account">
+              <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </button>
             <div className="relative">
@@ -135,62 +137,62 @@ function Layout({ children }) {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/5 mb-8">
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Products</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.products")}</h4>
             <div className="space-y-2">
               <button onClick={()=>window.location.href="/pricing"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Pricing</button>
-              <button onClick={()=>window.location.href="/#store"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Store</button>
-              <button onClick={()=>window.location.href="/b2b"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Enterprise / B2B</button>
+              <button onClick={()=>window.location.href="/#store"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.store")}</button>
+              <button onClick={()=>window.location.href="/b2b"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.enterprise")}</button>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Support</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("footer.support")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/support"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Help Center</button>
-              <button onClick={()=>window.location.href="/#compare"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Compare</button>
-              <button onClick={()=>window.location.href="/#portal"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Fulfillment</button>
+              <button onClick={()=>window.location.href="/support"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.help_center")}</button>
+              <button onClick={()=>window.location.href="/#compare"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.compare")}</button>
+              <button onClick={()=>window.location.href="/#portal"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.fulfillment")}</button>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Company</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.company")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/blog"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Blog</button>
-              <button onClick={()=>window.location.href="/about"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">About</button>
-              <button onClick={()=>window.location.href="/contact"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Contact</button>
+              <button onClick={()=>window.location.href="/blog"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.blog")}</button>
+              <button onClick={()=>window.location.href="/about"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.about")}</button>
+              <button onClick={()=>window.location.href="/contact"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.contact")}</button>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">Legal</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.legal")}</h4>
             <div className="space-y-2">
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Privacy Policy</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Terms of Service</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Refund Policy</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.privacy")}</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.terms")}</button>
+              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.refund")}</button>
             </div>
           </div>
         </div>
         <div className="border-b border-white/5 mb-8 pb-8 text-center">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">Stay Updated</h4>
-          <p className="text-xs text-white/50 mb-4">Get the latest deals and news delivered to your inbox.</p>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">{t("footer.stay_updated")}</h4>
+          <p className="text-xs text-white/50 mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" type="email" placeholder="your@email.com" className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#0078d4]" />
-            <button onClick={function(){ var e=document.getElementById("newsletter-email"); if(e&&e.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e.value})}).then(function(r){return r.json()}).then(function(d){ e.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#0078d4] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#0062b1] transition border-none cursor-pointer">Subscribe</button>
+            <input id="newsletter-email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#0078d4]" />
+            <button onClick={function(){ var e=document.getElementById("newsletter-email"); if(e&&e.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e.value})}).then(function(r){return r.json()}).then(function(d){ e.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#0078d4] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#0062b1] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
           <div>
-            <span className="text-lg font-bold text-white">KeyStarter Partner Solutions</span>
-            <p className="text-xs text-[#86868b] mt-1">Reliable, secure, efficient B2B & B2C Microsoft authorized supply chain services.</p>
+            <span className="text-lg font-bold text-white">{t("footer.brand_title")}</span>
+            <p className="text-xs text-[#86868b] mt-1">{t("footer.brand_desc")}</p>
           </div>
           <div className="flex items-center space-x-4 text-white/50 text-xs">
-            <span>256-bit SSL Secured</span>
-            <span>PayPal, Stripe, Bank Wire</span>
+            <span>{t("footer.secure")}</span>
+            <span>{t("footer.payments")}</span>
           </div>
         </div>
         <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
-          <p>&copy; 2026 KeyStarter. All Rights Reserved. All Microsoft trademarks and product designs are the property of Microsoft Corporation.</p>
+          <p>{t("footer.rights_ext")}</p>
           <div className="flex space-x-4">
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Disclaimer</button>
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Privacy Policy</button>
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">Licensing Terms</button>
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.disclaimer")}</button>
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.privacy")}</button>
+            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.licensing")}</button>
           </div>
         </div>
       </div>
@@ -231,3 +233,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+
