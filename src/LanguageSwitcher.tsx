@@ -11,7 +11,7 @@ export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const available = (i18n.options.supportedLngs || []).filter(function(l) { return l !== "cimode"; });
+  const available = (i18n.options?.supportedLngs || []).filter(function(l) { return l !== "cimode"; });
 
   useEffect(function() {
     function h(e: MouseEvent) { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); }
