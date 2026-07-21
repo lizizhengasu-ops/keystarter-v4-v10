@@ -473,9 +473,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-green-50 text-green-600 rounded border border-green-200">
-                      ⚡ {sku.tag}
+                      ⚡ {t('home.sku.'+sku.id+'.tag', sku.tag)}
                     </span>
-                    <span className="text-xs text-[#86868b]">{sku.type}</span>
+                    <span className="text-xs text-[#86868b]">{t('home.sku.'+sku.id+'.type', sku.type)}</span>
                   </div>
                   
                   <div className="flex items-center space-x-3.5 mb-4">
@@ -484,7 +484,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-[#1d1d1f]">{sku.title}</h3>
-                      <p className="text-xs text-[#86868b]">{sku.subtitle}</p>
+                      <p className="text-xs text-[#86868b]">{t('home.sku.'+sku.id+'.subtitle', sku.subtitle)}</p>
                     </div>
                   </div>
 
@@ -492,7 +492,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     {sku.features.map((feat, idx) => (
                       <li key={idx} className="flex items-start">
                         <span className="mr-2 text-green-500 font-bold">✓</span>
-                        <span>{feat}</span>
+                        <span>{t('home.sku.'+sku.id+'.f'+(idx+1), feat)}</span>
                       </li>
                     ))}
                   </ul>
@@ -505,7 +505,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                       <span className="text-xs text-[#86868b] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
                     </div>
                     {sku.auditInfo && (
-                      <span className="text-[11px] text-[#0078d4] font-medium">✓ {sku.auditInfo}</span>
+                      <span className="text-[11px] text-[#0078d4] font-medium">✓ {t('home.sku.'+sku.id+'.audit', sku.auditInfo)}</span>
                     )}
                   </div>
                   
@@ -513,7 +513,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     onClick={() => openCheckoutDrawer(sku.title, sku.price)} 
                     className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center space-x-1"
                   >
-                    <span>Buy Now</span> <span className="text-[10px]">{" > "}</span>
+                    <span>{t('product.buy_now', 'Buy Now')}</span> <span className="text-[10px]">{" > "}</span>
                   </button>
                 </div>
               </div>
