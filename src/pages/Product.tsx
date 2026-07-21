@@ -19,6 +19,15 @@ const features = [
 
 export default function ProductPage() {
   const {slug} = useParams();
+  const slugMap: Record<string, string> = {
+    'win-11-pro': 'windows-11-pro', 'win-11-home': 'windows-11-home',
+    'win-10-pro': 'windows-10-pro', 'm365-personal': 'm365-personal',
+    'm365-family': 'm365-family', 'm365-business': 'm365-business-standard',
+    'office-2026-pro': 'office-2026', 'office-2026-home': 'office-2026-home',
+    'server-2025': 'server-2025', 'sql-2025': 'sql-server-2025',
+  };
+  const wcSlug = slugMap[slug || ''] || slug;
+
   const cart = useCart();
   const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
@@ -30,7 +39,7 @@ export default function ProductPage() {
     if (!slug) return;
     let cancelled = false;
     setLoading(true);
-    fetchProduct(slug, i18n.language).then(p => {
+    fetchProduct(wcSlug, i18n.language).then(p => {
       if (!cancelled) { setProduct(p); setLoading(false); }
     }).catch(() => {
       if (!cancelled) setLoading(false);
