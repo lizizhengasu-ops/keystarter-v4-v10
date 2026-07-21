@@ -38,9 +38,9 @@ export default function ProductPage() {
     // Reviews
     var m = {"windows-11-pro":13,"windows-11-home":14,"windows-10-pro":15,"m365-personal":16,"m365-family":17,"m365-business":18,"office-2026-pro":19,"office-2026-home":20,"server-2025":21,"sql-2025":22};
     var id = m[slug] || product?.slug;
-    if (id) fetch("/wp-json/keystarter/v1/reviews/"+id+"?lang="+lang).then(function(r){return r.json()}).then(function(d){if(!cancelled)setReviews(d)}).catch(function(){});
+    if (id) fetch("/wp-json/keystarter/v1/reviews/"+id+"?lang="+i18n.language).then(function(r){return r.json()}).then(function(d){if(!cancelled)setReviews(d)}).catch(function(){});
     return () => { cancelled = true; };
-  }, [slug, lang]);
+  }, [slug, i18n.language]);
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
