@@ -308,29 +308,39 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialOfferSkus.map((sku) => (
               <div key={sku.id} onClick={() => window.location.href="/product/"+sku.id}
-                className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-5 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
+                className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-6 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
                 <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>
                 <div>
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 border border-gray-100">
-                      {sku.category === "windows" ? <WindowsIcon /> : sku.category === "office" ? <OfficeIcon /> : <DatabaseIcon />}
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-bold text-[#1d1d1f] truncate">{sku.title}</h3>
-                      <p className="text-[10px] text-[#86868b] truncate">{sku.subtitle}</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-orange-50 text-orange-600 rounded border border-orange-200">{sku.tag}</span>
+                    <span className="text-xs text-[#86868b]">{sku.type}</span>
+                  </div>
+                  <div className="flex items-center space-x-3.5 mb-4">
+                    <div className="flex items-center justify-center w-12 h-12 bg-orange-50 rounded-xl border border-orange-100">{sku.icon}</div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#1d1d1f]">{sku.title}</h3>
+                      <p className="text-xs text-[#86868b]">{sku.subtitle}</p>
                     </div>
                   </div>
-                  <div className="flex items-baseline gap-1.5 mb-3">
-                    <span className="text-xl font-extrabold text-[#ff6b35]">${sku.price}</span>
-                    <span className="text-[10px] text-[#86868b] line-through">${sku.originalPrice}</span>
-                  </div>
-                  <ul className="space-y-1 mb-3">
-                    {sku.features.slice(0, 2).map((feat, idx) => (
-                      <li key={idx} className="flex items-center gap-1.5 text-[10px] text-[#1d1d1f]/70">
-                        <span className="text-green-500">✓</span>
-                        <span className="truncate">{feat}</span>
-                      </li>
+                  <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
+                    {sku.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{chr(0x2713)}</span><span>{feat}</span></li>
                     ))}
+                  </ul>
+                </div>
+                <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <span className="text-xl font-bold text-[#ff6b35]">{chr(0x0024)}{sku.price}</span>
+                      <span className="text-xs text-[#86868b] line-through ml-2">{chr(0x0024)}{sku.originalPrice}</span>
+                      <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
+                    </div>
+                  </div>
+                  <button onClick={(e) => { e.stopPropagation(); window.location.href="/product/"+sku.id; }}
+                    className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-bold py-2.5 rounded-lg transition">View Deal {chr(0x2192)}</button>
+                </div>
+              </div>
+            ))}
                   </ul>
                 </div>
                 <button onClick={(e) => { e.stopPropagation(); window.location.href="/product/"+sku.id; }}
@@ -381,7 +391,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             </div>
           </div>
 
-          {/* 10 SKU Grid with Preserved Premium Copy */}
+          {/* 13 SKU Grid with Preserved Premium Copy */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredSkus.map((sku) => (
               <div 
