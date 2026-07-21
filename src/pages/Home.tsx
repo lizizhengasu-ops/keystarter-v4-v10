@@ -324,15 +324,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   </div>
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
                     {sku.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{chr(0x2713)}</span><span>{feat}</span></li>
+                      <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{String.fromCharCode(0x2713)}</span><span>{feat}</span></li>
                     ))}
                   </ul>
                 </div>
                <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
                   <div className="flex items-baseline justify-between mb-4">
                    <div>
-                      <span className="text-2xl font-extrabold text-[#ff6b35]">{chr(0x0024)}{sku.price}</span>
-                      <span className="text-xs text-[#86868b] line-through ml-1.5">{chr(0x0024)}{sku.originalPrice}</span>
+                      <span className="text-2xl font-extrabold text-[#ff6b35]">{String.fromCharCode(0x0024)}{sku.price}</span>
+                      <span className="text-xs text-[#86868b] line-through ml-1.5">{String.fromCharCode(0x0024)}{sku.originalPrice}</span>
                      <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
                    </div>
                  </div>
