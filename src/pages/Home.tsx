@@ -397,7 +397,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div 
                 key={sku.id} 
                 onClick={() => window.location.href='/product/'+sku.id} 
-                className="bg-white v5-card rounded-2xl border border-[#e8e8ed] p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow"
+                className={`bg-white v5-card rounded-2xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"border-[#ff6b35]/30":"border-[#e8e8ed]"} p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow relative`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
