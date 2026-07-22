@@ -232,10 +232,10 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="relative bg-gradient-to-r from-[#7c3aed] to-[#7c3aed] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3 text-sm">
-              <span className="hidden sm:inline text-lg">🔥</span>
-              <span className="font-semibold whitespace-nowrap">{t("home.offer.title")}</span>
-              <span className="text-white/80">{t("home.offer.desc")}</span>
-              <button onClick={() => scrollToSection("special-offer")} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
+             <span className="hidden sm:inline text-lg">🔥</span>
+              <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : "Enterprise Licensing Solutions"}</span>
+              <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : "Volume pricing. SAM Audit compliance. Dedicated support."}</span>
+              <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : scrollToSection("business")} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : "Contact Enterprise Sales →"}</button>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -296,6 +296,22 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </section>
 
+{heroPersona === "enterprise" && (
+      <section className="py-12 bg-white border-b border-[#e8e8ed] overflow-hidden">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Trusted by Industry Leaders</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Our Partners and Integrations</h2>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="flex animate-scroll gap-6 px-4" style={{width:"max-content"}}>
+            {[["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN & Security"],["Stripe","Payment Processing"],["Namecheap","Domain & DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"],["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN & Security"],["Stripe","Payment Processing"],["Namecheap","Domain & DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"]].map((p,i) => <div key={i} className="flex-shrink-0 w-[220px] sm:w-[260px] bg-[#fafafa] rounded-2xl p-6 border border-[#e8e8ed] text-center shadow-sm hover:border-[#7c3aed]/30 transition-colors"><div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-lg font-bold text-[#7c3aed]">{p[0][0]}</div><div className="text-sm font-bold text-[#1d1d1f] mb-1">{p[0]}</div><div className="text-[11px] text-[#86868b]">{p[1]}</div></div>)}
+          </div>
+        </div>
+      </section>
+      )}
+
 {/* Testimonials Carousel */}
       <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] overflow-hidden ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -326,7 +342,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
      
 {/* Special Offer Section */}
      {specialOfferSkus.length > 0 && (
-      <section id="special-offer" className="py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7]">
+      <section id="special-offer" className={`py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-8 text-center">
             <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
@@ -966,22 +982,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </section>
           )}
 
-      {heroPersona === "enterprise" && (
-      <section className="py-16 bg-white border-t border-[#e8e8ed] overflow-hidden">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Trusted by Industry Leaders</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Our Partners and Integrations</h2>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="flex animate-scroll gap-6 px-4" style={{width:"max-content"}}>
-            {[["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN and Security"],["Stripe","Payment Processing"],["Namecheap","Domain and DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"],["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN and Security"],["Stripe","Payment Processing"],["Namecheap","Domain and DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"]].map((p,i) => <div key={i} className="flex-shrink-0 w-[220px] sm:w-[260px] bg-[#fafafa] rounded-2xl p-6 border border-[#e8e8ed] text-center shadow-sm hover:border-[#7c3aed]/30 transition-colors"><div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-lg font-bold text-[#7c3aed]">{p[0][0]}</div><div className="text-sm font-bold text-[#1d1d1f] mb-1">{p[0]}</div><div className="text-[11px] text-[#86868b]">{p[1]}</div></div>)}
-          </div>
-        </div>
-      </section>
-      )}
-
+      
 
       {heroPersona === "enterprise" && (
       <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
