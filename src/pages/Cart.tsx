@@ -34,9 +34,9 @@ export default function CartPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 w-full sm:w-auto">
-                  <div className="text-xs text-[#86868b]">${"${it.price.toFixed(2)}"}</div>
-                  <select value={it.qty} onChange={e=>updateQty(it.slug,Number(e.target.value))} className="p-1.5 border border-[#e8e8ed] rounded-lg text-xs bg-white">
-                    {[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}
+                  <div className="text-xs text-[#86868b]">${it.price.toFixed(2)}</div>
+                  <select value={it.qty} onChange={e=>{const v=Number(e.target.value);updateQty(it.slug,v)}} className="p-1.5 border border-[#e8e8ed] rounded-lg text-xs bg-white">
+                    {[1,2,3,4,5,6,7,8,9,10].map(n=><option key={n} value={n}>{n}</option>)}
                   </select>
                   <div className="text-sm font-bold w-16 text-right">${(it.price * it.qty).toFixed(2)}</div>
                 </div>

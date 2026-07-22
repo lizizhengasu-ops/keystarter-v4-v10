@@ -381,10 +381,11 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     {sku.features.map((feat, idx) => (
                       <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{String.fromCharCode(0x2713)}</span><span>{feat}</span></li>
                     ))}
-                  </ul>
-                </div>
-               <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
-                  <div className="flex items-baseline justify-between mb-4">
+                 </ul>
+               </div>
+              <div className="border-t border-[#f5f5f7] pt-4 mt-auto">
+                    <p className="text-[10px] text-orange-600 font-semibold mb-2">Limit 10 per customer</p>
+                 <div className="flex items-baseline justify-between mb-4">
                    <div>
                       <span className="text-2xl font-extrabold text-[#ff6b35]">{String.fromCharCode(0x0024)}{sku.price}</span>
                       <span className="text-xs text-[#86868b] line-through ml-1.5">{String.fromCharCode(0x0024)}{sku.originalPrice}</span>
@@ -480,11 +481,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                         <span>{t('home.sku.'+sku.id.replace(/-/g,'')+'.f'+(idx+1), feat)}</span>
                       </li>
                     ))}
-                  </ul>
-                </div>
+                 </ul>
+               </div>
 
-                <div>
-                  <div className="flex items-baseline justify-between mb-4">
+               <div>
+                  {SPECIAL_OFFER_IDS.includes(sku.id) && <p className="text-[10px] text-orange-600 font-semibold mb-2">Limit 10 per customer</p>}
+                 <div className="flex items-baseline justify-between mb-4">
                     <div>
                       <span className="text-2xl font-extrabold text-[#1d1d1f]">${getLiveData(sku).price}</span>
                       <span className="text-xs text-[#86868b] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
