@@ -297,7 +297,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       </section>
 
 {/* Testimonials Carousel */}
-      <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] overflow-hidden"> ${heroPersona!=="retail"?"persona-hidden":""}`}>
+      <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] overflow-hidden ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase">Why Our Customers Trust Us</span>
@@ -382,7 +382,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       </section>
       )}
 
-      <section id="store" className={`py-20 bg-[#f5f5f7]"> ${heroPersona!=="retail"?"persona-hidden":""}`}>
+      <section id="store" className={`py-20 bg-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("store.section_title")}</h2>
@@ -490,7 +490,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       {}
       {/* B2B Section */}
-      <section id="business" className={`relative py-24 bg-[#161617] text-white overflow-hidden"> ${heroPersona!=="enterprise"?"persona-hidden":""}`}>
+      <section id="business" className={`relative py-24 bg-[#161617] text-white overflow-hidden ${heroPersona!=="enterprise"?"persona-hidden":""}`}>
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -724,7 +724,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
      {}
      {/* Deliver & Account Portal Section */}
       {/* Latest from Blog */}
-      <section id="blog-preview" className={`py-20 bg-[#f5f5f7]"> ${heroPersona!=="retail"?"persona-hidden":""}`}>
+      <section id="blog-preview" className={`py-20 bg-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
@@ -753,7 +753,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </section>
       {}
-      <section id="portal" className={`py-20 bg-white border-t border-[#e8e8ed]"> ${heroPersona!=="retail"?"persona-hidden":""}`}>
+      <section id="portal" className={`py-20 bg-white border-t border-[#e8e8ed] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("portal.label")}</span>
