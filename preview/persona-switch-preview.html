@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KeyStarter - Persona Switch Preview</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; transition:all 0.3s ease; }
+body { background:#fafafa; color:#111827; }
+
+/* === HERO === */
+.hero-wrap { position:relative; min-height:520px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fafafa; padding:80px 20px; }
+.glow-orb { position:absolute; width:450px; height:450px; border-radius:50%; filter:blur(100px); opacity:0.6; pointer-events:none; z-index:0; }
+.glow-orb.g1 { background:#e5e7eb; top:-100px; left:35%; }
+.glow-orb.g2 { background:#c4b5fd; bottom:-80px; right:10%; width:300px; height:300px; filter:blur(80px); opacity:0.4; }
+.hero-inner { position:relative; z-index:10; max-width:800px; text-align:center; }
+
+.persona-tabs { display:inline-flex; background:rgba(0,0,0,0.04); border:1px solid #d1d5db; padding:4px; border-radius:50px; margin-bottom:24px; }
+.persona-tab { padding:8px 20px; font-size:12px; font-weight:700; border-radius:50px; cursor:pointer; border:none; background:transparent; color:#111827; opacity:0.7; }
+.persona-tab.active { background:#7c3aed; color:#fff; opacity:1; }
+
+.hero-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:50px; font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:16px; background:#fff; color:#7c3aed; border:1px solid #d1d5db; letter-spacing:0.8px; }
+.hero-h1 { font-size:clamp(28px,5vw,44px); font-weight:800; line-height:1.2; margin-bottom:12px; }
+.hero-p { font-size:14px; color:#4b5563; max-width:560px; margin:0 auto 24px; line-height:1.6; }
+.hero-btns { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:32px; }
+.btn-main { padding:12px 28px; border-radius:12px; font-size:12px; font-weight:700; cursor:pointer; background:#7c3aed; color:#fff; border:none; }
+.btn-main:hover { background:#6d28d9; }
+.btn-sec { padding:12px 28px; border-radius:12px; font-size:12px; font-weight:700; cursor:pointer; background:#f3f4f6; color:#111827; border:1px solid #d1d5db; }
+.btn-sec:hover { background:#e5e7eb; }
+
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; max-width:640px; margin:0 auto; }
+.stat-card { background:#fff; border-radius:12px; padding:14px 10px; text-align:center; border:1px solid #d1d5db; }
+.stat-num { font-size:18px; font-weight:800; color:#7c3aed; }
+.stat-label { font-size:10px; font-weight:600; text-transform:uppercase; color:#4b5563; margin-top:4px; }
+
+@media(max-width:640px){ .stats-grid{ grid-template-columns:repeat(2,1fr); } .hero-wrap{ min-height:400px; padding:50px 16px; } }
+
+/* === SWITCHER BAR === */
+.switch-bar { text-align:center; padding:20px; background:#fff; border-bottom:1px solid #e8e8ed; position:sticky; top:0; z-index:100; }
+.switch-bar .persona-tabs { margin-bottom:0; }
+
+/* === RETAIL SECTIONS === */
+.section { padding:60px 20px; }
+.section-title { text-align:center; margin-bottom:40px; }
+.section-title h2 { font-size:28px; font-weight:700; }
+.section-title p { font-size:13px; color:#86868b; margin-top:8px; }
+
+/* Testimonials Carousel */
+.carousel-wrap { overflow:hidden; padding:20px 0; }
+@keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.carousel-track { display:flex; gap:16px; width:max-content; animation:scroll 40s linear infinite; padding:0 16px; }
+.carousel-track:hover { animation-play-state:paused; }
+.testimonial-card { flex-shrink:0; width:300px; background:#fff; border-radius:16px; padding:20px; border:1px solid #e8e8ed; }
+.testimonial-card .stars { color:#f59e0b; font-size:14px; margin-bottom:8px; }
+.testimonial-card .text { font-size:12px; color:#1d1d1f; line-height:1.6; font-style:italic; margin-bottom:12px; }
+.testimonial-card .name { font-size:11px; font-weight:600; color:#1d1d1f; }
+
+/* Special Offer */
+.offer-tag { display:inline-block; padding:4px 14px; border-radius:50px; font-size:10px; font-weight:700; background:#ff6b35; color:#fff; text-transform:uppercase; margin-bottom:12px; }
+.offer-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; max-width:1100px; margin:0 auto; }
+.offer-card { background:#fff; border-radius:16px; padding:20px; border:2px solid rgba(255,107,53,0.2); position:relative; overflow:hidden; }
+.offer-card .discount { position:absolute; top:0; right:0; background:#ff6b35; color:#fff; font-size:9px; font-weight:700; padding:2px 8px; border-radius:0 0 0 8px; }
+.offer-card .card-tag { font-size:10px; font-weight:700; text-transform:uppercase; padding:3px 10px; border-radius:4px; background:#fff3ed; color:#ff6b35; border:1px solid #ffd5c2; display:inline-block; margin-bottom:8px; }
+.offer-card h3 { font-size:14px; font-weight:700; margin-bottom:4px; }
+.offer-card .sub { font-size:11px; color:#86868b; margin-bottom:12px; }
+.offer-card .price { font-size:20px; font-weight:800; color:#ff6b35; }
+.offer-card .old-price { font-size:12px; color:#86868b; text-decoration:line-through; margin-left:8px; }
+.offer-card .btns { display:flex; gap:8px; margin-top:12px; }
+.offer-card .btn-cart { flex:1; padding:8px; border-radius:8px; font-size:11px; font-weight:700; border:2px solid #ff6b35; color:#ff6b35; background:transparent; cursor:pointer; }
+.offer-card .btn-buy { flex:1; padding:8px; border-radius:8px; font-size:11px; font-weight:700; background:#ff6b35; color:#fff; border:none; cursor:pointer; }
+@media(max-width:900px){ .offer-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:500px){ .offer-grid{ grid-template-columns:1fr; } }
+
+/* === ENTERPRISE SECTIONS === */
+.enterprise-section { padding:80px 20px; background:#161617; color:#fff; position:relative; overflow:hidden; }
+.enterprise-section .glow-bg { position:absolute; width:500px; height:500px; border-radius:50%; filter:blur(120px); opacity:0.08; background:#7c3aed; top:-150px; right:-100px; pointer-events:none; }
+.enterprise-content { position:relative; z-index:1; max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+.enterprise-left .badge { display:inline-block; padding:4px 14px; border-radius:50px; font-size:10px; font-weight:700; text-transform:uppercase; background:rgba(124,58,237,0.15); color:#7c3aed; border:1px solid rgba(124,58,237,0.3); margin-bottom:16px; }
+.enterprise-left h2 { font-size:clamp(24px,4vw,36px); font-weight:700; line-height:1.3; margin-bottom:16px; }
+.enterprise-left .desc { font-size:13px; color:#86868b; line-height:1.6; margin-bottom:24px; }
+.feature-item { display:flex; gap:12px; padding:14px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); margin-bottom:10px; }
+.feature-item .icon { font-size:20px; color:#7c3aed; }
+.feature-item h4 { font-size:13px; margin-bottom:4px; }
+.feature-item p { font-size:11px; color:#86868b; }
+.enterprise-form { background:#fff; color:#111827; padding:28px; border-radius:16px; }
+.enterprise-form h3 { font-size:18px; font-weight:700; margin-bottom:4px; }
+.enterprise-form .sub { font-size:11px; color:#86868b; margin-bottom:20px; }
+.enterprise-form input, .enterprise-form select { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d2d2d7; font-size:13px; margin-bottom:12px; background:#f5f5f7; }
+.enterprise-form .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.enterprise-form .submit { width:100%; padding:12px; border-radius:10px; background:#7c3aed; color:#fff; border:none; font-size:12px; font-weight:700; cursor:pointer; }
+@media(max-width:768px){ .enterprise-content{ grid-template-columns:1fr; } }
+
+/* Compare Table */
+.compare-table { width:100%; border-collapse:collapse; background:#fff; border-radius:16px; overflow:hidden; border:1px solid #e8e8ed; }
+.compare-table th { background:#f5f5f7; padding:16px; font-size:12px; font-weight:600; text-align:left; }
+.compare-table th.enterprise-col { color:#7c3aed; }
+.compare-table td { padding:16px; font-size:12px; border-top:1px solid #f5f5f7; }
+.compare-table .check { color:#16a34a; font-weight:600; }
+
+/* Support Cards */
+.support-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto; }
+.support-card { background:#fff; border-radius:16px; padding:24px; border:1px solid #e8e8ed; }
+.support-card .icon { font-size:28px; margin-bottom:12px; }
+.support-card h4 { font-size:15px; font-weight:700; margin-bottom:8px; }
+.support-card p { font-size:12px; color:#86868b; line-height:1.5; margin-bottom:12px; }
+.support-card a { font-size:12px; font-weight:600; color:#7c3aed; text-decoration:none; }
+@media(max-width:768px){ .support-grid{ grid-template-columns:1fr; } }
+
+/* Partner Carousel */
+.partner-card { flex-shrink:0; width:200px; background:#fafafa; border-radius:16px; padding:20px; text-align:center; border:1px solid #e8e8ed; }
+.partner-card .logo { width:40px; height:40px; border-radius:10px; background:#f3f4f6; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:#7c3aed; margin:0 auto 10px; }
+.partner-card .pname { font-size:13px; font-weight:600; }
+.partner-card .prole { font-size:10px; color:#86868b; margin-top:2px; }
+
+/* Bottom CTA */
+.bottom-cta { text-align:center; padding:60px 20px; background:#f3f4f6; border-top:1px solid #d1d5db; }
+.bottom-cta h2 { font-size:24px; font-weight:700; margin-bottom:8px; }
+.bottom-cta p { font-size:13px; color:#86868b; margin-bottom:20px; }
+.bottom-cta .cta-row { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; align-items:center; }
+.bottom-cta .email { font-size:14px; font-weight:600; color:#7c3aed; }
+
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<!-- Persona Switcher -->
+<div class="switch-bar">
+  <div class="persona-tabs">
+    <button class="persona-tab active" onclick="switchMode('retail')">👤 Personal Retail</button>
+    <button class="persona-tab" onclick="switchMode('enterprise')">🏢 Enterprise B2B</button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="hero-wrap">
+  <div class="glow-orb g1"></div>
+  <div class="glow-orb g2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge" id="heroBadge">Genuine Retail License Portal</div>
+    <h1 class="hero-h1" id="heroH1">Your Trusted Source for Genuine Microsoft Licenses</h1>
+    <p class="hero-p" id="heroP">Authorized partner. Guaranteed 100% genuine OEM & Retail activation keys delivered within 10 minutes.</p>
+    <div class="hero-btns">
+      <button class="btn-main" id="heroBtn">Shop Licenses Now</button>
+      <button class="btn-sec">Enterprise Licensing ›</button>
+    </div>
+    <div class="stats-grid" id="heroStats"></div>
+  </div>
+</div>
+
+<!-- ===== RETAIL CONTENT ===== -->
+<div id="retailContent">
+  <!-- Testimonials -->
+  <div class="section" style="background:#fff;border-bottom:1px solid #e8e8ed;">
+    <div class="section-title">
+      <span style="font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;letter-spacing:0.5px;">Why Our Customers Trust Us</span>
+      <h2>Real reviews from verified buyers</h2>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="testimonialTrack"></div>
+    </div>
+  </div>
+  <!-- Special Offer -->
+  <div class="section" style="background:linear-gradient(to bottom,rgba(255,107,53,0.03),#f5f5f7);">
+    <div class="section-title">
+      <span class="offer-tag">Limited Time</span>
+      <h2>🔥 Special Offer</h2>
+      <p>Save up to 40% on Microsoft licenses this month!</p>
+    </div>
+    <div class="offer-grid" id="offerGrid"></div>
+  </div>
+</div>
+
+<!-- ===== ENTERPRISE CONTENT ===== -->
+<div id="enterpriseContent" class="hidden">
+  <!-- Enterprise Compliance -->
+  <div class="enterprise-section">
+    <div class="glow-bg"></div>
+    <div class="enterprise-content">
+      <div class="enterprise-left">
+        <span class="badge">Enterprise B2B Compliance</span>
+        <h2>Enterprise Compliance & SAM Audit Support</h2>
+        <p class="desc">When facing a Microsoft SAM Audit, opaque procurement chains put enterprises at risk. We provide Volume Licensing certificates and genuine keys for 100% compliance at low cost, avoiding legal penalties.</p>
+        <div class="feature-item"><div class="icon">🛡️</div><div><h4>100% Official Compliance Verified</h4><p>Volume Licensing certificates with audit-ready documentation</p></div></div>
+        <div class="feature-item"><div class="icon">💵</div><div><h4>Volume Pricing Discounts (Up to 70% Off)</h4><p>Supports 5+ accounts with no minimum order</p></div></div>
+      </div>
+      <div class="enterprise-form">
+        <h3>Get Your Free Quote</h3>
+        <p class="sub">A specialist will email you within 24 hours</p>
+        <input type="text" placeholder="Company Name">
+        <div class="row"><select><option>5-20 Units</option><option>21-50 Units</option><option>51-100 Units</option><option>100+ Units</option></select><select><option>Windows</option><option>Office</option><option>Server</option><option>Compliance</option></select></div>
+        <div class="row"><input type="text" placeholder="Contact Name"><input type="email" placeholder="Email"></div>
+        <button class="submit">Get Free Custom Quote</button>
+      </div>
+    </div>
+  </div>
+  <!-- Comparison Matrix -->
+  <div class="section" style="background:#fff;">
+    <div class="section-title"><span style="font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;">Comparison Matrix</span><h2>Which License Model Fits Your Team?</h2><p>Compare editions to find the most cost-effective option.</p></div>
+    <div style="max-width:900px;margin:0 auto;overflow-x:auto;">
+      <table class="compare-table">
+        <tr><th>Dimension</th><th>Retail</th><th>SMB</th><th class="enterprise-col">Enterprise</th></tr>
+        <tr><td style="font-weight:600;">Pricing</td><td>Lowest price per unit</td><td>Bulk discounts</td><td>Volume licensing + PO terms</td></tr>
+        <tr><td style="font-weight:600;">License Ownership</td><td>Individual account</td><td>Company account</td><td>Corporate agreement</td></tr>
+        <tr><td style="font-weight:600;">Reinstall Support</td><td><span class="check">✓</span> Full (Unlimited)</td><td><span class="check">✓</span> Full (Unbind anytime)</td><td><span class="check">✓</span> Full (Silent auto-reactivate)</td></tr>
+        <tr><td style="font-weight:600;">SAM Audit</td><td>✓ Personal compliance</td><td><span class="check">✓</span> Full pass</td><td style="color:#7c3aed;font-weight:600;">✓ Premium guarantee</td></tr>
+      </table>
+    </div>
+  </div>
+  <!-- Help & Guides -->
+  <div class="section" style="background:#f5f5f7;">
+    <div class="section-title"><span style="font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;">Help & Guides</span><h2>Full Technical Support Center</h2><p>Self-service activation guides. We commit to full post-purchase deployment support.</p></div>
+    <div class="support-grid">
+      <div class="support-card"><div class="icon">🔧</div><h4>Activation Guides</h4><p>Step-by-step activation instructions for all Microsoft products. Easy to follow with screenshots.</p><a href="#">Go to Activation Guides ›</a></div>
+      <div class="support-card"><div class="icon">📦</div><h4>Official ISO Downloads</h4><p>Direct links to official Microsoft ISO downloads. No third-party software needed.</p><a href="#">Go to Microsoft Site ›</a></div>
+      <div class="support-card"><div class="icon">📞</div><h4>Enterprise Support</h4><p>24/7 priority support with dedicated account manager for enterprise clients.</p><a href="#">Contact Expert ›</a></div>
+    </div>
+  </div>
+  <!-- Partner Showcase -->
+  <div class="section" style="background:#fff;border-top:1px solid #e8e8ed;">
+    <div class="section-title"><span style="font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;">Trusted by Industry Leaders</span><h2>Our Partners & Integrations</h2></div>
+    <div class="carousel-wrap">
+      <div class="carousel-track">
+        <div class="partner-card"><div class="logo">M</div><div class="pname">Microsoft Partner</div><div class="prole">Authorized Reseller</div></div>
+        <div class="partner-card"><div class="logo">C</div><div class="pname">Cloudflare</div><div class="prole">CDN & Security</div></div>
+        <div class="partner-card"><div class="logo">S</div><div class="pname">Stripe</div><div class="prole">Payment Processing</div></div>
+        <div class="partner-card"><div class="logo">N</div><div class="pname">Namecheap</div><div class="prole">Domain & DNS</div></div>
+        <div class="partner-card"><div class="logo">R</div><div class="pname">RackNerd</div><div class="prole">VPS Hosting</div></div>
+        <div class="partner-card"><div class="logo">B</div><div class="pname">Brevo</div><div class="prole">Email Delivery</div></div>
+        <div class="partner-card"><div class="logo">P</div><div class="pname">PayPal</div><div class="prole">Global Payments</div></div>
+        <div class="partner-card"><div class="logo">W</div><div class="pname">WooCommerce</div><div class="prole">E-Commerce Platform</div></div>
+        <!-- duplicate for seamless loop -->
+        <div class="partner-card"><div class="logo">M</div><div class="pname">Microsoft Partner</div><div class="prole">Authorized Reseller</div></div>
+        <div class="partner-card"><div class="logo">C</div><div class="pname">Cloudflare</div><div class="prole">CDN & Security</div></div>
+        <div class="partner-card"><div class="logo">S</div><div class="pname">Stripe</div><div class="prole">Payment Processing</div></div>
+        <div class="partner-card"><div class="logo">N</div><div class="pname">Namecheap</div><div class="prole">Domain & DNS</div></div>
+        <div class="partner-card"><div class="logo">R</div><div class="pname">RackNerd</div><div class="prole">VPS Hosting</div></div>
+        <div class="partner-card"><div class="logo">B</div><div class="pname">Brevo</div><div class="prole">Email Delivery</div></div>
+        <div class="partner-card"><div class="logo">P</div><div class="pname">PayPal</div><div class="prole">Global Payments</div></div>
+        <div class="partner-card"><div class="logo">W</div><div class="pname">WooCommerce</div><div class="prole">E-Commerce Platform</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom CTA -->
+  <div class="bottom-cta">
+    <h2>Ready to Scale Your Licensing?</h2>
+    <p>Get volume pricing, dedicated support, and full SAM Audit compliance.</p>
+    <div class="cta-row"><button class="btn-main">Contact Enterprise Sales</button><span class="email">admin@keys-starter.com</span></div>
+  </div>
+</div>
+
+<script>
+const testimonials = [
+  {name:"Michael R.",stars:5,text:"Bought Windows 11 Pro last Tuesday. Got the key in under 5 minutes, activated first try. Saved like 150 compared to the Microsoft Store."},
+  {name:"Sarah K.",stars:5,text:"I was skeptical at first. But the Office 2021 key worked perfectly on my new laptop. Been using it for 3 weeks now, zero issues."},
+  {name:"James T.",stars:5,text:"IT guy here - bought 5 Win 10 Pro keys for a client migration. All activated without a hitch. The email delivery with screenshots is a nice touch."},
+  {name:"Emily C.",stars:5,text:"Got Windows 11 Home for my daughters school laptop. 39 vs 139 retail. Absolute steal. Key arrived in 2 minutes flat."},
+  {name:"Daniel L.",stars:4,text:"Used this for my gaming rig rebuild. Win 11 Pro key was legit - activated through Microsoft no problem."},
+  {name:"Rachel M.",stars:5,text:"Small business owner here. The enterprise volume pricing saved me so much. Got 10 licenses with compliance docs for our audit."},
+  {name:"Amanda W.",stars:5,text:"Honestly the best software buying experience I have had. Paid 18 for Win 11 Pro, key arrived before I finished making coffee."},
+  {name:"Chris P.",stars:5,text:"Developer here. Need genuine Windows for testing VMs. This site is a lifesaver. Keys are OEM but function exactly like retail."},
+  {name:"Nicole B.",stars:5,text:"My son built his first PC and needed Windows. Found KeyStarter through Reddit. Cannot believe we almost paid 199 at Best Buy."},
+  {name:"Heather K.",stars:5,text:"Home school mom with 3 kids and 3 computers. All three Windows keys were under 60 total. Kids are happy, I am happier."},
+];
+
+function renderTestimonials() {
+  const track = document.getElementById('testimonialTrack');
+  const all = [...testimonials,...testimonials];
+  track.innerHTML = all.map(t => {
+    const stars = '★'.repeat(t.stars) + '☆'.repeat(5-t.stars);
+    return `<div class="testimonial-card"><div class="stars">${stars}</div><div class="text">&ldquo;${t.text}&rdquo;</div><div class="name">- ${t.name}</div></div>`;
+  }).join('');
+}
+
+const offers = [
+  {title:"Windows 11 Pro",sub:"Special price - email delivery",price:18,orig:199,discount:91},
+  {title:"Windows 10 Pro",sub:"Special price - email delivery",price:18,orig:149,discount:88},
+  {title:"Office 2021 Pro Plus",sub:"1 Device - lifetime license",price:58,orig:439,discount:87},
+  {title:"Office 2019 Pro Plus",sub:"1 Device - lifetime license",price:48,orig:439,discount:89},
+];
+
+function renderOffers() {
+  const grid = document.getElementById('offerGrid');
+  grid.innerHTML = offers.map(o => `
+    <div class="offer-card">
+      <div class="discount">-${o.discount}%</div>
+      <span class="card-tag">Special Price</span>
+      <h3>${o.title}</h3>
+      <p class="sub">${o.sub}</p>
+      <span class="price">$${o.price}</span><span class="old-price">$${o.orig}</span>
+      <div class="btns"><button class="btn-cart">Add to Cart</button><button class="btn-buy">Buy Now</button></div>
+    </div>
+  `).join('');
+}
+
+function renderStats(mode) {
+  const grid = document.getElementById('heroStats');
+  if (mode === 'retail') {
+    grid.innerHTML = '<div class="stat-card"><div class="stat-num">10 Min</div><div class="stat-label">Instant Dispatch</div></div><div class="stat-card"><div class="stat-num">98.7%</div><div class="stat-label">Satisfaction</div></div><div class="stat-card"><div class="stat-num">50K+</div><div class="stat-label">Secure Activation</div></div><div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Genuine Verified</div></div>';
+  } else {
+    grid.innerHTML = '<div class="stat-card"><div class="stat-num">VAT 13%</div><div class="stat-label">Dedicated Invoice</div></div><div class="stat-card"><div class="stat-num">Enterprise</div><div class="stat-label">Volume Licensing</div></div><div class="stat-card"><div class="stat-num">PO Terms</div><div class="stat-label">Corporate Transfer</div></div><div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">SLA Manager</div></div>';
+  }
+}
+
+function switchMode(mode) {
+  document.querySelectorAll('.persona-tab').forEach((b,i) => b.classList.toggle('active', (i===0 && mode==='retail') || (i===1 && mode==='enterprise')));
+  const retail = document.getElementById('retailContent');
+  const enterprise = document.getElementById('enterpriseContent');
+  if (mode === 'retail') { retail.classList.remove('hidden'); enterprise.classList.add('hidden'); }
+  else { retail.classList.add('hidden'); enterprise.classList.remove('hidden'); }
+  
+  document.getElementById('heroBadge').textContent = mode==='retail' ? 'Genuine Retail License Portal' : 'Enterprise Volume Licensing';
+  document.getElementById('heroH1').textContent = mode==='retail' ? 'Your Trusted Source for Genuine Microsoft Licenses' : 'Enterprise Compliance & SAM Audit Support';
+  document.getElementById('heroP').textContent = mode==='retail' ? 'Authorized partner. Guaranteed 100% genuine OEM & Retail activation keys delivered within 10 minutes.' : 'Volume Licensing certificates and genuine keys for 100% compliance. Avoid legal penalties during Microsoft SAM Audits.';
+  document.getElementById('heroBtn').textContent = mode==='retail' ? 'Shop Licenses Now' : 'Get Free Compliance Quote';
+  renderStats(mode);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderTestimonials();
+renderOffers();
+renderStats('retail');
+</script>
+</body>
+</html>
