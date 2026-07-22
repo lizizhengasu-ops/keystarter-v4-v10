@@ -89,6 +89,7 @@ const [activeTab, setActiveTab] = useState('all');
 
   // Custom Toast State
   const [testimonials, setTestimonials] = useState([]);
+  const [heroPersona, setHeroPersona] = useState("retail");
   const [toast, setToast] = useState({ visible: false, message: '', icon: '🚀' });
 
   // Helper smooth scrolling for single page navigation
