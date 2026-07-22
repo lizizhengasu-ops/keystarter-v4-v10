@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { useCart } from "../CartContext";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+
+const SLUG_TO_ID = {"office-2019-pro-plus":633,"office-2021-pro-plus":634,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669,"win-10-iot-2019-entry":646,"win-10-iot-2019-high-end":663,"win-10-iot-2019-value":664,"win-10-iot-2021-entry":643,"win-10-iot-2021-high-end":658,"win-10-iot-2021-value":659,"win-11-iot-2024-entry":637,"win-11-iot-2024-high-end":656,"win-11-iot-2024-value":657,"win-11-iot-ml-entry":662,"win-11-iot-ml-high-end":660,"win-11-iot-ml-value":661,"win-svr-iot-2019":667,"win-svr-iot-2022":666,"win-svr-iot-2025":665,"windows-10-home":632,"windows-10-home-official":655,"windows-10-pro":630,"windows-10-pro-official":653,"windows-11-home":631,"windows-11-home-official":654,"windows-11-pro":629,"windows-11-pro-official":652};
 
 export default function CartPage() {
  const { items, remove, setQty, total } = useCart();
   
   const { t } = useTranslation();
   const tax = total * 0.08;
+  const [guestEmail, setGuestEmail] = useState("");
+  const [guestName, setGuestName] = useState("");
+  const [orderPlaced, setOrderPlaced] = useState(false);
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-7xl mx-auto">
@@ -52,11 +58,24 @@ export default function CartPage() {
             <div className="flex justify-between text-xs mb-3 text-green-600"><span>{t("cart.shipping")}</span><span>{t("cart.free")}</span></div>
             <div className="flex justify-between text-xs mb-3"><span>{t("cart.tax")}</span><span>${tax.toFixed(2)}</span></div>
             <div className="border-t border-[#e8e8ed] my-4 pt-4 flex justify-between text-lg font-bold"><span>{t("cart.total")}</span><span>${(total + tax).toFixed(2)}</span></div>
-            <p className="text-[10px] text-green-600 mb-4 text-center">{t("cart.pay_hint")}</p>
-            <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));window.location.href="/checkout.html";}} className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3 rounded-xl transition cursor-pointer">{t("cart.checkout")}</button>
+            <p className="text-[10px] text-green-600 mb-4 text-center">No account needed. Guest checkout.</p>
+            <input type="text" placeholder="Your Name" value={guestName} onChange={e=>setGuestName(e.target.value)} className="w-full px-3 py-2 text-xs border border-[#e8e8ed] rounded-lg mb-2 bg-white focus:outline-none focus:border-[#7c3aed]" />
+            <input type="email" placeholder="your@email.com" value={guestEmail} onChange={e=>setGuestEmail(e.target.value)} className="w-full px-3 py-2 text-xs border border-[#e8e8ed] rounded-lg mb-3 bg-white focus:outline-none focus:border-[#7c3aed]" />
+           <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));sessionStorage.setItem("ks_guest",JSON.stringify({name:guestName,email:guestEmail}));window.location.href="/checkout.html";}} disabled={!guestEmail||!guestEmail.includes("@")} className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3 rounded-xl transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Guest Checkout</button>
+            <button onClick={async()=>{try{for(const it of items){const pid=SLUG_TO_ID[it.slug];if(pid){await fetch("https://keys-starter.com/wp-json/wc/store/v1/cart/add-item",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:pid,quantity:it.qty})});await new Promise(r=>setTimeout(r,200));}}window.location.href="/checkout/";}catch(e){window.location.href="/checkout/";}}} disabled={!guestEmail||!guestEmail.includes("@")} className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3 rounded-xl transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Proceed to Checkout</button>
             <Link to="/store" className="block text-center py-2 text-xs text-[#7c3aed] hover:underline mt-3">{t("cart.continue")}</Link>
           </div>
         </div>
+        )}
+        {orderPlaced && (
+          <div className="max-w-md mx-auto text-center py-16">
+            <div className="text-5xl mb-6">{String.fromCodePoint(0x2705)}</div>
+            <h2 className="text-2xl font-bold text-[#1d1d1f] mb-4">Order Confirmed!</h2>
+            <p className="text-sm text-[#86868b] mb-2">Thank you, {guestName}!</p>
+            <p className="text-sm text-[#86868b] mb-6">Your order has been received. We will send the license keys to <strong>{guestEmail}</strong> within 10 minutes.</p>
+            <p className="text-xs text-green-600 mb-8">Order Total: ${(total + tax).toFixed(2)} ({items.length} items)</p>
+            <Link to="/store" className="inline-block bg-[#7c3aed] text-white px-8 py-3 text-sm font-semibold rounded-xl hover:bg-[#6d28d9] transition no-underline">Continue Shopping</Link>
+          </div>
         )}
       </div>
     </div>
