@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const { items, remove, updateQty, total } = useCart();
+ const { items, remove, setQty, total } = useCart();
+  
   const { t } = useTranslation();
   const tax = total * 0.08;
   return (
@@ -34,10 +35,12 @@ export default function CartPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 w-full sm:w-auto">
-                  <div className="text-xs text-[#86868b]">${it.price.toFixed(2)}</div>
-                  <select value={it.qty} onChange={e=>{const v=Number(e.target.value);updateQty(it.slug,v)}} className="p-1.5 border border-[#e8e8ed] rounded-lg text-xs bg-white">
-                    {[1,2,3,4,5,6,7,8,9,10].map(n=><option key={n} value={n}>{n}</option>)}
-                  </select>
+                 <div className="text-xs text-[#86868b]">${it.price.toFixed(2)}</div>
+                  <div className="flex items-center border border-[#e8e8ed] rounded-lg overflow-hidden">
+                    <button onClick={()=>setQty(it.slug,it.qty-1)} className="px-2 py-1 text-xs hover:bg-[#f5f5f7] transition bg-transparent border-none cursor-pointer" disabled={it.qty<=1}>-</button>
+                    <input type="number" value={it.qty} onChange={e=>{const v=parseInt(e.target.value)||1;setQty(it.slug,Math.min(99,Math.max(1,v)))}} className="w-10 text-center text-xs border-none bg-transparent outline-none" min="1" max="99" />
+                    <button onClick={()=>setQty(it.slug,it.qty+1)} className="px-2 py-1 text-xs hover:bg-[#f5f5f7] transition bg-transparent border-none cursor-pointer">+</button>
+                  </div>
                   <div className="text-sm font-bold w-16 text-right">${(it.price * it.qty).toFixed(2)}</div>
                 </div>
               </div>

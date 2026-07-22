@@ -23,7 +23,8 @@ export function CartProvider({children}:{children:React.ReactNode}) {
    setTimeout(() => setToast(""), 2500);
  };
   const remove = (slug:string) => set(p => p.filter(x=>x.slug!==slug));
-  const updateQty = (slug:string, delta:number) => set(p => p.map(x=>x.slug===slug?{...x,qty:Math.max(0,x.qty+delta)}:x).filter(x=>x.qty>0));
+ const updateQty = (slug:string, delta:number) => set(p => p.map(x=>x.slug===slug?{...x,qty:Math.max(0,x.qty+delta)}:x).filter(x=>x.qty>0));
+  const setQty = (slug:string, qty:number) => set(p => p.map(x=>x.slug===slug?{...x,qty:Math.max(1,Math.min(10,qty))}:x));
   const total = items.reduce((s,x)=>s+x.price*x.qty,0);
   const count = items.reduce((s,x)=>s+x.qty,0);
   return <C.Provider value={{items,add,remove,updateQty,total,count,toast}}>{children}</C.Provider>;
