@@ -255,8 +255,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
           {/* Persona Tabs */}
           <div className="inline-flex bg-black/[0.04] border border-[#d1d5db] p-1 rounded-full mb-8">
-            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCharCode(0x1F464)} Personal Retail</button>
-            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCharCode(0x1F3E2)} Enterprise B2B</button>
+            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F464)} Personal Retail</button>
+            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F3E2)} Enterprise B2B</button>
           </div>
 
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide mb-4 bg-white text-[#7c3aed] border border-[#d1d5db]">
@@ -295,6 +295,17 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </div>
         </div>
       </section>
+
+      {heroPersona === "enterprise" && (
+      <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
+        <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">Ready to Scale Your Licensing?</h2>
+        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">Get volume pricing, dedicated support, and full SAM Audit compliance.</p>
+        <div className="flex justify-center gap-4 flex-wrap items-center">
+          <a href="mailto:admin@keys-starter.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
+          <span className="text-sm text-[#7c3aed] font-semibold">admin@keys-starter.com</span>
+        </div>
+      </section>
+      )}
 
 {heroPersona === "enterprise" && (
       <section className="py-12 bg-white border-b border-[#e8e8ed] overflow-hidden">
@@ -984,16 +995,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       
 
-      {heroPersona === "enterprise" && (
-      <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
-        <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">Ready to Scale Your Licensing?</h2>
-        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">Get volume pricing, dedicated support, and full SAM Audit compliance.</p>
-        <div className="flex justify-center gap-4 flex-wrap items-center">
-          <a href="mailto:admin@keys-starter.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
-          <span className="text-sm text-[#7c3aed] font-semibold">admin@keys-starter.com</span>
-        </div>
-      </section>
-      )}
+      
 
 
       {/* Global Interactive Notification Toast */}
