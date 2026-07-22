@@ -243,88 +243,59 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       )}
       
-      {/* Navigation Bar */}
+            {/* Navigation Bar */}
 
       {}
-      {/* Hero Section */}
-      <section id="hero" className="relative pt-32 pb-20 overflow-hidden bg-white">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-green-300/10 rounded-full blur-[100px] pointer-events-none"></div>
+      {/* Hero Section - Platinum Digital Style */}
+      <section id="hero" className="relative min-h-[520px] flex items-center justify-center overflow-hidden bg-[#fafafa] pt-32 pb-20">
+        <div className="absolute w-[450px] h-[450px] rounded-full blur-[100px] opacity-60 pointer-events-none z-0 bg-[#e5e7eb] top-[-100px] left-[35%]"></div>
+        <div className="absolute w-[300px] h-[300px] rounded-full blur-[80px] opacity-40 pointer-events-none z-0 bg-[#c4b5fd] bottom-[-80px] right-[10%]"></div>
 
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
-          <p className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mb-3">{t("hero.title")}</p>
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#1d1d1f] mb-6 leading-tight">
-            {t('home.hero.headline')}
+          {/* Persona Tabs */}
+          <div className="inline-flex bg-black/[0.04] border border-[#d1d5db] p-1 rounded-full mb-8">
+            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCharCode(0x1F464)} Personal Retail</button>
+            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCharCode(0x1F3E2)} Enterprise B2B</button>
+          </div>
+
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide mb-4 bg-white text-[#7c3aed] border border-[#d1d5db]">
+            {heroPersona==="retail" ? "Genuine Retail License Portal" : "Enterprise Volume Licensing"}
+          </span>
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-[#111827]">
+            {heroPersona==="retail" ? t("home.hero.headline") : "Enterprise Compliance & SAM Audit Support"}
           </h1>
-          <p className="text-lg sm:text-xl text-[#86868b] font-normal mb-8 max-w-2xl mx-auto leading-relaxed">
-            {t('hero.desc')}
+          <p className="text-sm text-[#4b5563] max-w-xl mx-auto mb-8 leading-relaxed">
+            {heroPersona==="retail" ? t("hero.desc") : "Volume Licensing certificates and genuine keys for 100% compliance at low cost. Avoid legal penalties during Microsoft SAM Audits."}
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 mb-16 sm:flex-row">
-            <button 
-              onClick={() => scrollToSection('store')} 
-              className="w-full sm:w-auto bg-[#0078d4] hover:bg-[#0062b1] text-white font-medium px-8 py-3 rounded-full transition shadow-lg shadow-blue-500/10 text-center"
-            >
-              {t('hero.cta')}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+            <button onClick={() => scrollToSection("store")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition shadow-lg shadow-purple-500/10 text-center">
+              {heroPersona==="retail" ? t("hero.cta") : "Get Free Compliance Quote"}
             </button>
-            <button 
-              onClick={() => scrollToSection('business')} 
-              className="w-full sm:w-auto border border-[#d2d2d7] hover:bg-[#f5f5f7] text-[#1d1d1f] font-medium px-8 py-3 rounded-full transition text-center"
-            >
-              {t('hero.enterprise')} <span className="ml-1 text-xs">{" > "}</span>
+            <button onClick={() => scrollToSection("business")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#f3f4f6] text-[#111827] border border-[#d1d5db] hover:bg-[#e5e7eb] transition text-center">
+              {heroPersona==="retail" ? t("hero.enterprise") : "Verify My License"} {String.fromCharCode(0x203A)}
             </button>
           </div>
 
-          {/* Core Trust anchors */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#f5f5f7]">
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">10 Min</span>
-              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.delivery")}</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">98.7%</span>
-              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.satisfaction")}</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">50K+</span>
-              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.activation")}</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold md:text-3xl text-[#1d1d1f]">100%</span>
-              <span className="text-xs text-[#86868b] mt-1">{t("hero.trust.verification")}</span>
-            </div>
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+            {heroPersona==="retail" ? (<>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">10 Min</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.delivery")}</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">98.7%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.satisfaction")}</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">50K+</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.activation")}</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">100%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.verification")}</div></div>
+            </>) : (<>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">VAT 13%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Dedicated Invoice</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">Enterprise</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Volume Licensing</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">PO Terms</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Corporate Transfer</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">24/7</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">SLA Account Manager</div></div>
+            </>)}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
-      <section id="testimonials" className="py-12 bg-white border-b border-[#f5f5f7] overflow-hidden">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase">Why Our Customers Trust Us</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Real reviews from verified buyers</h2>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="flex animate-scroll gap-4 px-4" style={{width:"max-content"}}>
-            {[...TESTIMONIALS,...TESTIMONIALS].map((t,i) => (
-              <div key={i} className="flex-shrink-0 w-[300px] sm:w-[340px] bg-[#f5f5f7] rounded-2xl p-5 border border-[#e8e8ed]">
-                <div className="text-yellow-500 text-sm mb-2">
-                  {[...Array(5)].map((_,s) => (
-                    <span key={s} className={s < t.stars ? "text-yellow-500" : "text-gray-300"}>
-                      {s < t.stars ? String.fromCharCode(9733) : String.fromCharCode(9734)}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-xs text-[#1d1d1f]/80 leading-relaxed mb-3 italic">&ldquo;{t.text}&rdquo;</p>
-                <p className="text-[11px] font-semibold text-[#1d1d1f]">- {t.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-     {/* Special Offer Section */}
+{/* Special Offer Section */}
      {specialOfferSkus.length > 0 && (
       <section id="special-offer" className="py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
