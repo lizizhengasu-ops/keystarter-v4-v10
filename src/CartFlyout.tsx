@@ -31,8 +31,8 @@ export default function CartFlyout({open,onClose}) {
       <div style={{display:"flex",justifyContent:"space-between",fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:16}}>
         <span>{t("cart.subtotal")}</span><span>{new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(cart.total)}</span>
       </div>
-      <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:14,background:"#0071e3",color:"#fff",padding:"10px 18px",borderRadius:980,textDecoration:"none",textAlign:"center",marginBottom:8}}>{t("cart.checkout")}</Link>
-      <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:13,color:"#0071e3",textDecoration:"none",textAlign:"center"}}>{t("cart.view")}</Link>
+      <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:14,background:"#7c3aed",color:"#fff",padding:"10px 18px",borderRadius:980,textDecoration:"none",textAlign:"center",marginBottom:8}}>{t("cart.checkout")}</Link>
+      <Link to="/cart" onClick={onClose} style={{display:"block",fontSize:13,color:"#7c3aed",textDecoration:"none",textAlign:"center"}}>{t("cart.view")}</Link>
     </div>
   );
 }

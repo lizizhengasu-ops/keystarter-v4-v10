@@ -17,7 +17,7 @@ export default function V4Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Link to="/store" className="w-full sm:w-auto bg-[#0078d4] hover:bg-[#0062b1] text-white font-medium px-8 py-3 rounded-full transition shadow-lg shadow-blue-500/10 text-center">
+          <Link to="/store" className="w-full sm:w-auto bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-medium px-8 py-3 rounded-full transition shadow-lg shadow-blue-500/10 text-center">
             Shop Licenses Now
           </Link>
           <a href="#b2b-section" className="w-full sm:w-auto border border-[#d2d2d7] hover:bg-[#f5f5f7] text-[#1d1d1f] font-medium px-8 py-3 rounded-full transition text-center">

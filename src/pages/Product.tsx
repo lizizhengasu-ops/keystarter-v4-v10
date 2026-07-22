@@ -52,7 +52,7 @@ export default function ProductPage() {
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-[#86868b]">
-        <Link to="/" className="hover:text-[#0078d4] transition">Home</Link>
+        <Link to="/" className="hover:text-[#7c3aed] transition">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[#1d1d1f]">{product?.name || slug}</span>
       </div>
@@ -69,15 +69,15 @@ export default function ProductPage() {
       {!loading && product && (
       <div className="max-w-7xl mx-auto px-6 pb-16 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>
-          <div className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#0078D4]/10 to-[#005A9E]/10 flex items-center justify-center">
-            <span className="text-8xl font-bold text-[#0078D4]/20">{product.name[0]}</span>
+          <div className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
+            <span className="text-8xl font-bold text-[#7c3aed]/20">{product.name[0]}</span>
           </div>
         </div>
         <div>
-          <div className="text-[10px] text-[#0078d4] font-semibold uppercase tracking-wider mb-2">Genuine Digital License</div>
+          <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">Genuine Digital License</div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-2xl font-extrabold text-[#0078d4]">
+            <span className="text-2xl font-extrabold text-[#7c3aed]">
               {new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(product.price)}
             </span>
             <span className="text-xs text-[#86868b] line-through">$199.00</span>
@@ -91,17 +91,17 @@ export default function ProductPage() {
               {editions.map((e,i) => (
                 <div key={i} onClick={()=>setSelEdition(i)}
                   className={"flex-1 p-3 rounded-xl cursor-pointer text-center border-2 transition-all " +
-                    (selEdition===i ? "border-[#0078d4] bg-blue-50" : "border-[#e8e8ed] bg-white")}>
+                    (selEdition===i ? "border-[#7c3aed] bg-blue-50" : "border-[#e8e8ed] bg-white")}>
                   <div className="text-xs font-semibold">{e.name}</div>
                   <div className="text-[10px] text-[#86868b]">{e.desc}</div>
-                  <div className="text-xs font-semibold text-[#0078d4] mt-1">{e.price}</div>
+                  <div className="text-xs font-semibold text-[#7c3aed] mt-1">{e.price}</div>
                 </div>
               ))}
             </div>
           </div>
 
           <button onClick={()=>cart.add({slug:product.slug,name:product.name,price:product.price})}
-            className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3.5 rounded-xl transition mb-2">
+            className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.add_to_cart")}
           </button>
           <p className="text-[10px] text-[#86868b] text-center">Genuine product - Instant delivery - Secure checkout</p>
@@ -135,7 +135,7 @@ export default function ProductPage() {
       {!loading && !product && (
         <div className="max-w-7xl mx-auto px-6 pb-16 text-center py-20">
           <div className="text-lg text-[#86868b]">{t("notfound.title")}</div>
-          <Link to="/" className="text-sm text-[#0078d4] hover:underline mt-4 inline-block">{t("notfound.back")}</Link>
+          <Link to="/" className="text-sm text-[#7c3aed] hover:underline mt-4 inline-block">{t("notfound.back")}</Link>
         </div>
       )}
     </div>

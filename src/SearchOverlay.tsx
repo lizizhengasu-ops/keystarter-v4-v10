@@ -98,7 +98,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
                       <p style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{p.n}</p>
                       <p style={{fontSize:12,color:"#6e6e73"}}>{p.d}</p>
                     </div>
-                    <p style={{fontSize:15,fontWeight:400,color:"#0071e3"}}>${p.p}</p>
+                    <p style={{fontSize:15,fontWeight:400,color:"#7c3aed"}}>${p.p}</p>
                   </Link>
                 ))}
               </>
@@ -115,7 +115,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
             <p style={{fontSize:11,fontWeight:600,color:"#6e6e73",textTransform:"uppercase",letterSpacing:".05em",marginBottom:12}}>{t("search.quick_links")}</p>
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
               {[{n:"Windows 11 Pro - ",s:"windows-11-pro"},{n:"Windows 10 Pro - ",s:"windows-10-pro"},{n:"Office 2021 Pro - ",s:"office-2021-pro"},{n:"Win Server 2022 - ",s:"win-svr-2022"},{n:t("store.title"),s:"store",a:"/store"}].map((l,i) => (
-                <Link key={i} to={l.a||"/product/"+l.s} onClick={onClose} style={{display:"block",fontSize:15,fontWeight:400,color:"#0071e3",textDecoration:"none",padding:"6px 0",borderBottom:i<4?"1px solid #f0f0f2":"none",transition:"color 0.2s"}} onMouseEnter={e=>e.currentTarget.style.color="#0077ed"} onMouseLeave={e=>e.currentTarget.style.color="#0071e3"}>{l.n}</Link>
+                <Link key={i} to={l.a||"/product/"+l.s} onClick={onClose} style={{display:"block",fontSize:15,fontWeight:400,color:"#7c3aed",textDecoration:"none",padding:"6px 0",borderBottom:i<4?"1px solid #f0f0f2":"none",transition:"color 0.2s"}} onMouseEnter={e=>e.currentTarget.style.color="#0077ed"} onMouseLeave={e=>e.currentTarget.style.color="#7c3aed"}>{l.n}</Link>
               ))}
             </div>
           </div>

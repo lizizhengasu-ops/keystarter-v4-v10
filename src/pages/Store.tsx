@@ -6,10 +6,10 @@ import { fetchProducts } from "../api/woocommerce";
 import type { SPAProduct } from "../api/woocommerce";
 
 const categories = [
-  {name:"Windows 11 Pro", slug:"windows-11-pro", color:"#0078D4", items:["Single PC","2 PCs","Pro + Office Bundle","Pro + Office + Visio"]},
+  {name:"Windows 11 Pro", slug:"windows-11-pro", color:"#7c3aed", items:["Single PC","2 PCs","Pro + Office Bundle","Pro + Office + Visio"]},
   {name:"Windows 10 Pro", slug:"windows-10-pro", color:"#106EBE", items:["Single PC","2 PCs","Pro + Office Bundle","Server 2019 + Office"]},
   {name:"Office 2021 Pro", slug:"office-2021-pro", color:"#D83B01", items:["Office 2021 Pro Plus","Office 2019 Pro Plus","Office 2016 Pro Plus","2024 Pro Plus"]},
-  {name:"Server and Tools", slug:"win-svr-2022", color:"#005A9E", items:["Server 2019","Server 2022","Exchange 2019","SQL Server 2019"]}
+  {name:"Server and Tools", slug:"win-svr-2022", color:"#6d28d9", items:["Server 2019","Server 2022","Exchange 2019","SQL Server 2019"]}
 ];
 
 export default function StorePage() {
@@ -33,7 +33,7 @@ export default function StorePage() {
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
-      <div className="bg-gradient-to-r from-[#0078D4] via-[#106EBE] to-[#005A9E] text-white px-6 sm:px-12 py-20 text-center">
+      <div className="bg-gradient-to-r from-[#7c3aed] via-[#106EBE] to-[#6d28d9] text-white px-6 sm:px-12 py-20 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("store.title")}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto">{t("store.desc")}</p>
       </div>
@@ -51,7 +51,7 @@ export default function StorePage() {
                   <span className="text-[#86868b]">{it}</span>
                 </div>
               ))}
-              <Link to={"/products"} className="inline-block mt-3 text-xs font-semibold text-[#0078d4] hover:underline">View Details &gt;</Link>
+              <Link to={"/products"} className="inline-block mt-3 text-xs font-semibold text-[#7c3aed] hover:underline">View Details &gt;</Link>
             </div>
           ))}
         </div>
@@ -77,8 +77,8 @@ export default function StorePage() {
             {products.slice(0, 8).map((x,i) => (
               <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
                 <Link to={`/product/${x.slug}`}>
-                  <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#0078D4]/10 to-[#005A9E]/10 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-[#0078D4]/30">{x.name[0]}</span>
+                  <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-[#7c3aed]/30">{x.name[0]}</span>
                   </div>
                 </Link>
                 <div className="text-[10px] text-[#86868b] font-semibold uppercase tracking-wider mb-1">Microsoft License</div>
@@ -86,11 +86,11 @@ export default function StorePage() {
                   <div className="text-sm font-bold mb-1">{x.name}</div>
                 </Link>
                 <div className="text-xs text-[#86868b] mb-2">{x.description?.substring(0, 50)}</div>
-                <div className="text-lg font-extrabold text-[#0078d4] mb-3">
+                <div className="text-lg font-extrabold text-[#7c3aed] mb-3">
                   {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
                 </div>
                 <button onClick={()=>add({slug:x.slug,name:x.name,price:x.price})}
-                  className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
+                  className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
               </div>
             ))}
           </div>

@@ -75,7 +75,7 @@ function Layout({ children }) {
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
-      <div className="fixed top-0 left-0 h-[2px] bg-[#0071e3] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
+      <div className="fixed top-0 left-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
 
       <nav className="fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -85,25 +85,25 @@ function Layout({ children }) {
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
             <MicrosoftLogo />
             <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
-            <span className="hidden sm:inline bg-blue-50 text-[#0078d4] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
+            <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
-                <button onClick={()=>scrollToSection("store")} className="hover:text-[#0078d4] transition-colors">{t("nav.store")}</button>
-                <button onClick={()=>scrollToSection("business")} className="hover:text-[#0078d4] transition-colors">{t("nav.enterprise")}</button>
-                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#0078d4] transition-colors">{t("nav.compare")}</button>
-                <button onClick={()=>scrollToSection("support")} className="hover:text-[#0078d4] transition-colors">{t("nav.support")}</button>
-               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#0078d4] transition-colors">{t("nav.portal")}</button>
-                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#0078d4] transition-colors">{t("nav.blog")}</button>
+                <button onClick={()=>scrollToSection("store")} className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</button>
+                <button onClick={()=>scrollToSection("business")} className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</button>
+                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</button>
+                <button onClick={()=>scrollToSection("support")} className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</button>
+               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#7c3aed] transition-colors">{t("nav.portal")}</button>
+                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#7c3aed] transition-colors">{t("nav.blog")}</button>
 </>
             ) : (
               <>
-                <Link to="/pricing" className="hover:text-[#0078d4] transition-colors">{t("nav.pricing")}</Link><Link to="/#store" className="hover:text-[#0078d4] transition-colors">{t("nav.store")}</Link>
-                <Link to="/b2b" className="hover:text-[#0078d4] transition-colors">{t("nav.enterprise")}</Link>
-                <Link to="/#compare" className="hover:text-[#0078d4] transition-colors">Compare</Link>
-               <Link to="/support" className="hover:text-[#0078d4] transition-colors">{t("nav.support")}</Link>
-                <Link to="/blog" className="hover:text-[#0078d4] transition-colors">Blog</Link>
+                <Link to="/pricing" className="hover:text-[#7c3aed] transition-colors">{t("nav.pricing")}</Link><Link to="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</Link>
+                <Link to="/b2b" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</Link>
+                <Link to="/#compare" className="hover:text-[#7c3aed] transition-colors">Compare</Link>
+               <Link to="/support" className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</Link>
+                <Link to="/blog" className="hover:text-[#7c3aed] transition-colors">Blog</Link>
 </>
             )}
           </div>
@@ -118,7 +118,7 @@ function Layout({ children }) {
             <div className="relative">
               <button onClick={()=>setShowCart(!showCart)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={"Cart (" + cart.count + ")"}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                {cart.count > 0 && (<span className="absolute -top-1.5 -right-1.5 bg-[#0071e3] text-white text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center leading-none">{cart.count}</span>)}
+                {cart.count > 0 && (<span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center leading-none">{cart.count}</span>)}
               </button>
               <CartFlyout open={showCart} onClose={() => setShowCart(false)} />
             </div>
@@ -173,8 +173,8 @@ function Layout({ children }) {
           <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">{t("footer.stay_updated")}</h4>
           <p className="text-xs text-white/50 mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#0078d4]" />
-            <button onClick={function(){ var e=document.getElementById("newsletter-email"); if(e&&e.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e.value})}).then(function(r){return r.json()}).then(function(d){ e.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#0078d4] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#0062b1] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
+            <input id="newsletter-email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#7c3aed]" />
+            <button onClick={function(){ var e=document.getElementById("newsletter-email"); if(e&&e.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:e.value})}).then(function(r){return r.json()}).then(function(d){ e.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">

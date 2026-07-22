@@ -16,7 +16,7 @@ export default function CartPage() {
               <svg className="w-24 h-24 mx-auto text-[#d2d2d7]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             </div>
             <div className="text-lg text-[#86868b] mb-6">{t("cart.empty")}</div>
-            <Link to="/store" className="inline-block bg-[#0078d4] text-white px-8 py-3 text-sm font-semibold rounded-xl hover:bg-[#0062b1] transition">{t("cart.browse")}</Link>
+            <Link to="/store" className="inline-block bg-[#7c3aed] text-white px-8 py-3 text-sm font-semibold rounded-xl hover:bg-[#6d28d9] transition">{t("cart.browse")}</Link>
           </div>
         ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -24,8 +24,8 @@ export default function CartPage() {
             {items.map((it,i)=>(
               <div key={i} className="bg-white rounded-2xl p-5 border border-[#e8e8ed] flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                 <div className="flex-1 flex gap-4 items-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#0078D4]/10 to-[#005A9E]/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-[#0078D4]/30">{it.name[0]}</span>
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl font-bold text-[#7c3aed]/30">{it.name[0]}</span>
                   </div>
                   <div>
                     <div className="text-sm font-bold">{it.name}</div>
@@ -50,8 +50,8 @@ export default function CartPage() {
             <div className="flex justify-between text-xs mb-3"><span>{t("cart.tax")}</span><span>${tax.toFixed(2)}</span></div>
             <div className="border-t border-[#e8e8ed] my-4 pt-4 flex justify-between text-lg font-bold"><span>{t("cart.total")}</span><span>${(total + tax).toFixed(2)}</span></div>
             <p className="text-[10px] text-green-600 mb-4 text-center">{t("cart.pay_hint")}</p>
-            <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));window.location.href="/checkout.html";}} className="v5-btn w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3 rounded-xl transition cursor-pointer">{t("cart.checkout")}</button>
-            <Link to="/store" className="block text-center py-2 text-xs text-[#0078d4] hover:underline mt-3">{t("cart.continue")}</Link>
+            <button onClick={()=>{sessionStorage.setItem("ks_checkout_cart",JSON.stringify(items));window.location.href="/checkout.html";}} className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3 rounded-xl transition cursor-pointer">{t("cart.checkout")}</button>
+            <Link to="/store" className="block text-center py-2 text-xs text-[#7c3aed] hover:underline mt-3">{t("cart.continue")}</Link>
           </div>
         </div>
         )}

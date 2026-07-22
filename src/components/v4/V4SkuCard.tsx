@@ -7,7 +7,7 @@ function getBadge(slug, name) {
 function getIcon(slug) {
   if (slug.indexOf('office') >= 0) return { icon: 'fa-microsoft', bg: 'bg-orange-50 border-orange-100', color: '#d83b01' };
   if (slug.indexOf('server') >= 0 || slug.indexOf('exchange') >= 0 || slug.indexOf('sql') >= 0) return { icon: 'fa-database', bg: 'bg-purple-50 border-purple-100', color: '#5c2e91' };
-  return { icon: 'fa-windows', bg: 'bg-blue-50 border-blue-100', color: '#0078d4' };
+  return { icon: 'fa-windows', bg: 'bg-blue-50 border-blue-100', color: '#7c3aed' };
 }
 
 export default function V4SkuCard(props) {
@@ -48,7 +48,7 @@ export default function V4SkuCard(props) {
       <div className='flex items-center justify-between pt-4 border-t border-[#f5f5f7]'>
         <span className='text-xl font-bold text-[#1d1d1f]'>{price}</span>
         <button onClick={function() { onAdd(p); }}
-                className='bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-medium px-5 py-2 rounded-full transition'>
+                className='bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-medium px-5 py-2 rounded-full transition'>
           Add to Cart
         </button>
       </div>

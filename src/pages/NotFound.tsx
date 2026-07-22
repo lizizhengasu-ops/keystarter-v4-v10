@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="text-center">
         <div className="text-8xl font-bold text-[#1d1d1f] mb-4">{t("notfound.title")}</div>
         <p className="text-lg text-[#86868b] mb-8">{t("notfound.subtitle")}</p>
-        <Link to="/" className="inline-block bg-[#0078d4] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#0062b1] transition">{t("notfound.back")}</Link>
+        <Link to="/" className="inline-block bg-[#7c3aed] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition">{t("notfound.back")}</Link>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export default function BlogPage() {
                 <div className="text-[10px] text-[#86868b] mb-2">{new Date(p.date).toLocaleDateString()}</div>
                 <h2 className="text-lg font-bold mb-2" dangerouslySetInnerHTML={{__html: p.title.rendered}} />
                 <div className="text-sm text-[#86868b] mb-4" dangerouslySetInnerHTML={{__html: p.excerpt.rendered.substring(0,200)}} />
-                <Link to={"/blog/"+p.slug} className="text-sm text-[#0078d4] font-semibold hover:underline">{t("blog.read_more")} &rarr;</Link>
+                <Link to={"/blog/"+p.slug} className="text-sm text-[#7c3aed] font-semibold hover:underline">{t("blog.read_more")} &rarr;</Link>
               </div>
             ))}
           </div>

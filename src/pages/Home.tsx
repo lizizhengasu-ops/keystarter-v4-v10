@@ -16,7 +16,7 @@ const MicrosoftIcon = () => (
   </svg>
 );
 
-const WindowsIcon = ({ colorClass = "text-[#0078d4]" }) => (
+const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
   <svg className={`w-8 h-8 ${colorClass}`} viewBox="0 0 24 24" fill="currentColor">
     <path d="M0 3.449L9.75 2.1v9.45H0V3.449zM0 12.45h9.75v9.45L0 20.551v-8.1zM10.8 1.95L24 0v11.55H10.8V1.95zM10.8 12.45H24v11.55l-13.2-1.95v-9.6z" />
   </svg>
@@ -229,13 +229,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
   return (
     <div className="overflow-x-hidden bg-[#f5f5f7] text-[#1d1d1f] antialiased font-sans">
       {showOffer && (
-        <div className="relative bg-gradient-to-r from-[#0078d4] to-[#005a9e] text-white">
+        <div className="relative bg-gradient-to-r from-[#7c3aed] to-[#7c3aed] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3 text-sm">
               <span className="hidden sm:inline text-lg">🔥</span>
               <span className="font-semibold whitespace-nowrap">{t("home.offer.title")}</span>
               <span className="text-white/80">{t("home.offer.desc")}</span>
-              <button onClick={() => scrollToSection("special-offer")} className="bg-white text-[#0078d4] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
+              <button onClick={() => scrollToSection("special-offer")} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{t("home.offer.cta")}</button>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -300,7 +300,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] overflow-hidden ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase">Why Our Customers Trust Us</span>
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Why Our Customers Trust Us</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Real reviews from verified buyers</h2>
           </div>
         </div>
@@ -463,20 +463,20 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                       <span className="text-xs text-[#86868b] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
                     </div>
                     {sku.auditInfo && (
-                      <span className="text-[11px] text-[#0078d4] font-medium">✓ {t('home.sku.'+sku.id.replace(/-/g,'')+'.audit', sku.auditInfo)}</span>
+                      <span className="text-[11px] text-[#7c3aed] font-medium">✓ {t('home.sku.'+sku.id.replace(/-/g,'')+'.audit', sku.auditInfo)}</span>
                     )}
                   </div>
                   
                   <div className="flex gap-2">
                     <button 
                       onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price}); }} 
-                      className="flex-1 border-2 border-[#0078d4] text-[#0078d4] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"
+                      className="flex-1 border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
                     <button 
                       onClick={(e) => { e.stopPropagation(); cart.add({slug: sku.id, name: sku.title, price: getLiveData(sku).price});window.location.href='/cart';}} 
-                      className="flex-1 bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-semibold py-2.5 rounded-xl transition"
+                      className="flex-1 bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.buy_now', 'Buy Now')}
                     </button>
@@ -499,7 +499,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             
             {/* Business value propositions */}
             <div>
-              <span className="text-[#0078d4] text-xs font-bold tracking-wider uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+              <span className="text-[#7c3aed] text-xs font-bold tracking-wider uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
                 Enterprise B2B Compliance
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6 mb-6 leading-tight">
@@ -511,7 +511,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
               <div className="space-y-4">
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
-                  <div className="text-[#0078d4] text-xl pt-0.5">🛡️</div>
+                  <div className="text-[#7c3aed] text-xl pt-0.5">🛡️</div>
                   <div>
                     <h4  className="text-sm font-semibold">100% Official Compliance Verified</h4>
                     <p className="text-xs text-[#86868b] mt-1">{t("home.compare.enterprise_desc")}</p>
@@ -535,13 +535,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <form onSubmit={handleB2BSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.company")}</label>
-                  <input type="text" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
+                  <input type="text" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.employees")}</label>
-                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
+                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>5 - 20 Units</option>
                       <option>21 - 50 Units</option>
                       <option>51 - 100 Units</option>
@@ -550,7 +550,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.needs")}</label>
-                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition">
+                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>{t("home.b2b.windows")}</option>
                       <option>{t("home.b2b.m365")}</option>
                       <option>{t("home.b2b.server")}</option>
@@ -562,16 +562,16 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.contact_name")}</label>
-                    <input type="text" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
+                    <input type="text" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.phone")}</label>
-                    <input type="text" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" />
+                    <input type="text" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                   </div>
                 </div>
 
                 <div>
-                  <button type="submit" className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-bold py-3.5 rounded-lg transition shadow-lg shadow-blue-500/10">
+                  <button type="submit" className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-bold py-3.5 rounded-lg transition shadow-lg shadow-blue-500/10">
                     Get Free Custom Quote
                   </button>
                 </div>
@@ -588,7 +588,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="compare" className="py-20 bg-white">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
-            <p className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("home.compare.title")}</p>
+            <p className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("home.compare.title")}</p>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.compare.subtitle")}</h2>
             <p className="text-sm text-[#86868b] mt-3">Compare editions to find the most cost-effective option.</p>
           </div>
@@ -639,7 +639,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="support" className="py-20 bg-[#f5f5f7]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-16 text-center">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("home.support.help_guides")}</span>
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("home.support.help_guides")}</span>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.support.tech_center")}</h2>
             <p className="text-sm text-[#86868b] mt-3">{t("home.b2b.self_service")}</p>
           </div>
@@ -649,19 +649,19 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="text-3xl mb-4">🔑</div>
               <h4 className="text-base font-bold mb-2">{t("home.support.activation_faq")}</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("home.support.activation_guide")}</p>
-              <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#0078d4] hover:underline focus:outline-none text-left">Go to User Portal{' > '}</button>
+              <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#7c3aed] hover:underline focus:outline-none text-left">Go to User Portal{' > '}</button>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📦</div>
               <h4 className="text-base font-bold mb-2">{t("support.download_title")}</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.download_desc")}</p>
-              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#0078d4] hover:underline">Go to Microsoft Activation Site{' > '}</a>
+              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#7c3aed] hover:underline">Go to Microsoft Activation Site{' > '}</a>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
               <h4 className="text-base font-bold mb-2">{t("support.server_title")}</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.server_desc")}</p>
-              <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#0078d4] hover:underline text-left focus:outline-none">{t("home.support.contact_expert")} &gt;</button>
+              <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#7c3aed] hover:underline text-left focus:outline-none">{t("home.support.contact_expert")} &gt;</button>
             </div>
           </div>
 
@@ -674,7 +674,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="pt-4 first:pt-0">
                 <button 
                   onClick={() => toggleFAQ(1)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
+                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
                 >
                   <span>{t("faq.q1.question")}</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 1 ? 'rotate-180' : ''}`}>▼</span>
@@ -689,7 +689,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="pt-4">
                 <button 
                   onClick={() => toggleFAQ(2)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
+                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
                 >
                   <span>Q2：After purchasing, can I still use the key after reinstalling or changing devices?</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 2 ? 'rotate-180' : ''}`}>▼</span>
@@ -704,7 +704,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="pt-4">
                 <button 
                   onClick={() => toggleFAQ(3)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition"
+                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
                 >
                   <span>Q3：My company faces a compliance audit. Can these keys pass official SAM Audit?</span>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 3 ? 'rotate-180' : ''}`}>▼</span>
@@ -727,7 +727,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="blog-preview" className={`py-20 bg-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
             <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.blog.guides_resources")}</h2>
             <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">{t("blog.section_desc")}</p>
           </div>
@@ -737,15 +737,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             ) : blogPosts.slice(0, 3).map(post => (
               <a key={post.id} href={post.link} className="block bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group">
                 <div className="p-5">
-                  <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#0078d4] transition-colors mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                  <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#7c3aed] transition-colors mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
                   <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-                  <span className="text-xs text-[#0078d4] font-medium">{t("home.blog.read_more")}</span>
+                  <span className="text-xs text-[#7c3aed] font-medium">{t("home.blog.read_more")}</span>
                 </div>
               </a>
             ))}
           </div>
           <div className="text-center mt-10">
-            <a href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-[#0078d4] hover:text-[#005a9e] transition-colors">
+            <a href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-[#7c3aed] hover:text-[#7c3aed] transition-colors">
               View All Articles
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -756,7 +756,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="portal" className={`py-20 bg-white border-t border-[#e8e8ed] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="max-w-4xl px-4 mx-auto">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">{t("portal.label")}</span>
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("portal.label")}</span>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("portal.title")}</h2>
             <p className="text-sm text-[#86868b] mt-2">{t("portal.desc")}</p>
           </div>
@@ -794,7 +794,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <div>
                       <div className="flex items-center space-x-2">
                         <span className="text-sm font-bold text-[#1d1d1f]">{lic.title}</span>
-                        <span className={`text-[10px] font-semibold px-2 rounded ${lic.isOffice ? 'bg-red-50 text-[#f25022]' : 'bg-blue-50 text-[#0078d4]'}`}>
+                        <span className={`text-[10px] font-semibold px-2 rounded ${lic.isOffice ? 'bg-red-50 text-[#f25022]' : 'bg-blue-50 text-[#7c3aed]'}`}>
                           {lic.licenseType}
                         </span>
                       </div>
@@ -878,7 +878,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">{t("home.drawer.selected")}</span>
                   <h4 className="text-base font-bold mt-1 text-[#1d1d1f]">{checkoutProduct.title}</h4>
                   <div className="flex items-baseline justify-between mt-2">
-                    <span className="text-xl font-bold text-[#0078d4]">${checkoutProduct.price}</span>
+                    <span className="text-xl font-bold text-[#7c3aed]">${checkoutProduct.price}</span>
                     <span className="text-xs text-green-600">✓ Global Instant Delivery</span>
                   </div>
                 </div>
@@ -891,7 +891,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     placeholder="example@gmail.com" 
                     value={checkoutEmail}
                     onChange={(e) => setCheckoutEmail(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#0078d4] transition" 
+                    className="w-full px-3 py-2.5 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" 
                   />
                   <p className="text-[10px] text-gray-400">We will register an auto-delivery account with this email for key retrieval anytime.</p>
                 </div>
@@ -902,14 +902,14 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <div className="grid grid-cols-2 gap-3">
                     <div 
                       onClick={() => setPayMethod(1)} 
-                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 1 ? 'border-[#0078d4] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
+                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 1 ? 'border-[#7c3aed] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
                     >
                       <span className="text-xs font-semibold">PayPal</span>
                       <span className="text-xs text-blue-600">{payMethod === 1 ? '●' : '○'}</span>
                     </div>
                     <div 
                       onClick={() => setPayMethod(2)} 
-                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 2 ? 'border-[#0078d4] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
+                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 2 ? 'border-[#7c3aed] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
                     >
                       <span className="text-xs font-semibold">Stripe</span>
                       <span className="text-xs text-gray-600">{payMethod === 2 ? '●' : '○'}</span>
@@ -932,7 +932,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="pt-4">
                   <button 
                     type="submit" 
-                    className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white text-xs font-bold py-4 rounded-xl transition flex items-center justify-center space-x-1 shadow-lg shadow-blue-500/10"
+                    className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-bold py-4 rounded-xl transition flex items-center justify-center space-x-1 shadow-lg shadow-blue-500/10"
                   >
                     <span>💳 Complete Simulated Payment</span>
                   </button>
@@ -947,7 +947,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {}
 
           {testimonials.length > 0 && (
-          <section className="max-w-7xl mx-auto px-6 py-16">
+          <section className={`max-w-7xl mx-auto px-6 py-16 ${heroPersona!=="retail"?"persona-hidden":""}`}>
             <h2 className="text-2xl font-bold text-center mb-4">{t("testimonial.title")}</h2>
             <p className="text-sm text-[#86868b] text-center mb-10 max-w-xl mx-auto">{t("testimonial.desc")}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -965,6 +965,35 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             </div>
           </section>
           )}
+
+      {heroPersona === "enterprise" && (
+      <section className="py-16 bg-white border-t border-[#e8e8ed] overflow-hidden">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Trusted by Industry Leaders</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Our Partners and Integrations</h2>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="flex animate-scroll gap-6 px-4" style={{width:"max-content"}}>
+            {[["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN and Security"],["Stripe","Payment Processing"],["Namecheap","Domain and DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"],["Microsoft Partner","Authorized Reseller"],["Cloudflare","CDN and Security"],["Stripe","Payment Processing"],["Namecheap","Domain and DNS"],["RackNerd","VPS Hosting"],["Brevo","Email Delivery"],["PayPal","Global Payments"],["WooCommerce","E-Commerce"]].map((p,i) => <div key={i} className="flex-shrink-0 w-[220px] sm:w-[260px] bg-[#fafafa] rounded-2xl p-6 border border-[#e8e8ed] text-center shadow-sm hover:border-[#7c3aed]/30 transition-colors"><div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-lg font-bold text-[#7c3aed]">{p[0][0]}</div><div className="text-sm font-bold text-[#1d1d1f] mb-1">{p[0]}</div><div className="text-[11px] text-[#86868b]">{p[1]}</div></div>)}
+          </div>
+        </div>
+      </section>
+      )}
+
+
+      {heroPersona === "enterprise" && (
+      <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
+        <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">Ready to Scale Your Licensing?</h2>
+        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">Get volume pricing, dedicated support, and full SAM Audit compliance.</p>
+        <div className="flex justify-center gap-4 flex-wrap items-center">
+          <a href="mailto:admin@keys-starter.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
+          <span className="text-sm text-[#7c3aed] font-semibold">admin@keys-starter.com</span>
+        </div>
+      </section>
+      )}
+
 
       {/* Global Interactive Notification Toast */}
       {toast.visible && <Portal>

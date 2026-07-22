@@ -37,7 +37,7 @@
     price: apiItem.prices?.price ? parseFloat(apiItem.prices.price) / 100 : (local?.p || 0),
    description: apiItem.description || apiItem.short_description || local?.d || "",
    specs: local?.specs || DEFAULT_SPECS,
-   color: local?.c || "#0078D4",
+   color: local?.c || "#7c3aed",
    category: apiItem.categories?.[0]?.name || "",
    image: apiItem.images?.[0]?.src || "",
  };
@@ -55,7 +55,7 @@
     price: apiItem.price ? parseFloat(apiItem.price) / 100 : (local?.p || 0),
    description: apiItem.short_description || apiItem.description || local?.d || "",
      specs: local?.specs || DEFAULT_SPECS,
-     color: local?.c || "#0078D4",
+     color: local?.c || "#7c3aed",
      category: apiItem.categories?.[0]?.name || "",
      image: apiItem.images?.[0]?.src || "",
    };
@@ -84,7 +84,7 @@
        price: p.p,
        description: p.d,
        specs: p.specs || DEFAULT_SPECS,
-       color: p.c || "#0078D4",
+       color: p.c || "#7c3aed",
      }));
    }
  }

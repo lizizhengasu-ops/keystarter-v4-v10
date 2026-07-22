@@ -28,7 +28,7 @@ export default function SupportPage() {
         <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
           <h2 className="text-xl font-bold mb-2">{t("support.more")}</h2>
           <p className="text-sm text-[#86868b] mb-4">{t("support.email")}</p>
-          <a href="mailto:support@keystarter.com" className="inline-block bg-[#0078d4] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#0062b1] transition">{t("support.contact")}</a>
+          <a href="mailto:support@keystarter.com" className="inline-block bg-[#7c3aed] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition">{t("support.contact")}</a>
         </div>
       </div>
     </div>
