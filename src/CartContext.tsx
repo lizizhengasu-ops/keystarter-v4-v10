@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 type Item = { slug: string; name: string; price: number; qty: number };
-type Ctx = { items: Item[]; add: (i:Omit<Item,"qty">)=>void; remove: (s:string)=>void; updateQty: (slug:string, delta:number)=>void; total: number; count: number; toast: string };
+type Ctx = { items: Item[]; add: (i:Omit<Item,"qty">)=>void; remove: (s:string)=>void; updateQty: (slug:string, delta:number)=>void; setQty: (slug:string, qty:number)=>void; total: number; count: number; toast: string };
 const C = createContext<Ctx>(null!);
 export function CartProvider({children}:{children:React.ReactNode}) {
   const [items,set] = useState<Item[]>(() => {
