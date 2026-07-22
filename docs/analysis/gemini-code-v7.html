@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyStarter - 20 套高转化 Master Prompts & 双人群视觉预览与源码双向同步</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+        body { background-color: #030712; color: #f9fafb; padding: 20px 10px; }
+
+        /* 顶部控制面板 */
+        .control-panel { max-width: 1200px; margin: 0 auto 20px; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .panel-title { font-size: 18px; font-weight: 800; color: #60a5fa; margin-bottom: 4px; }
+        .panel-desc { font-size: 12px; color: #9ca3af; margin-bottom: 14px; }
+        
+        .switcher-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+        @media (max-width: 1000px) { .switcher-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .switcher-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .switch-btn { padding: 8px 4px; font-size: 11px; font-weight: 700; border-radius: 8px; border: 1px solid #1f2937; background: #1f2937; color: #d1d5db; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .switch-btn:hover { background: #374151; color: #fff; }
+        .switch-btn.active { background: #2563eb; border-color: #60a5fa; color: #fff; box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
+        .switch-btn span { font-size: 9px; font-weight: 400; opacity: 0.85; }
+
+        /* 双栏展示容器：左侧 Master Prompt，右侧 实际预览HTML源码 */
+        .code-dual-container { max-width: 1200px; margin: 0 auto 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 900px) { .code-dual-container { grid-template-columns: 1fr; } }
+
+        .code-box { background: #111827; border: 1px solid #2563eb; border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15); display: flex; flex-direction: column; }
+        .code-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .code-title-text { font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.5px; }
+        .copy-btn { padding: 6px 14px; font-size: 11px; font-weight: 700; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+        .copy-btn:hover { background: #3b82f6; }
+        
+        .code-text-area { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 11px; line-height: 1.5; color: #93c5fd; background: #030712; padding: 12px; border-radius: 8px; border: 1px solid #1e3a8a; height: 180px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; flex-grow: 1; }
+
+        /* 模拟浏览器容器 */
+        .browser-window { max-width: 1200px; margin: 0 auto; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .browser-bar { background: #111827; padding: 12px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .dot-r { background: #ff5f56; } .dot-y { background: #ffbd2e; } .dot-g { background: #27c93f; }
+        .address-bar { background: #030712; color: #6b7280; font-size: 12px; padding: 5px 16px; border-radius: 6px; flex-grow: 1; margin-left: 12px; font-family: monospace; border: 1px solid rgba(255,255,255,0.05); }
+
+        /* 画布与基本排版 */
+        .canvas { min-height: 520px; padding-bottom: 40px; position: relative; overflow: hidden; }
+        .top-notice { text-align: center; padding: 8px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+        .nav-bar { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; }
+        .logo-box { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -0.5px; }
+
+        /* 双人群切换 Tab */
+        .persona-tabs { display: inline-flex; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); padding: 4px; border-radius: 20px; margin-bottom: 20px; }
+        .tab-item { padding: 6px 18px; font-size: 12px; font-weight: 700; border-radius: 16px; cursor: pointer; opacity: 0.7; }
+        .tab-item.active { background: #2563eb; color: #fff; opacity: 1; box-shadow: 0 2px 10px rgba(37,99,235,0.4); }
+
+        .hero { max-width: 860px; margin: 20px auto 20px; text-align: center; padding: 0 20px; position: relative; z-index: 2; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.8px; }
+        .hero-h1 { font-size: 34px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.8px; }
+        .hero-p { font-size: 13px; line-height: 1.6; opacity: 0.85; margin-bottom: 24px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+        .cta-box { display: flex; justify-content: center; gap: 12px; }
+        .btn { padding: 11px 26px; border-radius: 10px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 940px; margin: 30px auto 0; padding: 0 20px; position: relative; z-index: 2; }
+        .stat-card { padding: 16px 12px; border-radius: 12px; text-align: center; }
+        .stat-num { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+        .stat-label { font-size: 10px; opacity: 0.75; font-weight: 600; text-transform: uppercase; }
+
+        .glow-orb { position: absolute; width: 450px; height: 450px; border-radius: 50%; filter: blur(120px); pointer-events: none; opacity: 0.3; z-index: 1; }
+
+        /* ================= 20 套色彩方案 CSS 规范 ================= */
+        .s-1 { background: #08090a; color: #f3f4f6; } .s-1 .glow-orb { background: #2563eb; top: -100px; left: 30%; } .s-1 .top-notice { background: rgba(37,99,235,0.1); color: #60a5fa; } .s-1 .hero-badge { background: rgba(37,99,235,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); } .s-1 .btn-main { background: #2563eb; color: #fff; } .s-1 .btn-sec { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.1); } .s-1 .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+        .s-2 { background: #f5f5f7; color: #1d1d1f; } .s-2 .glow-orb { display: none; } .s-2 .top-notice { background: #1d1d1f; color: #f5f5f7; } .s-2 .hero-badge { background: #e8e8ed; color: #1d1d1f; } .s-2 .btn-main { background: #0071e3; color: #fff; border-radius: 20px; } .s-2 .btn-sec { background: #e8e8ed; color: #1d1d1f; border-radius: 20px; } .s-2 .stat-card { background: #ffffff; color: #1d1d1f; border: 1px solid #e5e5e7; }
+        .s-3 { background: #090d16; color: #f0fdf4; } .s-3 .glow-orb { background: #059669; top: -100px; right: 20%; } .s-3 .top-notice { background: #064e3b; color: #34d399; } .s-3 .hero-badge { background: rgba(5,150,105,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); } .s-3 .btn-main { background: #10b981; color: #042f2e; font-weight: 800; } .s-3 .btn-sec { background: #111827; color: #f0fdf4; border: 1px solid #064e3b; } .s-3 .stat-card { background: #111827; color: #f0fdf4; border: 1px solid rgba(52,211,153,0.2); }
+        .s-4 { background: #0a0e1a; color: #f8fafc; } .s-4 .glow-orb { background: #7c3aed; top: -120px; left: 25%; } .s-4 .top-notice { background: #1e293b; color: #a78bfa; } .s-4 .hero-badge { background: rgba(124,58,237,0.15); color: #c084fc; border: 1px solid rgba(192,132,252,0.3); } .s-4 .btn-main { background: linear-gradient(90deg, #2563eb, #7c3aed); color: #fff; } .s-4 .btn-sec { background: #1e293b; color: #f8fafc; } .s-4 .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
+        .s-5 { background: #0f0f11; color: #f4f4f5; } .s-5 .glow-orb { background: #d97706; top: -150px; left: 35%; opacity: 0.2; } .s-5 .top-notice { background: #18181b; color: #fbbf24; } .s-5 .hero-badge { background: rgba(217,119,6,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); } .s-5 .btn-main { background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 800; } .s-5 .btn-sec { background: #18181b; color: #f4f4f5; border: 1px solid #27272a; } .s-5 .stat-card { background: #18181b; color: #f4f4f5; border: 1px solid #27272a; }
+        .s-6 { background: #f8fafc; color: #0f172a; } .s-6 .glow-orb { display: none; } .s-6 .top-notice { background: #0284c7; color: #fff; } .s-6 .hero-badge { background: #f0f9ff; color: #0284c7; border: 1px solid #bae6fd; } .s-6 .btn-main { background: #0284c7; color: #fff; } .s-6 .btn-sec { background: #f1f5f9; color: #0f172a; } .s-6 .stat-card { background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; }
+        .s-7 { background: #070a0f; color: #f0fdfa; } .s-7 .glow-orb { background: #14b8a6; top: -100px; left: 15%; } .s-7 .top-notice { background: rgba(20,184,166,0.08); color: #2dd4bf; } .s-7 .hero-badge { background: rgba(20,184,166,0.15); color: #2dd4bf; border: 1px solid rgba(45,212,191,0.3); } .s-7 .btn-main { background: #0d9488; color: #fff; } .s-7 .btn-sec { background: rgba(255,255,255,0.04); color: #f0fdfa; border: 1px solid rgba(20,184,166,0.2); } .s-7 .stat-card { background: rgba(20,184,166,0.04); border: 1px solid rgba(20,184,166,0.15); }
+        .s-8 { background: #0a0a0a; color: #fafafa; } .s-8 .glow-orb { display: none; } .s-8 .top-notice { background: #171717; color: #a3a3a3; } .s-8 .hero-badge { background: #171717; color: #fff; border-radius: 4px; border: 1px solid #404040; } .s-8 .btn-main { background: #ffffff; color: #000; border-radius: 4px; font-weight: 800; } .s-8 .btn-sec { background: #171717; color: #fff; border-radius: 4px; border: 1px solid #262626; } .s-8 .stat-card { background: #171717; color: #fff; border: 1px solid #262626; border-radius: 4px; }
+        .s-9 { background: #0d0b14; color: #fff1f2; } .s-9 .glow-orb { background: #f43f5e; top: -100px; right: 25%; opacity: 0.25; } .s-9 .top-notice { background: rgba(244,63,94,0.1); color: #fb7185; } .s-9 .hero-badge { background: rgba(244,63,94,0.15); color: #fb7185; border: 1px solid rgba(251,113,133,0.3); } .s-9 .btn-main { background: #e11d48; color: #fff; } .s-9 .btn-sec { background: rgba(255,255,255,0.05); color: #fff1f2; border: 1px solid rgba(244,63,94,0.2); } .s-9 .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(244,63,94,0.15); }
+        .s-10 { background: #030712; color: #f8fafc; } .s-10 .glow-orb { background: #0284c7; top: -100px; left: 30%; opacity: 0.4; } .s-10 .top-notice { background: rgba(2,132,199,0.15); color: #38bdf8; } .s-10 .hero-badge { background: rgba(2,132,199,0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); } .s-10 .btn-main { background: #0284c7; color: #fff; } .s-10 .btn-sec { background: rgba(255,255,255,0.06); color: #f8fafc; border: 1px solid rgba(255,255,255,0.15); } .s-10 .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
+        .s-11 { background: #020617; color: #f1f5f9; } .s-11 .glow-orb { background: #06b6d4; top: -100px; left: 20%; } .s-11 .top-notice { background: rgba(6,182,212,0.1); color: #22d3ee; } .s-11 .hero-badge { background: rgba(6,182,212,0.15); color: #22d3ee; border: 1px solid rgba(34,211,238,0.3); } .s-11 .btn-main { background: #0891b2; color: #fff; } .s-11 .btn-sec { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(6,182,212,0.2); } .s-11 .stat-card { background: rgba(6,182,212,0.04); border: 1px solid rgba(6,182,212,0.15); }
+        .s-12 { background: #fafafa; color: #18181b; } .s-12 .glow-orb { display: none; } .s-12 .top-notice { background: #18181b; color: #fafafa; } .s-12 .hero-badge { background: #f4f4f5; color: #18181b; border: 1px solid #e4e4e7; } .s-12 .btn-main { background: #18181b; color: #fff; } .s-12 .btn-sec { background: #f4f4f5; color: #18181b; border: 1px solid #e4e4e7; } .s-12 .stat-card { background: #ffffff; border: 1px solid #e4e4e7; }
+        .s-13 { background: #050b07; color: #ecfdf5; } .s-13 .glow-orb { background: #10b981; top: -100px; right: 30%; opacity: 0.25; } .s-13 .top-notice { background: rgba(16,185,129,0.1); color: #34d399; } .s-13 .hero-badge { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); } .s-13 .btn-main { background: #059669; color: #fff; } .s-13 .btn-sec { background: rgba(255,255,255,0.05); color: #ecfdf5; border: 1px solid rgba(16,185,129,0.2); } .s-13 .stat-card { background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.15); }
+        .s-14 { background: #0c0a09; color: #fafaf9; } .s-14 .glow-orb { background: #f59e0b; top: -100px; left: 25%; opacity: 0.25; } .s-14 .top-notice { background: rgba(245,158,11,0.1); color: #fbbf24; } .s-14 .hero-badge { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); } .s-14 .btn-main { background: #d97706; color: #fff; } .s-14 .btn-sec { background: rgba(255,255,255,0.05); color: #fafaf9; border: 1px solid rgba(245,158,11,0.2); } .s-14 .stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(245,158,11,0.15); }
+        .s-15 { background: #0b0914; color: #f5f3ff; } .s-15 .glow-orb { background: #8b5cf6; top: -100px; right: 20%; opacity: 0.3; } .s-15 .top-notice { background: rgba(139,92,246,0.1); color: #a78bfa; } .s-15 .hero-badge { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); } .s-15 .btn-main { background: #7c3aed; color: #fff; } .s-15 .btn-sec { background: rgba(255,255,255,0.05); color: #f5f3ff; border: 1px solid rgba(139,92,246,0.2); } .s-15 .stat-card { background: rgba(139,92,246,0.04); border: 1px solid rgba(139,92,246,0.15); }
+        .s-16 { background: #0f172a; color: #f8fafc; } .s-16 .glow-orb { display: none; } .s-16 .top-notice { background: #1e293b; color: #94a3b8; } .s-16 .hero-badge { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; } .s-16 .btn-main { background: #334155; color: #fff; } .s-16 .btn-sec { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; } .s-16 .stat-card { background: #1e293b; border: 1px solid #334155; }
+        .s-17 { background: #030a16; color: #f0f9ff; } .s-17 .glow-orb { background: #3b82f6; top: -100px; left: 35%; opacity: 0.35; } .s-17 .top-notice { background: rgba(59,130,246,0.12); color: #60a5fa; } .s-17 .hero-badge { background: rgba(59,130,246,0.18); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); } .s-17 .btn-main { background: #2563eb; color: #fff; box-shadow: 0 0 15px rgba(37,99,235,0.4); } .s-17 .btn-sec { background: rgba(255,255,255,0.05); color: #f0f9ff; border: 1px solid rgba(59,130,246,0.2); } .s-17 .stat-card { background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.15); }
+        .s-18 { background: #111111; color: #eeeeee; } .s-18 .glow-orb { display: none; } .s-18 .top-notice { background: #222222; color: #aaaaaa; } .s-18 .hero-badge { background: #222222; color: #cccccc; border: 1px solid #333333; } .s-18 .btn-main { background: #ffffff; color: #111111; font-weight: 800; } .s-18 .btn-sec { background: #222222; color: #eeeeee; border: 1px solid #333333; } .s-18 .stat-card { background: #1a1a1a; border: 1px solid #2a2a2a; }
+        .s-19 { background: #f0f9ff; color: #0c4a6e; } .s-19 .glow-orb { display: none; } .s-19 .top-notice { background: #0284c7; color: #fff; } .s-19 .hero-badge { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; } .s-19 .btn-main { background: #0284c7; color: #fff; } .s-19 .btn-sec { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; } .s-19 .stat-card { background: #ffffff; border: 1px solid #bae6fd; }
+        .s-20 { background: #050505; color: #facc15; } .s-20 .glow-orb { background: #facc15; top: -100px; left: 20%; opacity: 0.15; } .s-20 .top-notice { background: #facc15; color: #000; font-weight: 900; } .s-20 .hero-badge { background: rgba(250,204,21,0.1); color: #facc15; border: 1px solid #facc15; } .s-20 .btn-main { background: #facc15; color: #000; font-weight: 900; } .s-20 .btn-sec { background: #111111; color: #facc15; border: 1px solid #facc15; } .s-20 .stat-card { background: #111111; border: 1px solid #facc15; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 顶部控制面板 -->
+    <div class="control-panel">
+        <div class="panel-title">⚡ KeyStarter - 20 套全量 Master Prompts & 双人群视觉与HTML代码实时同步</div>
+        <div class="panel-desc">完美融合个人买家（B2C 正版便宜+发号）与企业买家（B2B 开票+合规）的双轨制信任架构，并完整呈现AI提示词与对应的实际页面HTML代码：</div>
+        
+        <div class="switcher-grid">
+            <button class="switch-btn active" onclick="setScheme(1)">01. Obsidian Cobalt<span>[深曜石钴蓝]</span></button>
+            <button class="switch-btn" onclick="setScheme(2)">02. Apple Studio<span>[苹果磨砂灰]</span></button>
+            <button class="switch-btn" onclick="setScheme(3)">03. Cyber Shield<span>[网络盾牌绿]</span></button>
+            <button class="switch-btn" onclick="setScheme(4)">04. Stripe Midnight<span>[Stripe 午夜]</span></button>
+            <button class="switch-btn" onclick="setScheme(5)">05. Titanium Gold<span>[钛金香槟金]</span></button>
+            <button class="switch-btn" onclick="setScheme(6)">06. Nordic Frost<span>[北欧冰霜白]</span></button>
+            <button class="switch-btn" onclick="setScheme(7)">07. Aurora Grid<span>[极光网格青]</span></button>
+            <button class="switch-btn" onclick="setScheme(8)">08. Carbon Matrix<span>[碳纤硬核黑]</span></button>
+            <button class="switch-btn" onclick="setScheme(9)">09. Velvet Rose<span>[钛金玫瑰红]</span></button>
+            <button class="switch-btn" onclick="setScheme(10)">10. Azure Mint<span>[蔚蓝薄荷绿]</span></button>
+            <button class="switch-btn" onclick="setScheme(11)">11. Neon Cyan<span>[深空霓虹青]</span></button>
+            <button class="switch-btn" onclick="setScheme(12)">12. Platinum White<span>[铂金纯净白]</span></button>
+            <button class="switch-btn" onclick="setScheme(13)">13. Matrix Green<span>[黑曜石矩阵]</span></button>
+            <button class="switch-btn" onclick="setScheme(14)">14. Amber Dark<span>[煤烟琥珀黄]</span></button>
+            <button class="switch-btn" onclick="setScheme(15)">15. Quantum Violet<span>[量子紫罗兰]</span></button>
+            <button class="switch-btn" onclick="setScheme(16)">16. Slate Mono<span>[板岩灰单色]</span></button>
+            <button class="switch-btn" onclick="setScheme(17)">17. Electric Blue<span>[电光发光蓝]</span></button>
+            <button class="switch-btn" onclick="setScheme(18)">18. Titanium Dark<span>[钛金石墨黑]</span></button>
+            <button class="switch-btn" onclick="setScheme(19)">19. Crystal Ice<span>[水晶纯冰白]</span></button>
+            <button class="switch-btn" onclick="setScheme(20)">20. Cyberpunk Yellow<span>[赛博高对比]</span></button>
+        </div>
+    </div>
+
+    <!-- 2. 双栏容器：左边显示 Master Prompt，右边显示 当前预览页面的实际HTML代码片段 -->
+    <div class="code-dual-container">
+        <!-- 左侧：AI Master Prompt -->
+        <div class="code-box">
+            <div class="code-header">
+                <div class="code-title-text" id="promptTitle">💡 方案 01 完整全量 AI Master Prompt</div>
+                <button class="copy-btn" onclick="copyText('promptDisplay', 'Master Prompt 已成功复制！')">一键复制 Prompt</button>
+            </div>
+            <div class="code-text-area" id="promptDisplay">Loading...</div>
+        </div>
+
+        <!-- 右侧：对应预览页面的 HTML 结构代码 -->
+        <div class="code-box" style="border-color: #10b981;">
+            <div class="code-header">
+                <div class="code-title-text" id="htmlTitle" style="color: #34d399;">💻 方案 01 预览区对应 HTML 代码</div>
+                <button class="copy-btn" style="background: #059669;" onclick="copyText('htmlDisplay', '页面实际HTML代码已成功复制！')">一键复制 HTML</button>
+            </div>
+            <div class="code-text-area" id="htmlDisplay" style="color: #6ee7b7; border-color: #064e3b;">Loading...</div>
+        </div>
+    </div>
+
+    <!-- 3. 模拟浏览器 UI 演示区 -->
+    <div class="browser-window">
+        <div class="browser-bar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <div class="address-bar">https://keys-starter.com</div>
+        </div>
+
+        <div id="canvas" class="canvas s-1">
+            <div class="glow-orb"></div>
+
+            <!-- 广播栏 -->
+            <div class="top-notice" id="topNotice">
+                🛡️ Official Microsoft Partner — Instant Auto-Delivery & 100% Genuine Activation Guaranteed
+            </div>
+
+            <!-- 导航栏 -->
+            <div class="nav-bar">
+                <div class="logo-box" id="logoBox">KeyStarter</div>
+                <div class="nav-links" style="display:flex; gap:20px; font-size:12px; font-weight:600; opacity:0.85;">
+                    <span>Store</span>
+                    <span>B2B Licensing</span>
+                    <span>VAT Invoice</span>
+                    <span>Key Verification</span>
+                </div>
+            </div>
+
+            <!-- Hero 主区块 -->
+            <div class="hero">
+                <!-- 双人群选项切换演示 -->
+                <div class="persona-tabs">
+                    <div class="tab-item active" onclick="switchPersona('b2c')">👤 个人正版授权 (Retail)</div>
+                    <div class="tab-item" onclick="switchPersona('b2b')">🏢 企业采购与发票 (Enterprise B2B)</div>
+                </div>
+
+                <div class="hero-badge" id="heroBadge">Genuine Retail License Portal</div>
+                <h1 class="hero-h1" id="heroH1">Your Trusted Source for Genuine Microsoft Licenses</h1>
+                <p class="hero-p" id="heroP">Authorized partner. Guaranteed 100% genuine OEM & Retail activation keys delivered to your inbox within 10 minutes. Save up to 80% with lifetime activation warranty.</p>
+                
+                <div class="cta-box" id="ctaBox">
+                    <button class="btn btn-main">Shop Personal Keys Now</button>
+                    <button class="btn btn-sec">Verify My License</button>
+                </div>
+            </div>
+
+            <!-- 信任指标 -->
+            <div class="stats-grid" id="statsGrid"></div>
+
+        </div>
+    </div>
+
+    <script>
+        // 20 套包含全量 SOP 规范的完整 AI Master Prompts
+        const masterPrompts = {
+            1: `[ROLE & PURPOSE]: You are an elite UI/UX designer specializing in high-conversion SaaS digital product stores for software keys.
+[DESIGN SYSTEM - OBSIDIAN COBALT DUAL-CORE]:
+- Background: Pitch black #08090a with deep midnight cobalt blue (#2563eb) radial glow orb.
+- Foreground Cards: Dark obsidian glassmorphism with 1px border (#ffffff14).
+- Primary CTA: Vibrant High-contrast Cobalt Blue (#2563eb) with glow shadow.
+[DUAL-PERSONA TRUST ARCHITECTURE]:
+- Top Bar: Toggle Tab for "Personal Retail" vs "Enterprise B2B Procurement".
+- B2C Selling Points: "10-Min Auto Delivery", "100% Activation Guarantee", "Save 80% Off".
+- B2B Selling Points: "13% VAT Tax Invoice Instant Download", "KMS Volume License".`,
+
+            2: `[ROLE & PURPOSE]: Senior UI Designer creating an ultra-clean, Apple-Studio inspired software store.
+[DESIGN SYSTEM - APPLE ENTERPRISE GLASS]:
+- Background: Neutral Studio Grey #f5f5f7 with ultra-refined frosted glass panels.
+- Typography: SF Pro Display style, ultra-crisp black text (#1d1d1f).
+- Primary CTA: Apple Blue #0071e3 with rounded-full pill buttons.`,
+
+            3: `[ROLE & PURPOSE]: Designer creating a high-security IT & software licensing store.
+[DESIGN SYSTEM - CYBER SHIELD EMERALD]:
+- Background: Deep cybersecurity obsidian #090d16 with glowing emerald green accents (#10b981).
+- Primary CTA: High-luminance Emerald Green (#10b981) with black bold text (#042f2e).`,
+
+            4: `[ROLE & PURPOSE]: Senior Product Designer building a Stripe-level fintech style software store.
+[DESIGN SYSTEM - STRIPE MIDNIGHT HYBRID]:
+- Background: Midnight Navy #0a0e1a with gradient violet glows (#7c3aed).
+- Primary CTA: Gradient button with crisp white typography.`,
+
+            5: `[ROLE & PURPOSE]: Executive UX Architect creating an ultra-exclusive B2B/B2C SaaS key store.
+[DESIGN SYSTEM - CHAMPAGNE TITANIUM VIP]:
+- Background: Dark slate carbon #0f0f11 with subtle champagne gold borders (#f59e0b).
+- Primary CTA: Metallic champagne gold gradient button.`,
+
+            6: `[ROLE & PURPOSE]: Scandinavian UI Designer crafting an open, honest, bright software marketplace.
+[DESIGN SYSTEM - NORDIC FROST ICY BLUE]:
+- Background: Frost white #f8fafc with icy blue accents (#0284c7) and clean borders.`,
+
+            7: `[ROLE & PURPOSE]: AI Product Designer crafting a next-generation software key marketplace.
+[DESIGN SYSTEM - AURORA CYBER MESH GRID]:
+- Background: Deep cyan black #070a0f with holographic mesh gradient glow (#14b8a6).`,
+
+            8: `[ROLE & PURPOSE]: Industrial Design Systems Specialist for Dev/IT Operations store.
+[DESIGN SYSTEM - CARBON INDUSTRIAL MATRIX]:
+- Background: Graphite carbon black #0a0a0a, monospace font elements.`,
+
+            9: `[ROLE & PURPOSE]: Boutique SaaS UI Designer creating a luxury dark digital license store.
+[DESIGN SYSTEM - VELVET ROSE TITANIUM]:
+- Background: Deep dark velvet plum #0d0b14 with rose titanium accents (#e11d48).`,
+
+            10: `[ROLE & PURPOSE]: Performance Marketing UI Designer creating a high-conversion key store.
+[DESIGN SYSTEM - AZURE MINT HIGH CONTRAST]:
+- Background: Dark high-contrast indigo #030712 with Azure Blue (#0284c7).`,
+
+            11: `[ROLE & PURPOSE]: Deep Space Cybernetic Store Designer.
+[DESIGN SYSTEM - DEEP SPACE NEON CYAN]: Dark #020617 canvas with neon cyan (#06b6d4) glows.`,
+
+            12: `[ROLE & PURPOSE]: Minimalist Corporate Designer for Platinum Web Store.
+[DESIGN SYSTEM - PLATINUM MINIMAL WHITE]: Clean #fafafa background, solid charcoal #18181b UI elements.`,
+
+            13: `[ROLE & PURPOSE]: Security Systems UI Designer.
+[DESIGN SYSTEM - EMERALD OBSIDIAN MATRIX]: Pitch black #050b07 with matrix emerald #10b981 highlights.`,
+
+            14: `[ROLE & PURPOSE]: E-Commerce Conversion Specialist.
+[DESIGN SYSTEM - SOLAR FLARE AMBER DARK]: Dark charcoal #0c0a09 with amber yellow (#f59e0b) urgency.`,
+
+            15: `[ROLE & PURPOSE]: AI Product Designer for Next-Gen Tech.
+[DESIGN SYSTEM - QUANTUM INDIGO VIOLET]: Deep purple-black #0b0914 canvas with violet (#8b5cf6) glows.`,
+
+            16: `[ROLE & PURPOSE]: IT Infrastructure UX Architect.
+[DESIGN SYSTEM - SLATE MONOCHROME PRO]: Cool slate #0f172a with monochrome cards.`,
+
+            17: `[ROLE & PURPOSE]: Modern E-Commerce Designer.
+[DESIGN SYSTEM - GLOWING ELECTRIC BLUE]: Deep sea blue #030a16 with neon blue #2563eb borders.`,
+
+            18: `[ROLE & PURPOSE]: Executive Portal Designer.
+[DESIGN SYSTEM - TITANIUM GRAPHITE DARK]: Neutral grey #111111 with titanium silver accents.`,
+
+            19: `[ROLE & PURPOSE]: Clean Tech Web Designer.
+[DESIGN SYSTEM - CRYSTAL PURE ICE]: Crystal blue-white #f0f9ff with sky blue #0284c7 accents.`,
+
+            20: `[ROLE & PURPOSE]: Hardcore Tech & Gaming UI Specialist.
+[DESIGN SYSTEM - CYBERPUNK HIGH-CONTRAST]: Pure black #050505 with cyber yellow #facc15 text.`
+        };
+
+        let currentScheme = 1;
+        let currentPersona = 'b2c';
+
+        function renderStats() {
+            const grid = document.getElementById('statsGrid');
+            if (currentPersona === 'b2c') {
+                grid.innerHTML = `
+                    <div class="stat-card"><div class="stat-num">10 Min</div><div class="stat-label">Auto Key Delivery</div></div>
+                    <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Genuine Guarantee</div></div>
+                    <div class="stat-card"><div class="stat-num">SAVE 80%</div><div class="stat-label">Retail Off Price</div></div>
+                    <div class="stat-card"><div class="stat-num">Lifetime</div><div class="stat-label">Activation Support</div></div>
+                `;
+            } else {
+                grid.innerHTML = `
+                    <div class="stat-card"><div class="stat-num">VAT 13%</div><div class="stat-label">Instant Tax Invoice</div></div>
+                    <div class="stat-card"><div class="stat-num">Volume</div><div class="stat-label">KMS & Tiered Discount</div></div>
+                    <div class="stat-card"><div class="stat-num">PO Payment</div><div class="stat-label">Corporate Transfer</div></div>
+                    <div class="stat-card"><div class="stat-num">1-on-1</div><div class="stat-label">Dedicated SLA Manager</div></div>
+                `;
+            }
+        }
+
+        function updateHtmlDisplay() {
+            const num = currentScheme;
+            const htmlCode = `<!-- 方案 ${num < 10 ? '0'+num : num} 实际渲染的 HTML 结构片段 -->
+<div class="canvas s-${num}">
+    <div class="glow-orb"></div>
+    <div class="top-notice">
+        🛡️ Official Microsoft Partner — Instant Auto-Delivery & 100% Genuine Activation Guaranteed
+    </div>
+    <div class="nav-bar">
+        <div class="logo-box">KeyStarter</div>
+        <div class="nav-links">Store | B2B Licensing | VAT Invoice</div>
+    </div>
+    <div class="hero">
+        <div class="persona-tabs">
+            <div class="tab-item ${currentPersona === 'b2c' ? 'active' : ''}">👤 个人正版授权</div>
+            <div class="tab-item ${currentPersona === 'b2b' ? 'active' : ''}">🏢 企业采购与发票</div>
+        </div>
+        <div class="hero-badge">${currentPersona === 'b2c' ? 'Genuine Retail License Portal' : 'Enterprise B2B Center'}</div>
+        <h1 class="hero-h1">${currentPersona === 'b2c' ? 'Your Trusted Source for Genuine Microsoft Licenses' : 'Compliant Software Licensing for IT & Corporate'}</h1>
+        <div class="cta-box">
+            <button class="btn btn-main">${currentPersona === 'b2c' ? 'Shop Personal Keys Now' : 'Get Corporate Quotation'}</button>
+            <button class="btn btn-sec">${currentPersona === 'b2c' ? 'Verify My License' : 'Download Invoice Sample'}</button>
+        </div>
+    </div>
+</div>`;
+            document.getElementById('htmlDisplay').innerText = htmlCode;
+        }
+
+        function switchPersona(persona) {
+            currentPersona = persona;
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (persona === 'b2c') {
+                tabs[0].classList.add('active');
+                document.getElementById('heroBadge').innerText = "Genuine Retail License Portal";
+                document.getElementById('heroH1').innerText = "Your Trusted Source for Genuine Microsoft Licenses";
+                document.getElementById('heroP').innerText = "Authorized partner. Guaranteed 100% genuine OEM & Retail activation keys delivered to your inbox within 10 minutes. Save up to 80% with lifetime activation warranty.";
+                document.getElementById('ctaBox').innerHTML = `<button class="btn btn-main">Shop Personal Keys Now</button><button class="btn btn-sec">Verify My License</button>`;
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('heroBadge').innerText = "Enterprise B2B & Volume Licensing Center";
+                document.getElementById('heroH1').innerText = "Compliant Software Licensing for IT & Corporate";
+                document.getElementById('heroP').innerText = "Full official VAT Tax Invoice support, corporate PO wire transfers, custom volume discounts, and 24/7 dedicated SLA support for IT managers.";
+                document.getElementById('ctaBox').innerHTML = `<button class="btn btn-main">Get Corporate Quotation</button><button class="btn btn-sec">Download Invoice Sample</button>`;
+            }
+            renderStats();
+            updateHtmlDisplay();
+        }
+
+        function setScheme(num) {
+            currentScheme = num;
+            const canvas = document.getElementById('canvas');
+            canvas.className = `canvas s-${num}`;
+            
+            document.getElementById('promptTitle').innerText = `💡 方案 ${num < 10 ? '0'+num : num} 完整全量 AI Master Prompt`;
+            document.getElementById('htmlTitle').innerText = `💻 方案 ${num < 10 ? '0'+num : num} 预览区对应 HTML 代码`;
+            
+            document.getElementById('promptDisplay').innerText = masterPrompts[num];
+            updateHtmlDisplay();
+
+            const btns = document.querySelectorAll('.switch-btn');
+            btns.forEach((btn, idx) => {
+                if (idx === num - 1) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        function copyText(elementId, successMsg) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            alert(successMsg);
+        }
+
+        // 初始化
+        setScheme(1);
+        renderStats();
+    </script>
+</body>
+</html>
