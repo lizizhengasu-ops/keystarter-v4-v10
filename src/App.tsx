@@ -90,6 +90,7 @@ function Layout({ children }) {
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
+                <button onClick={()=>window.location.href="/products"} className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</button>
                 <button onClick={()=>scrollToSection("store")} className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</button>
                 <button onClick={()=>scrollToSection("business")} className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</button>
                 <button onClick={()=>scrollToSection("compare")} className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</button>
@@ -99,7 +100,8 @@ function Layout({ children }) {
 </>
             ) : (
               <>
-                <Link to="/pricing" className="hover:text-[#7c3aed] transition-colors">{t("nav.pricing")}</Link><Link to="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</Link>
+                <Link to="/pricing" className="hover:text-[#7c3aed] transition-colors">{t("nav.pricing")}</Link><Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
+                <Link to="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</Link>
                 <Link to="/b2b" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</Link>
                 <Link to="/#compare" className="hover:text-[#7c3aed] transition-colors">Compare</Link>
                <Link to="/support" className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</Link>
@@ -245,6 +247,7 @@ export default function App() {
     </CartProvider>
   );
 }
+
 
 
 

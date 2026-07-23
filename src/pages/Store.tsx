@@ -17,7 +17,7 @@ export default function StorePage() {
   const [products, setProducts] = useState<SPAProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { addToCart } = useCart();
+  const { addToCart, buyNow } = useCart();
 
   useEffect(() => {
     let cancelled = false;
@@ -74,7 +74,7 @@ export default function StorePage() {
         
         {!loading && !error && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {products.slice(0, 8).map((x,i) => (
+            {products.map((x,i) => (
               <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
                 <Link to={`/product/${x.slug}`}>
                   <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
@@ -103,6 +103,8 @@ export default function StorePage() {
                   addToCart(x.slug, x.name, x.price);
                 }}
                   className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
+                <button onClick={() => buyNow(x.slug, x.name, x.price)}
+                  className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-semibold py-2.5 rounded-xl transition mt-2">{t('product.buy_now', 'Buy Now')}</button>
               </div>
             ))}
           </div>
@@ -111,3 +113,4 @@ export default function StorePage() {
     </div>
   );
 }
+

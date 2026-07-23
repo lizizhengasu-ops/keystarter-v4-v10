@@ -395,7 +395,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                    </div>
                  </div>
                   <div className="flex gap-2">
-                    <button onClick={(e) => { e.stopPropagation(); buyNow(sku.id, sku.title, getLiveData(sku).price) }}
+                    <button onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }}
                       className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
@@ -506,7 +506,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
                     <button 
-                      onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }} 
+                      onClick={(e) => { e.stopPropagation(); buyNow(sku.id, sku.title, getLiveData(sku).price) }} 
                       className="flex-1 bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.buy_now', 'Buy Now')}
