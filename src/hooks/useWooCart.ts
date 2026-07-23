@@ -27,7 +27,7 @@ export type WCItem = {
   id: number;
   name: string;
   quantity: number;
-  line_total: string;
+  totals: { line_total: string; line_subtotal?: string };
   images?: { src: string }[];
 };
 

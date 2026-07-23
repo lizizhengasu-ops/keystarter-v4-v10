@@ -40,7 +40,7 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
                   </p>
                 </div>
                 <p className="text-sm font-bold text-[#1d1d1f] flex-shrink-0">
-                  ${(parseInt(item.line_total || "0") / 100).toFixed(2)}
+                  ${(parseInt(item.totals?.line_total || "0") / 100).toFixed(2)}
                 </p>
               </div>
             ))}
