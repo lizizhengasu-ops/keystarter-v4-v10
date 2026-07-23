@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
 import { WC_IDS } from "../data/woo-ids";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
-const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
@@ -52,6 +51,7 @@ const PREMIUM_SKUS = [
   {id:'win-10-iot-2021-entry',category:'server',title:'Win 10 IoT Ent 2021 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2021 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
   {id:'win-10-iot-2019-entry',category:'server',title:'Win 10 IoT Ent 2019 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2019 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
 ];
+const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 
 export default function App() {
   const { t } = useTranslation();
