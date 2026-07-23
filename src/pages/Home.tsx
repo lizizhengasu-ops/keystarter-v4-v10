@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
 import { WC_IDS } from "../data/woo-ids";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
+const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
+
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
 // To eliminate any external CDN load latency or render flickering.
