@@ -26,11 +26,13 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
       const x = new XMLHttpRequest();
       x.open("GET", url, true);
       x.setRequestHeader("Content-Type", "application/json");
+      x.timeout = 15000;
       x.onload = () => {
         NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
-        ok(JSON.parse(x.responseText));
+        try { ok(JSON.parse(x.responseText)); } catch { ok({ items: [], items_count: 0 }); }
       };
       x.onerror = () => fail(x.statusText);
+      x.ontimeout = () => fail(new Error("timeout"));
       x.send();
     });
   }
@@ -40,8 +42,10 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     x.open(method, url, true);
     x.setRequestHeader("Content-Type", "application/json");
     x.setRequestHeader("X-WC-Store-API-Nonce", NONCE);
-    x.onload = () => ok(JSON.parse(x.responseText));
+    x.timeout = 15000;
+    x.onload = () => { try { ok(JSON.parse(x.responseText)); } catch { ok({ items: [], items_count: 0 }); } };
     x.onerror = () => fail(x.statusText);
+    x.ontimeout = () => fail(new Error("timeout"));
     body ? x.send(JSON.stringify(body)) : x.send();
   });
 }
