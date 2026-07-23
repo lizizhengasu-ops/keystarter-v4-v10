@@ -44,7 +44,7 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
       x.timeout = 15000;
       x.onload = () => {
         NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
-        try { ok(JSON.parse(x.responseText)); } catch { ok({ items: [], items_count: 0 }); }
+        try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); }
       };
       x.onerror = () => fail(x.statusText);
       x.ontimeout = () => fail(new Error("timeout"));
@@ -58,7 +58,7 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     x.setRequestHeader("Content-Type", "application/json");
     x.setRequestHeader("X-WC-Store-API-Nonce", NONCE);
     x.timeout = 15000;
-    x.onload = () => { try { ok(JSON.parse(x.responseText)); } catch { ok({ items: [], items_count: 0 }); } };
+    x.onload = () => { try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); } };
     x.onerror = () => fail(x.statusText);
     x.ontimeout = () => fail(new Error("timeout"));
     body ? x.send(JSON.stringify(body)) : x.send();
@@ -77,7 +77,7 @@ export function useWooCart() {
         const c = JSON.parse(cached);
         return { ...c, loading: false };
       }
-    } catch {}
+    } catch (e) { console.error('addItem error:', e);}
     return { items: [], items_count: 0, total: "0", currency: "USD", loading: true };
   });
 
@@ -91,9 +91,9 @@ export function useWooCart() {
         currency: d.totals?.currency_code || "USD",
         loading: false,
       };
-      try { sessionStorage.setItem(CART_CACHE_KEY, JSON.stringify(newCart)); } catch {}
+      try { sessionStorage.setItem(CART_CACHE_KEY, JSON.stringify(newCart)); } catch (e) { console.error('addItem error:', e);}
       setCart(newCart);
-    } catch {
+    } catch (e) { console.error('addItem error:', e);
       setCart((p) => ({ ...p, loading: false }));
     }
   }, []);
@@ -106,7 +106,7 @@ export function useWooCart() {
       try {
         await xhr("POST", API + "/add-item", { id, quantity: qty });
         await fetchCart();
-      } catch {
+      } catch (e) { console.error('addItem error:', e);
         setCart((p) => ({ ...p, loading: false }));
       }
     },

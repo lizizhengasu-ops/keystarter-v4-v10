@@ -1,8 +1,9 @@
-import { useWooCart, type WCItem } from "../hooks/useWooCart";
+import { type WCItem } from "../hooks/useWooCart";
+import { useCart } from "../data/CartContext";
 import Portal from "../Portal";
 
 export default function WooCartFlyout({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { cart } = useWooCart();
+  const { cart } = useCart();
 
   if (!open) return null;
 
