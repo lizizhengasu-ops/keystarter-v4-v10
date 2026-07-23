@@ -1,1 +1,0 @@
-Error: Component "Shuffle Grid" not found in registry

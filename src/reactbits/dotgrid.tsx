@@ -1,1 +1,0 @@
-Error: Component "DotGrid" not found in registry

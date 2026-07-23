@@ -1,1 +1,0 @@
-Error: Component "Fancy Carousel" not found in registry

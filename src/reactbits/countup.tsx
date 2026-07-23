@@ -1,1 +1,0 @@
-Error: Component "CountUp" not found in registry

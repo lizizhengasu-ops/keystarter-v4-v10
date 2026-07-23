@@ -1,1 +1,0 @@
-Error: Component "BlurText" not found in registry
