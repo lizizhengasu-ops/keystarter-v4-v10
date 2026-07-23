@@ -20,21 +20,8 @@ export type WCCart = {
 };
 
 function xhr(method: string, url: string, body?: any): Promise<any> {
-  // Ensure nonce is known before POST/PUT/DELETE
-  if (!NONCE && method !== "GET") {
-    return new Promise((resolve, reject) => {
-      const n = new XMLHttpRequest();
-      n.open("GET", API, true);
-      n.timeout = 15000;
-      n.onload = () => {
-        NONCE = n.getResponseHeader("X-WC-Store-API-Nonce") || n.getResponseHeader("nonce") || "";
-        xhr(method, url, body).then(resolve).catch(reject);
-      };
-      n.onerror = () => reject(new Error("nonce failed"));
-      n.ontimeout = () => reject(new Error("nonce timeout"));
-      n.send();
-    });
-  }
+  // Non-GET: wait for initial GET to discover nonce (shared promise, no separate request)
+  if (!NONCE && method !== "GET") return noncePromise.then(() => xhr(method, url, body));
   // Lazily discover nonce from first response; no extra roundtrip
   if (!NONCE && method === "GET") {
     return new Promise((ok, fail) => {
@@ -44,10 +31,12 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
       x.timeout = 15000;
       x.onload = () => {
         NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
-        try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); }
+        CART_TOKEN = x.getResponseHeader("cart-token") || CART_TOKEN;
+        resolveNonce();
+        try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('getCart error:', e); ok({ items: [], items_count: 0 }); }
       };
-      x.onerror = () => fail(x.statusText);
-      x.ontimeout = () => fail(new Error("timeout"));
+      x.onerror = () => { resolveNonce(); fail(x.statusText); };
+      x.ontimeout = () => { resolveNonce(); fail(new Error("timeout")); };
       x.send();
     });
   }
@@ -57,17 +46,21 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     x.open(method, url, true);
     x.setRequestHeader("Content-Type", "application/json");
     x.setRequestHeader("X-WC-Store-API-Nonce", NONCE);
+    if (CART_TOKEN && method !== "GET") x.setRequestHeader("Cart-Token", CART_TOKEN);
     x.timeout = 15000;
-    x.onload = () => { try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); } };
-    x.onerror = () => fail(x.statusText);
-    x.ontimeout = () => fail(new Error("timeout"));
+    x.onload = () => { const ct = x.getResponseHeader("cart-token"); if (ct) CART_TOKEN = ct; try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); } };
+    x.onerror = () => { resolveNonce(); fail(x.statusText); };
+    x.ontimeout = () => { resolveNonce(); fail(new Error("timeout")); };
     body ? x.send(JSON.stringify(body)) : x.send();
   });
 }
 
 // Module-level nonce cache — learned from first API response
 let NONCE = "";
-const CART_CACHE_KEY = "ks_cart_v1";
+let CART_TOKEN = "";
+let resolveNonce: () => void;
+const noncePromise = new Promise<void>((r) => { resolveNonce = r; });
+const CART_CACHE_KEY = "ks_cart_v3";
 
 export function useWooCart() {
   const [cart, setCart] = useState<WCCart>(() => {
