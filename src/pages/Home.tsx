@@ -4,6 +4,7 @@ import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
 import { WC_IDS } from "../data/woo-ids";
+import { SPECIAL_OFFER_IDS } from "../data/constants";
 
 // Custom lightweight inline SVG Icons representing Microsoft Core Brands
 // To eliminate any external CDN load latency or render flickering.
@@ -201,8 +202,6 @@ const [activeTab, setActiveTab] = useState('all');
     return { ...sku, price: live.price, originalPrice: live.regular_price };
   };
 
-const SPECIAL_OFFER_IDS = ['windows-11-pro','windows-10-pro','windows-11-home','windows-10-home','office-2019-pro-plus','office-2021-pro-plus'];
-const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 const filteredSkus = PREMIUM_SKUS.filter(sku => 
     activeTab === 'all' || sku.category === activeTab
   );
