@@ -3,7 +3,7 @@ import { useCart } from "../data/CartContext";
 import Portal from "../Portal";
 
 export default function WooCartFlyout({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { cart } = useCart();
+  const { cart, checkout } = useCart();
 
   if (!open) return null;
 
@@ -51,12 +51,12 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
             >
               View Cart
             </a>
-            <a
-              href="/checkout/"
-              className="block text-center text-xs text-[#7c3aed] mt-2 no-underline hover:underline"
+            <button
+              onClick={(e) => { e.stopPropagation(); checkout(); }}
+              className="block w-full text-center text-xs text-[#7c3aed] mt-2 no-underline hover:underline cursor-pointer bg-transparent border-none"
             >
               Checkout
-        </a>
+            </button>
         </>
         )}
       </div>

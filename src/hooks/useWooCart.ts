@@ -1,10 +1,14 @@
-// useWooCart.ts - WooCommerce Cart via Store API
-// Uses XHR to avoid CSP issues with fetch/eval
-import { useState, useEffect, useCallback } from "react";
+// useWooCart.ts - Local cart state (no WooCommerce Store API)
+// Cart is stored in memory + sessionStorage
+// Add to cart = instant (0ms network)
+// Checkout/Buy Now = sync to WooCommerce via checkout-sync.php
+import { useState, useCallback } from "react";
 
-const API = "/wp-json/wc/store/v1/cart";
+const CART_KEY = "ks_local_cart_v4";
+
 export type WCItem = {
   id: number;
+  slug: string;
   name: string;
   quantity: number;
   totals: { line_total: string; line_subtotal?: string };
@@ -19,98 +23,84 @@ export type WCCart = {
   loading: boolean;
 };
 
-function xhr(method: string, url: string, body?: any): Promise<any> {
-  // Non-GET: wait for initial GET attempt to finish (success or failure); never loop
-  if (!nonceReady && method !== "GET") return noncePromise.then(() => xhr(method, url, body));
-  // Lazily discover nonce from first response; no extra roundtrip
-  if (!NONCE && method === "GET") {
-    return new Promise((ok, fail) => {
-      const x = new XMLHttpRequest();
-      x.open("GET", url, true);
-      x.setRequestHeader("Content-Type", "application/json");
-      x.timeout = 15000;
-      x.onload = () => {
-        NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
-        CART_TOKEN = x.getResponseHeader("cart-token") || CART_TOKEN;
-        nonceReady = true;
-        resolveNonce();
-        try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('getCart error:', e); ok({ items: [], items_count: 0 }); }
-      };
-      x.onerror = () => { nonceReady = true; resolveNonce(); fail(x.statusText); };
-      x.ontimeout = () => { nonceReady = true; resolveNonce(); fail(new Error("timeout")); };
-      x.send();
-    });
-  }
-  // Subsequent requests: reuse cached nonce
-  return new Promise((ok, fail) => {
-    const x = new XMLHttpRequest();
-    x.open(method, url, true);
-    x.setRequestHeader("Content-Type", "application/json");
-    x.setRequestHeader("X-WC-Store-API-Nonce", NONCE);
-    if (CART_TOKEN && method !== "GET") x.setRequestHeader("Cart-Token", CART_TOKEN);
-    x.timeout = 15000;
-    x.onload = () => { const ct = x.getResponseHeader("cart-token"); if (ct) CART_TOKEN = ct; try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('addItem error:', e); ok({ items: [], items_count: 0 }); } };
-    x.onerror = () => { resolveNonce(); fail(x.statusText); };
-    x.ontimeout = () => { resolveNonce(); fail(new Error("timeout")); };
-    body ? x.send(JSON.stringify(body)) : x.send();
-  });
+const EMPTY_CART: WCCart = {
+  items: [], items_count: 0, total: "0", currency: "USD", loading: false,
+};
+
+function loadCart(): WCCart {
+  try {
+    const c = sessionStorage.getItem(CART_KEY);
+    if (c) return { ...JSON.parse(c), loading: false };
+  } catch {}
+  return EMPTY_CART;
 }
 
-// Module-level nonce cache — learned from first API response
-let NONCE = "";
-let nonceReady = false;
-let CART_TOKEN = "";
-let resolveNonce: () => void;
-const noncePromise = new Promise<void>((r) => { resolveNonce = r; });
-const CART_CACHE_KEY = "ks_cart_v3";
+function saveCart(cart: WCCart) {
+  try { sessionStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch {}
+}
 
 export function useWooCart() {
-  const [cart, setCart] = useState<WCCart>(() => {
-    try {
-      const cached = sessionStorage.getItem(CART_CACHE_KEY);
-      if (cached) {
-        const c = JSON.parse(cached);
-        return { ...c, loading: false };
-      }
-    } catch (e) { console.error('addItem error:', e);}
-    return { items: [], items_count: 0, total: "0", currency: "USD", loading: true };
-  });
+  const [cart, setCart] = useState<WCCart>(loadCart);
 
-  const fetchCart = useCallback(async () => {
-    try {
-      const d = await xhr("GET", API);
-      const newCart = {
-        items: d.items || [],
-        items_count: d.items_count || 0,
-        total: d.totals?.total_items || "0",
-        currency: d.totals?.currency_code || "USD",
-        loading: false,
+  const addToCart = useCallback((slug: string, name: string, price: number, qty = 1) => {
+    setCart(prev => {
+      const existing = prev.items.find(i => i.slug === slug);
+      let newItems: WCItem[];
+      if (existing) {
+        const newQty = existing.quantity + qty;
+        newItems = prev.items.map(i =>
+          i.slug === slug
+            ? { ...i, quantity: newQty, totals: { ...i.totals, line_total: String(newQty * price * 100) } }
+            : i
+        );
+      } else {
+        newItems = [...prev.items, {
+          id: 0, slug, name, quantity: qty,
+          totals: { line_total: String(qty * price * 100) },
+        }];
+      }
+      const newCart: WCCart = {
+        items: newItems,
+        items_count: newItems.reduce((s, i) => s + i.quantity, 0),
+        total: String(newItems.reduce((s, i) => s + parseInt(i.totals.line_total), 0)),
+        currency: "USD", loading: false,
       };
-      try { sessionStorage.setItem(CART_CACHE_KEY, JSON.stringify(newCart)); } catch (e) { console.error('addItem error:', e);}
-      setCart(newCart);
-    } catch (e) { console.error('addItem error:', e);
-      setCart((p) => ({ ...p, loading: false }));
-    }
+      saveCart(newCart);
+      return newCart;
+    });
   }, []);
 
-  useEffect(() => { fetchCart(); }, [fetchCart]);
+  const checkout = useCallback(() => {
+    const items = cart.items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
+    if (items.length === 0) { window.location.href = '/cart/'; return; }
+    window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify(items));
+  }, [cart]);
 
-  const addItem = useCallback(
-    async (id: number, qty = 1) => {
-      setCart((p) => ({ ...p, loading: true }));
-      try {
-        await xhr("POST", API + "/add-item", { id, quantity: qty });
-        await fetchCart();
-      } catch (e) { console.error('addItem error:', e);
-        setCart((p) => ({ ...p, loading: false }));
-      }
-    },
-    [fetchCart]
-  );
+  const buyNow = useCallback((slug: string, name: string, price: number) => {
+    addToCart(slug, name, price, 1);
+    setTimeout(() => {
+      window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
+    }, 50);
+  }, [addToCart]);
 
-  return {
-    cart,
-    addItem,
-    refresh: fetchCart,
-  };
+  const removeItem = useCallback((slug: string) => {
+    setCart(prev => {
+      const newItems = prev.items.filter(i => i.slug !== slug);
+      const newCart = {
+        items: newItems,
+        items_count: newItems.reduce((s, i) => s + i.quantity, 0),
+        total: String(newItems.reduce((s, i) => s + parseInt(i.totals.line_total), 0)),
+        currency: "USD", loading: false,
+      };
+      saveCart(newCart);
+      return newCart;
+    });
+  }, []);
+
+  const clearCart = useCallback(() => {
+    saveCart(EMPTY_CART);
+    setCart(EMPTY_CART);
+  }, []);
+
+  return { cart, addToCart, checkout, buyNow, removeItem, clearCart, refresh: () => {} };
 }

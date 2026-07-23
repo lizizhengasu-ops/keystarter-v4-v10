@@ -4,8 +4,11 @@ import type { WCCart } from "../hooks/useWooCart";
 
 export interface CartContextType {
   cart: WCCart;
-  addItem: (id: number, qty?: number) => Promise<void>;
-  refresh: () => Promise<void>;
+  addToCart: (slug: string, name: string, price: number, qty?: number) => void;
+  checkout: () => void;
+  buyNow: (slug: string, name: string, price: number) => void;
+  removeItem: (slug: string) => void;
+  clearCart: () => void;
 }
 
 export const CartCtx = createContext<CartContextType>(null!);

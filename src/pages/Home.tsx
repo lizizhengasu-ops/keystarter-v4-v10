@@ -87,7 +87,7 @@ const [activeTab, setActiveTab] = useState('all');
   // Checkout Drawer state
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [checkoutProduct, setCheckoutProduct] = useState({ title: '', price: 0 });
-  const { addItem } = useCart();
+  const { addToCart, buyNow } = useCart();
   const [checkoutEmail, setCheckoutEmail] = useState('');
   const [payMethod, setPayMethod] = useState(1);
 

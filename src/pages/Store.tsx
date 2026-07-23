@@ -17,7 +17,7 @@ export default function StorePage() {
   const [products, setProducts] = useState<SPAProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     let cancelled = false;

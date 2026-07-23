@@ -28,7 +28,7 @@ export default function ProductPage() {
   const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
   const [loading, setLoading] = useState(true);
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function ProductPage() {
           <p className="text-sm text-[#86868b] mb-6">{product.description?.substring(0,150)}</p>
 
 
-          <button onClick={()=>(function(){WC_IDS;var wid=w[product.slug];if(wid){window.location.href="/cart/?add-to-cart="+wid;}})()}
+          <button onClick={()=>(function(){WC_IDS;var wid=w[product.slug];addToCart(product.slug, product.name, product.price);})()}
             className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.add_to_cart")}
           </button>
