@@ -75,36 +75,37 @@ export default function StorePage() {
         {!loading && !error && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {products.map((x,i) => (
-              <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed] hover:shadow-md transition-shadow">
-                <Link to={`/product/${x.slug}`}>
-                  <div className="w-full h-[140px] rounded-xl mb-3 bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-[#7c3aed]/30">{x.name[0]}</span>
+              <div key={i} className="bg-white rounded-2xl border border-[#e8e8ed] p-5 flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => window.location.href='/product/'+x.slug}>
+                <div>
+                  <div className="flex items-center space-x-3.5 mb-4">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#f3f4f6] text-sm font-bold text-[#7c3aed]">
+                      {x.name[0]}
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-[#1d1d1f]">{x.name}</h3>
+                      <p className="text-[10px] text-[#86868b]">{x.category || 'Microsoft License'}</p>
+                    </div>
                   </div>
-                </Link>
-                <div className="text-[10px] text-[#86868b] font-semibold uppercase tracking-wider mb-1">Microsoft License</div>
-                <Link to={`/product/${x.slug}`}>
-                  <div className="text-sm font-bold mb-1">{x.name}</div>
-                </Link>
-                <div className="text-xs text-[#86868b] mb-2">{x.description?.substring(0, 50)}</div>
-                <div className="text-lg font-extrabold text-[#7c3aed] mb-3">
-                  {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
+                  <ul className="space-y-1.5 mb-4 text-[10px] text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-3">
+                    {(x.specs ? Object.entries(x.specs).slice(0, 4) : []).map(([k,v],fi) => (
+                      <li key={fi} className="flex items-start space-x-1.5"><span className="text-green-500 font-bold">✓</span><span>{v}</span></li>
+                    ))}
+                  </ul>
                 </div>
-                <button onClick={() => {
-                  const WC_IDS = {
-                    "windows-11-pro":629,"windows-10-pro":630,"windows-11-home":631,"windows-10-home":632,
-                    "office-2019-pro-plus":633,"office-2021-pro-plus":634,"win-11-iot-2024-entry":637,
-                    "win-10-iot-2021-entry":643,"win-10-iot-2019-entry":646,"win-11-iot-2024-high-end":656,
-                    "win-11-iot-2024-value":657,"win-10-iot-2021-high-end":658,"win-10-iot-2021-value":659,
-                    "win-11-iot-ml-high-end":660,"win-11-iot-ml-value":661,"win-11-iot-ml-entry":662,
-                    "win-10-iot-2019-high-end":663,"win-10-iot-2019-value":664,"win-svr-iot-2025":665,
-                    "win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669
-                  };
-                  const wid = WC_IDS[x.slug];
-                  addToCart(x.slug, x.name, x.price);
-                }}
-                  className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
-                <button onClick={() => buyNow(x.slug, x.name, x.price)}
-                  className="w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-semibold py-2.5 rounded-xl transition mt-2">{t('product.buy_now', 'Buy Now')}</button>
+                <div>
+                  <div className="flex items-baseline justify-between mb-3">
+                    <span className="text-xl font-extrabold text-[#1d1d1f]">
+                      {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button onClick={(e) => { e.stopPropagation(); addToCart(x.slug, x.name, x.price); }}
+                      className="flex-1 border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-blue-50 text-[10px] font-semibold py-2 rounded-xl transition">{t("product.add_to_cart")}</button>
+                    <button onClick={(e) => { e.stopPropagation(); buyNow(x.slug, x.name, x.price); }}
+                      className="flex-1 bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-[10px] font-semibold py-2 rounded-xl transition">{t('product.buy_now', 'Buy Now')}</button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

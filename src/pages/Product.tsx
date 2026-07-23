@@ -18,24 +18,18 @@ const features = [
 
 export default function ProductPage() {
   const {slug} = useParams();
-  const slugMap: Record<string, string> = {
-    'windows-11-pro': 'windows-11-pro', 'windows-10-pro': 'windows-10-pro',
-    'windows-11-home': 'windows-11-home', 'windows-10-home': 'windows-10-home',
-    'office-2019-pro-plus': 'office-2019-pro-plus', 'office-2021-pro-plus': 'office-2021-pro-plus',
-  };
-  const wcSlug = slugMap[slug || ''] || slug;
 
   const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
+  const { addToCart, buyNow } = useCart();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     if (!slug) return;
     let cancelled = false;
     setLoading(true);
-    fetchProduct(wcSlug, i18n.language).then(p => {
+    fetchProduct(slug, i18n.language).then(p => {
       if (!cancelled) { setProduct(p); setLoading(false); }
     }).catch(() => {
       if (!cancelled) setLoading(false);
@@ -84,9 +78,13 @@ export default function ProductPage() {
           <p className="text-sm text-[#86868b] mb-6">{product.description?.substring(0,150)}</p>
 
 
-          <button onClick={()=>(function(){WC_IDS;var wid=w[product.slug];addToCart(product.slug, product.name, product.price);})()}
+          <button onClick={() => addToCart(product.slug, product.name, product.price)}
             className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.add_to_cart")}
+          </button>
+          <button onClick={() => buyNow(product.slug, product.name, product.price)}
+            className="v5-btn w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white font-semibold py-3.5 rounded-xl transition mb-2">
+            {t("product.buy_now", "Buy Now")}
           </button>
           <p className="text-[10px] text-[#86868b] text-center">Genuine product - Instant delivery - Secure checkout</p>
 
