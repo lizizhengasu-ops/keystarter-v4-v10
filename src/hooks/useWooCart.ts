@@ -20,8 +20,8 @@ export type WCCart = {
 };
 
 function xhr(method: string, url: string, body?: any): Promise<any> {
-  // Non-GET: wait for initial GET to discover nonce (shared promise, no separate request)
-  if (!NONCE && method !== "GET") return noncePromise.then(() => xhr(method, url, body));
+  // Non-GET: wait for initial GET attempt to finish (success or failure); never loop
+  if (!nonceReady && method !== "GET") return noncePromise.then(() => xhr(method, url, body));
   // Lazily discover nonce from first response; no extra roundtrip
   if (!NONCE && method === "GET") {
     return new Promise((ok, fail) => {
@@ -32,11 +32,12 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
       x.onload = () => {
         NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
         CART_TOKEN = x.getResponseHeader("cart-token") || CART_TOKEN;
+        nonceReady = true;
         resolveNonce();
         try { ok(JSON.parse(x.responseText)); } catch (e) { console.error('getCart error:', e); ok({ items: [], items_count: 0 }); }
       };
-      x.onerror = () => { resolveNonce(); fail(x.statusText); };
-      x.ontimeout = () => { resolveNonce(); fail(new Error("timeout")); };
+      x.onerror = () => { nonceReady = true; resolveNonce(); fail(x.statusText); };
+      x.ontimeout = () => { nonceReady = true; resolveNonce(); fail(new Error("timeout")); };
       x.send();
     });
   }
@@ -57,6 +58,7 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
 
 // Module-level nonce cache — learned from first API response
 let NONCE = "";
+let nonceReady = false;
 let CART_TOKEN = "";
 let resolveNonce: () => void;
 const noncePromise = new Promise<void>((r) => { resolveNonce = r; });
