@@ -14,7 +14,7 @@ export default function B2bPage() {
       <div className="bg-gradient-to-r from-[#6d28d9] to-[#1a1a2e] text-white px-6 sm:px-12 py-20 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("b2b.title")}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto mb-8">{t("b2b.desc")}</p>
-        <button className="bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm border-none cursor-pointer hover:bg-gray-100 transition">{t("b2b.contact")}</button>
+        <a href="mailto:admin@keys-starter.com?subject=Enterprise%20B2B%20Inquiry" className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
       </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-bold mb-8">{t("b2b.solutions")}</h2>
@@ -29,7 +29,7 @@ export default function B2bPage() {
         <div className="text-center py-12 border-t border-[#e8e8ed]">
           <h2 className="text-2xl font-bold mb-4">{t("b2b.ready")}</h2>
           <p className="text-[#86868b] mb-4 text-sm">{t("b2b.quote")}</p>
-          <p className="text-[#7c3aed] font-semibold">{t("b2b.email")}</p>
+          <a href="mailto:admin@keys-starter.com" className="text-[#7c3aed] font-semibold no-underline hover:underline">{t("b2b.email")}</a>
         </div>
       </div>
     </div>

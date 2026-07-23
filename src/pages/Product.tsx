@@ -28,7 +28,6 @@ export default function ProductPage() {
   const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selEdition, setSelEdition] = useState(1);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -83,22 +82,8 @@ export default function ProductPage() {
           </div>
           <p className="text-sm text-[#86868b] mb-6">{product.description?.substring(0,150)}</p>
 
-          <div className="mb-6">
-            <div className="text-sm font-semibold mb-3">{t("product.select_edition")}</div>
-            <div className="flex gap-2">
-              {editions.map((e,i) => (
-                <div key={i} onClick={()=>setSelEdition(i)}
-                  className={"flex-1 p-3 rounded-xl cursor-pointer text-center border-2 transition-all " +
-                    (selEdition===i ? "border-[#7c3aed] bg-blue-50" : "border-[#e8e8ed] bg-white")}>
-                  <div className="text-xs font-semibold">{e.name}</div>
-                  <div className="text-[10px] text-[#86868b]">{e.desc}</div>
-                  <div className="text-xs font-semibold text-[#7c3aed] mt-1">{e.price}</div>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <button onClick={()=>(function(){var w={"windows-11-pro":629,"windows-10-pro":630,"windows-11-home":631,"windows-10-home":632,"office-2019-pro-plus":633,"office-2021-pro-plus":634,"win-11-iot-2024-entry":637,"win-10-iot-2021-entry":643,"win-10-iot-2019-entry":646,"windows-11-pro-official":652,"windows-10-pro-official":653,"windows-11-home-official":654,"windows-10-home-official":655,"win-11-iot-2024-high-end":656,"win-11-iot-2024-value":657,"win-10-iot-2021-high-end":658,"win-10-iot-2021-value":659,"win-11-iot-ml-high-end":660,"win-11-iot-ml-value":661,"win-11-iot-ml-entry":662,"win-10-iot-2019-high-end":663,"win-10-iot-2019-value":664,"win-svr-iot-2025":665,"win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669};var wid=w[product.slug];if(wid){window.location.href="/cart/?add-to-cart="+wid;}})()}
+          <button onClick={()=>(function(){WC_IDS;var wid=w[product.slug];if(wid){window.location.href="/cart/?add-to-cart="+wid;}})()}
             className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.add_to_cart")}
           </button>
