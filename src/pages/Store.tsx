@@ -1,4 +1,3 @@
-import { useCart } from "../CartContext";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -13,8 +12,7 @@ const categories = [
 ];
 
 export default function StorePage() {
-  const { add } = useCart();
-  const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
   const [products, setProducts] = useState<SPAProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

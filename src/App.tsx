@@ -1,12 +1,9 @@
-import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { CartProvider, useCart } from "./CartContext";
 import SearchOverlay from "./SearchOverlay";
-import CartFlyout from "./CartFlyout";
 import HomePage from "./pages/Home";
 import StorePage from "./pages/Store";
 import ProductPage from "./pages/Product";
-import CartPage from "./pages/Cart";
 import AccountPage from "./pages/Account";
 import SupportPage from "./pages/Support";
 import B2bPage from "./pages/B2b";
@@ -36,9 +33,7 @@ function MicrosoftLogo() {
 
 function Layout({ children }) {
   const location = useLocation();
-  const cart = useCart();
   const [searchOpen, setSearchOpen] = useState(false);
-  const [showCart, setShowCart] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
   const { t } = useTranslation();
@@ -48,13 +43,11 @@ function Layout({ children }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     setSearchOpen(false);
-    setShowCart(false);
   }, [location.pathname]);
 
   useEffect(() => {
     const h = (e) => {
       if (e.key === "/" && !searchOpen && e.target.tagName !== "INPUT") { e.preventDefault(); setSearchOpen(true); }
-      if (e.key === "Escape") setShowCart(false);
     };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
@@ -115,13 +108,9 @@ function Layout({ children }) {
               <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </button>
-            <div className="relative">
-              <button onClick={()=>setShowCart(!showCart)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={"Cart (" + cart.count + ")"}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                {cart.count > 0 && (<span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center leading-none">{cart.count}</span>)}
-              </button>
-              <CartFlyout open={showCart} onClose={() => setShowCart(false)} />
-            </div>
+            <a href="/cart/" className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="8" y1="10" x2="8" y2="14"/></svg>
+            </a>
           </div>
         </div>
       </nav>
@@ -219,14 +208,12 @@ function Layout({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
           <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/store" element={<StorePage />} />
             <Route path="/products" element={<StorePage />} />
             <Route path="/product/:slug" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/b2b" element={<B2bPage />} />
@@ -240,7 +227,6 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
-      </CartProvider>
     </BrowserRouter>
   );
 }
