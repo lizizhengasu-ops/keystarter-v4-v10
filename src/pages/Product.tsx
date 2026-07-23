@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {fetchProduct} from "../api/woocommerce";
 import type {SPAProduct} from "../api/woocommerce";
+import { useCart } from "../data/CartContext";
 
 const editions = [
   {name:"Home",desc:"For everyday use",price:"$12.99"},
