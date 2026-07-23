@@ -87,7 +87,19 @@ export default function StorePage() {
                 <div className="text-lg font-extrabold text-[#7c3aed] mb-3">
                   {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
                 </div>
-                <button onClick={()=>add({slug:x.slug,name:x.name,price:x.price})}
+                <button onClick={() => {
+                  const WC_IDS = {
+                    "windows-11-pro":629,"windows-10-pro":630,"windows-11-home":631,"windows-10-home":632,
+                    "office-2019-pro-plus":633,"office-2021-pro-plus":634,"win-11-iot-2024-entry":637,
+                    "win-10-iot-2021-entry":643,"win-10-iot-2019-entry":646,"win-11-iot-2024-high-end":656,
+                    "win-11-iot-2024-value":657,"win-10-iot-2021-high-end":658,"win-10-iot-2021-value":659,
+                    "win-11-iot-ml-high-end":660,"win-11-iot-ml-value":661,"win-11-iot-ml-entry":662,
+                    "win-10-iot-2019-high-end":663,"win-10-iot-2019-value":664,"win-svr-iot-2025":665,
+                    "win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669
+                  };
+                  const wid = WC_IDS[x.slug];
+                  if (wid) window.location.href = "/cart/?add-to-cart=" + wid;
+                }}
                   className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
               </div>
             ))}

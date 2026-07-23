@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
+import WooCartFlyout from "./components/WooCartFlyout";
+import { useWooCart } from "./hooks/useWooCart";
 import HomePage from "./pages/Home";
 import StorePage from "./pages/Store";
 import ProductPage from "./pages/Product";
@@ -17,6 +19,7 @@ import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
+import CartPage from "./pages/Cart";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -34,15 +37,18 @@ function MicrosoftLogo() {
 function Layout({ children }) {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [scrollPct, setScrollPct] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
   const { t } = useTranslation();
+  const { cart } = useWooCart();
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setSearchOpen(false);
+    setCartOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -67,6 +73,7 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
       <div className="fixed top-0 left-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
 
@@ -108,9 +115,14 @@ function Layout({ children }) {
               <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </button>
-            <a href="/cart/" className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
+            <button onClick={() => setCartOpen(true)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="8" y1="10" x2="8" y2="14"/></svg>
-            </a>
+                {cart.items_count > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {cart.items_count > 99 ? '99+' : cart.items_count}
+                  </span>
+                )}
+            </button>
           </div>
         </div>
       </nav>
@@ -118,7 +130,7 @@ function Layout({ children }) {
       <AnimInit />
 
       {/* V5.2: Page enter animation */}
-      <main key={location.pathname} className="page-enter pt-12">
+      <main className="page-enter pt-12">
         {children}
       </main>
 
@@ -224,6 +236,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
+            <Route path="/cart" element={<CartPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

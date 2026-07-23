@@ -3,7 +3,25 @@
 import { useState, useEffect, useCallback } from "react";
 
 const API = "/wp-json/wc/store/v1/cart";
-const NONCE = "";
+// Module-level nonce: fetched once on first use
+let NONCE = "";
+let noncePromise: Promise<string> | null = null;
+function ensureNonce(): Promise<string> {
+  if (NONCE) return Promise.resolve(NONCE);
+  if (noncePromise) return noncePromise;
+  noncePromise = new Promise((ok) => {
+    const x = new XMLHttpRequest();
+    x.open("GET", API, true);
+    x.onload = () => {
+      // WC Store API returns nonce in either header name
+      NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
+      ok(NONCE);
+    };
+    x.onerror = () => { NONCE = ""; ok(""); };
+    x.send();
+  });
+  return noncePromise;
+}
 
 export type WCItem = {
   id: number;
@@ -22,7 +40,7 @@ export type WCCart = {
 };
 
 function xhr(method: string, url: string, body?: any): Promise<any> {
-  return new Promise((ok, fail) => {
+  return ensureNonce().then(() => new Promise((ok, fail) => {
     const x = new XMLHttpRequest();
     x.open(method, url, true);
     x.setRequestHeader("Content-Type", "application/json");
@@ -30,7 +48,7 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     x.onload = () => ok(JSON.parse(x.responseText));
     x.onerror = () => fail(x.statusText);
     body ? x.send(JSON.stringify(body)) : x.send();
-  });
+  }));
 }
 
 export function useWooCart() {
