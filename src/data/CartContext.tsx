@@ -7,7 +7,6 @@ export interface CartContextType {
   addToCart: (slug: string, name: string, price: number, qty?: number) => void;
   checkout: () => void;
   buyNow: (slug: string, name: string, price: number) => void;
-  removeItem: (slug: string) => void;
   clearCart: () => void;
 }
 
