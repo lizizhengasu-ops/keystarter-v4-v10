@@ -20,6 +20,21 @@ export type WCCart = {
 };
 
 function xhr(method: string, url: string, body?: any): Promise<any> {
+  // Ensure nonce is known before POST/PUT/DELETE
+  if (!NONCE && method !== "GET") {
+    return new Promise((resolve, reject) => {
+      const n = new XMLHttpRequest();
+      n.open("GET", API, true);
+      n.timeout = 15000;
+      n.onload = () => {
+        NONCE = n.getResponseHeader("X-WC-Store-API-Nonce") || n.getResponseHeader("nonce") || "";
+        xhr(method, url, body).then(resolve).catch(reject);
+      };
+      n.onerror = () => reject(new Error("nonce failed"));
+      n.ontimeout = () => reject(new Error("nonce timeout"));
+      n.send();
+    });
+  }
   // Lazily discover nonce from first response; no extra roundtrip
   if (!NONCE && method === "GET") {
     return new Promise((ok, fail) => {
