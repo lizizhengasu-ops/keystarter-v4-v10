@@ -8,6 +8,7 @@ export interface CartContextType {
   checkout: () => void;
   buyNow: (slug: string, name: string, price: number) => void;
   clearCart: () => void;
+  refresh: () => Promise<void>;
 }
 
 export const CartCtx = createContext<CartContextType>(null!);

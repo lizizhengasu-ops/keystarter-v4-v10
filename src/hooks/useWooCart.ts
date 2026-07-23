@@ -1,7 +1,7 @@
 // useWooCart.ts - Dual-sync cart: local state + WooCommerce
 // Reads from Store API (GET, no nonce needed)
 // Writes via cart-sync.php (our endpoint, no nonce needed)
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const CART_KEY = "ks_cart_v5";
 const API = "/wp-json/wc/store/v1/cart";
@@ -72,19 +72,21 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
 
 export function useWooCart() {
   const [cart, setCart] = useState<WCCart>(loadCart);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingRef = useRef<{ slug: string; qty: number }[]>([]);
 
-  const fetchCart = useCallback(async () => {
+  const refresh = useCallback(async () => {
     try {
       const d = await xhr("GET", API);
-      const newCart = parseCartFromApi(d);
-      saveCart(newCart);
-      setCart(newCart);
-    } catch (e) {
-      setCart(p => ({ ...p, loading: false }));
-    }
+      const wcCart = parseCartFromApi(d);
+      const current = loadCart();
+      if (JSON.stringify(current) !== JSON.stringify(wcCart)) {
+        saveCart(wcCart);
+        setCart(wcCart);
+      }
+    } catch { /* silent fail - keep local cart */ }
   }, []);
 
-  useEffect(() => { fetchCart(); }, [fetchCart]);
 
   const addToCart = useCallback((slug: string, name: string, price: number, qty = 1) => {
     // 1. Update local state immediately
@@ -105,12 +107,28 @@ export function useWooCart() {
       saveCart(nc);
       return nc;
     });
-    // 2. Sync to WooCommerce in background (fire-and-forget)
-    xhr("POST", SYNC, { items: [{ slug, qty }] }).catch(() => {});
+    // 2. Debounced sync to WooCommerce (batches rapid adds)
+    pendingRef.current.push({ slug, qty });
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      const items = [...pendingRef.current];
+      pendingRef.current = [];
+      xhr("POST", SYNC, { items }).catch(() => {});
+    }, 3000);
   }, []);
 
   const checkout = useCallback(async () => {
-    // Sync ALL items to WC, then redirect to checkout
+    // Flush pending debounced sync first
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
+    }
+    if (pendingRef.current.length > 0) {
+      const pending = [...pendingRef.current];
+      pendingRef.current = [];
+      try { await xhr("POST", SYNC, { items: pending }); } catch {}
+    }
+    // Then sync ALL items to WC and redirect
     const items = cart.items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
     const encoded = encodeURIComponent(JSON.stringify(items));
     window.location.href = '/checkout-sync.php?items=' + encoded;
@@ -129,5 +147,5 @@ export function useWooCart() {
     setCart(EMPTY);
   }, []);
 
-  return { cart, addToCart, checkout, buyNow, clearCart, refresh: fetchCart };
+  return { cart, addToCart, checkout, buyNow, clearCart, refresh };
 }

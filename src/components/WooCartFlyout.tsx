@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import { type WCItem } from "../hooks/useWooCart";
 import { useCart } from "../data/CartContext";
 import Portal from "../Portal";
 
 export default function WooCartFlyout({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { cart, checkout } = useCart();
+  const { cart, checkout, refresh } = useCart();
+
+  // Background verification when cart opens — always before early return
+  useEffect(() => { if (open) refresh(); }, [open]);
 
   if (!open) return null;
 
