@@ -48,22 +48,32 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
 
 // Module-level nonce cache — learned from first API response
 let NONCE = "";
+const CART_CACHE_KEY = "ks_cart_v1";
 
 export function useWooCart() {
-  const [cart, setCart] = useState<WCCart>({
-    items: [], items_count: 0, total: "0", currency: "USD", loading: true,
+  const [cart, setCart] = useState<WCCart>(() => {
+    try {
+      const cached = sessionStorage.getItem(CART_CACHE_KEY);
+      if (cached) {
+        const c = JSON.parse(cached);
+        return { ...c, loading: false };
+      }
+    } catch {}
+    return { items: [], items_count: 0, total: "0", currency: "USD", loading: true };
   });
 
   const fetchCart = useCallback(async () => {
     try {
       const d = await xhr("GET", API);
-      setCart({
+      const newCart = {
         items: d.items || [],
         items_count: d.items_count || 0,
         total: d.totals?.total_items || "0",
         currency: d.totals?.currency_code || "USD",
         loading: false,
-      });
+      };
+      try { sessionStorage.setItem(CART_CACHE_KEY, JSON.stringify(newCart)); } catch {}
+      setCart(newCart);
     } catch {
       setCart((p) => ({ ...p, loading: false }));
     }
