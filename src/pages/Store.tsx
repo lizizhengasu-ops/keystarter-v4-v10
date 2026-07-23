@@ -100,7 +100,7 @@ export default function StorePage() {
                     "win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669
                   };
                   const wid = WC_IDS[x.slug];
-                  if (wid) addItem(wid);
+                  if (wid) window.location.href = '/cart/?add-to-cart=' + wid;
                 }}
                   className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
               </div>

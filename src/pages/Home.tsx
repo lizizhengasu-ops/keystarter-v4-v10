@@ -395,11 +395,11 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                    </div>
                  </div>
                   <div className="flex gap-2">
-                    <button onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) addItem(wid).catch(console.error); }}
+                    <button onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) window.location.href = '/cart/?add-to-cart=' + wid }}
                       className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) addItem(wid).catch(console.error); }}
+                    <button onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) window.location.href = '/cart/?add-to-cart=' + wid }}
                       className="flex-1 bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.buy_now', 'Buy Now')}
                     </button>
@@ -500,13 +500,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   
                   <div className="flex gap-2">
                     <button 
-                      onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) addItem(wid).catch(console.error); }} 
+                      onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) window.location.href = '/cart/?add-to-cart=' + wid }} 
                       className="flex-1 border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
                     <button 
-                      onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) addItem(wid).catch(console.error); }} 
+                      onClick={(e) => { e.stopPropagation(); const wid = WC_IDS[sku.id]; if (wid) window.location.href = '/cart/?add-to-cart=' + wid }} 
                       className="flex-1 bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition"
                     >
                       {t('product.buy_now', 'Buy Now')}
