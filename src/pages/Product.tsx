@@ -28,6 +28,7 @@ export default function ProductPage() {
   const {t, i18n} = useTranslation();
   const [product, setProduct] = useState<SPAProduct | null>(null);
   const [loading, setLoading] = useState(true);
+  const { addItem } = useCart();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
 import WooCartFlyout from "./components/WooCartFlyout";
-import { useWooCart } from "./hooks/useWooCart";
+import { CartProvider, useCart } from "./data/CartContext";
 import HomePage from "./pages/Home";
 import StorePage from "./pages/Store";
 import ProductPage from "./pages/Product";
@@ -41,7 +41,7 @@ function Layout({ children }) {
   const [scrollPct, setScrollPct] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
   const { t } = useTranslation();
-  const { cart } = useWooCart();
+  const { cart } = useCart();
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
@@ -219,6 +219,7 @@ function Layout({ children }) {
 
 export default function App() {
   return (
+    <CartProvider>
     <BrowserRouter>
           <Layout>
           <Routes>
@@ -241,6 +242,7 @@ export default function App() {
           </Routes>
         </Layout>
     </BrowserRouter>
+    </CartProvider>
   );
 }
 

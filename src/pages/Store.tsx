@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/woocommerce";
 import type { SPAProduct } from "../api/woocommerce";
+import { useCart } from "../data/CartContext";
 
 const categories = [
   {name:"Windows 11 Pro", slug:"windows-11-pro", color:"#7c3aed", items:["Single PC","2 PCs","Pro + Office Bundle","Pro + Office + Visio"]},
@@ -16,6 +17,7 @@ export default function StorePage() {
   const [products, setProducts] = useState<SPAProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { addItem } = useCart();
 
   useEffect(() => {
     let cancelled = false;
@@ -98,7 +100,7 @@ export default function StorePage() {
                     "win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669
                   };
                   const wid = WC_IDS[x.slug];
-                  if (wid) window.location.href = "/cart/?add-to-cart=" + wid;
+                  if (wid) addItem(wid);
                 }}
                   className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-semibold py-2.5 rounded-xl transition">{t("product.add_to_cart")}</button>
               </div>
