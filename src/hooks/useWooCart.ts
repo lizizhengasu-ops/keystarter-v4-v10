@@ -3,26 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 
 const API = "/wp-json/wc/store/v1/cart";
-// Module-level nonce: fetched once on first use
-let NONCE = "";
-let noncePromise: Promise<string> | null = null;
-function ensureNonce(): Promise<string> {
-  if (NONCE) return Promise.resolve(NONCE);
-  if (noncePromise) return noncePromise;
-  noncePromise = new Promise((ok) => {
-    const x = new XMLHttpRequest();
-    x.open("GET", API, true);
-    x.onload = () => {
-      // WC Store API returns nonce in either header name
-      NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
-      ok(NONCE);
-    };
-    x.onerror = () => { NONCE = ""; ok(""); };
-    x.send();
-  });
-  return noncePromise;
-}
-
 export type WCItem = {
   id: number;
   name: string;
@@ -40,7 +20,22 @@ export type WCCart = {
 };
 
 function xhr(method: string, url: string, body?: any): Promise<any> {
-  return ensureNonce().then(() => new Promise((ok, fail) => {
+  // Lazily discover nonce from first response; no extra roundtrip
+  if (!NONCE && method === "GET") {
+    return new Promise((ok, fail) => {
+      const x = new XMLHttpRequest();
+      x.open("GET", url, true);
+      x.setRequestHeader("Content-Type", "application/json");
+      x.onload = () => {
+        NONCE = x.getResponseHeader("X-WC-Store-API-Nonce") || x.getResponseHeader("nonce") || "";
+        ok(JSON.parse(x.responseText));
+      };
+      x.onerror = () => fail(x.statusText);
+      x.send();
+    });
+  }
+  // Subsequent requests: reuse cached nonce
+  return new Promise((ok, fail) => {
     const x = new XMLHttpRequest();
     x.open(method, url, true);
     x.setRequestHeader("Content-Type", "application/json");
@@ -48,8 +43,11 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     x.onload = () => ok(JSON.parse(x.responseText));
     x.onerror = () => fail(x.statusText);
     body ? x.send(JSON.stringify(body)) : x.send();
-  }));
+  });
 }
+
+// Module-level nonce cache — learned from first API response
+let NONCE = "";
 
 export function useWooCart() {
   const [cart, setCart] = useState<WCCart>({
