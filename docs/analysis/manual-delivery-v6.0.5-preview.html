@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeyStarter — v6.0.5 Per-Product Bulk Fill</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f1; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; padding: 30px; color: #1d2327; }
+  .page-wrap { max-width: 1120px; margin: 0 auto; }
+
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .header h1 { font-size: 22px; font-weight: 400; display: flex; align-items: center; gap: 8px; }
+  .header .badge { font-size: 10px; background: #7c3aed; color: #fff; padding: 2px 10px; border-radius: 10px; font-weight: 600; }
+  .badge-green { background: #e8f5e9; color: #2e7d32; font-size: 10px; padding: 2px 8px; border-radius: 8px; }
+
+  .warn-box { background: #fff8e1; border: 1px solid #ffe0b2; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 12px; display: flex; gap: 10px; align-items: flex-start; }
+  .warn-box .icon { font-size: 18px; flex-shrink: 0; }
+
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #c3c4c7; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  thead th { background: #f6f7f7; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #50575e; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #c3c4c7; }
+  tbody td { padding: 14px 12px; border-bottom: 1px solid #f0f0f1; vertical-align: top; font-size: 13px; }
+
+  .order-cell { min-width: 130px; }
+  .order-num { font-weight: 600; color: #3858e9; text-decoration: none; font-size: 14px; }
+  .cust { color: #50575e; font-size: 12px; }
+  .time { color: #8c8f94; font-size: 11px; }
+  .prog-row { margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+  .prog-bar { width: 80px; height: 4px; background: #e8e8ed; border-radius: 2px; overflow: hidden; }
+  .prog-bar .fill { height: 100%; border-radius: 2px; }
+
+  .item-row { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+  .item-row:last-child { border-bottom: 0; }
+  .item-info { flex: 0 0 180px; }
+  .item-name { font-size: 12px; font-weight: 600; }
+  .item-qty { font-size: 11px; color: #8c8f94; }
+
+  .key-section { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .key-row { display: flex; align-items: center; gap: 6px; }
+  .key-row input { flex: 1; max-width: 260px; padding: 4px 8px; border: 1.5px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: monospace; letter-spacing: .5px; }
+  .key-row input:focus { border-color: #7c3aed; outline: none; box-shadow: 0 0 0 1px #7c3aed; }
+  .key-row input.filled { border-color: #2e7d32; background: #f1f9f1; }
+  .key-row input.readonly { background: #f6f7f7; color: #8c8f94; border-color: #d0d0d0; cursor: default; }
+
+  .st { font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .st-pending { background: #fff3e0; color: #e65100; }
+  .st-done { background: #e8f5e9; color: #2e7d32; }
+  .st-physical { background: #e3f2fd; color: #1565c0; }
+
+  .act-btn { width: 26px; height: 26px; border: 1px solid #d0d0d0; border-radius: 3px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+  .act-btn:hover { background: #f0f0f1; }
+  .act-btn.send { background: #7c3aed; color: #fff; border-color: #6d28d9; width: auto; padding: 0 10px; font-size: 11px; }
+
+  /* Per-product bulk paste dialog */
+  .bulk-popup { display: none; background: #fafafa; border: 1px dashed #7c3aed; border-radius: 6px; padding: 10px; margin-top: 4px; }
+  .bulk-popup.open { display: flex; gap: 10px; align-items: flex-start; }
+  .bulk-popup textarea { flex: 1; min-height: 60px; padding: 6px; border: 1px solid #d0d0d0; border-radius: 4px; font-family: monospace; font-size: 11px; resize: vertical; }
+  .bulk-popup .hint { font-size: 10px; color: #8c8f94; line-height: 1.5; flex: 0 0 140px; }
+
+  .bulk-btn { font-size: 10px; color: #7c3aed; cursor: pointer; background: none; border: 1px dashed #7c3aed; border-radius: 3px; padding: 1px 6px; }
+  .bulk-btn:hover { background: #f3f0ff; }
+
+  .footer-bar { padding: 10px 12px; border-top: 1px solid #e8e8ed; display: flex; justify-content: space-between; font-size: 11px; color: #8c8f94; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="header">
+  <h1>🔑 License Keys <span class="badge">v6.0.5</span> <span class="badge-green">per-product bulk</span></h1>
+  <span style="font-size:11px;color:#8c8f94">⚡ Auto-save  |  <kbd style="background:#f0f0f1;padding:0 4px;border:1px solid #ddd">Tab</kbd> jump  |  📋 per-product batch</span>
+</div>
+
+<!-- Warning about Bulk Paste -->
+<div class="warn-box">
+  <div class="icon">⚠️</div>
+  <div>
+    <strong>Bulk Paste is per-product, not per-order.</strong>
+    Each product has its own "📋 Batch" button. Pasting keys in the product's batch box
+    only fills fields for that specific product. This prevents keys from going to the wrong product.
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th style="width:130px">Order</th><th>Items &amp; Keys</th><th style="width:50px"></th></tr>
+  </thead>
+  <tbody>
+
+    <!-- Order #681: 3 products, each with different key needs -->
+    <tr>
+      <td class="order-cell">
+        <div><a href="#" class="order-num">#681</a> <span class="st st-pending">Pending</span></div>
+        <div class="cust">Alice Wang</div>
+        <div class="time">2 min ago</div>
+        <div class="prog-row">
+          <div class="prog-bar"><div class="fill" style="width:0%"></div></div>
+          <span style="font-size:10px;color:#8c8f94">0/4</span>
+        </div>
+      </td>
+      <td>
+
+        <!-- Product 1: Windows 11 Pro x2 — needs 2 keys (same product, bulk works) -->
+        <div class="item-row" style="background:#fafafa;border-radius:4px">
+          <div class="item-info">
+            <div class="item-name">Windows 11 Pro OEM Key</div>
+            <div class="item-qty">× 2 keys needed</div>
+            <button class="bulk-btn" onclick="alert('Opens batch input for this product')">📋 Batch fill both</button>
+          </div>
+          <div class="key-section">
+            <div class="key-row">
+              <input type="text" placeholder="Key #1">
+              <span class="st st-pending">Pending</span>
+              <button class="act-btn" title="Send this key">➤</button>
+            </div>
+            <div class="key-row">
+              <input type="text" placeholder="Key #2">
+              <span class="st st-pending">Pending</span>
+              <button class="act-btn" title="Send this key">➤</button>
+            </div>
+            <!-- Bulk popup for THIS product only -->
+            <div class="bulk-popup open">
+              <textarea placeholder="Paste keys for Windows 11 Pro only...&#10;One per line">WX11P-AAAA-BBBB-CCCC
+WX11P-DDDD-EEEE-FFFF</textarea>
+              <div class="hint">
+                <strong>For this product only</strong><br>
+                2 keys → fill 2 fields<br>
+                <span style="color:#2e7d32">✅ Safe — all assigned to Windows 11 Pro</span>
+              </div>
+              <button class="act-btn send" style="height:60px">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Win Svr — physical, needs tracking -->
+        <div class="item-row">
+          <div class="item-info">
+            <div class="item-name">Win Svr IoT Std 2025</div>
+            <div class="item-qty">× 1 (sticker delivery)</div>
+          </div>
+          <div class="key-section">
+            <div class="key-row">
+              <input type="text" placeholder="Tracking number">
+              <span class="st st-physical">📦 Sticker</span>
+              <button class="act-btn" title="Mark shipped">📦</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Office — single key -->
+        <div class="item-row">
+          <div class="item-info">
+            <div class="item-name">Office 2021 Pro Plus</div>
+            <div class="item-qty">× 1 key needed</div>
+            <button class="bulk-btn">📋 Batch fill</button>
+          </div>
+          <div class="key-section">
+            <div class="key-row">
+              <input type="text" placeholder="OFF21-XXX-XXX-XXX">
+              <span class="st st-pending">Pending</span>
+              <button class="act-btn" title="Send this key">➤</button>
+            </div>
+          </div>
+        </div>
+
+      </td>
+      <td>
+        <button class="act-btn send" style="width:100%;padding:6px 0">➤ Send All</button>
+      </td>
+    </tr>
+
+    <!-- Order #680: Partially done -->
+    <tr>
+      <td class="order-cell">
+        <div><a href="#" class="order-num">#680</a> <span class="st" style="background:#f3e5f5;color:#7b1fa2">Partial</span></div>
+        <div class="cust">Bob Chen</div>
+        <div class="time">15 min ago</div>
+        <div class="prog-row">
+          <div class="prog-bar"><div class="fill" style="width:50%;background:#7b1fa2"></div></div>
+          <span style="font-size:10px;color:#8c8f94">1/2</span>
+        </div>
+      </td>
+      <td>
+        <div class="item-row">
+          <div class="item-info">
+            <div class="item-name">Office 2021 Pro Plus</div>
+            <div class="item-qty">× 1</div>
+          </div>
+          <div class="key-section">
+            <div class="key-row">
+              <input type="text" value="OFF21-ABCD-EFGH-IJKL" class="filled readonly" readonly>
+              <span class="st st-done">✅ Sent</span>
+            </div>
+          </div>
+        </div>
+        <div class="item-row" style="background:#fff8e1;margin:0 -12px;padding:8px 12px">
+          <div class="item-info">
+            <div class="item-name" style="font-weight:700">Office 2019 Pro Plus</div>
+            <div class="item-qty">× 1</div>
+            <button class="bulk-btn">📋 Batch fill</button>
+          </div>
+          <div class="key-section">
+            <div class="key-row">
+              <input type="text" placeholder="OFF19-XXX-XXX-XXX" style="border-color:#e65100">
+              <span class="st st-pending" style="background:#e65100;color:#fff">Waiting</span>
+              <button class="act-btn send" style="width:auto;padding:0 8px">➤ Send</button>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <button class="act-btn send" style="width:100%;padding:6px 0">➤ Send</button>
+      </td>
+    </tr>
+
+    <!-- Order #679: All done -->
+    <tr style="opacity:.6">
+      <td class="order-cell">
+        <div><a href="#" class="order-num">#679</a> <span class="st st-done">Completed</span></div>
+        <div class="cust">Scott Lee</div>
+        <div class="time">1 hr ago</div>
+        <div class="prog-row">
+          <div class="prog-bar"><div class="fill" style="width:100%;background:#2e7d32"></div></div>
+          <span style="font-size:10px;color:#8c8f94">2/2</span>
+        </div>
+      </td>
+      <td>
+        <div class="item-row">
+          <div class="item-info"><div class="item-name">Windows 11 Pro</div></div>
+          <div class="key-section"><div class="key-row"><input type="text" value="WX11P-OEM-ABCD-EFGH" class="filled readonly" readonly><span class="st st-done">✅ Sent</span></div></div>
+        </div>
+        <div class="item-row">
+          <div class="item-info"><div class="item-name">Win Svr IoT Std 2025</div></div>
+          <div class="key-section"><div class="key-row"><input type="text" value="TRACK-12345" class="filled readonly" readonly><span class="st st-done" style="background:#e3f2fd;color:#1565c0">📦 Shipped</span></div></div>
+        </div>
+      </td>
+      <td><span style="font-size:18px">✅</span></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="footer-bar">
+  <span>7 orders | 23 pending</span>
+  <span>📋 Bulk Paste: <strong>per-product</strong> — each "📋 Batch" button only fills that product's keys</span>
+</div>
+
+</div>
+</body>
+</html>

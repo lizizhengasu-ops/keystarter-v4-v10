@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeyStarter License Keys — v6.0.3 Admin Page</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f1; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; padding: 30px; color: #1d2327; }
+
+  /* WP Admin top bar mimic */
+  .wp-admin-bar { background: #1d2327; color: #a7aaad; padding: 0 20px; height: 32px; display: flex; align-items: center; font-size: 12px; margin: -30px -30px 20px; }
+  .wp-admin-bar span { margin-right: 16px; }
+
+  .page-wrap { max-width: 1200px; }
+
+  /* Page header */
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+  .page-header h1 { font-size: 23px; font-weight: 400; display: flex; align-items: center; gap: 8px; }
+  .page-header .badge { font-size: 11px; background: #7c3aed; color: #fff; padding: 2px 10px; border-radius: 10px; font-weight: 600; }
+  .page-header .header-actions { display: flex; gap: 8px; }
+  .page-header .header-actions input { padding: 4px 10px; border: 1px solid #c3c4c7; border-radius: 4px; font-size: 13px; min-width: 200px; }
+  .page-header .header-actions input:focus { border-color: #3858e9; box-shadow: 0 0 0 1px #3858e9; outline: none; }
+
+  /* Stats cards */
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: #fff; border: 1px solid #c3c4c7; border-radius: 4px; padding: 16px; box-shadow: 0 1px 1px rgba(0,0,0,.04); }
+  .stat-card .stat-num { font-size: 28px; font-weight: 600; }
+  .stat-card .stat-label { font-size: 12px; color: #8c8f94; margin-top: 4px; }
+  .stat-card.purple { border-left: 4px solid #7c3aed; }
+  .stat-card.green { border-left: 4px solid #2e7d32; }
+  .stat-card.blue { border-left: 4px solid #1565c0; }
+  .stat-card.orange { border-left: 4px solid #e65100; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; margin-bottom: 0; border-bottom: 1px solid #c3c4c7; }
+  .tabs a { padding: 8px 16px; font-size: 13px; color: #50575e; text-decoration: none; border: 1px solid transparent; margin-bottom: -1px; }
+  .tabs a.active { background: #fff; border-color: #c3c4c7; border-bottom-color: #fff; color: #1d2327; font-weight: 600; }
+  .tabs a .count { background: #dcdcde; border-radius: 8px; padding: 0 6px; font-size: 10px; margin-left: 4px; }
+
+  /* Table */
+  .table-wrap { background: #fff; border: 1px solid #c3c4c7; border-top: 0; box-shadow: 0 1px 1px rgba(0,0,0,.04); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: #f6f7f7; padding: 8px 12px; text-align: left; font-size: 12px; font-weight: 600; color: #50575e; border-bottom: 1px solid #c3c4c7; }
+  thead th input[type=checkbox] { margin: 0; }
+  tbody td { padding: 12px; font-size: 13px; border-bottom: 1px solid #f0f0f1; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.all-done { opacity: 0.6; background: #f9f9f9; }
+
+  /* Per-product rows inside order */
+  .product-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #f5f5f5; }
+  .product-row:last-child { border-bottom: 0; }
+  .product-name { flex: 1; font-size: 12px; }
+  .product-name .qty { color: #8c8f94; }
+  .product-key-input { flex: 0 0 240px; }
+  .product-key-input input { width: 100%; padding: 4px 8px; border: 1px solid #d0d0d0; border-radius: 3px; font-size: 12px; font-family: monospace; }
+  .product-key-input input:focus { border-color: #3858e9; box-shadow: 0 0 0 1px #3858e9; outline: none; }
+  .product-key-input input[readonly] { background: #f0f0f1; color: #8c8f94; }
+
+  .status-tag { font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .st-done { background: #e8f5e9; color: #2e7d32; }
+  .st-pending { background: #fff3e0; color: #e65100; }
+  .st-physical { background: #e3f2fd; color: #1565c0; }
+
+  .order-info { font-size: 12px; }
+  .order-info .order-num { font-weight: 600; text-decoration: none; color: #3858e9; }
+  .order-info .order-num:hover { text-decoration: underline; }
+  .order-info .customer { color: #50575e; }
+  .order-info .date { color: #8c8f94; font-size: 11px; }
+
+  .expand-icon { cursor: pointer; color: #8c8f94; font-size: 12px; user-select: none; flex-shrink: 0; width: 20px; text-align: center; }
+
+  /* Action row */
+  .table-footer { padding: 10px 12px; border-top: 1px solid #c3c4c7; display: flex; align-items: center; justify-content: space-between; }
+  .bulk-actions { display: flex; gap: 8px; align-items: center; font-size: 12px; }
+  .bulk-actions select { padding: 2px 6px; border: 1px solid #c3c4c7; border-radius: 3px; }
+  .btn { padding: 5px 14px; border: 1px solid #2271b1; border-radius: 3px; font-size: 12px; cursor: pointer; }
+  .btn-primary { background: #2271b1; color: #fff; }
+  .btn-primary:hover { background: #135e96; }
+  .btn-secondary { background: #fff; color: #2271b1; }
+  .btn-purple { background: #7c3aed; color: #fff; border-color: #6d28d9; }
+  .btn-purple:hover { background: #6d28d9; }
+
+  /* Inline save feedback */
+  .save-feedback { font-size: 11px; color: #2e7d32; animation: fadeOut 2s forwards; display: inline-block; }
+  @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+
+  .section-title { font-size: 18px; font-weight: 400; margin: 24px 0 12px; }
+
+  /* Log */
+  .activity-log { background: #fff; border: 1px solid #c3c4c7; border-radius: 4px; padding: 0; }
+  .log-item { padding: 10px 12px; border-bottom: 1px solid #f0f0f1; font-size: 12px; display: flex; align-items: center; gap: 8px; }
+  .log-item:last-child { border-bottom: 0; }
+  .log-time { color: #8c8f94; flex-shrink: 0; }
+  .log-icon { font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wp-admin-bar">
+  <span>🔲 KeyStarter</span>
+  <span>WooCommerce</span>
+  <span style="color:#fff">License Keys</span>
+</div>
+
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>
+      🔑 License Keys
+      <span class="badge">v6.0.3</span>
+      <span style="font-size:12px;font-weight:400;color:#8c8f94;margin-left:8px">Manage all order key fulfillments</span>
+    </h1>
+    <div class="header-actions">
+      <input type="text" placeholder="Search by order #, customer, product...">
+      <button class="btn btn-secondary">🔍 Search</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card purple"><div class="stat-num">7</div><div class="stat-label">Pending Orders</div></div>
+    <div class="stat-card" style="border-left:4px solid #7c3aed"><div class="stat-num">23</div><div class="stat-label">Items Awaiting Keys</div></div>
+    <div class="stat-card green"><div class="stat-num">12</div><div class="stat-label">Keys Sent Today</div></div>
+    <div class="stat-card blue"><div class="stat-num">3</div><div class="stat-label">Physical (Sticker)</div></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <a href="#" class="active">All Pending <span class="count">7</span></a>
+    <a href="#">Digital Only <span class="count">23</span></a>
+    <a href="#">Physical Only <span class="count">3</span></a>
+    <a href="#">Recently Sent</a>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:28px"><input type="checkbox"></th>
+          <th style="width:30px"></th>
+          <th style="width:140px">Order / Customer</th>
+          <th>Products &amp; Keys</th>
+          <th style="width:60px;text-align:center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Order 681: Fully pending (digital + physical) -->
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><span class="expand-icon">▶</span></td>
+          <td>
+            <div class="order-info">
+              <a href="#" class="order-num">#681</a><br>
+              <span class="customer">Alice Wang</span><br>
+              <span class="date">2 mins ago</span>
+            </div>
+          </td>
+          <td>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Windows 11 Pro OEM Key <span class="qty">×2</span></span>
+              <div class="product-key-input"><input type="text" placeholder="Enter key..." autofocus></div>
+              <span class="status-tag st-pending">⏳ Pending</span>
+            </div>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Windows 10 Pro OEM Key <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" placeholder="Enter key..." autofocus></div>
+              <span class="status-tag st-pending">⏳ Pending</span>
+            </div>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Win Svr IoT Std 2025 <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" placeholder="Tracking # (optional)"></div>
+              <span class="status-tag st-physical">📦 Sticker</span>
+            </div>
+          </td>
+          <td style="text-align:center">
+            <button class="btn btn-purple" style="font-size:11px;padding:3px 10px">Send</button>
+          </td>
+        </tr>
+
+        <!-- Order 682: Partially done, one pending -->
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><span class="expand-icon">▶</span></td>
+          <td>
+            <div class="order-info">
+              <a href="#" class="order-num">#680</a><br>
+              <span class="customer">Bob Chen</span><br>
+              <span class="date">15 mins ago</span>
+            </div>
+          </td>
+          <td>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Office 2021 Professional Plus <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" value="OFF21-ABCD-EFGH-IJKL" readonly></div>
+              <span class="status-tag st-done">✅ Sent</span>
+            </div>
+            <div class="product-row" style="background:#fff8e1;margin:0 -12px;padding:6px 12px">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name" style="font-weight:600">Office 2019 Professional Plus <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" placeholder="Enter key..." style="border-color:#e65100"></div>
+              <span class="status-tag st-pending" style="background:#e65100;color:#fff">⏳ Waiting</span>
+            </div>
+          </td>
+          <td style="text-align:center">
+            <button class="btn btn-purple" style="font-size:11px;padding:3px 10px">Send</button>
+          </td>
+        </tr>
+
+        <!-- Order 683: All done -->
+        <tr class="all-done">
+          <td><input type="checkbox"></td>
+          <td><span class="expand-icon">▶</span></td>
+          <td>
+            <div class="order-info">
+              <a href="#" class="order-num">#679</a><br>
+              <span class="customer">Scott Lee</span><br>
+              <span class="date">1 hr ago</span>
+            </div>
+          </td>
+          <td>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Windows 11 Pro OEM Key <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" value="WX11P-OEM-ABCD-EFGH" readonly></div>
+              <span class="status-tag st-done">✅ Sent</span>
+            </div>
+            <div class="product-row">
+              <span class="expand-icon" style="visibility:hidden">◉</span>
+              <span class="product-name">Win Svr IoT Std 2025 <span class="qty">×1</span></span>
+              <div class="product-key-input"><input type="text" value="TRACK-12345-USA" readonly></div>
+              <span class="status-tag st-done" style="background:#e3f2fd;color:#1565c0">📦 Shipped</span>
+            </div>
+          </td>
+          <td style="text-align:center">
+            <span style="font-size:11px;color:#2e7d32">✅ All done</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Footer -->
+    <div class="table-footer">
+      <div class="bulk-actions">
+        <select><option>Bulk Actions</option><option>Mark as Sent</option><option>Resend Email</option></select>
+        <button class="btn btn-secondary">Apply</button>
+        <span style="color:#8c8f94;margin-left:8px">7 orders | 23 items pending</span>
+      </div>
+      <div>
+        <button class="btn btn-purple" style="font-weight:600">⬇ Export Unfulfilled</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity Log -->
+  <div class="section-title">📋 Recent Activity</div>
+  <div class="activity-log">
+    <div class="log-item">
+      <span class="log-icon">✅</span>
+      <span><strong>You</strong> sent key for <strong>Order #679</strong> (Windows 11 Pro)</span>
+      <span class="log-time">10 min ago</span>
+    </div>
+    <div class="log-item">
+      <span class="log-icon">📦</span>
+      <span><strong>You</strong> marked <strong>Order #679</strong> (Win Svr IoT) as shipped</span>
+      <span class="log-time">10 min ago</span>
+    </div>
+    <div class="log-item">
+      <span class="log-icon">📧</span>
+      <span>Email sent to <strong>scott@example.com</strong> — License Key for #679</span>
+      <span class="log-time">10 min ago</span>
+    </div>
+    <div class="log-item">
+      <span class="log-icon">🔴</span>
+      <span><strong>Order #680</strong> placed — 2 items awaiting keys</span>
+      <span class="log-time">15 min ago</span>
+    </div>
+  </div>
+
+  <!-- v6.0.2 vs v6.0.3 comparison -->
+  <div class="section-title">📊 v6.0.2 vs v6.0.3</div>
+  <table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border:1px solid #ddd">
+    <tr style="background:#f6f7f7"><th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">Feature</th><th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">v6.0.2 (Order Metabox)</th><th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">v6.0.3 (Admin Page)</th></tr>
+    <tr><td style="padding:8px 10px;border-bottom:1px solid #eee">View</td><td style="padding:8px 10px;border-bottom:1px solid #eee">One order at a time</td><td style="padding:8px 10px;border-bottom:1px solid #eee">All pending orders in one screen</td></tr>
+    <tr><td style="padding:8px 10px;border-bottom:1px solid #eee">Bulk edit</td><td style="padding:8px 10px;border-bottom:1px solid #eee">❌</td><td style="padding:8px 10px;border-bottom:1px solid #eee">✅ Select + batch actions</td></tr>
+    <tr><td style="padding:8px 10px;border-bottom:1px solid #eee">Search/filter</td><td style="padding:8px 10px;border-bottom:1px solid #eee">❌</td><td style="padding:8px 10px;border-bottom:1px solid #eee">✅ Search + tabs + filter</td></tr>
+    <tr><td style="padding:8px 10px;border-bottom:1px solid #eee">Status overview</td><td style="padding:8px 10px;border-bottom:1px solid #eee">❌</td><td style="padding:8px 10px;border-bottom:1px solid #eee">✅ Stats cards + activity log</td></tr>
+    <tr><td style="padding:8px 10px;border-bottom:1px solid #eee">Export</td><td style="padding:8px 10px;border-bottom:1px solid #eee">❌</td><td style="padding:8px 10px;border-bottom:1px solid #eee">✅ CSV export of unfulfilled</td></tr>
+    <tr><td style="padding:8px 10px">Code</td><td style="padding:8px 10px">~50 lines (metabox)</td><td style="padding:8px 10px">~200 lines (admin page + JS)</td></tr>
+  </table>
+
+  <p style="margin-top:16px;font-size:12px;color:#8c8f94">v6.0.3 adds a dedicated WooCommerce submenu page: <strong>WooCommerce → License Keys</strong></p>
+</div>
+</body>
+</html>

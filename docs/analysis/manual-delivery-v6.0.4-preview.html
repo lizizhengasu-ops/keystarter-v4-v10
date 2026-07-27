@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KeyStarter License Keys — v6.0.4 Smart Fulfillment</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f1; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; padding: 30px; color: #1d2327; }
+
+  .page-wrap { max-width: 1280px; margin: 0 auto; }
+
+  /* Header */
+  .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+  .page-header h1 { font-size: 23px; font-weight: 400; display: flex; align-items: center; gap: 10px; }
+  .page-header .badge { font-size: 10px; background: #7c3aed; color: #fff; padding: 2px 10px; border-radius: 10px; font-weight: 600; }
+  .page-header .hdr-actions { display: flex; gap: 8px; }
+  .page-header .hdr-actions input { padding: 4px 10px; border: 1px solid #c3c4c7; border-radius: 4px; font-size: 13px; width: 220px; }
+
+  /* Stats */
+  .stats-row { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: #fff; border: 1px solid #c3c4c7; border-radius: 6px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .stat-card .num { font-size: 26px; font-weight: 700; }
+  .stat-card .lbl { font-size: 11px; color: #8c8f94; margin-top: 2px; }
+
+  /* Quick Actions Bar */
+  .quick-bar { background: #fff; border: 1px solid #c3c4c7; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .quick-bar .pill { font-size: 11px; padding: 4px 12px; border-radius: 14px; background: #f0f0f1; cursor: pointer; }
+  .quick-bar .pill.active { background: #7c3aed; color: #fff; }
+  .quick-bar .shortcut { font-size: 10px; color: #8c8f94; border-left: 1px solid #e8e8ed; padding-left: 12px; }
+  .quick-bar .shortcut kbd { background: #f0f0f1; padding: 1px 5px; border-radius: 3px; border: 1px solid #ddd; font-size: 10px; }
+
+  /* Table */
+  .table-wrap { background: #fff; border: 1px solid #c3c4c7; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: #f6f7f7; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #50575e; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #c3c4c7; }
+  tbody td { padding: 14px 12px; font-size: 13px; border-bottom: 1px solid #f0f0f1; vertical-align: top; }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.done-row { opacity: .55; }
+
+  /* Per-product inside order row */
+  .item-grid { display: flex; flex-direction: column; gap: 6px; }
+  .item-line { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+  .item-name { font-size: 12px; min-width: 200px; }
+  .item-name .qty { color: #8c8f94; }
+  .key-field { position: relative; flex: 1; max-width: 280px; }
+  .key-field input { width: 100%; padding: 5px 30px 5px 8px; border: 1.5px solid #d0d0d0; border-radius: 4px; font-size: 12px; font-family: monospace; letter-spacing: .5px; transition: border-color .2s; }
+  .key-field input:focus { border-color: #7c3aed; box-shadow: 0 0 0 1px #7c3aed; outline: none; }
+  .key-field input.filled { border-color: #2e7d32; background: #f1f9f1; }
+  .key-field input.error { border-color: #d32f2f; background: #fff5f5; }
+  .key-field .save-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 14px; }
+  .key-field input.filled ~ .save-icon::after { content: "✓"; color: #2e7d32; font-weight: bold; }
+
+  .st-tag { font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .st-done { background: #e8f5e9; color: #2e7d32; }
+  .st-pending { background: #fff3e0; color: #e65100; }
+  .st-physical { background: #e3f2fd; color: #1565c0; }
+  .st-partial { background: #f3e5f5; color: #7b1fa2; }
+
+  .order-meta { font-size: 12px; }
+  .order-meta .num { font-weight: 600; color: #3858e9; text-decoration: none; }
+  .order-meta .cust { color: #50575e; }
+  .order-meta .time { color: #8c8f94; font-size: 11px; }
+
+  /* Progress bar */
+  .prog { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .prog-bar { flex: 1; height: 4px; background: #e8e8ed; border-radius: 2px; overflow: hidden; max-width: 100px; }
+  .prog-bar .fill { height: 100%; background: #7c3aed; border-radius: 2px; transition: width .3s; }
+  .prog-text { font-size: 10px; color: #8c8f94; white-space: nowrap; }
+
+  /* Actions */
+  .action-btns { display: flex; gap: 4px; }
+  .action-btn { width: 28px; height: 28px; border: 1px solid #d0d0d0; border-radius: 4px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all .15s; }
+  .action-btn:hover { background: #f0f0f1; border-color: #8c8f94; }
+  .action-btn.send { background: #7c3aed; color: #fff; border-color: #6d28d9; }
+  .action-btn.send:hover { background: #6d28d9; }
+
+  .tt { position: relative; }
+  .tt:hover::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%); background: #1d2327; color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 4px; white-space: nowrap; z-index: 10; }
+
+  /* Bulk paste dialog */
+  .bulk-section { background: #fff; border: 1px solid #c3c4c7; border-radius: 6px; margin-bottom: 16px; overflow: hidden; display: none; }
+  .bulk-section.open { display: block; }
+  .bulk-header { padding: 12px 16px; background: #f6f7f7; border-bottom: 1px solid #c3c4c7; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; }
+  .bulk-body { padding: 16px; display: flex; gap: 16px; }
+  .bulk-body textarea { flex: 1; padding: 10px; border: 1px solid #d0d0d0; border-radius: 4px; font-family: monospace; font-size: 12px; min-height: 120px; resize: vertical; }
+  .bulk-body .bulk-hint { flex: 0 0 200px; font-size: 11px; color: #50575e; line-height: 1.6; }
+  .bulk-body .bulk-hint strong { display: block; margin-bottom: 4px; }
+
+  .auto-save-badge { font-size: 10px; color: #2e7d32; background: #e8f5e9; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+
+  .footer-bar { padding: 12px 16px; border-top: 1px solid #e8e8ed; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #8c8f94; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>
+      🔑 License Keys
+      <span class="badge">v6.0.4</span>
+      <span class="auto-save-badge">⚡ Auto-save</span>
+    </h1>
+    <div class="hdr-actions">
+      <input type="text" placeholder="Search order #, customer, product...">
+      <span class="pill">🔍 Search</span>
+      <span class="pill">📋 Bulk Paste</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card" style="border-left:3px solid #7c3aed"><div class="num">7</div><div class="lbl">Pending Orders</div></div>
+    <div class="stat-card" style="border-left:3px solid #e65100"><div class="num">23</div><div class="lbl">Keys Needed</div></div>
+    <div class="stat-card" style="border-left:3px solid #7c3aed"><div class="num">12</div><div class="lbl">Partially Filled</div></div>
+    <div class="stat-card" style="border-left:3px solid #2e7d32"><div class="num">8</div><div class="lbl">Sent Today</div></div>
+    <div class="stat-card" style="border-left:3px solid #1565c0"><div class="num">3</div><div class="lbl">Physical</div></div>
+  </div>
+
+  <!-- Quick Bar -->
+  <div class="quick-bar">
+    <span style="font-weight:600;font-size:12px">⚡ Smart Fill Mode</span>
+    <span class="pill active">All</span>
+    <span class="pill">Digital Only</span>
+    <span class="pill">Physical</span>
+    <span class="pill">Partially Done</span>
+    <span class="shortcut"><kbd>Tab</kbd> Next field  <kbd>Ctrl+→</kbd> Next order  <kbd>Ctrl+Enter</kbd> Send current</span>
+  </div>
+
+  <!-- Bulk Paste Dialog -->
+  <div class="bulk-section open">
+    <div class="bulk-header">
+      📋 Bulk Paste Keys
+      <span style="cursor:pointer;color:#8c8f94">✕</span>
+    </div>
+    <div class="bulk-body">
+      <textarea placeholder="Paste keys here, one per line...&#10;OFF21-XXXX-XXXX-XXXX&#10;WX11P-YYYY-YYYY-YYYY&#10;SRV25-ZZZZ-ZZZZ-ZZZZ">OFF21-XXXX-XXXX-XXXX
+WX11P-YYYY-YYYY-YYYY
+SRV25-ZZZZ-ZZZZ-ZZZZ</textarea>
+      <div class="bulk-hint">
+        <strong>How it works:</strong>
+        1. Copy keys from your source<br>
+        2. Paste here (one per line)<br>
+        3. Keys auto-assign to the next empty fields in order<br><br>
+        <span style="color:#2e7d32">3 keys ready to assign →</span>
+      </div>
+      <div>
+        <button class="action-btn send" style="width:auto;padding:6px 16px;font-size:12px;border-radius:4px">Apply to Open Fields</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24px"><input type="checkbox"></th>
+          <th style="width:140px">Order</th>
+          <th>Items &amp; Keys <span style="font-weight:400;color:#8c8f94">— auto-saves on type</span></th>
+          <th style="width:40px">⚡</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Order: All pending -->
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>
+            <div class="order-meta">
+              <div><a href="#" class="num">#681</a> <span class="st-tag st-pending">Pending</span></div>
+              <div class="cust">Alice Wang</div>
+              <div class="time">2 min ago</div>
+              <div class="prog">
+                <div class="prog-bar"><div class="fill" style="width:0%"></div></div>
+                <span class="prog-text">0/3</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="item-grid">
+              <div class="item-line">
+                <span class="item-name">Windows 11 Pro OEM Key <span class="qty">×2</span></span>
+                <div class="key-field">
+                  <input type="text" placeholder="WX11P-XXX-XXX-XXX" autofocus>
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-pending">Pending</span>
+                <button class="action-btn tt" data-tip="Send this key">➤</button>
+              </div>
+              <div class="item-line">
+                <span class="item-name">Windows 10 Pro OEM Key <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" placeholder="WX10P-XXX-XXX-XXX">
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-pending">Pending</span>
+                <button class="action-btn tt" data-tip="Send this key">➤</button>
+              </div>
+              <div class="item-line">
+                <span class="item-name">Win Svr IoT Std 2025 <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" placeholder="Tracking number (optional)">
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-physical">📦 Sticker</span>
+                <button class="action-btn tt" data-tip="Mark as shipped">📦</button>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button class="action-btn send tt" data-tip="Send all filled keys">➤</button>
+          </td>
+        </tr>
+
+        <!-- Order: Partially done -->
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>
+            <div class="order-meta">
+              <div><a href="#" class="num">#680</a> <span class="st-tag st-partial">Partial</span></div>
+              <div class="cust">Bob Chen</div>
+              <div class="time">15 min ago</div>
+              <div class="prog">
+                <div class="prog-bar"><div class="fill" style="width:50%;background:#7b1fa2"></div></div>
+                <span class="prog-text">1/2</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="item-grid">
+              <div class="item-line">
+                <span class="item-name">Office 2021 Pro Plus <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" value="OFF21-ABCD-EFGH-IJKL" class="filled" readonly>
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-done">✅ Sent to bob@...</span>
+              </div>
+              <div class="item-line" style="background:#fff8e1;margin:0 -12px;padding:4px 12px;border-radius:4px">
+                <span class="item-name" style="font-weight:600">Office 2019 Pro Plus <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" placeholder="OFF19-XXX-XXX-XXX" style="border-color:#e65100">
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-pending" style="background:#e65100;color:#fff">Waiting</span>
+                <button class="action-btn send tt" data-tip="Send this key">➤</button>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button class="action-btn send tt" data-tip="Send current key only">➤</button>
+          </td>
+        </tr>
+
+        <!-- Order: All done -->
+        <tr class="done-row">
+          <td><input type="checkbox"></td>
+          <td>
+            <div class="order-meta">
+              <div><a href="#" class="num">#679</a> <span class="st-tag st-done">Completed</span></div>
+              <div class="cust">Scott Lee</div>
+              <div class="time">1 hr ago</div>
+              <div class="prog">
+                <div class="prog-bar"><div class="fill" style="width:100%;background:#2e7d32"></div></div>
+                <span class="prog-text">2/2</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="item-grid">
+              <div class="item-line">
+                <span class="item-name">Windows 11 Pro OEM Key <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" value="WX11P-OEM-ABCD-EFGH" class="filled" readonly>
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-done">✅ Sent</span>
+              </div>
+              <div class="item-line">
+                <span class="item-name">Win Svr IoT Std 2025 <span class="qty">×1</span></span>
+                <div class="key-field">
+                  <input type="text" value="TRACK-12345" class="filled" readonly>
+                  <span class="save-icon"></span>
+                </div>
+                <span class="st-tag st-done" style="background:#e3f2fd;color:#1565c0">📦 Shipped</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span style="font-size:18px">✅</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="footer-bar">
+      <span>7 orders | 23 pending keys | ⚡ Auto-save enabled</span>
+      <button style="background:none;border:1px solid #d0d0d0;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px">📥 Export CSV</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div style="margin-top:12px;display:flex;gap:16px;font-size:11px;color:#8c8f94;background:#fff;padding:10px 16px;border-radius:6px;border:1px solid #e8e8ed">
+    <span><strong>💡 Smart features:</strong></span>
+    <span>⚡ Auto-save 500ms after typing</span>
+    <span><kbd style="background:#f0f0f1;padding:0 4px;border:1px solid #ddd;border-radius:2px">Tab</kbd> Jump to next empty field</span>
+    <span><kbd style="background:#f0f0f1;padding:0 4px;border:1px solid #ddd;border-radius:2px">Ctrl+Enter</kbd> Send current order</span>
+    <span>📋 Bulk paste assigns keys automatically</span>
+  </div>
+
+</div>
+</body>
+</html>

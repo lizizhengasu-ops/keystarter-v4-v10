@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manual Delivery v6.0.2 — Multi-Product Key Fulfillment</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f1; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; padding: 40px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 18px; margin-bottom: 8px; color: #1d2327; }
+  .subtitle { color: #50575e; font-size: 13px; margin-bottom: 24px; }
+  h2.section-title { font-size: 14px; margin: 32px 0 12px; color: #50575e; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+
+  /* Admin Layout */
+  .admin-layout { display: flex; gap: 20px; align-items: flex-start; }
+  .admin-main { flex: 1; min-height: 400px; }
+
+  /* Metabox */
+  .metabox { background: #fff; border: 1px solid #c3c4c7; box-shadow: 0 1px 1px rgba(0,0,0,.04); border-radius: 4px; width: 380px; flex-shrink: 0; }
+  .metabox-header { padding: 8px 12px; border-bottom: 1px solid #c3c4c7; display: flex; align-items: center; justify-content: space-between; background: #f6f7f7; }
+  .metabox-header h3 { font-size: 13px; font-weight: 600; color: #1d2327; }
+  .tag-v6 { background: #e8f5e9; color: #2e7d32; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .metabox-body { padding: 12px; }
+
+  /* Per-Product Row */
+  .item-row { border: 1px solid #e8e8ed; border-radius: 4px; padding: 10px; margin-bottom: 8px; }
+  .item-row:last-child { margin-bottom: 0; }
+  .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .item-name { font-size: 12px; font-weight: 600; color: #1d2327; }
+  .item-qty { font-size: 11px; color: #8c8f94; }
+  .item-input-row { display: flex; gap: 6px; align-items: center; }
+  .item-input-row input[type="text"] { flex: 1; padding: 6px 8px; border: 1px solid #8c8f94; border-radius: 3px; font-size: 12px; font-family: monospace; }
+  .item-input-row input[type="text"]:focus { border-color: #3858e9; box-shadow: 0 0 0 1px #3858e9; outline: none; }
+  .status-badge { font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
+  .status-done { background: #e8f5e9; color: #2e7d32; }
+  .status-pending { background: #fff3e0; color: #e65100; }
+  .status-physical { background: #e3f2fd; color: #1565c0; }
+  .item-physical-note { font-size: 10px; color: #1565c0; margin-top: 4px; }
+
+  .metabox-actions { margin-top: 12px; border-top: 1px solid #e8e8ed; padding-top: 10px; }
+  .btn-primary { background: #7c3aed; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; }
+  .btn-primary:hover { background: #6d28d9; }
+  .meta-note { font-size: 10px; color: #8c8f94; margin-top: 6px; text-align: center; }
+
+  /* Email Preview */
+  .email-container { max-width: 560px; margin: 0 auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .email-header { background: #7c3aed; color: #fff; padding: 24px; text-align: center; }
+  .email-header h1 { font-size: 20px; font-weight: 700; color: #fff; margin: 0; }
+  .email-body { padding: 32px; border: 1px solid #e8e8ed; border-top: 0; }
+  .email-body p { font-size: 14px; line-height: 1.6; color: #1d1d1f; margin-bottom: 12px; }
+
+  .key-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .key-table th { background: #f5f5f7; font-size: 11px; color: #50575e; text-align: left; padding: 8px 12px; border-bottom: 1px solid #e8e8ed; }
+  .key-table td { padding: 10px 12px; border-bottom: 1px solid #f5f5f7; font-size: 13px; }
+  .key-table .key-cell { font-family: monospace; font-weight: 700; letter-spacing: 1px; color: #7c3aed; font-size: 14px; }
+
+  .email-footer-text { font-size: 12px; color: #8c8f94; margin-top: 16px; border-top: 1px solid #e8e8ed; padding-top: 16px; }
+  .label-new { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 10px; padding: 1px 6px; border-radius: 6px; font-weight: 600; margin-left: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Manual Delivery v6.0.2</h1>
+<p class="subtitle">Per-product key fulfillment — each item gets its own key input</p>
+
+<!-- ==================================== -->
+<h2 class="section-title">1. Admin — WooCommerce Order Edit (per-product keys)</h2>
+<!-- ==================================== -->
+
+<div class="admin-layout">
+  <div class="admin-main" style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;padding:16px;color:#8c8f94;font-size:12px">
+    <strong style="color:#1d2327">Order #679</strong> — Scott Lee &lt;sb-dodfz5...&gt;<br>
+    <hr style="border:0;border-top:1px solid #e8e8ed;margin:10px 0">
+    Billing: 1050 S Terrace Rd, Tempe, AZ 85281<br>
+    Shipping: (same address)
+  </div>
+
+  <div class="metabox">
+    <div class="metabox-header">
+      <h3>License Keys <span class="label-new">v6.0.2</span></h3>
+      <span class="tag-v6">per-product</span>
+    </div>
+    <div class="metabox-body">
+
+      <!-- Product 1: Digital - Key provided -->
+      <div class="item-row">
+        <div class="item-header">
+          <span class="item-name">Windows 11 Pro OEM Key</span>
+          <span class="item-qty">× 1 <span class="status-badge status-done">✅ Key Sent</span></span>
+        </div>
+        <div class="item-input-row">
+          <input type="text" value="WX11P-OEM-ABCD-EFGH" readonly>
+        </div>
+      </div>
+
+      <!-- Product 2: Digital - Pending -->
+      <div class="item-row" style="border-color:#ffe0b2">
+        <div class="item-header">
+          <span class="item-name">Office 2021 Professional Plus</span>
+          <span class="item-qty">× 1 <span class="status-badge status-pending">⏳ Pending</span></span>
+        </div>
+        <div class="item-input-row">
+          <input type="text" value="" placeholder="Enter license key...">
+        </div>
+      </div>
+
+      <!-- Product 3: Physical (Sticker delivery) -->
+      <div class="item-row" style="border-color:#bbdefb">
+        <div class="item-header">
+          <span class="item-name">Win Svr IoT Std 2025 16 Core</span>
+          <span class="item-qty">× 1 <span class="status-badge status-physical">📦 Physical</span></span>
+        </div>
+        <div class="item-input-row">
+          <input type="text" value="" placeholder="Tracking number (optional)">
+        </div>
+        <div class="item-physical-note">⚠️ Sticker delivery — ship separately, update tracking above</div>
+      </div>
+
+      <div class="metabox-actions">
+        <button class="btn-primary">Complete Selected &amp; Send Keys</button>
+        <p class="meta-note">Only sends keys for items that have a key filled in</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ==================================== -->
+<h2 class="section-title">2. Customer Email (when admin fulfills one product)</h2>
+<!-- ==================================== -->
+
+<div class="email-container">
+  <div class="email-header">
+    <h1>🔑 Your License Key Is Ready</h1>
+  </div>
+  <div class="email-body">
+    <p>Hi Scott,</p>
+    <p>Your license key(s) for <strong>order #679</strong> have been issued:</p>
+
+    <table class="key-table">
+      <tr><th>Product</th><th>License Key</th></tr>
+      <tr>
+        <td>Windows 11 Pro OEM Key</td>
+        <td class="key-cell">WX11P-OEM-ABCD-EFGH</td>
+      </tr>
+      <tr>
+        <td>Office 2021 Professional Plus</td>
+        <td class="key-cell">OFF21-PRO-WXYZ-5678</td>
+      </tr>
+    </table>
+
+    <p style="font-size:12px;color:#e65100;background:#fff3e0;padding:10px;border-radius:6px">
+      📦 <strong>Win Svr IoT Std 2025</strong> is a physical product (sticker delivery).
+      It will be shipped separately. You will receive a tracking number when available.
+    </p>
+
+    <p class="email-footer-text">
+      Follow the activation instructions included with your product.<br>
+      For support: <a href="mailto:admin@keystarter.com" style="color:#7c3aed">admin@keystarter.com</a><br>
+      <span style="color:#999">Sent via Brevo | KeyStarter &lt;noreply@keys-starter.com&gt;</span>
+    </p>
+  </div>
+</div>
+
+<!-- ==================================== -->
+<h2 class="section-title">3. Key Logic</h2>
+
+<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border:1px solid #ddd">
+  <tr style="background:#f6f7f7">
+    <th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">Scenario</th>
+    <th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">v6.0.1 (single input)</th>
+    <th style="padding:8px 10px;text-align:left;border-bottom:1px solid #ddd">v6.0.2 (per-product)</th>
+  </tr>
+  <tr>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee">Customer bought 3 different licenses</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#e65100">❌ Only one key field</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#2e7d32">✅ Each product has own key field</td>
+  </tr>
+  <tr>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee">Partial fulfillment (send 1 of 3 keys)</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#e65100">❌ Not possible</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#2e7d32">✅ Send per-product, track status</td>
+  </tr>
+  <tr>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee">Mixed digital + physical items</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#e65100">❌ Not distinguished</td>
+    <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#2e7d32">✅ Digital = key input, Physical = tracking</td>
+  </tr>
+  <tr>
+    <td style="padding:8px 10px">Customer email</td>
+    <td style="padding:8px 10px;color:#e65100">❌ One block of keys</td>
+    <td style="padding:8px 10px;color:#2e7d32">✅ Table per product + key + status</td>
+  </tr>
+</table>
+
+<p style="margin-top:16px;font-size:12px;color:#8c8f94">
+  Full plan: <code>docs/analysis/manual-delivery-v6.0.1.md</code> (to be updated to v6.0.2)
+</p>
+
+</div>
+</body>
+</html>
