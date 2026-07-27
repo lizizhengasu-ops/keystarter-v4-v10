@@ -260,6 +260,7 @@ function ks_render_csv($nonce) {
     $CHUNK = 200;
     $csv_resuming = $_REQUEST['csv_r'] ?? '';
     $saved_chunk = $csv_resuming ? get_transient('ks_chunk_' . $csv_resuming) : null;
+    if ($csv_resuming && !$saved_chunk) { $csv_resuming = ''; echo '<div class="notice notice-error"><p>CSV data expired. Please upload again.</p></div>'; }
 
     // Handle POST for CSV import
     if (($_SERVER["REQUEST_METHOD"]==="POST" && isset($_POST["import_csv"]) && wp_verify_nonce($_POST["_wpnonce"]??"","ks_import_csv")) || $csv_resuming) {
