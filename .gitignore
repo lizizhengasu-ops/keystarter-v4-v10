@@ -48,3 +48,5 @@ fix-*.cjs
 tmp_*.py
 tmp_*.txt
 backups/
+tmp_*.py
+tmp_*.txt
