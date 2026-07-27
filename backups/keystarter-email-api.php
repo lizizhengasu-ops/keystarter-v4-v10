@@ -258,15 +258,19 @@ add_action("admin_init", function() {
 function ks_render_csv($nonce) {
     // v6.1.8 CSV chunking: 200 rows per batch
     $CHUNK = 200;
-    $csv_resuming = $_GET['csv_r'] ?? '';
+    $csv_resuming = $_REQUEST['csv_r'] ?? '';
     $saved_chunk = $csv_resuming ? get_transient('ks_chunk_' . $csv_resuming) : null;
 
     // Handle POST for CSV import
-    if ($_SERVER["REQUEST_METHOD"]==="POST" && isset($_POST["import_csv"]) && wp_verify_nonce($_POST["_wpnonce"]??"","ks_import_csv")) {
+    if (($_SERVER["REQUEST_METHOD"]==="POST" && isset($_POST["import_csv"]) && wp_verify_nonce($_POST["_wpnonce"]??"","ks_import_csv")) || $csv_resuming) {
         if ($_FILES["csv_file"]["size"] > 10485760) { echo "<div class=\"notice notice-error\"><p>File exceeds 10MB limit.</p></div>"; return; }
-    if (empty($_FILES["csv_file"]["tmp_name"])) { echo "<div class='notice notice-error'><p>No file uploaded.</p></div>"; }
+    if (empty($_FILES["csv_file"]["tmp_name"]) && !$csv_resuming) { echo "<div class='notice notice-error'><p>No file uploaded.</p></div>"; }
         else {
+                    if ($csv_resuming && $saved_chunk) {
+            $lines = $saved_chunk['lines'];
+        } else {
             $lines = file($_FILES["csv_file"]["tmp_name"], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        }
     // v6.1.8: save lines for resume, limit to CHUNK size
     $csv_hash = substr(md5(serialize($lines)), 0, 12);
     set_transient('ks_chunk_' . $csv_hash, $lines, 3600);
