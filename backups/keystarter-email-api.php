@@ -18,11 +18,11 @@ add_action("rest_api_init", function() {
 });
 
 // =============================================
-// v6.1.7 License Keys Admin — Queue + CSV + Transient Lock Batch
+// v6.1.8 License Keys Admin — Queue + CSV + Transient Lock + Chunked CSV Batch
 // Security: CSRF nonce, XSS esc, key dedup, lock
 // =============================================
 
-// v6.1.7 CSV email helper
+// v6.1.8 CSV email helper
 function ksc($o){
 $d=true;
 foreach($o->get_items() as $i){
@@ -62,7 +62,7 @@ add_action("admin_menu", function() {
         if (!current_user_can("manage_woocommerce")) wp_die("Access denied.");
         $tab = $_GET["tab"] ?? "queue";
         ?>
-        <div class="wrap"><h1>🔑 License Keys <span style="font-size:13px;font-weight:400;color:#666">v6.1.7 — Queue + CSV + Transient Lock</span></h1>
+        <div class="wrap"><h1>🔑 License Keys <span style="font-size:13px;font-weight:400;color:#666">v6.1.8 — Queue + CSV + Transient Lock + Chunked CSV</span></h1>
         <nav class="nav-tab-wrapper">
             <a href="?page=ks-license-keys&tab=queue" class="nav-tab <?php echo $tab==="queue"?"nav-tab-active":"" ?>">📋 Queue</a>
             <a href="?page=ks-license-keys&tab=csv" class="nav-tab <?php echo $tab==="csv"?"nav-tab-active":"" ?>">📦 CSV Batch</a>
@@ -256,12 +256,22 @@ add_action("admin_init", function() {
 
 // -- CSV Batch Mode --
 function ks_render_csv($nonce) {
+    // v6.1.8 CSV chunking: 200 rows per batch
+    $CHUNK = 200;
+    $csv_resuming = $_GET['csv_r'] ?? '';
+    $saved_chunk = $csv_resuming ? get_transient('ks_chunk_' . $csv_resuming) : null;
+
     // Handle POST for CSV import
     if ($_SERVER["REQUEST_METHOD"]==="POST" && isset($_POST["import_csv"]) && wp_verify_nonce($_POST["_wpnonce"]??"","ks_import_csv")) {
         if ($_FILES["csv_file"]["size"] > 10485760) { echo "<div class=\"notice notice-error\"><p>File exceeds 10MB limit.</p></div>"; return; }
     if (empty($_FILES["csv_file"]["tmp_name"])) { echo "<div class='notice notice-error'><p>No file uploaded.</p></div>"; }
         else {
             $lines = file($_FILES["csv_file"]["tmp_name"], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    // v6.1.8: save lines for resume, limit to CHUNK size
+    $csv_hash = substr(md5(serialize($lines)), 0, 12);
+    set_transient('ks_chunk_' . $csv_hash, $lines, 3600);
+    $total_rows = count($lines);
+
             $header = str_getcsv(array_shift($lines));
             $results = ["ok"=>0,"skip"=>0,"err"=>[]];
             foreach ($lines as $line) {
@@ -295,6 +305,16 @@ function ks_render_csv($nonce) {
             }
             echo "<div class='notice notice-success'><p>Imported: {$results['ok']} keys, skipped: {$results['skip']}";
             if ($results["err"]) echo "<br>Errors: " . implode("; ", array_slice($results["err"],0,5));
+    if ($chunk_end < $total_rows) {
+        // Save progress for resume
+        set_transient('ks_chunk_' . ($csv_hash ?? $csv_resuming), ['lines' => $lines, 'results' => $results], 3600);
+        echo '<br><strong>Batch complete:</strong> ' . ($done + 1) . '/' . $total_rows . ' rows. ';
+        echo '<a href="?page=ks-license-keys&tab=csv&csv_r=' . ($csv_hash ?? $csv_resuming) . '" class="button">Continue</a>';
+    } else {
+        // All done - cleanup
+        if ($csv_hash ?? $csv_resuming) delete_transient('ks_chunk_' . ($csv_hash ?? $csv_resuming));
+    }
+
             echo "</p></div>";
         }
     }
@@ -319,7 +339,7 @@ function ks_render_csv($nonce) {
         <code style="background:#f0f0f0;padding:2px 6px;border-radius:2px">681,windows-11-pro,Windows 11 Pro OEM Key,WX11P-A001-B002-C003</code>
     </div>
     <div style="margin-top:20px;background:#fff;border:1px solid #c3c4c7;border-radius:6px;padding:12px;font-size:11px;color:#666">
-        ✅ <strong>v6.1.7 safeguards active:</strong>
+        ✅ <strong>v6.1.8 safeguards active:</strong>
         CSRF nonce · XSS esc_html · Key dedup check · Order-level lock · Batch email (1 per order)
     </div>
     <?php
@@ -341,7 +361,7 @@ add_action("admin_post_ks_export_csv", function() {
         }
     }
     exit;
-});// v6.1.7 Dashboard
+});// v6.1.8 Dashboard
 add_action("wp_dashboard_setup",function(){wp_add_dashboard_widget("ks_pending","🔑 Pending Keys",function(){
 $o=wc_get_orders(["limit"=>100,"status"=>["on-hold","processing"]]);$c=0;
 foreach($o as $ord){foreach($ord->get_items() as $it){
