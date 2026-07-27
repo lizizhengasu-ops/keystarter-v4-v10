@@ -20,6 +20,11 @@ import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
 import CartPage from "./pages/Cart";
+import CookieConsent from "./components/CookieConsent";
+import PrivacyPage from "./pages/Privacy";
+import TermsPage from "./pages/Terms";
+import RefundPage from "./pages/Refund";
+import CookiesPage from "./pages/Cookies";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -166,9 +171,9 @@ function Layout({ children }) {
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.legal")}</h4>
             <div className="space-y-2">
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.privacy")}</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.terms")}</button>
-              <button className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.refund")}</button>
+              <button onClick={() => window.location.href="/privacy"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.privacy")}</button>
+              <button onClick={() => window.location.href="/terms"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.terms")}</button>
+              <button onClick={() => window.location.href="/refund"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.refund")}</button>
             </div>
           </div>
         </div>
@@ -204,9 +209,9 @@ function Layout({ children }) {
         <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
           <p>{t("footer.rights_ext")}</p>
           <div className="flex space-x-4">
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.disclaimer")}</button>
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.privacy")}</button>
-            <button className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.licensing")}</button>
+            <button onClick={() => window.location.href="/disclaimer"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.disclaimer")}</button>
+            <button onClick={() => window.location.href="/privacy"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.privacy")}</button>
+            <button onClick={() => window.location.href="/licensing"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.licensing")}</button>
           </div>
         </div>
       </div>
@@ -240,8 +245,13 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/refund" element={<RefundPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+      <CookieConsent />
         </Layout>
     </BrowserRouter>
     </CartProvider>
