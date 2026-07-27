@@ -23,6 +23,19 @@ add_action("rest_api_init", function() {
 // =============================================
 
 // v6.1.8 CSV email helper
+
+
+function ks_send_email($to, $subject, $message) {
+    if (class_exists("SendinblueApiClient")) {
+        try {
+            $c = new SendinblueApiClient();
+            $c->sendEmail(["sender"=>["email"=>"noreply@keys-starter.com","name"=>"KeyStarter"],"to"=>[["email"=>$to]],"subject"=>$subject,"htmlContent"=>$message]);
+            return true;
+        } catch (Exception $e) {}
+    }
+    return wp_mail($to, $subject, $message, ["Content-Type: text/html; charset=UTF-8","From: KeyStarter <noreply@keys-starter.com>"]);
+}
+
 function ksc($o){
 $d=true;
 foreach($o->get_items() as $i){
@@ -37,7 +50,7 @@ if($k)$h.="<tr><td>".esc_html($i->get_name())."</td><td>".esc_html($k)."</td></t
 }
 if($h){
 $m="Your keys for order #".$o->get_id().":<br><br><table>".$h."</table>";
-wp_mail($o->get_billing_email(),"Your Keys for Order #".$o->get_id(),$m,array("Content-Type: text/html; charset=UTF-8","From: KeyStarter <noreply@keys-starter.com>"));
+ks_send_email($o->get_billing_email(),"Your Keys for Order #".$o->get_id(),$m);
 }
 $o->set_status("completed");
 $o->save();
@@ -278,7 +291,9 @@ function ks_render_csv($nonce) {
     $total_rows = count($lines);
 
             $header = str_getcsv(array_shift($lines));
-            $results = ["ok"=>0,"skip"=>0,"err"=>[]];
+            $results = ["ok"=>0,"skip"=>0,"err"=>[],"sent"=>0];
+            $chunk_end = min($CHUNK, count($lines));
+            $lines = array_slice($lines, 0, $chunk_end);
             foreach ($lines as $line) {
                 $row = str_getcsv($line);
                 $data = array_combine($header, $row);
@@ -310,7 +325,8 @@ function ks_render_csv($nonce) {
             }
             echo "<div class='notice notice-success'><p>Imported: {$results['ok']} keys, skipped: {$results['skip']}";
             if ($results["err"]) echo "<br>Errors: " . implode("; ", array_slice($results["err"],0,5));
-    if ($chunk_end < $total_rows) {
+    $done = $results['ok'] + $results['skip'] + count($results['err']);
+    if ($chunk_end < $total_rows - 1) {
         // Save progress for resume
         set_transient('ks_chunk_' . ($csv_hash ?? $csv_resuming), ['lines' => $lines, 'results' => $results], 3600);
         echo '<br><strong>Batch complete:</strong> ' . ($done + 1) . '/' . $total_rows . ' rows. ';
