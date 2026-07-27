@@ -44,3 +44,7 @@ insert-line.cjs
 exclude-reactbits.cjs
 setup-enforcement.cjs
 fix-*.cjs
+
+tmp_*.py
+tmp_*.txt
+backups/
