@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:""});
 const [formStatus, setFormStatus] = useState("");
 const [errors, setErrors] = useState({});
+const [errorMsg, setErrorMsg] = useState("");
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validate = () => {
@@ -45,8 +46,16 @@ const handleSubmit = async (e) => {
       })
     }).catch(() => {});
     const data = await r.json();
-    setFormStatus(data.ok ? "sent" : "error");
-  } catch(e) { setFormStatus("error"); }
+    if (data.ok) {
+      setFormStatus("sent");
+    } else {
+      setErrorMsg(data.message || "Failed to send");
+      setFormStatus("error");
+    }
+  } catch(e) {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setFormStatus("error");
+  }
 };
 
 const topics = [
@@ -104,7 +113,7 @@ export default function SupportPage() {
                 className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
                 {formStatus==="sending" ? "Sending..." : "Send Request"}
               </button>
-              {formStatus === "error" && <p className="text-red-500 text-sm text-center">Failed to send. Please email admin@keys-starter.com</p>}
+              {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">Or email admin@keys-starter.com directly</span></p>}
             </form>
           )}
         </div>
