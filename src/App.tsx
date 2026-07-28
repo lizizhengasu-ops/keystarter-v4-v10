@@ -6,7 +6,6 @@ import { CartProvider, useCart } from "./data/CartContext";
 import HomePage from "./pages/Home";
 import StorePage from "./pages/Store";
 import ProductPage from "./pages/Product";
-import AccountPage from "./pages/Account";
 import SupportPage from "./pages/Support";
 import B2bPage from "./pages/B2b";
 import BlogPage from "./pages/Blog";
