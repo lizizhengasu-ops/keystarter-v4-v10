@@ -1,9 +1,101 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function AccountPage() {
   const { t } = useTranslation();
   const [mode, setMode] = useState("login");
+  const [loggedIn, setLoggedIn] = useState(null); // null=checking, true, false
+  const [orders, setOrders] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+
+  useEffect(() => {
+    fetch("/wp-json/keystarter/v1/nonce")
+      .then(r => r.ok ? setLoggedIn(true) : setLoggedIn(false))
+      .catch(() => setLoggedIn(false));
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn === true) {
+      fetch("/wp-json/keystarter/v1/customer-orders")
+        .then(r => r.json())
+        .then(data => { setOrders(data.orders || []); setLoadingOrders(false); })
+        .catch(() => setLoadingOrders(false));
+    }
+  }, [loggedIn]);
+
+  // While checking login state
+  if (loggedIn === null) {
+    return (
+      <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
+        <div className="max-w-md mx-auto text-center py-20">
+          <p className="text-[#86868b]">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Logged in - show orders
+  if (loggedIn === true) {
+    return (
+      <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12 min-h-screen">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-2xl font-bold mb-2">{t("account.title")}</h1>
+          <p className="text-[#86868b] text-sm mb-8">{t("account.orders_desc") || "Your order history and license key delivery status."}</p>
+
+          {loadingOrders ? (
+            <div className="text-center py-12">
+              <p className="text-[#86868b]">Loading orders...</p>
+            </div>
+          ) : orders.length === 0 ? (
+            <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] text-center">
+              <p className="text-[#86868b]">No orders found.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {orders.map(o => (
+                <div key={o.id} className="bg-white rounded-2xl p-5 border border-[#e8e8ed]">
+                  <div className="flex justify-between items-center mb-3">
+                    <div>
+                      <span className="font-bold text-sm">Order #{o.id}</span>
+                      <span className="text-xs text-[#86868b] ml-3">{o.date}</span>
+                    </div>
+                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-600">{o.status}</span>
+                  </div>
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b border-[#f0f0f2]">
+                        <th className="text-left py-2 font-semibold text-[#86868b]">Product</th>
+                        <th className="text-right py-2 font-semibold text-[#86868b]">Qty</th>
+                        <th className="text-right py-2 font-semibold text-[#86868b]">Key Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {o.items.map((item, idx) => (
+                        <tr key={idx} className="border-b border-[#f5f5f7]">
+                          <td className="py-2.5">{item.name}</td>
+                          <td className="text-right py-2.5">{item.qty}</td>
+                          <td className="text-right py-2.5">
+                            {o.key_email_status === "sent" ? <span className="text-green-600 font-medium">✅ Sent</span> :
+                             o.key_email_status === "failed" ? <span className="text-red-500 font-medium">❌ Failed</span> :
+                             <span className="text-yellow-600 font-medium">⏳ Pending</span>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="text-right mt-2">
+                    <span className="text-xs font-semibold">Total: ${o.total.toFixed(2)}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Not logged in - show login/register form
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-md mx-auto">
@@ -20,7 +112,6 @@ export default function AccountPage() {
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
               <div className="flex items-center mb-6"><input type="checkbox" id="remember" className="mr-2" /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
               <button onClick={()=>window.location.href='/my-account/'} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.signin")}</button>
-              <a href="/my-account/" className="block w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold no-underline text-center hover:bg-[#6d28d9] transition mb-4">{t("account.signin")}</a>
               <p className="text-xs text-center text-[#86868b]">{t("account.no_account")} <button onClick={()=>setMode("register")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.register")}</button></p>
             </div>
           )}
@@ -38,7 +129,6 @@ export default function AccountPage() {
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.confirm_password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
               <button onClick={()=>window.location.href='/my-account/'} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.register")}</button>
-              <a href="/my-account/" className="block w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold no-underline text-center hover:bg-[#6d28d9] transition mb-4">{t("account.register")}</a>
               <p className="text-xs text-center text-[#86868b]">{t("account.has_account")} <button onClick={()=>setMode("login")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.signin")}</button></p>
             </div>
           )}
