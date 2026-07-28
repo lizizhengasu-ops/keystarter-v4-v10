@@ -1,4 +1,27 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
+
+const [form, setForm] = useState({name:"", email:"", subject:"", message:""});
+const [formStatus, setFormStatus] = useState("");
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setFormStatus("sending");
+  try {
+    const r = await fetch("/wp-json/keystarter/v1/send-email", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        to: "admin@keys-starter.com",
+        subject: "Support: " + form.subject,
+        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
+      })
+    });
+    const data = await r.json();
+    setFormStatus(data.ok ? "sent" : "error");
+  } catch(e) { setFormStatus("error"); }
+};
 
 const topics = [
   {n:"Activation", d:"How to activate your Windows, Office, or Server license."},
@@ -27,8 +50,25 @@ export default function SupportPage() {
         </div>
         <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
           <h2 className="text-xl font-bold mb-2">{t("support.more")}</h2>
-          <p className="text-sm text-[#86868b] mb-4">{t("support.email")}</p>
-          <a href="mailto:support@keystarter.com" className="inline-block bg-[#7c3aed] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition">{t("support.contact")}</a>
+          {formStatus === "sent" ? (
+            <p className="text-green-600 font-semibold text-sm">Thank you! We will respond within 24 hours.</p>
+          ) : (
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
+              <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <input type="text" placeholder="Subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} required
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
+              <button type="submit" disabled={formStatus==="sending"}
+                className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
+                {formStatus==="sending" ? "Sending..." : "Send Request"}
+              </button>
+              {formStatus === "error" && <p className="text-red-500 text-sm text-center">Failed to send. Please email admin@keys-starter.com</p>}
+            </form>
+          )}
         </div>
       </div>
     </div>
