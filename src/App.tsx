@@ -104,9 +104,7 @@ function Layout({ children }) {
             ) : (
               <>
                 <Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
-                <Link to="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</Link>
                 <Link to="/b2b" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</Link>
-                <Link to="/#compare" className="hover:text-[#7c3aed] transition-colors">Compare</Link>
                <Link to="/support" className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</Link>
                 <Link to="/blog" className="hover:text-[#7c3aed] transition-colors">Blog</Link>
 </>
