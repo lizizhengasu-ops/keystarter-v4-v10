@@ -234,7 +234,7 @@ export default function App() {
             <Route path="/store" element={<StorePage />} />
             <Route path="/products" element={<StorePage />} />
             <Route path="/product/:slug" element={<ProductPage />} />
-            <Route path="/account" element={<AccountPage />} />
+            <Route path="/account" element={<Navigate to="/my-account/" />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/b2b" element={<B2bPage />} />
             <Route path="/blog" element={<BlogPage />} />
