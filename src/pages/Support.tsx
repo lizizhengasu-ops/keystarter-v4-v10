@@ -2,62 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 
-const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:""});
-const [formStatus, setFormStatus] = useState("");
-const [errors, setErrors] = useState({});
-const [errorMsg, setErrorMsg] = useState("");
-const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const validate = () => {
-  const e = {};
-  if (!form.name.trim()) e.name = "Name is required";
-  if (!form.email.trim()) e.email = "Email is required";
-  else if (!emailRe.test(form.email)) e.email = "Invalid email format";
-  if (!form.subject.trim()) e.subject = "Subject is required";
-  if (!form.message.trim()) e.message = "Message is required";
-  return e;
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const v = validate();
-  setErrors(v);
-  if (Object.keys(v).length > 0) return;
-  if (form.honeypot_website) return;
-  setFormStatus("sending");
-  try {
-    const r = await fetch("/wp-json/keystarter/v1/send-email", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        to: "admin@keys-starter.com",
-        subject: "Support: " + form.subject,
-        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
-      })
-    });
-    // Auto-reply to customer
-    fetch("/wp-json/keystarter/v1/send-email", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        to: form.email,
-        subject: "Thank you for contacting KeyStarter Support",
-        message: "<p>Hi " + form.name + ",</p><p>Thank you for reaching out. Our support team will review your request and respond within 24 hours.</p><p>For urgent issues, email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Support Team</p>"
-      })
-    }).catch(() => {});
-    const data = await r.json();
-    if (data.ok) {
-      setFormStatus("sent");
-    } else {
-      setErrorMsg(data.message || "Failed to send");
-      setFormStatus("error");
-    }
-  } catch(e) {
-      setErrorMsg("Network error. Please check your connection and try again.");
-      setFormStatus("error");
-  }
-};
-
 const topics = [
   {n:"Activation", d:"How to activate your Windows, Office, or Server license."},
   {n:"Installation", d:"Step-by-step installation guides for all Microsoft products."},
@@ -69,6 +13,61 @@ const topics = [
 
 export default function SupportPage() {
   const { t } = useTranslation();
+  const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:""});
+  const [formStatus, setFormStatus] = useState("");
+  const [errors, setErrors] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = "Name is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!emailRe.test(form.email)) e.email = "Invalid email format";
+    if (!form.subject.trim()) e.subject = "Subject is required";
+    if (!form.message.trim()) e.message = "Message is required";
+    return e;
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const v = validate();
+    setErrors(v);
+    if (Object.keys(v).length > 0) return;
+    if (form.honeypot_website) return;
+    setFormStatus("sending");
+    try {
+      const r = await fetch("/wp-json/keystarter/v1/send-email", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          to: "admin@keys-starter.com",
+          subject: "Support: " + form.subject,
+          message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
+        })
+      });
+      // Auto-reply to customer
+      fetch("/wp-json/keystarter/v1/send-email", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          to: form.email,
+          subject: "Thank you for contacting KeyStarter Support",
+          message: "<p>Hi " + form.name + ",</p><p>Thank you for reaching out. Our support team will review your request and respond within 24 hours.</p><p>For urgent issues, email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Support Team</p>"
+        })
+      }).catch(() => {});
+      const data = await r.json();
+      if (data.ok) {
+        setFormStatus("sent");
+      } else {
+        setErrorMsg(data.message || "Failed to send");
+        setFormStatus("error");
+      }
+    } catch(e) {
+        setErrorMsg("Network error. Please check your connection and try again.");
+        setFormStatus("error");
+    }
+  };
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-4xl mx-auto">
