@@ -7,19 +7,21 @@ export default function AccountPage() {
   const [loggedIn, setLoggedIn] = useState(null); // null=checking, true, false
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [orderError, setOrderError] = useState(false);
 
   useEffect(() => {
-    fetch("/wp-json/keystarter/v1/nonce")
+    fetch("/wp-json/keystarter/v1/nonce",{credentials:"same-origin"})
       .then(r => r.ok ? setLoggedIn(true) : setLoggedIn(false))
       .catch(() => setLoggedIn(false));
   }, []);
 
   useEffect(() => {
     if (loggedIn === true) {
-      fetch("/wp-json/keystarter/v1/customer-orders")
+      setOrderError(false);
+      fetch("/wp-json/keystarter/v1/customer-orders", {credentials: "same-origin"})
         .then(r => r.json())
         .then(data => { setOrders(data.orders || []); setLoadingOrders(false); })
-        .catch(() => setLoadingOrders(false));
+        .catch(() => { setLoadingOrders(false); setOrderError(true); });
     }
   }, [loggedIn]);
 
@@ -45,6 +47,11 @@ export default function AccountPage() {
           {loadingOrders ? (
             <div className="text-center py-12">
               <p className="text-[#86868b]">Loading orders...</p>
+            </div>
+          ) : orderError ? (
+            <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] text-center">
+              <p className="text-red-500 text-sm">Failed to load orders.</p>
+              <button onClick={()=>window.location.reload()} className="mt-4 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Retry</button>
             </div>
           ) : orders.length === 0 ? (
             <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] text-center">
@@ -75,9 +82,11 @@ export default function AccountPage() {
                           <td className="py-2.5">{item.name}</td>
                           <td className="text-right py-2.5">{item.qty}</td>
                           <td className="text-right py-2.5">
-                            {o.key_email_status === "sent" ? <span className="text-green-600 font-medium">✅ Sent</span> :
-                             o.key_email_status === "failed" ? <span className="text-red-500 font-medium">❌ Failed</span> :
-                             <span className="text-yellow-600 font-medium">⏳ Pending</span>}
+                            {item.virtual ? (
+                              o.key_email_status === "sent" ? <span className="text-green-600 font-medium">✅ Sent</span> :
+                              o.key_email_status === "failed" ? <span className="text-red-500 font-medium">❌ Failed</span> :
+                              <span className="text-yellow-600 font-medium">⏳ Pending</span>
+                            ) : <span className="text-[#86868b]">📦 Physical</span>}
                           </td>
                         </tr>
                       ))}
