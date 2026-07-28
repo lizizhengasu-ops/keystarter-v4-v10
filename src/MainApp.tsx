@@ -16,6 +16,7 @@ import NavDrawer from "./NavDrawer";
 import NotFound from "./pages/NotFound";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
+// B1785212195_1743202026
 import AccountPage from "./pages/Account";
 import AboutPage from "./pages/About";
 import ChangelogPage from "./pages/Changelog";
@@ -77,6 +78,7 @@ function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
+      <span data-build={typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : ''} style={{display:'none'}} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
