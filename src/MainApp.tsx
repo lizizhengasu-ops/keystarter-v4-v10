@@ -119,7 +119,7 @@ function Layout({ children }) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
           <LanguageSwitcher />
-              <button onClick={()=>window.location.href="/account"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
+              <button onClick={()=>window.location.href="/my-account/"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </button>
             <button onClick={() => setCartOpen(true)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
