@@ -27,9 +27,7 @@ const handleSubmit = async (e) => {
         subject: "Thank you for contacting KeyStarter Support",
         message: "<p>Hi " + form.name + ",</p><p>Thank you for reaching out. Our support team will review your request and respond within 24 hours.</p><p>For urgent issues, email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Support Team</p>"
       })
-    });
-      })
-    });
+    }).catch(() => {});
     const data = await r.json();
     setFormStatus(data.ok ? "sent" : "error");
   } catch(e) { setFormStatus("error"); }

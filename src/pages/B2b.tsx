@@ -15,9 +15,19 @@ const handleSubmit = async (e) => {
       body: JSON.stringify({
         to: "admin@keys-starter.com",
         subject: "B2B Inquiry from " + form.name,
-        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Company:</b> " + form.company + "</p><p><b>Message:</b> " + form.message + "</p>"
+        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Company:</b> " + form.company + "</p><p><b>Product Interest:</b> " + form.product_interest + "</p><p><b>Message:</b> " + form.message + "</p>"
       })
     });
+    // Auto-reply to customer (best-effort, no await)
+    fetch("/wp-json/keystarter/v1/send-email", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        to: form.email,
+        subject: "Thank you for your B2B Inquiry - KeyStarter",
+        message: "<p>Hi " + form.name + ",</p><p>Thank you for your interest in KeyStarter's B2B solutions. Our enterprise sales team will review your inquiry and contact you within 24 hours.</p><p>For urgent inquiries, please email admin@keys-starter.com or call our sales team.</p><p>Best regards,<br>KeyStarter Enterprise Sales</p>"
+      })
+    }).catch(() => {});
     const data = await r.json();
     setFormStatus(data.ok ? "sent" : "error");
   } catch(e) { setFormStatus("error"); }
@@ -59,7 +69,11 @@ export default function B2bPage() {
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="text" placeholder="Company" value={form.company} onChange={e=>setForm({...form,company:e.target.value})}
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <input type="text" placeholder="Product Interest (e.g., Windows Server, Office)" value={form.product_interest} onChange={e=>setForm({...form,product_interest:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
