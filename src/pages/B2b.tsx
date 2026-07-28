@@ -4,9 +4,24 @@ import { useTranslation } from "react-i18next";
 
 const [form, setForm] = useState({name:"", email:"", phone:"", company:"", product_interest:"", message:""});
 const [formStatus, setFormStatus] = useState("");
+const [errors, setErrors] = useState({});
+const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const validate = () => {
+  const e = {};
+  if (!form.name.trim()) e.name = "Name is required";
+  if (!form.email.trim()) e.email = "Email is required";
+  else if (!emailRe.test(form.email)) e.email = "Invalid email format";
+  if (!form.message.trim()) e.message = "Message is required";
+  return e;
+};
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  const v = validate();
+  setErrors(v);
+  if (Object.keys(v).length > 0) return;
+  if (form.honeypot_website) return;
   setFormStatus("sending");
   try {
     const r = await fetch("/wp-json/keystarter/v1/send-email", {
@@ -61,22 +76,32 @@ export default function B2bPage() {
         </div>
         <div className="text-center py-12 border-t border-[#e8e8ed]">
           <h2 className="text-2xl font-bold mb-4">{t("b2b.ready")}</h2>
-          {formStatus === "sent" ? (
-            <p className="text-green-600 font-semibold text-sm">Thank you! Our team will contact you within 24 hours.</p>
-          ) : (
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
-              <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
+  {formStatus === "sent" ? (
+    <div className="text-center">
+    <p className="text-green-600 font-semibold text-sm">Thank you! Our team will contact you within 24 hours.</p>
+    <button onClick={()=>{setForm({name:"",email:"",phone:"",company:"",product_interest:"",message:"",honeypot_website:""});setFormStatus("");setErrors({});}}
+      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Send Another Inquiry</button>
+    </div>
+  ) : (
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
+      <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
+        <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
+      </div>
+      <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+      {errors.name && <p className="text-red-500 text-xs -mt-2">{errors.name}</p>}
+      <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+      {errors.email && <p className="text-red-500 text-xs -mt-2">{errors.email}</p>}
+      <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="text" placeholder="Company" value={form.company} onChange={e=>setForm({...form,company:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="text" placeholder="Product Interest (e.g., Windows Server, Office)" value={form.product_interest} onChange={e=>setForm({...form,product_interest:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
+      <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
+      {errors.message && <p className="text-red-500 text-xs -mt-2">{errors.message}</p>}
               <button type="submit" disabled={formStatus==="sending"}
                 className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
                 {formStatus==="sending" ? "Sending..." : "Send Inquiry"}
