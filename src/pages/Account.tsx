@@ -117,10 +117,15 @@ export default function AccountPage() {
                 <button onClick={()=>setMode("login")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.signin")}</button>
                 <button onClick={()=>setMode("register")} className="text-[#86868b] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.register")}</button>
               </div>
-              <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="email" /></div>
-              <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
-              <div className="flex items-center mb-6"><input type="checkbox" id="remember" className="mr-2" /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
-              <button onClick={()=>window.location.href='/my-account/'} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.signin")}</button>
+              <form method="POST" action="/wp-login.php" noValidate>
+                <input type="hidden" name="redirect_to" value="https://keys-starter.com/account" />
+                <input type="hidden" name="testcookie" value="1" />
+                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input name="log" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="text" required autoFocus /></div>
+                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input name="pwd" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" required /></div>
+               <div className="flex items-center mb-6"><input type="checkbox" name="rememberme" id="remember" className="mr-2" defaultChecked /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
+                <a href="/wp-login.php?action=lostpassword" className="text-xs text-[#7c3aed] hover:underline block text-right -mt-4 mb-4">Lost your password?</a>
+                <button type="submit" className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.signin")}</button>
+              </form>
               <p className="text-xs text-center text-[#86868b]">{t("account.no_account")} <button onClick={()=>setMode("register")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.register")}</button></p>
             </div>
           )}
@@ -131,13 +136,13 @@ export default function AccountPage() {
                 <button onClick={()=>setMode("register")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.register")}</button>
               </div>
               <h2 className="text-lg font-bold mb-2">{t("account.register")}</h2>
-              <p className="text-xs text-[#86868b] mb-6">{t("account.register_desc")}</p>
+              <p className="text-xs text-[#86868b] mb-6">Create an account to track your orders and receive license keys. You will be redirected to the registration page.</p>
               <div className="grid grid-cols-2 gap-3 mb-4"><div><label className="text-sm font-semibold block mb-1">{t("account.first_name")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" /></div><div><label className="text-sm font-semibold block mb-1">{t("account.last_name")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" /></div></div>
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="email" /></div>
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.phone")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" /></div>
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
               <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.confirm_password")}</label><input className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" /></div>
-              <button onClick={()=>window.location.href='/my-account/'} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.register")}</button>
+              <button onClick={()=>window.location.href='/my-account/'} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">Create Account {'\u203A'}</button>
               <p className="text-xs text-center text-[#86868b]">{t("account.has_account")} <button onClick={()=>setMode("login")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.signin")}</button></p>
             </div>
           )}
