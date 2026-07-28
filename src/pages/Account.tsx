@@ -47,6 +47,20 @@ export default function AccountPage() {
       else { setLoginError("Invalid email or password."); setLoginSending(false); }
     } catch(e) { setLoginError("Network error. Please try again."); setLoginSending(false); }
   };
+  const handleRegister = async () => {
+    setRegisterMsg("");
+    setRegisterSending(true);
+    try {
+      const fd = new URLSearchParams();
+      fd.append("user_login", registerEmail);
+      fd.append("user_email", registerEmail);
+      fd.append("redirect_to", "https://keys-starter.com/account");
+      const r = await fetch("/wp-login.php?action=register", {method: "POST", body: fd, redirect: "manual", credentials: "same-origin"});
+      const loc = r.headers.get("location") || "";
+      setRegisterMsg(loc.includes("checkemail") ? "Account created! Check your email for password." : "Registration failed. Email may be taken.");
+    } catch(e) { setRegisterMsg("Network error. Please try again."); }
+    setRegisterSending(false);
+  };
   // While checking login state
   if (loggedIn === null) {
     return (
