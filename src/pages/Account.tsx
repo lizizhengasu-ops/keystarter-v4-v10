@@ -31,7 +31,8 @@ export default function AccountPage() {
     }
   }, [loggedIn]);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    if (e) e.preventDefault();
     setLoginError("");
     setLoginSending(true);
     try {
@@ -41,13 +42,16 @@ export default function AccountPage() {
       fd.append("redirect_to", "https://keys-starter.com/account");
       fd.append("testcookie", "1");
       fd.append("rememberme", "forever");
-      await fetch("/wp-login.php", {method: "POST", body: fd, redirect: "manual", credentials: "same-origin"});
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(), 15000);
+      await fetch("/wp-login.php", {method: "POST", body: fd, redirect: "manual", credentials: "same-origin", signal: controller.signal});
       const nr = await fetch("/wp-json/keystarter/v1/nonce", {credentials: "same-origin"});
       if (nr.ok) { setLoggedIn(true); }
       else { setLoginError("Invalid email or password."); setLoginSending(false); }
     } catch(e) { setLoginError("Network error. Please try again."); setLoginSending(false); }
   };
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    if (e) e.preventDefault();
     setRegisterMsg("");
     setRegisterSending(true);
     try {
@@ -153,12 +157,15 @@ export default function AccountPage() {
                 <button onClick={()=>setMode("login")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.signin")}</button>
                 <button onClick={()=>setMode("register")} className="text-[#86868b] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.register")}</button>
               </div>
-                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input name="log" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="text" value={loginForm.email} onChange={e=>{setLoginForm({...loginForm,email:e.target.value});setLoginError("");}} required autoFocus disabled={loginSending} /></div>
-                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input name="pwd" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" value={loginForm.password} onChange={e=>{setLoginForm({...loginForm,password:e.target.value});setLoginError("");}} required disabled={loginSending} /></div>
-                <div className="flex items-center mb-6"><input type="checkbox" name="rememberme" id="remember" className="mr-2" defaultChecked disabled={loginSending} /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
-                <a href="/wp-login.php?action=lostpassword" className="text-xs text-[#7c3aed] hover:underline block text-right -mt-4 mb-4">Lost your password?</a>
-                <button onClick={handleLogin} disabled={loginSending} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{loginSending ? "Signing in..." : t("account.signin")}</button>
-                {loginError && <p className="text-red-500 text-sm text-center mb-4">{loginError}</p>}
+                <form onSubmit={handleLogin} noValidate>
+                  <input type="hidden" name="redirect_to" value="https://keys-starter.com/account" />
+                  <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input name="log" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="text" value={loginForm.email} onChange={e=>{setLoginForm({...loginForm,email:e.target.value});setLoginError("");}} required autoFocus disabled={loginSending} /></div>
+                  <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input name="pwd" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" value={loginForm.password} onChange={e=>{setLoginForm({...loginForm,password:e.target.value});setLoginError("");}} required disabled={loginSending} /></div>
+                  <div className="flex items-center mb-6"><input type="checkbox" name="rememberme" id="remember" className="mr-2" defaultChecked disabled={loginSending} /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
+                  <a href="/wp-login.php?action=lostpassword" className="text-xs text-[#7c3aed] hover:underline block text-right -mt-4 mb-4">Lost your password?</a>
+                  <button type="submit" disabled={loginSending} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{loginSending ? "Signing in..." : t("account.signin")}</button>
+                  {loginError && <p className="text-red-500 text-sm text-center mb-4">{loginError}</p>}
+                </form>
               <p className="text-xs text-center text-[#86868b]">{t("account.no_account")} <button onClick={()=>setMode("register")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.register")}</button></p>
             </div>
           )}
@@ -169,7 +176,7 @@ export default function AccountPage() {
                 <button onClick={()=>setMode("register")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.register")}</button>
               </div>
               <h2 className="text-lg font-bold mb-2">{t("account.register")}</h2>
-                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input type="email" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" value={registerEmail} onChange={e=>setRegisterEmail(e.target.value)} required autoFocus /></div>
+                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input type="email" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" value={registerEmail} onChange={e=>{setRegisterEmail(e.target.value);setRegisterMsg("");}} required autoFocus /></div>
                 <p className="text-xs text-[#86868b] -mt-2 mb-4">A password will be emailed to you after registration.</p>
                 <button onClick={handleRegister} disabled={registerSending} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{registerSending ? "Creating..." : "Create Account"}</button>
                 {registerMsg && <p className={"text-sm text-center mb-4 " + (registerMsg.includes("fail")||registerMsg.includes("error")?"text-red-500":"text-green-600")}>{registerMsg}</p>}
