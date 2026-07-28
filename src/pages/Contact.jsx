@@ -117,7 +117,7 @@ export default function ContactPage() {
             )}
           </div>
           <div className="space-y-4">
-            <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.email")}</div><div className="text-sm text-[#86868b]">support@keystarter.com</div></div>
+            <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.email")}</div><div className="text-sm text-[#86868b]">admin@keys-starter.com</div></div>
             <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.chat")}</div><div className="text-sm text-[#86868b]">{t("contact.chat_avail")}</div></div>
             <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.phone")}</div><div className="text-sm text-[#86868b]">{t("contact.hours")}</div></div>
           </div>
