@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 
-const [form, setForm] = useState({name:"", email:"", subject:"", message:""});
+const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:""});
 const [formStatus, setFormStatus] = useState("");
 
 const handleSubmit = async (e) => {
@@ -15,7 +15,19 @@ const handleSubmit = async (e) => {
       body: JSON.stringify({
         to: "admin@keys-starter.com",
         subject: "Support: " + form.subject,
-        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
+        message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
+      })
+    });
+    // Auto-reply to customer
+    fetch("/wp-json/keystarter/v1/send-email", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        to: form.email,
+        subject: "Thank you for contacting KeyStarter Support",
+        message: "<p>Hi " + form.name + ",</p><p>Thank you for reaching out. Our support team will review your request and respond within 24 hours.</p><p>For urgent issues, email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Support Team</p>"
+      })
+    });
       })
     });
     const data = await r.json();
@@ -57,6 +69,8 @@ export default function SupportPage() {
               <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
+                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+              <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
               <input type="text" placeholder="Subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} required
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />

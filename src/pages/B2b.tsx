@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 
-const [form, setForm] = useState({name:"", email:"", company:"", message:""});
+const [form, setForm] = useState({name:"", email:"", phone:"", company:"", product_interest:"", message:""});
 const [formStatus, setFormStatus] = useState("");
 
 const handleSubmit = async (e) => {
