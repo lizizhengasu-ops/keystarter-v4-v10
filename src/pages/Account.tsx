@@ -13,6 +13,7 @@ export default function AccountPage() {
         if (data.logged_in) {
           setLoggedIn(true);
           setOrders(data.orders || []);
+          setLogoutUrl(data.logout_url || "");
           setLoadingOrders(false);
         } else {
           setLoggedIn(false);
@@ -42,6 +43,7 @@ export default function AccountPage() {
   const [registerMsg, setRegisterMsg] = useState("");
 
   const [registerSending, setRegisterSending] = useState(false);
+  const [logoutUrl, setLogoutUrl] = useState("");
 
 
 
@@ -91,7 +93,10 @@ const handleRegister = async (e) => {
 
         <div className="max-w-3xl mx-auto">
 
-          <h1 className="text-2xl font-bold mb-2">{t("account.title")}</h1>
+          <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">{t("account.title")}</h1>
+          <a href={logoutUrl} className="text-xs text-[#86868b] hover:text-red-500 transition-colors">Sign Out</a>
+        </div>
 
           <p className="text-[#86868b] text-sm mb-8">{t("account.orders_desc") || "Your order history and license key delivery status."}</p>
 
