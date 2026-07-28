@@ -95,7 +95,7 @@ function Layout({ children }) {
               <>
                 <button onClick={()=>window.location.href="/products"} className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</button>
                 <button onClick={()=>scrollToSection("store")} className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</button>
-                <button onClick={()=>scrollToSection("business")} className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</button>
+                <button onClick={()=>{window.location.hash='business';scrollToSection("business")}} className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</button>
                 <button onClick={()=>scrollToSection("compare")} className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</button>
                 <button onClick={()=>scrollToSection("support")} className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</button>
                <button onClick={()=>scrollToSection("portal")} className="hover:text-[#7c3aed] transition-colors">{t("nav.portal")}</button>

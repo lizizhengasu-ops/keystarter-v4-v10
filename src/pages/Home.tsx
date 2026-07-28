@@ -176,7 +176,20 @@ const [activeTab, setActiveTab] = useState('all');
       showToast(`Simulated dispatch [${checkoutProduct.title}] License Key!`, "🟢");
       scrollToSection('portal');
     }, 500);
-  };
+ };
+
+  // Listen for hash nav (from header nav buttons)
+  useEffect(() => {
+    const onHash = () => {
+      if (window.location.hash === '#business') {
+        setHeroPersona("enterprise");
+        setTimeout(() => scrollToSection('business'), 200);
+      }
+    };
+    if (window.location.hash === '#business') setTimeout(onHash, 100);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
 
   const handleB2BSubmit = (e) => {
     e.preventDefault();
