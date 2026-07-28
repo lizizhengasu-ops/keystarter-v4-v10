@@ -8,6 +8,12 @@ export default function AccountPage() {
   const [orders, setOrders] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [orderError, setOrderError] = useState(false);
+  const [loginForm, setLoginForm] = useState({email:"", password:""});
+  const [loginError, setLoginError] = useState("");
+  const [loginSending, setLoginSending] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerMsg, setRegisterMsg] = useState("");
+  const [registerSending, setRegisterSending] = useState(false);
 
   useEffect(() => {
     fetch("/wp-json/keystarter/v1/nonce",{credentials:"same-origin"})
@@ -24,8 +30,6 @@ export default function AccountPage() {
         .catch(() => { setLoadingOrders(false); setOrderError(true); });
     }
   }, [loggedIn]);
-
-  const registerSubmit = (e) => { e.target.user_login.value = e.target.user_email.value; };
 
   // While checking login state
   if (loggedIn === null) {
@@ -138,13 +142,10 @@ export default function AccountPage() {
                 <button onClick={()=>setMode("register")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.register")}</button>
               </div>
               <h2 className="text-lg font-bold mb-2">{t("account.register")}</h2>
-              <form method="POST" action="/wp-login.php?action=register" noValidate onSubmit={registerSubmit}>
-                <input type="hidden" name="user_login" value="" />
-                <input type="hidden" name="redirect_to" value="https://keys-starter.com/account" />
-                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input name="user_email" type="email" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" required autoFocus /></div>
+                <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input type="email" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" value={registerEmail} onChange={e=>setRegisterEmail(e.target.value)} required autoFocus /></div>
                 <p className="text-xs text-[#86868b] -mt-2 mb-4">A password will be emailed to you after registration.</p>
-                <button type="submit" className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">Create Account</button>
-              </form>
+                <button onClick={handleRegister} disabled={registerSending} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{registerSending ? "Creating..." : "Create Account"}</button>
+                {registerMsg && <p className={"text-sm text-center mb-4 " + (registerMsg.includes("fail")||registerMsg.includes("error")?"text-red-500":"text-green-600")}>{registerMsg}</p>}
               <p className="text-xs text-center text-[#86868b]">{t("account.has_account")} <button onClick={()=>setMode("login")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.signin")}</button></p>
             </div>
           )}
