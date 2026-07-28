@@ -13,7 +13,6 @@ import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
 import NotFound from "./pages/NotFound";
-import PricingPage from "./pages/Pricing";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
@@ -104,7 +103,7 @@ function Layout({ children }) {
 </>
             ) : (
               <>
-                <Link to="/pricing" className="hover:text-[#7c3aed] transition-colors">{t("nav.pricing")}</Link><Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
+                <Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
                 <Link to="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</Link>
                 <Link to="/b2b" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</Link>
                 <Link to="/#compare" className="hover:text-[#7c3aed] transition-colors">Compare</Link>
@@ -146,7 +145,7 @@ function Layout({ children }) {
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.products")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/pricing"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Pricing</button>
+              <button onClick={()=>window.location.href="/products"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Products</button>
               <button onClick={()=>window.location.href="/#store"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.store")}</button>
               <button onClick={()=>window.location.href="/b2b"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.enterprise")}</button>
             </div>
@@ -238,7 +237,7 @@ export default function App() {
             <Route path="/b2b" element={<B2bPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/pricing" element={<Navigate to="/products" />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
