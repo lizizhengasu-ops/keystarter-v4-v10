@@ -8,6 +8,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({name:"", email:"", subject:"general", message:"", honeypot_website:""});
   const [fs, setFs] = useState("");
   const [errs, setErrs] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   const validate = () => {
     const e = {};
@@ -45,8 +46,14 @@ export default function ContactPage() {
         })
       }).catch(() => {});
       const data = await r.json();
-      setFs(data.ok ? "sent" : "error");
+      if (data.ok) {
+        setFs("sent");
+      } else {
+        setErrorMsg(data.message || "Failed to send");
+        setFs("error");
+      }
     } catch(e) {
+      setErrorMsg("Network error. Please check your connection.");
       setFs("error");
     }
   };
@@ -55,6 +62,7 @@ export default function ContactPage() {
     setForm({name:"", email:"", subject:"general", message:"", honeypot_website:""});
     setFs("");
     setErrs({});
+    setErrorMsg("");
   };
 
   return (
@@ -80,7 +88,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mb-4">
                   <label className="text-sm font-semibold block mb-1">{t("contact.name")}</label>
-                  <input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
+                  <input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
                     className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" />
                   {errs.name && <p className="text-red-500 text-xs mt-1">{errs.name}</p>}
                 </div>
@@ -111,7 +119,7 @@ export default function ContactPage() {
                   className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition disabled:opacity-50 text-sm">
                   {fs==="sending" ? "Sending..." : t("contact.send")}
                 </button>
-                {fs === "error" && <p className="text-red-500 text-sm text-center mt-3">Failed to send. Email admin@keys-starter.com</p>}
+                {fs === "error" && <p className="text-red-500 text-sm text-center mt-3">{errorMsg}<br/><span className="text-xs">Or email admin@keys-starter.com directly</span></p>}
                 <p className="text-xs text-[#86868b] text-center mt-3">{t("contact.response")}</p>
               </form>
             )}

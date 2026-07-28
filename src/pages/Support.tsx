@@ -96,7 +96,7 @@ export default function SupportPage() {
       <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
         <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
       </div>
-      <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required
+              <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.name && <p className="text-red-500 text-xs -mt-2">{errors.name}</p>}
       <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
