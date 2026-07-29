@@ -19,6 +19,7 @@ import ContactPage from "./pages/Contact";
 // B1785212195_1743202026
 import AccountPage from "./pages/Account";
 import AboutPage from "./pages/About";
+import DownloadsPage from "./pages/Downloads";
 import ChangelogPage from "./pages/Changelog";
 import CartPage from "./pages/Cart";
 import CookieConsent from "./components/CookieConsent";
@@ -242,6 +243,7 @@ export default function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/downloads" element={<DownloadsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/cart" element={<CartPage />} />
