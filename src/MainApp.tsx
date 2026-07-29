@@ -239,7 +239,7 @@ export default function App() {
             <Route path="/b2b" element={<B2bPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/pricing" element={<Navigate to="/products" />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
