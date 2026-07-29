@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 
@@ -10,19 +10,25 @@ const solutions = [
 ];
 
 export default function B2bPage() {
+  useEffect(() => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.getElementById(window.location.hash.slice(1));
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+    }
+  }, []);
   const { t } = useTranslation();
-  const [form, setForm] = useState({name:"", email:"", phone:"", company:"", product_interest:"", message:""});
+  const [form, setForm] = useState({company:"", units:"5-20 Units", product:"Windows 11 Series", contact:"", phone:""});
   const [formStatus, setFormStatus] = useState("");
   const [errors, setErrors] = useState({});
   const [errorMsg, setErrorMsg] = useState("");
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.email.trim()) e.email = "Email is required";
-    else if (!emailRe.test(form.email)) e.email = "Invalid email format";
-    if (!form.message.trim()) e.message = "Message is required";
+    if (!form.company.trim()) e.company = "Company name is required";
+    if (!form.contact.trim()) e.contact = "Contact name is required";
+    if (!form.phone.trim()) e.phone = "Phone or email is required";
     return e;
   };
   
@@ -39,8 +45,8 @@ export default function B2bPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
-          subject: "B2B Inquiry from " + form.name,
-          message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Company:</b> " + form.company + "</p><p><b>Product Interest:</b> " + form.product_interest + "</p><p><b>Message:</b> " + form.message + "</p>"
+          subject: "Compliance Quote from " + form.company,
+          message: "<h2>Compliance Quote Request</h2><p><b>Company:</b> " + form.company + "</p><p><b>Units:</b> " + form.units + "</p><p><b>Product:</b> " + form.product + "</p><p><b>Contact:</b> " + form.contact + "</p><p><b>Phone/Email:</b> " + form.phone + "</p>"
         })
       });
       // Auto-reply to customer (best-effort, no await)
@@ -48,9 +54,9 @@ export default function B2bPage() {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          to: form.email,
-          subject: "Thank you for your B2B Inquiry - KeyStarter",
-          message: "<p>Hi " + form.name + ",</p><p>Thank you for your interest in KeyStarter's B2B solutions. Our enterprise sales team will review your inquiry and contact you within 24 hours.</p><p>For urgent inquiries, please email admin@keys-starter.com or call our sales team.</p><p>Best regards,<br>KeyStarter Enterprise Sales</p>"
+          to: form.phone,
+          subject: "Thank you for your Compliance Quote - KeyStarter",
+          message: "<p>Hi " + form.contact + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
         })
       }).catch(() => {});
       const data = await r.json();
@@ -67,7 +73,7 @@ export default function B2bPage() {
   };
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
-      <div className="bg-gradient-to-r from-[#6d28d9] to-[#1a1a2e] text-white px-6 sm:px-12 py-20 text-center">
+      <div id="enterprise-b2b" className="bg-gradient-to-r from-[#6d28d9] to-[#1a1a2e] text-white px-6 sm:px-12 py-20 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("b2b.title")}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto mb-8">{t("b2b.desc")}</p>
         <a href="mailto:admin@keys-starter.com?subject=Enterprise%20B2B%20Inquiry" className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
@@ -87,32 +93,41 @@ export default function B2bPage() {
   {formStatus === "sent" ? (
     <div className="text-center">
     <p className="text-green-600 font-semibold text-sm">Thank you! Our team will contact you within 24 hours.</p>
-    <button onClick={()=>{setForm({name:"",email:"",phone:"",company:"",product_interest:"",message:"",honeypot_website:""});setFormStatus("");setErrors({});}}
-      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Send Another Inquiry</button>
+    <button onClick={()=>{setForm({company:"",units:"5-20 Units",product:"Windows 11 Series",contact:"",phone:"",honeypot_website:""});setFormStatus("");setErrors({});}}
+      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Send Another Quote</button>
     </div>
   ) : (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
       <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
         <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
       </div>
-              <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
+                  <input type="text" placeholder="Company / Organization Name" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} required autoFocus
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-      {errors.name && <p className="text-red-500 text-xs -mt-2">{errors.name}</p>}
-      <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
+      {errors.company && <p className="text-red-500 text-xs">{errors.company}</p>}
+      
+      <label className="text-xs font-medium text-[#86868b] block mb-1">Estimated Licenses Needed</label>
+      <select value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
+        <option>5-20 Units</option><option>21-50 Units</option><option>51-200 Units</option><option>200+ Units</option>
+      </select>
+      
+      <label className="text-xs font-medium text-[#86868b] block mb-1">Primary Product Needs</label>
+      <select value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
+        <option>Windows 11 Series</option><option>Windows 10</option><option>Office</option><option>Server</option><option>Other</option>
+      </select>
+      
+      <input type="text" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-      {errors.email && <p className="text-red-500 text-xs -mt-2">{errors.email}</p>}
-      <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <input type="text" placeholder="Company" value={form.company} onChange={e=>setForm({...form,company:e.target.value})}
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <input type="text" placeholder="Product Interest (e.g., Windows Server, Office)" value={form.product_interest} onChange={e=>setForm({...form,product_interest:e.target.value})}
-                className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-      <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
-        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
-      {errors.message && <p className="text-red-500 text-xs -mt-2">{errors.message}</p>}
+      {errors.contact && <p className="text-red-500 text-xs">{errors.contact}</p>}
+      
+      <input type="text" placeholder="Phone / Email" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required
+        className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
+      {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
+                  
               <button type="submit" disabled={formStatus==="sending"}
                 className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
-                {formStatus==="sending" ? "Sending..." : "Send Inquiry"}
+                {formStatus==="sending" ? "Sending..." : "Get Free Custom Quote"}
               </button>
               {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">Or email admin@keys-starter.com directly</span></p>}
             </form>

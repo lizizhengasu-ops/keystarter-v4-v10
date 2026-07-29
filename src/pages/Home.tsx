@@ -191,10 +191,43 @@ const [activeTab, setActiveTab] = useState('all');
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  const handleB2BSubmit = (e) => {
+  const handleB2BSubmit = async (e) => {
     e.preventDefault();
-    showToast("Quote submitted! A specialist will email you shortly.", "🔵");
-    e.target.reset();
+    const fd = new FormData(e.target);
+    const msg = "<h2>Compliance Quote Request</h2>" +
+      "<p><b>Company:</b> " + (fd.get("company") || "") + "</p>" +
+      "<p><b>Units:</b> " + (fd.get("units") || "") + "</p>" +
+      "<p><b>Product:</b> " + (fd.get("product") || "") + "</p>" +
+      "<p><b>Contact:</b> " + (fd.get("contact") || "") + "</p>" +
+      "<p><b>Phone/Email:</b> " + (fd.get("phone") || "") + "</p>";
+    try {
+      await fetch("/wp-json/keystarter/v1/send-email", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          to: "admin@keys-starter.com",
+          subject: "Compliance Quote from " + (fd.get("company") || "Unknown"),
+          message: msg
+        })
+      });
+      // Auto-reply to customer
+      const ce = fd.get("phone") || "";
+      if (ce.includes("@")) {
+        fetch("/wp-json/keystarter/v1/send-email", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+            to: ce,
+            subject: "Thank you for your Compliance Quote - KeyStarter",
+            message: "<p>Hi " + (fd.get("contact") || "") + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs and provide a cost-effective quote within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
+          })
+        }).catch(() => {});
+      }
+      showToast("Quote submitted! A specialist will email you shortly.", "🔵");
+      e.target.reset();
+    } catch(err) {
+      showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
+    }
   };
 
   const simulateDirectOrder = (productName, isOffice, key) => {
@@ -250,7 +283,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
              <span className="hidden sm:inline text-lg">🔥</span>
               <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : "Enterprise Licensing Solutions"}</span>
               <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : "Volume pricing. SAM Audit compliance. Dedicated support."}</span>
-              <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : scrollToSection("business")} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : "Contact Enterprise Sales →"}</button>
+              <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : "Contact Enterprise Sales →"}</button>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -286,10 +319,10 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-            <button onClick={() => scrollToSection("store")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition shadow-lg shadow-purple-500/10 text-center">
+            <button onClick={() => scrollToSection(heroPersona==="retail" ? "special-offer" : "business")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition shadow-lg shadow-purple-500/10 text-center">
               {heroPersona==="retail" ? t("hero.cta") : "Get Free Compliance Quote"}
             </button>
-            <button onClick={() => scrollToSection("business")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#f3f4f6] text-[#111827] border border-[#d1d5db] hover:bg-[#e5e7eb] transition text-center">
+            <button onClick={() => window.location.href="/b2b#enterprise-b2b"} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#f3f4f6] text-[#111827] border border-[#d1d5db] hover:bg-[#e5e7eb] transition text-center">
               {heroPersona==="retail" ? t("hero.enterprise") : "Verify My License"} {String.fromCharCode(0x203A)}
             </button>
           </div>
@@ -579,13 +612,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <form onSubmit={handleB2BSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.company")}</label>
-                  <input type="text" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
+                  <input type="text" name="company" required placeholder="e.g. TechCorp Solutions Ltd." className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.employees")}</label>
-                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
+                    <select name="units" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>5 - 20 Units</option>
                       <option>21 - 50 Units</option>
                       <option>51 - 100 Units</option>
@@ -594,7 +627,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.needs")}</label>
-                    <select className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
+                    <select name="product" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>{t("home.b2b.windows")}</option>
                       <option>{t("home.b2b.m365")}</option>
                       <option>{t("home.b2b.server")}</option>
@@ -606,11 +639,11 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.contact_name")}</label>
-                    <input type="text" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
+                    <input type="text" name="contact" required placeholder="Mr. Zhang" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.phone")}</label>
-                    <input type="text" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
+                    <input type="text" name="phone" required placeholder="manager@company.com" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" />
                   </div>
                 </div>
 
