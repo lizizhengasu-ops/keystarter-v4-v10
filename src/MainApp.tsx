@@ -156,6 +156,7 @@ function Layout({ children }) {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("footer.support")}</h4>
             <div className="space-y-2">
               <button onClick={()=>window.location.href="/support"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.help_center")}</button>
+              <button onClick={()=>window.location.href="/faq"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.faq")}</button>
               <button onClick={()=>window.location.href="/#compare"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.compare")}</button>
               <button onClick={()=>window.location.href="/#portal"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.fulfillment")}</button>
             </div>

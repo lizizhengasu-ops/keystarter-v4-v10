@@ -1,4 +1,4 @@
-{
+﻿{
   "brand.name": "Clave de inicio",
   "brand.partner": "Socio",
   "nav.store": "Tienda",
@@ -134,6 +134,7 @@
   "hero.trust": "Tu socio de confianza para obtener licencias de software de Microsoft genuinas en todo el mundo.",
   "footer.support": "Soporte",
   "footer.help_center": "Centro de ayuda",
+  "footer.faq": "Preguntas Frecuentes",
   "footer.fulfillment": "Cumplimiento",
   "footer.about": "Acerca de",
   "footer.contact": "Contacto",

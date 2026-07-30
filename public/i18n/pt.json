@@ -1,4 +1,4 @@
-{
+﻿{
   "brand.name": "KeyStarter",
   "brand.partner": "Parceiro",
   "nav.store": "Loja",
@@ -134,6 +134,7 @@
   "hero.trust": "O seu parceiro de confiança para licenças de software Microsoft genuínas em todo o mundo.",
   "footer.support": "Suporte",
   "footer.help_center": "Central de Ajuda",
+  "footer.faq": "Perguntas Frequentes",
   "footer.fulfillment": "Atendimento",
   "footer.about": "Sobre",
   "footer.contact": "Contato",

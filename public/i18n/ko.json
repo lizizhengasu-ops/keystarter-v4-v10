@@ -1,4 +1,4 @@
-{
+﻿{
   "brand.name": "키스타터",
   "brand.partner": "파트너",
   "nav.store": "스토어",
@@ -134,6 +134,7 @@
   "hero.trust": "전 세계 Microsoft 정품 소프트웨어 라이선스에 대한 신뢰할 수 있는 파트너입니다.",
   "footer.support": "지원",
   "footer.help_center": "도움말 센터",
+  "footer.faq": "자주 묻는 질문",
   "footer.fulfillment": "주문 처리",
   "footer.about": "About",
   "footer.contact": "연락하다",

@@ -1,4 +1,4 @@
-{
+﻿{
   "brand.name": "CléDémarreur",
   "brand.partner": "Partenaire",
   "nav.store": "Boutique",
@@ -134,6 +134,7 @@
   "hero.trust": "Votre partenaire de confiance pour les licences de logiciels Microsoft authentiques dans le monde entier.",
   "footer.support": "Soutien",
   "footer.help_center": "Centre d'aide",
+  "footer.faq": "FAQ",
   "footer.fulfillment": "Accomplissement",
   "footer.about": "About",
   "footer.contact": "Contact",
