@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import {fetchProduct} from "../api/woocommerce";
 import type {SPAProduct} from "../api/woocommerce";
 import { useCart } from "../data/CartContext";
+import { PRODUCT_DETAILS } from "../data/product-details";
 
 const editions = [
   {name:"Home",desc:"For everyday use",price:"$12.99"},
@@ -27,6 +28,7 @@ export default function ProductPage() {
 const [reviews, setReviews] = useState([]);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [reviewPage, setReviewPage] = useState(1);
+  const details = PRODUCT_DETAILS[slug || ""];
 
   useEffect(() => {
     if (!slug) return;
@@ -40,7 +42,7 @@ const [reviews, setReviews] = useState([]);
     // Reviews
     var m = {"windows-11-pro":629,"windows-10-pro":630,"windows-11-home":631,"windows-10-home":632,"office-2019-pro-plus":633,"office-2021-pro-plus":634,"win-11-iot-2024-entry":637,"win-10-iot-2021-entry":643,"win-10-iot-2019-entry":646,"windows-11-pro-official":652,"windows-10-pro-official":653,"windows-11-home-official":654,"windows-10-home-official":655,"win-11-iot-2024-high-end":656,"win-11-iot-2024-value":657,"win-10-iot-2021-high-end":658,"win-10-iot-2021-value":659,"win-11-iot-ml-high-end":660,"win-11-iot-ml-value":661,"win-11-iot-ml-entry":662,"win-10-iot-2019-high-end":663,"win-10-iot-2019-value":664,"win-svr-iot-2025":665,"win-svr-iot-2022":666,"win-svr-iot-2019":667,"sql-svr-2019-runtime":668,"sql-svr-2022-runtime":669};
     var id = m[slug] || product?.slug;
-    if (id) fetch("/wp-json/keystarter/v1/reviews/"+id+"?lang="+i18n.language+"&per_page=100").then(function(r){return r.json()}).then(function(d){if(!cancelled&&d&&d.reviews)setReviews(d.reviews)}).catch(function(){});
+    if (id) fetch("/wp-json/keystarter/v1/reviews/"+id+"?lang="+i18n.language+"&per_page=100").then(function(r){return r.text()}).then(function(t){var d=JSON.parse(t.replace(/^\\uFEFF/,""));if(!cancelled&&d&&d.reviews)setReviews(d.reviews)}).catch(function(){});
     return () => { cancelled = true; };
   }, [slug, i18n.language]);
 
@@ -78,7 +80,7 @@ const [reviews, setReviews] = useState([]);
             <span className="text-xs text-[#86868b] line-through">$199.00</span>
             <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save 92%</span>
           </div>
-          <p className="text-sm text-[#86868b] mb-6">{product.description?.substring(0,150)}</p>
+          <p className="text-sm text-[#86868b] mb-6">{details ? details.desc : product.description?.substring(0,150)}</p>
 
 
           <button onClick={() => addToCart(product.slug, product.name, product.price)}
@@ -99,6 +101,32 @@ const [reviews, setReviews] = useState([]);
                 <span className="font-medium">{Array.isArray(f) ? f[1] : f[1]}</span>
               </div>
             ))}
+          {details && details.features && (
+          <div className="mt-6">
+            <h3 className="text-base font-bold mb-3">Features</h3>
+            <div className="space-y-2">
+              {details.features.map(function(f:string,i:number){return(
+                <div key={i} className="flex items-start gap-2 text-xs text-[#1d1d1f]">
+                  <span className="text-[#7c3aed] mt-0.5">"</span>
+                  <span>{f}</span>
+                </div>
+              );})}
+            </div>
+          </div>
+          )}
+          {details && details.requirements && (
+          <div className="mt-6">
+            <h3 className="text-base font-bold mb-3">System Requirements</h3>
+            <div className="bg-[#f5f5f7] rounded-xl p-4">
+              {details.requirements.map(function(r:any,i:number){return(
+                <div key={i} className="flex justify-between py-1.5 border-b border-[#e8e8ed] last:border-0 text-xs">
+                  <span className="text-[#86868b] font-medium">{r.l}</span>
+                  <span className="text-right max-w-[60%]">{r.v}</span>
+                </div>
+              );})}
+            </div>
+          </div>
+          )}
           
           {reviews.length > 0 && (
           <div className="mt-8 pt-6 border-t border-[#e8e8ed]">
