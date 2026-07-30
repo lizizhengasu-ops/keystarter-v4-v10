@@ -143,8 +143,8 @@
   "footer.brand_desc": "신뢰할 수 있고 안전하며 효율적인 B2B 및 B2C Microsoft 공인 공급망 서비스.",
   "footer.rights_ext": "your@email.com",
   "footer.email_placeholder": "계정",
-  "nav.account": "장바구니",
-  "nav.cart": "정품 Microsoft 소프트웨어에 대한 신뢰할 수 있는 출처",
+  "nav.account": "계정",
+  "nav.cart": "장바구니",
   "home.hero.headline": "구매하기",
   "product.buy_now": "지금 구매",
   "hero.trust.delivery": "자동 번개 배송",
@@ -307,5 +307,6 @@
   "support.team": "KeyStarter Support Team",
   "support.send_another": "Send Another Request",
   "support.email_admin_direct": "Or email admin@keys-starter.com directly",
-  "product.genuine_digital": "Genuine Digital License"
+  "product.genuine_digital": "Genuine Digital License",
+  "nav.home": "홈"
 }
