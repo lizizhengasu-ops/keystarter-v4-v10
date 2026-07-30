@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
@@ -7,17 +7,6 @@ import { WC_IDS } from "../data/woo-ids";
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 
-
-// Custom lightweight inline SVG Icons representing Microsoft Core Brands
-// To eliminate any external CDN load latency or render flickering.
-const MicrosoftIcon = () => (
-  <svg className="w-8 h-8" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="11" height="11" fill="#F25022"/>
-    <rect x="12" y="0" width="11" height="11" fill="#7FBA00"/>
-    <rect x="0" y="12" width="11" height="11" fill="#00A4EF"/>
-    <rect x="12" y="12" width="11" height="11" fill="#FFB900"/>
-  </svg>
-);
 
 const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
   <svg className={`w-8 h-8 ${colorClass}`} viewBox="0 0 24 24" fill="currentColor">

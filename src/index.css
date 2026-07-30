@@ -53,3 +53,11 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 .animate-scroll:hover { animation-play-state: paused; }
 
 .persona-hidden { display:none !important; }
+
+/* KeyStarter Logo animations */
+@keyframes spin-cw { from { transform: rotate(-30deg) rotate(0deg); } to { transform: rotate(-30deg) rotate(360deg); } }
+@keyframes spin-ccw { from { transform: rotate(30deg) rotate(0deg); } to { transform: rotate(30deg) rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.anim-spin-cw { animation: spin-cw 4s linear infinite; }
+.anim-spin-ccw { animation: spin-ccw 4s linear infinite; }
+.anim-pulse { animation: pulse 2s ease-in-out infinite; }
