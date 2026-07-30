@@ -45,7 +45,7 @@ export default function B2bPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
-          subject: "Compliance Quote from " + form.company,
+          subject: t("b2b.compliance_quote_subject") + " (from " + form.company,
           message: "<h2>Compliance Quote Request</h2><p><b>Company:</b> " + form.company + "</p><p><b>Units:</b> " + form.units + "</p><p><b>Product:</b> " + form.product + "</p><p><b>Contact:</b> " + form.contact + "</p><p><b>Phone/Email:</b> " + form.phone + "</p>"
         })
       });
@@ -94,7 +94,7 @@ export default function B2bPage() {
     <div className="text-center">
     <p className="text-green-600 font-semibold text-sm">Thank you! Our team will contact you within 24 hours.</p>
     <button onClick={()=>{setForm({company:"",units:"5-20 Units",product:"Windows 11 Series",contact:"",phone:"",honeypot_website:""});setFormStatus("");setErrors({});}}
-      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Send Another Quote</button>
+      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">{t("b2b.send_another_quote")}</button>
     </div>
   ) : (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
@@ -105,16 +105,16 @@ export default function B2bPage() {
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.company && <p className="text-red-500 text-xs">{errors.company}</p>}
       
-      <label className="text-xs font-medium text-[#86868b] block mb-1">Estimated Licenses Needed</label>
+      <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.estimated_licenses")}</label>
       <select value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>5-20 Units</option><option>21-50 Units</option><option>51-200 Units</option><option>200+ Units</option>
       </select>
       
-      <label className="text-xs font-medium text-[#86868b] block mb-1">Primary Product Needs</label>
+      <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.primary_needs")}</label>
       <select value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
-        <option>Windows 11 Series</option><option>Windows 10</option><option>Office</option><option>Server</option><option>Other</option>
+        <option>{t("b2b.product_windows11")}</option><option>{t("b2b.product_windows10")}</option><option>{t("b2b.product_office")}</option><option>{t("b2b.product_server")}</option><option>{t("b2b.product_other")}</option>
       </select>
       
       <input type="text" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
@@ -129,7 +129,7 @@ export default function B2bPage() {
                 className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
                 {formStatus==="sending" ? "Sending..." : "Get Free Custom Quote"}
               </button>
-              {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">Or email admin@keys-starter.com directly</span></p>}
+              {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">{t("b2b.email_admin_direct")}</span></p>}
             </form>
           )}
         </div>

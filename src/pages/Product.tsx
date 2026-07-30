@@ -67,7 +67,7 @@ export default function ProductPage() {
           </div>
         </div>
         <div>
-          <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">Genuine Digital License</div>
+          <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <div className="flex items-center gap-2 mb-4">
             <span className="text-2xl font-extrabold text-[#7c3aed]">

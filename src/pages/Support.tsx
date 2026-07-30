@@ -88,7 +88,7 @@ export default function SupportPage() {
     <div className="text-center">
     <p className="text-green-600 font-semibold text-sm">Thank you! We will respond within 24 hours.</p>
     <button onClick={()=>{setForm({name:"",email:"",phone:"",subject:"",message:"",honeypot_website:""});setFormStatus("");setErrors({});}}
-      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Send Another Request</button>
+      className="mt-3 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">{t("support.send_another")}</button>
     </div>
   ) : (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
@@ -112,7 +112,7 @@ export default function SupportPage() {
                 className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold hover:bg-[#6d28d9] transition disabled:opacity-50">
                 {formStatus==="sending" ? "Sending..." : "Send Request"}
               </button>
-              {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">Or email admin@keys-starter.com directly</span></p>}
+              {formStatus === "error" && <p className="text-red-500 text-sm text-center">{errorMsg}<br/><span className="text-xs">{t("support.email_admin_direct")}</span></p>}
             </form>
           )}
         </div>

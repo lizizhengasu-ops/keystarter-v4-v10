@@ -95,7 +95,7 @@ const handleRegister = async (e) => {
 
           <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">{t("account.title")}</h1>
-          <a href={logoutUrl} className="text-xs text-[#86868b] hover:text-red-500 transition-colors">Sign Out</a>
+          <a href={logoutUrl} className="text-xs text-[#86868b] hover:text-red-500 transition-colors">{t("account.sign_out")}</a>
         </div>
 
           <p className="text-[#86868b] text-sm mb-8">{t("account.orders_desc") || "Your order history and license key delivery status."}</p>
@@ -116,7 +116,7 @@ const handleRegister = async (e) => {
 
               <p className="text-red-500 text-sm">Failed to load orders.</p>
 
-              <button onClick={()=>window.location.reload()} className="mt-4 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">Retry</button>
+              <button onClick={()=>window.location.reload()} className="mt-4 bg-[#7c3aed] text-white px-5 py-2 rounded-xl text-xs font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition">{t("account.retry")}</button>
 
             </div>
 
@@ -156,11 +156,11 @@ const handleRegister = async (e) => {
 
                       <tr className="border-b border-[#f0f0f2]">
 
-                        <th className="text-left py-2 font-semibold text-[#86868b]">Product</th>
+                        <th className="text-left py-2 font-semibold text-[#86868b]">{t("account.product")}</th>
 
                         <th className="text-right py-2 font-semibold text-[#86868b]">Qty</th>
 
-                        <th className="text-right py-2 font-semibold text-[#86868b]">Key Email</th>
+                        <th className="text-right py-2 font-semibold text-[#86868b]">{t("account.key_email")}</th>
 
                       </tr>
 
