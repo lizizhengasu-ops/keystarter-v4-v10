@@ -281,9 +281,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3 text-sm">
              <span className="hidden sm:inline text-lg">🔥</span>
-              <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : "Enterprise Licensing Solutions"}</span>
-              <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : "Volume pricing. SAM Audit compliance. Dedicated support."}</span>
-              <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : "Contact Enterprise Sales →"}</button>
+              <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : t("home.enterprise.hero_title")}</span>
+              <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : t("home.enterprise.hero_desc")}</span>
+              <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : t("home.enterprise.hero_cta")}</button>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -303,27 +303,27 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
           {/* Persona Tabs */}
           <div className="inline-flex bg-black/[0.04] border border-[#d1d5db] p-1 rounded-full mb-8">
-            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F464)} Personal Retail</button>
-            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F3E2)} Enterprise B2B</button>
+            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F464)} {t("home.persona.retail")}</button>
+            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F3E2)} {t("home.persona.enterprise")}</button>
           </div>
 
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide mb-4 bg-white text-[#7c3aed] border border-[#d1d5db]">
-            {heroPersona==="retail" ? "Genuine Retail License Portal" : "Enterprise Volume Licensing"}
+            {heroPersona==="retail" ? t("home.retail.portal_title") : t("home.enterprise.heading")}
           </span>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-[#111827]">
-            {heroPersona==="retail" ? t("home.hero.headline") : "Enterprise Compliance & SAM Audit Support"}
+            {heroPersona==="retail" ? t("home.hero.headline") : t("home.enterprise.sub_heading")}
           </h1>
           <p className="text-sm text-[#4b5563] max-w-xl mx-auto mb-8 leading-relaxed">
-            {heroPersona==="retail" ? t("hero.desc") : "Volume Licensing certificates and genuine keys for 100% compliance at low cost. Avoid legal penalties during Microsoft SAM Audits."}
+            {heroPersona==="retail" ? t("hero.desc") : t("home.enterprise.sub_desc")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
             <button onClick={() => scrollToSection(heroPersona==="retail" ? "special-offer" : "business")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition shadow-lg shadow-purple-500/10 text-center">
-              {heroPersona==="retail" ? t("hero.cta") : "Get Free Compliance Quote"}
+              {heroPersona==="retail" ? t("hero.cta") : t("home.enterprise.compliance_btn")}
             </button>
             <button onClick={() => window.location.href="/b2b#enterprise-b2b"} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#f3f4f6] text-[#111827] border border-[#d1d5db] hover:bg-[#e5e7eb] transition text-center">
-              {heroPersona==="retail" ? t("hero.enterprise") : "Verify My License"} {String.fromCharCode(0x203A)}
+              {heroPersona==="retail" ? t("hero.enterprise") : t("home.enterprise.verify_btn")} {String.fromCharCode(0x203A)}
             </button>
           </div>
 
@@ -335,10 +335,10 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">50K+</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.activation")}</div></div>
               <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">100%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.verification")}</div></div>
             </>) : (<>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">VAT 13%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Dedicated Invoice</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">Enterprise</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Volume Licensing</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">PO Terms</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Corporate Transfer</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">24/7</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">SLA Account Manager</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.vat_label")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.dedicated_invoice")}</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.enterprise_label")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Volume Licensing</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.po_terms")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.corporate_transfer")}</div></div>
+              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.support_247")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.sla_manager")}</div></div>
             </>)}
           </div>
         </div>
@@ -346,8 +346,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       {heroPersona === "enterprise" && (
       <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
-        <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">Ready to Scale Your Licensing?</h2>
-        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">Get volume pricing, dedicated support, and full SAM Audit compliance.</p>
+        <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("home.enterprise.cta_title")}</h2>
+        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">{t("home.enterprise.cta_desc")}</p>
         <div className="flex justify-center gap-4 flex-wrap items-center">
           <a href="mailto:admin@keys-starter.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
           <span className="text-sm text-[#7c3aed] font-semibold">admin@keys-starter.com</span>
@@ -359,8 +359,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section className="py-12 bg-white border-b border-[#e8e8ed] overflow-hidden">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Trusted by Industry Leaders</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Our Partners and Integrations</h2>
+            <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">{t("home.enterprise.trusted_title")}</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">{t("home.enterprise.partners_title")}</h2>
           </div>
         </div>
         <div className="relative">
@@ -577,7 +577,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             {/* Business value propositions */}
             <div>
               <span className="text-[#7c3aed] text-xs font-bold tracking-wider uppercase bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
-                Enterprise B2B Compliance
+                {t("home.enterprise.compliance_section_title")}
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6 mb-6 leading-tight">
                 Enterprise Compliance & {t("home.compare.audit")}
@@ -590,15 +590,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#7c3aed] text-xl pt-0.5">🛡️</div>
                   <div>
-                    <h4  className="text-sm font-semibold">100% Official Compliance Verified</h4>
+                    <h4  className="text-sm font-semibold">{t("home.enterprise.compliance_verified_label")}</h4>
                     <p className="text-xs text-[#86868b] mt-1">{t("home.compare.enterprise_desc")}</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#34c759] text-xl pt-0.5">💰</div>
                   <div>
-                    <h4  className="text-sm font-semibold">Volume Pricing Discounts (Up to 70% Off)</h4>
-                    <p className="text-xs text-[#86868b] mt-1">Supports 5+ accounts with no minimum order. Flexible CSP licensing for enterprise cloud migration.</p>
+                    <h4  className="text-sm font-semibold">{t("home.enterprise.volume_pricing_title")}</h4>
+                    <p className="text-xs text-[#86868b] mt-1">{t("home.enterprise.compliance_flexible")}</p>
                   </div>
                 </div>
               </div>
@@ -732,7 +732,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div className="text-3xl mb-4">📦</div>
               <h4 className="text-base font-bold mb-2">{t("support.download_title")}</h4>
               <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.download_desc")}</p>
-              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#7c3aed] hover:underline">Go to Microsoft Activation Site{' > '}</a>
+              <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#7c3aed] hover:underline">{t("home.support.activation_link")}{' > '}</a>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
