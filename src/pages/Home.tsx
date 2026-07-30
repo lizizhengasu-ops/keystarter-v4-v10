@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { fetchProducts } from '../api/woocommerce';
 import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';

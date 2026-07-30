@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -10,6 +10,10 @@ export default function AboutPage() {
         <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] mb-10">
           <h2 className="text-xl font-bold mb-4">{t("about.story")}</h2>
           <p className="text-sm text-[#86868b] leading-relaxed">{t("about.story_text")}</p>
+        </div>
+        <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] mb-10">
+          <h2 className="text-xl font-bold mb-4">Approval & Certification</h2>
+          <img src="/approvaleng.png" alt="Approval Certificate" className="w-full max-w-2xl mx-auto rounded-lg" />
         </div>
         <div className="grid grid-cols-3 gap-6">
           <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center"><div className="text-3xl font-extrabold text-[#0078d4] mb-1">10K+</div><div className="text-xs text-[#86868b]">{t("about.customers")}</div></div>

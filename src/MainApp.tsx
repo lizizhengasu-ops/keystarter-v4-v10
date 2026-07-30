@@ -1,4 +1,4 @@
-// v6.1.23f
+﻿// v6.1.23f
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
@@ -39,6 +39,18 @@ function MicrosoftLogo() {
     </svg>
   );
 }
+
+function KeyStarterLogo() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="40" stroke="#1d1d1f" strokeWidth="1.2" />
+      <ellipse cx="50" cy="50" rx="36" ry="14" stroke="#7c3aed" strokeWidth="1.2" transform="rotate(-30 50 50)" className="anim-spin-cw" style={{ transformOrigin: "50px 50px" }} />
+      <ellipse cx="50" cy="50" rx="36" ry="14" stroke="#7c3aed" strokeWidth="1.2" transform="rotate(30 50 50)" className="anim-spin-ccw" style={{ transformOrigin: "50px 50px" }} />
+      <circle cx="50" cy="50" r="5" fill="#7c3aed" className="anim-pulse" />
+    </svg>
+  );
+}
+
 
 function Layout({ children }) {
   const location = useLocation();
@@ -90,7 +102,7 @@ function Layout({ children }) {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
-            <MicrosoftLogo />
+            <KeyStarterLogo />
             <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
             <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
