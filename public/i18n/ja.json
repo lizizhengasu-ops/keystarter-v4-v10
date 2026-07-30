@@ -308,5 +308,14 @@
   "support.send_another": "Send Another Request",
   "support.email_admin_direct": "Or email admin@keys-starter.com directly",
   "product.genuine_digital": "Genuine Digital License",
-  "nav.home": "ホーム"
+  "nav.home": "ホーム",
+  "account.dashboard": "Dashboard",
+  "account.orders": "Orders",
+  "account.downloads": "Downloads",
+  "account.addresses": "Addresses",
+  "account.details": "Account details",
+  "account.logout": "Log out",
+  "cart.empty_wp": "Your cart is currently empty!",
+  "cart.new_in_store": "New in store",
+  "cart.return_shop": "Return to shop"
 }
