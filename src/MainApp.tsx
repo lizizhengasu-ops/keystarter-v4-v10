@@ -14,13 +14,11 @@ import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
 import NotFound from "./pages/NotFound";
-import PricingPage from "./pages/Pricing";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 // B1785212195_1743202026
 import AccountPage from "./pages/Account";
 import AboutPage from "./pages/About";
-import DownloadsPage from "./pages/Downloads";
 import ChangelogPage from "./pages/Changelog";
 import CartPage from "./pages/Cart";
 import CookieConsent from "./components/CookieConsent";
@@ -241,10 +239,8 @@ export default function App() {
             <Route path="/b2b" element={<B2bPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/downloads" element={<DownloadsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/cart" element={<CartPage />} />
