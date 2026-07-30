@@ -14,6 +14,7 @@ import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
 import NotFound from "./pages/NotFound";
+import PricingPage from "./pages/Pricing";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
 // B1785212195_1743202026
