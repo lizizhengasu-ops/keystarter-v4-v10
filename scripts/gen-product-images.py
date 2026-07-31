@@ -45,30 +45,54 @@ def sql_logo():
 
 def make_image(spec):
     kind, title, subtitle = spec["kind"], spec["title"], spec["subtitle"]
-    img = Image.new("RGB", (1024, 768), (255, 255, 255))
-    logo = None
-    if kind == "win11":
-        logo = Image.open(os.path.join(ROOT, "tmp", "logos", "win11.png")).convert("RGBA")
-        paste_layer(img, logo, 512, 250, 340, 320)
-    elif kind == "win10":
-        paste_layer(img, win10_logo(), 512, 250, 360, 340)
-    elif kind == "office":
-        paste_layer(img, office_logo(), 512, 250, 360, 340)
-    elif kind == "sql":
-        paste_layer(img, sql_logo(), 512, 250, 340, 340)
-    elif kind == "server11":
-        logo = Image.open(os.path.join(ROOT, "tmp", "logos", "win11.png")).convert("RGBA")
-        paste_layer(img, logo, 512, 250, 340, 320)
-    elif kind == "server10":
-        paste_layer(img, win10_logo(), 512, 250, 360, 340)
-
+    img = Image.new("RGB", (1024, 768), (238, 241, 246))
     d = ImageDraw.Draw(img)
-    tsize = 44 if len(title) <= 24 else 34
+
+    for y in range(768):
+        t = y / 767.0
+        c = (int(238 + (250 - 238) * t), int(241 + (247 - 241) * t), int(246 + (251 - 246) * t))
+        d.line([(0, y), (1024, y)], fill=c)
+
+    x0, y0, x1, y1 = 262, 130, 762, 600
+    off = 74
+
+    d.ellipse([330, 616, 694, 648], fill=(203, 208, 216))
+
+    for y in range(y0, y1):
+        t = (y - y0) / float(y1 - y0)
+        c = (int(255 - t * 20), int(253 - t * 18), int(255 - t * 22))
+        d.line([(x0, y), (x1, y)], fill=c)
+
+    d.polygon([(x1, y0), (x1 - off, y0 - off), (x1 - off, y1 - off), (x1, y1)], fill=(225, 230, 238))
+    d.polygon([(x0, y0), (x1, y0), (x1 - off, y0 - off), (x0 - off, y0 - off)], fill=(246, 249, 253))
+
+    outline = (199, 206, 215)
+    d.rectangle([x0, y0, x1, y1], outline=outline, width=2)
+    d.line([(x0, y0), (x0 - off, y0 - off)], fill=outline, width=2)
+    d.line([(x1, y0), (x1 - off, y0 - off)], fill=outline, width=2)
+    d.line([(x0 - off, y0 - off), (x1 - off, y0 - off)], fill=outline, width=2)
+    d.line([(x1 - off, y0 - off), (x1 - off, y1 - off)], fill=outline, width=2)
+    d.line([(x1 - off, y1 - off), (x1, y1)], fill=outline, width=2)
+
+    logo = None
+    if kind == "win11" or kind == "server11":
+        logo = Image.open(os.path.join(ROOT, "tmp", "logos", "win11.png")).convert("RGBA")
+        paste_layer(img, logo, 512, 268, 300, 260)
+    elif kind == "win10" or kind == "server10":
+        paste_layer(img, win10_logo(), 512, 268, 300, 260)
+    elif kind == "office":
+        paste_layer(img, office_logo(), 512, 268, 300, 260)
+    elif kind == "sql":
+        paste_layer(img, sql_logo(), 512, 268, 280, 260)
+
+    tsize = 42 if len(title) <= 24 else 32
     tf = font(tsize)
-    sf = font(26, bold=False)
-    d.text((512, 512), title, font=tf, fill=(29, 29, 31, 255), anchor="mm")
-    d.text((512, 572), subtitle, font=sf, fill=(134, 134, 139, 255), anchor="mm")
-    d.rectangle([0, 0, 1023, 767], outline=(232, 232, 237, 255), width=2)
+    sf = font(25, bold=False)
+    d.text((512, 472), title, font=tf, fill=(29, 29, 31, 255), anchor="mm")
+    d.text((512, 530), subtitle, font=sf, fill=(110, 110, 118, 255), anchor="mm")
+
+    d.rounded_rectangle([330, 560, 694, 598], radius=19, fill=(124, 58, 237, 255))
+    d.text((512, 579), "Official Digital License", font=font(21), fill=(255, 255, 255, 255), anchor="mm")
     return img
 
 products = [
