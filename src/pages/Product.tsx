@@ -5,6 +5,7 @@ import {fetchProduct} from "../api/woocommerce";
 import type {SPAProduct} from "../api/woocommerce";
 import { useCart } from "../data/CartContext";
 import { PRODUCT_DETAILS } from "../data/product-details";
+import { PRODUCT_IMAGES } from "../data/product-images";
 import { GENERIC_FAQS, FAQ_BY_SERIES } from "../data/faq";
 import { COMPARISON_GROUPS, COMPARISON_MAP, FAQ_SERIES_MAP } from "../data/product-comparison";
 import { ProductComparison } from "../components/ProductComparison";
@@ -111,6 +112,17 @@ const [reviews, setReviews] = useState([]);
     </div>
   );
 
+  const productImage = PRODUCT_IMAGES[slug || ""] || "";
+  const imageBlock = productImage ? (
+    <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#e8e8ed] flex items-center justify-center">
+      <img src={productImage} alt={product?.name || ""} className="w-full h-full object-contain p-4" loading="lazy" />
+    </div>
+  ) : (
+    <div className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
+      <span className="text-8xl font-bold text-[#7c3aed]/20">{product ? product.name[0] : ""}</span>
+    </div>
+  );
+
   useEffect(() => {
     if (!slug) return;
     let cancelled = false;
@@ -147,11 +159,7 @@ const [reviews, setReviews] = useState([]);
       {!loading && product && 
       <div className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div>
-          <div className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
-            <span className="text-8xl font-bold text-[#7c3aed]/20">{product.name[0]}</span>
-          </div>
-        </div>
+        <div>{imageBlock}</div>
         <div>
           <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
