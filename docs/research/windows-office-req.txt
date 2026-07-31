@@ -1,0 +1,35 @@
+# Windows / Office system requirements research (2026-07-31)
+
+Sources: Microsoft Learn and support.microsoft.com public documentation.
+Google and DuckDuckGo direct scraping were blocked by bot checks on 2026-07-31,
+so Windows/Office specs were cross-checked against Microsoft public docs and
+the already-saved Microsoft Learn files for IoT, Windows Server, and SQL Server.
+
+## Windows 11 (Home / Pro)
+- CPU: 1 GHz or faster, 2+ cores, compatible 64-bit processor or SoC
+- RAM: 4 GB minimum, 8 GB recommended
+- Storage: 64 GB minimum, 128 GB recommended (SSD preferred)
+- Firmware: UEFI with Secure Boot capability
+- TPM: TPM 2.0 required
+- Graphics: DirectX 12 compatible / WDDM 2.0
+- Display: 720p (HD) or higher, 9+ inch, 8-bit color
+- Internet: required for updates; Microsoft account for personal-use features
+
+## Windows 10 (Home / Pro)
+- CPU: 1 GHz or faster 32/64-bit compatible processor
+- RAM: 1 GB minimum (32-bit) / 2 GB minimum (64-bit), 4 GB recommended
+- Storage: 16 GB minimum (32-bit) / 20 GB minimum (64-bit), 64 GB recommended
+- Graphics: DirectX 9 compatible / WDDM 1.0
+- Display: 800x600 minimum
+- Firmware: UEFI with Secure Boot capability recommended
+- TPM: TPM 1.2 recommended, TPM 2.0 supported
+
+## Office 2019 / 2021 Professional Plus
+- OS: Windows 11, Windows 10, or Windows Server 2019 or newer
+- CPU: 1.6 GHz or faster, 2 cores
+- RAM: 4 GB minimum, 8 GB recommended
+- Storage: 4 GB available disk space minimum
+- Graphics: DirectX 10 compatible
+- Display: 1280x768 or higher
+- Internet: required for installation and activation
+- Browser: current Edge, Chrome, or Firefox

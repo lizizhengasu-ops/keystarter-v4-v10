@@ -98,6 +98,19 @@ const [reviews, setReviews] = useState([]);
     </div>
   );
 
+  const descBlock = (
+    <div className="mb-6">
+      <p className="text-sm text-[#86868b]">{details ? details.desc : product?.description?.substring(0,150)}</p>
+      {details && details.tags && details.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-3">
+          {details.tags.map(function(tag:string,i:number){return(
+            <span key={i} className="bg-[#7c3aed]/10 text-[#7c3aed] rounded-full px-2.5 py-1 text-[11px] font-medium">{tag}</span>
+          );})}
+        </div>
+      )}
+    </div>
+  );
+
   useEffect(() => {
     if (!slug) return;
     let cancelled = false;
@@ -149,7 +162,7 @@ const [reviews, setReviews] = useState([]);
             <span className="text-xs text-[#86868b] line-through">$199.00</span>
             <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save 92%</span>
           </div>
-          <p className="text-sm text-[#86868b] mb-6">{details ? details.desc : product.description?.substring(0,150)}</p>
+          {descBlock}
 
 
           <button onClick={() => addToCart(product.slug, product.name, product.price)}
