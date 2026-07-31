@@ -1,4 +1,4 @@
-﻿// v6.1.23f
+// v6.1.23f
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
