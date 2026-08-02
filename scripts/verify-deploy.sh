@@ -22,11 +22,21 @@ check() {
   fi
 }
 
+# Resolve current asset names from the deployed index.html so this script
+# stays valid after the next build (hashed filenames change every deploy).
+INDEX_HTML="/var/www/keystarter-frontend/index.html"
+JS_PATH=$(grep -oE '/assets/index-[A-Za-z0-9_-]+\.js' "$INDEX_HTML" | head -1)
+CSS_PATH=$(grep -oE '/assets/index-[A-Za-z0-9_-]+\.css' "$INDEX_HTML" | head -1)
+if [ -z "$JS_PATH" ] || [ -z "$CSS_PATH" ]; then
+  echo "[verify-deploy] FAIL: cannot resolve JS/CSS asset names from $INDEX_HTML"
+  exit 1
+fi
+
 check "/"
 check "/product/windows-11-home-official"
 check "/wp-json/"
-check "/assets/index-DiCa7W86.js"
-check "/assets/index-DKBjzyQS.css"
+check "$JS_PATH"
+check "$CSS_PATH"
 check "/assets/images/box-win11-home.jpg"
 check "/assets/images/box-sql-2019.png"
 
