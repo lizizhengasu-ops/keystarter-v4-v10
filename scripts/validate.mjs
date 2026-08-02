@@ -102,6 +102,39 @@ function checkPositionFixed(dir) {
 }
 
 // ---------------------------------------------------------------------------
+// 4. product image mapping coverage
+// ---------------------------------------------------------------------------
+function checkProductImages() {
+  const productsFile = path.join(ROOT, "src", "data", "products.ts");
+  const imagesFile = path.join(ROOT, "src", "data", "product-images.ts");
+  const selectFile = path.join(ROOT, "docs", "product-image-library", "select.html");
+  if (!existsSync(productsFile) || !existsSync(imagesFile)) {
+    error("product data files missing", productsFile);
+    return;
+  }
+  const productsSrc = readFileSync(productsFile, "utf-8");
+  const imagesSrc = readFileSync(imagesFile, "utf-8");
+  const slugs = [...productsSrc.matchAll(/slug:\s*'([^']+)'/g)].map(m => m[1]);
+  const imgMap = new Map(
+    [...imagesSrc.matchAll(/"([^"]+)":\s*"\/assets\/images\/([^"]+)"/g)].map(m => [m[1], m[2]])
+  );
+  const missing = slugs.filter(s => !imgMap.has(s));
+  if (missing.length) error("products without image mapping: " + missing.join(", "));
+  const imgDir = path.join(ROOT, "public", "assets", "images");
+  const missingFiles = [...new Set(imgMap.values())].filter(f => !existsSync(path.join(imgDir, f)));
+  if (missingFiles.length) error("mapped image files missing on disk: " + missingFiles.join(", "));
+  if (existsSync(selectFile)) {
+    const sel = readFileSync(selectFile, "utf-8");
+    const start = sel.indexOf("const CURRENT = {");
+    const end = sel.indexOf("};", start);
+    const block = start >= 0 && end > start ? sel.slice(start, end) : "";
+    const currentFiles = [...block.matchAll(/"([^"]+)":\s*"([^"]+)"/g)].map(m => m[2]);
+    const bad = currentFiles.filter(f => !existsSync(path.join(imgDir, f)));
+    if (bad.length) error("select.html CURRENT references missing file: " + bad.join(", "));
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 console.log("\n[validate.mjs] Full project health check");
@@ -123,6 +156,11 @@ console.log("\n3. position:fixed / Portal check (src/)");
 const fixedBefore = totalErrors;
 checkPositionFixed(SRC);
 if (totalErrors === fixedBefore) ok("All overlays protected by Portal");
+
+console.log("\n4. product image mapping coverage");
+const imgBefore = totalErrors;
+checkProductImages();
+if (totalErrors === imgBefore) ok("All product slugs mapped and image files exist");
 
 console.log("\n========================================");
 if (exitCode === 0) {

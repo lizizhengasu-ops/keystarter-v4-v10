@@ -1,3 +1,12 @@
+param(
+  [int]$Port = 8765
+)
 $ErrorActionPreference = "Stop"
-Set-Location -LiteralPath "C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\docs\product-image-library"
-Start-Process -FilePath "python" -ArgumentList "-m", "http.server", "8765" -WindowStyle Hidden
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$libDir = Join-Path $repoRoot "docs\product-image-library"
+if (-not (Test-Path (Join-Path $libDir "select.html"))) {
+  throw "select.html not found under $libDir"
+}
+$argLine = '-m http.server ' + $Port + ' --directory "' + $libDir + '"'
+Start-Process -FilePath "python" -ArgumentList $argLine -WindowStyle Hidden
+Write-Host "Selection page: http://localhost:$Port/select.html"
