@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KeyStarter 产品图选型</title>
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --line: #e8e8ed;
+    --text: #1d1d1f;
+    --muted: #86868b;
+    --accent: #7c3aed;
+    --accent-dark: #5b21b6;
+    --ok: #16a34a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 20px 140px;
+  }
+  .header { max-width: 1280px; margin: 0 auto 18px; }
+  h1 { font-size: 24px; margin: 0 0 6px; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.6; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .chip {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section { max-width: 1280px; margin: 0 auto 28px; }
+  h2 { font-size: 17px; margin: 0 0 4px; }
+  .group-meta { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+  .group-meta b { color: var(--ok); font-weight: 600; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color .12s ease, box-shadow .12s ease;
+    position: relative;
+  }
+  .card:hover { border-color: #c4b5fd; box-shadow: 0 2px 10px rgba(124,58,237,.08); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,58,237,.18); }
+  .imgbox {
+    aspect-ratio: 4 / 3;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .imgbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .meta { padding: 9px 11px; border-top: 1px solid #f0f0f2; }
+  .file { font-family: Consolas, monospace; font-size: 11px; color: var(--accent); font-weight: 600; }
+  .title { font-size: 11px; color: var(--muted); line-height: 1.45; margin: 4px 0 6px; min-height: 32px; }
+  .source { font-size: 11px; color: var(--accent); text-decoration: none; }
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .card.selected .badge { display: flex; }
+  .bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(29,29,31,.96);
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 20;
+  }
+  .bar .count { font-size: 13px; }
+  .bar textarea {
+    width: min(560px, 90vw);
+    height: 34px;
+    resize: vertical;
+    min-height: 34px;
+    max-height: 120px;
+    border: 1px solid #4b5563;
+    border-radius: 6px;
+    background: #111827;
+    color: #d1d5db;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+  .bar button {
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  .bar button.secondary { background: #374151; }
+  .bar button:hover { filter: brightness(1.08); }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>KeyStarter 产品图片选型</h1>
+    <div class="sub">
+      点击卡片选中该产品的图片，每组建议选 1 张。选完后点击底部「复制选择结果」，把复制的内容粘贴回对话即可。
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div id="groups"></div>
+
+  <div class="bar">
+    <span class="count" id="count">已选 0 / 0</span>
+    <textarea id="output" readonly placeholder="选择结果会显示在这里"></textarea>
+    <button id="copyBtn">复制选择结果</button>
+    <button class="secondary" id="clearBtn">清空</button>
+  </div>
+
+<script>
+const LABELS = {
+  "win11-home": "Windows 11 Home",
+  "win11-pro": "Windows 11 Pro",
+  "win10-home": "Windows 10 Home",
+  "win10-pro": "Windows 10 Pro",
+  "office-2024": "Office 2024",
+  "office-2021": "Office 2021",
+  "office-2019": "Office 2019",
+  "office-2016": "Office 2016",
+  "office-365": "Microsoft 365",
+  "project-2021": "Project 2021",
+  "visio-2021": "Visio 2021",
+  "server-2019": "Windows Server 2019",
+  "server-2022": "Windows Server 2022",
+  "server-2025": "Windows Server 2025",
+  "sql-2019": "SQL Server 2019",
+  "sql-2022": "SQL Server 2022",
+  "exchange-2019": "Exchange Server 2019",
+  "iot-win11": "Windows 11 IoT",
+  "iot-win10": "Windows 10 IoT"
+};
+
+// group key -> current live file name
+const CURRENT = {
+  "office-2019": "box-office-2019.jpg",
+  "office-2021": "box-office-2021.png",
+  "server-2019": "box-server-2019.jpg",
+  "server-2022": "box-server-2022.jpg",
+  "server-2025": "box-server-2025.jpg",
+  "sql-2019": "box-sql.jpg",
+  "sql-2022": "box-sql.jpg"
+};
+
+const PRIORITY = [
+  "office-2024", "office-2021", "office-2019", "office-2016", "office-365",
+  "project-2021", "visio-2021", "server-2019", "server-2022", "server-2025",
+  "sql-2019", "sql-2022", "exchange-2019", "win11-home", "win11-pro",
+  "win10-home", "win10-pro", "iot-win11", "iot-win10"
+];
+
+const FILTERS = [
+  { key: "all", label: "全部" },
+  { key: "office", label: "Office" },
+  { key: "server", label: "Server" },
+  { key: "sql", label: "SQL / Exchange" },
+  { key: "win", label: "Windows" },
+  { key: "iot", label: "IoT" }
+];
+
+const GROUP_FILTER = {
+  office: ["office-2024", "office-2021", "office-2019", "office-2016", "office-365", "project-2021", "visio-2021"],
+  server: ["server-2019", "server-2022", "server-2025"],
+  sql: ["sql-2019", "sql-2022", "exchange-2019"],
+  win: ["win11-home", "win11-pro", "win10-home", "win10-pro"],
+  iot: ["iot-win11", "iot-win10"]
+};
+
+let data = null;
+let activeFilter = "all";
+const selection = {}; // group -> file
+
+async function init() {
+  const res = await fetch("sources.json", { cache: "no-store" });
+  data = await res.json();
+  renderChips();
+  render();
+}
+
+function renderChips() {
+  const wrap = document.getElementById("chips");
+  wrap.innerHTML = "";
+  FILTERS.forEach(f => {
+    const b = document.createElement("button");
+    b.className = "chip" + (f.key === activeFilter ? " active" : "");
+    b.textContent = f.label;
+    b.onclick = () => { activeFilter = f.key; renderChips(); render(); };
+    wrap.appendChild(b);
+  });
+}
+
+function groupKeys() {
+  if (activeFilter === "all") return PRIORITY.filter(k => data && data[k] && data[k].length);
+  return GROUP_FILTER[activeFilter].filter(k => data && data[k] && data[k].length);
+}
+
+function render() {
+  const root = document.getElementById("groups");
+  root.innerHTML = "";
+  groupKeys().forEach(key => {
+    const label = LABELS[key] || key;
+    const entries = data[key];
+    const section = document.createElement("section");
+    const h = document.createElement("h2");
+    h.textContent = label;
+    section.appendChild(h);
+    const meta = document.createElement("div");
+    meta.className = "group-meta";
+    meta.innerHTML = CURRENT[key]
+      ? '当前线上图: <b>' + CURRENT[key] + '</b> · 候选项 ' + entries.length + ' 张'
+      : '候选项 ' + entries.length + ' 张';
+    section.appendChild(meta);
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    entries.forEach((e, i) => {
+      const file = e.file;
+      const card = document.createElement("div");
+      card.className = "card" + (selection[key] === file ? " selected" : "");
+      card.dataset.group = key;
+      card.dataset.file = file;
+      card.innerHTML =
+        '<div class="imgbox"><img src="images/' + encodeURIComponent(file) + '" alt="' +
+        (e.title || file).replace(/"/g, "&quot;") + '" loading="lazy"></div>' +
+        '<div class="meta"><div class="file">' + file + '</div>' +
+        '<div class="title">' + (e.title || "").replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</div>' +
+        (e.src ? '<a class="source" href="' + e.src + '" target="_blank" rel="noopener">查看来源</a>' : '') +
+        '</div><div class="badge">✓</div>';
+      card.onclick = () => {
+        if (selection[key] === file) delete selection[key];
+        else selection[key] = file;
+        render();
+      };
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);
+    root.appendChild(section);
+  });
+  updateOutput();
+}
+
+function updateOutput() {
+  const keys = Object.keys(selection);
+  document.getElementById("count").textContent = "已选 " + keys.length + " / " + groupKeys().length;
+  const lines = keys.map(k => k + " -> " + selection[k]);
+  document.getElementById("output").value = lines.join("\n");
+}
+
+document.getElementById("copyBtn").onclick = async () => {
+  const ta = document.getElementById("output");
+  ta.select();
+  try { await navigator.clipboard.writeText(ta.value); }
+  catch (e) { document.execCommand("copy"); }
+  document.getElementById("copyBtn").textContent = "已复制 ✓";
+  setTimeout(() => { document.getElementById("copyBtn").textContent = "复制选择结果"; }, 1600);
+};
+
+document.getElementById("clearBtn").onclick = () => {
+  Object.keys(selection).forEach(k => delete selection[k]);
+  render();
+};
+
+init();
+</script>
+</body>
+</html>

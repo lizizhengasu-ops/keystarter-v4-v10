@@ -1,0 +1,43 @@
+{
+  "note": "Selected by user on 2026-08-02 via select.html. Groups without a current product page (office-2024, office-2016, office-365, project-2021, visio-2021, exchange-2019) are kept for future product additions.",
+  "selected": {
+    "office-2024": "office-2024-4.jpg",
+    "office-2021": "office-2021-1.jpg",
+    "office-2019": "office-2019-3.jpg",
+    "office-2016": "office-2016-2.jpg",
+    "office-365": "office-365-2.jpg",
+    "project-2021": "project-2021-4.png",
+    "visio-2021": "visio-2021-2.jpg",
+    "server-2019": "server-2019-4.jpg",
+    "server-2022": "server-2022-2.jpg",
+    "server-2025": "server-2025-4.jpg",
+    "sql-2019": "sql-2019-3.png",
+    "sql-2022": "sql-2022-1.jpg",
+    "exchange-2019": "exchange-2019-4.png",
+    "win11-home": "win11-home-3.jpg",
+    "win11-pro": "win11-pro-1.jpg",
+    "win10-home": "win10-home-1.jpg",
+    "win10-pro": "win10-pro-1.jpg",
+    "iot-win11": "iot-win11-4.jpg",
+    "iot-win10": "iot-win10-1.jpg"
+  },
+  "applied_to_products": {
+    "windows-11-home": "box-win11-home.jpg",
+    "windows-11-home-official": "box-win11-home.jpg",
+    "windows-11-pro": "box-win11-pro.jpg",
+    "windows-11-pro-official": "box-win11-pro.jpg",
+    "windows-10-home": "box-win10-home.jpg",
+    "windows-10-home-official": "box-win10-home.jpg",
+    "windows-10-pro": "box-win10-pro.jpg",
+    "windows-10-pro-official": "box-win10-pro.jpg",
+    "office-2019-pro-plus": "box-office-2019.jpg",
+    "office-2021-pro-plus": "box-office-2021.jpg",
+    "win-11-iot-*": "box-iot-win11.jpg",
+    "win-10-iot-*": "box-iot-win10.jpg",
+    "win-svr-iot-2019": "box-server-2019.jpg",
+    "win-svr-iot-2022": "box-server-2022.jpg",
+    "win-svr-iot-2025": "box-server-2025.jpg",
+    "sql-svr-2019-runtime": "box-sql-2019.png",
+    "sql-svr-2022-runtime": "box-sql-2022.jpg"
+  }
+}
