@@ -392,12 +392,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
      
 {/* Special Offer Section */}
      {specialOfferSkus.length > 0 && (
-      <section id="special-offer" className={`py-16 bg-gradient-to-b from-[#ff6b35]/5 to-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
+      <section id="special-offer" className={`py-16 bg-[#161617] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-8 text-center">
             <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
-            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f]">{t("home.offer.section_title")}</h2>
-            <p className="text-sm text-[#86868b] mt-1">{t("home.offer.section_desc")}</p>
+            <h2 className="text-2xl font-bold tracking-tight text-white">{t("home.offer.section_title")}</h2>
+            <p className="text-sm text-white/70 mt-1">{t("home.offer.section_desc")}</p>
             <div className="mt-6 inline-flex flex-col items-center gap-2.5 rounded-2xl bg-white border-2 border-[#ff6b35]/40 px-8 py-6 shadow-[0_12px_32px_rgba(255,107,53,0.18)]">
               <span className="text-xs font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
               <CountdownTimer large />
