@@ -59,7 +59,7 @@ export default function RefundPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">How to Request a Refund</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">To request a refund, contact us at admin@keystarter.com within 14 days of your purchase. Include your order number, the product name, and a clear description of the issue. For invalid or used keys, include a screenshot of the activation error where possible.</p>
+              <p className="mb-3 last:mb-0 pl-10">To request a refund, contact us at admin@keys-starter.com within 14 days of your purchase. Include your order number, the product name, and a clear description of the issue. For invalid or used keys, include a screenshot of the activation error where possible.</p>
             </section>
             <section id="s4" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
@@ -94,7 +94,7 @@ export default function RefundPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">8</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">For refund inquiries, contact us at admin@keystarter.com.</p>
+              <p className="mb-3 last:mb-0 pl-10">For refund inquiries, contact us at admin@keys-starter.com.</p>
             </section>
           </div>
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-[#7c3aed]/5 to-[#106EBE]/5 border border-[#e8e8ed] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -105,7 +105,7 @@ export default function RefundPage() {
               <div className="text-sm font-semibold text-[#1d1d1f]">Questions? Contact us</div>
               <div className="text-xs text-[#86868b] mt-0.5">Our team typically responds within 24 hours.</div>
             </div>
-            <a href="mailto:admin@keystarter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keystarter.com</a>
+            <a href="mailto:admin@keys-starter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keys-starter.com</a>
           </div>
         </div>
       </div>

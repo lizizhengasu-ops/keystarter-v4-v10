@@ -166,7 +166,7 @@ export default function TermsPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">17</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">If you have questions about these Terms, contact us at admin@keystarter.com.</p>
+              <p className="mb-3 last:mb-0 pl-10">If you have questions about these Terms, contact us at admin@keys-starter.com.</p>
             </section>
           </div>
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-[#7c3aed]/5 to-[#106EBE]/5 border border-[#e8e8ed] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -177,7 +177,7 @@ export default function TermsPage() {
               <div className="text-sm font-semibold text-[#1d1d1f]">Questions? Contact us</div>
               <div className="text-xs text-[#86868b] mt-0.5">Our team typically responds within 24 hours.</div>
             </div>
-            <a href="mailto:admin@keystarter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keystarter.com</a>
+            <a href="mailto:admin@keys-starter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keys-starter.com</a>
           </div>
         </div>
       </div>

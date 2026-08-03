@@ -113,7 +113,7 @@ export default function PrivacyPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">10</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Your Rights (GDPR/CCPA)</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Depending on your jurisdiction, you may have the right to access, correct, delete, or port your personal data, and to object to or restrict certain processing. You may also have the right to opt out of the sale or sharing of your personal information under the CCPA. To exercise these rights, contact us at admin@keystarter.com.</p>
+              <p className="mb-3 last:mb-0 pl-10">Depending on your jurisdiction, you may have the right to access, correct, delete, or port your personal data, and to object to or restrict certain processing. You may also have the right to opt out of the sale or sharing of your personal information under the CCPA. To exercise these rights, contact us at admin@keys-starter.com.</p>
             </section>
             <section id="s11" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
@@ -134,7 +134,7 @@ export default function PrivacyPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">13</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">For privacy-related inquiries, contact us at admin@keystarter.com.</p>
+              <p className="mb-3 last:mb-0 pl-10">For privacy-related inquiries, contact us at admin@keys-starter.com.</p>
             </section>
           </div>
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-[#7c3aed]/5 to-[#106EBE]/5 border border-[#e8e8ed] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
               <div className="text-sm font-semibold text-[#1d1d1f]">Questions? Contact us</div>
               <div className="text-xs text-[#86868b] mt-0.5">Our team typically responds within 24 hours.</div>
             </div>
-            <a href="mailto:admin@keystarter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keystarter.com</a>
+            <a href="mailto:admin@keys-starter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keys-starter.com</a>
           </div>
         </div>
       </div>

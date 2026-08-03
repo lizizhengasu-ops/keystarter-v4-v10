@@ -22,7 +22,7 @@ export default function CookiesPage() {
             <h2 className="text-lg font-bold text-[#1d1d1f] mt-8 mb-3">5. {t("cookies.s5t", "Managing Cookies")}</h2>
             <p className="mb-4">{t("cookies.s5b", "Manage via our cookie consent banner or browser settings.")}</p>
             <h2 className="text-lg font-bold text-[#1d1d1f] mt-8 mb-3">6. {t("cookies.s6t", "Contact")}</h2>
-            <p className="mb-4">{t("cookies.s6b", "For cookie-related questions: admin@keystarter.com")}</p>
+            <p className="mb-4">{t("cookies.s6b", "For cookie-related questions: admin@keys-starter.com")}</p>
             <p className="text-[11px] text-[#86868b] mt-8 border-t border-[#f5f5f7] pt-6">{t("cookies.disclaimer", "Template. Consult a legal professional.")}</p>
           </div>
         </div>
