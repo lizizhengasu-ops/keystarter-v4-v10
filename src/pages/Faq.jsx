@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 const faqs = [
   {q:"How do I activate my license?", a:"Your license key will be emailed immediately after purchase. Follow the activation guide included in the email."},
   {q:"Is this a genuine Microsoft product?", a:"Yes. KeyStarter is a Microsoft-authorized supply chain partner. All licenses are genuine and verified."},
-  {q:"How long does delivery take?", a:"Delivery is instant. License keys are sent via email within 1-2 minutes of payment confirmation."},
-  {q:"Can I get a refund?", a:"Yes. We offer a 30-day money-back guarantee on all products. Contact support for assistance."},
+  {q:"How long does delivery take?", a:"Delivery is instant. License keys are sent via email within minutes of payment confirmation, and in most cases within 10 minutes."},
+  {q:"Can I get a refund?", a:"We offer refunds within 14 days of purchase if your key was not delivered or is invalid and cannot be replaced. Contact support for assistance."},
   {q:"Do you offer volume pricing?", a:"Yes. Contact our B2B team for volume discounts on bulk orders."},
   {q:"Which countries do you support?", a:"We support customers worldwide with multi-language site and multiple payment methods."},
   {q:"What payment methods do you accept?", a:"We accept PayPal, Stripe, and bank wire transfers."},

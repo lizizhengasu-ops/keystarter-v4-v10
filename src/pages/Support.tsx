@@ -8,7 +8,7 @@ const topics = [
   {n:"Licensing", d:"Understanding digital licenses, retail vs OEM, and transfer policies."},
   {n:"Account", d:"Managing your orders, keys, and account settings."},
   {n:"Payments", d:"Payment methods, invoices, and billing questions."},
-  {n:"Refunds", d:"Our 30-day money-back guarantee and refund process."},
+  {n:"Refunds", d:"Our 14-day refund policy and refund process."},
 ];
 
 export default function SupportPage() {
