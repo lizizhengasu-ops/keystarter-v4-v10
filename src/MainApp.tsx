@@ -13,6 +13,7 @@ import BlogPage from "./pages/Blog";
 import BlogArticlePage from "./pages/BlogArticle";
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
+import WhatsAppButton from "./components/WhatsAppButton";
 import NotFound from "./pages/NotFound";
 import FaqPage from "./pages/Faq";
 import ContactPage from "./pages/Contact";
@@ -235,6 +236,7 @@ function Layout({ children }) {
       <div className="back-top" id="back-top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} role="button" aria-label="Back to top" tabIndex={0} onKeyDown={(e)=>e.key==="Enter"&&window.scrollTo({top:0,behavior:"smooth"})}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
       </div>
+      <WhatsAppButton />
     </div>
   );
 }
