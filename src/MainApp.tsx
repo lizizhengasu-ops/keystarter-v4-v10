@@ -1,4 +1,4 @@
-// v6.1.23f
+﻿// v6.1.23f
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
@@ -25,6 +25,8 @@ import CookieConsent from "./components/CookieConsent";
 import PrivacyPage from "./pages/Privacy";
 import TermsPage from "./pages/Terms";
 import RefundPage from "./pages/Refund";
+import DisclaimerPage from "./pages/Disclaimer";
+import LicensingPage from "./pages/Licensing";
 import CookiesPage from "./pages/Cookies";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
@@ -262,6 +264,8 @@ export default function App() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/refund" element={<RefundPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
+            <Route path="/disclaimer" element={<DisclaimerPage />} />
+            <Route path="/licensing" element={<LicensingPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
       <CookieConsent />
