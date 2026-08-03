@@ -40,8 +40,8 @@ export default function CountdownTimer({ className = "", large = false }: { clas
     <div className={"flex items-center " + (large ? "gap-2 " : "gap-1 ") + className}>
       {cells.map((c) => (
         <div key={c.label} className={(large ? "min-w-[58px] rounded-xl px-2.5 py-2 " : "min-w-[44px] rounded-lg px-1.5 py-1 ") + "border border-[#ff6b35]/25 bg-orange-50 text-center"}>
-          <div className={(large ? "text-2xl " : "text-[13px] ") + "font-bold leading-tight text-[#ff6b35] tabular-nums"}>{c.value}</div>
-          <div className={(large ? "text-[10px] " : "text-[8px] ") + "uppercase tracking-wide text-[#a05c34]"}>{c.label}</div>
+          <div className={(large ? "text-2xl " : "text-[13px] ") + "font-bold leading-tight text-[#c2410c] tabular-nums"}>{c.value}</div>
+          <div className={(large ? "text-[10px] " : "text-[8px] ") + "uppercase tracking-wide text-[#9a3412]"}>{c.label}</div>
         </div>
       ))}
     </div>
