@@ -558,6 +558,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="absolute inset-0 overflow-hidden">
           <video className="absolute inset-0 w-full h-full object-cover opacity-40" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
             <source src="/videos/enterprise-bg.mp4" type="video/mp4" />
+            <source src="/videos/enterprise-bg.webm" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-[#161617]/70" />
         </div>
