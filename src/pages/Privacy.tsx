@@ -17,7 +17,6 @@ export default function PrivacyPage() {
     { id: "s10", title: "Your Rights (GDPR/CCPA)" },
     { id: "s11", title: "Children Privacy" },
     { id: "s12", title: "Changes to This Policy" },
-    { id: "s13", title: "Contact" },
   ];
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased min-h-screen">
@@ -128,13 +127,6 @@ export default function PrivacyPage() {
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Changes to This Policy</h2>
               </div>
               <p className="mb-3 last:mb-0 pl-10">We may update this Privacy Policy from time to time. We will post any changes on this page and update the Last updated date accordingly.</p>
-            </section>
-            <section id="s13" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
-              <div className="flex items-start gap-3 mb-3">
-                <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">13</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
-              </div>
-              <p className="mb-3 last:mb-0 pl-10">For privacy-related inquiries, contact us at admin@keys-starter.com.</p>
             </section>
           </div>
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-[#7c3aed]/5 to-[#106EBE]/5 border border-[#e8e8ed] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
