@@ -934,7 +934,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <h3 className="text-lg font-bold text-[#1d1d1f]">🔒 Secure Checkout & Activation Delivery</h3>
                   <button onClick={closeCheckoutDrawer} className="text-gray-400 hover:text-gray-500 text-lg">×</button>
                 </div>
-                <p className="text-xs text-[#86868b] mt-1">After completing payment, your genuine license will be delivered to the fulfillment center within 5 minutes.</p>
+                <p className="text-xs text-[#86868b] mt-1">After completing payment, your genuine license will be delivered to the fulfillment center within 10 minutes.</p>
               </div>
 
               {/* Form Content */}
@@ -988,7 +988,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <span className="text-green-500">✓</span> Supports official MSA account binding
                   </div>
                   <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 7-Day Money-Back Guarantee (No activation failure risk)
+                    <span className="text-green-500">✓</span> 14-Day Refund Guarantee (No activation failure risk)
                   </div>
                   <div className="flex items-center text-[10px] text-[#86868b] gap-2">
                     <span className="text-green-500">✓</span> 256-bit SSL certificate chain encryption

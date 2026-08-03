@@ -200,7 +200,7 @@
   "drawer.paypal": "페이팔",
   "drawer.stripe": "줄무늬",
   "drawer.guarantee_1": "공식 MSA 계정 바인딩 지원",
-  "drawer.guarantee_2": "7일 환불 보장 (활성화 실패 위험 없음)",
+  "drawer.guarantee_2": "14일 환불 보장 (활성화 실패 위험 없음)",
   "drawer.guarantee_3": "모의 결제 완료",
   "drawer.complete_payment": "클릭하면 라이선스 키가 즉시 자동 발송됩니다!",
   "drawer.payment_hint": "example@gmail.com",
