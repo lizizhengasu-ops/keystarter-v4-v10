@@ -248,7 +248,7 @@ export default function App() {
           <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/store" element={<StorePage />} />
+            <Route path="/store" element={<Navigate to="/products" replace />} />
             <Route path="/shop" element={<Navigate to="/products" replace />} />
             <Route path="/products" element={<StorePage />} />
             <Route path="/product/:slug" element={<ProductPage />} />
