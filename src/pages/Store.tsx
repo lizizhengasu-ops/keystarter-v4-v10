@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/woocommerce";
 import type { SPAProduct } from "../api/woocommerce";
 import { useCart } from "../data/CartContext";
+import ProductImage from "../components/ProductImage";
 
 // categories removed - using filter tabs from homepage style
 
@@ -100,15 +101,9 @@ export default function StorePage() {
               <div key={i} className="bg-white rounded-2xl border border-[#e8e8ed] p-5 flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => window.location.href='/product/'+x.slug}>
                 <div>
-                  <div className="flex items-center space-x-3.5 mb-4">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#f3f4f6] text-sm font-bold text-[#7c3aed]">
-                      {x.name[0]}
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-[#1d1d1f]">{x.name}</h3>
-                      <p className="text-[10px] text-[#86868b]">{x.category || 'Microsoft License'}</p>
-                    </div>
-                  </div>
+                  <ProductImage slug={x.slug} name={x.name} />
+                  <h3 className="text-sm font-bold text-[#1d1d1f] mb-1">{x.name}</h3>
+                  <p className="text-[10px] text-[#86868b] mb-4">{x.category || 'Microsoft License'}</p>
                   <ul className="space-y-1.5 mb-4 text-[10px] text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-3">
                     {(x.specs ? Object.entries(x.specs).slice(0, 4) : []).map(([k,v],fi) => (
                       <li key={fi} className="flex items-start space-x-1.5"><span className="text-green-500 font-bold">✓</span><span>{v}</span></li>

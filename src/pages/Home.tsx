@@ -6,6 +6,7 @@ import { TESTIMONIALS } from '../data/testimonials';
 import { WC_IDS } from "../data/woo-ids";
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
+import ProductImage from "../components/ProductImage";
 
 
 const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
@@ -407,13 +408,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-orange-50 text-orange-600 rounded border border-orange-200">{sku.tag}</span>
                     <span className="text-xs text-[#86868b]">{sku.type}</span>
                   </div>
-                  <div className="flex items-center space-x-3.5 mb-4">
-                    <div className="flex items-center justify-center w-12 h-12 bg-orange-50 rounded-xl border border-orange-100">{sku.icon}</div>
-                    <div>
-                      <h3 className="text-lg font-bold text-[#1d1d1f]">{sku.title}</h3>
-                      <p className="text-xs text-[#86868b]">{sku.subtitle}</p>
-                    </div>
-                  </div>
+                  <ProductImage slug={sku.id} name={sku.title} />
+                  <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
+                  <p className="text-xs text-[#86868b] mb-4">{sku.subtitle}</p>
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
                     {sku.features.map((feat, idx) => (
                       <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{String.fromCharCode(0x2713)}</span><span>{feat}</span></li>
@@ -501,15 +498,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <span className="text-xs text-[#86868b]">{t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type)}</span>
                   </div>
                   
-                  <div className="flex items-center space-x-3.5 mb-4">
-                    <div className={`flex items-center justify-center w-12 h-12 rounded-xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 border-orange-100":"bg-gray-50 border-gray-100"}`}>
-                      {sku.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-[#1d1d1f]">{sku.title}</h3>
-                      <p className="text-xs text-[#86868b]">{t('home.sku.'+sku.id.replace(/-/g,'')+'.subtitle', sku.subtitle)}</p>
-                    </div>
-                  </div>
+                  <ProductImage slug={sku.id} name={sku.title} />
+                  <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
+                  <p className="text-xs text-[#86868b] mb-4">{t('home.sku.'+sku.id.replace(/-/g,'')+'.subtitle', sku.subtitle)}</p>
 
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
                     {sku.features.map((feat, idx) => (

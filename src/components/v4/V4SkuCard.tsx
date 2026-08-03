@@ -1,20 +1,15 @@
+import ProductImage from "../ProductImage";
+
 function getBadge(slug, name) {
   if (slug.indexOf('bundle') >= 0) return { text: 'Best Value', cls: 'bg-green-50 text-green-600 border-green-200', icon: 'fa-bolt' };
   if (slug.indexOf('2024') >= 0 || slug.indexOf('11-pro') >= 0) return { text: 'Newest', cls: 'bg-blue-50 text-blue-600 border-blue-200', icon: 'fa-star' };
   return { text: 'Instant Delivery', cls: 'bg-green-50 text-green-600 border-green-200', icon: 'fa-bolt' };
 }
 
-function getIcon(slug) {
-  if (slug.indexOf('office') >= 0) return { icon: 'fa-microsoft', bg: 'bg-orange-50 border-orange-100', color: '#d83b01' };
-  if (slug.indexOf('server') >= 0 || slug.indexOf('exchange') >= 0 || slug.indexOf('sql') >= 0) return { icon: 'fa-database', bg: 'bg-purple-50 border-purple-100', color: '#5c2e91' };
-  return { icon: 'fa-windows', bg: 'bg-blue-50 border-blue-100', color: '#7c3aed' };
-}
-
 export default function V4SkuCard(props) {
   var p = props.product;
   var onAdd = props.onAddToCart;
   var badge = getBadge(p.slug, p.n);
-  var icon = getIcon(p.slug);
   var specs = p.specs || {};
   var tags = [specs.platform, specs.lang, specs.activation, specs.support].filter(Boolean).slice(0, 4);
   var typeName = specs.type === 'OEM' ? 'OEM' : specs.type === 'Bundle' ? 'Bundle' : 'Retail';
@@ -29,15 +24,9 @@ export default function V4SkuCard(props) {
           </span>
           <span className='text-xs text-[#86868b]'>{typeName}</span>
         </div>
-        <div className='flex items-center space-x-3.5 mb-4'>
-          <div className={'w-12 h-12 rounded-xl flex items-center justify-center border ' + icon.bg}>
-            <i className={'fa-brands ' + icon.icon + ' text-2xl'} style={{color: icon.color}}></i>
-          </div>
-          <div>
-            <h3 className='text-lg font-bold text-[#1d1d1f]'>{p.n}</h3>
-            <p className='text-xs text-[#86868b]'>{specs.version || ''}</p>
-          </div>
-        </div>
+        <ProductImage slug={p.slug} name={p.n} />
+        <h3 className='text-lg font-bold text-[#1d1d1f] mb-1'>{p.n}</h3>
+        <p className='text-xs text-[#86868b] mb-4'>{specs.version || ''}</p>
         <p className='text-xs text-[#86868b] leading-relaxed mb-4'>{p.d}</p>
         <div className='flex flex-wrap gap-2 mb-4'>
           {tags.map(function(t, i) {
