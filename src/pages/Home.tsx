@@ -398,9 +398,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f]">{t("home.offer.section_title")}</h2>
             <p className="text-sm text-[#86868b] mt-1">{t("home.offer.section_desc")}</p>
-            <div className="mt-5 inline-flex flex-col items-center gap-2 rounded-2xl bg-white border-2 border-[#ff6b35]/30 px-6 py-4 shadow-[0_8px_24px_rgba(255,107,53,0.12)]">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
-              <CountdownTimer />
+            <div className="mt-6 inline-flex flex-col items-center gap-2.5 rounded-2xl bg-white border-2 border-[#ff6b35]/40 px-8 py-6 shadow-[0_12px_32px_rgba(255,107,53,0.18)]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
+              <CountdownTimer large />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -431,6 +431,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                      <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
                    </div>
                  </div>
+                  <CountdownTimer className="mb-4" />
                   <div className="flex gap-2">
                     <button onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }}
                       className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
@@ -528,6 +529,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                       <span className="text-[11px] text-[#7c3aed] font-medium">✓ {t('home.sku.'+sku.id.replace(/-/g,'')+'.audit', sku.auditInfo)}</span>
                     )}
                   </div>
+                  {SPECIAL_OFFER_IDS.includes(sku.id) && <CountdownTimer className="mb-4" />}
                   
                   <div className="flex gap-2">
                     <button 

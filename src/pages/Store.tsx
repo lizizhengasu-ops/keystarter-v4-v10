@@ -66,8 +66,8 @@ export default function StorePage() {
       </div>
       <div className="flex justify-center px-6 pt-6">
         <div className="flex flex-col items-center gap-2 rounded-2xl bg-orange-50 border-2 border-[#ff6b35]/30 px-6 py-4 shadow-[0_8px_24px_rgba(255,107,53,0.12)]">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
-          <CountdownTimer />
+          <span className="text-xs font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
+          <CountdownTimer large />
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
