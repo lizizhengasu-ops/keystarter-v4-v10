@@ -555,6 +555,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {}
       {/* B2B Section */}
       <section id="business" className={`relative py-24 bg-[#161617] text-white overflow-hidden ${heroPersona!=="enterprise"?"persona-hidden":""}`}>
+        <div className="absolute inset-0 overflow-hidden">
+          <video className="absolute inset-0 w-full h-full object-cover opacity-40" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
+            <source src="/videos/enterprise-bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-[#161617]/70" />
+        </div>
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
