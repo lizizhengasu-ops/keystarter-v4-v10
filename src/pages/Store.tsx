@@ -64,6 +64,12 @@ export default function StorePage() {
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("store.title")}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto">Browse by category. Each card includes a genuine delivery guarantee for worry-free compliance.</p>
       </div>
+      <div className="flex justify-center px-6 pt-6">
+        <div className="flex flex-col items-center gap-2 rounded-2xl bg-orange-50 border-2 border-[#ff6b35]/30 px-6 py-4 shadow-[0_8px_24px_rgba(255,107,53,0.12)]">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
+          <CountdownTimer />
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Filter Tabs - matching homepage style */}
           <div className="flex justify-center mb-10 py-2 overflow-x-auto">

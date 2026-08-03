@@ -7,6 +7,7 @@ import { WC_IDS } from "../data/woo-ids";
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
+import CountdownTimer from "../components/CountdownTimer";
 
 
 const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
@@ -397,6 +398,10 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f]">{t("home.offer.section_title")}</h2>
             <p className="text-sm text-[#86868b] mt-1">{t("home.offer.section_desc")}</p>
+            <div className="mt-5 inline-flex flex-col items-center gap-2 rounded-2xl bg-white border-2 border-[#ff6b35]/30 px-6 py-4 shadow-[0_8px_24px_rgba(255,107,53,0.12)]">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#ff6b35]">Limited Time Offer ends in</span>
+              <CountdownTimer />
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialOfferSkus.map((sku) => (
