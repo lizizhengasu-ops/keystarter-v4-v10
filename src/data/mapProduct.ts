@@ -4,11 +4,12 @@
  
  import { products as localProducts } from "./products";
  
- export interface SPAProduct {
-   slug: string;
-   name: string;
-   price: number;
-   description: string;
+export interface SPAProduct {
+  slug: string;
+  name: string;
+  price: number;
+  regularPrice?: number;
+  description: string;
    specs: Record<string, string>;
    color: string;
    category?: string;
@@ -35,6 +36,7 @@
    slug: apiItem.slug,
    name: apiItem.name || apiItem.title || local?.n || apiItem.slug,
     price: apiItem.prices?.price ? parseFloat(apiItem.prices.price) / 100 : (local?.p || 0),
+   regularPrice: apiItem.prices?.regular_price ? parseFloat(apiItem.prices.regular_price) / 100 : 0,
    description: apiItem.description || apiItem.short_description || local?.d || "",
    specs: local?.specs || DEFAULT_SPECS,
    color: local?.c || "#7c3aed",
@@ -53,6 +55,7 @@
    slug: apiItem.slug,
    name: apiItem.name || local?.n || apiItem.slug,
     price: apiItem.price ? parseFloat(apiItem.price) / 100 : (local?.p || 0),
+   regularPrice: apiItem.regular_price ? parseFloat(apiItem.regular_price) / 100 : 0,
    description: apiItem.short_description || apiItem.description || local?.d || "",
      specs: local?.specs || DEFAULT_SPECS,
      color: local?.c || "#7c3aed",
@@ -62,9 +65,9 @@
  }
  
  // Batch: fetch products with language support
- export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProduct[]> {
-   const langSuffix = lang !== "en" ? `?lang=${lang}` : "";
-   const apiBase = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
+export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProduct[]> {
+  const langSuffix = lang !== "en" ? `?lang=${lang}&per_page=100` : "?per_page=100";
+  const apiBase = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
    
    try {
      const res = await fetch(`${apiBase}${langSuffix}`, {
@@ -82,6 +85,7 @@
        slug: p.slug,
        name: p.n,
        price: p.p,
+       regularPrice: 0,
        description: p.d,
        specs: p.specs || DEFAULT_SPECS,
        color: p.c || "#7c3aed",
