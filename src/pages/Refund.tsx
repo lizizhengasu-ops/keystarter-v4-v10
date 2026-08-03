@@ -45,7 +45,7 @@ export default function RefundPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Digital Product Policy</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Most products sold by KeyStarter are digital license keys delivered by email. By purchasing a digital license key, you consent to immediate delivery of the key and acknowledge that, once the key is delivered and activation has started, the statutory right of withdrawal for digital content is lost. Once a license key has been delivered and successfully verified, the purchase is generally considered final.</p>
+              <p className="mb-3 last:mb-0 pl-10">Most products sold by KeyStarter are digital license keys or subscription redemptions delivered by email. By purchasing a digital product, you consent to immediate delivery and acknowledge that, once the key or redemption is delivered and activation has started, the statutory right of withdrawal for digital content is lost. Once a digital product has been delivered and successfully verified, the purchase is generally considered final.</p>
             </section>
             <section id="s2" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">

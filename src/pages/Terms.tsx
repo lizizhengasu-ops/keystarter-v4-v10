@@ -68,7 +68,7 @@ export default function TermsPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Products and Licenses</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">All products offered are digital license keys or physical license stickers. Licenses may be OEM, Retail, Volume Licensing, or IoT Enterprise editions. The rights granted to you are defined by the applicable Microsoft End User License Agreement (EULA) and the product edition you purchase. It is your responsibility to verify that your system meets the product requirements before purchase.</p>
+              <p className="mb-3 last:mb-0 pl-10">All products offered are digital license keys, subscription redemptions, or physical license stickers. Licenses may be OEM, Retail, Volume Licensing, or IoT Enterprise editions. The rights granted to you are defined by the applicable Microsoft End User License Agreement (EULA) and the product edition you purchase. It is your responsibility to verify that your system meets the product requirements before purchase.</p>
             </section>
             <section id="s4" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
