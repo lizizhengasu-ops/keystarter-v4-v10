@@ -60,7 +60,7 @@ export default function LicensingPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Retail Licenses</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Retail licenses, including Full Packaged Product (FPP), can be transferred to another device, subject to Microsoft terms. Retail keys may be reinstalled on the same device as many times as needed.</p>
+              <p className="mb-3 last:mb-0 pl-10">Retail licenses, including Full Packaged Product (FPP), can be transferred to another device, subject to Microsoft terms. Retail keys may be reinstalled on the same device as many times as needed. Some retail keys are bound to a Microsoft account and must be activated while signed in to that account. Subscription products such as Microsoft 365 are redeemed through the Microsoft account used during redemption.</p>
             </section>
             <section id="s4" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">

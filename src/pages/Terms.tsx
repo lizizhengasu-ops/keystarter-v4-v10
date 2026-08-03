@@ -75,14 +75,14 @@ export default function TermsPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Orders and Payment</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">When you place an order, you agree to pay the price displayed at checkout, including any applicable taxes. We accept payment through Stripe, PayPal, and other payment methods made available from time to time. By completing a purchase you represent that the payment information you provide is accurate and that you are authorized to use it.</p>
+              <p className="mb-3 last:mb-0 pl-10">When you place an order, you agree to pay the price displayed at checkout, including any applicable taxes. We accept payment through Stripe, PayPal, and bank wire transfers for enterprise orders. By completing a purchase you represent that the payment information you provide is accurate and that you are authorized to use it.</p>
             </section>
             <section id="s5" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Delivery of Digital Products</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Digital license keys are delivered electronically to the email address associated with your order, typically within 2 to 5 minutes after payment is confirmed. In some cases delivery may be delayed for payment verification, fraud screening, or regional availability checks. If you do not receive your key, contact our support team.</p>
+              <p className="mb-3 last:mb-0 pl-10">Digital license keys are delivered electronically to the email address associated with your order, usually within a few minutes after payment is confirmed and in most cases within 10 minutes. Keys are also available in your customer account. In some cases delivery may be delayed for payment verification, fraud screening, or regional availability checks. If you do not receive your key, contact our support team.</p>
             </section>
             <section id="s6" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">

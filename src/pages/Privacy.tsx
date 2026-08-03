@@ -127,7 +127,7 @@ export default function PrivacyPage() {
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">12</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Changes to This Policy</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">We may update this Privacy Policy from time to time. The latest version will always be posted on this page with an updated Last updated date.</p>
+              <p className="mb-3 last:mb-0 pl-10">We may update this Privacy Policy from time to time. We will post any changes on this page and update the Last updated date accordingly.</p>
             </section>
             <section id="s13" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
