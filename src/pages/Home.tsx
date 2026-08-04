@@ -9,6 +9,7 @@ import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
+import { stripTags } from "../utils/html";
 
 
 const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
@@ -743,8 +744,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             ) : blogPosts.slice(0, 3).map(post => (
               <a key={post.id} href={post.link} className="block bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group">
                 <div className="p-5">
-                  <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#7c3aed] transition-colors mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-                  <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                  <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#7c3aed] transition-colors mb-2 line-clamp-2">{stripTags(post.title.rendered)}</h3>
+                  <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3">{stripTags(post.excerpt.rendered)}</div>
                   <span className="text-xs text-[#7c3aed] font-medium">{t("home.blog.read_more")}</span>
                 </div>
               </a>

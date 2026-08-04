@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { stripTags } from "../utils/html";
 
 type Post = { id: number; title: { rendered: string }; excerpt: { rendered: string }; slug: string; date: string };
 
@@ -25,8 +26,8 @@ export default function BlogPage() {
             {posts.map(p => (
               <div key={p.id} className="bg-white rounded-2xl p-6 border border-[#e8e8ed]">
                 <div className="text-[10px] text-[#86868b] mb-2">{new Date(p.date).toLocaleDateString()}</div>
-                <h2 className="text-lg font-bold mb-2" dangerouslySetInnerHTML={{__html: p.title.rendered}} />
-                <div className="text-sm text-[#86868b] mb-4" dangerouslySetInnerHTML={{__html: p.excerpt.rendered.substring(0,200)}} />
+                <h2 className="text-lg font-bold mb-2">{stripTags(p.title.rendered)}</h2>
+                <div className="text-sm text-[#86868b] mb-4">{stripTags(p.excerpt.rendered).substring(0,200)}</div>
                 <Link to={"/blog/"+p.slug} className="text-sm text-[#7c3aed] font-semibold hover:underline">{t("blog.read_more")} &rarr;</Link>
               </div>
             ))}
