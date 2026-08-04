@@ -19,20 +19,20 @@ export default function B2bPage() {
     }
   }, []);
   const { t } = useTranslation();
-  const [form, setForm] = useState({company:"", units:"5-20 Units", product:"Windows 11 Series", contact:"", phone:""});
+  const [form, setForm] = useState({company:"", units:"5-20 Units", product:"Windows 11 Series", contact:"", phone:"", honeypot_website:""});
   const [formStatus, setFormStatus] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [errorMsg, setErrorMsg] = useState("");
   
   const validate = () => {
-    const e = {};
+    const e: Record<string, string> = {};
     if (!form.company.trim()) e.company = "Company name is required";
     if (!form.contact.trim()) e.contact = "Contact name is required";
     if (!form.phone.trim()) e.phone = "Phone or email is required";
     return e;
   };
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);

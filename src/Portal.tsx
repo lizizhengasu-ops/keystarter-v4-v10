@@ -11,6 +11,6 @@ import { createPortal } from "react-dom";
  *     <div className="fixed inset-0 z-50">...</div>
  *   </Portal>
  */
-export default function Portal({ children }) {
+export default function Portal({ children }: { children: any }) {
   return createPortal(children, document.body);
 }

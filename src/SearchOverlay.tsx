@@ -8,19 +8,19 @@ import { useTranslation } from "react-i18next";
 export default function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useTranslation();
   const [q, setQ] = useState("");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const results = q.length >= 1 ? products.filter(p => p.n.toLowerCase().includes(q.toLowerCase()) || p.d.toLowerCase().includes(q.toLowerCase())) : [];
 
   useEffect(() => {
     if (open && inputRef.current) {
-      setTimeout(() => inputRef.current.focus(), 100);
+      setTimeout(() => { if (inputRef.current) inputRef.current.focus(); }, 100);
     }
     if (!open) setQ("");
   }, [open]);
 
   const [selIdx, setSelIdx] = useState(-1);
   useEffect(() => {
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") { onClose(); return; }
       if (e.key === "ArrowDown") { e.preventDefault(); setSelIdx(i => Math.min(i + 1, results.length - 1)); }
       if (e.key === "ArrowUp") { e.preventDefault(); setSelIdx(i => Math.max(i - 1, 0)); }
@@ -93,7 +93,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
                     }}
                     onMouseEnter={e => e.currentTarget.style.background = "#f5f5f7"}
                     onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-                    <div style={{width:36,height:54,flexShrink:0}}><img color={p.color} /></div>
+                    <div style={{width:36,height:54,flexShrink:0}}><img alt="" /></div>
                     <div style={{flex:1}}>
                       <p style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{p.n}</p>
                       <p style={{fontSize:12,color:"#6e6e73"}}>{p.d}</p>

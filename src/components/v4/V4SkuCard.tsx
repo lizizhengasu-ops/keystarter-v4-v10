@@ -1,12 +1,12 @@
 import ProductImage from "../ProductImage";
 
-function getBadge(slug, name) {
+function getBadge(slug: string, name: string) {
   if (slug.indexOf('bundle') >= 0) return { text: 'Best Value', cls: 'bg-green-50 text-green-600 border-green-200', icon: 'fa-bolt' };
   if (slug.indexOf('2024') >= 0 || slug.indexOf('11-pro') >= 0) return { text: 'Newest', cls: 'bg-blue-50 text-blue-600 border-blue-200', icon: 'fa-star' };
   return { text: 'Instant Delivery', cls: 'bg-green-50 text-green-600 border-green-200', icon: 'fa-bolt' };
 }
 
-export default function V4SkuCard(props) {
+export default function V4SkuCard(props: any) {
   var p = props.product;
   var onAdd = props.onAddToCart;
   var badge = getBadge(p.slug, p.n);

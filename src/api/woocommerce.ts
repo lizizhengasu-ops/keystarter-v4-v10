@@ -1,5 +1,6 @@
  // KeyStarter API service - fetches product data with multi-language support
  import { fetchProducts as fetchProductsMapped, fetchProduct } from "../data/mapProduct";
+ import type { SPAProduct } from "../data/mapProduct";
  
  export { fetchProduct };
  export type { SPAProduct };

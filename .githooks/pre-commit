@@ -5,7 +5,7 @@ import path from"path";
 var __dirname=path.dirname(fileURLToPath(import.meta.url));
 var cwd=path.resolve(__dirname,"..");
 try{
-  var out=execSync("node scripts/validate.mjs",{cwd:cwd,stdio:"pipe"});
+  var out=execSync("npm run precommit",{cwd:cwd,stdio:"pipe"});
   console.log(out.toString());
   console.log("[pre-commit] PASSED");
   process.exit(0);

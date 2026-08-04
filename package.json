@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/validate.mjs && vite",
-    "build": "node scripts/validate.mjs && vite build",
-    "lint": "oxlint",
+    "build": "node scripts/validate.mjs && npm run typecheck && vite build",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "lint": "oxlint --ignore-pattern **/keystarter-v4/** --ignore-pattern **/tmp/** --ignore-pattern **/temp/**",
+    "precommit": "node scripts/validate.mjs && npm run typecheck && npm run lint",
     "preview": "vite preview",
     "build:seo": "vite build && python ../../_archive/seo_inject.py",
     "lint:portal": "node scripts/check-fixed-elements.mjs",

@@ -28,9 +28,9 @@ export default function AccountPage() {
 
   const [mode, setMode] = useState("login");
 
-  const [loggedIn, setLoggedIn] = useState(null); // null=checking, true, false
+  const [loggedIn, setLoggedIn] = useState<boolean | null>(null); // null=checking, true, false
 
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<any[]>([]);
 
   const [loadingOrders, setLoadingOrders] = useState(true);
 
@@ -48,7 +48,7 @@ export default function AccountPage() {
 
 
 
-const handleRegister = async (e) => {
+const handleRegister = async (e: any) => {
     if (e) e.preventDefault();
     setRegisterMsg("");
     setRegisterSending(true);
@@ -168,7 +168,7 @@ const handleRegister = async (e) => {
 
                     <tbody>
 
-                      {o.items.map((item, idx) => (
+                      {o.items.map((item: any, idx: number) => (
 
                         <tr key={idx} className="border-b border-[#f5f5f7]">
 

@@ -13,14 +13,14 @@ const topics = [
 
 export default function SupportPage() {
   const { t } = useTranslation();
-  const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:""});
+  const [form, setForm] = useState({name:"", email:"", phone:"", subject:"", message:"", honeypot_website:""});
   const [formStatus, setFormStatus] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [errorMsg, setErrorMsg] = useState("");
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   const validate = () => {
-    const e = {};
+    const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Name is required";
     if (!form.email.trim()) e.email = "Email is required";
     else if (!emailRe.test(form.email)) e.email = "Invalid email format";
@@ -29,7 +29,7 @@ export default function SupportPage() {
     return e;
   };
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const v = validate();
     setErrors(v);

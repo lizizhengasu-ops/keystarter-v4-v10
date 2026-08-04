@@ -70,9 +70,9 @@ export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProd
   const apiBase = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
    
    try {
-     const res = await fetch(`${apiBase}${langSuffix}`, {
-       signal: AbortSignal.timeout?.() ? AbortSignal.timeout(8000) : undefined
-     });
+    const res = await fetch(`${apiBase}${langSuffix}`, {
+      signal: AbortSignal.timeout(8000)
+    });
      if (!res.ok) throw new Error(`HTTP ${res.status}`);
      const data = await res.json();
      

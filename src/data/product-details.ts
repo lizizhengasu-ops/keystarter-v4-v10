@@ -4,6 +4,7 @@ export interface ProductDetail {
   desc: string;
   features: string[];
   requirements: { l: string; v: string }[];
+  tags?: string[];
 }
 
 export const PRODUCT_DETAILS: Record<string, ProductDetail> = {};
