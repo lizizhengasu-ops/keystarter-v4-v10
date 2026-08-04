@@ -42,6 +42,9 @@ export default function SupportPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
+          from_email: form.email,
+          from_name: form.name,
+          reply_to: form.email,
           subject: "Support: " + form.subject,
           message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Phone:</b> " + form.phone + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
         })
@@ -52,6 +55,9 @@ export default function SupportPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: form.email,
+          from_email: form.email,
+          from_name: form.name,
+          reply_to: form.email,
           subject: "Thank you for contacting KeyStarter Support",
           message: "<p>Hi " + form.name + ",</p><p>Thank you for reaching out. Our support team will review your request and respond within 24 hours.</p><p>For urgent issues, email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Support Team</p>"
         })

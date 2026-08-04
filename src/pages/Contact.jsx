@@ -32,6 +32,9 @@ export default function ContactPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
+          from_email: form.email,
+          from_name: form.name,
+          reply_to: form.email,
           subject: "Contact: " + form.subject + " from " + form.name,
           message: "<p><b>Name:</b> " + form.name + "</p><p><b>Email:</b> " + form.email + "</p><p><b>Subject:</b> " + form.subject + "</p><p><b>Message:</b> " + form.message + "</p>"
         })
@@ -41,6 +44,9 @@ export default function ContactPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: form.email,
+          from_email: form.email,
+          from_name: form.name,
+          reply_to: form.email,
           subject: "Thank you for contacting KeyStarter",
           message: "<p>Hi " + form.name + ",</p><p>Thank you for contacting KeyStarter. We will review your inquiry and respond within 24 hours.</p><p>Best regards,<br>KeyStarter Team</p>"
         })

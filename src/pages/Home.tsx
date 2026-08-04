@@ -28,6 +28,20 @@ const DatabaseIcon = () => (
   </svg>
 );
 
+const TrustIcon = ({ type }) => {
+  const common = { className: "w-7 h-7", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" };
+  if (type === "delivery") {
+    return <svg {...common}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>;
+  }
+  if (type === "genuine") {
+    return <svg {...common}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg>;
+  }
+  if (type === "refund") {
+    return <svg {...common}><path d="m16 16 2 2 4-4" /><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" /><path d="M3.29 7 12 12l8.71-5" /><path d="M12 22V12" /></svg>;
+  }
+  return <svg {...common}><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>;
+};
+
 const PREMIUM_SKUS = [
   {id:'windows-11-pro-official',category:'windows',title:'Windows 11 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:199.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon />},
   {id:'windows-10-pro-official',category:'windows',title:'Windows 10 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:149.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
@@ -45,6 +59,14 @@ const PREMIUM_SKUS = [
 ];
 const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 
+const TRUST_ITEMS = [
+  { img: "/assets/images/trust-paypal.jpg?v=3", title: "PayPal Verified", desc: "Official verified seller account", alt: "PayPal" },
+  { icon: "delivery", bg: "#ff6b35", title: "Instant Delivery", desc: "Global instant delivery within 10 minutes" },
+  { icon: "genuine", bg: "#00aa13", title: "100% Genuine", desc: "Direct Microsoft channel licenses" },
+  { icon: "refund", bg: "#2563eb", title: "14-Day Refund", desc: "No activation failure risk guarantee" },
+  { icon: "ssl", bg: "#7c3aed", title: "SSL Encrypted", desc: "256-bit TLS encrypted checkout" }
+];
+
 export default function App() {
   const { t } = useTranslation();
   const [apiProducts, setApiProducts] = useState(null);
@@ -55,32 +77,7 @@ const [activeTab, setActiveTab] = useState('all');
   const [showOffer, setShowOffer] = useState(true);
   useEffect(() => { fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=3").then(r=>r.json()).then(setBlogPosts).catch(()=>{}); }, []);
   
-  // Simulated Licenses purchased in this session
-  const [purchasedLicenses, setPurchasedLicenses] = useState([
-    {
-      id: 'demo-win',
-      title: 'Windows 11 Professional Retail',
-      licenseType: 'Account-Bound',
-      key: 'W269N-WFGWX-YVC9B-4J6C9-T83GX',
-      isOffice: false,
-      link: 'https://www.microsoft.com/zh-cn/software-download/windows11'
-    },
-    {
-      id: 'demo-office',
-      title: 'Microsoft 365 Family Account',
-      licenseType: '1-Year Subscription',
-      key: 'Activated via official mail: customer-link-m365',
-      isOffice: true,
-      link: 'https://setup.office.com'
-    }
-  ]);
-
-  // Checkout Drawer state
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [checkoutProduct, setCheckoutProduct] = useState({ title: '', price: 0 });
   const { addToCart, buyNow } = useCart();
-  const [checkoutEmail, setCheckoutEmail] = useState('');
-  const [payMethod, setPayMethod] = useState(1);
 
   // Custom Toast State
   const [heroPersona, setHeroPersona] = useState("retail");
@@ -128,46 +125,6 @@ const [activeTab, setActiveTab] = useState('all');
     document.body.removeChild(tempTextArea);
   };
 
-  const openCheckoutDrawer = (productName, price) => {
-    setCheckoutProduct({ title: productName, price });
-    setIsDrawerOpen(true);
-  };
-
-  const closeCheckoutDrawer = () => {
-    setIsDrawerOpen(false);
-  };
-
-  const handlePurchase = (e) => {
-    e.preventDefault();
-    if (!checkoutEmail || !checkoutEmail.includes('@')) {
-      showToast("Please enter a valid email to receive the license key.", "⚠️");
-      return;
-    }
-
-    closeCheckoutDrawer();
-
-    const isOfficeProduct = checkoutProduct.title.includes('Office') || checkoutProduct.title.includes('365');
-    const mockKey = isOfficeProduct 
-      ? 'M365F-ANNUAL-BIND-OK-KEY-' + Math.floor(10000 + Math.random() * 90000)
-      : 'W11PR-OEM25-GENUINE-KEY-' + Math.floor(10000 + Math.random() * 90000);
-
-    // Simulate order backend injection
-    setTimeout(() => {
-      const newLicense = {
-        id: 'mock-' + Date.now(),
-        title: checkoutProduct.title,
-        licenseType: 'Official Genuine License',
-        key: mockKey,
-        isOffice: isOfficeProduct,
-        link: isOfficeProduct ? 'https://setup.office.com' : 'https://www.microsoft.com/zh-cn/software-download/'
-      };
-
-      setPurchasedLicenses(prev => [newLicense, ...prev]);
-      showToast(`Simulated dispatch [${checkoutProduct.title}] License Key!`, "🟢");
-      scrollToSection('portal');
-    }, 500);
- };
-
   // Listen for hash nav (from header nav buttons)
   useEffect(() => {
     const onHash = () => {
@@ -196,6 +153,9 @@ const [activeTab, setActiveTab] = useState('all');
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
+          from_email: (fd.get("phone") || "").includes("@") ? (fd.get("phone") || "") : "",
+          from_name: (fd.get("contact") || ""),
+          reply_to: (fd.get("phone") || "").includes("@") ? (fd.get("phone") || "") : "",
           subject: "Compliance Quote from " + (fd.get("company") || "Unknown"),
           message: msg
         })
@@ -208,6 +168,9 @@ const [activeTab, setActiveTab] = useState('all');
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
             to: ce,
+            from_email: ce,
+            from_name: (fd.get("contact") || ""),
+            reply_to: ce,
             subject: "Thank you for your Compliance Quote - KeyStarter",
             message: "<p>Hi " + (fd.get("contact") || "") + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs and provide a cost-effective quote within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
           })
@@ -218,20 +181,6 @@ const [activeTab, setActiveTab] = useState('all');
     } catch(err) {
       showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
     }
-  };
-
-  const simulateDirectOrder = (productName, isOffice, key) => {
-    const newLicense = {
-      id: 'sim-' + Date.now(),
-      title: productName,
-      licenseType: 'Official Genuine License',
-      key: key,
-      isOffice: isOffice,
-      link: isOffice ? 'https://setup.office.com' : 'https://www.microsoft.com/zh-cn/software-download/'
-    };
-    setPurchasedLicenses(prev => [newLicense, ...prev]);
-    showToast(`Success! Simulated dispatch [${productName}] License Key!`, "🟢");
-    scrollToSection('portal');
   };
 
   // Filtered SKUs
@@ -818,90 +767,39 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </div>
 
           <div className="bg-[#f5f5f7] rounded-3xl p-6 sm:p-10 border border-[#e8e8ed] shadow-sm">
-            <div className="flex flex-col items-center justify-between gap-4 pb-6 mb-8 border-b border-[#e8e8ed] sm:flex-row">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center justify-center w-12 h-12 text-lg font-bold bg-gray-200 rounded-full border border-gray-300 text-[#1d1d1f]">
-                  U
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-[#1d1d1f]">{t("portal.demo_name")}</h4>
-                  <p className="text-xs text-[#86868b]">Email: trial-buyer@keystarter.com</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="bg-green-100 text-green-700 text-[10px] font-semibold px-2 py-0.5 rounded border border-green-200">
-                  ● Account Status: Active
-                </span>
-              </div>
+            <div className="text-center py-10">
+              <h4 className="text-sm font-bold text-[#1d1d1f] mb-2">{t("portal.title")}</h4>
+              <p className="text-xs text-[#86868b] mb-4">{t("portal.desc")}</p>
+              <button onClick={() => window.location.href="/account"} className="inline-block bg-[#7c3aed] text-white text-xs font-semibold px-5 py-2.5 rounded-xl border-none cursor-pointer hover:bg-[#6d28d9] transition">{t("account.signin")}</button>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <h4 className="text-xs font-bold text-[#86868b] uppercase tracking-wider mb-4">{t("portal.licenses_title")}</h4>
-            
-            <div className="space-y-4">
-              {purchasedLicenses.map((lic) => (
-                <div 
-                  key={lic.id} 
-                  className="v5-card-light bg-white p-5 rounded-2xl border border-[#e8e8ed] flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-500/30 transition shadow-sm"
-                >
-                  <div className="flex items-start space-x-3.5">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center border mt-1 md:mt-0 ${lic.isOffice ? 'bg-red-50 border-red-100' : 'bg-blue-50 border-blue-100'}`}>
-                      {lic.isOffice ? <OfficeIcon /> : <WindowsIcon />}
+      <section id="trusted-secure" className="py-14 bg-white border-t border-[#e8e8ed]">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">Trusted &amp; Secure</span>
+            <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Payments and licenses you can rely on</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
+            {TRUST_ITEMS.map((item, i) => (
+              <div key={i} className="group bg-[#f5f5f7] rounded-2xl border border-[#e8e8ed] overflow-hidden transition hover:border-[#7c3aed]/40 hover:shadow-md">
+                <div className="flex h-32 items-center justify-center bg-white border-b border-[#e8e8ed]">
+                  {item.img ? (
+                    <img src={item.img} alt={item.alt || item.title} loading="lazy" className="max-h-12 max-w-[130px] object-contain" />
+                  ) : (
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl text-white" style={{ backgroundColor: item.bg }}>
+                      <TrustIcon type={item.icon} />
                     </div>
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-bold text-[#1d1d1f]">{lic.title}</span>
-                        <span className={`text-[10px] font-semibold px-2 rounded ${lic.isOffice ? 'bg-red-50 text-[#f25022]' : 'bg-blue-50 text-[#7c3aed]'}`}>
-                          {lic.licenseType}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <span className="text-xs font-mono text-gray-500 bg-gray-50 px-2 py-0.5 rounded">{lic.key}</span>
-                        <button 
-                          onClick={() => copyToClipboard(lic.key)} 
-                          className="text-blue-500 hover:text-blue-700 text-xs transition focus:outline-none"
-                        >
-                          Copy All
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="w-full md:w-auto">
-                    <a 
-                      href={lic.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="block text-center bg-[#f5f5f7] hover:bg-[#e8e8ed] text-xs font-semibold text-[#1d1d1f] px-4 py-2.5 rounded-lg border border-[#d2d2d7] transition whitespace-nowrap"
-                    >
-                      Go to Official Download &gt;
-                    </a>
-                  </div>
+                  )}
                 </div>
-              ))}
-            </div>
-
-            {/* Simulated Live Generation controls for Sandbox testing */}
-            <div className="mt-8 bg-blue-50/50 p-6 rounded-2xl border border-blue-100 text-center">
-              <h5 className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2">🎁 Interactive: Self-Service Simulated Payment & Activation</h5>
-              <p className="text-xs text-blue-700 max-w-lg mx-auto mb-4">
-                Click below to simulate purchasing any Microsoft activation key. The system will auto-dispatch it to your account card above. Try it now!
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <button 
-                  onClick={() => simulateDirectOrder('Windows 11 Home', false, 'TX9XD-98N7V-6WMQ6-BX7FG-H8Q99')} 
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow"
-                >
-                  Simulate Get Windows 11 Key
-                </button>
-                <button 
-                  onClick={() => simulateDirectOrder('Office 2026 Pro Plus', true, 'T3N7V-8BYX2-6QBMQ-99FGH-73GX9')} 
-                  className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow"
-                >
-                  Simulate Get Office 2026 Key
-                </button>
+                <div className="p-4">
+                  <h3 className="text-sm font-bold text-[#1d1d1f]">{item.title}</h3>
+                  <p className="text-[11px] text-[#86868b] mt-1 leading-relaxed">{item.desc}</p>
+                </div>
               </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
@@ -910,95 +808,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {/* Deep-dark corporate footer */}
 
       {}
-      {/* Checkout side drawer with pure React state binding */}
-      {isDrawerOpen && <Portal>
-        <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" onClick={closeCheckoutDrawer}></div>
-          
-          <div className="absolute inset-y-0 right-0 flex max-w-full pl-10">
-            <div className="w-screen max-w-md bg-white border-l border-[#e8e8ed] shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-in-out">
-              
-              {/* Header */}
-              <div className="p-6 border-b border-[#e8e8ed]">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-[#1d1d1f]">🔒 Secure Checkout & Activation Delivery</h3>
-                  <button onClick={closeCheckoutDrawer} className="text-gray-400 hover:text-gray-500 text-lg">×</button>
-                </div>
-                <p className="text-xs text-[#86868b] mt-1">After completing payment, your genuine license will be delivered to the fulfillment center within 10 minutes.</p>
-              </div>
 
-              {/* Form Content */}
-              <form onSubmit={handlePurchase} className="flex-1 overflow-y-auto p-6 space-y-6">
-                
-                <div className="bg-[#f5f5f7] p-4 rounded-xl border border-[#e8e8ed]">
-                  <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">{t("home.drawer.selected")}</span>
-                  <h4 className="text-base font-bold mt-1 text-[#1d1d1f]">{checkoutProduct.title}</h4>
-                  <div className="flex items-baseline justify-between mt-2">
-                    <span className="text-xl font-bold text-[#7c3aed]">${checkoutProduct.price}</span>
-                    <span className="text-xs text-green-600">✓ Global Instant Delivery</span>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">{t("home.drawer.email_label")}</label>
-                  <input 
-                    type="email" 
-                    required 
-                    placeholder="example@gmail.com" 
-                    value={checkoutEmail}
-                    onChange={(e) => setCheckoutEmail(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition" 
-                  />
-                  <p className="text-[10px] text-gray-400">We will register an auto-delivery account with this email for key retrieval anytime.</p>
-                </div>
-
-                {/* Simulated Payment select */}
-                <div className="space-y-3">
-                  <label className="block text-xs font-semibold text-[#1d1d1f]">{t("home.drawer.payment_label")}</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div 
-                      onClick={() => setPayMethod(1)} 
-                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 1 ? 'border-[#7c3aed] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
-                    >
-                      <span className="text-xs font-semibold">PayPal</span>
-                      <span className="text-xs text-blue-600">{payMethod === 1 ? '●' : '○'}</span>
-                    </div>
-                    <div 
-                      onClick={() => setPayMethod(2)} 
-                      className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition ${payMethod === 2 ? 'border-[#7c3aed] bg-blue-50/25' : 'border-[#e8e8ed]'}`}
-                    >
-                      <span className="text-xs font-semibold">Stripe</span>
-                      <span className="text-xs text-gray-600">{payMethod === 2 ? '●' : '○'}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-xl border border-[#e8e8ed] space-y-2">
-                  <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> Supports official MSA account binding
-                  </div>
-                  <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 14-Day Refund Guarantee (No activation failure risk)
-                  </div>
-                  <div className="flex items-center text-[10px] text-[#86868b] gap-2">
-                    <span className="text-green-500">✓</span> 256-bit SSL certificate chain encryption
-                  </div>
-                </div>
-
-                <div className="pt-4">
-                  <button 
-                    type="submit" 
-                    className="w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-xs font-bold py-4 rounded-xl transition flex items-center justify-center space-x-1 shadow-lg shadow-blue-500/10"
-                  >
-                    <span>💳 Complete Simulated Payment</span>
-                  </button>
-                  <p className="text-[10px] text-center text-gray-400 mt-2">{t("home.drawer.payment_click")}</p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </Portal>}
 
       {}
 

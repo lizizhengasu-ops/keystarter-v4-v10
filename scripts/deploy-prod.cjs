@@ -3,8 +3,8 @@ const fs=require("fs");
 const path=require("path");
 
 const host=process.argv[2]||"204.152.214.213";
-const pass=process.argv[3]||"7pmaA49eGOj1Qj6Q8F";
-const distDir=process.argv[4]||"./dist";
+const keyPath=process.env.SSH_KEY||path.join(process.env.USERPROFILE||process.env.HOME||"", ".ssh", "id_ed25519_racknerd");
+const distDir=process.argv[3]||"./dist";
 const remoteDir="/var/www/keystarter-frontend";
 
 function upload(c,local,remote){
@@ -12,10 +12,23 @@ function upload(c,local,remote){
     const dir=path.dirname(remote);
     c.exec("mkdir -p "+dir+" && cat > "+remote,(e,s)=>{
       if(e)return fail(e);
+      const timer=setTimeout(()=>fail(new Error("upload timeout")),60000);
       s.stdin.write(fs.readFileSync(local));
       s.stdin.end();
-      s.on("close",(code)=>code===0?ok():fail(new Error("exit "+code)));
-      setTimeout(()=>ok(),10000);
+      s.on("close",(code)=>{
+        clearTimeout(timer);
+        if(code!==0){fail(new Error("exit "+code));return;}
+        c.exec("stat -c %s "+remote,(e2,s2)=>{
+          if(e2){fail(e2);return;}
+          let out="";
+          s2.on("data",d=>out+=d);
+          s2.on("close",()=>{
+            const sz=parseInt(out.trim(),10);
+            if(sz===fs.statSync(local).size) ok();
+            else fail(new Error("size mismatch remote="+sz+" local="+fs.statSync(local).size));
+          });
+        });
+      });
     });
   });
 }
@@ -44,7 +57,7 @@ c.on("ready",async()=>{
   }catch(e){console.log("ERR:",e.message);c.end();process.exit(1);}
 });
 c.on("error",e=>{console.log("CONN:",e.message);process.exit(1);});
-c.connect({host,port:22,username:"root",password:pass,
+c.connect({host,port:2222,username:"root",privateKey:fs.readFileSync(keyPath),
   algorithms:{kex:["curve25519-sha256","ecdh-sha2-nistp256","diffie-hellman-group14-sha256"],
   serverHostKey:["ssh-ed25519","ecdsa-sha2-nistp256"],
   cipher:["aes256-ctr","aes128-ctr"],hmac:["hmac-sha2-256"]},

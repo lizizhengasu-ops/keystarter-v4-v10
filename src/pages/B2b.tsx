@@ -45,20 +45,28 @@ export default function B2bPage() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           to: "admin@keys-starter.com",
+          from_email: form.phone.includes("@") ? form.phone : "",
+          from_name: form.company,
+          reply_to: form.phone.includes("@") ? form.phone : "",
           subject: t("b2b.compliance_quote_subject") + " (from " + form.company,
           message: "<h2>Compliance Quote Request</h2><p><b>Company:</b> " + form.company + "</p><p><b>Units:</b> " + form.units + "</p><p><b>Product:</b> " + form.product + "</p><p><b>Contact:</b> " + form.contact + "</p><p><b>Phone/Email:</b> " + form.phone + "</p>"
         })
       });
       // Auto-reply to customer (best-effort, no await)
-      fetch("/wp-json/keystarter/v1/send-email", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          to: form.phone,
-          subject: "Thank you for your Compliance Quote - KeyStarter",
-          message: "<p>Hi " + form.contact + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
-        })
-      }).catch(() => {});
+      if (form.phone.includes("@")) {
+        fetch("/wp-json/keystarter/v1/send-email", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+            to: form.phone,
+            from_email: form.phone,
+            from_name: form.contact,
+            reply_to: form.phone,
+            subject: "Thank you for your Compliance Quote - KeyStarter",
+            message: "<p>Hi " + form.contact + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
+          })
+        }).catch(() => {});
+      }
       const data = await r.json();
       if (data.ok) {
         setFormStatus("sent");
