@@ -83,7 +83,6 @@ const [activeTab, setActiveTab] = useState('all');
   const [payMethod, setPayMethod] = useState(1);
 
   // Custom Toast State
-  const [testimonials, setTestimonials] = useState([]);
   const [heroPersona, setHeroPersona] = useState("retail");
   const [toast, setToast] = useState({ visible: false, message: '', icon: '🚀' });
 
@@ -247,24 +246,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
     activeTab === 'all' || sku.category === activeTab
   );
 
-  useEffect(() => {
-    var pids = [13, 14, 19, 16, 22];
-    var all = [];
-    var loaded = 0;
-    pids.forEach(function(id) {
-      fetch('/wp-json/keystarter/v1/reviews/' + id)
-        .then(function(r) { return r.json(); })
-        .then(function(revs) {
-          all = all.concat(revs);
-          loaded++;
-          if (loaded === pids.length) {
-            all.sort(function() { return 0.5 - Math.random(); });
-            setTestimonials(all.slice(0, 3));
-          }
-        });
-    });
-  }, []);
-
   return (
     <div className="overflow-x-hidden bg-[#f5f5f7] text-[#1d1d1f] antialiased font-sans">
       {showOffer && (
@@ -289,7 +270,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {/* Hero Section - Platinum Digital Style */}
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
-          <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[1.08] scale-105" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
+          <video className="absolute inset-0 w-full h-full object-cover opacity-70 blur-[2px] brightness-[1.08] scale-105" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
             <source src="/videos/enterprise-bg.mp4?v=20" type="video/mp4" />
             <source src="/videos/enterprise-bg.webm?v=20" type="video/webm" />
           </video>
@@ -1021,25 +1002,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       {}
 
-          {testimonials.length > 0 && (
-          <section className={`max-w-7xl mx-auto px-6 py-16 ${heroPersona!=="retail"?"persona-hidden":""}`}>
-            <h2 className="text-2xl font-bold text-center mb-4">{t("testimonial.title")}</h2>
-            <p className="text-sm text-[#86868b] text-center mb-10 max-w-xl mx-auto">{t("testimonial.desc")}</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map(function(t, i) {
-                var stars = "";
-                for (var s = 0; s < 5; s++) stars += s < t.rating ? String.fromCharCode(9733) : String.fromCharCode(9734);
-                return (
-                  <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] shadow-sm">
-                    <div className="text-yellow-500 text-sm mb-3">{stars}</div>
-                    <div className="text-xs text-[#86868b] italic mb-3">{"\u201c"}{t.text}{"\u201d"}</div>
-                    <div className="text-xs font-semibold text-[#1d1d1f]">- {t.author}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-          )}
 
       
 
@@ -1054,7 +1016,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </Portal>}
 
-<section className="py-12 bg-white border-t border-[#e8e8ed]"><div className="max-w-5xl mx-auto px-6 text-center"><h3 className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-8">Trusted &amp; Secure</h3><div className="flex flex-wrap justify-center gap-x-10 gap-y-6 items-center"><span className="inline-flex items-center gap-2 text-sm font-medium text-[#515154]"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="#003087"><path d="M19.5 3H4.5C3.12 3 2 4.12 2 5.5v13C2 19.88 3.12 21 4.5 21h15c1.38 0 2.5-1.12 2.5-2.5v-13C22 4.12 20.88 3 19.5 3z"/></svg> PayPal Verified</span><span className="inline-flex items-center gap-2 text-sm font-medium text-[#515154]"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="#6772E5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg> Stripe Secure</span><span className="inline-flex items-center gap-2 text-sm font-medium text-[#515154]"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="#00AA13"><path d="M12 2L2 12l10 10 10-10L12 2z"/></svg> 100% Genuine</span><span className="inline-flex items-center gap-2 text-sm font-medium text-[#515154]"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="#666"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> 14-Day Refund</span><span className="inline-flex items-center gap-2 text-sm font-medium text-[#515154]"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="#999"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg> SSL Encrypted</span></div></div></section>
     </div>
   );
 }
