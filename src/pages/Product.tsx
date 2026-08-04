@@ -164,11 +164,19 @@ const [reviews, setReviews] = useState([]);
           <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-2xl font-extrabold text-[#7c3aed]">
-              {new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(product.price)}
-            </span>
-            <span className="text-xs text-[#86868b] line-through">$199.00</span>
-            <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save 92%</span>
+            {(() => {
+              const hasReg = product.regularPrice && product.regularPrice > product.price;
+              const off = hasReg ? Math.round((1 - product.price / product.regularPrice) * 100) : 0;
+              return (
+                <>
+                  <span className="text-2xl font-extrabold text-[#7c3aed]">
+                    {new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(product.price)}
+                  </span>
+                  {hasReg && <span className="text-xs text-[#86868b] line-through">{new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(product.regularPrice)}</span>}
+                  {hasReg && off > 0 && <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save {off}%</span>}
+                </>
+              );
+            })()}
           </div>
           {descBlock}
 

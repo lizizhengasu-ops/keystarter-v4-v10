@@ -2,10 +2,14 @@
 // Reads from Store API (GET, no nonce needed)
 // Writes via cart-sync.php (our endpoint, no nonce needed)
 import { useState, useEffect, useCallback, useRef } from "react";
+import { WC_IDS } from "../data/woo-ids";
 
 const CART_KEY = "ks_cart_v5";
 const API = "/wp-json/wc/store/v1/cart";
 const SYNC = "/cart-sync.php";
+const ID_TO_SLUG = Object.fromEntries(
+  Object.entries(WC_IDS).map(([slug, id]) => [String(id), slug])
+);
 
 export type WCItem = {
   id: number;
@@ -41,7 +45,7 @@ function saveCart(c: WCCart) {
 function parseCartFromApi(d: any): WCCart {
   const items: WCItem[] = (d.items || []).map((i: any) => ({
     id: i.id || 0,
-    slug: "",
+    slug: ID_TO_SLUG[String(i.id)] || "",
     name: i.name || "",
     quantity: i.quantity || 0,
     totals: i.totals || { line_total: "0" },
@@ -80,9 +84,18 @@ export function useWooCart() {
       const d = await xhr("GET", API);
       const wcCart = parseCartFromApi(d);
       const current = loadCart();
-      if (JSON.stringify(current) !== JSON.stringify(wcCart)) {
-        saveCart(wcCart);
-        setCart(wcCart);
+      // Keep local items that have not been synced yet (WC cart empty or missing them)
+      const merged = { ...wcCart, items: [...wcCart.items] };
+      current.items.forEach((li) => {
+        const inApi = wcCart.items.some((ai) => ai.id !== 0 && ai.id === li.id);
+        if (!inApi && li.slug) {
+          merged.items.push(li);
+          merged.items_count += li.quantity;
+        }
+      });
+      if (JSON.stringify(current) !== JSON.stringify(merged)) {
+        saveCart(merged);
+        setCart(merged);
       }
     } catch { /* silent fail - keep local cart */ }
   }, []);
@@ -101,7 +114,7 @@ export function useWooCart() {
             : i
         );
       } else {
-        newItems = [...prev.items, { id: 0, slug, name, quantity: qty, totals: { line_total: String(qty * price * 100) } }];
+        newItems = [...prev.items, { id: WC_IDS[slug] || 0, slug, name, quantity: qty, totals: { line_total: String(qty * price * 100) } }];
       }
       const nc = { items: newItems, items_count: newItems.reduce((s, i) => s + i.quantity, 0), total: String(newItems.reduce((s, i) => s + parseInt(i.totals.line_total), 0)), currency: "USD", loading: false };
       saveCart(nc);
