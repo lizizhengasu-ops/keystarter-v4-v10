@@ -287,25 +287,30 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       {}
       {/* Hero Section - Platinum Digital Style */}
-      <section id="hero" className="relative min-h-[520px] flex items-center justify-center overflow-hidden bg-[#fafafa] pt-32 pb-20">
-        <div className="absolute w-[450px] h-[450px] rounded-full blur-[100px] opacity-60 pointer-events-none z-0 bg-[#e5e7eb] top-[-100px] left-[35%]"></div>
-        <div className="absolute w-[300px] h-[300px] rounded-full blur-[80px] opacity-40 pointer-events-none z-0 bg-[#c4b5fd] bottom-[-80px] right-[10%]"></div>
+      <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
+        <div className="absolute inset-0 overflow-hidden">
+          <video className="absolute inset-0 w-full h-full object-cover opacity-50" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
+            <source src="/videos/enterprise-bg.mp4" type="video/mp4" />
+            <source src="/videos/enterprise-bg.webm" type="video/webm" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#161617]/85 via-[#161617]/70 to-[#161617]/90" />
+        </div>
 
         <div className="relative z-10 max-w-4xl px-4 mx-auto text-center">
           {/* Persona Tabs */}
-          <div className="inline-flex bg-black/[0.04] border border-[#d1d5db] p-1 rounded-full mb-8">
-            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F464)} {t("home.persona.retail")}</button>
-            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-[#111827] opacity-70 hover:opacity-100")}>{String.fromCodePoint(0x1F3E2)} {t("home.persona.enterprise")}</button>
+          <div className="inline-flex bg-white/10 border border-white/20 p-1 rounded-full mb-8">
+            <button onClick={() => setHeroPersona("retail")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="retail" ? "bg-[#7c3aed] text-white" : "text-white/70 hover:text-white")}>{String.fromCodePoint(0x1F464)} {t("home.persona.retail")}</button>
+            <button onClick={() => setHeroPersona("enterprise")} className={"px-5 py-2 text-xs font-bold rounded-full transition " + (heroPersona==="enterprise" ? "bg-[#7c3aed] text-white" : "text-white/70 hover:text-white")}>{String.fromCodePoint(0x1F3E2)} {t("home.persona.enterprise")}</button>
           </div>
 
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide mb-4 bg-white text-[#7c3aed] border border-[#d1d5db]">
             {heroPersona==="retail" ? t("home.retail.portal_title") : t("home.enterprise.heading")}
           </span>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-[#111827]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight text-white">
             {heroPersona==="retail" ? t("home.hero.headline") : t("home.enterprise.sub_heading")}
           </h1>
-          <p className="text-sm text-[#4b5563] max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-sm text-white/75 max-w-xl mx-auto mb-8 leading-relaxed">
             {heroPersona==="retail" ? t("hero.desc") : t("home.enterprise.sub_desc")}
           </p>
 
@@ -313,24 +318,29 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <button onClick={() => scrollToSection(heroPersona==="retail" ? "special-offer" : "business")} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition shadow-lg shadow-purple-500/10 text-center">
               {heroPersona==="retail" ? t("hero.cta") : t("home.enterprise.compliance_btn")}
             </button>
-            <button onClick={() => window.location.href="/b2b#enterprise-b2b"} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#f3f4f6] text-[#111827] border border-[#d1d5db] hover:bg-[#e5e7eb] transition text-center">
+            <button onClick={() => window.location.href="/b2b#enterprise-b2b"} className="w-full sm:w-auto inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-white/10 text-white border border-white/20 hover:bg-white/20 transition text-center">
               {heroPersona==="retail" ? t("hero.enterprise") : t("home.enterprise.verify_btn")} {String.fromCharCode(0x203A)}
             </button>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            {heroPersona==="retail" ? (<>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">10 Min</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.delivery")}</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">98.7%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.satisfaction")}</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">50K+</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.activation")}</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">100%</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("hero.trust.verification")}</div></div>
-            </>) : (<>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.vat_label")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.dedicated_invoice")}</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.enterprise_label")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">Volume Licensing</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.po_terms")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.corporate_transfer")}</div></div>
-              <div className="bg-white rounded-xl p-4 border border-[#d1d5db] text-center shadow-sm"><div className="text-lg font-extrabold text-[#7c3aed]">{t("home.enterprise.support_247")}</div><div className="text-[10px] font-semibold uppercase text-[#4b5563] mt-1">{t("home.enterprise.sla_manager")}</div></div>
-            </>)}
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-0 md:divide-x divide-white/20 bg-white/10 border border-white/20 rounded-lg shadow-sm overflow-hidden max-w-3xl mx-auto">
+            {(heroPersona==="retail" ? [
+              { num: "10 Min", label: t("hero.trust.delivery") },
+              { num: "98.7%", label: t("hero.trust.satisfaction") },
+              { num: "50K+", label: t("hero.trust.activation") },
+              { num: "100%", label: t("hero.trust.verification") }
+            ] : [
+              { num: t("home.enterprise.vat_label"), label: t("home.enterprise.dedicated_invoice") },
+              { num: t("home.enterprise.enterprise_label"), label: "Volume Licensing" },
+              { num: t("home.enterprise.po_terms"), label: t("home.enterprise.corporate_transfer") },
+              { num: t("home.enterprise.support_247"), label: t("home.enterprise.sla_manager") }
+            ]).map((s, i) => (
+              <div key={i} className="px-4 py-5 text-center">
+                <div className="text-xl md:text-2xl font-extrabold text-[#ff6b35] tabular-nums">{s.num}</div>
+                <div className="text-[10px] md:text-[11px] font-semibold uppercase text-white/70 mt-1.5 tracking-wide">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -555,13 +565,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {}
       {/* B2B Section */}
       <section id="business" className={`relative py-24 bg-[#161617] text-white overflow-hidden ${heroPersona!=="enterprise"?"persona-hidden":""}`}>
-        <div className="absolute inset-0 overflow-hidden">
-          <video className="absolute inset-0 w-full h-full object-cover opacity-40" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
-            <source src="/videos/enterprise-bg.mp4" type="video/mp4" />
-            <source src="/videos/enterprise-bg.webm" type="video/webm" />
-          </video>
-          <div className="absolute inset-0 bg-[#161617]/70" />
-        </div>
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
