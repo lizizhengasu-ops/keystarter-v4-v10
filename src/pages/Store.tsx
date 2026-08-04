@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/woocommerce";
 import type { SPAProduct } from "../api/woocommerce";
@@ -119,7 +118,7 @@ export default function StorePage() {
                   <h3 className="text-sm font-bold text-[#1d1d1f] mb-1">{x.name}</h3>
                   <p className="text-[10px] text-[#86868b] mb-4">{x.category || 'Microsoft License'}</p>
                   <ul className="space-y-1.5 mb-4 text-[10px] text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-3">
-                    {(x.specs ? Object.entries(x.specs).slice(0, 4) : []).map(([k,v],fi) => (
+                    {(x.specs ? Object.entries(x.specs).slice(0, 4) : []).map(([_k,v],fi) => (
                       <li key={fi} className="flex items-start space-x-1.5"><span className="text-green-500 font-bold">✓</span><span>{v}</span></li>
                     ))}
                   </ul>

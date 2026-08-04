@@ -33,17 +33,6 @@ import CookiesPage from "./pages/Cookies";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
-function MicrosoftLogo() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 23 23" fill="none">
-      <rect x="0" y="0" width="11" height="11" fill="#F25022"/>
-      <rect x="12" y="0" width="11" height="11" fill="#7FBA00"/>
-      <rect x="0" y="12" width="11" height="11" fill="#00A4EF"/>
-      <rect x="12" y="12" width="11" height="11" fill="#FFB900"/>
-    </svg>
-  );
-}
-
 function KeyStarterLogo() {
   return (
     <svg className="w-5 h-5" viewBox="0 0 100 100" fill="none">

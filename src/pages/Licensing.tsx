@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 export default function LicensingPage() {
-  const { t } = useTranslation();
   const [active, setActive] = useState(0);
   const sections = [
     { id: "s1", title: "Overview" },

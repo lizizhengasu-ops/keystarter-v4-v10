@@ -69,7 +69,7 @@ export default function SupportPage() {
         setErrorMsg(data.message || "Failed to send");
         setFormStatus("error");
       }
-    } catch(e) {
+    } catch(_e) {
         setErrorMsg("Network error. Please check your connection and try again.");
         setFormStatus("error");
     }

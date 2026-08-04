@@ -12,18 +12,6 @@ import { ProductComparison } from "../components/ProductComparison";
 import { ProductFAQ } from "../components/ProductFAQ";
 import { ProductReviews } from "../components/ProductReviews";
 
-const editions = [
-  {name:"Home",desc:"For everyday use",price:"$12.99"},
-  {name:"Pro",desc:"For business",price:"$14.99"},
-  {name:"Enterprise",desc:"For organizations",price:"$29.99"}
-];
-
-const features = [
-  ["Platform","Windows PC / 64-bit"],["Delivery","Instant via email"],
-  ["Activation","Digital License"],["Support","Lifetime"],
-  ["Security","Built-in"],["AI","Copilot ready"]
-];
-
 export default function ProductPage() {
   const {slug} = useParams();
 
@@ -32,8 +20,6 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const { addToCart, buyNow } = useCart();
 const [reviews, setReviews] = useState([]);
-  const [showAllReviews, setShowAllReviews] = useState(false);
-  const [reviewPage, setReviewPage] = useState(1);
   const details = PRODUCT_DETAILS[slug || ""];
   const compGroup = COMPARISON_MAP[slug || ""] ? COMPARISON_GROUPS[COMPARISON_MAP[slug || ""]] : null;
   const sKey = FAQ_SERIES_MAP[slug || ""] || "";
@@ -81,7 +67,7 @@ const [reviews, setReviews] = useState([]);
     <div>
       <div className="border-t-0 pt-0">
         <h3 className="text-base font-bold mb-4">{t("product.details")}</h3>
-      {(product?.specs ? Object.entries(product.specs) : features).map((f:any,i:number) => (
+      {(product?.specs ? Object.entries(product.specs) : []).map((f:any,i:number) => (
           <div key={i} className="flex justify-between py-2 border-b border-[#f5f5f7] text-xs">
             <span className="text-[#86868b]">{Array.isArray(f) ? f[0] : f[0]}</span>
             <span className="font-medium">{Array.isArray(f) ? f[1] : f[1]}</span>
@@ -214,4 +200,3 @@ const [reviews, setReviews] = useState([]);
     </div>
   );
 }
-

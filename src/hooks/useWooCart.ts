@@ -1,7 +1,7 @@
 // useWooCart.ts - Dual-sync cart: local state + WooCommerce
 // Reads from Store API (GET, no nonce needed)
 // Writes via cart-sync.php (our endpoint, no nonce needed)
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import { WC_IDS } from "../data/woo-ids";
 
 const CART_KEY = "ks_cart_v5";

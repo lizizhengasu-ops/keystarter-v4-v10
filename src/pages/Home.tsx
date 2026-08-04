@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchProducts } from '../api/woocommerce';
 import type { SPAProduct } from '../api/woocommerce';
 import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
-import { WC_IDS } from "../data/woo-ids";
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
@@ -113,19 +112,6 @@ const [activeTab, setActiveTab] = useState('all');
     setOpenFaqId(prevId => (prevId === id ? null : id));
   };
 
-  const copyToClipboard = (text: string) => {
-    const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = text;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    try {
-      document.execCommand('copy');
-      showToast("License key copied! Go activate now!", "🟢");
-    } catch (err) {
-      showToast("Copy failed, please select and copy manually.", "🔴");
-    }
-    document.body.removeChild(tempTextArea);
-  };
 
   // Listen for hash nav (from header nav buttons)
   useEffect(() => {
@@ -180,7 +166,7 @@ const [activeTab, setActiveTab] = useState('all');
       }
       showToast("Quote submitted! A specialist will email you shortly.", "🔵");
       e.target.reset();
-    } catch(err) {
+    } catch(_err) {
       showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
     }
   };

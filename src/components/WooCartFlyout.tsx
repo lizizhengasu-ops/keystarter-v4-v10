@@ -7,7 +7,7 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
   const { cart, checkout, refresh } = useCart();
 
   // Background verification when cart opens — always before early return
-  useEffect(() => { if (open) refresh(); }, [open]);
+  useEffect(() => { if (open) refresh(); }, [open, refresh]);
 
   if (!open) return null;
 
