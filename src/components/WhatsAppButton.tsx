@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "15551234567"; // TODO: replace with the real WhatsApp number (country code + number, digits only)
+const WHATSAPP_NUMBER = "14807647544";
 const WHATSAPP_TEXT = "Hello KeyStarter, I have a question about your products.";
 
 export default function WhatsAppButton() {
