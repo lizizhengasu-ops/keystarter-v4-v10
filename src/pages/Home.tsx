@@ -208,8 +208,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
           <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[1.08] scale-105" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-poster.png">
-            <source src="/videos/enterprise-bg.mp4?v=24" type="video/mp4" />
-            <source src="/videos/enterprise-bg.webm?v=24" type="video/webm" />
+            <source src="/videos/enterprise-bg.mp4?v=26" type="video/mp4" />
+            <source src="/videos/enterprise-bg.webm?v=26" type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-[#161617]/65 via-[#161617]/50 to-[#161617]/75" />
           <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.45)] pointer-events-none" />
