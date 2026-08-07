@@ -7,6 +7,8 @@ export interface CartContextType {
   addToCart: (slug: string, name: string, price: number, qty?: number) => void;
   checkout: () => void;
   buyNow: (slug: string, name: string, price: number) => void;
+  openCart: () => void;
+  flushCart: () => Promise<void>;
   clearCart: () => void;
   refresh: () => Promise<void>;
 }

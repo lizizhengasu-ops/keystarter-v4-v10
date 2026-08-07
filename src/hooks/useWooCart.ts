@@ -145,6 +145,19 @@ export function useWooCart() {
     window.location.href = '/checkout-sync.php?items=' + encoded;
   }, [syncPending]);
 
+  const flushCart = useCallback(async () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
+    }
+    await syncPending();
+  }, [syncPending]);
+
+  const openCart = useCallback(async () => {
+    await flushCart();
+    window.location.href = '/cart/';
+  }, [flushCart]);
+
   const buyNow = useCallback(async (slug: string, name: string, price: number) => {
     addToCart(slug, name, price, 1);
     if (debounceRef.current) {
@@ -160,5 +173,5 @@ export function useWooCart() {
     setCart(EMPTY);
   }, []);
 
-  return { cart, addToCart, checkout, buyNow, clearCart, refresh };
+  return { cart, addToCart, checkout, buyNow, openCart, flushCart, clearCart, refresh };
 }

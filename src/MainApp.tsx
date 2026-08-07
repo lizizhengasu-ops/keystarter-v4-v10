@@ -52,7 +52,7 @@ function Layout({ children }: { children: any }) {
   const [scrollPct, setScrollPct] = useState(0);
   const [navOpen, setNavOpen] = useState(false);
   const { t } = useTranslation();
-  const { cart } = useCart();
+  const { cart, flushCart } = useCart();
 
   useEffect(()=>{const bt=document.getElementById("back-top");if(bt)bt.classList.toggle("visible",window.scrollY>300);})
 
@@ -123,7 +123,7 @@ function Layout({ children }: { children: any }) {
               <a href="/my-account/" className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </a>
-            <button onClick={() => setCartOpen(true)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
+            <button onClick={() => { flushCart(); setCartOpen(true); }} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="8" y1="10" x2="8" y2="14"/></svg>
                 {cart.items_count > 0 && (
                   <span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
@@ -262,5 +262,4 @@ export default function App() {
     </CartProvider>
   );
 }
-
 

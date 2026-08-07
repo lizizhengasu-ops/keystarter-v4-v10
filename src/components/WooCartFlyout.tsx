@@ -4,7 +4,7 @@ import { useCart } from "../data/CartContext";
 import Portal from "../Portal";
 
 export default function WooCartFlyout({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { cart, checkout, refresh } = useCart();
+  const { cart, checkout, refresh, openCart } = useCart();
 
   // Background verification when cart opens — always before early return
   useEffect(() => { if (open) refresh(); }, [open, refresh]);
@@ -51,6 +51,7 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
             ))}
             <a
               href="/cart/"
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); openCart(); }}
               className="block text-center text-sm font-semibold bg-[#7c3aed] text-white py-2.5 rounded-xl mt-4 no-underline hover:bg-[#6d28d9] transition"
             >
               View Cart
