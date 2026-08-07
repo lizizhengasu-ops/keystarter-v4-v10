@@ -77,11 +77,6 @@ function Layout({ children }: { children: any }) {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 48; window.scrollTo({ top: y, behavior: "smooth" }); }
-  };
-
   return (
     <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <span data-build={typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : ''} style={{display:'none'}} />
@@ -103,13 +98,13 @@ function Layout({ children }: { children: any }) {
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
               <>
-                <button onClick={()=>window.location.href="/products"} className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</button>
-                <button onClick={()=>scrollToSection("store")} className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</button>
-                <button onClick={()=>{window.location.hash='business';scrollToSection("business")}} className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</button>
-                <button onClick={()=>scrollToSection("compare")} className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</button>
-                <button onClick={()=>scrollToSection("support")} className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</button>
-               <button onClick={()=>scrollToSection("portal")} className="hover:text-[#7c3aed] transition-colors">{t("nav.portal")}</button>
-                <button onClick={()=>window.location.href='/blog'} className="hover:text-[#7c3aed] transition-colors">{t("nav.blog")}</button>
+                <Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
+                <a href="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</a>
+                <a href="/#business" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</a>
+                <a href="/#compare" className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</a>
+                <a href="/#support" className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</a>
+                <a href="/#portal" className="hover:text-[#7c3aed] transition-colors">{t("nav.portal")}</a>
+                <Link to="/blog" className="hover:text-[#7c3aed] transition-colors">{t("nav.blog")}</Link>
 </>
             ) : (
               <>
@@ -125,9 +120,9 @@ function Layout({ children }: { children: any }) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
           <LanguageSwitcher />
-              <button onClick={()=>window.location.href="/my-account/"} className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
+              <a href="/my-account/" className="text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label={t("nav.account")}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </button>
+              </a>
             <button onClick={() => setCartOpen(true)} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="8" y1="10" x2="8" y2="14"/></svg>
                 {cart.items_count > 0 && (
@@ -153,34 +148,34 @@ function Layout({ children }: { children: any }) {
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.products")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/products"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">Products</button>
-              <button onClick={()=>window.location.href="/#store"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.store")}</button>
-              <button onClick={()=>window.location.href="/b2b"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.enterprise")}</button>
+              <Link to="/products" className="block text-xs text-white/70 hover:text-white transition">Products</Link>
+              <a href="/#store" className="block text-xs text-white/70 hover:text-white transition">{t("nav.store")}</a>
+              <Link to="/b2b" className="block text-xs text-white/70 hover:text-white transition">{t("nav.enterprise")}</Link>
             </div>
           </div>
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("footer.support")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/support"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.help_center")}</button>
-              <button onClick={()=>window.location.href="/faq"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.faq")}</button>
-              <button onClick={()=>window.location.href="/#compare"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.compare")}</button>
-              <button onClick={()=>window.location.href="/#portal"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.fulfillment")}</button>
+              <Link to="/support" className="block text-xs text-white/70 hover:text-white transition">{t("footer.help_center")}</Link>
+              <Link to="/faq" className="block text-xs text-white/70 hover:text-white transition">{t("footer.faq")}</Link>
+              <a href="/#compare" className="block text-xs text-white/70 hover:text-white transition">{t("nav.compare")}</a>
+              <a href="/#portal" className="block text-xs text-white/70 hover:text-white transition">{t("footer.fulfillment")}</a>
             </div>
           </div>
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.company")}</h4>
             <div className="space-y-2">
-              <button onClick={()=>window.location.href="/blog"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("nav.blog")}</button>
-              <button onClick={()=>window.location.href="/about"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.about")}</button>
-              <button onClick={()=>window.location.href="/contact"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.contact")}</button>
+              <Link to="/blog" className="block text-xs text-white/70 hover:text-white transition">{t("nav.blog")}</Link>
+              <Link to="/about" className="block text-xs text-white/70 hover:text-white transition">{t("footer.about")}</Link>
+              <Link to="/contact" className="block text-xs text-white/70 hover:text-white transition">{t("footer.contact")}</Link>
             </div>
           </div>
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-4">{t("nav.legal")}</h4>
             <div className="space-y-2">
-              <button onClick={() => window.location.href="/privacy"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.privacy")}</button>
-              <button onClick={() => window.location.href="/terms"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.terms")}</button>
-              <button onClick={() => window.location.href="/refund"} className="block text-xs text-white/70 hover:text-white bg-transparent border-none p-0 cursor-pointer transition">{t("footer.refund")}</button>
+              <Link to="/privacy" className="block text-xs text-white/70 hover:text-white transition">{t("footer.privacy")}</Link>
+              <Link to="/terms" className="block text-xs text-white/70 hover:text-white transition">{t("footer.terms")}</Link>
+              <Link to="/refund" className="block text-xs text-white/70 hover:text-white transition">{t("footer.refund")}</Link>
             </div>
           </div>
         </div>
@@ -267,7 +262,5 @@ export default function App() {
     </CartProvider>
   );
 }
-
-
 
 

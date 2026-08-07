@@ -100,6 +100,12 @@ export function useWooCart() {
     } catch { /* silent fail - keep local cart */ }
   }, []);
 
+  const syncPending = useCallback(async () => {
+    if (pendingRef.current.length === 0) return;
+    const items = [...pendingRef.current];
+    pendingRef.current = [];
+    try { await xhr("POST", SYNC, { items }); } catch { /* keep local cart */ }
+  }, []);
 
   const addToCart = useCallback((slug: string, name: string, price: number, qty = 1) => {
     // 1. Update local state immediately
@@ -123,12 +129,8 @@ export function useWooCart() {
     // 2. Debounced sync to WooCommerce (batches rapid adds)
     pendingRef.current.push({ slug, qty });
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      const items = [...pendingRef.current];
-      pendingRef.current = [];
-      xhr("POST", SYNC, { items }).catch(() => {});
-    }, 3000);
-  }, []);
+    debounceRef.current = setTimeout(() => { syncPending(); }, 250);
+  }, [syncPending]);
 
   const checkout = useCallback(async () => {
     // Flush pending debounced sync first
@@ -136,24 +138,22 @@ export function useWooCart() {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
     }
-    if (pendingRef.current.length > 0) {
-      const pending = [...pendingRef.current];
-      pendingRef.current = [];
-      try { await xhr("POST", SYNC, { items: pending }); } catch {}
-    }
+    await syncPending();
     // Then sync ALL items to WC and redirect
-    const items = cart.items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
+    const items = loadCart().items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
     const encoded = encodeURIComponent(JSON.stringify(items));
     window.location.href = '/checkout-sync.php?items=' + encoded;
-  }, [cart]);
+  }, [syncPending]);
 
   const buyNow = useCallback(async (slug: string, name: string, price: number) => {
     addToCart(slug, name, price, 1);
-    // Let local state update, then redirect to checkout-sync with this item
-    setTimeout(() => {
-      window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
-    }, 100);
-  }, [addToCart]);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+      debounceRef.current = null;
+    }
+    await syncPending();
+    window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
+  }, [addToCart, syncPending]);
 
   const clearCart = useCallback(() => {
     saveCart(EMPTY);

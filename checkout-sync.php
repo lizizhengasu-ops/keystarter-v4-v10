@@ -3,6 +3,9 @@
 // v5.14.3 - Fixed: save WC session cookie so /checkout/ recognizes the cart
 require_once "/var/www/keys-starter.com/wp-load.php";
 
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+
 $items_json = isset($_GET["items"]) ? stripslashes($_GET["items"]) : "[]";
 $items = json_decode($items_json, true);
 
@@ -35,6 +38,8 @@ if ($items && is_array($items) && function_exists("WC")) {
     // CRITICAL: Set the WC session cookie so the browser sends it to /checkout/
     if (WC()->session) {
         WC()->session->set_customer_session_cookie(true);
+        wc_setcookie("woocommerce_items_in_cart", "1");
+        wc_setcookie("woocommerce_cart_hash", WC()->cart->get_cart_hash());
     }
 }
 

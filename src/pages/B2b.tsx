@@ -119,27 +119,27 @@ export default function B2bPage() {
       <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
         <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
       </div>
-                  <input type="text" placeholder="Company / Organization Name" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} required autoFocus
+                  <input type="text" name="company" placeholder="Company / Organization Name" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} required autoFocus
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.company && <p className="text-red-500 text-xs">{errors.company}</p>}
       
       <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.estimated_licenses")}</label>
-      <select value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
+      <select name="units" value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>5-20 Units</option><option>21-50 Units</option><option>51-200 Units</option><option>200+ Units</option>
       </select>
       
       <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.primary_needs")}</label>
-      <select value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
+      <select name="product" value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>{t("b2b.product_windows11")}</option><option>{t("b2b.product_windows10")}</option><option>{t("b2b.product_office")}</option><option>{t("b2b.product_server")}</option><option>{t("b2b.product_other")}</option>
       </select>
       
-      <input type="text" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
+      <input type="text" name="contact" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.contact && <p className="text-red-500 text-xs">{errors.contact}</p>}
       
-      <input type="text" placeholder="Phone / Email" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required
+      <input type="text" name="phone" placeholder="Phone / Email" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
                   

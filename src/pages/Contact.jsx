@@ -90,23 +90,23 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit}>
                 <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
-                  <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
+                  <input name="website" tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
                 </div>
                 <div className="mb-4">
                   <label className="text-sm font-semibold block mb-1">{t("contact.name")}</label>
-                  <input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
+                  <input name="name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
                     className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" />
                   {errs.name && <p className="text-red-500 text-xs mt-1">{errs.name}</p>}
                 </div>
                 <div className="mb-4">
                   <label className="text-sm font-semibold block mb-1">{t("contact.email")}</label>
-                  <input value={form.email} onChange={e=>setForm({...form,email:e.target.value})} type="email" required
+                  <input name="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} type="email" required
                     className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" />
                   {errs.email && <p className="text-red-500 text-xs mt-1">{errs.email}</p>}
                 </div>
                 <div className="mb-4">
                   <label className="text-sm font-semibold block mb-1">{t("contact.subject")}</label>
-                  <select value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}
+                  <select name="subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}
                     className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm bg-white">
                     <option value="general">{t("contact.general")}</option>
                     <option value="tech">{t("contact.tech")}</option>
@@ -117,7 +117,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mb-4">
                   <label className="text-sm font-semibold block mb-1">{t("contact.message")}</label>
-                  <textarea value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
+                  <textarea name="message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
                     className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" />
                   {errs.message && <p className="text-red-500 text-xs mt-1">{errs.message}</p>}
                 </div>

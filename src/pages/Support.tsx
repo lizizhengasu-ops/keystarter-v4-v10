@@ -99,19 +99,19 @@ export default function SupportPage() {
   ) : (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
       <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
-        <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
+        <input name="website" tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
       </div>
-              <input type="text" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
+              <input type="text" name="name" placeholder="Name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required autoFocus
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.name && <p className="text-red-500 text-xs -mt-2">{errors.name}</p>}
-      <input type="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
+      <input type="email" name="email" placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.email && <p className="text-red-500 text-xs -mt-2">{errors.email}</p>}
-      <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
+      <input type="tel" name="phone" placeholder="Phone (optional)" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-              <input type="text" placeholder="Subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} required
+              <input type="text" name="subject" placeholder="Subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} required
                 className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
-      <textarea placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
+      <textarea name="message" placeholder="Message" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required rows={4}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm resize-none" />
       {errors.message && <p className="text-red-500 text-xs -mt-2">{errors.message}</p>}
               <button type="submit" disabled={formStatus==="sending"}
