@@ -1,6 +1,8 @@
 ﻿<?php
 // /cart-sync.php - Sync items to WooCommerce cart (JSON API, no redirect)
 require_once dirname(__FILE__) . '/wp-load.php';
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
 header("Content-Type: application/json; charset=utf-8");
 
 $input = json_decode(file_get_contents("php://input"), true);
@@ -34,6 +36,18 @@ foreach ($items as $item) {
     $qty = max(1, min(99, intval(is_array($item) ? ($item["qty"] ?? 1) : ($item->qty ?? 1))));
     $pid = $slug_map[$slug] ?? 0;
     if ($pid > 0) WC()->cart->add_to_cart($pid, $qty);
+}
+
+// Persist the WC cart into session, save it, then send the session cookie
+// so /cart/ and /checkout/ recognize this cart.
+if (WC()->cart && isset(WC()->cart->session)) {
+    WC()->cart->session->set_session();
+}
+if (WC()->session) {
+    WC()->session->save_data();
+    WC()->session->set_customer_session_cookie(true);
+    wc_setcookie("woocommerce_items_in_cart", "1");
+    wc_setcookie("woocommerce_cart_hash", WC()->cart->get_cart_hash());
 }
 
 echo json_encode(["ok" => true, "count" => WC()->cart->get_cart_contents_count()]);
