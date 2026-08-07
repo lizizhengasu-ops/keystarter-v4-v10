@@ -74,6 +74,10 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
   });
 }
 
+function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | undefined> {
+  return Promise.race([p, new Promise<undefined>((r) => setTimeout(() => r(undefined), ms))]);
+}
+
 export function useWooCart() {
   const [cart, setCart] = useState<WCCart>(loadCart);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -138,7 +142,7 @@ export function useWooCart() {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
     }
-    await syncPending();
+    await withTimeout(syncPending(), 5000);
     // Then sync ALL items to WC and redirect
     const items = loadCart().items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
     const encoded = encodeURIComponent(JSON.stringify(items));
@@ -150,11 +154,11 @@ export function useWooCart() {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
     }
-    await syncPending();
+    await withTimeout(syncPending(), 4000);
   }, [syncPending]);
 
   const openCart = useCallback(async () => {
-    await flushCart();
+    await withTimeout(flushCart(), 4000);
     window.location.href = '/cart/';
   }, [flushCart]);
 
@@ -164,7 +168,7 @@ export function useWooCart() {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;
     }
-    await syncPending();
+    await withTimeout(syncPending(), 5000);
     window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
   }, [addToCart, syncPending]);
 
