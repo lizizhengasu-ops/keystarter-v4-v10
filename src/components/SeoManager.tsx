@@ -118,15 +118,25 @@ function setCanonical(href: string) {
 }
 
 function setJsonLd(data: object | null) {
-  const id = "seo-jsonld";
-  document.getElementById(id)?.remove();
+  // Single owner of structured data: drop any JSON-LD injected by the edge
+  // Worker or a previous route before appending the current block.
+  document.head
+    .querySelectorAll('script[type="application/ld+json"]')
+    .forEach((el) => el.remove());
   if (!data) return;
   const script = document.createElement("script");
   script.type = "application/ld+json";
-  script.id = id;
+  script.id = "seo-jsonld";
   script.textContent = JSON.stringify(data);
   document.head.appendChild(script);
 }
+
+const ORG_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: SITE,
+};
 
 export default function SeoManager() {
   const { pathname } = useLocation();
@@ -160,9 +170,10 @@ export default function SeoManager() {
     if (path === "/") {
       jsonLd = {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: SITE_NAME,
-        url: SITE,
+        "@graph": [
+          ORG_JSONLD,
+          { "@type": "WebSite", name: SITE_NAME, url: SITE },
+        ],
       };
     } else if (product) {
       jsonLd = {
@@ -173,12 +184,13 @@ export default function SeoManager() {
         brand: { "@type": "Brand", name: "Microsoft" },
         offers: {
           "@type": "Offer",
-          price: product.p,
-          priceCurrency: "USD",
           availability: "https://schema.org/InStock",
           url: `${SITE}/product/${product.slug}`,
+          // Price intentionally omitted: WooCommerce is the single source of truth.
         },
       };
+    } else {
+      jsonLd = ORG_JSONLD;
     }
     setJsonLd(jsonLd);
   }, [pathname]);
