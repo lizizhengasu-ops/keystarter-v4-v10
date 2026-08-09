@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react
 import { useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
 import WooCartFlyout from "./components/WooCartFlyout";
+import SeoManager from "./components/SeoManager";
 import { CartProvider, useCart } from "./data/CartContext";
 import HomePage from "./pages/Home";
 import StorePage from "./pages/Store";
@@ -231,6 +232,7 @@ export default function App() {
   return (
     <CartProvider>
     <BrowserRouter>
+          <SeoManager />
           <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
