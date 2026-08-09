@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { fetchProducts } from '../api/woocommerce';
 import type { SPAProduct } from '../api/woocommerce';
 import Portal from '../Portal';
@@ -345,8 +346,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialOfferSkus.map((sku) => (
-              <div key={sku.id} onClick={() => window.location.href="/product/"+sku.id}
+              <div key={sku.id}
                 className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-6 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
+                <Link to={`/product/${sku.id}`} aria-label={sku.title} className="absolute inset-0 z-10" />
                 <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -372,7 +374,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                    </div>
                  </div>
                   <CountdownTimer className="mb-4" />
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 relative z-20">
                     <button onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }}
                       className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.add_to_cart', 'Add to Cart')}
@@ -432,9 +434,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             {filteredSkus.map((sku) => (
               <div 
                 key={sku.id} 
-                onClick={() => window.location.href='/product/'+sku.id} 
                 className={`bg-white v5-card rounded-2xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"border-[#ff6b35]/30":"border-[#e8e8ed]"} p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow relative`}
               >
+                <Link to={`/product/${sku.id}`} aria-label={sku.title} className="absolute inset-0 z-10" />
                 {SPECIAL_OFFER_IDS.includes(sku.id) && <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>}
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -471,7 +473,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   </div>
                   {SPECIAL_OFFER_IDS.includes(sku.id) && <CountdownTimer className="mb-4" />}
                   
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 relative z-20">
                     <button 
                       onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }} 
                       className="flex-1 border-2 border-[#7c3aed] text-[#7c3aed] hover:bg-blue-50 text-xs font-semibold py-2.5 rounded-xl transition"

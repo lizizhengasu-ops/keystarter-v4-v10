@@ -183,7 +183,7 @@ function Layout({ children }: { children: any }) {
           <h4 className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">{t("footer.stay_updated")}</h4>
           <p className="text-xs text-white/50 mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#7c3aed]" />
+            <input id="newsletter-email" name="email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-[#7c3aed]" />
             <button onClick={function(){ const el=document.getElementById("newsletter-email") as HTMLInputElement | null; if(el&&el.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:el.value})}).then(function(r){return r.json()}).then(function(d){ el.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>
@@ -211,9 +211,9 @@ function Layout({ children }: { children: any }) {
         <div className="flex flex-col justify-between text-xs text-[#86868b] gap-4 md:flex-row">
           <p>{t("footer.rights_ext")}</p>
           <div className="flex space-x-4">
-            <button onClick={() => window.location.href="/disclaimer"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.disclaimer")}</button>
-            <button onClick={() => window.location.href="/privacy"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.privacy")}</button>
-            <button onClick={() => window.location.href="/licensing"} className="hover:text-white bg-transparent border-none p-0 cursor-pointer text-xs">{t("footer.licensing")}</button>
+            <Link to="/disclaimer" className="hover:text-white text-xs">{t("footer.disclaimer")}</Link>
+            <Link to="/privacy" className="hover:text-white text-xs">{t("footer.privacy")}</Link>
+            <Link to="/licensing" className="hover:text-white text-xs">{t("footer.licensing")}</Link>
           </div>
         </div>
       </div>
@@ -262,4 +262,3 @@ export default function App() {
     </CartProvider>
   );
 }
-
