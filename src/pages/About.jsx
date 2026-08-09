@@ -147,13 +147,13 @@ export default function AboutPage() {
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e8e8ed]">
             <img
               src="/assets/images/about/approval-cert.webp"
-              alt="Microsoft Gold Partner Certificate - Shenzhen LogiCtech Technology Co., Ltd."
+              alt="Microsoft Gold Partner Certificate - Shenzhen Luojike Technology Co., Ltd. (LogiCtech)"
               className="w-full max-w-xl mx-auto rounded-lg border border-[#f0f0f2]"
               loading="lazy"
             />
             <p className="text-xs text-[#86868b] mt-4 text-center max-w-xl mx-auto">
-              深圳市络基刻科技有限公司 / Shenzhen LogiCtech Technology Co., Ltd. is certified as a Microsoft Gold Partner with
-              Silver Application Development and Silver Small and Midmarket Cloud Solutions competencies.
+              深圳市络基刻科技有限公司 / Shenzhen Luojike Technology Co., Ltd. (LogiCtech) is certified as a Microsoft Gold
+              Partner with Silver Application Development and Silver Small and Midmarket Cloud Solutions competencies.
             </p>
             <div className="flex flex-wrap justify-center gap-2 mt-5">
               <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Microsoft Gold Partner</span>
