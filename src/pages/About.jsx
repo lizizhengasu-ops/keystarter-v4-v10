@@ -163,6 +163,19 @@ export default function AboutPage() {
               <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Trellix</span>
             </div>
           </div>
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e8e8ed] mt-6">
+            <h3 className="text-sm font-bold mb-3">Verified Microsoft AppSource Partner</h3>
+            <img
+              src="/assets/images/about/appsource-partner.webp"
+              alt="Shenzhen LogiCtech Technology Co., Ltd. listed on Microsoft AppSource partner directory"
+              className="w-full max-w-3xl mx-auto rounded-lg border border-[#f0f0f2]"
+              loading="lazy"
+            />
+            <p className="text-xs text-[#86868b] mt-4 text-center max-w-3xl mx-auto">
+              Shenzhen LogiCtech Technology Co., Ltd. appears in the Microsoft AppSource partner directory as a verified
+              Microsoft partner.
+            </p>
+          </div>
         </div>
       </section>
 
