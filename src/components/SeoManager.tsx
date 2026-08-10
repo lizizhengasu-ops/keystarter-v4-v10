@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { products } from "../data/products";
 import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
+import { BLOG_ARTICLES } from "../data/blog-articles";
 
 const SITE = "https://keys-starter.com";
 const SITE_NAME = "KeyStarter";
@@ -148,12 +149,18 @@ export default function SeoManager() {
       path.startsWith("/product/") && path.length > "/product/".length
         ? products.find((p) => p.slug === path.slice("/product/".length))
         : undefined;
-    const blogArticle = path.startsWith("/blog/") && path.length > "/blog/".length;
+    const blogSlug =
+      path.startsWith("/blog/") && path.length > "/blog/".length
+        ? path.slice("/blog/".length)
+        : null;
+    const article = blogSlug ? BLOG_ARTICLES[blogSlug] : undefined;
     const meta = product
       ? { title: `${product.n} — ${SITE_NAME}`, description: `${product.d} - ${product.specs.version}, ${product.specs.type}. Instant delivery with lifetime support.` }
-      : blogArticle
-        ? ROUTE_META["/blog"]
-        : ROUTE_META[path] ?? NOT_FOUND_META;
+      : article
+        ? { title: `${article.title} — ${SITE_NAME}`, description: article.description }
+        : blogSlug
+          ? ROUTE_META["/blog"]
+          : ROUTE_META[path] ?? NOT_FOUND_META;
 
     document.title = meta.title;
     upsertMeta("name", "description", meta.description);
@@ -161,7 +168,7 @@ export default function SeoManager() {
     upsertMeta("property", "og:title", meta.title);
     upsertMeta("property", "og:description", meta.description);
     upsertMeta("property", "og:url", `${SITE}${path}`);
-    upsertMeta("property", "og:type", product ? "product" : "website");
+    upsertMeta("property", "og:type", product ? "product" : article ? "article" : "website");
     upsertMeta("property", "og:site_name", SITE_NAME);
     upsertMeta("name", "twitter:card", "summary");
     upsertMeta("name", "twitter:title", meta.title);
@@ -180,6 +187,18 @@ export default function SeoManager() {
           ORG_JSONLD,
           { "@type": "WebSite", name: SITE_NAME, url: SITE },
         ],
+      };
+    } else if (article) {
+      jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: article.title,
+        datePublished: article.datePublished,
+        dateModified: article.dateModified,
+        author: ORG_JSONLD,
+        publisher: ORG_JSONLD,
+        mainEntityOfPage: article.url,
+        url: article.url,
       };
     } else if (product) {
       jsonLd = {
