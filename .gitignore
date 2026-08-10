@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-seo-*/
+dist-ga4-*/
 dist-ssr
 *.local
 
