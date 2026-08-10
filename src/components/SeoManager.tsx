@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { products } from "../data/products";
+import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
 
 const SITE = "https://keys-starter.com";
 const SITE_NAME = "KeyStarter";
@@ -165,6 +166,11 @@ export default function SeoManager() {
     upsertMeta("name", "twitter:card", "summary");
     upsertMeta("name", "twitter:title", meta.title);
     upsertMeta("name", "twitter:description", meta.description);
+    const ogImage = product
+      ? PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE
+      : DEFAULT_OG_IMAGE;
+    upsertMeta("property", "og:image", ogImage);
+    upsertMeta("name", "twitter:image", ogImage);
 
     let jsonLd: object | null = null;
     if (path === "/") {
