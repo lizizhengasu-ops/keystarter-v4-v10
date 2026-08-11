@@ -219,7 +219,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {/* Hero Section - Platinum Digital Style */}
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
-          <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="auto" poster="/videos/enterprise-bg-v32-poster.png">
+          <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="none" poster="/videos/enterprise-bg-v32-poster.webp">
             <source src="/videos/enterprise-bg-v32.mp4" type="video/mp4" />
             <source src="/videos/enterprise-bg-v32.webm" type="video/webm" />
           </video>

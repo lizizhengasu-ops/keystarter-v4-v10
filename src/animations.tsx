@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 export default function AnimInit() {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    let cancelled = false;
+    (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ]);
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger);
     const has = (sel: string) => !!document.querySelector(sel);
     
     // Hero entrance
@@ -59,6 +65,8 @@ export default function AnimInit() {
     if (has('nav')) gsap.from('nav', {y:-44,opacity:0,duration:0.5,ease:'power2.out',delay:0.2});
     
     setTimeout(() => ScrollTrigger.refresh(), 200);
+    })();
+    return () => { cancelled = true; };
   }, []);
   return null;
 }
