@@ -46,14 +46,6 @@ const CLIENTS = [
   { name: "SF Technology", file: "sftech.webp" },
 ];
 
-const PARTNERS = [
-  { name: "Microsoft", industry: "Software & Licensing", file: "microsoft.webp" },
-  { name: "Kylin", industry: "Operating Systems", file: "kylin.webp" },
-  { name: "UOS", industry: "Operating Systems", file: "uniontech.webp" },
-  { name: "Acronis", industry: "Backup & Data Protection", file: null },
-  { name: "Trellix", industry: "Endpoint Security", file: null },
-];
-
 const INDUSTRIES = [
   "about.ind1",
   "about.ind2",
@@ -84,20 +76,6 @@ export default function AboutPage() {
   const { t } = useTranslation();
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
-      <style>{`
-        @keyframes ks-marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        .ks-marquee-track {
-          display: flex;
-          width: max-content;
-          animation: ks-marquee 30s linear infinite;
-        }
-        .ks-marquee:hover .ks-marquee-track {
-          animation-play-state: paused;
-        }
-      `}</style>
       <section className="px-6 py-12 border-b border-[#e8e8ed] bg-gradient-to-b from-white to-[#f5f5f7]">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-2">{t("about.title")}</h1>
@@ -180,37 +158,6 @@ export default function AboutPage() {
               loading="lazy"
             />
             <p className="text-xs text-[#86868b] mt-4 text-center max-w-3xl mx-auto">{t("about.appsource_desc")}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-16 bg-white border-y border-[#e8e8ed]">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-semibold text-[#7c3aed] uppercase mb-3">{t("about.partners_eyebrow")}</p>
-          <h2 className="text-2xl font-bold mb-3">{t("about.partners_label")}</h2>
-          <p className="text-sm text-[#86868b] max-w-2xl mb-8">{t("about.partners_desc")}</p>
-          <div className="ks-marquee overflow-hidden py-2">
-            <div className="ks-marquee-track gap-4">
-              {[...PARTNERS, ...PARTNERS].map((partner, idx) => (
-                <div
-                  key={`${partner.name}-${idx}`}
-                  className="w-56 shrink-0 bg-[#f5f5f7] rounded-xl border border-[#e8e8ed] p-4 flex flex-col items-center justify-center min-h-[112px]"
-                >
-                  {partner.file ? (
-                    <img
-                      src={`/assets/images/about/partners/${partner.file}`}
-                      alt={`${partner.name} logo`}
-                      className="max-h-9 max-w-[10rem] object-contain mb-2"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span className="text-lg font-extrabold tracking-wide text-[#1d1d1f] mb-2">{partner.name}</span>
-                  )}
-                  <span className="text-[11px] font-semibold text-[#86868b] uppercase">{partner.name}</span>
-                  <span className="text-[11px] text-[#515154] mt-0.5">{partner.industry}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
