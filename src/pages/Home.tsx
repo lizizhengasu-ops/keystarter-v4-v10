@@ -88,7 +88,7 @@ const [activeTab, setActiveTab] = useState('all');
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
-    const id = window.requestIdleCallback(() => setVideoReady(true), { timeout: 2500 });
+    const id = window.requestIdleCallback(() => setVideoReady(true), { timeout: 4000 });
     return () => window.cancelIdleCallback(id);
   }, []);
 

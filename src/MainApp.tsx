@@ -1,36 +1,36 @@
 // v6.1.23f
 declare const __BUILD_TIME__: string;
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import SearchOverlay from "./SearchOverlay";
 import WooCartFlyout from "./components/WooCartFlyout";
 import SeoManager from "./components/SeoManager";
 import { CartProvider, useCart } from "./data/CartContext";
 import HomePage from "./pages/Home";
-import StorePage from "./pages/Store";
-import ProductPage from "./pages/Product";
-import SupportPage from "./pages/Support";
-import B2bPage from "./pages/B2b";
-import BlogPage from "./pages/Blog";
-import BlogArticlePage from "./pages/BlogArticle";
+const StorePage = lazy(() => import("./pages/Store"));
+const ProductPage = lazy(() => import("./pages/Product"));
+const SupportPage = lazy(() => import("./pages/Support"));
+const B2bPage = lazy(() => import("./pages/B2b"));
+const BlogPage = lazy(() => import("./pages/Blog"));
+const BlogArticlePage = lazy(() => import("./pages/BlogArticle"));
 import AnimInit from "./animations";
 import NavDrawer from "./NavDrawer";
 import WhatsAppButton from "./components/WhatsAppButton";
-import NotFound from "./pages/NotFound";
-import FaqPage from "./pages/Faq";
-import ContactPage from "./pages/Contact";
+const NotFound = lazy(() => import("./pages/NotFound"));
+const FaqPage = lazy(() => import("./pages/Faq"));
+const ContactPage = lazy(() => import("./pages/Contact"));
 // B1785212195_1743202026
-import AccountPage from "./pages/Account";
-import AboutPage from "./pages/About";
-import ChangelogPage from "./pages/Changelog";
-import CartPage from "./pages/Cart";
+const AccountPage = lazy(() => import("./pages/Account"));
+const AboutPage = lazy(() => import("./pages/About"));
+const ChangelogPage = lazy(() => import("./pages/Changelog"));
+const CartPage = lazy(() => import("./pages/Cart"));
 import CookieConsent from "./components/CookieConsent";
-import PrivacyPage from "./pages/Privacy";
-import TermsPage from "./pages/Terms";
-import RefundPage from "./pages/Refund";
-import DisclaimerPage from "./pages/Disclaimer";
-import LicensingPage from "./pages/Licensing";
-import CookiesPage from "./pages/Cookies";
+const PrivacyPage = lazy(() => import("./pages/Privacy"));
+const TermsPage = lazy(() => import("./pages/Terms"));
+const RefundPage = lazy(() => import("./pages/Refund"));
+const DisclaimerPage = lazy(() => import("./pages/Disclaimer"));
+const LicensingPage = lazy(() => import("./pages/Licensing"));
+const CookiesPage = lazy(() => import("./pages/Cookies"));
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
@@ -84,7 +84,7 @@ function Layout({ children }: { children: any }) {
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
-      <div className="fixed top-0 left-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ width: scrollPct + "%", transition: "width 0.1s" }} />
+      <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ transform: `scaleX(${scrollPct / 100})`, transformOrigin: "left", transition: "transform 0.1s" }} />
 
       <nav className="fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -94,7 +94,7 @@ function Layout({ children }: { children: any }) {
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label="KeyStarter Home">
             <KeyStarterLogo />
             <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
-            <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-[10px] font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
+            <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
             {location.pathname === "/" ? (
@@ -127,7 +127,7 @@ function Layout({ children }: { children: any }) {
             <button onClick={() => { flushCart(); setCartOpen(true); }} className="relative text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors" aria-label="Cart">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="8" y1="10" x2="8" y2="14"/></svg>
                 {cart.items_count > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#7c3aed] text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
                     {cart.items_count > 99 ? '99+' : cart.items_count}
                   </span>
                 )}
@@ -140,7 +140,9 @@ function Layout({ children }: { children: any }) {
 
       {/* V5.2: Page enter animation */}
       <main className="page-enter pt-12">
-        {children}
+        <Suspense fallback={<div className="min-h-[60vh]"></div>}>
+          {children}
+        </Suspense>
       </main>
 
       <footer className="bg-[#0b0b0d] text-white py-16 border-t border-white/10">
