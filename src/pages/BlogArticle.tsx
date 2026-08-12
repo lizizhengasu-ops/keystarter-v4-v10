@@ -36,7 +36,7 @@ export default function BlogArticlePage() {
       <div className="max-w-3xl mx-auto">
         <Link to="/blog" className="text-sm text-[#7c3aed] hover:underline mb-6 inline-block">&larr; {t("blog.back")}</Link>
         <h1 className="text-3xl font-bold mb-4">{stripTags(article.title.rendered)}</h1>
-        <div className="text-sm text-[#1d1d1f] leading-relaxed" dangerouslySetInnerHTML={{__html: sanitizeHtml(article.content.rendered)}} />
+        <div className="text-sm text-[#1d1d1f] leading-relaxed [content-visibility:auto] [contain-intrinsic-size:auto_700px]" dangerouslySetInnerHTML={{__html: sanitizeHtml(article.content.rendered)}} />
       </div>
     </div>
   );
