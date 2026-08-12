@@ -143,7 +143,7 @@ function Layout({ children }: { children: any }) {
         {children}
       </main>
 
-      <footer className="bg-[#0b0b0d] text-white py-16 border-t border-white/10 [text-shadow:0_1px_2px_rgba(0,0,0,0.9)]">
+      <footer className="bg-[#0b0b0d] text-white py-16 border-t border-white/10">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 mb-8">
           <div>
