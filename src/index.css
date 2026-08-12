@@ -91,3 +91,7 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/inter-latin-600.woff2') format('woff2'); }
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/inter-latin-700.woff2') format('woff2'); }
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/inter-latin-800.woff2') format('woff2'); }
+
+/* Micro-tune iter2 (Phase 2): CSS nav entrance (replaces GSAP nav animation) */
+@keyframes navFade { from { opacity: 0; transform: translateY(-44px); } to { opacity: 1; transform: none; } }
+.nav-fade { animation: navFade 0.5s ease-out; }

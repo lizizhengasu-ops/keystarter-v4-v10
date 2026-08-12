@@ -86,7 +86,7 @@ function Layout({ children }: { children: any }) {
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
       <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ transform: `scaleX(${scrollPct / 100})`, transformOrigin: "left", transition: "transform 0.1s" }} />
 
-      <nav className="fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
+      <nav className="nav-fade fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
                     <button onClick={()=>setNavOpen(true)} className="md:hidden text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors mr-2" aria-label="Menu">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>

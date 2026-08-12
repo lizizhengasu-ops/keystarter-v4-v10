@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 export default function AnimInit() {
   useEffect(() => {
     let cancelled = false;
+    const ANIM_SELECTORS = ['.hero-title', '.hero-subtitle', '.hero-cta', '.hero-link-large', '.float-in', '.scale-in', '.section-title', '.card-item', '.stagger-item', '.hero-image', '.parallax-up', '.parallax-slow', '.stagger-cards', '.content-block', '.section-in', '.img-zoom', '.fade-up', '.divider', '.text-reveal'];
+    if (!ANIM_SELECTORS.some((s) => document.querySelector(s))) return;
     (async () => {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import('gsap'),
@@ -62,7 +64,6 @@ export default function AnimInit() {
     if (has('.text-reveal')) gsap.from('.text-reveal', {y:10,opacity:0,duration:0.4,stagger:0.03,ease:'power1.out',scrollTrigger:{trigger:'.text-reveal',start:'top 85%'}});
     
     // Nav entrance
-    if (has('nav')) gsap.from('nav', {y:-44,opacity:0,duration:0.5,ease:'power2.out',delay:0.2});
     
     setTimeout(() => ScrollTrigger.refresh(), 200);
     })();
