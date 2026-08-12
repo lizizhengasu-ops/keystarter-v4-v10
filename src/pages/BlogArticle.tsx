@@ -13,7 +13,18 @@ export default function BlogArticlePage() {
     fetch("https://keys-starter.com/wp-json/wp/v2/posts?slug="+slug)
       .then(r => r.json()).then((d:any[]) => { if (d.length>0) setArticle(d[0]); setLoading(false); }).catch(() => setLoading(false));
   }, [slug]);
-  if (loading) return <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12"><div className="max-w-3xl mx-auto text-center py-20 text-[#86868b]">{t("blog.loading_article")}</div></div>;
+  if (loading) return (
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
+      <div className="max-w-3xl mx-auto">
+        <div className="shimmer h-8 w-3/4 mb-4 rounded" />
+        <div className="shimmer h-4 w-1/3 mb-8 rounded" />
+        <div className="aspect-video shimmer rounded-xl mb-8" />
+        <div className="shimmer h-4 w-full mb-2 rounded" />
+        <div className="shimmer h-4 w-full mb-2 rounded" />
+        <div className="shimmer h-4 w-2/3 rounded" />
+      </div>
+    </div>
+  );
   if (!article) return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
       <div className="max-w-3xl mx-auto text-center py-20"><div className="text-lg text-[#86868b] mb-4">{t("blog.not_found")}</div>

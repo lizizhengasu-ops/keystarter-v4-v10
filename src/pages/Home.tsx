@@ -85,11 +85,14 @@ const [activeTab, setActiveTab] = useState('all');
   // Custom Toast State
   const [heroPersona, setHeroPersona] = useState("retail");
   const [toast, setToast] = useState({ visible: false, message: '', icon: '🚀' });
-  const [videoReady, setVideoReady] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    const id = window.requestIdleCallback(() => setVideoReady(true), { timeout: 4000 });
-    return () => window.cancelIdleCallback(id);
+    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(m.matches);
+    const h = () => setReduceMotion(m.matches);
+    m.addEventListener("change", h);
+    return () => m.removeEventListener("change", h);
   }, []);
 
   // Helper smooth scrolling for single page navigation
@@ -227,9 +230,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
           <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="none" poster="/videos/enterprise-bg-v32-poster.webp">
-            {videoReady && (
+            {!reduceMotion && (
               <>
-                <source src="/videos/enterprise-bg-v32.mp4" type="video/mp4" />
+                <source src="/videos/enterprise-bg-v32-lite.mp4" type="video/mp4" />
                 <source src="/videos/enterprise-bg-v32.webm" type="video/webm" />
               </>
             )}

@@ -45,8 +45,19 @@ export default function BlogPage() {
   if (loading)
     return (
       <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
-        <div className="max-w-5xl mx-auto text-center py-20 text-[#86868b]">
-          {t("blog.loading")}
+        <div className="max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-[#e8e8ed]">
+                <div className="aspect-video shimmer" />
+                <div className="p-5">
+                  <div className="shimmer h-4 w-3/4 mb-3 rounded" />
+                  <div className="shimmer h-3 w-full mb-2 rounded" />
+                  <div className="shimmer h-3 w-1/2 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
