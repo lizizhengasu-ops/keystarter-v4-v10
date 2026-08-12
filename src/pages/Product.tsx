@@ -77,9 +77,9 @@ const [reviews, setReviews] = useState([]);
       <div className="mt-6 border-t border-[#e8e8ed] pt-6">
         <h3 className="text-base font-bold mb-4">How It Works</h3>
         <div className="grid grid-cols-3 gap-4">
-          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">1</span></div><div className="text-xs font-semibold mb-1">Purchase & Pay</div><div className="text-[10px] text-[#86868b]">Complete secure checkout via PayPal or Stripe</div></div>
-          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">2</span></div><div className="text-xs font-semibold mb-1">Receive Instantly</div><div className="text-[10px] text-[#86868b]">License key delivered to your email within minutes</div></div>
-          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">3</span></div><div className="text-xs font-semibold mb-1">Activate & Enjoy</div><div className="text-[10px] text-[#86868b]">Follow email instructions to activate your license</div></div>
+          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">1</span></div><div className="text-xs font-semibold mb-1">Purchase & Pay</div><div className="text-xs text-[#86868b]">Complete secure checkout via PayPal or Stripe</div></div>
+          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">2</span></div><div className="text-xs font-semibold mb-1">Receive Instantly</div><div className="text-xs text-[#86868b]">License key delivered to your email within minutes</div></div>
+          <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">3</span></div><div className="text-xs font-semibold mb-1">Activate & Enjoy</div><div className="text-xs text-[#86868b]">Follow email instructions to activate your license</div></div>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@ const [reviews, setReviews] = useState([]);
       {details && details.tags && details.tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mt-3">
           {details.tags.map(function(tag:string,i:number){return(
-            <span key={i} className="bg-[#7c3aed]/10 text-[#7c3aed] rounded-full px-2.5 py-1 text-[11px] font-medium">{tag}</span>
+            <span key={i} className="bg-[#7c3aed]/10 text-[#7c3aed] rounded-full px-2.5 py-1 text-xs font-medium">{tag}</span>
           );})}
         </div>
       )}
@@ -147,7 +147,7 @@ const [reviews, setReviews] = useState([]);
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div>{imageBlock}</div>
         <div>
-          <div className="text-[10px] text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
+          <div className="text-xs text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
           <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
           <div className="flex items-center gap-2 mb-4">
             {(() => {
@@ -160,7 +160,7 @@ const [reviews, setReviews] = useState([]);
                     {new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(product.price)}
                   </span>
                   {hasReg && reg ? <span className="text-xs text-[#86868b] line-through">{new Intl.NumberFormat("en",{style:"currency",currency:"USD"}).format(reg)}</span> : null}
-                  {hasReg && off > 0 && <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save {off}%</span>}
+                  {hasReg && off > 0 && <span className="text-xs bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded">Save {off}%</span>}
                 </>
               );
             })()}
@@ -176,7 +176,7 @@ const [reviews, setReviews] = useState([]);
             className="v5-btn w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.buy_now", "Buy Now")}
           </button>
-          <div className="grid grid-cols-3 gap-2 mt-2 px-1"><div className="text-center py-2 rounded-lg bg-green-50/50 border border-green-100"><svg className="w-4 h-4 mx-auto text-green-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><div className="text-[10px] font-semibold text-green-700">Secure Checkout</div><div className="text-[9px] text-green-600">SSL Encrypted</div></div><div className="text-center py-2 rounded-lg bg-blue-50/50 border border-blue-100"><svg className="w-4 h-4 mx-auto text-blue-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div className="text-[10px] font-semibold text-blue-700">Instant Delivery</div><div className="text-[9px] text-blue-600">Within 10 Minutes</div></div><div className="text-center py-2 rounded-lg bg-purple-50/50 border border-purple-100"><svg className="w-4 h-4 mx-auto text-purple-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><div className="text-[10px] font-semibold text-purple-700">Genuine License</div><div className="text-[9px] text-purple-600">100% Authentic</div></div></div>
+          <div className="grid grid-cols-3 gap-2 mt-2 px-1"><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><div className="text-xs font-semibold text-green-700">Secure Checkout</div><div className="text-xs text-[#7c3aed]">SSL Encrypted</div></div><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div className="text-xs font-semibold text-[#7c3aed]">Instant Delivery</div><div className="text-xs text-[#7c3aed]">Within 10 Minutes</div></div><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><div className="text-xs font-semibold text-[#7c3aed]">Genuine License</div><div className="text-xs text-[#7c3aed]">100% Authentic</div></div></div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8 pt-8 border-t border-[#e8e8ed]">

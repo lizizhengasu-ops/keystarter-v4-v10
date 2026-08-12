@@ -117,7 +117,7 @@ export default function BlogPage() {
                     <div className="flex items-center gap-2 mb-3">
                       <span
                         className={
-                          "text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full " +
+                          "text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full " +
                           (isDaily
                             ? "bg-[#7c3aed] text-white"
                             : "bg-[#f1edfb] text-[#7c3aed]")
@@ -125,7 +125,7 @@ export default function BlogPage() {
                       >
                         {isDaily ? "Windows AI News" : "Windows Guide"}
                       </span>
-                      <span className="text-[11px] text-[#86868b]">
+                      <span className="text-xs text-[#86868b]">
                         {new Date(p.date).toLocaleDateString()}
                       </span>
                     </div>

@@ -40,7 +40,7 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
                   <p className="text-xs font-semibold text-[#1d1d1f] truncate">
                     {item.name}
                   </p>
-                  <p className="text-[10px] text-[#86868b]">
+                  <p className="text-xs text-[#86868b]">
                     Qty: {item.quantity}
                   </p>
                 </div>

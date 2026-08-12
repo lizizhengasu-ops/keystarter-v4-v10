@@ -25,7 +25,7 @@ export function ProductComparison({ group }: { group: ComparisonGroup | null }) 
               {group.columns.map((col: any, ci: number) => (
                 <span key={ci} className="text-center min-w-[60px] px-2.5">
                   <span className="text-sm font-bold text-[#7c3aed]">${col.price}</span>
-                  {col.badge && <span className="block text-[10px] text-[#86868b] mt-0.5">{col.badge}</span>}
+                  {col.badge && <span className="block text-xs text-[#86868b] mt-0.5">{col.badge}</span>}
                 </span>
               ))}
             </div>

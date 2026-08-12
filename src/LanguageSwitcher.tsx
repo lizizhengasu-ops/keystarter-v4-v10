@@ -23,7 +23,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div ref={ref} className="relative">
-      <button onClick={function() { setOpen(!open); }} className="text-[#1d1d1f]/70 hover:text-[#7c3aed] text-[11px] font-semibold transition-colors uppercase tracking-wide" aria-label="Switch language">
+      <button onClick={function() { setOpen(!open); }} className="text-[#1d1d1f]/70 hover:text-[#7c3aed] text-xs font-semibold transition-colors uppercase tracking-wide" aria-label="Switch language">
         {LANG_NAMES[i18n.language] || i18n.language}
       </button>
       {open && (

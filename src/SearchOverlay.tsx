@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { products } from "./data/products";
+import { PRODUCT_IMAGES } from "./data/product-images";
 import Portal from "./Portal";
 import { useTranslation } from "react-i18next";
 
@@ -93,7 +94,9 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
                     }}
                     onMouseEnter={e => e.currentTarget.style.background = "#f5f5f7"}
                     onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
-                    <div style={{width:36,height:54,flexShrink:0}}><img alt="" /></div>
+                    <div style={{width:36,height:54,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden",borderRadius:6,background:"#f5f5f7"}}>
+                      {PRODUCT_IMAGES[p.slug] ? <img src={PRODUCT_IMAGES[p.slug]} alt="" style={{width:"100%",height:"100%",objectFit:"contain"}} /> : <span style={{fontSize:14,fontWeight:600,color:"#86868b"}}>{p.n[0]}</span>}
+                    </div>
                     <div style={{flex:1}}>
                       <p style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{p.n}</p>
                       <p style={{fontSize:12,color:"#6e6e73"}}>{p.d}</p>

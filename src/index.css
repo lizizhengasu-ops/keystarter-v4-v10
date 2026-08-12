@@ -72,3 +72,14 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 .faq-question::after { content: "+"; font-size: 20px; font-weight: 300; color: var(--v4-gray); flex-shrink: 0; transition: transform 0.3s, color 0.2s; }
 .faq-item[open] .faq-question::after { content: "\2212"; color: var(--v4-blue); }
 .faq-answer { font-size: 12px; line-height: 1.65; color: var(--v4-gray); padding: 0 16px 14px; }
+
+/* Micro-tune iter1 (test env only): accessibility and motion safety */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:focus-visible { outline: 2px solid #7c3aed; outline-offset: 2px; }

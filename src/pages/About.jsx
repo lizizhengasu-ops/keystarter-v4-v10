@@ -63,9 +63,9 @@ export default function AboutPage() {
           <h1 className="text-3xl font-bold mb-2">{t("about.title")}</h1>
           <p className="text-[#86868b] mb-6 text-lg max-w-2xl">{t("about.desc")}</p>
           <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold bg-[#7c3aed] text-white">Microsoft Gold Partner</span>
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-semibold bg-white border border-[#e8e8ed] text-[#515154]">{t("about.badge_distributor")}</span>
-            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[11px] font-semibold bg-white border border-[#e8e8ed] text-[#515154]">{t("about.badge_integration")}</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#7c3aed] text-white">Microsoft Gold Partner</span>
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">{t("about.badge_distributor")}</span>
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">{t("about.badge_integration")}</span>
           </div>
         </div>
       </section>
@@ -124,11 +124,11 @@ export default function AboutPage() {
             />
             <p className="text-xs text-[#86868b] mt-4 text-center max-w-xl mx-auto">{t("about.cert_desc")}</p>
             <div className="flex flex-wrap justify-center gap-2 mt-5">
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Microsoft Gold Partner</span>
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Kylin</span>
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">UOS</span>
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Acronis</span>
-              <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-[#0078d4]/10 text-[#0078d4]">Trellix</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">Microsoft Gold Partner</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">Kylin</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">UOS</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">Acronis</span>
+              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">Trellix</span>
             </div>
           </div>
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e8e8ed] mt-6">
@@ -184,15 +184,15 @@ export default function AboutPage() {
       <section className="px-6 pb-16">
         <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6">
           <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
-            <div className="text-3xl font-extrabold text-[#0078d4] mb-1">10K+</div>
+            <div className="text-3xl font-extrabold text-[#7c3aed] mb-1">10K+</div>
             <div className="text-xs text-[#86868b]">{t("about.stat_customers")}</div>
           </div>
           <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
-            <div className="text-3xl font-extrabold text-[#0078d4] mb-1">5+</div>
+            <div className="text-3xl font-extrabold text-[#7c3aed] mb-1">5+</div>
             <div className="text-xs text-[#86868b]">{t("about.stat_experience")}</div>
           </div>
           <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] text-center">
-            <div className="text-3xl font-extrabold text-[#0078d4] mb-1">99.9%</div>
+            <div className="text-3xl font-extrabold text-[#7c3aed] mb-1">99.9%</div>
             <div className="text-xs text-[#86868b]">{t("about.stat_delivery")}</div>
           </div>
         </div>
