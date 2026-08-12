@@ -147,69 +147,69 @@ function Layout({ children }: { children: any }) {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/5 mb-8">
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-4">{t("nav.products")}</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">{t("nav.products")}</h4>
             <div className="space-y-2">
-              <Link to="/products" className="block text-xs text-white/90 hover:text-white transition">Products</Link>
-              <a href="/#store" className="block text-xs text-white/90 hover:text-white transition">{t("nav.store")}</a>
-              <Link to="/b2b" className="block text-xs text-white/90 hover:text-white transition">{t("nav.enterprise")}</Link>
+              <Link to="/products" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">Products</Link>
+              <a href="/#store" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("nav.store")}</a>
+              <Link to="/b2b" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("nav.enterprise")}</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-4">{t("footer.support")}</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">{t("footer.support")}</h4>
             <div className="space-y-2">
-              <Link to="/support" className="block text-xs text-white/90 hover:text-white transition">{t("footer.help_center")}</Link>
-              <Link to="/faq" className="block text-xs text-white/90 hover:text-white transition">{t("footer.faq")}</Link>
-              <a href="/#compare" className="block text-xs text-white/90 hover:text-white transition">{t("nav.compare")}</a>
-              <a href="/#portal" className="block text-xs text-white/90 hover:text-white transition">{t("footer.fulfillment")}</a>
+              <Link to="/support" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.help_center")}</Link>
+              <Link to="/faq" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.faq")}</Link>
+              <a href="/#compare" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("nav.compare")}</a>
+              <a href="/#portal" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.fulfillment")}</a>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-4">{t("nav.company")}</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">{t("nav.company")}</h4>
             <div className="space-y-2">
-              <Link to="/blog" className="block text-xs text-white/90 hover:text-white transition">{t("nav.blog")}</Link>
-              <Link to="/about" className="block text-xs text-white/90 hover:text-white transition">{t("footer.about")}</Link>
-              <Link to="/contact" className="block text-xs text-white/90 hover:text-white transition">{t("footer.contact")}</Link>
+              <Link to="/blog" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("nav.blog")}</Link>
+              <Link to="/about" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.about")}</Link>
+              <Link to="/contact" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.contact")}</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-4">{t("nav.legal")}</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">{t("nav.legal")}</h4>
             <div className="space-y-2">
-              <Link to="/privacy" className="block text-xs text-white/90 hover:text-white transition">{t("footer.privacy")}</Link>
-              <Link to="/terms" className="block text-xs text-white/90 hover:text-white transition">{t("footer.terms")}</Link>
-              <Link to="/refund" className="block text-xs text-white/90 hover:text-white transition">{t("footer.refund")}</Link>
+              <Link to="/privacy" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.privacy")}</Link>
+              <Link to="/terms" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.terms")}</Link>
+              <Link to="/refund" className="block text-[13px] font-medium text-white hover:text-[#c4b5fd] transition">{t("footer.refund")}</Link>
             </div>
           </div>
         </div>
         <div className="border-b border-white/5 mb-8 pb-8 text-center">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-3">{t("footer.stay_updated")}</h4>
-          <p className="text-xs text-white/75 mb-4">{t("footer.newsletter")}</p>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3">{t("footer.stay_updated")}</h4>
+          <p className="text-[13px] text-white/90 mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" name="email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-xs bg-white/10 border border-white/10 text-white placeholder-white/65 focus:outline-none focus:border-[#7c3aed]" />
+            <input id="newsletter-email" name="email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-[13px] bg-white/10 border border-white/15 text-white placeholder-white/75 focus:outline-none focus:border-[#7c3aed]" />
             <button onClick={function(){ const el=document.getElementById("newsletter-email") as HTMLInputElement | null; if(el&&el.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:el.value})}).then(function(r){return r.json()}).then(function(d){ el.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/5 md:flex-row text-center md:text-left">
           <div>
             <span className="text-lg font-bold text-white">{t("footer.brand_title")}</span>
-            <p className="text-xs text-[#c7c7cc] mt-1">{t("footer.brand_desc")}</p>
+            <p className="text-[13px] text-white/90 mt-1">{t("footer.brand_desc")}</p>
           </div>
           <div className="flex items-center space-x-3 my-3 md:my-0">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors" aria-label="Twitter">
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white transition-colors" aria-label="Twitter">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors" aria-label="LinkedIn">
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white transition-colors" aria-label="LinkedIn">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors" aria-label="YouTube">
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white transition-colors" aria-label="YouTube">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
           </div>
-          <div className="flex items-center space-x-4 text-white/80 text-xs">
+          <div className="flex items-center space-x-4 text-white/90 text-[13px]">
             <span>{t("footer.secure")}</span>
             <span>{t("footer.payments")}</span>
           </div>
         </div>
-        <div className="flex flex-col justify-between text-xs text-[#c7c7cc] gap-4 md:flex-row">
+        <div className="flex flex-col justify-between text-[13px] text-white/90 gap-4 md:flex-row">
           <p>{t("footer.rights_ext")}</p>
           <div className="flex space-x-4">
             <Link to="/disclaimer" className="hover:text-white text-xs">{t("footer.disclaimer")}</Link>
