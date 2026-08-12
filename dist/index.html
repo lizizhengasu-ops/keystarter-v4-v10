@@ -9,12 +9,24 @@
     gtag('js', new Date());
     gtag('config', 'G-SVM4WGFYKD');
   </script>
+  <script>
+    if (location.pathname === "/") {
+      var p = document.createElement("link");
+      p.rel = "preload"; p.as = "image"; p.fetchPriority = "high";
+      p.href = "/videos/enterprise-bg-v32-poster.webp";
+      document.head.appendChild(p);
+      var l = document.createElement("link");
+      l.rel = "preload"; l.as = "video"; l.type = "video/mp4";
+      l.href = "/videos/enterprise-bg-v32-lite.mp4";
+      document.head.appendChild(l);
+    }
+  </script>
   <meta name="generator" content="WordPress 6.x" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
  <link rel="alternate" type="application/json" href="https://keys-starter.com/wp-json/" />
   <link rel="icon" type="image/svg+xml" href="/keystarter-logo.svg" />
   <link rel="apple-touch-icon" href="/keystarter-logo.svg" />
-  <link rel="preload" as="image" fetchpriority="high" href="/videos/enterprise-bg-v32-poster.webp" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-800.woff2" crossorigin>
   <link rel="preload" as="fetch" crossorigin href="/i18n/en.json" />
  <title>KeyStarter — Genuine Software Licenses</title>
   <meta name="description" content="Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout." />
@@ -25,22 +37,15 @@
   <meta name="twitter:card" content="summary" />
   <meta property="og:image" content="https://keys-starter.com/og-cover.png" />
   <meta name="twitter:image" content="https://keys-starter.com/og-cover.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>  <script type="module" crossorigin src="/assets/index-lqNd3vSI.js"></script>
+  <script type="module" crossorigin src="/assets/index-DM17Ovt7.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-QTnfLwEv.js">
   <link rel="modulepreload" crossorigin href="/assets/react-vendor-B6MFl_py.js">
   <link rel="modulepreload" crossorigin href="/assets/i18n-9lWzVu6r.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-Cl5jBYAp.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-tWpmNSAg.css">
 </head>
 <body>
-  <img id="hero-static-poster" class="fixed inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105 pointer-events-none" src="/videos/enterprise-bg-v32-poster.webp" alt="" style="z-index:0" fetchpriority="high" />
   <div id="root">
     <div class="skel" style="position:relative;min-height:560px;overflow:hidden;padding:60px 20px;max-width:1068px;margin:0 auto">
-      <img class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" src="/videos/enterprise-bg-v32-poster.webp" alt="" />
       <div class="shimmer" style="height:560px;border-radius:18px;margin-bottom:24px"></div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16">
         <div class="shimmer" style="height:280px;border-radius:18px"></div>
@@ -50,6 +55,25 @@
       </div>
     </div>
   </div>
-  <script src="/chat-widget.js?v=7" data-tenant="keystarter" async></script>
+  <script>
+    function loadChatWidget() {
+      if (window.__chatWidgetLoaded) return;
+      window.__chatWidgetLoaded = 1;
+      var s = document.createElement("script");
+      s.src = "/chat-widget.js?v=7";
+      s.dataset.tenant = "keystarter";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+    if ("requestIdleCallback" in window) {
+      window.addEventListener("load", function () {
+        requestIdleCallback(loadChatWidget, { timeout: 2000 });
+      });
+    } else {
+      window.addEventListener("load", function () {
+        setTimeout(loadChatWidget, 1000);
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { products } from "../data/products";
 import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
@@ -142,8 +142,15 @@ const ORG_JSONLD = {
 
 export default function SeoManager() {
   const { pathname } = useLocation();
+  const firstRender = useRef(true);
 
   useEffect(() => {
+    // Keep the server/edge-injected SEO v2 title/meta, canonical and JSON-LD
+    // on initial hydration; only update them on client-side navigation.
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     const path = pathname.replace(/\/+$/, "") || "/";
     const product =
       path.startsWith("/product/") && path.length > "/product/".length
@@ -159,7 +166,10 @@ export default function SeoManager() {
       : article
         ? { title: `${article.title} — ${SITE_NAME}`, description: article.description }
         : blogSlug
-          ? ROUTE_META["/blog"]
+          ? {
+              title: `${blogSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} — ${SITE_NAME}`,
+              description: ROUTE_META["/blog"].description,
+            }
           : ROUTE_META[path] ?? NOT_FOUND_META;
 
     document.title = meta.title;
