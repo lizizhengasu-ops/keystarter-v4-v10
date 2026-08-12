@@ -85,6 +85,12 @@ const [activeTab, setActiveTab] = useState('all');
   // Custom Toast State
   const [heroPersona, setHeroPersona] = useState("retail");
   const [toast, setToast] = useState({ visible: false, message: '', icon: '🚀' });
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    const id = window.requestIdleCallback(() => setVideoReady(true), { timeout: 2500 });
+    return () => window.cancelIdleCallback(id);
+  }, []);
 
   // Helper smooth scrolling for single page navigation
   const scrollToSection = (id: string) => {
@@ -221,8 +227,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
           <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="none" poster="/videos/enterprise-bg-v32-poster.webp">
-            <source src="/videos/enterprise-bg-v32.mp4" type="video/mp4" />
-            <source src="/videos/enterprise-bg-v32.webm" type="video/webm" />
+            {videoReady && (
+              <>
+                <source src="/videos/enterprise-bg-v32.mp4" type="video/mp4" />
+                <source src="/videos/enterprise-bg-v32.webm" type="video/webm" />
+              </>
+            )}
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-[#161617]/65 via-[#161617]/50 to-[#161617]/75" />
           <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.45)] pointer-events-none" />
