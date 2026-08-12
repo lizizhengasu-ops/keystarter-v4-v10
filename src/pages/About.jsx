@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CLIENTS } from "../data/clients";
+import SoftwarePortfolio from "../components/SoftwarePortfolio";
 
 const ADVANTAGES = [
   {
@@ -89,6 +90,15 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 bg-white border-y border-[#e8e8ed]">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-semibold text-[#7c3aed] uppercase mb-3">{t("about.eco_label")}</p>
+          <h2 className="text-2xl font-bold mb-3">{t("about.eco_title")}</h2>
+          <p className="text-sm text-[#86868b] max-w-2xl mb-8">{t("about.eco_desc")}</p>
+          <SoftwarePortfolio />
         </div>
       </section>
 

@@ -11,7 +11,8 @@ export default function LicensingPage() {
     { id: "s6", title: "Activation" },
     { id: "s7", title: "Usage Rights" },
     { id: "s8", title: "Compliance and Audits" },
-    { id: "s9", title: "Contact" },
+    { id: "s9", title: "Genuine vs Unofficial" },
+    { id: "s10", title: "Contact" },
   ];
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased min-h-screen">
@@ -98,6 +99,36 @@ export default function LicensingPage() {
             <section id="s9" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">9</span>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Genuine vs. Unofficial Keys</h2>
+              </div>
+              <p className="mb-4 pl-10">Before you buy, check whether the key comes from an authorized channel. Unofficial or separated channel keys carry real compliance and support risks.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-10">
+                <div className="rounded-2xl border border-[#fde68a] bg-[#fffbeb] p-5">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#fef3c7] text-[#b45309] mb-3">Unofficial / Channel Keys</span>
+                  <ul className="list-disc ml-4 space-y-1 text-xs text-[#515154]">
+                    <li>No official certificate or compliance identifier</li>
+                    <li>Updates and after-sales support are not guaranteed</li>
+                    <li>Often sold as labels or serial numbers separated from the product</li>
+                  </ul>
+                  <div className="grid grid-cols-2 gap-2 mt-4">
+                    <div className="rounded-xl border border-[#e8e8ed] overflow-hidden bg-white aspect-[4/3]"><img src="/assets/images/about/licensing/unofficial-iot.webp" alt="Unofficial key label example" className="w-full h-full object-contain" loading="lazy" /></div>
+                    <div className="rounded-xl border border-[#e8e8ed] overflow-hidden bg-white aspect-[4/3]"><img src="/assets/images/about/licensing/unofficial-win11.webp" alt="Unofficial key label example" className="w-full h-full object-contain" loading="lazy" /></div>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-[#a7f3d0] bg-[#ecfdf5] p-5">
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#d1fae5] text-[#0e9f6e] mb-3">Genuine Licensed Product</span>
+                  <ul className="list-disc ml-4 space-y-1 text-xs text-[#515154]">
+                    <li>Official certificate and compliance markings</li>
+                    <li>Normal updates and after-sales support</li>
+                    <li>Audit-ready records for enterprise compliance</li>
+                  </ul>
+                  <div className="rounded-xl border border-[#e8e8ed] overflow-hidden bg-white aspect-[4/3] mt-4"><img src="/assets/images/about/licensing/genuine-cert.webp" alt="Genuine certificate example" className="w-full h-full object-contain" loading="lazy" /></div>
+                </div>
+              </div>
+            </section>
+            <section id="s10" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
+              <div className="flex items-start gap-3 mb-3">
+                <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">10</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
               </div>
               <p className="mb-3 last:mb-0 pl-10">For licensing questions, contact us at admin@keys-starter.com.</p>

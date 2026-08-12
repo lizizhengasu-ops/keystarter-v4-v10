@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import SoftwarePortfolio from "../components/SoftwarePortfolio";
 
 
 const solutions = [
@@ -7,6 +8,17 @@ const solutions = [
   {n:"Dedicated Support", d:"Priority technical support with dedicated account management."},
   {n:"Bulk Discounts", d:"Volume-based pricing with increasing discounts for larger orders."},
   {n:"Custom Deployment", d:"Enterprise-wide deployment planning and assistance."},
+];
+
+const INDUSTRIES = [
+  { img: "/assets/images/about/industries/factory.webp", name: "Factory Automation" },
+  { img: "/assets/images/about/industries/energy.webp", name: "New Energy" },
+  { img: "/assets/images/about/industries/transport.webp", name: "Transportation" },
+  { img: "/assets/images/about/industries/healthcare.webp", name: "Healthcare" },
+  { img: "/assets/images/about/industries/monitoring.webp", name: "Monitoring & Data Centers" },
+  { img: "/assets/images/about/industries/kiosk.webp", name: "Self-service Terminals" },
+  { img: "/assets/images/about/industries/logistics.webp", name: "Warehouse & Logistics" },
+  { img: "/assets/images/about/industries/iot.webp", name: "IoT & Embedded" },
 ];
 
 export default function B2bPage() {
@@ -105,6 +117,25 @@ export default function B2bPage() {
               <p className="text-xs text-[#86868b]">{s.d}</p>
             </div>
           ))}
+        </div>
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-2">Software Portfolio</h2>
+          <p className="text-xs text-[#86868b] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels.</p>
+          <SoftwarePortfolio />
+        </div>
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-2">Industries We Serve</h2>
+          <p className="text-xs text-[#86868b] mb-8">Software and hardware integration designed for industrial, medical, energy, transportation and logistics environments.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {INDUSTRIES.map((s) => (
+              <div key={s.img} className="bg-white rounded-2xl border border-[#e8e8ed] overflow-hidden">
+                <div className="aspect-[16/10] overflow-hidden bg-[#eef1f5]">
+                  <img src={s.img} alt={s.name} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="px-4 py-3 text-sm font-bold">{s.name}</div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="text-center py-12 border-t border-[#e8e8ed]">
           <h2 className="text-2xl font-bold mb-4">{t("b2b.ready")}</h2>

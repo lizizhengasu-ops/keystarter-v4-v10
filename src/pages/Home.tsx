@@ -6,6 +6,7 @@ import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
 import { CLIENTS } from '../data/clients';
+import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
@@ -308,6 +309,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">{t("home.enterprise.trusted_title")}</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">{t("home.enterprise.partners_title")}</h2>
           </div>
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-[#7c3aed] text-white">Microsoft Gold Partner</span>
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">Kylin / UOS Authorized Channel</span>
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">Acronis Authorized</span>
+            <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">Trellix Authorized</span>
+          </div>
         </div>
         <div className="relative">
           <div className="flex animate-scroll gap-6 px-4" style={{width:"max-content"}}>
@@ -319,6 +326,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               </div>
             ))}
           </div>
+        </div>
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 pt-10">
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-bold tracking-tight text-[#1d1d1f]">One software ecosystem, every license you need</h3>
+          </div>
+          <SoftwarePortfolio compact />
         </div>
       </section>
       )}
