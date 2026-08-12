@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { CLIENTS } from "../data/clients";
 
 const ADVANTAGES = [
   {
@@ -25,25 +26,6 @@ const TEAM_ROLES = [
   { role: "about.team.r6.role", desc: "about.team.r6.desc" },
   { role: "about.team.r7.role", desc: "about.team.r7.desc" },
   { role: "about.team.r8.role", desc: "about.team.r8.desc" },
-];
-
-const CLIENTS = [
-  { name: "SUPCON", file: "supcon.webp" },
-  { name: "HollySys", file: "hollysys.webp" },
-  { name: "BYD", file: "byd.webp" },
-  { name: "NAURA", file: "naura.webp" },
-  { name: "GRG Banking", file: "grg.webp" },
-  { name: "GWI", file: "gwi.webp" },
-  { name: "DAS", file: "das.webp" },
-  { name: "HIKVISION", file: "hikvision.webp" },
-  { name: "Dahua", file: "dahua.webp" },
-  { name: "GE HealthCare", file: "gehealthcare.webp" },
-  { name: "Mindray", file: "mindray.webp" },
-  { name: "Centerm", file: "centerm.webp" },
-  { name: "Star-Net", file: "star-net.webp" },
-  { name: "SmartMore", file: "smartmore.webp" },
-  { name: "Mogulinker", file: "mogulinker.webp" },
-  { name: "SF Technology", file: "sftech.webp" },
 ];
 
 const INDUSTRIES = [

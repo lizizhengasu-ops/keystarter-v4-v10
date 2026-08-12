@@ -5,7 +5,7 @@ import type { SPAProduct } from '../api/woocommerce';
 import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
-import { PARTNERS } from '../data/partners';
+import { CLIENTS } from '../data/clients';
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
@@ -298,15 +298,11 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
         <div className="relative">
           <div className="flex animate-scroll gap-6 px-4" style={{width:"max-content"}}>
-            {[...PARTNERS, ...PARTNERS].map((p, i) => (
+            {[...CLIENTS, ...CLIENTS].map((c, i) => (
               <div key={i} className="flex-shrink-0 w-[220px] sm:w-[260px] bg-[#fafafa] rounded-2xl p-6 border border-[#e8e8ed] text-center shadow-sm hover:border-[#7c3aed]/30 transition-colors">
-                {p.file ? (
-                  <img src={`/assets/images/about/partners/${p.file}`} alt={`${p.name} logo`} className="h-10 max-w-[10rem] object-contain mx-auto mb-3" loading="lazy" />
-                ) : (
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#f3f4f6] flex items-center justify-center text-lg font-bold text-[#7c3aed]">{p.name[0]}</div>
-                )}
-                <div className="text-sm font-bold text-[#1d1d1f] mb-1">{p.name}</div>
-                <div className="text-[11px] text-[#86868b]">{p.industry}</div>
+                <img src={`/assets/images/about/clients/${c.file}`} alt={`${c.name} logo`} className="h-10 max-w-[10rem] object-contain mx-auto mb-3" loading="lazy" />
+                <div className="text-sm font-bold text-[#1d1d1f] mb-1">{c.name}</div>
+                <div className="text-[11px] text-[#86868b]">{c.industry}</div>
               </div>
             ))}
           </div>
