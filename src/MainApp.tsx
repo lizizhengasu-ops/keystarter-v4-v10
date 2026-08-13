@@ -79,7 +79,7 @@ function Layout({ children }: { children: any }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
+    <div className="min-h-[1400px] flex flex-col bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <span data-build={typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : ''} style={{display:'none'}} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
@@ -139,7 +139,7 @@ function Layout({ children }: { children: any }) {
       <AnimInit />
 
       {/* V5.2: Page enter animation */}
-      <main className="page-enter pt-12">
+      <main className="page-enter pt-12 flex-1 min-h-[1100px]">
         <Suspense fallback={<div className="min-h-[60vh]"></div>}>
           {children}
         </Suspense>
