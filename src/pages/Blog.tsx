@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { stripTags } from "../utils/html";
+import { BLOG_ARTICLES } from "../data/blog-articles";
 
 type Post = {
   id: number;
@@ -14,24 +15,34 @@ type Post = {
 
 const DAILY_RE = /windows-microsoft-ai-news/i;
 
+const STATIC_POSTS: Post[] = Object.entries(BLOG_ARTICLES).map(([slug, a], i) => ({
+  id: i + 1,
+  title: { rendered: a.title },
+  excerpt: { rendered: a.description },
+  slug,
+  date: a.datePublished,
+}));
+
 function coverOf(p: Post): string | undefined {
   return p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
 }
 
 export default function BlogPage() {
   const { t } = useTranslation();
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<Post[]>(STATIC_POSTS);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
     fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=50")
       .then((r) => r.json())
       .then((d: Post[]) => {
-        setPosts(d);
-        setLoading(false);
+        const bySlug = new Map(STATIC_POSTS.map((p) => [p.slug, p]));
+        d.forEach((p) => {
+          if (!bySlug.has(p.slug)) bySlug.set(p.slug, p);
+        });
+        setPosts(Array.from(bySlug.values()));
       })
-      .catch(() => setLoading(false));
+      .catch(() => {});
   }, []);
 
   const filtered = useMemo(() => {
@@ -41,26 +52,6 @@ export default function BlogPage() {
       (p.title.rendered + " " + stripTags(p.excerpt.rendered)).toLowerCase().includes(q)
     );
   }, [posts, query]);
-
-  if (loading)
-    return (
-      <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid sm:grid-cols-2 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-[#e8e8ed]">
-                <div className="aspect-video shimmer" />
-                <div className="p-5">
-                  <div className="shimmer h-4 w-3/4 mb-3 rounded" />
-                  <div className="shimmer h-3 w-full mb-2 rounded" />
-                  <div className="shimmer h-3 w-1/2 rounded" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">

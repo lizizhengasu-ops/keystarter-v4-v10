@@ -91,8 +91,8 @@ export default function StorePage() {
         {loading && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[1,2,3,4].map(i => (
-              <div key={i} className="bg-white rounded-2xl p-4 border border-[#e8e8ed]">
-                <div className="shimmer w-full h-[140px] rounded-xl mb-3" />
+              <div key={i} className="bg-white rounded-2xl p-5 border border-[#e8e8ed]">
+                <div className="shimmer w-full aspect-[4/3] rounded-xl mb-3" />
                 <div className="shimmer h-4 w-3/4 mb-2 rounded" />
                 <div className="shimmer h-3 w-1/2 mb-2 rounded" />
                 <div className="shimmer h-8 w-full rounded-xl" />
