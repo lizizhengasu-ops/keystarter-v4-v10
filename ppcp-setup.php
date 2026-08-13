@@ -1,14 +1,22 @@
 <?php
 require_once "/var/www/keys-starter.com/wp-load.php";
 
+// Credentials are read from environment variables (never hardcode secrets in git).
+$sandbox_client_id     = getenv("PPCP_SANDBOX_CLIENT_ID");
+$sandbox_client_secret = getenv("PPCP_SANDBOX_CLIENT_SECRET");
+if (!$sandbox_client_id || !$sandbox_client_secret) {
+    fwrite(STDERR, "Missing env: PPCP_SANDBOX_CLIENT_ID / PPCP_SANDBOX_CLIENT_SECRET\n");
+    exit(1);
+}
+
 // Enable PayPal Payments (PPCP) gateway
 $settings = array(
     "enabled" => "yes",
     "title" => "PayPal",
     "description" => "Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.",
     "testmode" => "yes",
-    "sandbox_client_id" => "ARTOz_3Y7RDMVDUgoy4DHky4D5Gb5ocnFCBpUnrtj3HxKu1JRpxCv4kiDW_hFG1U_vU90xZM3FYVP1YP",
-    "sandbox_client_secret" => "ECgKJatQykqH8Kc7PVJEqdOh1FE3mUZN4dICRM77hmXI9Boiwu4xS4wBAfm7D6tVrLJb83GfJueXJXEA",
+    "sandbox_client_id" => $sandbox_client_id,
+    "sandbox_client_secret" => $sandbox_client_secret,
     "client_id" => "",
     "client_secret" => "",
     "invoice_prefix" => "WC-",

@@ -1,14 +1,22 @@
 <?php
 require_once "/var/www/keys-starter.com/wp-load.php";
 
+// Credentials are read from environment variables (never hardcode secrets in git).
+$api_username = getenv("PAYPAL_API_USERNAME");
+$api_password = getenv("PAYPAL_API_PASSWORD");
+if (!$api_username || !$api_password) {
+    fwrite(STDERR, "Missing env: PAYPAL_API_USERNAME / PAYPAL_API_PASSWORD\n");
+    exit(1);
+}
+
 $settings = array(
     "enabled" => "yes",
     "title" => "PayPal",
     "email" => "admin@keys-starter.com",
     "testmode" => "yes",
     "paymentaction" => "sale",
-    "api_username" => "ARTOz_3Y7RDMVDUgoy4DHky4D5Gb5ocnFCBpUnrtj3HxKu1JRpxCv4kiDW_hFG1U_vU90xZM3FYVP1YP",
-    "api_password" => "ECgKJatQykqH8Kc7PVJEqdOh1FE3mUZN4dICRM77hmXI9Boiwu4xS4wBAfm7D6tVrLJb83GfJueXJXEA",
+    "api_username" => $api_username,
+    "api_password" => $api_password,
     "api_signature" => "",
     "invoice_prefix" => "WC-",
     "send_shipping" => "yes",
