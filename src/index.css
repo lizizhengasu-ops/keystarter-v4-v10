@@ -51,6 +51,8 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 .animate-scroll { animation: scroll 60s linear infinite; }
 .animate-scroll:hover { animation-play-state: paused; }
+@keyframes hero-hd-zoom { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+.hero-hd-zoom { animation: hero-hd-zoom 24s ease-in-out infinite alternate; will-change: transform; }
 
 .persona-hidden { display:none !important; }
 

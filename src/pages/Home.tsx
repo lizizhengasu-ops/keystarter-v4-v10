@@ -230,7 +230,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {/* Hero Section - Platinum Digital Style */}
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
-          <video className="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="none" poster="/videos/enterprise-bg-v32-poster.webp">
+          <img className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] hero-hd-zoom" src="/videos/enterprise-bg-hd.webp" alt="" fetchPriority="high" />
+          <video className="md:hidden absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] scale-105" autoPlay muted loop playsInline preload="none" poster="/videos/enterprise-bg-v32-poster.webp">
             {!reduceMotion && (
               <>
                 <source src="/videos/enterprise-bg-v32-lite.mp4" type="video/mp4" />
