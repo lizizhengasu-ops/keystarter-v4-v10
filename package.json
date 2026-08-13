@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/validate.mjs && vite",
-    "build": "node scripts/seo/generate-seo-data.mjs && node scripts/validate.mjs && npm run typecheck && vite build",
+    "build": "node scripts/seo/generate-seo-data.mjs && node scripts/validate.mjs && npm run typecheck && vite build && node scripts/inline-css.mjs",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
     "lint": "oxlint --ignore-pattern **/keystarter-v4/** --ignore-pattern **/tmp/** --ignore-pattern **/temp/** --ignore-pattern **/dist-seo-*/** --ignore-pattern **/dist-ga4-*/**",
     "precommit": "node scripts/validate.mjs && npm run typecheck && npm run lint",
