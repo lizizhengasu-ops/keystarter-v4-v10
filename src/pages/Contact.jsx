@@ -58,7 +58,7 @@ export default function ContactPage() {
         setErrorMsg(data.message || "Failed to send");
         setFs("error");
       }
-    } catch(_e) {
+    } catch {
       setErrorMsg("Network error. Please check your connection.");
       setFs("error");
     }

@@ -59,7 +59,7 @@ const handleRegister = async (e: any) => {
       const r = await fetch("/wp-login.php?action=register", {method: "POST", body: fd, redirect: "manual", credentials: "same-origin"});
       const loc = r.headers.get("location") || "";
       setRegisterMsg(loc.includes("checkemail") ? "Account created! Check your email for password." : "Registration failed. Email may be taken.");
-    } catch(_e) { setRegisterMsg("Network error. Please try again."); }
+    } catch { setRegisterMsg("Network error. Please try again."); }
     setRegisterSending(false);
   };
   // While checking login state
@@ -299,7 +299,6 @@ const handleRegister = async (e: any) => {
   );
 
 }
-
 
 
 

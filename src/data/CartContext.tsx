@@ -13,7 +13,9 @@ export interface CartContextType {
   refresh: () => Promise<void>;
 }
 
+// oxlint-disable-next-line react/only-export-components
 export const CartCtx = createContext<CartContextType>(null!);
+// oxlint-disable-next-line react/only-export-components
 export const useCart = () => useContext(CartCtx);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {

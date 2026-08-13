@@ -11,7 +11,7 @@
  * 集成：pre-commit hook / npm run validate / deploy 前置门控
  */
 
-import { readFileSync, existsSync, readdirSync, statSync } from "fs";
+import { readFileSync, existsSync, readdirSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -83,7 +83,6 @@ function checkPositionFixed(dir) {
     // Layout elements that are exempt
     const LAYOUT = ["nav", "navbar", "header", "progress", "back-top"];
     // Check for overlay patterns (class or style with position fixed + z-index >= 30)
-    let hasOverlay = false;
     let hasPortal = content.includes("createPortal") || content.includes("<Portal>") || content.includes("ReactDOM.createPortal");
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -92,7 +91,6 @@ function checkPositionFixed(dir) {
       if (LAYOUT.some(k => line.includes(k))) continue;
       // Check if it's an overlay (z-30+ or inset-0 or dialog/modal/drawer)
       if (/z-[3456]\d|inset-0|modal|dialog|drawer|overlay/i.test(line)) {
-        hasOverlay = true;
         if (!hasPortal) {
           error("position:fixed overlay without Portal protection", fp + ":" + (i + 1));
         }
@@ -144,7 +142,6 @@ console.log("\n1. BOM detection (src/, dist/)");
 checkBOM(path.join(ROOT, "src"));
 checkBOM(path.join(ROOT, "dist"));
 if (totalErrors === 0) ok("No BOM found");
-const bomErrors = totalErrors;
 
 console.log("\n2. JSON validation");
 const jsonBefore = totalErrors;

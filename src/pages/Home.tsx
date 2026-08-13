@@ -178,7 +178,7 @@ const [activeTab, setActiveTab] = useState('all');
       }
       showToast("Quote submitted! A specialist will email you shortly.", "🔵");
       e.target.reset();
-    } catch(_err) {
+    } catch {
       showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
     }
   };
@@ -581,7 +581,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.employees")}</label>
-                    <select name="units" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
+                    <select name="units" aria-label="Estimated licenses" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>5 - 20 Units</option>
                       <option>21 - 50 Units</option>
                       <option>51 - 100 Units</option>
@@ -590,7 +590,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-[#1d1d1f] mb-1">{t("home.b2b.needs")}</label>
-                    <select name="product" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
+                    <select name="product" aria-label="Primary product needs" className="w-full px-3 py-2 text-sm bg-[#f5f5f7] border border-[#d2d2d7] rounded-lg focus:outline-none focus:border-[#7c3aed] transition">
                       <option>{t("home.b2b.windows")}</option>
                       <option>{t("home.b2b.m365")}</option>
                       <option>{t("home.b2b.server")}</option>

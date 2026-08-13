@@ -38,9 +38,6 @@ function scanFile(filePath) {
   const lines = content.split("\n");
   const issues = [];
 
-  // 检查是否是覆盖层文件（文件名含 overlay/modal/drawer/toast/popup）
-  const isOverlayFile = /(overlay|modal|drawer|toast|popup|portal)/i.test(filePath);
-
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const lineNum = i + 1;

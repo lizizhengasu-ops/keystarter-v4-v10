@@ -29,7 +29,13 @@ export default function LanguageSwitcher() {
       {open && (
         <div style={{position:"absolute",top:"100%",right:0,marginTop:8,background:"#fff",borderRadius:12,boxShadow:"0 8px 30px rgba(0,0,0,0.15)",border:"1px solid #e6e6ea",zIndex:200,padding:6,minWidth:120}}>
           {available.map(function(code) { return (
-            <button key={code} onClick={function() { i18n.changeLanguage(code); setOpen(false); }}
+            <button key={code} onClick={function() {
+              i18n.changeLanguage(code).then(function() {
+                document.documentElement.lang = code;
+                document.title = i18n.t("seo.title", "KeyStarter — Genuine Software Licenses");
+              });
+              setOpen(false);
+            }}
               style={{display:"block",width:"100%",padding:"8px 14px",borderRadius:8,fontSize:12,fontWeight:code===i18n.language?600:400,background:code===i18n.language?"#f0f0f2":"transparent",color:"#1d1d1f",border:"none",cursor:"pointer",textAlign:"left"}}>
               {LANG_NAMES[code] || code}
             </button>

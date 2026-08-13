@@ -145,6 +145,11 @@ export default function SeoManager() {
   const firstRender = useRef(true);
 
   useEffect(() => {
+    // Remove the edge-injected sr-only brand/product H1 so each page has exactly
+    // one visible main H1.
+    document
+      .querySelectorAll('h1[style*="position:absolute"], h1[style*="left:-9999px"]')
+      .forEach((el) => el.remove());
     // Keep the server/edge-injected SEO v2 title/meta, canonical and JSON-LD
     // on initial hydration; only update them on client-side navigation.
     if (firstRender.current) {

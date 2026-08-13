@@ -40,7 +40,7 @@ export default function NavDrawer({ open, onClose, isHomepage }: NavDrawerProps)
         </div>
         <nav className="px-3 py-3 space-y-0.5">
           {links.map((link) => (
-            <a key={link.to} href={link.to} onClick={(e) => { window.location.href = link.to; onClose(); }}
+            <a key={link.to} href={link.to} onClick={() => { window.location.href = link.to; onClose(); }}
                className="block px-4 py-2.5 text-sm font-medium text-[#1d1d1f] hover:bg-[#f5f5f7] rounded-lg transition-colors">
               {link.label}
             </a>

@@ -32,6 +32,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
     };
     if (open) { window.addEventListener("keydown", handleKey); setSelIdx(-1); }
     return () => window.removeEventListener("keydown", handleKey);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [open, onClose, results, selIdx]);
 
   if (!open) return null;

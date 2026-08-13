@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+
 export function stripTags(html: string): string {
   return String(html || "")
     .replace(/<[^>]*>/g, " ")
@@ -6,12 +8,11 @@ export function stripTags(html: string): string {
 }
 
 export function sanitizeHtml(html: string): string {
-  return String(html || "")
-    .replace(/<script[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[\s\S]*?<\/style>/gi, "")
-    .replace(/<iframe[\s\S]*?<\/iframe>/gi, "")
-    .replace(/<object[\s\S]*?<\/object>/gi, "")
-    .replace(/<embed[\s\S]*?>/gi, "")
-    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
-    .replace(/javascript:/gi, "");
+  return DOMPurify.sanitize(String(html || ""), {
+    ALLOWED_TAGS: [
+      "h2", "h3", "h4", "p", "ul", "ol", "li", "table", "thead", "tbody", "tr", "th", "td",
+      "a", "img", "strong", "em", "br", "blockquote", "code", "pre", "span",
+    ],
+    ALLOWED_ATTR: ["href", "src", "alt", "title", "target", "rel", "colspan", "rowspan"],
+  });
 }

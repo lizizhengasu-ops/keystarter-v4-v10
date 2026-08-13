@@ -25,4 +25,11 @@ i18n
     },
   });
 
+i18n.on("languageChanged", (lng) => {
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = lng || "en";
+    document.title = i18n.t("seo.title", "KeyStarter — Genuine Software Licenses");
+  }
+});
+
 export default i18n;

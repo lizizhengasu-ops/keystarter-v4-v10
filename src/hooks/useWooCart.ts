@@ -70,7 +70,7 @@ function xhr(method: string, url: string, body?: any): Promise<any> {
     };
     x.onerror = () => fail(x.statusText);
     x.ontimeout = () => fail(new Error("timeout"));
-    body ? x.send(JSON.stringify(body)) : x.send();
+    if (body) x.send(JSON.stringify(body)); else x.send();
   });
 }
 

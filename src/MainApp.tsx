@@ -186,7 +186,7 @@ function Layout({ children }: { children: any }) {
           <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-3">{t("footer.stay_updated")}</h4>
           <p className="text-sm text-white mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" name="email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/15 text-white placeholder-white/80 focus:outline-none focus:border-[#7c3aed]" />
+            <input id="newsletter-email" name="email" aria-label="Email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/15 text-white placeholder-white/80 focus:outline-none focus:border-[#7c3aed]" />
             <button onClick={function(){ const el=document.getElementById("newsletter-email") as HTMLInputElement | null; if(el&&el.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:el.value})}).then(function(r){return r.json()}).then(function(d){ el.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>

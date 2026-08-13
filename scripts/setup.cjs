@@ -1,4 +1,4 @@
-var fs=require("fs"),path=require("path"),cp=require("child_process");
+var fs=require("fs"),cp=require("child_process");
 var ROOT="C:/Users/31961/Documents/microsoft web/_projects/keystarter-v4";
 
 fs.writeFileSync(ROOT+"/.githooks/pre-commit.bat",[

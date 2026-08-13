@@ -123,6 +123,7 @@ const [reviews, setReviews] = useState([]);
     var id = (m as Record<string, number | undefined>)[slug] || product?.slug;
     if (id) fetch("/wp-json/keystarter/v1/reviews/"+id+"?lang="+i18n.language+"&per_page=100").then(function(r){return r.text()}).then(function(t){var d=JSON.parse(t.replace(/^\\uFEFF/,""));if(!cancelled&&d&&d.reviews)setReviews(d.reviews)}).catch(function(){});
     return () => { cancelled = true; };
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, i18n.language]);
 
   return (

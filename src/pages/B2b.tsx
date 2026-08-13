@@ -86,7 +86,7 @@ export default function B2bPage() {
         setErrorMsg(data.message || "Failed to send");
         setFormStatus("error");
       }
-    } catch(_e) {
+    } catch {
         setErrorMsg("Network error. Please check your connection and try again.");
         setFormStatus("error");
     }
@@ -148,29 +148,29 @@ export default function B2bPage() {
   ) : (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto text-left space-y-4">
       <div style={{position:"absolute",left:"-9999px"}} aria-hidden="true">
-        <input tabIndex={-1} value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
+        <input tabIndex={-1} aria-hidden="true" value={form.honeypot_website} onChange={e=>setForm({...form,honeypot_website:e.target.value})} />
       </div>
-                  <input type="text" name="company" placeholder="Company / Organization Name" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} required autoFocus
+                  <input type="text" name="company" aria-label="Company / Organization Name" placeholder="Company / Organization Name" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} required autoFocus
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.company && <p className="text-red-500 text-xs">{errors.company}</p>}
       
       <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.estimated_licenses")}</label>
-      <select name="units" value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
+      <select name="units" aria-label="Estimated licenses" value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>5-20 Units</option><option>21-50 Units</option><option>51-200 Units</option><option>200+ Units</option>
       </select>
       
       <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.primary_needs")}</label>
-      <select name="product" value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
+      <select name="product" aria-label="Primary product needs" value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>{t("b2b.product_windows11")}</option><option>{t("b2b.product_windows10")}</option><option>{t("b2b.product_office")}</option><option>{t("b2b.product_server")}</option><option>{t("b2b.product_other")}</option>
       </select>
       
-      <input type="text" name="contact" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
+      <input type="text" name="contact" aria-label="Contact Name" placeholder="Contact Name" value={form.contact} onChange={e=>setForm({...form,contact:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.contact && <p className="text-red-500 text-xs">{errors.contact}</p>}
       
-      <input type="text" name="phone" placeholder="Phone / Email" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required
+      <input type="text" name="phone" aria-label="Phone / Email" placeholder="Phone / Email" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} required
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
                   

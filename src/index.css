@@ -13,6 +13,7 @@
   --v4-radius-lg: 24px;
 }
 
+html, body { max-width:100%; overflow-x:clip; }
 body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark); -webkit-font-smoothing:antialiased; }
 
 /* V5.2 - Page Transition */
