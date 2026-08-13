@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { stripTags } from "../utils/html";
@@ -29,21 +29,8 @@ function coverOf(p: Post): string | undefined {
 
 export default function BlogPage() {
   const { t } = useTranslation();
-  const [posts, setPosts] = useState<Post[]>(STATIC_POSTS);
+  const [posts] = useState<Post[]>(STATIC_POSTS);
   const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    fetch("https://keys-starter.com/wp-json/wp/v2/posts?_embed&per_page=50")
-      .then((r) => r.json())
-      .then((d: Post[]) => {
-        const bySlug = new Map(STATIC_POSTS.map((p) => [p.slug, p]));
-        d.forEach((p) => {
-          if (!bySlug.has(p.slug)) bySlug.set(p.slug, p);
-        });
-        setPosts(Array.from(bySlug.values()));
-      })
-      .catch(() => {});
-  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

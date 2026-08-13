@@ -134,7 +134,7 @@ const [reviews, setReviews] = useState([]);
       </div>
       
       {loading && (
-        <div className="max-w-7xl mx-auto px-6 pb-16">
+        <div className="max-w-7xl mx-auto px-6 pb-16 min-h-[80vh]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="shimmer w-full aspect-[4/3] rounded-2xl" />
             <div><div className="shimmer h-6 w-1/3 mb-4 rounded" /><div className="shimmer h-10 w-2/3 mb-6 rounded" /><div className="shimmer h-4 w-full mb-2 rounded" /><div className="shimmer h-4 w-3/4 mb-6 rounded" /><div className="shimmer h-12 w-full rounded-xl" /></div>
