@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { products } from "../data/products";
 import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
 import { BLOG_ARTICLES } from "../data/blog-articles";
+import { EDGE_PRODUCT_META, EDGE_BLOG_INDEX, EDGE_PRODUCTS_INDEX } from "../data/seo-edge";
 
 const SITE = "https://keys-starter.com";
 const SITE_NAME = "KeyStarter";
@@ -167,15 +168,22 @@ export default function SeoManager() {
         : null;
     const article = blogSlug ? BLOG_ARTICLES[blogSlug] : undefined;
     const meta = product
-      ? { title: `${product.n} — ${SITE_NAME}`, description: `${product.d} - ${product.specs.version}, ${product.specs.type}. Instant delivery with lifetime support.` }
+      ? (EDGE_PRODUCT_META[product.slug] ?? {
+          title: `${product.n} — ${SITE_NAME}`,
+          description: `${product.d} - ${product.specs.version}, ${product.specs.type}. Instant delivery with lifetime support.`,
+        })
       : article
-        ? { title: `${article.title} — ${SITE_NAME}`, description: article.description }
+        ? { title: `${article.title} | ${SITE_NAME}`, description: article.description }
         : blogSlug
           ? {
-              title: `${blogSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} — ${SITE_NAME}`,
+              title: `${blogSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} | ${SITE_NAME}`,
               description: ROUTE_META["/blog"].description,
             }
-          : ROUTE_META[path] ?? NOT_FOUND_META;
+          : path === "/products"
+            ? EDGE_PRODUCTS_INDEX
+            : path === "/blog"
+              ? EDGE_BLOG_INDEX
+              : ROUTE_META[path] ?? NOT_FOUND_META;
 
     document.title = meta.title;
     upsertMeta("name", "description", meta.description);
