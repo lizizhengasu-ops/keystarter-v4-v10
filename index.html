@@ -2,12 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVM4WGFYKD"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-SVM4WGFYKD');
+    function loadGtag() {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = 1;
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=G-SVM4WGFYKD";
+      document.head.appendChild(s);
+    }
+    if ("requestIdleCallback" in window) {
+      window.addEventListener("load", function () {
+        requestIdleCallback(loadGtag, { timeout: 3000 });
+      });
+    } else {
+      window.addEventListener("load", function () {
+        setTimeout(loadGtag, 1500);
+      });
+    }
   </script>
   <script>
     if (location.pathname === "/") {
@@ -15,10 +31,6 @@
       p.rel = "preload"; p.as = "image"; p.fetchPriority = "high";
       p.href = "/videos/enterprise-bg-v32-poster.webp";
       document.head.appendChild(p);
-      var l = document.createElement("link");
-      l.rel = "preload"; l.as = "video"; l.type = "video/mp4";
-      l.href = "/videos/enterprise-bg-v32-lite.mp4";
-      document.head.appendChild(l);
     }
   </script>
   <meta name="generator" content="WordPress 6.x" />

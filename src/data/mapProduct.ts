@@ -95,6 +95,21 @@ export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProd
  
  // Single: fetch one product by slug
  export async function fetchProduct(slug: string, lang = "en"): Promise<SPAProduct | null> {
+   const langSuffix = lang !== "en" ? `&lang=${lang}` : "";
+   const url = `/wp-json/wc/store/v1/products?slug=${encodeURIComponent(slug)}&per_page=1${langSuffix}`;
+   try {
+     const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+     if (res.ok) {
+       const data = await res.json();
+       if (Array.isArray(data) && data.length > 0) {
+         const mapped = mapStoreProduct(data[0]);
+         if (mapped) return mapped;
+       }
+     }
+   } catch (err) {
+     console.warn("fetchProduct single failed, falling back to full list:", err);
+   }
+   // Fallback: full list then find (covers API slug-param gaps)
    const all = await fetchProducts(lang);
    return all.find(p => p.slug === slug) || null;
  }
