@@ -38,6 +38,11 @@ codex-key2*
 dist/api-test.html
 scripts/check-*.cjs
 scripts/wp-*.cjs
+
+# Generated/temp artifacts (2026-08-15 hygiene)
+temp/
+dist-*.tar.gz
+verify-legal.mjs
 scripts/get-*.cjs
 bak/
 deploy-key.cjs
