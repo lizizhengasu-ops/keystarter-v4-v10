@@ -394,7 +394,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {specialOfferSkus.map((sku) => (
+            {specialOfferSkus.map((sku, i) => (
               <div key={sku.id}
                 className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-6 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
                 <Link to={`/product/${sku.id}`} aria-label={sku.title} className="absolute inset-0 z-10" />
@@ -404,7 +404,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-orange-50 text-orange-600 rounded border border-orange-200">{sku.tag}</span>
                     <span className="text-xs text-[#86868b]">{sku.type}</span>
                   </div>
-                  <ProductImage slug={sku.id} name={sku.title} />
+                  <ProductImage slug={sku.id} name={sku.title} eager={i < 2} />
                   <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
                   <p className="text-xs text-[#86868b] mb-4">{sku.subtitle}</p>
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
@@ -480,7 +480,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
           {/* 13 SKU Grid with Preserved Premium Copy */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredSkus.map((sku) => (
+            {filteredSkus.map((sku, i) => (
               <div 
                 key={sku.id} 
                 className={`bg-white v5-card rounded-2xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"border-[#ff6b35]/30":"border-[#e8e8ed]"} p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow relative`}
@@ -495,7 +495,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     <span className="text-xs text-[#86868b]">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type))}</span>
                   </div>
                   
-                  <ProductImage slug={sku.id} name={sku.title} />
+                  <ProductImage slug={sku.id} name={sku.title} eager={i < 2} />
                   <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
                   <p className="text-xs text-[#86868b] mb-4">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.subtitle', sku.subtitle))}</p>
 

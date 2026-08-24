@@ -1,6 +1,6 @@
 import { PRODUCT_IMAGES } from "../data/product-images";
 
-export default function ProductImage({ slug, name, className = "" }: { slug: string; name: string; className?: string }) {
+export default function ProductImage({ slug, name, className = "", eager = false }: { slug: string; name: string; className?: string; eager?: boolean }) {
   const src = PRODUCT_IMAGES[slug] || "";
   if (!src) {
     return (
@@ -11,7 +11,7 @@ export default function ProductImage({ slug, name, className = "" }: { slug: str
   }
   return (
     <div className={"w-full aspect-[4/3] rounded-xl overflow-hidden bg-white border border-[#e8e8ed] flex items-center justify-center " + className}>
-      <img src={src} alt={name} className="w-full h-full object-contain p-3" loading="lazy" />
+      <img src={src} alt={name} className="w-full h-full object-contain p-3" loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} />
     </div>
   );
 }

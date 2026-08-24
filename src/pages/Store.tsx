@@ -113,7 +113,7 @@ export default function StorePage() {
               <div key={i} className={"bg-white rounded-2xl border p-5 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden " + (isSpecial ? "border-[#ff6b35]/40" : "border-[#e8e8ed]")}>
                 {isSpecial && off > 0 && <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-xs font-bold px-2 py-0.5 rounded-bl-lg">-{off}%</div>}
                 <Link to={"/product/"+x.slug} className="block">
-                  <ProductImage slug={x.slug} name={x.name} />
+                  <ProductImage slug={x.slug} name={x.name} eager={i < 2} />
                   {isSpecial && <span className="inline-block text-xs font-bold uppercase tracking-wide text-[#ff6b35] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded mt-2 mb-2">Special Price</span>}
                   <h3 className="text-sm font-bold text-[#1d1d1f] mb-1">{x.name}</h3>
                   <p className="text-xs text-[#86868b] mb-4">{x.category || 'Microsoft License'}</p>

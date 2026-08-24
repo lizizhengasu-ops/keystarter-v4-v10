@@ -64,7 +64,7 @@ export default function BlogPage() {
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-5xl mx-auto">
         {/* Hero */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#0078d4] text-white px-8 py-10 mb-8 shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#0078d4] text-white px-8 py-12 mb-8 shadow-xl">
           <div className="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
           <div className="absolute right-24 bottom-0 w-40 h-40 rounded-full bg-white/10 blur-2xl" />
           <div className="relative flex items-center gap-3 mb-4">
@@ -73,10 +73,10 @@ export default function BlogPage() {
               KeyStarter Blog
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
             {t("blog.title")}
           </h1>
-          <p className="text-white/85 max-w-2xl text-base md:text-lg leading-relaxed mb-1">
+          <p className="text-white/85 max-w-2xl text-lg md:text-xl leading-relaxed mb-1">
             {t("blog.desc")}
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur px-4 py-2 text-sm font-semibold">

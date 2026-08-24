@@ -53,7 +53,7 @@
       } else if (p === "/products") {
         hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased"><div class="bg-gradient-to-r from-[#7c3aed] via-[#6d28d9] to-[#6d28d9] text-white px-6 sm:px-12 py-20 text-center"><h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4">All Products</h1><p class="text-lg font-light max-w-2xl mx-auto">Browse by category. Each card includes a genuine delivery guarantee for worry-free compliance.</p></div></div>';
       } else if (p === "/blog") {
-        hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12"><div class="max-w-5xl mx-auto"><div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#0078d4] text-white px-8 py-10 mb-8 shadow-xl"><div class="relative flex items-center gap-3 mb-4"><img src="/keystarter-logo.svg" alt="KeyStarter logo" class="w-8 h-8" /><span class="text-xs font-semibold tracking-[0.2em] text-white/80 uppercase">KeyStarter Blog</span></div><h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">Blog</h1><p class="text-white/85 max-w-2xl text-base md:text-lg leading-relaxed mb-1">Guides, comparisons, and tips for Microsoft software licensing.</p></div></div></div>';
+        hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12"><div class="max-w-5xl mx-auto"><div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#0078d4] text-white px-8 py-12 mb-8 shadow-xl"><div class="relative flex items-center gap-3 mb-4"><img src="/keystarter-logo.svg" alt="KeyStarter logo" class="w-8 h-8" /><span class="text-xs font-semibold tracking-[0.2em] text-white/80 uppercase">KeyStarter Blog</span></div><h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight">Blog</h1><p class="text-white/85 max-w-2xl text-lg md:text-xl leading-relaxed mb-1">Guides, comparisons, and tips for Microsoft software licensing.</p></div></div></div>';
       }
       var slug = p.indexOf("/product/") === 0 ? p.substring(9) : "";
       if (slug) {
@@ -61,6 +61,9 @@
         var img = PMAP[slug];
         if (img) {
           var nm = slug.split("-").map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
+          var l = document.createElement("link");
+          l.rel = "preload"; l.as = "image"; l.href = img;
+          document.head.appendChild(l);
           hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased">' +
             '<div class="max-w-7xl mx-auto px-6 py-4 text-xs text-[#86868b]">Home / <span>' + nm + '</span></div>' +
             '<div class="max-w-7xl mx-auto px-6 pb-16"><div class="grid grid-cols-1 md:grid-cols-2 gap-10">' +
