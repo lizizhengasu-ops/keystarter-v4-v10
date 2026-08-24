@@ -126,12 +126,6 @@ export default function AboutPage() {
           <p className="text-xs font-semibold text-[#7c3aed] uppercase mb-3">{t("about.cert_label")}</p>
           <h2 className="text-2xl font-bold mb-6">{t("about.cert_title")}</h2>
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e8e8ed]">
-            <img
-              src="/assets/images/about/approval-cert-v2.webp"
-              alt="Microsoft Gold Partner Certificate - Shenzhen Luojike Technology Co., Ltd. (LogiCtech)"
-              className="w-full max-w-xl mx-auto rounded-lg border border-[#f0f0f2]"
-              loading="lazy"
-            />
             <p className="text-xs text-[#86868b] mt-4 text-center max-w-xl mx-auto">{t("about.cert_desc")}</p>
             <div className="flex flex-wrap justify-center gap-2 mt-5">
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#7c3aed]/10 text-[#7c3aed]">Microsoft Gold Partner</span>
@@ -144,7 +138,7 @@ export default function AboutPage() {
           <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e8e8ed] mt-6">
             <h3 className="text-sm font-bold mb-3">{t("about.appsource_title")}</h3>
             <img
-              src="/assets/images/about/appsource-partner-v2.webp"
+              src="/assets/images/about/appsource-partner-v3.webp"
               alt="Shenzhen LogiCtech Technology Co., Ltd. listed on Microsoft AppSource partner directory"
               className="w-full max-w-3xl mx-auto rounded-lg border border-[#f0f0f2]"
               loading="lazy"
