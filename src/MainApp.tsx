@@ -31,8 +31,10 @@ const RefundPage = lazy(() => import("./pages/Refund"));
 const DisclaimerPage = lazy(() => import("./pages/Disclaimer"));
 const LicensingPage = lazy(() => import("./pages/Licensing"));
 const CookiesPage = lazy(() => import("./pages/Cookies"));
+const LinksPage = lazy(() => import("./pages/Links"));
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { pushEvent } from "./tracking";
 
 function KeyStarterLogo() {
   return (
@@ -59,6 +61,7 @@ function Layout({ children }: { children: any }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    pushEvent("page_view", { page_path: location.pathname, page_title: document.title });
     setSearchOpen(false);
     setCartOpen(false);
   }, [location.pathname]);
@@ -169,6 +172,7 @@ function Layout({ children }: { children: any }) {
             <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.company")}</h4>
             <div className="space-y-2">
               <Link to="/blog" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("nav.blog")}</Link>
+              <Link to="/links" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">Quick Links</Link>
               <Link to="/about" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.about")}</Link>
               <Link to="/contact" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.contact")}</Link>
             </div>
@@ -186,8 +190,8 @@ function Layout({ children }: { children: any }) {
           <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-3">{t("footer.stay_updated")}</h4>
           <p className="text-sm text-white mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
-            <input id="newsletter-email" name="email" aria-label="Email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/15 text-white placeholder-white/80 focus:outline-none focus:border-[#7c3aed]" />
-            <button onClick={function(){ const el=document.getElementById("newsletter-email") as HTMLInputElement | null; if(el&&el.value){ fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:el.value})}).then(function(r){return r.json()}).then(function(d){ el.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
+            <input id="newsletter-email" name="email" aria-label="Email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 min-h-[44px] px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/15 text-white placeholder-white/80 focus:outline-none focus:border-[#7c3aed]" />
+            <button onClick={function(){ const el=document.getElementById("newsletter-email") as HTMLInputElement | null; if(el&&el.value){ pushEvent("lead",{form_name:"footer_newsletter",email_present:true}); fetch("/api/consumer/newsletter",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:el.value})}).then(function(r){return r.json()}).then(function(d){ el.value=""; alert(d.message||"Subscribed!"); }).catch(function(){ alert("Error. Please try again."); }); } }} className="min-h-[44px] bg-[#7c3aed] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#6d28d9] transition border-none cursor-pointer">{t("footer.subscribe")}</button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-6 pb-8 mb-8 border-b border-white/10 md:flex-row text-center md:text-left">
@@ -251,6 +255,7 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
+            <Route path="/links" element={<LinksPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />

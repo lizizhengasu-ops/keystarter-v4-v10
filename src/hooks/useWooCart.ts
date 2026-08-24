@@ -3,6 +3,7 @@
 // Writes via cart-sync.php (our endpoint, no nonce needed)
 import { useState, useCallback, useRef } from "react";
 import { WC_IDS } from "../data/woo-ids";
+import { pushEvent } from "../tracking";
 
 const CART_KEY = "ks_cart_v5";
 const API = "/wp-json/wc/store/v1/cart";
@@ -108,6 +109,11 @@ export function useWooCart() {
   }, []);
 
   const addToCart = useCallback((slug: string, name: string, price: number, qty = 1) => {
+    pushEvent("add_to_cart", {
+      currency: "USD",
+      value: price * qty,
+      items: [{ item_id: slug, item_name: name, quantity: qty, price }],
+    });
     // 1. Update local state immediately
     setCart(prev => {
       const existing = prev.items.find(i => i.slug === slug);
@@ -133,6 +139,7 @@ export function useWooCart() {
   }, [syncPending]);
 
   const checkout = useCallback(async () => {
+    pushEvent("begin_checkout", { currency: "USD" });
     // Flush pending debounced sync first
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
@@ -160,6 +167,7 @@ export function useWooCart() {
 
   const buyNow = useCallback(async (slug: string, name: string, price: number) => {
     addToCart(slug, name, price, 1);
+    pushEvent("begin_checkout", { currency: "USD", items: [{ item_id: slug, item_name: name, quantity: 1, price }] });
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
       debounceRef.current = null;

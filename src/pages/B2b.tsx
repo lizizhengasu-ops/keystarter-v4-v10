@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SoftwarePortfolio from "../components/SoftwarePortfolio";
+import { pushEvent } from "../tracking";
 
 
 const solutions = [
@@ -81,6 +82,12 @@ export default function B2bPage() {
       }
       const data = await r.json();
       if (data.ok) {
+        pushEvent("quote", {
+          form_name: "b2b",
+          company: form.company,
+          units: form.units,
+          product: form.product,
+        });
         setFormStatus("sent");
       } else {
         setErrorMsg(data.message || "Failed to send");

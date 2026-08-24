@@ -12,6 +12,7 @@ import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
 import { stripTags } from "../utils/html";
+import { pushEvent } from "../tracking";
 
 
 const WindowsIcon = ({ colorClass = "text-[#7c3aed]" }) => (
@@ -47,10 +48,10 @@ const TrustIcon = ({ type }: { type: string }) => {
 };
 
 const PREMIUM_SKUS: any[] = [
-  {id:'windows-11-pro-official',category:'windows',title:'Windows 11 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:199.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon />},
-  {id:'windows-10-pro-official',category:'windows',title:'Windows 10 Pro OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:149.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
-  {id:'windows-11-home-official',category:'windows',title:'Windows 11 Home OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
-  {id:'windows-10-home-official',category:'windows',title:'Windows 10 Home OEM Key',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Official Order',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'windows-11-pro-official',category:'windows',title:'Windows 11 Pro OEM Key Official',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:199.00,tag:'Microsoft Official',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon />},
+  {id:'windows-10-pro-official',category:'windows',title:'Windows 10 Pro OEM Key Official',subtitle:'Official Microsoft order - screenshot delivery',price:49,originalPrice:149.00,tag:'Microsoft Official',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
+  {id:'windows-11-home-official',category:'windows',title:'Windows 11 Home OEM Key Official',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Microsoft Official',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
+  {id:'windows-10-home-official',category:'windows',title:'Windows 10 Home OEM Key Official',subtitle:'Official Microsoft order - screenshot delivery',price:39,originalPrice:139.00,tag:'Microsoft Official',type:'Microsoft Direct OEM',features:['Official Microsoft direct order','Delivery with order screenshot','Lifetime OEM activation'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
   {id:'windows-11-pro',category:'windows',title:'Windows 11 Pro OEM Key',subtitle:'Special price - email delivery',price:18,originalPrice:199.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - lifetime activation','Email delivery','Official ISO downloads & updates'],icon:<WindowsIcon />},
   {id:'windows-10-pro',category:'windows',title:'Windows 10 Pro OEM Key',subtitle:'Special price - email delivery',price:18,originalPrice:149.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - lifetime activation','Email delivery','Official ISO downloads & updates'],icon:<WindowsIcon colorClass="text-[#7fba00]" />},
   {id:'windows-11-home',category:'windows',title:'Windows 11 Home OEM Key',subtitle:'Special price - email delivery',price:13,originalPrice:139.00,tag:'Special Price',type:'OEM',features:['OEM license for 1 PC - home use','Email delivery','Seamless updates & support'],icon:<WindowsIcon colorClass="text-[#00a4ef]" />},
@@ -185,6 +186,12 @@ const [activeTab, setActiveTab] = useState('all');
         }).catch(() => {});
       }
       showToast("Quote submitted! A specialist will email you shortly.", "🔵");
+      pushEvent("quote", {
+        form_name: "home_b2b",
+        company: String(fd.get("company") || ""),
+        units: String(fd.get("units") || ""),
+        product: String(fd.get("product") || ""),
+      });
       e.target.reset();
     } catch {
       showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
@@ -205,7 +212,7 @@ const [activeTab, setActiveTab] = useState('all');
   // Filtered SKUs
   const getLiveData = (sku: any) => {
     if (!apiProducts) return sku;
-    const live = apiProducts.find((p: any) => p.name === sku.title);
+    const live = apiProducts.find((p: any) => p.slug === sku.id);
     if (!live) return sku;
     return { ...sku, price: live.price, originalPrice: live.regularPrice };
   };

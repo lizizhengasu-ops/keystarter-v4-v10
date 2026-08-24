@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Portal from "../Portal";
 import { useTranslation } from "react-i18next";
+import { updateConsent } from "../tracking";
 
 const CONSENT_KEY = "ks_cookie_consent";
 
@@ -10,17 +11,24 @@ export default function CookieConsent() {
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem(CONSENT_KEY)) setVisible(true);
+      const saved = localStorage.getItem(CONSENT_KEY);
+      if (!saved) {
+        setVisible(true);
+      } else {
+        updateConsent(saved === "accepted");
+      }
     } catch {}
   }, []);
 
   const accept = () => {
     try { localStorage.setItem(CONSENT_KEY, "accepted"); } catch {}
+    updateConsent(true);
     setVisible(false);
   };
 
   const reject = () => {
     try { localStorage.setItem(CONSENT_KEY, "rejected"); } catch {}
+    updateConsent(false);
     setVisible(false);
   };
 
@@ -37,11 +45,11 @@ export default function CookieConsent() {
         </p>
         <div className="flex gap-3 flex-shrink-0">
           <button onClick={reject}
-            className="px-4 py-2 text-xs font-semibold border border-[#e8e8ed] rounded-xl text-[#86868b] hover:bg-[#f5f5f7] transition bg-transparent cursor-pointer">
+            className="min-h-[44px] px-4 py-2 text-xs font-semibold border border-[#e8e8ed] rounded-xl text-[#86868b] hover:bg-[#f5f5f7] transition bg-transparent cursor-pointer">
             {t("cookie_banner.reject", "Reject All")}
           </button>
           <button onClick={accept}
-            className="px-4 py-2 text-xs font-semibold bg-[#7c3aed] text-white rounded-xl hover:bg-[#6d28d9] transition cursor-pointer">
+            className="min-h-[44px] px-4 py-2 text-xs font-semibold bg-[#7c3aed] text-white rounded-xl hover:bg-[#6d28d9] transition cursor-pointer">
             {t("cookie_banner.accept", "Accept All")}
           </button>
         </div>

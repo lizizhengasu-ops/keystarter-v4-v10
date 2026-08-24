@@ -11,6 +11,17 @@ import { COMPARISON_GROUPS, COMPARISON_MAP, FAQ_SERIES_MAP } from "../data/produ
 import { ProductComparison } from "../components/ProductComparison";
 import { ProductFAQ } from "../components/ProductFAQ";
 import { ProductReviews } from "../components/ProductReviews";
+import { pushEvent } from "../tracking";
+
+const SECOND_IMAGE_SLUGS = new Set([
+  "win-11-iot-2024-entry",
+  "win-11-iot-ml-entry",
+  "win-svr-iot-2025",
+  "win-11-iot-ml-high-end",
+  "win-11-iot-ml-value",
+  "win-11-iot-2024-high-end",
+  "win-11-iot-2024-value",
+]);
 
 export default function ProductPage() {
   const {slug} = useParams();
@@ -20,6 +31,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const { addToCart, buyNow } = useCart();
 const [reviews, setReviews] = useState([]);
+  const [imgIdx, setImgIdx] = useState(0);
   const details = PRODUCT_DETAILS[slug || ""];
   const compGroup = COMPARISON_MAP[slug || ""] ? COMPARISON_GROUPS[COMPARISON_MAP[slug || ""]] : null;
   const sKey = FAQ_SERIES_MAP[slug || ""] || "";
@@ -99,9 +111,28 @@ const [reviews, setReviews] = useState([]);
   );
 
   const productImage = PRODUCT_IMAGES[slug || ""] || "";
-  const imageBlock = productImage ? (
-    <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#e8e8ed] flex items-center justify-center">
-      <img src={productImage} alt={product?.name || ""} className="w-full h-full object-contain p-4" loading="lazy" />
+  const galleryImages: string[] = [];
+  if (productImage) galleryImages.push(productImage);
+  if (productImage && SECOND_IMAGE_SLUGS.has(slug || "")) galleryImages.push("/assets/images/retail-box-verify.webp");
+  const imageBlock = galleryImages.length > 0 ? (
+    <div>
+      <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#e8e8ed] flex items-center justify-center">
+        <img src={galleryImages[imgIdx] || galleryImages[0]} alt={product?.name || ""} className="w-full h-full object-contain p-4" loading="eager" fetchPriority="high" />
+      </div>
+      {galleryImages.length > 1 && (
+        <div className="flex gap-2 mt-3">
+          {galleryImages.map((src, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setImgIdx(i)}
+              className={`w-24 h-20 rounded-lg overflow-hidden border-2 bg-white flex items-center justify-center transition ${i === imgIdx ? "border-[#7c3aed]" : "border-[#e8e8ed] hover:border-[#c4b5fd]"}`}
+            >
+              <img src={src} alt="" className="w-full h-full object-contain p-1" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   ) : (
     <div className="w-full aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#7c3aed]/10 to-[#6d28d9]/10 flex items-center justify-center">
@@ -112,6 +143,7 @@ const [reviews, setReviews] = useState([]);
   useEffect(() => {
     if (!slug) return;
     let cancelled = false;
+    setImgIdx(0);
     setLoading(true);
     fetchProduct(slug, i18n.language).then(p => {
       if (!cancelled) { setProduct(p); setLoading(false); }
@@ -132,6 +164,17 @@ const [reviews, setReviews] = useState([]);
     return () => { cancelled = true; };
     // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, i18n.language]);
+
+  useEffect(() => {
+    if (product) {
+      pushEvent("view_item", {
+        currency: "USD",
+        value: product.price,
+        items: [{ item_id: product.slug, item_name: product.name, price: product.price }],
+      });
+    }
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?.slug]);
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
@@ -177,14 +220,25 @@ const [reviews, setReviews] = useState([]);
 
 
           <button onClick={() => addToCart(product.slug, product.name, product.price)}
-            className="v5-btn w-full bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
+            className="v5-btn w-full min-h-[44px] inline-flex items-center justify-center bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.add_to_cart")}
           </button>
           <button onClick={() => buyNow(product.slug, product.name, product.price)}
-            className="v5-btn w-full bg-[#ff6b35] hover:bg-[#e55a2b] text-white font-semibold py-3.5 rounded-xl transition mb-2">
+            className="v5-btn w-full min-h-[44px] inline-flex items-center justify-center bg-[#ff6b35] hover:bg-[#e55a2b] text-white font-semibold py-3.5 rounded-xl transition mb-2">
             {t("product.buy_now", "Buy Now")}
           </button>
           <div className="grid grid-cols-3 gap-2 mt-2 px-1"><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><div className="text-xs font-semibold text-green-700">Secure Checkout</div><div className="text-xs text-[#7c3aed]">SSL Encrypted</div></div><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><div className="text-xs font-semibold text-[#7c3aed]">Instant Delivery</div><div className="text-xs text-[#7c3aed]">Within 10 Minutes</div></div><div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20"><svg className="w-4 h-4 mx-auto text-[#7c3aed] mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><div className="text-xs font-semibold text-[#7c3aed]">Genuine License</div><div className="text-xs text-[#7c3aed]">100% Authentic</div></div></div>
+          <div className="grid grid-cols-2 gap-2 mt-3 px-1">
+            <div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20">
+              <div className="text-xs font-semibold text-[#7c3aed]">14-Day Refund</div>
+              <div className="text-xs text-[#7c3aed]">No activation risk</div>
+            </div>
+            <div className="text-center py-2 rounded-lg bg-[#7c3aed]/5 border border-[#7c3aed]/20">
+              <div className="text-xs font-semibold text-[#7c3aed]">Activation Success</div>
+              <div className="text-xs text-[#7c3aed]">Verified keys</div>
+            </div>
+            <a href="#product-faq" className="col-span-2 min-h-[44px] flex items-center justify-center text-xs font-semibold text-[#7c3aed] border border-[#7c3aed]/30 rounded-lg hover:bg-[#f5f3ff] transition">FAQ &amp; Help</a>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8 pt-8 border-t border-[#e8e8ed]">

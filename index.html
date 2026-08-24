@@ -5,25 +5,6 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SVM4WGFYKD');
-    function loadGtag() {
-      if (window.__gtagLoaded) return;
-      window.__gtagLoaded = 1;
-      var s = document.createElement("script");
-      s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=G-SVM4WGFYKD";
-      document.head.appendChild(s);
-    }
-    if ("requestIdleCallback" in window) {
-      window.addEventListener("load", function () {
-        requestIdleCallback(loadGtag, { timeout: 3000 });
-      });
-    } else {
-      window.addEventListener("load", function () {
-        setTimeout(loadGtag, 1500);
-      });
-    }
   </script>
   <script>
     if (location.pathname === "/") {
@@ -39,6 +20,7 @@
   <link rel="icon" type="image/svg+xml" href="/keystarter-logo.svg" />
   <link rel="apple-touch-icon" href="/keystarter-logo.svg" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-800.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400.woff2" crossorigin>
   <link rel="preload" as="fetch" crossorigin href="/i18n/en.json" />
  <title>KeyStarter — Genuine Software Licenses</title>
   <meta name="description" content="Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout." />
@@ -62,6 +44,37 @@
       </div>
     </div>
   </div>
+  <script>
+    (function () {
+      var p = location.pathname;
+      var hero = null;
+      if (p === "/") {
+        hero = '<div class="pt-12"><div class="relative bg-gradient-to-r from-[#7c3aed] to-[#7c3aed] text-white"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between"><div class="flex items-center gap-3 text-sm"><span class="font-semibold whitespace-nowrap">Special Offer</span><span class="text-white/80">Save up to 40% on Microsoft licenses this month!</span></div></div></div><section class="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20"><div class="relative z-10 max-w-4xl px-4 mx-auto text-center"><span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide mb-4 bg-white text-[#7c3aed] border border-[#d1d5db]">Genuine Retail License Portal</span><h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 leading-tight text-white">Your Trusted Source for Genuine Microsoft Software</h1><p class="text-sm text-white/75 max-w-xl mx-auto mb-8 leading-relaxed">Authorized Microsoft software reseller. 10 core SKUs in stock, delivered within 10 minutes.</p></div></section></div>';
+      } else if (p === "/products") {
+        hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased"><div class="bg-gradient-to-r from-[#7c3aed] via-[#6d28d9] to-[#6d28d9] text-white px-6 sm:px-12 py-20 text-center"><h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4">All Products</h1><p class="text-lg font-light max-w-2xl mx-auto">Browse by category. Each card includes a genuine delivery guarantee for worry-free compliance.</p></div></div>';
+      } else if (p === "/blog") {
+        hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12"><div class="max-w-5xl mx-auto"><div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#7c3aed] via-[#5b21b6] to-[#0078d4] text-white px-8 py-10 mb-8 shadow-xl"><div class="relative flex items-center gap-3 mb-4"><img src="/keystarter-logo.svg" alt="KeyStarter logo" class="w-8 h-8" /><span class="text-xs font-semibold tracking-[0.2em] text-white/80 uppercase">KeyStarter Blog</span></div><h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">Blog</h1><p class="text-white/85 max-w-2xl text-base md:text-lg leading-relaxed mb-1">Guides, comparisons, and tips for Microsoft software licensing.</p></div></div></div>';
+      }
+      var slug = p.indexOf("/product/") === 0 ? p.substring(9) : "";
+      if (slug) {
+        var PMAP={"windows-11-home":"/assets/images/box-win11-home.webp","windows-11-home-official":"/assets/images/box-win11-home.webp","windows-11-pro":"/assets/images/box-win11-pro.webp","windows-11-pro-official":"/assets/images/box-win11-pro.webp","windows-10-home":"/assets/images/pic-win10-home.webp","windows-10-home-official":"/assets/images/pic-win10-home-official.webp","windows-10-pro":"/assets/images/pic-win10-pro.webp","windows-10-pro-official":"/assets/images/pic-win10-pro.webp","office-2019-pro-plus":"/assets/images/box-office-2019.webp","office-2021-pro-plus":"/assets/images/box-office-2021.webp","win-11-iot-2024-entry":"/assets/images/box-iot-win11-entry.webp","win-11-iot-2024-value":"/assets/images/box-iot-win11-value.webp","win-11-iot-2024-high-end":"/assets/images/box-iot-win11-high-end.webp","win-10-iot-2021-entry":"/assets/images/pic-iot2021-entry.webp","win-10-iot-2021-value":"/assets/images/pic-iot2021-value.jpg","win-10-iot-2021-high-end":"/assets/images/pic-iot2021-high.jpg","win-10-iot-2019-entry":"/assets/images/pic-iot2019-entry.jpg","win-10-iot-2019-value":"/assets/images/pic-iot2019-entry.jpg","win-10-iot-2019-high-end":"/assets/images/pic-iot2019-entry.jpg","win-11-iot-ml-entry":"/assets/images/box-iot-ml-entry.webp","win-11-iot-ml-value":"/assets/images/box-iot-ml-value.webp","win-11-iot-ml-high-end":"/assets/images/box-iot-ml-high-end.webp","win-svr-iot-2019":"/assets/images/box-server-2019.webp","win-svr-iot-2022":"/assets/images/pic-svr2022.webp","win-svr-iot-2025":"/assets/images/box-svr-iot-2025.webp","sql-svr-2019-runtime":"/assets/images/box-sql-2019.webp","sql-svr-2022-runtime":"/assets/images/box-sql-2022.webp"};
+        var img = PMAP[slug];
+        if (img) {
+          var nm = slug.split("-").map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(" ");
+          hero = '<div class="pt-12 bg-[#f5f5f7] text-[#1d1d1f] antialiased">' +
+            '<div class="max-w-7xl mx-auto px-6 py-4 text-xs text-[#86868b]">Home / <span>' + nm + '</span></div>' +
+            '<div class="max-w-7xl mx-auto px-6 pb-16"><div class="grid grid-cols-1 md:grid-cols-2 gap-10">' +
+            '<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-[#e8e8ed] flex items-center justify-center"><img src="' + img + '" alt="' + nm + '" class="w-full h-full object-contain p-4" fetchpriority="high" /></div>' +
+            '<div><h1 class="text-3xl font-bold mb-2">' + nm + '</h1><div class="shimmer h-12 w-full rounded-xl"></div><div class="shimmer h-4 w-2/3 mt-4 rounded"></div></div>' +
+            '</div></div></div>';
+        }
+      }
+      if (hero) {
+        var root = document.getElementById("root");
+        if (root) root.innerHTML = hero;
+      }
+    })();
+  </script>
   <script type="module" src="/src/main.tsx"></script>
   <script>
     function loadChatWidget() {
