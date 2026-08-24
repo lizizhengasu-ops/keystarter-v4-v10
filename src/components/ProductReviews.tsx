@@ -25,22 +25,22 @@ export function ProductReviews({ reviews, t }: { reviews: Review[]; t: (k: strin
       {showAll && totalPages > 1 && (
         <div className="flex items-center justify-center gap-1.5 mt-4">
           <button onClick={() => setPage(Math.max(1, page - 1))}
-            className="v5-btn text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
+            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
             disabled={page <= 1}>Prev</button>
           {pgArr.map((p) => (
             <button key={p} onClick={() => setPage(p)}
-              className={"v5-btn text-xs rounded-lg px-3 py-1.5 transition " + (p == page ? "bg-[#7c3aed] text-white font-semibold" : "text-[#86868b] border border-[#e8e8ed] hover:bg-white")}>
+              className={"v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs rounded-lg px-3 py-1.5 transition " + (p == page ? "bg-[#7c3aed] text-white font-semibold" : "text-[#86868b] border border-[#e8e8ed] hover:bg-white")}>
               {p}
             </button>
           ))}
           <button onClick={() => setPage(Math.min(totalPages, page + 1))}
-            className="v5-btn text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
+            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
             disabled={page >= totalPages}>Next</button>
         </div>
       )}
       {reviews.length > 5 && (
         <button onClick={() => { setShowAll(!showAll); setPage(1); }}
-          className="v5-btn mt-4 text-xs text-[#7c3aed] font-semibold border border-[#7c3aed]/20 rounded-lg px-4 py-2 hover:bg-[#7c3aed]/5 transition">
+          className="v5-btn mt-4 min-h-[44px] inline-flex items-center justify-center text-xs text-[#7c3aed] font-semibold border border-[#7c3aed]/20 rounded-lg px-4 py-2 hover:bg-[#7c3aed]/5 transition">
           {showAll ? "Hide Reviews" : "View All Reviews (" + reviews.length + ")"}
         </button>
       )}

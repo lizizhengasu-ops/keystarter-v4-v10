@@ -28,6 +28,11 @@ const ROUTE_META: Record<string, PageMeta> = {
     description:
       "Guides and updates from KeyStarter about Windows, Office and software licensing.",
   },
+  "/links": {
+    title: "Quick Links — KeyStarter",
+    description:
+      "Shop best sellers, read the blog, subscribe for updates and request a B2B quote at KeyStarter.",
+  },
   "/b2b": {
     title: "B2B & Bulk Licensing — KeyStarter",
     description:

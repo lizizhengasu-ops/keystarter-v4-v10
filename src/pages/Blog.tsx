@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { stripTags } from "../utils/html";
 import { BLOG_ARTICLES } from "../data/blog-articles";
+import { pushEvent } from "../tracking";
 
 type Post = {
   id: number;
@@ -31,6 +32,25 @@ export default function BlogPage() {
   const { t } = useTranslation();
   const [posts] = useState<Post[]>(STATIC_POSTS);
   const [query, setQuery] = useState("");
+  const [email, setEmail] = useState("");
+  const [newsStatus, setNewsStatus] = useState("");
+
+  const subscribe = (e: any) => {
+    e.preventDefault();
+    if (!email) return;
+    pushEvent("lead", { form_name: "blog_newsletter", email_present: true });
+    fetch("/api/consumer/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        setNewsStatus(d.message || "Subscribed!");
+        setEmail("");
+      })
+      .catch(() => setNewsStatus("Error. Please try again."));
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -74,11 +94,31 @@ export default function BlogPage() {
           className="w-full rounded-2xl border border-[#e8e8ed] bg-white px-5 py-3 text-sm shadow-sm placeholder:text-[#a0a0a8] focus:border-[#7c3aed] focus:outline-none focus:ring-2 focus:ring-[#ede9fe] mb-8"
         />
 
+        <div className="bg-white rounded-2xl border border-[#e8e8ed] shadow-sm p-5 mb-8">
+          <h2 className="text-base font-bold mb-1">{t("footer.stay_updated", "Stay Updated")}</h2>
+          <p className="text-xs text-[#86868b] mb-4">{t("footer.newsletter", "Get Windows and Microsoft AI news in your inbox.")}</p>
+          <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              aria-label="Email"
+              placeholder={t("footer.email_placeholder", "Your email address")}
+              className="flex-1 px-4 py-3 rounded-xl border border-[#e8e8ed] text-sm min-h-[44px] focus:outline-none focus:border-[#7c3aed]"
+            />
+            <button type="submit" className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-semibold px-6 py-3 rounded-xl text-sm min-h-[44px] transition cursor-pointer">
+              {t("footer.subscribe", "Subscribe")}
+            </button>
+          </form>
+          {newsStatus && <p className="text-xs text-green-600 mt-3">{newsStatus}</p>}
+        </div>
+
         {filtered.length === 0 ? (
           <div className="text-center py-20 text-[#86868b]">{t("blog.empty")}</div>
         ) : (
           <div className="grid sm:grid-cols-2 gap-6">
-            {filtered.map((p) => {
+            {filtered.map((p, i) => {
               const cover = coverOf(p);
               const isDaily = DAILY_RE.test(p.slug);
               const title = stripTags(p.title.rendered);
@@ -93,7 +133,8 @@ export default function BlogPage() {
                       <img
                         src={cover}
                         alt={title}
-                        loading="lazy"
+                        loading={i === 0 ? "eager" : "lazy"}
+                        fetchPriority={i === 0 ? "high" : "auto"}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
@@ -121,7 +162,7 @@ export default function BlogPage() {
                     <h2 className="text-lg font-bold mb-2 text-[#1d1d1f] group-hover:text-[#6d28d9] transition-colors line-clamp-2">
                       {title}
                     </h2>
-                    <p className="text-sm text-[#86868b] mb-4 line-clamp-3">
+                    <p className="text-sm text-[#86868b] mb-4 line-clamp-2">
                       {stripTags(p.excerpt.rendered).substring(0, 140)}
                     </p>
                     <span className="text-sm text-[#7c3aed] font-semibold group-hover:underline">
