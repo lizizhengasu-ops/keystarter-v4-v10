@@ -115,6 +115,13 @@ export default function B2bPage() {
         <p className="text-lg font-light max-w-2xl mx-auto mb-8">{t("b2b.desc")}</p>
         <a href="mailto:admin@keys-starter.com?subject=Enterprise%20B2B%20Inquiry" className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
       </div>
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-6 pt-6 text-xs font-medium text-[#1d1d1f]/80">
+        <span>Genuine Microsoft licensing channels</span>
+        <span>Volume pricing with custom quotes</span>
+        <span>14-day refund policy</span>
+        <span>Dedicated activation support</span>
+        <span>Compliance &amp; audit documentation</span>
+      </div>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-bold mb-8">{t("b2b.solutions")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
@@ -126,8 +133,8 @@ export default function B2bPage() {
           ))}
         </div>
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-2">Software Portfolio</h2>
-          <p className="text-xs text-[#86868b] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels.</p>
+          <h2 className="text-2xl font-bold mb-2">Licensing Portfolio - Windows, Office, Server &amp; IoT</h2>
+          <p className="text-xs text-[#86868b] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels. All B2B orders include compliance documentation and audit support.</p>
           <SoftwarePortfolio />
         </div>
         <div className="mb-16">
