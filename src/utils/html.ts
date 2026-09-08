@@ -1,10 +1,20 @@
 import DOMPurify from "dompurify";
 
+// WP REST returns title.rendered / excerpt.rendered with HTML entities
+// (e.g. "&#038;"); stripTags output is used as React text nodes, so decode them.
+function decodeEntities(text: string): string {
+  const el = document.createElement("textarea");
+  el.innerHTML = text;
+  return el.value;
+}
+
 export function stripTags(html: string): string {
-  return String(html || "")
-    .replace(/<[^>]*>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return decodeEntities(
+    String(html || "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 }
 
 export function sanitizeHtml(html: string): string {
