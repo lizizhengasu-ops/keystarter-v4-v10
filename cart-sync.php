@@ -35,7 +35,12 @@ $slug_map = [
 foreach ($items as $item) {
     $slug = is_array($item) ? ($item["slug"] ?? "") : ($item->slug ?? "");
     $qty = max(1, min(99, intval(is_array($item) ? ($item["qty"] ?? 1) : ($item->qty ?? 1))));
-    $pid = $slug_map[$slug] ?? 0;
+    // Multisite-safe: resolve the product ID in the CURRENT blog first;
+    // the hardcoded map is only a legacy fallback for the main site.
+    $pid = (int) wc_get_product_id_by_slug($slug);
+    if ($pid <= 0) {
+        $pid = (int) ($slug_map[$slug] ?? 0);
+    }
     if ($pid > 0) WC()->cart->add_to_cart($pid, $qty);
 }
 
