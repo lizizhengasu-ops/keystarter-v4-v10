@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // /cart-sync.php - Sync items to WooCommerce cart (JSON API, no redirect)
 require_once dirname(__FILE__) . '/wp-load.php';
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
