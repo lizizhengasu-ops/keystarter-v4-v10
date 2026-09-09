@@ -4,11 +4,10 @@
 import { useState, useCallback, useRef } from "react";
 import { WC_IDS } from "../data/woo-ids";
 import { pushEvent } from "../tracking";
-import { api } from "../site-config";
 
 const CART_KEY = "ks_cart_v5";
-const API = api("/wp-json/wc/store/v1/cart");
-const SYNC = api("/cart-sync.php");
+const API = "/wp-json/wc/store/v1/cart";
+const SYNC = "/cart-sync.php";
 const ID_TO_SLUG = Object.fromEntries(
   Object.entries(WC_IDS).map(([slug, id]) => [String(id), slug])
 );
@@ -150,7 +149,7 @@ export function useWooCart() {
     // Then sync ALL items to WC and redirect
     const items = loadCart().items.filter(i => i.slug).map(i => ({ slug: i.slug, qty: i.quantity }));
     const encoded = encodeURIComponent(JSON.stringify(items));
-    window.location.href = api('/checkout-sync.php?items=') + encoded;
+    window.location.href = '/checkout-sync.php?items=' + encoded;
   }, [syncPending]);
 
   const flushCart = useCallback(async () => {
@@ -163,7 +162,7 @@ export function useWooCart() {
 
   const openCart = useCallback(async () => {
     await flushCart();
-    window.location.href = api('/cart/');
+    window.location.href = '/cart/';
   }, [flushCart]);
 
   const buyNow = useCallback(async (slug: string, name: string, price: number) => {
@@ -174,7 +173,7 @@ export function useWooCart() {
       debounceRef.current = null;
     }
     await syncPending();
-    window.location.href = api('/checkout-sync.php?items=') + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
+    window.location.href = '/checkout-sync.php?items=' + encodeURIComponent(JSON.stringify([{ slug, qty: 1 }]));
   }, [addToCart, syncPending]);
 
   const clearCart = useCallback(() => {

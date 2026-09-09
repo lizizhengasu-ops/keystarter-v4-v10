@@ -6,8 +6,7 @@ import type { SPAProduct } from "../api/woocommerce";
 import { useCart } from "../data/CartContext";
 import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
-import { SPECIAL_OFFER_IDS } from "../data/constants";
-import { SITE, filterBySiteCatalog } from "../site-config";
+import { SPECIAL_OFFER_IDS, SPECIAL_REGULAR_PRICES } from "../data/constants";
 
 // categories removed - using filter tabs from homepage style
 
@@ -112,9 +111,9 @@ export default function StorePage() {
         
         {!loading && !error && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {filterBySiteCatalog(filteredProducts).map((x,i) => {
+            {filteredProducts.map((x,i) => {
               const isSpecial = SPECIAL_OFFER_IDS.includes(x.slug);
-              const orig = isSpecial ? (SITE.priceAnchors?.[x.slug] || x.regularPrice || 0) : 0;
+              const orig = isSpecial ? (SPECIAL_REGULAR_PRICES[x.slug] || x.regularPrice || 0) : 0;
               const off = orig > x.price ? Math.round((1 - x.price / orig) * 100) : 0;
               return (
               <div key={i} className={"bg-white rounded-2xl border p-5 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden " + (isSpecial ? "border-[#ff6b35]/40" : "border-[#e8e8ed]")}>

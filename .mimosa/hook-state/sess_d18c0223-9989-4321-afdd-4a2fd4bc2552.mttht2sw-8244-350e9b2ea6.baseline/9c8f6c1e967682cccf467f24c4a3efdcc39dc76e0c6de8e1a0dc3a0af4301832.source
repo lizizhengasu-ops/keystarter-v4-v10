@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 
-import { api } from "../site-config";
+
 
 export default function AccountPage() {
   // Single call: check auth + get orders if logged in
   useEffect(() => {
-    fetch(api("/wp-json/keystarter/v1/customer-account"),{credentials:"same-origin"})
+    fetch("/wp-json/keystarter/v1/customer-account",{credentials:"same-origin"})
       .then(r => r.json())
       .then(data => {
         if (data.logged_in) {
@@ -56,7 +56,7 @@ const handleRegister = async (e: any) => {
       const fd = new URLSearchParams();
       fd.append("user_login", registerEmail);
       fd.append("user_email", registerEmail);
-      const r = await fetch(api("/wp-login.php?action=register"), {method: "POST", body: fd, redirect: "manual", credentials: "same-origin"});
+      const r = await fetch("/wp-login.php?action=register", {method: "POST", body: fd, redirect: "manual", credentials: "same-origin"});
       const loc = r.headers.get("location") || "";
       setRegisterMsg(loc.includes("checkemail") ? "Account created! Check your email for password." : "Registration failed. Email may be taken.");
     } catch { setRegisterMsg("Network error. Please try again."); }

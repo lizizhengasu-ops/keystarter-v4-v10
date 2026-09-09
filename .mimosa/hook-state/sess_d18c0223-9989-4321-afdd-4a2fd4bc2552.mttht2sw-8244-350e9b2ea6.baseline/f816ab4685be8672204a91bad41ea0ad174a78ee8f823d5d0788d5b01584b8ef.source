@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { pushEvent } from "../tracking";
-import { api } from "../site-config";
 
 export default function LinksPage() {
   const { search } = useLocation();
@@ -13,7 +12,7 @@ export default function LinksPage() {
   const subscribe = (e: React.FormEvent) => {
     e.preventDefault();
     pushEvent("lead", { form_name: "links_newsletter", email_present: !!email });
-    fetch(api("/api/consumer/newsletter"), {
+    fetch("/api/consumer/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

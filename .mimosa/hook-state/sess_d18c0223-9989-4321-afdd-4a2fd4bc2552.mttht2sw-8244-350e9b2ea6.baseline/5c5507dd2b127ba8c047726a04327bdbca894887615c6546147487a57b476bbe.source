@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { stripTags, sanitizeHtml } from "../utils/html";
-import { api } from "../site-config";
 
 export default function BlogArticlePage() {
   const { t } = useTranslation();
@@ -11,7 +10,7 @@ export default function BlogArticlePage() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (!slug) return;
-    fetch(api("/wp-json/wp/v2/posts?slug="+slug))
+    fetch("https://keys-starter.com/wp-json/wp/v2/posts?slug="+slug)
       .then(r => r.json()).then((d:any[]) => { if (d.length>0) setArticle(d[0]); setLoading(false); }).catch(() => setLoading(false));
   }, [slug]);
   if (loading) return (

@@ -3,7 +3,6 @@
  // API: /wp-json/wc/v3/products  (needs API key)
  
  import { products as localProducts } from "./products";
- import { api } from "../site-config";
  
 export interface SPAProduct {
   slug: string;
@@ -68,10 +67,10 @@ export interface SPAProduct {
  // Batch: fetch products with language support
 export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProduct[]> {
   const langSuffix = lang !== "en" ? `?lang=${lang}&per_page=100` : "?per_page=100";
-  const apiPath = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
-
+  const apiBase = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
+   
    try {
-    const res = await fetch(`${api(apiPath)}${langSuffix}`, {
+    const res = await fetch(`${apiBase}${langSuffix}`, {
       signal: AbortSignal.timeout(8000)
     });
      if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -97,7 +96,7 @@ export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProd
  // Single: fetch one product by slug
  export async function fetchProduct(slug: string, lang = "en"): Promise<SPAProduct | null> {
    const langSuffix = lang !== "en" ? `&lang=${lang}` : "";
-   const url = api(`/wp-json/wc/store/v1/products?slug=${encodeURIComponent(slug)}&per_page=1${langSuffix}`);
+   const url = `/wp-json/wc/store/v1/products?slug=${encodeURIComponent(slug)}&per_page=1${langSuffix}`;
    try {
      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
      if (res.ok) {

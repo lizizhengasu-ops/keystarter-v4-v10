@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { SITE } from "../site-config";
 
-export default function RefundPage() {
+export default function DisclaimerPage() {
   const [active, setActive] = useState(0);
   const sections = [
-    { id: "s1", title: "Digital Product Policy" },
-    { id: "s2", title: "Refund Eligibility" },
-    { id: "s3", title: "How to Request a Refund" },
-    { id: "s4", title: "Refund Review" },
-    { id: "s5", title: "Processing Time" },
-    { id: "s6", title: "Physical (Sticker) Products" },
-    { id: "s7", title: "Non-Refundable Cases" },
-    { id: "s8", title: "Contact" },
+    { id: "s1", title: "General Information" },
+    { id: "s2", title: "Independent Reseller" },
+    { id: "s3", title: "No Warranty" },
+    { id: "s4", title: "Product Information" },
+    { id: "s5", title: "Third-Party Links" },
+    { id: "s6", title: "Limitation of Liability" },
+    { id: "s7", title: "Contact" },
   ];
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased min-h-screen">
@@ -21,8 +19,8 @@ export default function RefundPage() {
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             Last updated: August 3, 2026
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Refund Policy</h1>
-          <p className="text-lg font-light max-w-2xl mx-auto text-white/85">Refund policy for digital license purchases.</p>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Disclaimer</h1>
+          <p className="text-lg font-light max-w-2xl mx-auto text-white/85">Important legal and compliance information about KeyStarter.</p>
         </div>
       </div>
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10">
@@ -42,58 +40,51 @@ export default function RefundPage() {
             <section id="s1" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Digital Product Policy</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">General Information</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Most products sold by KeyStarter are digital license keys or subscription redemptions delivered by email. By purchasing a digital product, you consent to immediate delivery and acknowledge that, once the key or redemption is delivered and activation has started, the statutory right of withdrawal for digital content is lost. Once a digital product has been delivered and successfully verified, the purchase is generally considered final.</p>
+              <p className="mb-3 last:mb-0 pl-10">The information provided on this Website is for general informational purposes only and does not constitute legal, financial, or professional advice. You should consult a qualified professional for advice tailored to your specific situation.</p>
             </section>
             <section id="s2" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Refund Eligibility</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Independent Reseller</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">You may request a refund within 14 days of purchase in the following cases: (a) the product key has not been displayed or delivered to you, or (b) the product key is invalid, duplicate, or already used and we cannot replace it with a valid key.</p>
+              <p className="mb-3 last:mb-0 pl-10">KeyStarter is an independent software reseller and is not affiliated with, sponsored by, or endorsed by Microsoft Corporation or any other software manufacturer. All product names, logos, and brands are property of their respective owners.</p>
             </section>
             <section id="s3" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">How to Request a Refund</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">No Warranty</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">To request a refund, contact us at {SITE.supportEmail} within 14 days of your purchase. Include your order number, the product name, and a clear description of the issue. For invalid or used keys, include a screenshot of the activation error where possible.</p>
+              <p className="mb-3 last:mb-0 pl-10">All products are provided as-is without warranties of any kind, whether express or implied. We do not warrant that the products will meet your requirements or that the Website will be uninterrupted or error-free.</p>
             </section>
             <section id="s4" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Refund Review</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Product Information</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Our support team will review your request and may request additional information to verify the issue. If the request is approved, a refund will be issued to the original payment method.</p>
+              <p className="mb-3 last:mb-0 pl-10">Product descriptions, prices, and system requirements are provided in good faith and are subject to change without notice. It is your responsibility to verify that your system meets the requirements before purchasing.</p>
             </section>
             <section id="s5" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Processing Time</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Third-Party Links</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">Approved refunds are typically processed within 5 to 10 business days, depending on your payment provider. The refund will appear on your statement according to your payment provider policy.</p>
+              <p className="mb-3 last:mb-0 pl-10">The Website may contain links to third-party websites or services that are not owned or controlled by KeyStarter. We are not responsible for the content, policies, or practices of any third-party websites.</p>
             </section>
             <section id="s6" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">6</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Physical (Sticker) Products</h2>
+                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Limitation of Liability</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">For physical license sticker products, a refund may be considered if the item has not been shipped or if it arrives damaged or incorrect. Once a physical item has been shipped, it may be subject to return shipping requirements.</p>
+              <p className="mb-3 last:mb-0 pl-10">To the maximum extent permitted by law, KeyStarter shall not be liable for any loss or damage arising from the use of the Website, the purchase of products, or reliance on any information provided on the Website.</p>
             </section>
             <section id="s7" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
               <div className="flex items-start gap-3 mb-3">
                 <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">7</span>
-                <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Non-Refundable Cases</h2>
-              </div>
-              <p className="mb-3 last:mb-0 pl-10">Refunds are not provided for keys that have been successfully activated, for purchases where the customer changed their mind after delivery, or for issues caused by the customer system not meeting the product requirements.</p>
-            </section>
-            <section id="s8" className="scroll-mt-24 border-b border-[#f5f5f7] last:border-0 pb-6 mb-6">
-              <div className="flex items-start gap-3 mb-3">
-                <span className="mt-0.5 w-7 h-7 rounded-lg bg-[#7c3aed]/10 text-[#7c3aed] text-xs font-bold flex items-center justify-center flex-shrink-0">8</span>
                 <h2 className="text-lg font-bold text-[#1d1d1f] pt-0.5">Contact</h2>
               </div>
-              <p className="mb-3 last:mb-0 pl-10">For refund inquiries, contact us at {SITE.supportEmail}.</p>
+              <p className="mb-3 last:mb-0 pl-10">If you have questions about this Disclaimer, contact us at admin@keys-starter.com.</p>
             </section>
           </div>
           <div className="mt-8 rounded-2xl bg-gradient-to-r from-[#7c3aed]/5 to-[#106EBE]/5 border border-[#e8e8ed] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -104,7 +95,7 @@ export default function RefundPage() {
               <div className="text-sm font-semibold text-[#1d1d1f]">Questions? Contact us</div>
               <div className="text-xs text-[#86868b] mt-0.5">Our team typically responds within 24 hours.</div>
             </div>
-            <a href={"mailto:" + SITE.supportEmail} className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">{SITE.supportEmail}</a>
+            <a href="mailto:admin@keys-starter.com" className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">admin@keys-starter.com</a>
           </div>
         </div>
       </div>

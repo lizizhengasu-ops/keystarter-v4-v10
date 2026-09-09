@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { fetchProducts } from '../api/woocommerce';
 import type { SPAProduct } from '../api/woocommerce';
-import { SITE, api } from '../site-config';
 import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
@@ -64,8 +63,7 @@ const PREMIUM_SKUS: any[] = [
   {id:'win-10-iot-2019-entry',category:'server',title:'Win 10 IoT Ent 2019 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2019 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
   {id:'testms',category:'test',title:'testms',subtitle:'Payment test product - 0.10 USD',price:0.1,originalPrice:0.1,tag:'Test',type:'Test SKU',features:['Payment test product','0.10 USD test SKU','Digital delivery'],icon:<WindowsIcon colorClass="text-[#7c3aed]" />},
 ];
-const inSiteCatalog = (id: string) => !SITE.productSlugs || SITE.productSlugs.includes(id);
-const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id) && inSiteCatalog(s.id));
+const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id));
 
 const TRUST_ITEMS = [
   { img: "/assets/images/trust-paypal.jpg?v=3", title: "PayPal Verified", desc: "Official verified seller account", alt: "PayPal" },
@@ -90,7 +88,7 @@ const [activeTab, setActiveTab] = useState('all');
   const [showOffer, setShowOffer] = useState(true);
   useEffect(() => {
     const id = window.requestIdleCallback(() => {
-      fetch(api("/wp-json/wp/v2/posts?per_page=3"))
+      fetch("/wp-json/wp/v2/posts?per_page=3")
         .then((r) => r.json())
         .then(setBlogPosts)
         .catch(() => {});
@@ -165,11 +163,11 @@ const [activeTab, setActiveTab] = useState('all');
       "<p><b>Contact:</b> " + (fd.get("contact") || "") + "</p>" +
       "<p><b>Phone/Email:</b> " + String(fd.get("phone") || "") + "</p>";
     try {
-      await fetch(api("/wp-json/keystarter/v1/send-email"), {
+      await fetch("/wp-json/keystarter/v1/send-email", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          to: SITE.supportEmail,
+          to: "admin@keys-starter.com",
           from_email: String(fd.get("phone") || "").includes("@") ? String(fd.get("phone") || "") : "",
           from_name: (fd.get("contact") || ""),
           reply_to: String(fd.get("phone") || "").includes("@") ? String(fd.get("phone") || "") : "",
@@ -180,7 +178,7 @@ const [activeTab, setActiveTab] = useState('all');
       // Auto-reply to customer
       const ce = String(fd.get("phone") || "");
       if (ce.includes("@")) {
-        fetch(api("/wp-json/keystarter/v1/send-email"), {
+        fetch("/wp-json/keystarter/v1/send-email", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
@@ -188,8 +186,8 @@ const [activeTab, setActiveTab] = useState('all');
             from_email: ce,
             from_name: (fd.get("contact") || ""),
             reply_to: ce,
-            subject: "Thank you for your Compliance Quote - " + SITE.siteName,
-            message: "<p>Hi " + (fd.get("contact") || "") + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs and provide a cost-effective quote within 30 minutes.</p><p>For urgent inquiries, please email " + SITE.supportEmail + ".</p><p>Best regards,<br>" + SITE.siteName + " Compliance Team</p>"
+            subject: "Thank you for your Compliance Quote - KeyStarter",
+            message: "<p>Hi " + (fd.get("contact") || "") + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs and provide a cost-effective quote within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
           })
         }).catch(() => {});
       }
@@ -202,7 +200,7 @@ const [activeTab, setActiveTab] = useState('all');
       });
       e.target.reset();
     } catch {
-      showToast("Network error. Please email " + SITE.supportEmail + " directly.", "⚠️");
+      showToast("Network error. Please email admin@keys-starter.com directly.", "⚠️");
     }
   };
 
@@ -214,7 +212,7 @@ const [activeTab, setActiveTab] = useState('all');
       "Primary Product Needs: " + (fd.get("product") || "") + "\n" +
       "Contact Name: " + (fd.get("contact") || "") + "\n" +
       "Phone / Email: " + (fd.get("phone") || "");
-    window.open("https://wa.me/" + SITE.whatsappNumber + "?text=" + encodeURIComponent(text), "_blank");
+    window.open("https://wa.me/14807647544?text=" + encodeURIComponent(text), "_blank");
   };
 
   // Filtered SKUs
@@ -225,8 +223,8 @@ const [activeTab, setActiveTab] = useState('all');
     return { ...sku, price: live.price, originalPrice: live.regularPrice };
   };
 
-const filteredSkus = PREMIUM_SKUS.filter(sku =>
-    inSiteCatalog(sku.id) && (activeTab === 'all' || sku.category === activeTab)
+const filteredSkus = PREMIUM_SKUS.filter(sku => 
+    activeTab === 'all' || sku.category === activeTab
   );
 
   return (
@@ -312,8 +310,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("home.enterprise.cta_title")}</h2>
         <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">{t("home.enterprise.cta_desc")}</p>
         <div className="flex justify-center gap-4 flex-wrap items-center">
-          <a href={"mailto:" + SITE.supportEmail} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
-          <span className="text-sm text-[#7c3aed] font-semibold">{SITE.supportEmail}</span>
+          <a href="mailto:admin@keys-starter.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
+          <span className="text-sm text-[#7c3aed] font-semibold">admin@keys-starter.com</span>
         </div>
       </section>
       )}

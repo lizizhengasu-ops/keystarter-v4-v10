@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SoftwarePortfolio from "../components/SoftwarePortfolio";
 import { pushEvent } from "../tracking";
-import { SITE, api } from "../site-config";
 
 
 const solutions = [
@@ -54,11 +53,11 @@ export default function B2bPage() {
     if (form.honeypot_website) return;
     setFormStatus("sending");
     try {
-      const r = await fetch(api("/wp-json/keystarter/v1/send-email"), {
+      const r = await fetch("/wp-json/keystarter/v1/send-email", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          to: SITE.supportEmail,
+          to: "admin@keys-starter.com",
           from_email: form.phone.includes("@") ? form.phone : "",
           from_name: form.company,
           reply_to: form.phone.includes("@") ? form.phone : "",
@@ -68,7 +67,7 @@ export default function B2bPage() {
       });
       // Auto-reply to customer (best-effort, no await)
       if (form.phone.includes("@")) {
-        fetch(api("/wp-json/keystarter/v1/send-email"), {
+        fetch("/wp-json/keystarter/v1/send-email", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
@@ -76,8 +75,8 @@ export default function B2bPage() {
             from_email: form.phone,
             from_name: form.contact,
             reply_to: form.phone,
-            subject: "Thank you for your Compliance Quote - " + SITE.siteName,
-            message: "<p>Hi " + form.contact + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs within 30 minutes.</p><p>For urgent inquiries, please email " + SITE.supportEmail + ".</p><p>Best regards,<br>" + SITE.siteName + " Compliance Team</p>"
+            subject: "Thank you for your Compliance Quote - KeyStarter",
+            message: "<p>Hi " + form.contact + ",</p><p>Thank you for your compliance quote request. Our experts will review your needs within 30 minutes.</p><p>For urgent inquiries, please email admin@keys-starter.com.</p><p>Best regards,<br>KeyStarter Compliance Team</p>"
           })
         }).catch(() => {});
       }
@@ -107,14 +106,14 @@ export default function B2bPage() {
       "Primary Product Needs: " + form.product + "\n" +
       "Contact Name: " + form.contact + "\n" +
       "Phone / Email: " + form.phone;
-    window.open("https://wa.me/" + SITE.whatsappNumber + "?text=" + encodeURIComponent(text), "_blank");
+    window.open("https://wa.me/14807647544?text=" + encodeURIComponent(text), "_blank");
   };
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div id="enterprise-b2b" className="bg-gradient-to-r from-[#6d28d9] to-[#1a1a2e] text-white px-6 sm:px-12 py-20 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">{t("b2b.title")}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto mb-8">{t("b2b.desc")}</p>
-        <a href={"mailto:" + SITE.supportEmail + "?subject=Enterprise%20B2B%20Inquiry"} className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
+        <a href="mailto:admin@keys-starter.com?subject=Enterprise%20B2B%20Inquiry" className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
       </div>
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-6 pt-6 text-xs font-medium text-[#1d1d1f]/80">
         <span>Genuine Microsoft licensing channels</span>

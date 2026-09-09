@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { stripTags } from "../utils/html";
 import { BLOG_ARTICLES } from "../data/blog-articles";
 import { pushEvent } from "../tracking";
-import { api } from "../site-config";
 
 type Post = {
   id: number;
@@ -40,7 +39,7 @@ export default function BlogPage() {
     e.preventDefault();
     if (!email) return;
     pushEvent("lead", { form_name: "blog_newsletter", email_present: true });
-    fetch(api("/api/consumer/newsletter"), {
+    fetch("/api/consumer/newsletter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

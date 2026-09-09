@@ -4,12 +4,12 @@ import { products } from "../data/products";
 import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
 import { BLOG_ARTICLES } from "../data/blog-articles";
 import { EDGE_PRODUCT_META, EDGE_BLOG_INDEX, EDGE_PRODUCTS_INDEX } from "../data/seo-edge";
-import { SITE as SITE_CONFIG } from "../site-config";
 
-const SITE = SITE_CONFIG.canonicalOrigin;
-const SITE_NAME = SITE_CONFIG.siteName;
-const FALLBACK_TITLE = SITE_CONFIG.defaultTitle;
-const FALLBACK_DESC = SITE_CONFIG.defaultDesc;
+const SITE = "https://keys-starter.com";
+const SITE_NAME = "KeyStarter";
+const FALLBACK_TITLE = "KeyStarter — Genuine Software Licenses";
+const FALLBACK_DESC =
+  "Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout.";
 
 interface PageMeta {
   title: string;
