@@ -35,9 +35,13 @@ $slug_map = [
 foreach ($items as $item) {
     $slug = is_array($item) ? ($item["slug"] ?? "") : ($item->slug ?? "");
     $qty = max(1, min(99, intval(is_array($item) ? ($item["qty"] ?? 1) : ($item->qty ?? 1))));
-    // Multisite-safe: resolve the product ID in the CURRENT blog first;
-    // the hardcoded map is only a legacy fallback for the main site.
-    $pid = (int) wc_get_product_id_by_slug($slug);
+    // Multisite-safe: resolve the product ID from the CURRENT blog's posts table
+    // ($wpdb->posts follows the switched blog); hardcoded map is legacy fallback.
+    global $wpdb;
+    $pid = (int) $wpdb->get_var($wpdb->prepare(
+        "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s AND post_type = 'product' AND post_status = 'publish' LIMIT 1",
+        $slug
+    ));
     if ($pid <= 0) {
         $pid = (int) ($slug_map[$slug] ?? 0);
     }
