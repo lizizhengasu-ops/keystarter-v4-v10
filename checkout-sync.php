@@ -1,7 +1,8 @@
 <?php
 // /checkout-sync.php - Sync SPA cart to WooCommerce, then redirect to checkout
-// v5.14.3 - Fixed: save WC session cookie so /checkout/ recognizes the cart
-require_once "/var/www/keys-starter.com/wp-load.php";
+// v5.15 - Multisite-safe: product resolved by slug in the CURRENT blog
+// (wpdb->posts follows the switched blog); hardcoded id map = legacy fallback.
+require_once dirname(__FILE__) . '/wp-load.php';
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
@@ -11,7 +12,7 @@ $items = json_decode($items_json, true);
 
 if ($items && is_array($items) && function_exists("WC")) {
     WC()->cart->empty_cart();
-    
+
     $slug_map = [
         "windows-11-pro" => 629, "windows-10-pro" => 630,
         "windows-11-home" => 631, "windows-10-home" => 632,
@@ -29,13 +30,21 @@ if ($items && is_array($items) && function_exists("WC")) {
         "sql-svr-2022-runtime" => 669,
         "testms" => 1013,
     ];
-    
+
+    global $wpdb;
     foreach ($items as $item) {
-        $pid = isset($slug_map[$item["slug"]]) ? $slug_map[$item["slug"]] : 0;
+        $slug = isset($item["slug"]) ? $item["slug"] : "";
         $qty = isset($item["qty"]) ? max(1, min(99, intval($item["qty"]))) : 1;
+        $pid = (int) $wpdb->get_var($wpdb->prepare(
+            "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s AND post_type = 'product' AND post_status = 'publish' LIMIT 1",
+            $slug
+        ));
+        if ($pid <= 0) {
+            $pid = isset($slug_map[$slug]) ? (int) $slug_map[$slug] : 0;
+        }
         if ($pid > 0) WC()->cart->add_to_cart($pid, $qty);
     }
-    
+
     // CRITICAL: Set the WC session cookie so the browser sends it to /checkout/
     if (WC()->session) {
         WC()->session->set_customer_session_cookie(true);
