@@ -1,0 +1,1458 @@
+{
+  "aurora": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "nova": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "quartz": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "sovereign": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "lumina": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "console": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  },
+  "editorial": {
+    "pages": [
+      {
+        "view": "desktop",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "desktop",
+        "page": "support.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "index.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "about.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "account.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "b2b.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "cart.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "changelog.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "compare.html?slug=windows-11-pro-vs-home",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "contact.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "downloads.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "faq.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "legal.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "licensing.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "links.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product.html?slug=windows-11-pro",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "product-windows-11-pro.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "products.html",
+        "errors": []
+      },
+      {
+        "view": "mobile",
+        "page": "support.html",
+        "errors": []
+      }
+    ],
+    "console_errors": [],
+    "page_errors": [],
+    "failed_requests": [],
+    "overflow": []
+  }
+}

@@ -1,0 +1,1 @@
+Error: Component "NumberTicker" not found in registry

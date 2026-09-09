@@ -1,0 +1,104 @@
+# -*- coding: utf-8 -*-
+"""Playwright QA for KeyStarter v3 Paper (8820) and Terminal (8821)."""
+import json
+import os
+import time
+from playwright.sync_api import sync_playwright
+
+SITES = {
+    "paper": ("http://127.0.0.1:8820", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-paper-v3"),
+    "terminal": ("http://127.0.0.1:8821", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-terminal-v3"),
+    "mercury": ("http://127.0.0.1:8822", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-mercury-v3"),
+    "ledger": ("http://127.0.0.1:8823", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-ledger-v3"),
+    "atlas": ("http://127.0.0.1:8824", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-atlas-v3"),
+    "merchant": ("http://127.0.0.1:8825", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-merchant-v3"),
+    "meridian": ("http://127.0.0.1:8826", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-meridian-v3"),
+    "aurora": ("http://127.0.0.1:8827", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-aurora-v3"),
+    "nova": ("http://127.0.0.1:8828", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-nova-v3"),
+    "quartz": ("http://127.0.0.1:8829", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-quartz-v3"),
+    "sovereign": ("http://127.0.0.1:8830", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-sovereign-v3"),
+    "lumina": ("http://127.0.0.1:8831", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-lumina-v3"),
+    "console": ("http://127.0.0.1:8832", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-console-v5"),
+    "editorial": ("http://127.0.0.1:8833", r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\redesign-editorial-v5"),
+}
+
+PAGES = [
+    "index.html", "about.html", "account.html", "b2b.html", "blog.html",
+    "blog-article.html?slug=windows-iot-enterprise-vs-windows-11-pro",
+    "blog-post.html?slug=windows-microsoft-ai-news-2026-08-27",
+    "cart.html", "changelog.html", "compare.html?slug=windows-11-pro-vs-home",
+    "contact.html", "downloads.html", "faq.html", "legal.html", "licensing.html",
+    "links.html", "product.html?slug=windows-11-pro", "product-windows-11-pro.html",
+    "products.html", "support.html",
+]
+
+SHOT_PAGES = ["index.html", "product.html?slug=windows-11-pro", "products.html", "b2b.html", "support.html"]
+
+
+def main():
+    out_path = r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview\qa-v3-pair-report.json"
+    report = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path, "r", encoding="utf-8") as f:
+                report = json.load(f)
+        except Exception:
+            report = {}
+    only = os.environ.get("ONLY", "")
+    sites = {k: v for k, v in SITES.items() if not only or k == only}
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        for name, (base, root) in sites.items():
+            qa = {"pages": [], "console_errors": [], "page_errors": [], "failed_requests": [], "overflow": []}
+            qa_dir = os.path.join(root, "qa")
+            os.makedirs(qa_dir, exist_ok=True)
+            for view in ("desktop", "mobile"):
+                w, h = (1440, 900) if view == "desktop" else (390, 844)
+                for page_path in PAGES:
+                    url = base + "/" + page_path
+                    ctx = browser.new_context(viewport={"width": w, "height": h})
+                    page = ctx.new_page()
+                    errs = []
+                    page.on("console", lambda msg: errs.append(msg.text) if msg.type == "error" else None)
+                    page.on("pageerror", lambda exc: errs.append("PAGEERROR: " + str(exc)))
+                    page.on("requestfailed", lambda req: errs.append("REQFAIL: " + req.url))
+                    try:
+                        page.goto(url, wait_until="networkidle", timeout=25000)
+                        page.wait_for_timeout(500)
+                        overflow = page.evaluate("document.documentElement.scrollWidth > document.documentElement.clientWidth")
+                        slug = page_path.split("?")[0].replace(".html", "")
+                        if overflow:
+                            qa["overflow"].append(view + "/" + slug)
+                        short = page_path.split("?")[0].replace(".html", "")
+                        if page_path.split("?")[0] in SHOT_PAGES or (page_path.split("?")[0] == "product.html"):
+                            fname = f"{view}_{short}.png"
+                            page.screenshot(path=os.path.join(qa_dir, fname), full_page=False)
+                        qa["pages"].append({"view": view, "page": page_path, "errors": errs})
+                        qa["console_errors"].extend(errs)
+                    except Exception as exc:
+                        qa["page_errors"].append(view + "/" + page_path + ": " + str(exc))
+                    finally:
+                        ctx.close()
+            # Full-page home screenshot for visual review.
+            ctx = browser.new_context(viewport={"width": 1440, "height": 900})
+            page = ctx.new_page()
+            page.goto(base + "/index.html", wait_until="networkidle", timeout=25000)
+            page.wait_for_timeout(800)
+            page.screenshot(path=os.path.join(qa_dir, "full_index.png"), full_page=True)
+            ctx.close()
+            report[name] = qa
+        browser.close()
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    for name, qa in report.items():
+        print(name, "console_errors", len(qa["console_errors"]), "page_errors", len(qa["page_errors"]), "overflow", len(qa["overflow"]))
+        for e in qa["console_errors"][:10]:
+            print("  ", e[:160])
+        for e in qa["page_errors"][:5]:
+            print("  ", e[:200])
+        for o in qa["overflow"][:10]:
+            print("  overflow", o)
+
+
+if __name__ == "__main__":
+    main()

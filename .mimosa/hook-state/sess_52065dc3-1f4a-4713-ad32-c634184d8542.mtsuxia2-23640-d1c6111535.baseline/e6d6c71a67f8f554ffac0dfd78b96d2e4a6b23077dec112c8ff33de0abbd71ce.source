@@ -1,0 +1,668 @@
+import html
+import json
+import os
+import time
+from io import BytesIO
+from pathlib import Path
+
+import requests
+from PIL import Image
+
+ROOT = Path(r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10")
+LIB = ROOT / "docs" / "product-image-library"
+IMG = LIB / "images"
+IMG.mkdir(parents=True, exist_ok=True)
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    ),
+    "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    "Referer": "https://www.google.com/",
+}
+
+# (section label, group key, [entries])
+GROUPS = [
+    (
+        "Windows 11 Home",
+        "win11-home",
+        [
+            {
+                "name": "win11-home-1",
+                "title": "Microsoft System Builder | Windows 11 Home | Intended use for new systems | Install on a new PC | Branded by Microsoft",
+                "src": "https://m.media-amazon.com/images/I/61JfosHunyL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win11-home-2",
+                "title": "Microsoft Windows 11 Home FPP 64-Bit USB Flash Drive",
+                "src": "https://m.media-amazon.com/images/I/515EUmZGqnL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win11-home-3",
+                "title": "Microsoft Windows 11 (USB)",
+                "src": "https://m.media-amazon.com/images/I/61fUMcLzmgL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows 11 Pro",
+        "win11-pro",
+        [
+            {
+                "name": "win11-pro-1",
+                "title": "Microsoft Windows 11 PRO (Ingles) FPP 64-BIT ENG INTL USB Flash Drive",
+                "src": "https://m.media-amazon.com/images/I/51bdxhaQO6L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win11-pro-2",
+                "title": "Microsoft OEM System Builder | Windows 11 Pro | Intended use for new systems | Authorized by Microsoft",
+                "src": "https://m.media-amazon.com/images/I/61p-Ylv5vtL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win11-pro-3",
+                "title": "Techshoppro Compatible in Box Micro Win 11 PRO (Ingles) FPP 64-BIT ENG INTL USB Flash Drive",
+                "src": "https://m.media-amazon.com/images/I/71yEhcwa-SL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win11-pro-4",
+                "title": "Computer Werx Compatible with/Replacement for Windows 11 Professional 64 Bit Install DVD with key",
+                "src": "https://m.media-amazon.com/images/I/81oABIKA+gL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows 10 Home",
+        "win10-home",
+        [
+            {
+                "name": "win10-home-1",
+                "title": "Microsoft OEM System Builder | Windows 10 Home | 64-bit | Intended use for new systems | Upgradable to Windows 11 | Branded by Microsoft",
+                "src": "https://m.media-amazon.com/images/I/51yWoUm1I7L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win10-home-2",
+                "title": "Sistema Operativo Microsoft Windows 10 Home",
+                "src": "https://m.media-amazon.com/images/I/81-t-N2AXXL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win10-home-3",
+                "title": "9th and Vine Compatible with Windows 10 Home 32/64 Bit DVD",
+                "src": "https://m.media-amazon.com/images/I/616yPUueYfS._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows 10 Pro",
+        "win10-pro",
+        [
+            {
+                "name": "win10-pro-1",
+                "title": "Microsoft OEM System Builder | AMD, Windows 10 Pro | 64 BIT | Intended use for new systems | Upgradable to Windows 11",
+                "src": "https://m.media-amazon.com/images/I/611Kb1KT+mL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win10-pro-2",
+                "title": "Microsoft Windows 10 PRO 64Bit builder OEM",
+                "src": "https://m.media-amazon.com/images/I/71xfe1EB6yL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win10-pro-3",
+                "title": "Bootable USB Type C + A Installer for Windows 10 Pro",
+                "src": "https://m.media-amazon.com/images/I/61k2vB4Dj0L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "win10-pro-4",
+                "title": "Bootable USB Flash Drive for Windows 10 Pro 32/64 Bit",
+                "src": "https://m.media-amazon.com/images/I/41vblxE4onL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Office 2024",
+        "office-2024",
+        [
+            {
+                "name": "office-2024-1",
+                "title": "Microsoft Office Home & Business 2024 | Classic Desktop Apps: Word, Excel, PowerPoint, Outlook and OneNote | One-Time Purchase for 1 PC/MAC",
+                "src": "https://m.media-amazon.com/images/I/5142rSuCQ-L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2024-2",
+                "title": "Microsoft Office Home & Business 2024 | One time purchase, 1 Device | Windows 10/11, Mac - Key Card",
+                "src": "https://m.media-amazon.com/images/I/51ztr5lSYSL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2024-3",
+                "title": "Microsoft Office Home 2024 | Classic Office Apps: Word, Excel, PowerPoint | One-Time Purchase",
+                "src": "https://m.media-amazon.com/images/I/61-3UnDAw3L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2024-4",
+                "title": "Microsoft Office 2024 Professional Plus | Lifetime Licence | 1 PC/Notebook | ONLY for Windows Systems",
+                "src": "https://m.media-amazon.com/images/I/41quykW85eL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Office 2021",
+        "office-2021",
+        [
+            {
+                "name": "office-2021-1",
+                "title": "Office 2021 Home and Business - All Classic Office Applications - For 1 PC/Mac",
+                "src": "https://m.media-amazon.com/images/I/51qNT5086vL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2021-2",
+                "title": "Office Familie und kleines Unternehmen 2021 | Endgueltiger Kauf | 1 PC oder Mac | Box",
+                "src": "https://m.media-amazon.com/images/I/51wwkdEqROL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2021-3",
+                "title": "Microsoft Office Home & Business 2021 Download",
+                "src": "https://m.media-amazon.com/images/I/514josPlrVL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2021-4",
+                "title": "Microsoft Office 2021 Professional Plus | Versand per Postbrief | Lebenslange Lizenz",
+                "src": "https://m.media-amazon.com/images/I/61HPkLi8XhL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Office 2019",
+        "office-2019",
+        [
+            {
+                "name": "office-2019-1",
+                "title": "Microsoft Office Home and Business 2019 for 1 User",
+                "src": "https://m.media-amazon.com/images/I/71DfK6Ufw7L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2019-2",
+                "title": "Microsoft Office Home & Business 2019 | one-time purchase | 1 PC (Windows 10) or Mac",
+                "src": "https://m.media-amazon.com/images/I/713kB-3aMFL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2019-3",
+                "title": "Microsoft T5D-03301 Office 2019 Home and Business One Time Purchase 1 User",
+                "src": "https://m.media-amazon.com/images/I/71havHklzHL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2019-4",
+                "title": "Office 2019 Home & Student - Box Pack - 1 PC/Mac",
+                "src": "https://m.media-amazon.com/images/I/71+kA7okp6L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-2019-5",
+                "title": "Microsoft Office 2019",
+                "src": "https://m.media-amazon.com/images/I/61aABpqnmiL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Office 2016",
+        "office-2016",
+        [
+            {
+                "name": "office-2016-1",
+                "title": "Microsoft Office 2016 Professional Plus",
+                "src": "https://blitzhandel24.imgbolt.de/media/image/66/f8/ba/Microsoft-Office-2016-Professional-Plus.jpg",
+            },
+            {
+                "name": "office-2016-2",
+                "title": "Microsoft Office 2016 Pro Plus Box Plus Paper License Key",
+                "src": "https://5.imimg.com/data5/SELLER/Default/2022/4/AQ/PX/SQ/43926903/microsoft-office-2016-pro-plus-box-plus-paper-license-key-500x500.jpg",
+            },
+            {
+                "name": "office-2016-3",
+                "title": "Giloshop - Microsoft Office 2016 Professional Plus For Windows 32/64",
+                "src": "https://giloshop.com/media/catalog/product/cache/e736ae0f9f477b1f78634a69dbed3c0b/m/i/microsoft_office_2016_professional_plus_for_windows-min_1.jpg",
+            },
+            {
+                "name": "office-2016-4",
+                "title": "MICROSOFT OFFICE PROFESSIONAL Plus 2016 - Retail DVD - Brand New",
+                "src": "https://www.picclickimg.com/tgcAAOSwxldoOI6l/Microsoft-Office-Professional-Plus-2016-Retail-DVD.webp",
+            },
+            {
+                "name": "office-2016-5",
+                "title": "Microsoft Office 2016 Professional Plus for Windows PC",
+                "src": "https://softwarekey4u.com/wp-content/uploads/2025/04/Microsoft-Office-2016-Professional-Plus-for-Windows-PC.webp",
+            },
+            {
+                "name": "office-2016-6",
+                "title": "Microsoft Office 2016 Professional Plus",
+                "src": "https://www.lowsoft.de/media/69/22/90/1691665624/lowsoft_office_16_proplus-jpg.png",
+            },
+        ],
+    ),
+    (
+        "Microsoft 365",
+        "office-365",
+        [
+            {
+                "name": "office-365-1",
+                "title": "Microsoft 365 Personal | Office 365 apps | 1 user | 1 year subscription | PC/Mac, Tablet and phone | multilingual | box",
+                "src": "https://m.media-amazon.com/images/I/71cm9QFQKuL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-365-2",
+                "title": "Microsoft 365 Family | 12 Months, Up to 6 Users | Word, Excel, PowerPoint | 1TB OneDrive Cloud Storage | Box",
+                "src": "https://m.media-amazon.com/images/I/71oEWYGkN6L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-365-3",
+                "title": "Microsoft 365 Personal | 12-Month Subscription | 1 Person | Premium Office Apps | Instant Download",
+                "src": "https://m.media-amazon.com/images/I/71EGOVVEyAL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "office-365-4",
+                "title": "Microsoft 365 Family | 12-Month Subscription | Up to 6 People | Premium Office Apps | Instant Download",
+                "src": "https://m.media-amazon.com/images/I/61ILQQaR6gL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Project 2021",
+        "project-2021",
+        [
+            {
+                "name": "project-2021-1",
+                "title": "MICROSOFT Project Pro 2021 English PKC",
+                "src": "https://m.media-amazon.com/images/I/51+9Xnl1czL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "project-2021-2",
+                "title": "Project 2021 Professional",
+                "src": "https://faire.software/58-large_default/project-2021-professional.jpg",
+            },
+            {
+                "name": "project-2021-3",
+                "title": "Buy Project Professional 2021, MS Project key for PC - Keysworlds",
+                "src": "https://www.keysworlds.com/media/catalog/product/cache/a95cd6208f6f304d3ecd6458151997d3/k/s/ksw-project21.jpg",
+            },
+            {
+                "name": "project-2021-4",
+                "title": "Microsoft MS Project 2021 Pro Plus - Noud Digital",
+                "src": "https://noud-digital.com/wp-content/uploads/2025/07/project3.png",
+            },
+        ],
+    ),
+    (
+        "Visio 2021",
+        "visio-2021",
+        [
+            {
+                "name": "visio-2021-1",
+                "title": "Microsoft VISIO Pro 2021 English PKC",
+                "src": "https://m.media-amazon.com/images/I/51h0QCiUS1L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "visio-2021-2",
+                "title": "Microsoft Visio 2021 Professional (PKC)",
+                "src": "https://cdn.idealo.com/folder/Product/202667/0/202667038/s1_produktbild_gross/microsoft-visio-2021-professional-pkc.jpg",
+            },
+            {
+                "name": "visio-2021-3",
+                "title": "Giloshop - Microsoft Visio Professional 2021 | 1 PC | Lifetime License",
+                "src": "https://giloshop.com/media/catalog/product/cache/e736ae0f9f477b1f78634a69dbed3c0b/m/i/microsoft_visio_professional_2021-min.jpg",
+            },
+            {
+                "name": "visio-2021-4",
+                "title": "Microsoft Visio 2021 Professional",
+                "src": "https://blitzhandel24.imgbolt.de/media/image/a7/9f/69/Visio-Professional-2021.jpg",
+            },
+            {
+                "name": "visio-2021-5",
+                "title": "Visio Professional 2021",
+                "src": "https://resources.claroshop.com/medios-plazavip/mkt/62f1748769f33_visio-2021copy_1200x1200_crop_centerjpg.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows Server 2019",
+        "server-2019",
+        [
+            {
+                "name": "server-2019-1",
+                "title": "Microsoft Windows Server 2019 Standard - Base License and Media - 16 Core",
+                "src": "https://www.e-retail.com/wp-content/uploads/2020/08/WinSvr_2019_FPP_SvrStd_ANG-1.jpg",
+            },
+            {
+                "name": "server-2019-2",
+                "title": "Microsoft Windows Server 2019 Standard - Base License and Media - 16 Core (Newegg)",
+                "src": "https://c1.neweggimages.com/ProductImageCompressAll1280/AAYY_1_20190203364661238.jpg",
+            },
+            {
+                "name": "server-2019-3",
+                "title": "HPE Microsoft Windows Server 2019 Standard - License - 16 Additional Core",
+                "src": "https://m.media-amazon.com/images/I/61QqXwr+LTL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2019-4",
+                "title": "Microsoft Windows Server 2019 - License - 5 User Cal",
+                "src": "https://m.media-amazon.com/images/I/51KsNBT3sPL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2019-5",
+                "title": "Microsoft Windows Server 2019 Standard Box Pack - 1 Server License (5 CAL) | eBay",
+                "src": "https://i.ebayimg.com/images/g/XpcAAeSwjXFo6DOo/s-l400.jpg",
+            },
+            {
+                "name": "server-2019-6",
+                "title": "Buy Windows Server 2019 Standard Genuine License | UNIQ",
+                "src": "https://uniq.software/images/com_hikashop/upload/server_19_std-angle.png",
+            },
+        ],
+    ),
+    (
+        "Windows Server 2022",
+        "server-2022",
+        [
+            {
+                "name": "server-2022-1",
+                "title": "Microsoft Windows Server 2022 Standard | Base License with media and key | 16 Core",
+                "src": "https://m.media-amazon.com/images/I/51mTNSouh4L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2022-2",
+                "title": "Microsoft Microsoft Windows Server 2022",
+                "src": "https://m.media-amazon.com/images/I/516ydRSg+fL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2022-3",
+                "title": "Microsoft Windows Server 2022 Standard | Base License with media and key | 24 Core",
+                "src": "https://m.media-amazon.com/images/I/51La6Nzoq7L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2022-4",
+                "title": "HPE Microsoft Windows Server 2022 Datacenter Edition 64-bit - License and Media - 16 Cores",
+                "src": "https://m.media-amazon.com/images/I/31BCPGZO-TL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows Server 2025",
+        "server-2025",
+        [
+            {
+                "name": "server-2025-1",
+                "title": "Microsoft Windows Server 2025 Standard Edition 64-bit, Base License, 16 Core - OEM",
+                "src": "https://m.media-amazon.com/images/I/61PzrcTcWeL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2025-2",
+                "title": "GigaMediaGroup Server 2025 Standard 16 Core OEM English Version NEW",
+                "src": "https://m.media-amazon.com/images/I/41lPAt02mCL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2025-3",
+                "title": "Server 2025 Standard 16 Core OEM English Version NEW",
+                "src": "https://m.media-amazon.com/images/I/61HR6nuUlTL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2025-4",
+                "title": "Microsoft Windows Server 2025 Standard Edition 64-bit, Base License, 24 Core - OEM",
+                "src": "https://m.media-amazon.com/images/I/61zs9J1kTTL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "server-2025-5",
+                "title": "Windows Server 2025 User CAL 5 pack",
+                "src": "https://m.media-amazon.com/images/I/31wZ6CJuAlL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "SQL Server 2019",
+        "sql-2019",
+        [
+            {
+                "name": "sql-2019-1",
+                "title": "SQL SERVER 2019 Standard 16 CORE Inc 5 Cals New Sealed DVD Box",
+                "src": "https://www.picclickimg.com/HNEAAOSwREtoELFf/SQL-Server-2019-Standard-16-CORE-Inc-5.webp",
+            },
+            {
+                "name": "sql-2019-2",
+                "title": "SQL Server 2019",
+                "src": "https://lowsoft.it/media/5c/e6/38/1691744223/lowsoft_sql_server_19_std_freigestellt-png.png",
+            },
+            {
+                "name": "sql-2019-3",
+                "title": "Microsoft SQL Server 2019 Standard - licenca - 16 cores",
+                "src": "https://cyberlogics.ao/wp-content/uploads/2022/05/sqlsrv16core.png",
+            },
+            {
+                "name": "sql-2019-4",
+                "title": "Buy Microsoft Windows Server | Discounted Price & License - SQL Server 2019 Standard 20 CAL 64 Bit",
+                "src": "https://indigosoftwarecompany.com/wp-content/uploads/2022/10/Microsoft-SQL-Server-2019-Standard-20-CAL-64-Bit-Comp.jpg",
+            },
+            {
+                "name": "sql-2019-5",
+                "title": "Microsoft SQL Server 2019 official product illustration",
+                "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/SQL_2019_Webpage_illustration_RE4r3wO:VP2-859x540?resMode=sharp2&op_usm=1.5,0.",
+            },
+        ],
+    ),
+    (
+        "SQL Server 2022",
+        "sql-2022",
+        [
+            {
+                "name": "sql-2022-1",
+                "title": "SQL Server 2022 Standard DVD Box Pack License Key - DIGI WORLD",
+                "src": "https://digiworld4u.in/wp-content/uploads/2025/03/sql2022.png",
+            },
+            {
+                "name": "sql-2022-2",
+                "title": "Microsoft SQL Server 2022 Standard - Used Software",
+                "src": "https://www.s2-software.com/media/d3/25/59/1690290237/s2-sqlserver-22-std.png",
+            },
+            {
+                "name": "sql-2022-3",
+                "title": "Phan mem Microsoft SQL Server 2022 Standard Edition | Laptop World",
+                "src": "https://laptopworld.vn/media/product/21347_50329_pm_microsoft_sql_server_2022_standard_edition.jpg",
+            },
+            {
+                "name": "sql-2022-4",
+                "title": "Buy SQL Server 2022 Standard Edition - Advanced Performance & Security",
+                "src": "https://os-market.store/image/cache/cache/1-1000/489/main/7407-sql2022-0-5-1000x1000.jpg",
+            },
+            {
+                "name": "sql-2022-5",
+                "title": "SQL Server 2022 Standard 2 core",
+                "src": "https://lowsoft.it/media/58/f0/7a/1691744339/lowsoft_sql_server_22_std_2_core_freigestellt.png",
+            },
+        ],
+    ),
+    (
+        "Exchange Server 2019",
+        "exchange-2019",
+        [
+            {
+                "name": "exchange-2019-1",
+                "title": "MS Exchange Server 2019 Standard",
+                "src": "https://lowsoft.fr/media/9a/66/01/1691739989/lowsoft_exchange_server_19_std_freigestellt-png.png",
+            },
+            {
+                "name": "exchange-2019-2",
+                "title": "MICROSOFT EXCHANGE SERVER 2019 ESTANDAR",
+                "src": "https://macrosoft.store/1120-large_default/microsoft-exchange-server-2019-estandar.jpg",
+            },
+            {
+                "name": "exchange-2019-3",
+                "title": "Microsoft Exchange Server 2019 Standard - Retail 250 CALs New Multilanguage",
+                "src": "https://reduxmax.com/images/thumbs/0001556_microsoft-exchange-server-2019-standard-w-retail-250-cals-new-multilanguage_550.png",
+            },
+            {
+                "name": "exchange-2019-4",
+                "title": "Microsoft Exchange Server 2019 Standard - cena, kup taniej",
+                "src": "https://teamnet-software.pl/1836-product_page/microsoft-exchange-server-2019-standard.jpg",
+            },
+            {
+                "name": "exchange-2019-5",
+                "title": "Microsoft Exchange Server 2019 Standard Edition (On-Premises) - DVD x64",
+                "src": "https://i.ebayimg.com/images/g/~xYAAOSwXPxoGZvS/s-l400.jpg",
+            },
+            {
+                "name": "exchange-2019-6",
+                "title": "Microsoft Exchange Server 2019 Standard",
+                "src": "https://www.aplicloja.com/img/produtos/17-02-2023-17-43-13-Microsoft-Exchange-Server-2019-Standard.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows 11 IoT",
+        "iot-win11",
+        [
+            {
+                "name": "iot-win11-1",
+                "title": "Windows 11 Home System Builder box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/61JfosHunyL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win11-2",
+                "title": "Windows 11 Pro System Builder box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/61p-Ylv5vtL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win11-3",
+                "title": "Windows 11 Home USB - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/515EUmZGqnL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win11-4",
+                "title": "Windows 11 Pro FPP USB - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/51bdxhaQO6L._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+    (
+        "Windows 10 IoT",
+        "iot-win10",
+        [
+            {
+                "name": "iot-win10-1",
+                "title": "Windows 10 Home System Builder box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/51yWoUm1I7L._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win10-2",
+                "title": "Windows 10 Home official box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/81-t-N2AXXL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win10-3",
+                "title": "Windows 10 Pro System Builder box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/611Kb1KT+mL._AC_SL1500_.jpg",
+            },
+            {
+                "name": "iot-win10-4",
+                "title": "Windows 10 Pro OEM box - IoT series candidate",
+                "src": "https://m.media-amazon.com/images/I/71xfe1EB6yL._AC_SL1500_.jpg",
+            },
+        ],
+    ),
+]
+
+
+def fetch_image(entry):
+    for attempt in range(3):
+        try:
+            resp = requests.get(entry["src"], headers=HEADERS, timeout=30, allow_redirects=True)
+            if resp.status_code != 200:
+                raise RuntimeError("HTTP " + str(resp.status_code))
+            img = Image.open(BytesIO(resp.content))
+            img.load()
+            has_alpha = img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info)
+            ext = ".png" if has_alpha else ".jpg"
+            out_path = IMG / (entry["name"] + ext)
+            if has_alpha:
+                img.convert("RGBA").save(out_path, "PNG")
+            else:
+                img.convert("RGB").save(out_path, "JPEG", quality=92)
+            entry["file"] = out_path.name
+            entry["local"] = "images/" + out_path.name
+            return True
+        except Exception as exc:
+            if attempt == 2:
+                print("FAIL", entry["name"], entry["src"], repr(exc), flush=True)
+            else:
+                time.sleep(1.2)
+    return False
+
+
+def build_html(sources):
+    total = sum(len(v) for v in sources.values())
+    parts = []
+    parts.append("<!DOCTYPE html>")
+    parts.append('<html lang="zh"><head><meta charset="utf-8">')
+    parts.append('<meta name="viewport" content="width=device-width, initial-scale=1">')
+    parts.append("<title>KeyStarter Product Image Library</title>")
+    parts.append("<style>")
+    parts.append(
+        "body{font-family:Segoe UI,Arial,sans-serif;background:#f5f5f7;color:#1d1d1f;margin:0;padding:28px}"
+        "h1{font-size:26px;margin:0 0 6px}.sub{color:#86868b;font-size:14px;margin-bottom:26px}"
+        "section{margin-bottom:34px}h2{font-size:18px;margin:0 0 12px}h2 span{color:#7c3aed;font-size:13px;margin-left:6px}"
+        ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}"
+        ".card{background:#fff;border:1px solid #e8e8ed;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}"
+        ".imgbox{aspect-ratio:4/3;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}"
+        ".imgbox img{max-width:100%;max-height:100%;object-fit:contain}.meta{padding:10px 12px;border-top:1px solid #f0f0f2}"
+        ".t{font-size:12px;line-height:1.4;min-height:34px}a{color:#7c3aed;font-size:11px;text-decoration:none}"
+    )
+    parts.append("</style></head><body>")
+    parts.append("<h1>KeyStarter \u4ea7\u54c1\u56fe\u7247\u5e93</h1>")
+    parts.append(
+        '<div class="sub">\u5171 %d \u5f20\u5019\u9009\u56fe \u00b7 Amazon / \u5b98\u65b9\u7ea2\u8272\u914d\u7f6e / \u7535\u5546\u7248\u672c\u7bb1\u88c5\u56fe \u00b7 2026-07-31</div>'
+        % total
+    )
+    for label, key, entries in GROUPS:
+        good = [e for e in entries if e.get("file")]
+        if not good:
+            continue
+        parts.append("<section>")
+        parts.append('<h2>%s <span>%d</span></h2>' % (html.escape(label), len(good)))
+        parts.append('<div class="grid">')
+        for e in good:
+            parts.append('<div class="card">')
+            parts.append(
+                '<div class="imgbox"><img src="images/%s" alt="%s" loading="lazy"></div>'
+                % (html.escape(e["file"]), html.escape(e["title"]))
+            )
+            parts.append('<div class="meta"><div class="t">%s</div>' % html.escape(e["title"]))
+            parts.append(
+                '<a href="%s" target="_blank" rel="noopener">Source</a></div></div>'
+                % html.escape(e["src"])
+            )
+        parts.append("</div></section>")
+    parts.append("</body></html>")
+    (LIB / "preview.html").write_text("\n".join(parts), encoding="utf-8")
+
+
+def main():
+    used = set()
+    sources = {}
+    for label, key, entries in GROUPS:
+        for entry in entries:
+            ok = fetch_image(entry)
+            if ok:
+                used.add(entry["file"])
+        sources[key] = [e for e in entries if e.get("file")]
+
+    for old in IMG.iterdir():
+        if old.is_file() and old.name not in used:
+            old.unlink()
+
+    (LIB / "sources.json").write_text(
+        json.dumps(sources, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    build_html(sources)
+    total = sum(len(v) for v in sources.values())
+    print("TOTAL_IMAGES:", total)
+    for label, key, entries in GROUPS:
+        good = sum(1 for e in entries if e.get("file"))
+        print(key, good)
+
+
+if __name__ == "__main__":
+    main()

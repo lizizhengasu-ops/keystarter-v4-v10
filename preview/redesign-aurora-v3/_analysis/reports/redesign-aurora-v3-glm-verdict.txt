@@ -1,0 +1,4 @@
+[GLM-4.6V] KeyStarter Aurora v3.0 首页+产品页成对盲测
+判定：成对盲测主要判为"像同一模板"，依据为同一品牌内容、模块顺序与产品信息结构；视觉风格（Apple 电影感极简 + Shopify 转化、蓝强调、film-storyboard/parallax）不同。
+对抗问题：首页不是"两张图+一段文字"通用组合，含 data-craft aurora-arc SVG、浮层芯片与滚动揭示动效，判定为否。
+剩余同源维度：同一 KeyStarter 内容、产品摄影、导航与 15 类功能组件，由用户裁决；并排截图包见 preview/_analysis/v3-glm/。

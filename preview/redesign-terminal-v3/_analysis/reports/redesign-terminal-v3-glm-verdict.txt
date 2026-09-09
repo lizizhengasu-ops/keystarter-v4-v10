@@ -1,0 +1,4 @@
+[GLM-4.6V] KeyStarter Terminal v3.0 首页+产品页成对盲测
+判定：与旧站/姊妹站进行成对盲测，最终结论见 preview/_analysis/v3-glm/v3-blind-verdict.txt；视觉风格为 Linear 深色终端控制台。
+对抗问题：首页不是"两张图+一段文字"通用组合，含 data-craft 签名 SVG。
+剩余同源维度：同一品牌内容、产品摄影、导航与功能组件，由用户裁决。

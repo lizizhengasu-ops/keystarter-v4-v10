@@ -1,0 +1,380 @@
+[
+  {
+    "file": "box-iot-win10.jpg",
+    "mean": 110.8,
+    "std": 24.9,
+    "sat_mean": 242.4,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win11.jpg",
+    "mean": 90.8,
+    "std": 65.8,
+    "sat_mean": 150.5,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-office-2019.jpg",
+    "mean": 243.3,
+    "std": 22.9,
+    "sat_mean": 3.1,
+    "grey_levels": 12,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-office-2021.jpg",
+    "mean": 203.9,
+    "std": 64.3,
+    "sat_mean": 14.6,
+    "grey_levels": 14,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-server-2019.jpg",
+    "mean": 202.6,
+    "std": 56.6,
+    "sat_mean": 42.3,
+    "grey_levels": 14,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-server-2022.jpg",
+    "mean": 103.3,
+    "std": 26.6,
+    "sat_mean": 239.1,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-server-2025.jpg",
+    "mean": 29.9,
+    "std": 37.1,
+    "sat_mean": 140.5,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-sql-2022.jpg",
+    "mean": 235.0,
+    "std": 52.4,
+    "sat_mean": 15.5,
+    "grey_levels": 16,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-win10-home.jpg",
+    "mean": 110.8,
+    "std": 24.9,
+    "sat_mean": 242.4,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win10-pro.jpg",
+    "mean": 75.1,
+    "std": 55.5,
+    "sat_mean": 180.5,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win11-home.jpg",
+    "mean": 188.3,
+    "std": 63.8,
+    "sat_mean": 75.3,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win11-pro.jpg",
+    "mean": 90.8,
+    "std": 65.8,
+    "sat_mean": 150.5,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-iot2019-entry.jpg",
+    "mean": 194.7,
+    "std": 64.3,
+    "sat_mean": 113.4,
+    "grey_levels": 12,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-iot2021-high.jpg",
+    "mean": 155.4,
+    "std": 89.3,
+    "sat_mean": 76.0,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-iot2021-value.jpg",
+    "mean": 223.2,
+    "std": 56.4,
+    "sat_mean": 36.4,
+    "grey_levels": 14,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "trust-paypal.jpg",
+    "mean": 226.9,
+    "std": 63.8,
+    "sat_mean": 35.2,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-sql-2019.png",
+    "mean": 137.7,
+    "std": 108.3,
+    "sat_mean": 30.6,
+    "grey_levels": 16,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-iot-ml-entry.webp",
+    "mean": 86.0,
+    "std": 76.0,
+    "sat_mean": 195.0,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-ml-high-end.webp",
+    "mean": 85.7,
+    "std": 75.0,
+    "sat_mean": 194.9,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-ml-value.webp",
+    "mean": 88.0,
+    "std": 76.8,
+    "sat_mean": 192.9,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win10.webp",
+    "mean": 110.8,
+    "std": 24.8,
+    "sat_mean": 242.4,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win11-entry.webp",
+    "mean": 82.7,
+    "std": 73.1,
+    "sat_mean": 199.2,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win11-high-end.webp",
+    "mean": 90.6,
+    "std": 79.2,
+    "sat_mean": 189.9,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win11-value.webp",
+    "mean": 92.5,
+    "std": 81.1,
+    "sat_mean": 187.9,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-iot-win11.webp",
+    "mean": 90.8,
+    "std": 65.8,
+    "sat_mean": 151.1,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-office-2019.webp",
+    "mean": 243.3,
+    "std": 22.9,
+    "sat_mean": 3.1,
+    "grey_levels": 12,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-office-2021.webp",
+    "mean": 203.9,
+    "std": 64.2,
+    "sat_mean": 15.0,
+    "grey_levels": 14,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-server-2019.webp",
+    "mean": 202.7,
+    "std": 56.6,
+    "sat_mean": 42.3,
+    "grey_levels": 14,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-server-2022.webp",
+    "mean": 102.7,
+    "std": 26.7,
+    "sat_mean": 238.8,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-server-2025.webp",
+    "mean": 88.5,
+    "std": 78.8,
+    "sat_mean": 192.1,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-sql-2019.webp",
+    "mean": 138.2,
+    "std": 108.5,
+    "sat_mean": 33.5,
+    "grey_levels": 16,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-sql-2022.webp",
+    "mean": 235.0,
+    "std": 52.4,
+    "sat_mean": 15.4,
+    "grey_levels": 16,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "box-svr-iot-2025.webp",
+    "mean": 88.5,
+    "std": 78.8,
+    "sat_mean": 192.1,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win10-home.webp",
+    "mean": 110.8,
+    "std": 24.8,
+    "sat_mean": 242.4,
+    "grey_levels": 11,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win10-pro.webp",
+    "mean": 74.9,
+    "std": 55.6,
+    "sat_mean": 181.0,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win11-home.webp",
+    "mean": 188.3,
+    "std": 63.8,
+    "sat_mean": 75.4,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "box-win11-pro.webp",
+    "mean": 90.8,
+    "std": 65.8,
+    "sat_mean": 151.1,
+    "grey_levels": 15,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-iot2021-entry.webp",
+    "mean": 213.9,
+    "std": 57.3,
+    "sat_mean": 50.5,
+    "grey_levels": 13,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-svr2022.webp",
+    "mean": 213.2,
+    "std": 49.8,
+    "sat_mean": 16.7,
+    "grey_levels": 16,
+    "verdict": "LOW",
+    "usage": "慎用于内容大图，建议人工确认"
+  },
+  {
+    "file": "pic-win10-home-official.webp",
+    "mean": 122.8,
+    "std": 46.5,
+    "sat_mean": 203.0,
+    "grey_levels": 14,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-win10-home.webp",
+    "mean": 205.5,
+    "std": 74.5,
+    "sat_mean": 45.9,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  },
+  {
+    "file": "pic-win10-pro.webp",
+    "mean": 202.8,
+    "std": 76.9,
+    "sat_mean": 35.2,
+    "grey_levels": 16,
+    "verdict": "OK",
+    "usage": "可用于内容大图"
+  }
+]

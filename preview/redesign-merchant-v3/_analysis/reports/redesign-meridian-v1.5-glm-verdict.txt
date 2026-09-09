@@ -1,0 +1,17 @@
+GLM-4.6V 成对观感盲测 · redesign-meridian-v1.5 · 2026-08-28T12:14:29.228Z
+
+## redesign-meridian-v1.5 vs meridian-v15 · 首页
+[GLM-4.6V] 
+像同一模板，整体布局、核心元素（导航、主文案、产品展示区）相似，属于同一品牌的不同视觉版本。
+
+## redesign-meridian-v1.5 vs meridian-v15 · 产品页
+[GLM-4.6V] 
+像同一模板，整体页面布局、功能模块（导航、产品展示、价格、操作按钮等）的位置和结构相似，属于同一模板的风格调整。
+
+## redesign-meridian-v1.5 vs redesign-vault-v1.5 · 首页
+[GLM-4.6V] 
+像同一模板，整体布局、导航结构、按钮风格及设计语言一致，属于同一套模板的不同呈现。
+
+## redesign-meridian-v1.5 vs redesign-vault-v1.5 · 产品页
+[GLM-4.6V] 
+像同一模板，依据是两图整体布局结构（导航栏、产品展示区域、价格与操作按钮的排列方式等）相似，属于同一模板的不同主题风格呈现。

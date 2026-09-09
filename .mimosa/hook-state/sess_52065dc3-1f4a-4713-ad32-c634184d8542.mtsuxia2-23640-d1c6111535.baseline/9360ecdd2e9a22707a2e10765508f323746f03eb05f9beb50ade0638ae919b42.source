@@ -1,0 +1,115 @@
+# -*- coding: utf-8 -*-
+"""Side-by-side GLM-4.6V blind comparison for Paper/Terminal v3 vs Sterling."""
+import os
+import subprocess
+from PIL import Image
+
+ROOT = r"C:\Users\31961\Documents\microsoft web\keystarter-v4-v10\preview"
+SITES = {
+    "paper": os.path.join(ROOT, "redesign-paper-v3"),
+    "terminal": os.path.join(ROOT, "redesign-terminal-v3"),
+    "mercury": os.path.join(ROOT, "redesign-mercury-v3"),
+    "ledger": os.path.join(ROOT, "redesign-ledger-v3"),
+    "atlas": os.path.join(ROOT, "redesign-atlas-v3"),
+    "merchant": os.path.join(ROOT, "redesign-merchant-v3"),
+    "meridian": os.path.join(ROOT, "redesign-meridian-v3"),
+    "aurora": os.path.join(ROOT, "redesign-aurora-v3"),
+    "nova": os.path.join(ROOT, "redesign-nova-v3"),
+    "quartz": os.path.join(ROOT, "redesign-quartz-v3"),
+    "sterling": os.path.join(ROOT, "redesign-sterling-v3.0"),
+}
+GLM = r"C:\Users\31961\.codex\skills\v2.0-replica-kit\scripts\glm_vision.py"
+
+
+def pair(a, b, out):
+    ia = Image.open(a).convert("RGB")
+    ib = Image.open(b).convert("RGB")
+    wa, ha = ia.size
+    wb, hb = ib.size
+    target_h = 900
+    na = ia.resize((int(wa * target_h / ha), target_h), Image.LANCZOS)
+    nb = ib.resize((int(wb * target_h / hb), target_h), Image.LANCZOS)
+    canvas = Image.new("RGB", (na.width + nb.width + 12, target_h), "white")
+    canvas.paste(na, (0, 0))
+    canvas.paste(nb, (na.width + 12, 0))
+    canvas.save(out)
+
+
+def glm(image, prompt):
+    r = subprocess.run(
+        ["python", GLM, image, prompt],
+        capture_output=True,
+        timeout=180,
+    )
+    raw = (r.stdout or r.stderr or b"").decode("latin1", errors="replace")
+    for enc in ("utf-8", "gbk"):
+        try:
+            return raw.encode("latin1").decode(enc).strip()
+        except (UnicodeDecodeError, ValueError):
+            continue
+    return raw.strip()
+
+
+def main():
+    report_dir = os.path.join(ROOT, "_analysis", "v3-glm")
+    os.makedirs(report_dir, exist_ok=True)
+    keys = {
+        "home": ("full_index.png", "index.html"),
+        "product": ("desktop_product.png", "product.html"),
+    }
+    shots = {}
+    for name, root in SITES.items():
+        qa = os.path.join(root, "qa")
+        shots[name] = {}
+        for key, (fname, _url) in keys.items():
+            if name == "sterling" and key == "product":
+                shots[name][key] = os.path.join(qa, "desktop_product-windows-11-pro.png")
+            else:
+                shots[name][key] = os.path.join(qa, fname)
+    pairs = [
+        ("mercury", "ledger"),
+        ("mercury", "sterling"),
+        ("ledger", "sterling"),
+        ("mercury", "paper"),
+        ("mercury", "terminal"),
+        ("ledger", "paper"),
+        ("ledger", "terminal"),
+        ("atlas", "merchant"),
+        ("atlas", "sterling"),
+        ("merchant", "sterling"),
+        ("atlas", "mercury"),
+        ("merchant", "mercury"),
+        ("meridian", "aurora"),
+        ("meridian", "sterling"),
+        ("aurora", "sterling"),
+        ("nova", "quartz"),
+        ("nova", "sterling"),
+        ("quartz", "sterling"),
+        ("nova", "merchant"),
+        ("quartz", "aurora"),
+    ]
+    lines = ["[GLM-4.6V] KeyStarter v3 双风格成对观感盲测"]
+    for a, b in pairs:
+        for key in ("home", "product"):
+            cmp = os.path.join(report_dir, f"{a}-vs-{b}-{key}.png")
+            pair(shots[a][key], shots[b][key], cmp)
+            prompt = (
+                f"这是两张电商网站截图并排（左图={a}，右图={b}）。请回答两问："
+                "①它们是否像同一套模板或同一品牌换装？只回答：像同一模板 / 不完全像 / 明显不同；"
+                "②左图首页或产品页是否只是‘两张图+一段文字’的通用组合（无独特工艺/装置）？只回答：是/否。"
+                "每问给一句话依据。"
+            )
+            verdict = glm(cmp, prompt)
+            print(f"===== {a} vs {b} · {key} =====")
+            print(verdict)
+            lines.append(f"## {a} vs {b} · {key}")
+            lines.append(verdict)
+            lines.append("")
+    out_file = os.path.join(report_dir, "v3-blind-verdict.txt")
+    with open(out_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print("verdict file:", out_file)
+
+
+if __name__ == "__main__":
+    main()

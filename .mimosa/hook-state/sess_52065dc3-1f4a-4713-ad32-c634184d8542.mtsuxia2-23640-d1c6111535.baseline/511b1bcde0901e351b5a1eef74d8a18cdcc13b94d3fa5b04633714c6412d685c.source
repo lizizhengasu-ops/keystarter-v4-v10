@@ -1,0 +1,69 @@
+<section id="support" className="py-20 bg-[#f5f5f7]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-semibold text-[#0078d4] tracking-wider uppercase mb-2">Help & Guides</span>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">全方位的Support & Resources中心</h2>
+            <p className="text-sm text-[#86868b] mt-3">支持自助查询激活常见指南。我们承诺不仅向您售卖密钥，更包办后期所有安全部署。</p>
+        </div>
+
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+                <div className="text-3xl mb-4">🔑</div>
+                <h4 className="text-base font-bold mb-2">激活码Frequently Asked Questions (Activation Guide)</h4>
+                <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何正确在设备中输入 Retail 密钥并完成和个人微信号的官方云绑定。</p>
+                <a href="#portal" onClick="scrollToSection('portal')" className="text-xs font-semibold text-[#0078d4] hover:underline">立即前往用户后台查看 ></a>
+            </div>
+            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+                <div className="text-3xl mb-4">📦</div>
+                <h4 className="text-base font-bold mb-2">Office 部署安装指南 (Setup)</h4>
+                <p className="text-xs text-[#86868b] leading-relaxed mb-4">如何完全清除电脑里的野蛮盗版 Office残留并干净地完成 Microsoft 365 部署。</p>
+                <a href="https://setup.office.com" target="_blank" className="text-xs font-semibold text-[#0078d4] hover:underline">前往微软官方激活网 ></a>
+            </div>
+            <div className="bg-white rounded-2xl border border-[#e8e8ed] p-6 hover:shadow-[0_12px_30px_rgba(0,0,0,0.03)] transition">
+                <div className="text-3xl mb-4">📡</div>
+                <h4 className="text-base font-bold mb-2">服务器与 SQL 本地激活 (Volume)</h4>
+                <p className="text-xs text-[#86868b] leading-relaxed mb-4">解决 Server 激活报错问题，提供官方原生 ISO 下载验证渠道。</p>
+                <button onClick="alert('我们的 7x24 小时技术团队已就位，请直接在下方申请获取合规咨询部署。')" className="text-xs font-semibold text-[#0078d4] hover:underline text-left">一键联系在线支持专家 ></button>
+            </div>
+        </div>
+
+        
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-[#e8e8ed] p-8">
+            <h3 className="text-lg font-bold mb-6 text-center text-[#1d1d1f]">🤔 关于正版软件购买，您的核心焦虑解答</h3>
+            
+            <div className="space-y-4 divide-y divide-[#f5f5f7]">
+                
+                <div className="pt-4 first:pt-0">
+                    <button onClick="toggleFAQ(1)" className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition">
+                        <span>Q1：为什么你们的价格比微软官网直接购买便宜这么多？是不是盗版？</span>
+                        <i id="faq-icon-1" className="fa-solid fa-chevron-down text-xs text-[#86868b] transition-transform duration-200"></i>
+                    </button>
+                    <p id="faq-ans-1" className="hidden text-xs text-[#86868b] mt-3 leading-relaxed">
+                        绝对是正版。我们采购的是微软针对全球不同地区进行大宗协议采购的批量许可证（Volume Licensing）或大客户合作伙伴通道（CSP）。微软官方对大宗采购有极高让利，我们扣除渠道成本后把这些合规红利让渡给开发者与广大个人用户。所以支持绑定微软账号、官方镜像下载，绝非黑产非法 Key。
+                    </p>
+                </div>
+                
+                <div className="pt-4">
+                    <button onClick="toggleFAQ(2)" className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition">
+                        <span>Q2：买完密钥，重装电脑或者更换设备后，还能继续用吗？</span>
+                        <i id="faq-icon-2" className="fa-solid fa-chevron-down text-xs text-[#86868b] transition-transform duration-200"></i>
+                    </button>
+                    <p id="faq-ans-2" className="hidden text-xs text-[#86868b] mt-3 leading-relaxed">
+                        可以！由于我们所提供的是 Retail 级别的正规密钥，这些激活码将支持在您登录自己的微软账户后实现云关联绑定。重装设备时，只需在微软官方激活面板上点击“我最近更改了此设备的硬件”，便可瞬间实现无损二次激活。
+                    </p>
+                </div>
+                
+                <div className="pt-4">
+                    <button onClick="toggleFAQ(3)" className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#0078d4] focus:outline-none transition">
+                        <span>Q3：我的企业正面临合规审查，能用这些 Key 通过官方 SAM 审计吗？</span>
+                        <i id="faq-icon-3" className="fa-solid fa-chevron-down text-xs text-[#86868b] transition-transform duration-200"></i>
+                    </button>
+                    <p id="faq-ans-3" className="hidden text-xs text-[#86868b] mt-3 leading-relaxed">
+                        能！我们特为企业采购用户提供专属批量合规协议通道，并且在发货时提供微软原厂合规声明与我司授权认证收据（支持发票）。若在审计期间发生任何问题，我方合规专家团队将提供一对一法律合规Support & Resources，全程保驾护航。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

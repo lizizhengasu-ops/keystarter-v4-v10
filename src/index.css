@@ -18,7 +18,7 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 
 /* V5.2 - Page Transition */
 @keyframes v5fadeIn { from { opacity:0 } to { opacity:1 } }
-.page-enter { animation:v5fadeIn 0.35s ease-out forwards; }
+.page-enter { animation:none; }
 
 /* V5.2 - Unified Card Hover */
 .v5-card { transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); }
@@ -56,6 +56,15 @@ body { font-family:var(--v4-font); background:var(--v4-bg); color:var(--v4-dark)
 .hero-hd-zoom { animation: hero-hd-zoom 24s ease-in-out infinite alternate; will-change: transform; }
 
 .persona-hidden { display:none !important; }
+
+/* CWV iter: skip rendering below-the-fold sections until they enter viewport */
+section, footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+#hero {
+  content-visibility: visible;
+}
 
 /* KeyStarter Logo animations */
 @keyframes spin-cw { from { transform: rotate(-30deg) rotate(0deg); } to { transform: rotate(-30deg) rotate(360deg); } }
