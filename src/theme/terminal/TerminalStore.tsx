@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
-import { termImg, termCat, termRating, termPrice, termBadge } from "./terminal-data";
+import { termImg, termCat, termRating, termPrice, termBadge, termFeaturedRank } from "./terminal-data";
 
 type Bucket = "all" | "windows" | "office" | "server" | "iot";
 type Sort = "featured" | "asc" | "desc";
@@ -27,6 +27,7 @@ export default function TerminalStore() {
     if (filter !== "all") list = list.filter(x => x.cat === filter);
     if (sort === "asc") list.sort((a, b) => a.p.price - b.p.price);
     if (sort === "desc") list.sort((a, b) => b.p.price - a.p.price);
+    if (sort === "featured") list.sort((a, b) => termFeaturedRank(a.p.slug) - termFeaturedRank(b.p.slug));
     return list;
   }, [products, filter, sort]);
 

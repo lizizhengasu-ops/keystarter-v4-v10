@@ -26,9 +26,6 @@
 /* Sticky header sits above the app's own overlays. */
 .header { z-index: 50; }
 
-/* Dark skin for the whole document, not just ported sections. */
-[data-theme="terminal"] body { background: var(--ks-bg); color: var(--ks-ink); }
-
 /* PDP "KEY ISSUANCE CONSOLE" strip — the design package ships these classes
    without visual rules; styled here to match the Terminal console language. */
 .st-console-bar {

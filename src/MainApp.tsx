@@ -32,6 +32,7 @@ const DisclaimerPage = lazy(() => import("./pages/Disclaimer"));
 const LicensingPage = lazy(() => import("./pages/Licensing"));
 const CookiesPage = lazy(() => import("./pages/Cookies"));
 const LinksPage = lazy(() => import("./pages/Links"));
+const DownloadsPage = lazy(() => import("./pages/Downloads"));
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { pushEvent } from "./tracking";
@@ -91,12 +92,12 @@ function Layout({ children }: { children: any }) {
 
   useEffect(() => {
     if (!KS_TERMINAL) return;
-    document.documentElement.setAttribute("data-theme", "terminal");
     // Terminal design system (style.css + fonts + overrides) only ships to
     // skins that request it; the default design never downloads it.
+    // NOTE: no data-theme switch — the mockup as shipped uses the light base
+    // with dark console accents (.kst-terminal carries its own dark bg).
     import("./theme/terminal/style.css");
     import("./theme/terminal/overrides.css");
-    return () => document.documentElement.removeAttribute("data-theme");
   }, []);
 
   return (
@@ -286,6 +287,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/links" element={<LinksPage />} />
+            <Route path="/downloads" element={<DownloadsPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />

@@ -94,6 +94,11 @@ const ROUTE_META: Record<string, PageMeta> = {
     title: "Changelog — KeyStarter",
     description: "Recent updates and improvements to the KeyStarter website.",
   },
+  "/downloads": {
+    title: "Downloads & Delivery — KeyStarter",
+    description:
+      "Official Microsoft installers and delivery instructions for your Windows, Office, Server and SQL licenses.",
+  },
 };
 
 const NOT_FOUND_META: PageMeta = {

@@ -66,3 +66,20 @@ export function termPrice(n: number): string {
 export function termBadge(cat: string): string {
   return { windows: "OEM", office: "PERPETUAL", server: "SERVER", iot: "IOT" }[cat] || "OEM";
 }
+
+/** Mockup's curated "Featured" order (products.html), rest appended. */
+export const TERM_ORDER = [
+  "windows-11-pro", "windows-10-pro", "windows-11-pro-official", "windows-11-home",
+  "office-2021-pro-plus", "office-2019-pro-plus", "win-svr-iot-2022", "sql-svr-2022-runtime",
+  "win-11-iot-2024-value", "win-11-iot-2024-high-end", "sql-svr-2019-runtime", "windows-10-pro-official",
+  "windows-10-home", "windows-11-home-official", "windows-10-home-official",
+  "win-11-iot-2024-entry", "win-10-iot-2021-value", "win-10-iot-2021-high-end", "win-10-iot-2021-entry",
+  "win-10-iot-2019-value", "win-10-iot-2019-high-end", "win-10-iot-2019-entry",
+  "win-11-iot-ml-value", "win-11-iot-ml-high-end", "win-11-iot-ml-entry",
+  "win-svr-iot-2019", "win-svr-iot-2025", "shop1-payment-test",
+];
+
+export function termFeaturedRank(slug: string): number {
+  const i = TERM_ORDER.indexOf(slug);
+  return i === -1 ? 999 : i;
+}
