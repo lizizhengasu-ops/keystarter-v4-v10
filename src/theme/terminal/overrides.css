@@ -1,0 +1,69 @@
+/* Terminal skin overrides — loaded together with style.css (only when
+   design=terminal). Bridges the mockup's static-page assumptions to the
+   React app: SPA main has no top padding (sticky header), the mobile nav
+   is React-controlled, and a mono utility for the announce/footer notes. */
+
+.ks-main { display: block; }
+
+/* The default Layout gives main a fixed-header offset; the Terminal header
+   is position:sticky so the offset must go. */
+[data-theme="terminal"] main.page-enter { padding-top: 0; }
+
+/* React-controlled mobile nav (style.css ships it display:none). */
+.mobile-nav[data-open="true"] { display: block; }
+
+.ks-mono { font-family: var(--ks-mono); }
+
+/* Announce bar: two-part copy like the mockup, small screens keep the deal. */
+.announce { justify-content: center; gap: 10px; display: flex; align-items: center; }
+.announce .promo-msg { letter-spacing: .12em; }
+@media (max-width: 720px) {
+  .announce .promo-msg { display: none; }
+}
+
+/* Body scroll lock helper for overlays is provided by the app itself. */
+
+/* Sticky header sits above the app's own overlays. */
+.header { z-index: 50; }
+
+/* Dark skin for the whole document, not just ported sections. */
+[data-theme="terminal"] body { background: var(--ks-bg); color: var(--ks-ink); }
+
+/* PDP "KEY ISSUANCE CONSOLE" strip — the design package ships these classes
+   without visual rules; styled here to match the Terminal console language. */
+.st-console-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--ks-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--ks-muted);
+  border: 1px solid var(--ks-line);
+  background: var(--ks-soft);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.st-console-bar b { color: var(--ks-accent); }
+.st-console-bar i { color: #34d399; font-style: normal; }
+.st-console-keyline {
+  font-family: var(--ks-mono);
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--ks-accent);
+  border: 1px dashed var(--ks-line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  text-align: center;
+}
+.st-console-status {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--ks-mono);
+  font-size: 11px;
+  color: var(--ks-muted);
+  margin-bottom: 10px;
+}
+.st-console-status b { color: #34d399; }

@@ -36,10 +36,13 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { pushEvent } from "./tracking";
 import { SITE, api } from "./site-config";
-import "./theme/terminal.css";
-import { TerminalTopbar } from "./theme/TerminalChrome";
 
 const KS_TERMINAL = SITE.design === "terminal";
+const TerminalHomePage = lazy(() => import("./theme/terminal/TerminalHome"));
+const TerminalStorePage = lazy(() => import("./theme/terminal/TerminalStore"));
+const TerminalProductPage = lazy(() => import("./theme/terminal/TerminalProduct"));
+const TerminalHeader = lazy(() => import("./theme/terminal/TerminalChrome").then(m => ({ default: m.TerminalHeader })));
+const TerminalFooter = lazy(() => import("./theme/terminal/TerminalChrome").then(m => ({ default: m.TerminalFooter })));
 
 function KeyStarterLogo() {
   return (
@@ -86,16 +89,29 @@ function Layout({ children }: { children: any }) {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
+  useEffect(() => {
+    if (!KS_TERMINAL) return;
+    document.documentElement.setAttribute("data-theme", "terminal");
+    // Terminal design system (style.css + fonts + overrides) only ships to
+    // skins that request it; the default design never downloads it.
+    import("./theme/terminal/style.css");
+    import("./theme/terminal/overrides.css");
+    return () => document.documentElement.removeAttribute("data-theme");
+  }, []);
+
   return (
-    <div className="min-h-[1400px] flex flex-col bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }} data-ks-design={KS_TERMINAL ? "terminal" : undefined}>
+    <div className={"min-h-[1400px] flex flex-col antialiased" + (KS_TERMINAL ? "" : " bg-[#f5f5f7] text-[#1d1d1f]")} style={KS_TERMINAL ? undefined : { fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
       <span data-build={typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : ''} style={{display:'none'}} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
-      <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
+      {!KS_TERMINAL && <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />}
       <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ transform: `scaleX(${scrollPct / 100})`, transformOrigin: "left", transition: "transform 0.1s" }} />
 
-      {KS_TERMINAL && <TerminalTopbar />}
-
+      {KS_TERMINAL ? (
+        <Suspense fallback={null}>
+          <TerminalHeader onSearch={() => setSearchOpen(true)} onCart={() => { flushCart(); setCartOpen(true); }} cartCount={cart.items_count} />
+        </Suspense>
+      ) : (
       <nav className="nav-fade fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
                     <button onClick={()=>setNavOpen(true)} className="md:hidden text-[#1d1d1f]/70 hover:text-[#1d1d1f] transition-colors mr-2" aria-label="Menu">
@@ -103,10 +119,7 @@ function Layout({ children }: { children: any }) {
           </button>
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label={SITE.siteName + " Home"}>
             <KeyStarterLogo />
-            <span className="flex flex-col justify-center leading-none">
-              <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
-              {KS_TERMINAL && <span className="ks-brand-tagline hidden md:block mt-0.5">KeyStarter Terminal — Authorized Partner</span>}
-            </span>
+            <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
             <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
@@ -148,16 +161,22 @@ function Layout({ children }: { children: any }) {
           </div>
         </div>
       </nav>
+      )}
 
       <AnimInit />
 
       {/* V5.2: Page enter animation */}
-      <main className="page-enter pt-12 flex-1 min-h-[1100px]">
+      <main className={"page-enter flex-1 min-h-[1100px]" + (KS_TERMINAL ? "" : " pt-12")}>
         <Suspense fallback={<div className="min-h-[60vh]"></div>}>
           {children}
         </Suspense>
       </main>
 
+      {KS_TERMINAL ? (
+        <Suspense fallback={null}>
+          <TerminalFooter />
+        </Suspense>
+      ) : (
       <footer className="bg-[#0b0b0d] text-white py-16 border-t border-white/10">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 mb-8">
@@ -235,6 +254,7 @@ function Layout({ children }: { children: any }) {
         </div>
       </div>
     </footer>
+      )}
 
       <div className="back-top" id="back-top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} role="button" aria-label="Back to top" tabIndex={0} onKeyDown={(e)=>e.key==="Enter"&&window.scrollTo({top:0,behavior:"smooth"})}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5"><polyline points="18 15 12 9 6 15"/></svg>
@@ -251,11 +271,11 @@ export default function App() {
           <SeoManager />
           <Layout>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={KS_TERMINAL ? <TerminalHomePage /> : <HomePage />} />
             <Route path="/store" element={<Navigate to="/products" replace />} />
             <Route path="/shop" element={<Navigate to="/products" replace />} />
-            <Route path="/products" element={<StorePage />} />
-            <Route path="/product/:slug" element={<ProductPage />} />
+            <Route path="/products" element={KS_TERMINAL ? <TerminalStorePage /> : <StorePage />} />
+            <Route path="/product/:slug" element={KS_TERMINAL ? <TerminalProductPage /> : <ProductPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/b2b" element={<B2bPage />} />
