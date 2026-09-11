@@ -158,9 +158,11 @@ export default function SeoManager() {
       .forEach((el) => el.remove());
     // Keep the server/edge-injected SEO v2 title/meta, canonical and JSON-LD
     // on initial hydration; only update them on client-side navigation.
+    // The edge SEO worker injects a canonical tag before hydration; matrix
+    // sites without it ship none, so SeoManager owns SEO there instead.
     if (firstRender.current) {
       firstRender.current = false;
-      return;
+      if (document.head.querySelector('link[rel="canonical"]')) return;
     }
     const path = pathname.replace(/\/+$/, "") || "/";
     const product =

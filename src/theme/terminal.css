@@ -1,0 +1,117 @@
+/* KeyStarter "Terminal" storefront skin (Linear-style dark technical console).
+   Activated only when site-config sets design:"terminal" — the attribute is
+   rendered on the Layout root div, so every rule below is inert for the
+   default design and @font-face files are never fetched by the main site. */
+
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/sora-400.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/sora-600.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/sora-700.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/jetbrains-mono-500.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/jetbrains-mono-600.woff2') format('woff2'); }
+
+/* Layout offsets: fixed announcement topbar (36px) above the fixed nav. */
+[data-ks-design="terminal"] .ks-term-topbar { top: 0; }
+[data-ks-design="terminal"] nav.nav-fade { top: 36px; height: 64px; }
+[data-ks-design="terminal"] main.page-enter { padding-top: 100px; }
+
+/* Typography signature: Sora headings, JetBrains Mono accents. */
+[data-ks-design="terminal"] h1,
+[data-ks-design="terminal"] h2,
+[data-ks-design="terminal"] h3 {
+  font-family: 'Sora', 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.02em;
+}
+.ks-mono {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+[data-ks-design="terminal"] .ks-brand-tagline {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: #6b7280;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+/* Announcement topbar. */
+.ks-term-topbar {
+  position: fixed;
+  left: 0; right: 0;
+  height: 36px;
+  z-index: 50;
+  background: #090b10;
+  border-bottom: 1px solid #1c2230;
+  color: #a8b0bf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ks-term-topbar a { color: #a78bfa; text-decoration: none; font-weight: 600; }
+.ks-term-topbar a:hover { color: #c4b5fd; }
+
+/* Hero console panel. */
+.ks-console {
+  max-width: 768px;
+  margin: 56px auto 0;
+  background: #0a0c11;
+  border: 1px solid #1c2230;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  text-align: left;
+}
+.ks-console-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #1c2230;
+  background: rgba(255, 255, 255, 0.02);
+}
+.ks-console-dots { display: inline-flex; gap: 7px; }
+.ks-console-dots i { width: 9px; height: 9px; border-radius: 9999px; display: block; }
+.ks-console-label {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #5b6270;
+}
+.ks-console-body {
+  padding: 18px 18px 8px;
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 2;
+  color: #8b93a7;
+  min-height: 118px;
+}
+.ks-console-body .ks-line { display: block; opacity: 0; animation: ks-console-line 0.4s ease forwards; }
+.ks-console-body .ks-line:nth-child(1) { animation-delay: 0.2s; }
+.ks-console-body .ks-line:nth-child(2) { animation-delay: 0.9s; }
+.ks-console-body .ks-line:nth-child(3) { animation-delay: 1.6s; }
+.ks-console-body .ks-line:nth-child(4) { animation-delay: 2.3s; }
+.ks-console-body .ks-ok { color: #34d399; }
+.ks-console-body .ks-hi { color: #a78bfa; }
+.ks-console-body .ks-dim { color: #5b6270; }
+.ks-cursor {
+  display: inline-block;
+  width: 7px; height: 13px;
+  background: #7c6cff;
+  vertical-align: -2px;
+  animation: ks-console-blink 1.1s steps(1) infinite;
+}
+@keyframes ks-console-line { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+@keyframes ks-console-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ks-console-body .ks-line { animation: none; opacity: 1; }
+  .ks-cursor { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .ks-term-topbar .ks-topbar-full { display: none; }
+  .ks-console-body { font-size: 11px; }
+}

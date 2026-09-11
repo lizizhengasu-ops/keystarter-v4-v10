@@ -19,6 +19,7 @@ export interface SiteConfig {
   defaultTitle: string;      // SEO fallback title
   defaultDesc: string;       // SEO fallback description
   logoSrc: string;           // header logo path (deployed per site)
+  design?: string;           // storefront skin: "terminal" | undefined (default)
   locales?: string[];        // optional locale whitelist for i18n
   productSlugs?: string[];   // optional catalog whitelist, in display order
   priceAnchors?: Record<string, number>; // display-only "was" prices; checkout is always Woo

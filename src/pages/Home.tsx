@@ -13,6 +13,7 @@ import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
 import { stripTags } from "../utils/html";
+import { TerminalConsole } from "../theme/TerminalChrome";
 import { pushEvent } from "../tracking";
 
 
@@ -304,6 +305,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               </div>
             ))}
           </div>
+
+          {SITE.design === "terminal" && <TerminalConsole />}
         </div>
       </section>
 

@@ -36,6 +36,10 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { pushEvent } from "./tracking";
 import { SITE, api } from "./site-config";
+import "./theme/terminal.css";
+import { TerminalTopbar } from "./theme/TerminalChrome";
+
+const KS_TERMINAL = SITE.design === "terminal";
 
 function KeyStarterLogo() {
   return (
@@ -83,12 +87,14 @@ function Layout({ children }: { children: any }) {
   }, []);
 
   return (
-    <div className="min-h-[1400px] flex flex-col bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }}>
+    <div className="min-h-[1400px] flex flex-col bg-[#f5f5f7] text-[#1d1d1f] antialiased" style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" }} data-ks-design={KS_TERMINAL ? "terminal" : undefined}>
       <span data-build={typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : ''} style={{display:'none'}} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <WooCartFlyout open={cartOpen} onClose={() => setCartOpen(false)} />
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)} isHomepage={location.pathname === "/"} />
       <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#7c3aed] z-[9999]" style={{ transform: `scaleX(${scrollPct / 100})`, transformOrigin: "left", transition: "transform 0.1s" }} />
+
+      {KS_TERMINAL && <TerminalTopbar />}
 
       <nav className="nav-fade fixed top-0 z-50 w-full h-12 bg-white/75 border-b border-[#e8e8ed] backdrop-blur-[20px]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -97,7 +103,10 @@ function Layout({ children }: { children: any }) {
           </button>
 <Link to="/" className="flex items-center space-x-2 v5-card-light rounded-lg px-2 -ml-2" aria-label={SITE.siteName + " Home"}>
             <KeyStarterLogo />
-            <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
+            <span className="flex flex-col justify-center leading-none">
+              <span className="text-sm font-semibold tracking-tight text-[#1d1d1f]">{t("brand.name")}</span>
+              {KS_TERMINAL && <span className="ks-brand-tagline hidden md:block mt-0.5">KeyStarter Terminal — Authorized Partner</span>}
+            </span>
             <span className="hidden sm:inline bg-blue-50 text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded border border-blue-200">{t("brand.partner")}</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6 text-xs font-medium text-[#1d1d1f]/80">
