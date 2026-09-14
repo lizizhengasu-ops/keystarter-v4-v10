@@ -44,9 +44,9 @@ const ROUTE_META: Record<string, PageMeta> = {
       "KeyStarter provides genuine Microsoft license keys with instant delivery and lifetime support.",
   },
   "/support": {
-    title: "Support — KeyStarter",
+    title: "Support Center — Activation, Licensing & Refund Help | KeyStarter",
     description:
-      "Get help with your KeyStarter order, activation and licensing questions.",
+      "Get help with Windows, Office, IoT and Server license keys: activation, installation, refunds and account questions at KeyStarter.",
   },
   "/faq": {
     title: "FAQ — KeyStarter",
@@ -66,16 +66,19 @@ const ROUTE_META: Record<string, PageMeta> = {
     description: "Review your KeyStarter cart and check out securely.",
   },
   "/privacy": {
-    title: "Privacy Policy — KeyStarter",
-    description: "How KeyStarter collects and protects your personal information.",
+    title: "Privacy Policy — How KeyStarter Protects Your Data",
+    description:
+      "How KeyStarter collects, uses and protects personal data: order data, analytics, cookies and your GDPR/CCPA rights.",
   },
   "/terms": {
-    title: "Terms & Conditions — KeyStarter",
-    description: "The terms governing your use of KeyStarter and its services.",
+    title: "Terms of Service — KeyStarter Software Licensing",
+    description:
+      "The terms governing purchases and use of Microsoft license keys delivered by KeyStarter, including licensing scope and delivery.",
   },
   "/refund": {
-    title: "Refund Policy — KeyStarter",
-    description: "KeyStarter offers a 14-day refund policy on eligible orders.",
+    title: "14-Day Refund Policy — KeyStarter License Keys",
+    description:
+      "Keys that fail to activate through no fault of the buyer are replaced or refunded within 14 days. See the full policy and process.",
   },
   "/cookies": {
     title: "Cookie Policy — KeyStarter",
@@ -91,7 +94,7 @@ const ROUTE_META: Record<string, PageMeta> = {
       "Licensing details for Windows, Office, IoT and Server products at KeyStarter.",
   },
   "/changelog": {
-    title: "Changelog — KeyStarter",
+    title: "Product Changelog — KeyStarter Platform Updates",
     description: "Recent updates and improvements to the KeyStarter website.",
   },
   "/downloads": {
@@ -162,12 +165,27 @@ export default function SeoManager() {
       .querySelectorAll('h1[style*="position:absolute"], h1[style*="left:-9999px"]')
       .forEach((el) => el.remove());
     // Keep the server/edge-injected SEO v2 title/meta, canonical and JSON-LD
-    // on initial hydration; only update them on client-side navigation.
-    // The edge SEO worker injects a canonical tag before hydration; matrix
-    // sites without it ship none, so SeoManager owns SEO there instead.
     if (firstRender.current) {
       firstRender.current = false;
-      if (document.head.querySelector('link[rel="canonical"]')) return;
+      if (document.head.querySelector('link[rel="canonical"]')) {
+        // Edge-injected SEO owns title/canonical/og, but some deployments do
+        // not ship an og:image — never let the page go out without one.
+        if (!document.head.querySelector('meta[property="og:image"]')) {
+          upsertMeta("property", "og:image", DEFAULT_OG_IMAGE);
+        }
+        // Same for the Product JSON-LD image when the edge LD lacks it.
+        const prodLd = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+          .map(s => { try { return { s, j: JSON.parse(s.textContent) }; } catch { return null; } })
+          .find(x => x && x.j && x.j["@type"] === "Product" && !x.j.image);
+        if (prodLd) {
+          try {
+            const sl = location.pathname.replace(/^.*\/product\//, "").replace(/\/+$/, "");
+            prodLd.j.image = PRODUCT_OG_IMAGES[sl] || DEFAULT_OG_IMAGE;
+            prodLd.s.textContent = JSON.stringify(prodLd.j);
+          } catch { /* leave edge LD untouched */ }
+        }
+        return;
+      }
     }
     const path = pathname.replace(/\/+$/, "") || "/";
     const product =
@@ -241,6 +259,7 @@ export default function SeoManager() {
         "@type": "Product",
         name: product.n,
         description: meta.description,
+        image: PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE,
         brand: { "@type": "Brand", name: "Microsoft" },
         offers: {
           "@type": "Offer",

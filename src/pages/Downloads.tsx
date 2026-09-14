@@ -3,7 +3,7 @@ export default function DownloadsPage() {
   return (
     <div className="bg-[#f6f7f9] text-[#0f1115] antialiased px-6 py-14 min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <span className="eyebrow" style={{ fontFamily: "var(--ks-mono, monospace)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "#635bff", fontWeight: 600 }}>Fulfillment center</span>
+        <span className="eyebrow" style={{ fontFamily: "var(--ks-mono, monospace)", fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "#4f43e8", fontWeight: 600 }}>Fulfillment center</span>
         <h1 className="text-4xl font-bold mt-2 mb-2" style={{ letterSpacing: "-.02em" }}>Downloads &amp; delivery</h1>
         <p className="text-[#5b6270] mb-10">Official installers and delivery instructions for your license.</p>
 
