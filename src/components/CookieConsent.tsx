@@ -40,7 +40,7 @@ export default function CookieConsent() {
   return (
     <Portal><div className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-[#e8e8ed] shadow-[0_-4px_12px_rgba(0,0,0,0.06)] p-4">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-[#86868b] leading-relaxed text-center sm:text-left">
+        <p className="text-xs text-[#515154] leading-relaxed text-center sm:text-left">
           {t("cookie_banner.text", "This site uses cookies to improve your experience and for analytics.")}{" "}
           <a href="/privacy" className="text-[#7c3aed] hover:underline">{t("cookie_banner.privacy", "Privacy Policy")}</a>
           {t("cookie_banner.and", " and ")}
@@ -48,7 +48,7 @@ export default function CookieConsent() {
         </p>
         <div className="flex gap-3 flex-shrink-0">
           <button onClick={reject}
-            className="min-h-[44px] px-4 py-2 text-xs font-semibold border border-[#e8e8ed] rounded-xl text-[#86868b] hover:bg-[#f5f5f7] transition bg-transparent cursor-pointer">
+            className="min-h-[44px] px-4 py-2 text-xs font-semibold border border-[#e8e8ed] rounded-xl text-[#515154] hover:bg-[#f5f5f7] transition bg-transparent cursor-pointer">
             {t("cookie_banner.reject", "Reject All")}
           </button>
           <button onClick={accept}

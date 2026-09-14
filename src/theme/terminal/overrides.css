@@ -14,6 +14,69 @@
 
 .ks-mono { font-family: var(--ks-mono); }
 
+/* Announce bar ships dark (#0d1118) but the light-base text colors were
+   written for a light bar — dark-on-dark at ratio 1.0. Force AA-passing
+   light text and a real touch target for the deals link. */
+.announce { background: #0d1118; color: #a8b0bf; }
+.announce .promo-msg { color: #8b93a7; }
+.announce a { color: #a78bfa; padding: 4px 8px; }
+
+/* The hero console panel is always dark (#0c1018) but plain line text
+   inherited the light-theme ink (near-black) — invisible. */
+.kst-terminal { color: #a8b0bf; }
+.kst-terminal-head span { color: #8b93a7; }
+.kst-line .key { color: #e6e9f0; }
+.kst-line .dim { color: #9aa3b5; }
+.kst-terminal .prompt { color: #a78bfa; }
+.kst-best .slab-card .btn-ghost { color: var(--ks-ink); border-color: var(--ks-line); }
+
+/* Product-card star glyphs rendered in the dark-theme warn amber on white
+   (2.2:1); pin them to the AA-passing bronze. */
+.stars { color: #b45309; }
+
+/* Mobile: the brand tagline crowds the 66px header — drop it on phones. */
+@media (max-width: 640px) {
+  .brand span small { display: none; }
+}
+
+/* The .kst-best band is intentionally dark in the package, but its section
+   head and ghost button inherit light-theme ink — dark on dark. The card
+   interiors carry their own colors; light up only what sits on the band. */
+.kst-best { color: #e6e9f0; }
+.kst-best .eyebrow { color: #a78bfa; }
+.kst-best h2, .kst-best h3, .kst-best .h2 { color: #f6f7f9; }
+.kst-best .btn-ghost { color: #e6e9f0; border-color: #2a3140; }
+.kst-best .btn-ghost:hover { border-color: #4b5675; background: rgba(255, 255, 255, 0.04); }
+/* Card interiors are white and must keep ink text (the band color would
+   otherwise inherit light-on-white into them). */
+.kst-best .slab-card, .kst-best .slab-card h3 a { color: var(--ks-ink); }
+.kst-best .slab-card small { color: var(--ks-muted); }
+
+/* Long-form copy: keep measure readable (craft floor 45-75ch). */
+.ks-main p { max-width: 70ch; }
+.ks-main .lead { max-width: 620px; }
+
+/* Touch targets: breadcrumb / inline text links and form controls. */
+.ks-main .breadcrumb a { display: inline-block; padding: 5px 2px; }
+.ks-main .support-card > a,
+.ks-main .pdp-rating a { display: inline-block; padding: 5px 0; }
+.ks-main a[target="_blank"]:not([class]) { display: inline-block; padding: 5px 0; }
+.ks-main input, .ks-main select { min-height: 42px; }
+
+/* Browser surfaces belong to the design (craft floor): focus + selection. */
+/* Accent text sat at 4.38:1 on the light bg — deepen one step for AA while
+   staying visually in-family. */
+.ks-main, .kst-header, .site-footer { --ks-accent: #4f43e8; --ks-accent-ink: #ffffff; }
+.ks-main :focus-visible,
+.kst-header :focus-visible,
+.site-footer :focus-visible {
+  outline: 2px solid #635bff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.ks-main ::selection,
+.ks-main ::-moz-selection { background: rgba(99, 91, 255, 0.18); }
+
 /* Announce bar: two-part copy like the mockup, small screens keep the deal. */
 .announce { justify-content: center; gap: 10px; display: flex; align-items: center; }
 .announce .promo-msg { letter-spacing: .12em; }
