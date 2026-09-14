@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
-import { termImg, termCat, termRating, termPrice, termBadge, termFeaturedRank } from "./terminal-data";
+import { termImg, termCat, termRating, termPrice, termBadge, termFeaturedRank, isTestSku } from "./terminal-data";
 
 type Bucket = "all" | "windows" | "office" | "server" | "iot";
 type Sort = "featured" | "asc" | "desc";
@@ -23,7 +23,9 @@ export default function TerminalStore() {
   }, []);
 
   const visible = useMemo(() => {
-    let list = (products || []).map(p => ({ p, cat: termCat(p.slug, p.category) }));
+    let list = (products || [])
+      .map(p => ({ p, cat: termCat(p.slug, p.category) }))
+      .filter(x => !isTestSku(x.p.slug));
     if (filter !== "all") list = list.filter(x => x.cat === filter);
     if (sort === "asc") list.sort((a, b) => a.p.price - b.p.price);
     if (sort === "desc") list.sort((a, b) => b.p.price - a.p.price);

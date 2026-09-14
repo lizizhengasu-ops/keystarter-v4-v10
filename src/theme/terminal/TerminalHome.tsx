@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { fetchProducts, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
 import { api, SITE } from "../../site-config";
-import { termImg, termCat, termRating, termPrice, termBadge } from "./terminal-data";
+import { termImg, termCat, termRating, termPrice, termBadge, isTestSku } from "./terminal-data";
 
 const BEST = ["windows-11-pro", "windows-10-pro", "office-2021-pro-plus", "win-svr-iot-2022"];
 const NEW = ["windows-11-pro-official", "win-svr-iot-2025", "office-2021-pro-plus", "win-11-iot-2024-value"];
@@ -31,7 +31,7 @@ function pick(products: SPAProduct[] | null, slugs: string[]): SPAProduct[] {
 export default function TerminalHome() {
   const products = useCatalog();
   const { addToCart, buyNow } = useCart();
-  const count = products ? products.length : 0;
+  const count = products ? products.filter(p => !isTestSku(p.slug)).length : 0;
 
   const [quoteSent, setQuoteSent] = useState(false);
   const [emailOk, setEmailOk] = useState(false);

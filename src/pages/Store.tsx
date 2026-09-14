@@ -26,9 +26,14 @@ export default function StorePage() {
     { key: "server", label: "Server / SQL" },
   ];
 
+  // Test SKUs (payment-test products) are never shown to customers.
+  const catalogProducts = products.filter(function(p) {
+    return !/^(testms|shop1-payment-test)$/.test(p.slug || "");
+  });
+
   const filteredProducts = activeTab === "all"
-    ? products
-    : products.filter(function(p) {
+    ? catalogProducts
+    : catalogProducts.filter(function(p) {
         var s = (p.slug || "").toLowerCase();
         if (activeTab === "windows") return /windows/.test(s) || /^win-/.test(s);
         if (activeTab === "office") return /office/.test(s);
@@ -37,7 +42,7 @@ export default function StorePage() {
       });
 
   function countByTab(tabKey: string): number {
-    if (tabKey === "all") return products.length;
+    if (tabKey === "all") return catalogProducts.length;
     return products.filter(function(p) {
       var s = (p.slug || "").toLowerCase();
       if (tabKey === "windows") return /windows/.test(s) || /^win-/.test(s);

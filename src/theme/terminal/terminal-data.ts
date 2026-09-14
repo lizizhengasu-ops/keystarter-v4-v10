@@ -79,6 +79,13 @@ export const TERM_ORDER = [
   "win-svr-iot-2019", "win-svr-iot-2025", "shop1-payment-test",
 ];
 
+/** Test SKUs never shown to customers (reachable via direct URL / checkout-sync only). */
+export const TEST_SKUS = new Set(["testms", "shop1-payment-test"]);
+
+export function isTestSku(slug: string): boolean {
+  return TEST_SKUS.has(slug);
+}
+
 export function termFeaturedRank(slug: string): number {
   const i = TERM_ORDER.indexOf(slug);
   return i === -1 ? 999 : i;
