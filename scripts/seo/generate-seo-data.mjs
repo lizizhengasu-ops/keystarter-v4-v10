@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
-const API = "https://keys-starter.com/wp-json/wp/v2/posts?per_page=100&status=publish&_fields=slug,title,date,modified,excerpt,link";
+const API = "https://keys-starter.com/wp-json/wp/v2/posts?per_page=100&status=publish&_fields=slug,title,date,modified,excerpt,link,featured_media";
 
 function decodeHtml(s) {
   if (!s) return "";
@@ -40,9 +40,38 @@ async function fetchPosts() {
   return res.json();
 }
 
+// Card-size cover (medium_large ≈768w) per post; missing covers are not fatal.
+async function fetchCovers(ids) {
+  const unique = [...new Set(ids)].filter(Boolean);
+  if (!unique.length) return new Map();
+  const res = await fetch(
+    "https://keys-starter.com/wp-json/wp/v2/media?per_page=100&include=" + unique.join(",") +
+      "&_fields=id,source_url,media_details",
+    { headers: { "User-Agent": "Mozilla/5.0 (KeyStarter SEO build script)" } }
+  );
+  if (!res.ok) {
+    console.warn("[seo-gen] covers fetch failed: " + res.status + " — cards render without images");
+    return new Map();
+  }
+  const map = new Map();
+  for (const m of await res.json()) {
+    const sizes = m.media_details?.sizes || {};
+    const pick = sizes.medium_large?.source_url || sizes.large?.source_url || m.source_url;
+    if (pick) map.set(m.id, pick);
+  }
+  return map;
+}
+
 function readEnv() {
   const envPath = path.join(ROOT, "..", ".env.local");
-  const txt = readFileSync(envPath, "utf8");
+  let txt;
+  try {
+    txt = readFileSync(envPath, "utf8");
+  } catch {
+    // env is optional: only product lastmod refresh needs it (e.g. worktree builds)
+    console.warn("[seo-gen] .env.local not found — skipping product lastmod refresh");
+    return {};
+  }
   const out = {};
   for (const line of txt.split(/\r?\n/)) {
     const m = line.match(/^([^=]+)=(.*)$/);
@@ -53,6 +82,7 @@ function readEnv() {
 
 async function fetchProducts() {
   const env = readEnv();
+  if (!env.WP_API_USER || !env.WP_API_APP_PASSWORD) return [];
   const auth = Buffer.from(env.WP_API_USER + ":" + env.WP_API_APP_PASSWORD).toString("base64");
   const res = await fetch("https://keys-starter.com/wp-json/wc/v3/products?per_page=100&_fields=slug,date_modified", {
     headers: { Authorization: "Basic " + auth, "User-Agent": "Mozilla/5.0 (KeyStarter SEO build script)" },
@@ -71,13 +101,14 @@ function buildTs(articles) {
     "  datePublished: string;",
     "  dateModified: string;",
     "  url: string;",
+    "  cover?: string;",
     "}",
     "",
     "export const BLOG_ARTICLES: Record<string, BlogArticle> = {",
   ];
   for (const a of articles) {
     lines.push(
-      `  ${JSON.stringify(a.slug)}: { title: ${JSON.stringify(a.title)}, description: ${JSON.stringify(a.description)}, datePublished: ${JSON.stringify(a.datePublished)}, dateModified: ${JSON.stringify(a.dateModified)}, url: ${JSON.stringify(a.url)} },`
+      `  ${JSON.stringify(a.slug)}: { title: ${JSON.stringify(a.title)}, description: ${JSON.stringify(a.description)}, datePublished: ${JSON.stringify(a.datePublished)}, dateModified: ${JSON.stringify(a.dateModified)}, url: ${JSON.stringify(a.url)}, cover: ${JSON.stringify(a.cover || "")} },`
     );
   }
   lines.push("};", "");
@@ -114,6 +145,7 @@ function buildSitemap(baseXml, articles, products) {
 
 const posts = await fetchPosts();
 const products = await fetchProducts();
+const covers = await fetchCovers(posts.map((p) => p.featured_media));
 const articles = posts.map((p) => ({
   slug: p.slug,
   title: decodeHtml(p.title?.rendered) || p.slug,
@@ -121,6 +153,7 @@ const articles = posts.map((p) => ({
   datePublished: p.date,
   dateModified: p.modified,
   url: "https://keys-starter.com/blog/" + p.slug,
+  cover: covers.get(p.featured_media) || "",
 }));
 
 writeFileSync(path.join(ROOT, "src", "data", "blog-articles.ts"), buildTs(articles), "utf8");

@@ -12,6 +12,7 @@ type Post = {
   excerpt: { rendered: string };
   slug: string;
   date: string;
+  cover?: string;
   _embedded?: { "wp:featuredmedia"?: Array<{ source_url?: string }> };
 };
 
@@ -23,10 +24,11 @@ const STATIC_POSTS: Post[] = Object.entries(BLOG_ARTICLES).map(([slug, a], i) =>
   excerpt: { rendered: a.description },
   slug,
   date: a.datePublished,
+  cover: a.cover,
 }));
 
 function coverOf(p: Post): string | undefined {
-  return p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
+  return p.cover || p._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
 }
 
 export default function BlogPage() {
