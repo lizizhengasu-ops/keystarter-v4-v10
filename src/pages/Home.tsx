@@ -62,7 +62,6 @@ const PREMIUM_SKUS: any[] = [
   {id:'win-11-iot-2024-entry',category:'server',title:'Win 11 IoT Ent LTSC 2024 Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2024 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
   {id:'win-10-iot-2021-entry',category:'server',title:'Win 10 IoT Ent 2021 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2021 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
   {id:'win-10-iot-2019-entry',category:'server',title:'Win 10 IoT Ent 2019 LTSC Entry',subtitle:'IoT device license - sticker delivery',price:45,originalPrice:160.00,tag:'IoT',type:'Enterprise IoT',features:['IoT Enterprise LTSC 2019 Edition','Sticker delivery + shipping','Device-bound activation'],icon:<DatabaseIcon />},
-  {id:'testms',category:'test',title:'testms',subtitle:'Payment test product - 0.10 USD',price:0.1,originalPrice:0.1,tag:'Test',type:'Test SKU',features:['Payment test product','0.10 USD test SKU','Digital delivery'],icon:<WindowsIcon colorClass="text-[#7c3aed]" />},
 ];
 const inSiteCatalog = (id: string) => !SITE.productSlugs || SITE.productSlugs.includes(id);
 const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.id) && inSiteCatalog(s.id));

@@ -42,6 +42,14 @@ const KS_TERMINAL = SITE.design === "terminal";
 const TerminalHomePage = lazy(() => import("./theme/terminal/TerminalHome"));
 const TerminalStorePage = lazy(() => import("./theme/terminal/TerminalStore"));
 const TerminalProductPage = lazy(() => import("./theme/terminal/TerminalProduct"));
+const TerminalAboutPage = lazy(() => import("./theme/terminal/TerminalAbout"));
+const TerminalSupportPage = lazy(() => import("./theme/terminal/TerminalSupportContact").then(m => ({ default: m.TerminalSupport })));
+const TerminalContactPage = lazy(() => import("./theme/terminal/TerminalSupportContact").then(m => ({ default: m.TerminalContact })));
+const TerminalB2bPage = lazy(() => import("./theme/terminal/TerminalB2bBlog").then(m => ({ default: m.TerminalB2b })));
+const TerminalBlogPage = lazy(() => import("./theme/terminal/TerminalB2bBlog").then(m => ({ default: m.TerminalBlog })));
+const TerminalFaqPage = lazy(() => import("./theme/terminal/TerminalPages").then(m => ({ default: m.TerminalFaq })));
+const TerminalLinksPage = lazy(() => import("./theme/terminal/TerminalPages").then(m => ({ default: m.TerminalLinks })));
+const TerminalChangelogPage = lazy(() => import("./theme/terminal/TerminalPages").then(m => ({ default: m.TerminalChangelog })));
 const TerminalHeader = lazy(() => import("./theme/terminal/TerminalChrome").then(m => ({ default: m.TerminalHeader })));
 const TerminalFooter = lazy(() => import("./theme/terminal/TerminalChrome").then(m => ({ default: m.TerminalFooter })));
 
@@ -278,15 +286,15 @@ export default function App() {
             <Route path="/products" element={KS_TERMINAL ? <TerminalStorePage /> : <StorePage />} />
             <Route path="/product/:slug" element={KS_TERMINAL ? <TerminalProductPage /> : <ProductPage />} />
             <Route path="/account" element={<AccountPage />} />
-            <Route path="/support" element={<SupportPage />} />
-            <Route path="/b2b" element={<B2bPage />} />
-            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/support" element={KS_TERMINAL ? <TerminalSupportPage /> : <SupportPage />} />
+            <Route path="/b2b" element={KS_TERMINAL ? <TerminalB2bPage /> : <B2bPage />} />
+            <Route path="/blog" element={KS_TERMINAL ? <TerminalBlogPage /> : <BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/faq" element={<FaqPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/changelog" element={<ChangelogPage />} />
-            <Route path="/links" element={<LinksPage />} />
+            <Route path="/faq" element={KS_TERMINAL ? <TerminalFaqPage /> : <FaqPage />} />
+            <Route path="/contact" element={KS_TERMINAL ? <TerminalContactPage /> : <ContactPage />} />
+            <Route path="/about" element={KS_TERMINAL ? <TerminalAboutPage /> : <AboutPage />} />
+            <Route path="/changelog" element={KS_TERMINAL ? <TerminalChangelogPage /> : <ChangelogPage />} />
+            <Route path="/links" element={KS_TERMINAL ? <TerminalLinksPage /> : <LinksPage />} />
             <Route path="/downloads" element={<DownloadsPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
