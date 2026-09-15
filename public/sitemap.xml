@@ -57,6 +57,10 @@
 <url><loc>https://keys-starter.com/product/win-svr-iot-2019</loc><priority>0.8</priority><lastmod>2026-07-22</lastmod></url>
 <url><loc>https://keys-starter.com/product/sql-svr-2019-runtime</loc><priority>0.8</priority><lastmod>2026-07-22</lastmod></url>
 <url><loc>https://keys-starter.com/product/sql-svr-2022-runtime</loc><priority>0.8</priority><lastmod>2026-07-22</lastmod></url>
+<url><loc>https://keys-starter.com/product-category/windows</loc><priority>0.8</priority></url>
+<url><loc>https://keys-starter.com/product-category/office</loc><priority>0.8</priority></url>
+<url><loc>https://keys-starter.com/product-category/server-sql</loc><priority>0.8</priority></url>
+<url><loc>https://keys-starter.com/product-category/iot-enterprise</loc><priority>0.8</priority></url>
 <url><loc>https://keys-starter.com/blog/excel-tips-tricks-2026-09-15</loc><lastmod>2026-09-15</lastmod><priority>0.6</priority></url>
 <url><loc>https://keys-starter.com/blog/powerpoint-tips-tricks-2026-09-15</loc><lastmod>2026-09-15</lastmod><priority>0.6</priority></url>
 <url><loc>https://keys-starter.com/blog/windows-11-tips-tricks-2026-09-15</loc><lastmod>2026-09-15</lastmod><priority>0.6</priority></url>
@@ -108,8 +112,4 @@
 <url><loc>https://keys-starter.com/blog/bulk-windows-licenses-business</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
 <url><loc>https://keys-starter.com/blog/best-windows-license-buying-guide-2026</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
 <url><loc>https://keys-starter.com/blog/windows-11-pro-vs-home-which-one-do-you-need</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
-<url><loc>https://keys-starter.com/product-category/windows</loc><priority>0.8</priority></url>
-<url><loc>https://keys-starter.com/product-category/office</loc><priority>0.8</priority></url>
-<url><loc>https://keys-starter.com/product-category/server-sql</loc><priority>0.8</priority></url>
-<url><loc>https://keys-starter.com/product-category/iot-enterprise</loc><priority>0.8</priority></url>
 </urlset>
