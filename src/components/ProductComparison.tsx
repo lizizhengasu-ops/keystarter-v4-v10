@@ -5,7 +5,7 @@ export function ProductComparison({ group }: { group: ComparisonGroup | null }) 
   return (
     <div className="max-w-7xl mx-auto px-6">
       <div className="mt-8 pt-6 border-t border-[#e8e8ed]">
-        <h3 className="text-base font-bold mb-4">{group.title}</h3>
+        <h2 className="text-base font-bold mb-4">{group.title}</h2>
         <div className="bg-[#f5f5f7] rounded-xl p-5">
           {group.rows.map((row: any, ri: number) => (
             <div key={ri} className="flex items-center py-2.5 border-b border-[#e8e8ed] last:border-0 text-xs gap-2">

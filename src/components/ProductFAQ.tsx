@@ -5,7 +5,7 @@ export function ProductFAQ({ faqs }: { faqs: FAQItem[] }) {
   return (
     <div id="product-faq" className="max-w-7xl mx-auto px-6">
       <div className="mt-8 pt-6 border-t border-[#e8e8ed]">
-        <h3 className="text-base font-bold mb-4">FAQ</h3>
+        <h2 className="text-base font-bold mb-4">FAQ</h2>
         <div className="faq-accordion">
           {faqs.map((faq, i) => (
             <details key={i} className="faq-item">

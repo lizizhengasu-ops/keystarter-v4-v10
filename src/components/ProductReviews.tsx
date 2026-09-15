@@ -10,7 +10,7 @@ export function ProductReviews({ reviews, t }: { reviews: Review[]; t: (k: strin
   if (reviews.length === 0) return null;
   return (
     <div className="max-w-7xl mx-auto px-6 pb-8 mt-8 pt-6 border-t border-[#e8e8ed]">
-      <h3 className="text-base font-bold mb-4">{t("reviews") || "Customer Reviews"}</h3>
+      <h2 className="text-base font-bold mb-4">{t("reviews") || "Customer Reviews"}</h2>
       <div className="space-y-3">
         {visible.map((r, i) => (
           <div key={i} className="bg-white rounded-xl border border-[#e8e8ed] p-4 shadow-sm">

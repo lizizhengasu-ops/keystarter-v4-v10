@@ -25,6 +25,49 @@ const SECOND_IMAGE_SLUGS = new Set([
   "win-11-iot-2024-value",
 ]);
 
+// Related-guide internal links by product family (P1 #8). All targets verified
+// live-200 on 2026-09-15. Plain <a> on purpose: /guide/* and /compare/* are
+// edge-served pages outside the SPA route table.
+const GUIDE_FAMILY: { match: (slug: string) => boolean; guides: { href: string; title: string; desc: string }[] }[] = [
+  {
+    match: (s) => /^windows-1[01]-(pro|home)(-official)?$/.test(s),
+    guides: [
+      { href: "/blog/windows-11-pro-key-buying-guide-2026", title: "How to Buy a Windows 11 Pro Key in 2026", desc: "Prices, risks and how to spot a safe seller" },
+      { href: "/blog/how-to-activate-windows-11", title: "How to Activate Windows 11", desc: "Step-by-step activation with a product key" },
+      { href: "/blog/windows-11-pro-vs-home-which-one-do-you-need", title: "Windows 11 Pro vs Home", desc: "Which edition fits your PC" },
+      { href: "/compare/windows-11-pro-vs-home", title: "Pro vs Home Comparison Table", desc: "Feature-by-feature breakdown" },
+      { href: "/blog/best-windows-license-buying-guide-2026", title: "Best Windows License Buying Guide", desc: "OEM, retail and volume licensing explained" },
+    ],
+  },
+  {
+    match: (s) => /^win-1[01]-iot/.test(s),
+    guides: [
+      { href: "/blog/windows-iot-enterprise-vs-windows-11-pro", title: "IoT Enterprise vs Windows 11 Pro", desc: "Which license fits your devices" },
+      { href: "/compare/windows-iot-enterprise-vs-windows-11-pro", title: "IoT vs Pro Comparison Table", desc: "Lifecycle and licensing side by side" },
+      { href: "/blog/windows-iot-licensing-models-oem-vs-volume", title: "IoT Licensing Models", desc: "OEM vs volume for embedded fleets" },
+      { href: "/blog/ltsc-vs-regular-windows", title: "LTSC vs Regular Windows", desc: "Long-term servicing explained" },
+    ],
+  },
+  {
+    match: (s) => /^win-svr-|^sql-svr-/.test(s),
+    guides: [
+      { href: "/blog/windows-server-2022-licensing-explained", title: "Windows Server Licensing Explained", desc: "Per-core rules made simple" },
+      { href: "/blog/bulk-windows-licenses-business", title: "Bulk Licenses for Business", desc: "Volume purchasing playbook" },
+      { href: "/blog/windows-iot-licensing-models-oem-vs-volume", title: "IoT Licensing Models", desc: "OEM vs volume licensing" },
+      { href: "/b2b", title: "B2B & Bulk Inquiries", desc: "Get a volume quote from KeyStarter" },
+    ],
+  },
+  {
+    match: (s) => /^office-/.test(s),
+    guides: [
+      { href: "/guide/activate-office-troubleshooting", title: "Office Activation Troubleshooting", desc: "Fix unlicensed-product banners" },
+      { href: "/blog/office-2026-vs-microsoft-365", title: "Office 2026 vs Microsoft 365", desc: "One-time license or subscription" },
+      { href: "/blog/how-to-install-office-2026", title: "How to Install Office 2026", desc: "Download and setup walkthrough" },
+      { href: "/guide/digital-license-vs-product-key", title: "Digital License vs Product Key", desc: "How each activation method works" },
+    ],
+  },
+];
+
 export default function ProductPage() {
   const {slug} = useParams();
 
@@ -48,12 +91,13 @@ const [reviews, setReviews] = useState([]);
   const compGroup = COMPARISON_MAP[slug || ""] ? COMPARISON_GROUPS[COMPARISON_MAP[slug || ""]] : null;
   const sKey = FAQ_SERIES_MAP[slug || ""] || "";
   const allFaqs = [...(sKey ? (FAQ_BY_SERIES[sKey] || []) : []), ...GENERIC_FAQS];
+  const relatedGuides = slug ? (GUIDE_FAMILY.find(f => f.match(slug))?.guides ?? []) : [];
   // Pre-computed sub-columns (avoids Rolldown brace-nesting issue)
   const leftCol = details ? (
     <div>
       {details.features && (
       <div>
-        <h3 className="text-base font-bold mb-3">Features</h3>
+        <h2 className="text-base font-bold mb-3">Features</h2>
         <div className="grid grid-cols-1 gap-2">
           {details.features.map(function(f:string,i:number){return(
             <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white border border-[#e8e8ed] shadow-sm">
@@ -73,7 +117,7 @@ const [reviews, setReviews] = useState([]);
 
   const reqCol = details?.requirements ? (
     <div className="md:col-span-2 mt-8 pt-8 border-t border-[#e8e8ed]">
-      <h3 className="text-base font-bold mb-3">System Requirements</h3>
+      <h2 className="text-base font-bold mb-3">System Requirements</h2>
       <div className="bg-[#f5f5f7] rounded-xl p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
           {details.requirements.map(function(r:any,i:number){return(
@@ -90,7 +134,7 @@ const [reviews, setReviews] = useState([]);
   const rightCol = (
     <div>
       <div className="border-t-0 pt-0">
-        <h3 className="text-base font-bold mb-4">{t("product.details")}</h3>
+        <h2 className="text-base font-bold mb-4">{t("product.details")}</h2>
       {(displayProduct?.specs ? Object.entries(displayProduct.specs) : []).map((f:any,i:number) => (
           <div key={i} className="flex justify-between py-2 border-b border-[#f5f5f7] text-xs">
             <span className="text-[#86868b]">{Array.isArray(f) ? f[0] : f[0]}</span>
@@ -99,7 +143,7 @@ const [reviews, setReviews] = useState([]);
         ))}
       </div>
       <div className="mt-6 border-t border-[#e8e8ed] pt-6">
-        <h3 className="text-base font-bold mb-4">How It Works</h3>
+        <h2 className="text-base font-bold mb-4">How It Works</h2>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">1</span></div><div className="text-xs font-semibold mb-1">Purchase & Pay</div><div className="text-xs text-[#86868b]">Complete secure checkout via PayPal or Stripe</div></div>
           <div className="text-center"><div className="w-10 h-10 mx-auto rounded-full bg-[#7c3aed]/10 flex items-center justify-center mb-2"><span className="text-sm font-bold text-[#7c3aed]">2</span></div><div className="text-xs font-semibold mb-1">Receive Instantly</div><div className="text-xs text-[#86868b]">License key delivered to your email within minutes</div></div>
@@ -190,11 +234,15 @@ const [reviews, setReviews] = useState([]);
 
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
-      <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-[#86868b]">
-        <Link to="/" className="hover:text-[#7c3aed] transition">Home</Link>
-        <span className="mx-2">/</span>
-        <span className="text-[#1d1d1f]">{displayProduct?.name || slug}</span>
-      </div>
+      <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 py-4 text-xs text-[#86868b]">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li><Link to="/" className="hover:text-[#7c3aed] transition">Home</Link></li>
+          <li aria-hidden="true">/</li>
+          <li><Link to="/products" className="hover:text-[#7c3aed] transition">Products</Link></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-[#1d1d1f]">{displayProduct?.name || slug}</li>
+        </ol>
+      </nav>
       
       {!displayProduct && (
         <div className="max-w-7xl mx-auto px-6 pb-16 min-h-[80vh]">
@@ -261,6 +309,27 @@ const [reviews, setReviews] = useState([]);
       </div>
       }
       
+      {displayProduct && relatedGuides.length > 0 && (
+        <section aria-labelledby="related-guides-heading" className="bg-[#f5f5f7] max-w-7xl mx-auto px-6 pb-12 pt-2">
+          <h2 id="related-guides-heading" className="text-base font-bold mb-3">Related Guides</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedGuides.map(function(g){return(
+              <a key={g.href} href={g.href} className="group flex items-start gap-3 p-4 rounded-xl bg-white border border-[#e8e8ed] shadow-sm hover:border-[#7c3aed]/40 transition">
+                <div className="w-8 h-8 rounded-lg bg-[#7c3aed]/10 flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4 text-[#7c3aed]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-[#1d1d1f] group-hover:text-[#7c3aed] transition">{g.title}</div>
+                  <div className="text-xs text-[#86868b] mt-0.5">{g.desc}</div>
+                </div>
+              </a>
+            );})}
+          </div>
+        </section>
+      )}
+
       {displayProduct && compGroup && <ProductComparison group={compGroup} />}
       {displayProduct && allFaqs.length > 0 && <ProductFAQ faqs={allFaqs} />}
       {reviews.length > 0 && <ProductReviews reviews={reviews} t={t} />}
