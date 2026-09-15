@@ -15,6 +15,8 @@ export interface SPAProduct {
    color: string;
    category?: string;
    image?: string;
+   rating?: number;
+   reviewCount?: number;
  }
  
  const DEFAULT_SPECS = {
@@ -43,6 +45,8 @@ export interface SPAProduct {
    color: local?.c || "#7c3aed",
    category: apiItem.categories?.[0]?.name || "",
    image: apiItem.images?.[0]?.src || "",
+   rating: apiItem.average_rating ? parseFloat(apiItem.average_rating) : undefined,
+   reviewCount: apiItem.review_count ? parseInt(apiItem.review_count) : undefined,
  };
  }
  
@@ -62,6 +66,8 @@ export interface SPAProduct {
      color: local?.c || "#7c3aed",
      category: apiItem.categories?.[0]?.name || "",
      image: apiItem.images?.[0]?.src || "",
+     rating: apiItem.average_rating ? parseFloat(apiItem.average_rating) : undefined,
+     reviewCount: apiItem.review_count ? parseInt(apiItem.review_count) : undefined,
    };
  }
  

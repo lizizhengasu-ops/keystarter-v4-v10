@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchProduct, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
-import { termImg, termRating, termPrice } from "./terminal-data";
+import { termImg, termPrice } from "./terminal-data";
 import { stripTags } from "../../utils/html";
+import { getWooId } from "../../data/woo-ids";
+import { api } from "../../site-config";
 
 export default function TerminalProduct() {
   const { slug = "" } = useParams();
   const [product, setProduct] = useState<SPAProduct | null | undefined>(undefined);
+  const [reviews, setReviews] = useState<Array<{ author: string; text: string; rating: number; verified: boolean }>>([]);
   const { addToCart, buyNow } = useCart();
 
   useEffect(() => {
@@ -22,6 +25,16 @@ export default function TerminalProduct() {
       .catch(() => { if (live) setProduct(null); });
     return () => { live = false; };
   }, [slug]);
+
+  useEffect(() => {
+    if (!product) return;
+    let live = true;
+    fetch(api("/wp-json/keystarter/v1/product-reviews/" + (getWooId(product.slug) || 0)), { credentials: "same-origin" })
+      .then(r => r.json())
+      .then(list => { if (live && Array.isArray(list)) setReviews(list.map((c: any) => ({ author: c.author, text: c.text, rating: Number(c.rating) || 0, verified: !!c.verified }))); })
+      .catch(() => {});
+    return () => { live = false; };
+  }, [product]);
 
   if (product === undefined) {
     return (
@@ -41,7 +54,7 @@ export default function TerminalProduct() {
     );
   }
 
-  const r = termRating(product.slug);
+
   const desc = stripTags(String(product.description || "")).trim();
 
   return (
@@ -75,8 +88,8 @@ export default function TerminalProduct() {
               )}
             </div>
             <div className="pdp-rating kst-pdp-rating">
-              <span className="stars kst-stars">{r.stars}</span> {r.score}
-              <Link to="/products">({r.count} reviews)</Link>
+              <span className="stars kst-stars">{"★".repeat(Math.min(5, Math.max(1, Math.round(product.rating || 0))))}</span> {(product.rating || 0).toFixed(1)}
+              <Link to="/products">({product.reviewCount || 0} reviews)</Link>
             </div>
             <p className="pdp-msg kst-pdp-msg"><b>Instant delivery</b> — key emailed within 10 minutes of payment. Works for 1 PC, lifetime activation.</p>
 

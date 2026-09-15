@@ -34,9 +34,9 @@ const ROUTE_META: Record<string, PageMeta> = {
       "Shop best sellers, read the blog, subscribe for updates and request a B2B quote at KeyStarter.",
   },
   "/b2b": {
-    title: "B2B & Bulk Licensing — KeyStarter",
+    title: "B2B License Keys & Volume Licensing — Custom Quotes | KeyStarter",
     description:
-      "Bulk and business licensing for Windows, Office, IoT and Server keys with dedicated support.",
+      "Buy B2B license keys in volume: genuine Windows, Office, IoT and Server keys for teams of 5 to 5,000 — custom quotes in 24h, compliance documentation and dedicated support.",
   },
   "/about": {
     title: "About KeyStarter",

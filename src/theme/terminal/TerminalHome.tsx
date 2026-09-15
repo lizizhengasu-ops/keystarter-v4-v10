@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { fetchProducts, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
 import { api, SITE } from "../../site-config";
-import { termImg, termCat, termRating, termPrice, termBadge, isTestSku } from "./terminal-data";
+import { termImg, termCat, termPrice, termBadge, isTestSku } from "./terminal-data";
 
 const BEST = ["windows-11-pro", "windows-10-pro", "office-2021-pro-plus", "win-svr-iot-2022"];
 const NEW = ["windows-11-pro-official", "win-svr-iot-2025", "office-2021-pro-plus", "win-11-iot-2024-value"];
@@ -114,7 +114,6 @@ export default function TerminalHome() {
           </div>
           <div className="slab-grid">
             {best.map(p => {
-              const r = termRating(p.slug);
               return (
                 <article className="slab-card" key={p.slug}>
                   <div className="img"><img src={termImg(p.slug)} alt={p.name} loading="lazy" /></div>
@@ -122,7 +121,7 @@ export default function TerminalHome() {
                     <span className="tag">BEST SELLER</span>
                     <h3><Link to={"/product/" + p.slug}>{p.name}</Link></h3>
                     <small>Verified before sale</small>
-                    <div className="rating">{r.stars} {r.score} ({r.count})</div>
+                    <div className="rating">{p.reviewCount ? "★".repeat(Math.round(p.rating || 0)) + " " + (p.rating || 0).toFixed(1) + " (" + p.reviewCount + ")" : "New"}</div>
                     <div className="price">{termPrice(p.price)}</div>
                     <div className="actions">
                       <button className="btn btn-accent" onClick={() => addToCart(p.slug, p.name, p.price, 1)}>Add to Cart</button>

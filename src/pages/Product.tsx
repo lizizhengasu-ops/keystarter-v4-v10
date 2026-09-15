@@ -14,6 +14,8 @@ import { ProductComparison } from "../components/ProductComparison";
 import { ProductFAQ } from "../components/ProductFAQ";
 import { ProductReviews } from "../components/ProductReviews";
 import { pushEvent } from "../tracking";
+import ReviewForm from "../components/ReviewForm";
+import { getWooId } from "../data/woo-ids";
 
 const SECOND_IMAGE_SLUGS = new Set([
   "win-11-iot-2024-entry",
@@ -333,6 +335,12 @@ const [reviews, setReviews] = useState([]);
       {displayProduct && compGroup && <ProductComparison group={compGroup} />}
       {displayProduct && allFaqs.length > 0 && <ProductFAQ faqs={allFaqs} />}
       {reviews.length > 0 && <ProductReviews reviews={reviews} t={t} />}
+      {displayProduct && (
+        <section className="max-w-3xl mx-auto px-6 py-12 w-full">
+          <h2 className="text-xl font-bold mb-4">Write a Review</h2>
+          <ReviewForm productId={getWooId(slug || "") || 0} />
+        </section>
+      )}
 
       {!displayProduct && (
         <div className="max-w-7xl mx-auto px-6 pb-16 text-center py-20">

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts, type SPAProduct } from "../../api/woocommerce";
 import { useCart } from "../../data/CartContext";
-import { termImg, termCat, termRating, termPrice, termBadge, termFeaturedRank, isTestSku } from "./terminal-data";
+import { termImg, termCat, termPrice, termBadge, termFeaturedRank, isTestSku } from "./terminal-data";
 
 type Bucket = "all" | "windows" | "office" | "server" | "iot";
 type Sort = "featured" | "asc" | "desc";
@@ -61,7 +61,6 @@ export default function TerminalStore() {
 
         <div className="prod-grid" id="product-grid">
           {visible.map(({ p, cat }) => {
-            const r = termRating(p.slug);
             return (
               <article className="prod-card" key={p.slug}>
                 <div className="img">
@@ -69,7 +68,7 @@ export default function TerminalStore() {
                   <img src={termImg(p.slug)} alt={p.name} loading="lazy" />
                 </div>
                 <h3><Link to={"/product/" + p.slug}>{p.name}</Link></h3>
-                <div className="rating"><span className="stars">{r.stars}</span> {r.score} ({r.count})</div>
+                <div className="rating">{p.reviewCount ? <span className="stars">{"★".repeat(Math.min(5, Math.max(1, Math.round(p.rating || 0))))}</span> : null} {p.reviewCount ? (p.rating || 0).toFixed(1) + " (" + p.reviewCount + ")" : "New"}</div>
                 <div className="prices"><b>{termPrice(p.price)}</b></div>
                 <div className="actions">
                   <button className="btn btn-primary" onClick={() => addToCart(p.slug, p.name, p.price, 1)}>Add to Cart</button>
