@@ -116,6 +116,11 @@ export default function StorePage() {
         {error && <div className="text-red-500 text-center py-8">{t("store.load_error")}</div>}
         
         {!loading && !error && (
+          <div>
+          <h2 className="text-xl font-bold mb-6 text-center">
+            {activeTab === "windows" ? "Windows License Keys" : activeTab === "office" ? "Office Suites" : activeTab === "server" ? "Server & SQL Licenses" : "All License Keys"}
+            {" "}({filterBySiteCatalog(filteredProducts).length})
+          </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {filterBySiteCatalog(filteredProducts).map((x,i) => {
               const isSpecial = SPECIAL_OFFER_IDS.includes(x.slug);
@@ -155,6 +160,7 @@ export default function StorePage() {
               </div>
               );
             })}
+          </div>
           </div>
         )}
       </div>
