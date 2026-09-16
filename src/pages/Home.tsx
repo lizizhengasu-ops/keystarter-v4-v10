@@ -68,7 +68,7 @@ const specialOfferSkus = PREMIUM_SKUS.filter(s => SPECIAL_OFFER_IDS.includes(s.i
 
 const TRUST_ITEMS = [
   { img: "/assets/images/trust-paypal.jpg?v=3", title: "PayPal Verified", desc: "Official verified seller account", alt: "PayPal" },
-  { icon: "delivery", bg: "#ff6b35", title: "Instant Delivery", desc: "Global instant delivery within 10 minutes" },
+  { icon: "delivery", bg: "#c2410c", title: "Instant Delivery", desc: "Global instant delivery within 10 minutes" },
   { icon: "genuine", bg: "#00aa13", title: "100% Genuine", desc: "Direct Microsoft channel licenses" },
   { icon: "refund", bg: "#2563eb", title: "14-Day Refund", desc: "No activation failure risk guarantee" },
   { icon: "ssl", bg: "#7c3aed", title: "SSL Encrypted", desc: "256-bit TLS encrypted checkout" }
@@ -298,7 +298,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               { num: t("home.enterprise.support_247"), label: t("home.enterprise.sla_manager") }
             ]).map((s, i) => (
               <div key={i} className="px-4 py-5 text-center">
-                <div className="text-xl md:text-2xl font-extrabold text-[#ff6b35] tabular-nums">{s.num}</div>
+                <div className="text-xl md:text-2xl font-extrabold text-[#c2410c] tabular-nums">{s.num}</div>
                 <div className="text-[10px] md:text-[11px] font-semibold uppercase text-white/70 mt-1.5 tracking-wide">{s.label}</div>
               </div>
             ))}
@@ -309,7 +309,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {heroPersona === "enterprise" && (
       <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
         <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("home.enterprise.cta_title")}</h2>
-        <p className="text-sm text-[#86868b] mb-6 max-w-xl mx-auto">{t("home.enterprise.cta_desc")}</p>
+        <p className="text-sm text-[#6e6e73] mb-6 max-w-xl mx-auto">{t("home.enterprise.cta_desc")}</p>
         <div className="flex justify-center gap-4 flex-wrap items-center">
           <a href={"mailto:" + SITE.supportEmail} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-[#7c3aed] text-white hover:bg-[#6d28d9] transition cursor-pointer no-underline">Contact Enterprise Sales</a>
           <span className="text-sm text-[#7c3aed] font-semibold">{SITE.supportEmail}</span>
@@ -337,7 +337,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div key={i} className="flex-shrink-0 w-[220px] sm:w-[260px] bg-[#fafafa] rounded-2xl p-6 border border-[#e8e8ed] text-center shadow-sm hover:border-[#7c3aed]/30 transition-colors">
                 <img src={`/assets/images/about/clients/${c.file}`} alt={`${c.name} logo`} className="h-10 max-w-[10rem] object-contain mx-auto mb-3" loading="lazy" />
                 <div className="text-sm font-bold text-[#1d1d1f] mb-1">{c.name}</div>
-                <div className="text-[11px] text-[#86868b]">{c.industry}</div>
+                <div className="text-[11px] text-[#6e6e73]">{c.industry}</div>
               </div>
             ))}
           </div>
@@ -384,7 +384,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="special-offer" className={`py-16 bg-gradient-to-b from-[#1d1d1f] to-[#161617] border-t border-white/10 ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-8 text-center">
-            <span className="inline-block text-[10px] font-bold bg-[#ff6b35] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
+            <span className="inline-block text-[10px] font-bold bg-[#c2410c] text-white px-3 py-1 rounded-full uppercase tracking-wider mb-3">Limited Time</span>
             <h2 className="text-2xl font-bold tracking-tight text-white">{t("home.offer.section_title")}</h2>
             <p className="text-sm text-white/70 mt-1">{t("home.offer.section_desc")}</p>
             <div className="mt-6 inline-flex flex-col items-center gap-2.5 rounded-2xl bg-white border-2 border-[#ff6b35]/40 px-8 py-6 shadow-[0_12px_32px_rgba(255,107,53,0.18)]">
@@ -397,15 +397,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <div key={sku.id}
                 className="bg-white v5-card rounded-2xl border-2 border-[#ff6b35]/20 p-6 flex flex-col justify-between cursor-pointer hover:border-[#ff6b35]/50 hover:shadow-lg transition-all relative overflow-hidden">
                 <Link to={`/product/${sku.id}`} aria-label={sku.title} className="absolute inset-0 z-10" />
-                <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>
+                <div className="absolute top-0 right-0 bg-[#c2410c] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 bg-orange-50 text-orange-600 rounded border border-orange-200">{sku.tag}</span>
-                    <span className="text-xs text-[#86868b]">{sku.type}</span>
+                    <span className="text-xs text-[#6e6e73]">{sku.type}</span>
                   </div>
                   <ProductImage slug={sku.id} name={sku.title} eager={i < 2} />
                   <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
-                  <p className="text-xs text-[#86868b] mb-4">{sku.subtitle}</p>
+                  <p className="text-xs text-[#6e6e73] mb-4">{sku.subtitle}</p>
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
                     {sku.features.map((feat: any, idx: number) => (
                       <li key={idx} className="flex items-start space-x-2"><span className="text-green-500 mt-0.5">{String.fromCharCode(0x2713)}</span><span>{feat}</span></li>
@@ -417,18 +417,18 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                  <div className="flex items-baseline justify-between mb-4">
                    <div>
                       <span className="text-2xl font-extrabold text-[#ff6b35]">{String.fromCharCode(0x0024)}{sku.price}</span>
-                      <span className="text-xs text-[#86868b] line-through ml-1.5">{String.fromCharCode(0x0024)}{sku.originalPrice}</span>
+                      <span className="text-xs text-[#6e6e73] line-through ml-1.5">{String.fromCharCode(0x0024)}{sku.originalPrice}</span>
                      <span className="text-[10px] font-semibold text-orange-600 ml-2">Special Offer</span>
                    </div>
                  </div>
                   <CountdownTimer className="mb-4" />
                   <div className="flex gap-2 relative z-20">
                     <button onClick={(e) => { e.stopPropagation(); addToCart(sku.id, sku.title, getLiveData(sku).price) }}
-                      className="flex-1 border-2 border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
+                      className="flex-1 border-2 border-[#c2410c] text-[#c2410c] hover:bg-orange-50 text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.add_to_cart', 'Add to Cart')}
                     </button>
                     <button onClick={(e) => { e.stopPropagation(); buyNow(sku.id, sku.title, getLiveData(sku).price) }}
-                      className="flex-1 bg-[#ff6b35] hover:bg-[#e55a2b] text-white text-xs font-semibold py-2.5 rounded-xl transition">
+                      className="flex-1 bg-[#c2410c] hover:bg-[#b03a09] text-white text-xs font-semibold py-2.5 rounded-xl transition">
                       {t('product.buy_now', 'Buy Now')}
                     </button>
                   </div>
@@ -444,7 +444,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto mb-12 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("store.section_title")}</h2>
-            <p className="text-sm text-[#86868b]">{t("store.section_desc")}</p>
+            <p className="text-sm text-[#6e6e73]">{t("store.section_desc")}</p>
           </div>
 
           {/* Filter Categories */}
@@ -452,25 +452,25 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <div className="flex space-x-1.5 bg-white p-1.5 rounded-full border border-[#e8e8ed] shadow-[0_4px_12px_rgba(0,0,0,0.03)] whitespace-nowrap">
               <button 
                 onClick={() => setActiveTab('all')} 
-                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'all' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
+                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'all' ? 'bg-[#1d1d1f] text-white' : 'text-[#6e6e73] hover:text-black'}`}
               >
                 All Products (13)
               </button>
               <button 
                 onClick={() => setActiveTab('windows')} 
-                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'windows' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
+                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'windows' ? 'bg-[#1d1d1f] text-white' : 'text-[#6e6e73] hover:text-black'}`}
               >
                 Windows (8)
               </button>
               <button 
                 onClick={() => setActiveTab('office')} 
-                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'office' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
+                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'office' ? 'bg-[#1d1d1f] text-white' : 'text-[#6e6e73] hover:text-black'}`}
               >
                 Office (2)
               </button>
               <button 
                 onClick={() => setActiveTab('server')} 
-                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'server' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
+                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'server' ? 'bg-[#1d1d1f] text-white' : 'text-[#6e6e73] hover:text-black'}`}
               >
                 Server / SQL (3)
               </button>
@@ -485,18 +485,18 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 className={`bg-white v5-card rounded-2xl border ${SPECIAL_OFFER_IDS.includes(sku.id)?"border-[#ff6b35]/30":"border-[#e8e8ed]"} p-6 flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow relative`}
               >
                 <Link to={`/product/${sku.id}`} aria-label={sku.title} className="absolute inset-0 z-10" />
-                {SPECIAL_OFFER_IDS.includes(sku.id) && <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>}
+                {SPECIAL_OFFER_IDS.includes(sku.id) && <div className="absolute top-0 right-0 bg-[#c2410c] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>}
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className={`text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 text-orange-600 border-orange-200":"bg-green-50 text-green-600 border-green-200"}`}>
                       ⚡ {String(t('home.sku.'+sku.id.replace(/-/g,'')+'.tag', sku.tag))}
                     </span>
-                    <span className="text-xs text-[#86868b]">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type))}</span>
+                    <span className="text-xs text-[#6e6e73]">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type))}</span>
                   </div>
                   
                   <ProductImage slug={sku.id} name={sku.title} eager={i < 2} />
                   <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">{sku.title}</h3>
-                  <p className="text-xs text-[#86868b] mb-4">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.subtitle', sku.subtitle))}</p>
+                  <p className="text-xs text-[#6e6e73] mb-4">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.subtitle', sku.subtitle))}</p>
 
                   <ul className="space-y-2 mb-6 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-4">
                     {sku.features.map((feat: any, idx: number) => (
@@ -513,7 +513,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                  <div className="flex items-baseline justify-between mb-4">
                     <div>
                       <span className="text-2xl font-extrabold text-[#1d1d1f]">${getLiveData(sku).price}</span>
-                      <span className="text-xs text-[#86868b] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
+                      <span className="text-xs text-[#6e6e73] line-through ml-1.5">${getLiveData(sku).originalPrice}</span>
                     </div>
                     {sku.auditInfo && (
                       <span className="text-[11px] text-[#7c3aed] font-medium">✓ {String(t('home.sku.'+sku.id.replace(/-/g,'')+'.audit', sku.auditInfo))}</span>
@@ -559,7 +559,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-6 mb-6 leading-tight">
                 Enterprise Compliance & {t("home.compare.audit")}
               </h2>
-              <p className="text-sm text-[#86868b] leading-relaxed mb-8">
+              <p className="text-sm text-[#6e6e73] leading-relaxed mb-8">
                 When facing a Microsoft SAM Audit, opaque procurement chains put enterprises at risk. We provide Volume Licensing certificates and genuine keys for 100% compliance at low cost, avoiding legal penalties.
               </p>
 
@@ -567,15 +567,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#7c3aed] text-xl pt-0.5">🛡️</div>
                   <div>
-                    <h4  className="text-sm font-semibold">{t("home.enterprise.compliance_verified_label")}</h4>
-                    <p className="text-xs text-[#86868b] mt-1">{t("home.compare.enterprise_desc")}</p>
+                    <h3 className="text-sm font-semibold">{t("home.enterprise.compliance_verified_label")}</h3>
+                    <p className="text-xs text-[#6e6e73] mt-1">{t("home.compare.enterprise_desc")}</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 v5-card-light bg-white/5 p-4 rounded-xl border border-white/10 hover:border-blue-500/40 transition duration-300">
                   <div className="text-[#34c759] text-xl pt-0.5">💰</div>
                   <div>
-                    <h4  className="text-sm font-semibold">{t("home.enterprise.volume_pricing_title")}</h4>
-                    <p className="text-xs text-[#86868b] mt-1">{t("home.enterprise.compliance_flexible")}</p>
+                    <h3 className="text-sm font-semibold">{t("home.enterprise.volume_pricing_title")}</h3>
+                    <p className="text-xs text-[#6e6e73] mt-1">{t("home.enterprise.compliance_flexible")}</p>
                   </div>
                 </div>
               </div>
@@ -584,7 +584,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             {/* B2B Interactive Intake Form */}
             <div className="bg-white text-[#1d1d1f] p-8 rounded-2xl border border-[#e8e8ed] shadow-2xl relative">
               <h3 className="text-xl font-bold mb-2">{t("home.b2b.contact_title")}</h3>
-              <p className="text-xs text-[#86868b] mb-6">{t("home.b2b.quote")}</p>
+              <p className="text-xs text-[#6e6e73] mb-6">{t("home.b2b.quote")}</p>
               
               <form onSubmit={handleB2BSubmit} className="space-y-4">
                 <div>
@@ -633,7 +633,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                     Get Quote by WhatsApp
                   </button>
                 </div>
-                <p className="text-[10px] text-center text-[#86868b] mt-3">🔒 Your privacy is protected by GDPR and Chinese data protection laws. Never shared with third parties.</p>
+                <p className="text-[10px] text-center text-[#6e6e73] mt-3">🔒 Your privacy is protected by GDPR and Chinese data protection laws. Never shared with third parties.</p>
               </form>
             </div>
 
@@ -648,7 +648,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="max-w-2xl mx-auto mb-16 text-center">
             <p className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("home.compare.title")}</p>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.compare.subtitle")}</h2>
-            <p className="text-sm text-[#86868b] mt-3">Compare editions to find the most cost-effective option.</p>
+            <p className="text-sm text-[#6e6e73] mt-3">Compare editions to find the most cost-effective option.</p>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-[#e8e8ed] shadow-sm">
@@ -699,26 +699,26 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="max-w-2xl mx-auto mb-16 text-center">
             <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("home.support.help_guides")}</span>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.support.tech_center")}</h2>
-            <p className="text-sm text-[#86868b] mt-3">{t("home.b2b.self_service")}</p>
+            <p className="text-sm text-[#6e6e73] mt-3">{t("home.b2b.self_service")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">🔑</div>
-              <h4 className="text-base font-bold mb-2">{t("home.support.activation_faq")}</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("home.support.activation_guide")}</p>
+              <h3 className="text-base font-bold mb-2">{t("home.support.activation_faq")}</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed mb-4">{t("home.support.activation_guide")}</p>
               <button onClick={() => scrollToSection('portal')} className="text-xs font-semibold text-[#7c3aed] hover:underline focus:outline-none text-left">Go to User Portal{' > '}</button>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📦</div>
-              <h4 className="text-base font-bold mb-2">{t("support.download_title")}</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.download_desc")}</p>
+              <h3 className="text-base font-bold mb-2">{t("support.download_title")}</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed mb-4">{t("support.download_desc")}</p>
               <a href="https://setup.office.com" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[#7c3aed] hover:underline">{t("home.support.activation_link")}{' > '}</a>
             </div>
             <div className="bg-white v5-card-light rounded-2xl border border-[#e8e8ed] p-6">
               <div className="text-3xl mb-4">📡</div>
-              <h4 className="text-base font-bold mb-2">{t("support.server_title")}</h4>
-              <p className="text-xs text-[#86868b] leading-relaxed mb-4">{t("support.server_desc")}</p>
+              <h3 className="text-base font-bold mb-2">{t("support.server_title")}</h3>
+              <p className="text-xs text-[#6e6e73] leading-relaxed mb-4">{t("support.server_desc")}</p>
               <button onClick={() => showToast("Our 24/7 tech team is ready. Apply below for compliance consultation.", "ℹ️")} className="text-xs font-semibold text-[#7c3aed] hover:underline text-left focus:outline-none">{t("home.support.contact_expert")} &gt;</button>
             </div>
           </div>
@@ -738,7 +738,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 1 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 1 && (
-                  <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
+                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
                     Absolutely genuine. We source Volume Licensing and CSP channel keys through Microsoft regional bulk agreements. Microsoft offers steep volume discounts, and we pass those savings to developers. All keys support Microsoft account binding and official ISO downloads — never unauthorized keys.
                   </p>
                 )}
@@ -753,7 +753,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 2 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 2 && (
-                  <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
+                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
                     Yes! Our Retail-grade keys support cloud binding to your Microsoft account. When reinstalling, simply click “I recently changed the hardware on this device”，for seamless reactivation.
                   </p>
                 )}
@@ -768,7 +768,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                   <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 3 ? 'rotate-180' : ''}`}>▼</span>
                 </button>
                 {openFaqId === 3 && (
-                  <p className="text-xs text-[#86868b] mt-3 leading-relaxed">
+                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
                     Yes! We provide enterprise procurement with Microsoft compliance statements and authorized receipts (invoices supported). Our compliance team offers one-on-one legal support throughout any audit.
                   </p>
                 )}
@@ -787,16 +787,16 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("blog.section_label")}</span>
             <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("home.blog.guides_resources")}</h2>
-            <p className="text-sm text-[#86868b] mt-3 max-w-2xl mx-auto">{t("blog.section_desc")}</p>
+            <p className="text-sm text-[#6e6e73] mt-3 max-w-2xl mx-auto">{t("blog.section_desc")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {blogPosts.length === 0 ? (
-              <div className="md:col-span-3 text-center text-sm text-[#86868b] py-8">Loading latest articles...</div>
+              <div className="md:col-span-3 text-center text-sm text-[#6e6e73] py-8">Loading latest articles...</div>
             ) : blogPosts.slice(0, 3).map(post => (
               <a key={post.id} href={post.link} className="block bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group">
                 <div className="p-5">
                   <h3 className="text-base font-semibold text-[#1d1d1f] group-hover:text-[#7c3aed] transition-colors mb-2 line-clamp-2">{stripTags(post.title.rendered)}</h3>
-                  <div className="text-xs text-[#86868b] leading-relaxed line-clamp-3 mb-3">{stripTags(post.excerpt.rendered)}</div>
+                  <div className="text-xs text-[#6e6e73] leading-relaxed line-clamp-3 mb-3">{stripTags(post.excerpt.rendered)}</div>
                   <span className="text-xs text-[#7c3aed] font-medium">{t("home.blog.read_more")}</span>
                 </div>
               </a>
@@ -816,13 +816,13 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase mb-2">{t("portal.label")}</span>
             <h2  className="text-3xl font-bold tracking-tight text-[#1d1d1f]">{t("portal.title")}</h2>
-            <p className="text-sm text-[#86868b] mt-2">{t("portal.desc")}</p>
+            <p className="text-sm text-[#6e6e73] mt-2">{t("portal.desc")}</p>
           </div>
 
           <div className="bg-[#f5f5f7] rounded-3xl p-6 sm:p-10 border border-[#e8e8ed] shadow-sm">
             <div className="text-center py-10">
-              <h4 className="text-sm font-bold text-[#1d1d1f] mb-2">{t("portal.title")}</h4>
-              <p className="text-xs text-[#86868b] mb-4">{t("portal.desc")}</p>
+              <h3 className="text-sm font-bold text-[#1d1d1f] mb-2">{t("portal.title")}</h3>
+              <p className="text-xs text-[#6e6e73] mb-4">{t("portal.desc")}</p>
               <button onClick={() => window.location.href="/account"} className="inline-block bg-[#7c3aed] text-white text-xs font-semibold px-5 py-2.5 rounded-xl border-none cursor-pointer hover:bg-[#6d28d9] transition">{t("account.signin")}</button>
             </div>
           </div>
@@ -832,7 +832,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       <section id="trusted-secure" className="py-14 bg-white border-t border-[#e8e8ed]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">Trusted &amp; Secure</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#6e6e73]">Trusted &amp; Secure</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Payments and licenses you can rely on</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
@@ -849,7 +849,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 </div>
                 <div className="p-4">
                   <h3 className="text-sm font-bold text-[#1d1d1f]">{item.title}</h3>
-                  <p className="text-[11px] text-[#86868b] mt-1 leading-relaxed">{item.desc}</p>
+                  <p className="text-[11px] text-[#6e6e73] mt-1 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}

@@ -91,7 +91,7 @@ export default function StorePage() {
                 return (
                   <button key={t.key}
                     onClick={function(){setActiveTab(t.key)}}
-                    className={"px-6 py-2 rounded-full text-xs font-semibold transition " + (activeTab === t.key ? "bg-[#1d1d1f] text-white" : "text-[#86868b] hover:text-black")}
+                    className={"px-6 py-2 rounded-full text-xs font-semibold transition " + (activeTab === t.key ? "bg-[#1d1d1f] text-white" : "text-[#6e6e73] hover:text-black")}
                   >
                     {t.label} ({cnt})
                   </button>
@@ -128,12 +128,12 @@ export default function StorePage() {
               const off = orig > x.price ? Math.round((1 - x.price / orig) * 100) : 0;
               return (
               <div key={i} className={"bg-white rounded-2xl border p-5 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden " + (isSpecial ? "border-[#ff6b35]/40" : "border-[#e8e8ed]")}>
-                {isSpecial && off > 0 && <div className="absolute top-0 right-0 bg-[#ff6b35] text-white text-xs font-bold px-2 py-0.5 rounded-bl-lg">-{off}%</div>}
+                {isSpecial && off > 0 && <div className="absolute top-0 right-0 bg-[#c2410c] text-white text-xs font-bold px-2 py-0.5 rounded-bl-lg">-{off}%</div>}
                 <Link to={"/product/"+x.slug} className="block">
                   <ProductImage slug={x.slug} name={x.name} eager={i < 2} />
-                  {isSpecial && <span className="inline-block text-xs font-bold uppercase tracking-wide text-[#ff6b35] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded mt-2 mb-2">Special Price</span>}
+                  {isSpecial && <span className="inline-block text-xs font-bold uppercase tracking-wide text-[#c2410c] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded mt-2 mb-2">Special Price</span>}
                   <h3 className="text-sm font-bold text-[#1d1d1f] mb-1">{x.name}</h3>
-                  <p className="text-xs text-[#86868b] mb-4">{x.category || 'Microsoft License'}</p>
+                  <p className="text-xs text-[#6e6e73] mb-4">{x.category || 'Microsoft License'}</p>
                   <ul className="space-y-1.5 mb-4 text-xs text-[#1d1d1f]/80 border-t border-[#f5f5f7] pt-3">
                     {(x.specs ? Object.entries(x.specs).slice(0, 4) : []).map(([_k,v],fi) => (
                       <li key={fi} className="flex items-start space-x-1.5"><span className="text-green-500 font-bold">✓</span><span>{v}</span></li>
@@ -143,18 +143,18 @@ export default function StorePage() {
                 <div>
                   <div className="flex items-baseline justify-between mb-2">
                     <div className="flex items-baseline gap-1.5">
-                    <span className={"text-xl font-extrabold " + (isSpecial ? "text-[#ff6b35]" : "text-[#1d1d1f]")}>
+                    <span className={"text-xl font-extrabold " + (isSpecial ? "text-[#c2410c]" : "text-[#1d1d1f]")}>
                       {new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(x.price)}
                     </span>
-                    {off > 0 && <span className="text-xs text-[#86868b] line-through">{new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(orig)}</span>}
+                    {off > 0 && <span className="text-xs text-[#6e6e73] line-through">{new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(orig)}</span>}
                     </div>
                   </div>
                   {isSpecial && <CountdownTimer className="mb-3" />}
                   <div className="flex gap-2">
                     <button onClick={(e) => { e.stopPropagation(); addToCart(x.slug, x.name, x.price); }}
-                      className={"flex-1 border-2 text-xs font-semibold py-2 rounded-xl transition " + (isSpecial ? "border-[#ff6b35] text-[#ff6b35] hover:bg-orange-50" : "border-[#7c3aed] text-[#7c3aed] hover:bg-[#f5f3ff]")}>{t("product.add_to_cart")}</button>
+                      className={"flex-1 border-2 text-xs font-semibold py-2 rounded-xl transition " + (isSpecial ? "border-[#c2410c] text-[#c2410c] hover:bg-orange-50" : "border-[#7c3aed] text-[#7c3aed] hover:bg-[#f5f3ff]")}>{t("product.add_to_cart")}</button>
                     <button onClick={(e) => { e.stopPropagation(); buyNow(x.slug, x.name, x.price); }}
-                      className={"flex-1 text-white text-xs font-semibold py-2 rounded-xl transition " + (isSpecial ? "bg-[#ff6b35] hover:bg-[#e55a2b]" : "bg-[#7c3aed] hover:bg-[#6d28d9]")}>{t('product.buy_now', 'Buy Now')}</button>
+                      className={"flex-1 text-white text-xs font-semibold py-2 rounded-xl transition " + (isSpecial ? "bg-[#c2410c] hover:bg-[#b03a09]" : "bg-[#7c3aed] hover:bg-[#6d28d9]")}>{t('product.buy_now', 'Buy Now')}</button>
                   </div>
                 </div>
               </div>

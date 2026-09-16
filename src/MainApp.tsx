@@ -136,7 +136,7 @@ function Layout({ children }: { children: any }) {
               <>
                 <Link to="/products" className="hover:text-[#7c3aed] transition-colors">{t("nav.products", "Products")}</Link>
                 <a href="/#store" className="hover:text-[#7c3aed] transition-colors">{t("nav.store")}</a>
-                <a href="/#business" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</a>
+                <a href="/#business" aria-label="Enterprise B2B licensing section" className="hover:text-[#7c3aed] transition-colors">{t("nav.enterprise")}</a>
                 <a href="/#compare" className="hover:text-[#7c3aed] transition-colors">{t("nav.compare")}</a>
                 <a href="/#support" className="hover:text-[#7c3aed] transition-colors">{t("nav.support")}</a>
                 <a href="/#portal" className="hover:text-[#7c3aed] transition-colors">{t("nav.portal")}</a>

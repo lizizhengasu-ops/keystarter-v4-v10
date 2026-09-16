@@ -42,9 +42,9 @@ export default function CookieConsent() {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-xs text-[#515154] leading-relaxed text-center sm:text-left">
           {t("cookie_banner.text", "This site uses cookies to improve your experience and for analytics.")}{" "}
-          <a href="/privacy" className="text-[#7c3aed] hover:underline">{t("cookie_banner.privacy", "Privacy Policy")}</a>
+          <a href="/privacy" className="text-[#7c3aed] underline underline-offset-2 hover:text-[#5b21b6]">{t("cookie_banner.privacy", "Privacy Policy")}</a>
           {t("cookie_banner.and", " and ")}
-          <a href="/cookies" className="text-[#7c3aed] hover:underline">{t("cookie_banner.cookie", "Cookie Policy")}</a>.
+          <a href="/cookies" className="text-[#7c3aed] underline underline-offset-2 hover:text-[#5b21b6]">{t("cookie_banner.cookie", "Cookie Policy")}</a>.
         </p>
         <div className="flex gap-3 flex-shrink-0">
           <button onClick={reject}
