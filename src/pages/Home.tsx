@@ -488,7 +488,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 {SPECIAL_OFFER_IDS.includes(sku.id) && <div className="absolute top-0 right-0 bg-[#c2410c] text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg">-{Math.round((1 - sku.price/sku.originalPrice)*100)}%</div>}
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className={`text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 text-orange-600 border-orange-200":"bg-green-50 text-green-600 border-green-200"}`}>
+                    <span className={`text-[11px] font-bold tracking-wide uppercase px-2.5 py-1 rounded border ${SPECIAL_OFFER_IDS.includes(sku.id)?"bg-orange-50 text-orange-600 border-orange-200":"bg-green-50 text-green-700 border-green-200"}`}>
                       ⚡ {String(t('home.sku.'+sku.id.replace(/-/g,'')+'.tag', sku.tag))}
                     </span>
                     <span className="text-xs text-[#6e6e73]">{String(t('home.sku.'+sku.id.replace(/-/g,'')+'.type', sku.type))}</span>
@@ -676,15 +676,15 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 </tr>
                 <tr>
                   <td className="p-6 font-semibold text-[#1d1d1f] text-sm">{t("home.compare.reinstall")}</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unlimited)</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Unbind anytime)</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full Support</span> (Silent auto-reactivation)</td>
+                  <td className="p-6"><span className="text-green-700 font-semibold">✓ Full Support</span> (Unlimited)</td>
+                  <td className="p-6"><span className="text-green-700 font-semibold">✓ Full Support</span> (Unbind anytime)</td>
+                  <td className="p-6"><span className="text-green-700 font-semibold">✓ Full Support</span> (Silent auto-reactivation)</td>
                 </tr>
                 <tr>
                   <td className="p-6 font-semibold text-[#1d1d1f] text-sm">SAM Audit Support</td>
                   <td className="p-6">✓ Personal asset compliance</td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Full compliance pass</span></td>
-                  <td className="p-6"><span className="text-green-600 font-semibold">✓ Premium compliance guarantee</span></td>
+                  <td className="p-6"><span className="text-green-700 font-semibold">✓ Full compliance pass</span></td>
+                  <td className="p-6"><span className="text-green-700 font-semibold">✓ Premium compliance guarantee</span></td>
                 </tr>
               </tbody>
             </table>
