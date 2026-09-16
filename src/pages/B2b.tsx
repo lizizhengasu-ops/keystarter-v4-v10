@@ -205,6 +205,27 @@ export default function B2bPage() {
           )}
         </div>
       </div>
+      <section className="max-w-7xl mx-auto px-6 pb-16">
+        <h2 className="text-base font-bold mb-4">B2B &amp; Volume Licensing FAQ</h2>
+        <div className="space-y-2">
+          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
+            <summary className="text-sm font-semibold cursor-pointer">What is the minimum order for volume pricing?</summary>
+            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Volume discounts start at 5 keys of the same product and improve with quantity. Mixed-product orders above 10 keys also qualify — request a quote and you will get tiered pricing within one business day.</p>
+          </details>
+          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
+            <summary className="text-sm font-semibold cursor-pointer">Do you provide invoices and purchase orders?</summary>
+            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Yes. Every order includes a VAT invoice, and we support PO-based purchasing for companies that require procurement workflows. Wire transfer is available for orders above 20 keys.</p>
+          </details>
+          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
+            <summary className="text-sm font-semibold cursor-pointer">Which license types fit business deployment?</summary>
+            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">For fixed-function and embedded devices, <a href="/blog/windows-iot-licensing-models-oem-vs-volume" className="text-[#7c3aed] hover:underline">IoT licensing models (OEM vs volume)</a> explain the compliance path; for team desktops, see <a href="/blog/bulk-windows-licenses-business" className="text-[#7c3aed] hover:underline">bulk Windows licenses for business</a> and the <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs retail comparison</a> to pick the right SKU per seat.</p>
+          </details>
+          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
+            <summary className="text-sm font-semibold cursor-pointer">How does key delivery work for large orders?</summary>
+            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Keys are delivered by email in a formatted list within minutes of payment, and CSV export is available on request for automated provisioning tools.</p>
+          </details>
+        </div>
+      </section>
     </div>
   );
 }

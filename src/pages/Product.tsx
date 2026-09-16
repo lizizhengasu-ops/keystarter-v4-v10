@@ -39,6 +39,7 @@ const GUIDE_FAMILY: { match: (slug: string) => boolean; guides: { href: string; 
       { href: "/blog/windows-11-pro-vs-home-which-one-do-you-need", title: "Windows 11 Pro vs Home", desc: "Which edition fits your PC" },
       { href: "/compare/windows-11-pro-vs-home", title: "Pro vs Home Comparison Table", desc: "Feature-by-feature breakdown" },
       { href: "/blog/best-windows-license-buying-guide-2026", title: "Best Windows License Buying Guide", desc: "OEM, retail and volume licensing explained" },
+      { href: "/guide/activate-windows-error-codes", title: "Windows Activation Error Codes", desc: "Fixes for 0xC004F074 and other codes" },
     ],
   },
   {
@@ -64,6 +65,8 @@ const GUIDE_FAMILY: { match: (slug: string) => boolean; guides: { href: string; 
     guides: [
       { href: "/guide/activate-office-troubleshooting", title: "Office Activation Troubleshooting", desc: "Fix unlicensed-product banners" },
       { href: "/blog/office-2026-vs-microsoft-365", title: "Office 2026 vs Microsoft 365", desc: "One-time license or subscription" },
+      { href: "/guide/activate-office-2021", title: "Activate Office 2021 Pro Plus", desc: "Step-by-step 2021 activation guide" },
+      { href: "/guide/activate-windows-error-codes", title: "Activation Error Code Fixes", desc: "0xC004F074 and common Office errors" },
       { href: "/blog/how-to-install-office-2026", title: "How to Install Office 2026", desc: "Download and setup walkthrough" },
       { href: "/guide/digital-license-vs-product-key", title: "Digital License vs Product Key", desc: "How each activation method works" },
     ],
