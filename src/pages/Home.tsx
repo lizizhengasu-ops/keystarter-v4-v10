@@ -454,7 +454,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 onClick={() => setActiveTab('all')} 
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'all' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
-                All Products (14)
+                All Products (13)
               </button>
               <button 
                 onClick={() => setActiveTab('windows')} 
@@ -473,12 +473,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
                 className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'server' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
               >
                 Server / SQL (3)
-              </button>
-              <button 
-                onClick={() => setActiveTab('test')} 
-                className={`px-6 py-2 rounded-full text-xs font-semibold transition ${activeTab === 'test' ? 'bg-[#1d1d1f] text-white' : 'text-[#86868b] hover:text-black'}`}
-              >
-                Test (1)
               </button>
             </div>
           </div>

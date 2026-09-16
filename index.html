@@ -6,7 +6,7 @@
   <!-- gtag.js unified: both IDs load once via src/tracking.ts (deferred to load+idle) -->
   <script defer src="/s33k.js?v=2" data-domain="keys-starter.com"></script>
   <script>
-    if (location.pathname === "/") {
+    if (location.pathname === "/" && window.matchMedia("(min-width: 768px)").matches) {
       var p = document.createElement("link");
       p.rel = "preload"; p.as = "image"; p.fetchPriority = "high";
       p.href = "/videos/enterprise-bg-v32-poster.webp";
