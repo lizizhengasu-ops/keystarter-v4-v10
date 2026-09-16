@@ -104,11 +104,22 @@ export function initTracking() {
     s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
     document.head.appendChild(s);
   };
+  // PSI phase 1: defer the gtag.js network load past the interaction window —
+  // consent defaults to denied, so nothing can be collected before first input.
+  // Events keep queueing in dataLayer and flush when the script finally loads.
+  const kick = () => {
+    load();
+    for (const ev of INTERACTION_EVENTS) window.removeEventListener(ev, kick);
+  };
+  const INTERACTION_EVENTS = ["pointerdown", "keydown", "touchstart", "scroll"] as const;
+  for (const ev of INTERACTION_EVENTS) {
+    window.addEventListener(ev, kick, { passive: true, once: true });
+  }
   const ric = (window as any).requestIdleCallback;
   if (typeof ric === "function") {
-    window.addEventListener("load", () => ric(load, { timeout: 3000 }));
+    window.addEventListener("load", () => ric(load, { timeout: 5000 }));
   } else {
-    window.addEventListener("load", () => setTimeout(load, 1500));
+    window.addEventListener("load", () => setTimeout(load, 5000));
   }
 }
 
