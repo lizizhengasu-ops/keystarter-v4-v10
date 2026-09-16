@@ -52,7 +52,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
           background: "#1d1d1f", borderRadius: 14, padding: "0 18px",
           boxShadow: "0 8px 30px rgba(0,0,0,0.3)"
         }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#86868b" strokeWidth="1.5" style={{flexShrink:0}}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" strokeWidth="1.5" style={{flexShrink:0}}>
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
           <input ref={inputRef} autoFocus placeholder={t("search.placeholder")} value={q} onChange={e => setQ(e.target.value)}
@@ -63,7 +63,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
             }} />
           {q && (
             <div onClick={() => setQ("")} className="cursor-pointer shrink-0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868b" strokeWidth="1.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" strokeWidth="1.5">
                 <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
               </svg>
             </div>
@@ -96,7 +96,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
                     onMouseEnter={e => e.currentTarget.style.background = "#f5f5f7"}
                     onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
                     <div style={{width:36,height:54,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden",borderRadius:6,background:"#f5f5f7"}}>
-                      {PRODUCT_IMAGES[p.slug] ? <img src={PRODUCT_IMAGES[p.slug]} alt="" style={{width:"100%",height:"100%",objectFit:"contain"}} /> : <span style={{fontSize:14,fontWeight:600,color:"#86868b"}}>{p.n[0]}</span>}
+                      {PRODUCT_IMAGES[p.slug] ? <img src={PRODUCT_IMAGES[p.slug]} alt="" style={{width:"100%",height:"100%",objectFit:"contain"}} /> : <span style={{fontSize:14,fontWeight:600,color:"#6e6e73"}}>{p.n[0]}</span>}
                     </div>
                     <div style={{flex:1}}>
                       <p style={{fontSize:15,fontWeight:600,color:"#1d1d1f",marginBottom:2}}>{p.n}</p>

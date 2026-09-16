@@ -65,7 +65,7 @@ export default function ReviewForm({ productId, theme = "light" }: { productId: 
       >
         {status === "sending" ? "Sending…" : "Submit Review"}
       </button>
-      <p className="text-[11px]" style={{ color: theme === "terminal" ? "#8b93a7" : "#86868b" }}>
+      <p className="text-[11px]" style={{ color: theme === "terminal" ? "#8b93a7" : "#6e6e73" }}>
         Reviews are moderated. Add your order number to get a Verified badge.
       </p>
     </form>

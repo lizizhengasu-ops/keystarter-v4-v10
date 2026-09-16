@@ -99,7 +99,7 @@ export default function BlogPage() {
 
         <div className="bg-white rounded-2xl border border-[#e8e8ed] shadow-sm p-5 mb-8">
           <h2 className="text-base font-bold mb-1">{t("footer.stay_updated", "Stay Updated")}</h2>
-          <p className="text-xs text-[#86868b] mb-4">{t("footer.newsletter", "Get Windows and Microsoft AI news in your inbox.")}</p>
+          <p className="text-xs text-[#6e6e73] mb-4">{t("footer.newsletter", "Get Windows and Microsoft AI news in your inbox.")}</p>
           <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
@@ -118,7 +118,7 @@ export default function BlogPage() {
         </div>
 
         {filtered.length === 0 ? (
-          <div className="text-center py-20 text-[#86868b]">{t("blog.empty")}</div>
+          <div className="text-center py-20 text-[#6e6e73]">{t("blog.empty")}</div>
         ) : (
           <div className="grid sm:grid-cols-2 gap-6">
             {filtered.map((p, i) => {
@@ -158,14 +158,14 @@ export default function BlogPage() {
                       >
                         {isDaily ? "Windows AI News" : "Windows Guide"}
                       </span>
-                      <span className="text-xs text-[#86868b]">
+                      <span className="text-xs text-[#6e6e73]">
                         {new Date(p.date).toLocaleDateString()}
                       </span>
                     </div>
                     <h2 className="text-lg font-bold mb-2 text-[#1d1d1f] group-hover:text-[#6d28d9] transition-colors line-clamp-2">
                       {title}
                     </h2>
-                    <p className="text-sm text-[#86868b] mb-4 line-clamp-2">
+                    <p className="text-sm text-[#6e6e73] mb-4 line-clamp-2">
                       {stripTags(p.excerpt.rendered).substring(0, 140)}
                     </p>
                     <span className="text-sm text-[#7c3aed] font-semibold group-hover:underline">

@@ -109,7 +109,7 @@ export default function SoftwarePortfolio({ compact = false }: { compact?: boole
       {items.map((cat) => (
         <div key={cat.title} className="bg-[#fafafa] rounded-2xl border border-[#e8e8ed] p-5">
           <h3 className={"font-bold text-[#1d1d1f] " + (compact ? "text-sm mb-2" : "text-sm mb-1.5")}>{cat.title}</h3>
-          {!compact && <p className="text-xs text-[#86868b] leading-relaxed mb-3">{cat.desc}</p>}
+          {!compact && <p className="text-xs text-[#6e6e73] leading-relaxed mb-3">{cat.desc}</p>}
           <div className="flex flex-wrap gap-1.5">
             {cat.brands.map((brand) => (
               <span key={brand.name} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white border border-[#e8e8ed] text-[#515154]">

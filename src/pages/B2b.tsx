@@ -129,18 +129,18 @@ export default function B2bPage() {
           {solutions.map((s,i) => (
             <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed]">
               <h3 className="font-bold text-sm mb-2">{s.n}</h3>
-              <p className="text-xs text-[#86868b]">{s.d}</p>
+              <p className="text-xs text-[#6e6e73]">{s.d}</p>
             </div>
           ))}
         </div>
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-2">Licensing Portfolio - Windows, Office, Server &amp; IoT</h2>
-          <p className="text-xs text-[#86868b] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels. All B2B orders include compliance documentation and audit support.</p>
+          <p className="text-xs text-[#6e6e73] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels. All B2B orders include compliance documentation and audit support.</p>
           <SoftwarePortfolio />
         </div>
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-2">Industries We Serve</h2>
-          <p className="text-xs text-[#86868b] mb-8">Software and hardware integration designed for industrial, medical, energy, transportation and logistics environments.</p>
+          <p className="text-xs text-[#6e6e73] mb-8">Software and hardware integration designed for industrial, medical, energy, transportation and logistics environments.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {INDUSTRIES.map((s) => (
               <div key={s.img} className="bg-white rounded-2xl border border-[#e8e8ed] overflow-hidden">
@@ -169,13 +169,13 @@ export default function B2bPage() {
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm" />
       {errors.company && <p className="text-red-500 text-xs">{errors.company}</p>}
       
-      <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.estimated_licenses")}</label>
+      <label className="text-xs font-medium text-[#6e6e73] block mb-1">{t("b2b.estimated_licenses")}</label>
       <select name="units" aria-label="Estimated licenses" value={form.units} onChange={e=>setForm({...form,units:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>5-20 Units</option><option>21-50 Units</option><option>51-200 Units</option><option>200+ Units</option>
       </select>
       
-      <label className="text-xs font-medium text-[#86868b] block mb-1">{t("b2b.primary_needs")}</label>
+      <label className="text-xs font-medium text-[#6e6e73] block mb-1">{t("b2b.primary_needs")}</label>
       <select name="product" aria-label="Primary product needs" value={form.product} onChange={e=>setForm({...form,product:e.target.value})}
         className="w-full p-3 border border-[#e8e8ed] rounded-xl text-sm bg-white">
         <option>{t("b2b.product_windows11")}</option><option>{t("b2b.product_windows10")}</option><option>{t("b2b.product_office")}</option><option>{t("b2b.product_server")}</option><option>{t("b2b.product_other")}</option>
@@ -210,19 +210,19 @@ export default function B2bPage() {
         <div className="space-y-2">
           <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
             <summary className="text-sm font-semibold cursor-pointer">What is the minimum order for volume pricing?</summary>
-            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Volume discounts start at 5 keys of the same product and improve with quantity. Mixed-product orders above 10 keys also qualify — request a quote and you will get tiered pricing within one business day.</p>
+            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Volume discounts start at 5 keys of the same product and improve with quantity. Mixed-product orders above 10 keys also qualify — request a quote and you will get tiered pricing within one business day.</p>
           </details>
           <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
             <summary className="text-sm font-semibold cursor-pointer">Do you provide invoices and purchase orders?</summary>
-            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Yes. Every order includes a VAT invoice, and we support PO-based purchasing for companies that require procurement workflows. Wire transfer is available for orders above 20 keys.</p>
+            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Yes. Every order includes a VAT invoice, and we support PO-based purchasing for companies that require procurement workflows. Wire transfer is available for orders above 20 keys.</p>
           </details>
           <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
             <summary className="text-sm font-semibold cursor-pointer">Which license types fit business deployment?</summary>
-            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">For fixed-function and embedded devices, <a href="/blog/windows-iot-licensing-models-oem-vs-volume" className="text-[#7c3aed] hover:underline">IoT licensing models (OEM vs volume)</a> explain the compliance path; for team desktops, see <a href="/blog/bulk-windows-licenses-business" className="text-[#7c3aed] hover:underline">bulk Windows licenses for business</a> and the <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs retail comparison</a> to pick the right SKU per seat.</p>
+            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">For fixed-function and embedded devices, <a href="/blog/windows-iot-licensing-models-oem-vs-volume" className="text-[#7c3aed] hover:underline">IoT licensing models (OEM vs volume)</a> explain the compliance path; for team desktops, see <a href="/blog/bulk-windows-licenses-business" className="text-[#7c3aed] hover:underline">bulk Windows licenses for business</a> and the <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs retail comparison</a> to pick the right SKU per seat.</p>
           </details>
           <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
             <summary className="text-sm font-semibold cursor-pointer">How does key delivery work for large orders?</summary>
-            <p className="text-xs text-[#86868b] mt-2 leading-relaxed">Keys are delivered by email in a formatted list within minutes of payment, and CSV export is available on request for automated provisioning tools.</p>
+            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Keys are delivered by email in a formatted list within minutes of payment, and CSV export is available on request for automated provisioning tools.</p>
           </details>
         </div>
       </section>

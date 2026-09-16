@@ -9,7 +9,7 @@ export function ProductComparison({ group }: { group: ComparisonGroup | null }) 
         <div className="bg-[#f5f5f7] rounded-xl p-5">
           {group.rows.map((row: any, ri: number) => (
             <div key={ri} className="flex items-center py-2.5 border-b border-[#e8e8ed] last:border-0 text-xs gap-2">
-              <span className="text-[#86868b] font-medium w-[35%] flex-shrink-0">{row.label}</span>
+              <span className="text-[#6e6e73] font-medium w-[35%] flex-shrink-0">{row.label}</span>
               <div className="flex gap-2 flex-wrap justify-end flex-1">
                 {group.columns.map((col: any, ci: number) => {
                   const v = row.values[col.slug];
@@ -20,12 +20,12 @@ export function ProductComparison({ group }: { group: ComparisonGroup | null }) 
             </div>
           ))}
           <div className="flex items-center pt-3 mt-1 text-xs gap-2">
-            <span className="text-[#86868b] font-medium w-[35%] flex-shrink-0">Price</span>
+            <span className="text-[#6e6e73] font-medium w-[35%] flex-shrink-0">Price</span>
             <div className="flex gap-2 flex-wrap justify-end flex-1">
               {group.columns.map((col: any, ci: number) => (
                 <span key={ci} className="text-center min-w-[60px] px-2.5">
                   <span className="text-sm font-bold text-[#7c3aed]">${col.price}</span>
-                  {col.badge && <span className="block text-xs text-[#86868b] mt-0.5">{col.badge}</span>}
+                  {col.badge && <span className="block text-xs text-[#6e6e73] mt-0.5">{col.badge}</span>}
                 </span>
               ))}
             </div>

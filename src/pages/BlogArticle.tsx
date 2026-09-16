@@ -28,7 +28,7 @@ export default function BlogArticlePage() {
   );
   if (!article) return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] px-6 py-12">
-      <div className="max-w-3xl mx-auto text-center py-20"><div className="text-lg text-[#86868b] mb-4">{t("blog.not_found")}</div>
+      <div className="max-w-3xl mx-auto text-center py-20"><div className="text-lg text-[#6e6e73] mb-4">{t("blog.not_found")}</div>
       <Link to="/blog" className="text-sm text-[#7c3aed] hover:underline">{t("blog.back")}</Link></div>
     </div>
   );

@@ -27,11 +27,11 @@ export default function DisclaimerPage() {
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10">
         <aside className="hidden lg:block">
           <div className="sticky top-24 bg-white rounded-2xl border border-[#e8e8ed] p-4 shadow-sm">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#86868b] mb-3 px-2">On this page</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-[#6e6e73] mb-3 px-2">On this page</div>
             <nav className="space-y-0.5 max-h-[70vh] overflow-auto pr-1">
               {sections.map(function(s:any,i:number){return(
                 <a key={s.id} href={"#"+s.id} onClick={function(){setActive(i)}}
-                   className={"block text-xs px-3 py-2 rounded-lg transition-colors "+(i===active?"bg-[#7c3aed]/10 text-[#7c3aed] font-semibold":"text-[#86868b] hover:text-[#1d1d1f]")}>{s.title}</a>
+                   className={"block text-xs px-3 py-2 rounded-lg transition-colors "+(i===active?"bg-[#7c3aed]/10 text-[#7c3aed] font-semibold":"text-[#6e6e73] hover:text-[#1d1d1f]")}>{s.title}</a>
               );})}
             </nav>
           </div>
@@ -94,7 +94,7 @@ export default function DisclaimerPage() {
             </div>
             <div className="flex-1">
               <div className="text-sm font-semibold text-[#1d1d1f]">Questions? Contact us</div>
-              <div className="text-xs text-[#86868b] mt-0.5">Our team typically responds within 24 hours.</div>
+              <div className="text-xs text-[#6e6e73] mt-0.5">Our team typically responds within 24 hours.</div>
             </div>
             <a href={"mailto:" + SITE.supportEmail} className="text-xs font-semibold text-[#7c3aed] hover:underline whitespace-nowrap">{SITE.supportEmail}</a>
           </div>

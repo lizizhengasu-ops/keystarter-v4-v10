@@ -79,13 +79,13 @@ export default function SupportPage() {
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased px-6 py-12">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-2">{t("support.title")}</h1>
-        <p className="text-[#86868b] mb-10">{t("support.desc")}</p>
+        <p className="text-[#6e6e73] mb-10">{t("support.desc")}</p>
         <h2 className="text-xl font-bold mb-4">{t("support.topics")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {topics.map((tp,i) => (
             <div key={i} className="bg-white rounded-2xl p-5 border border-[#e8e8ed]">
               <h3 className="font-semibold text-sm mb-1">{tp.n}</h3>
-              <p className="text-xs text-[#86868b]">{tp.d}</p>
+              <p className="text-xs text-[#6e6e73]">{tp.d}</p>
             </div>
           ))}
         </div>

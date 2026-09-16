@@ -26,9 +26,9 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
         </p>
 
         {cart.loading ? (
-          <p className="text-xs text-[#86868b]">Loading...</p>
+          <p className="text-xs text-[#6e6e73]">Loading...</p>
         ) : cart.items.length === 0 ? (
-          <p className="text-xs text-[#86868b]">Your cart is empty</p>
+          <p className="text-xs text-[#6e6e73]">Your cart is empty</p>
         ) : (
           <>
             {cart.items.map((item: WCItem) => (
@@ -40,7 +40,7 @@ export default function WooCartFlyout({ open, onClose }: { open: boolean; onClos
                   <p className="text-xs font-semibold text-[#1d1d1f] truncate">
                     {item.name}
                   </p>
-                  <p className="text-xs text-[#86868b]">
+                  <p className="text-xs text-[#6e6e73]">
                     Qty: {item.quantity}
                   </p>
                 </div>

@@ -18,23 +18,23 @@ export function ProductReviews({ reviews, t }: { reviews: Review[]; t: (k: strin
               <div className="text-yellow-500 text-sm">{"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}</div>
               <span className="text-xs font-medium text-[#1d1d1f]">{r.author}</span>
             </div>
-            <div className="text-xs leading-relaxed text-[#86868b]">{r.text}</div>
+            <div className="text-xs leading-relaxed text-[#6e6e73]">{r.text}</div>
           </div>
         ))}
       </div>
       {showAll && totalPages > 1 && (
         <div className="flex items-center justify-center gap-1.5 mt-4">
           <button onClick={() => setPage(Math.max(1, page - 1))}
-            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
+            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#6e6e73] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
             disabled={page <= 1}>Prev</button>
           {pgArr.map((p) => (
             <button key={p} onClick={() => setPage(p)}
-              className={"v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs rounded-lg px-3 py-1.5 transition " + (p == page ? "bg-[#7c3aed] text-white font-semibold" : "text-[#86868b] border border-[#e8e8ed] hover:bg-white")}>
+              className={"v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs rounded-lg px-3 py-1.5 transition " + (p == page ? "bg-[#7c3aed] text-white font-semibold" : "text-[#6e6e73] border border-[#e8e8ed] hover:bg-white")}>
               {p}
             </button>
           ))}
           <button onClick={() => setPage(Math.min(totalPages, page + 1))}
-            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#86868b] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
+            className="v5-btn min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-xs text-[#6e6e73] border border-[#e8e8ed] rounded-lg px-3 py-1.5 hover:bg-white transition disabled:opacity-30"
             disabled={page >= totalPages}>Next</button>
         </div>
       )}

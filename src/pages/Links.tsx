@@ -30,7 +30,7 @@ export default function LinksPage() {
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <div className="max-w-3xl mx-auto px-6 py-14">
         <h1 className="text-3xl font-bold mb-2">KeyStarter</h1>
-        <p className="text-sm text-[#86868b] mb-10">Genuine Microsoft licenses, instant delivery.</p>
+        <p className="text-sm text-[#6e6e73] mb-10">Genuine Microsoft licenses, instant delivery.</p>
 
         <div className="space-y-4">
           <Link to={withUtm("/products")} className="block bg-white rounded-2xl p-5 border border-[#e8e8ed] hover:border-[#7c3aed]/40 transition min-h-[56px] flex items-center">
@@ -46,7 +46,7 @@ export default function LinksPage() {
 
         <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed] mt-8">
           <h2 className="text-lg font-bold mb-2">Stay Updated</h2>
-          <p className="text-xs text-[#86868b] mb-4">Guides and news about Windows, Office and licensing.</p>
+          <p className="text-xs text-[#6e6e73] mb-4">Guides and news about Windows, Office and licensing.</p>
           <form onSubmit={subscribe} className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"

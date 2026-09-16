@@ -36,7 +36,7 @@ export default function NavDrawer({ open, onClose, isHomepage }: NavDrawerProps)
       <div className="fixed left-0 top-0 h-full w-72 bg-white shadow-xl">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#e8e8ed]">
           <span className="text-sm font-semibold text-[#1d1d1f]">{t("nav.menu", "Menu")}</span>
-          <button onClick={onClose} className="text-[#86868b] hover:text-[#1d1d1f] transition-colors text-lg leading-none" aria-label={t("nav.close_menu", "Close menu")}>X</button>
+          <button onClick={onClose} className="text-[#6e6e73] hover:text-[#1d1d1f] transition-colors text-lg leading-none" aria-label={t("nav.close_menu", "Close menu")}>X</button>
         </div>
         <nav className="px-3 py-3 space-y-0.5">
           {links.map((link) => (

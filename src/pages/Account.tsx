@@ -71,7 +71,7 @@ const handleRegister = async (e: any) => {
 
         <div className="max-w-md mx-auto text-center py-20">
 
-          <p className="text-[#86868b]">Loading...</p>
+          <p className="text-[#6e6e73]">Loading...</p>
 
         </div>
 
@@ -95,10 +95,10 @@ const handleRegister = async (e: any) => {
 
           <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">{t("account.title")}</h1>
-          <a href={logoutUrl} className="text-xs text-[#86868b] hover:text-red-500 transition-colors">{t("account.sign_out")}</a>
+          <a href={logoutUrl} className="text-xs text-[#6e6e73] hover:text-red-500 transition-colors">{t("account.sign_out")}</a>
         </div>
 
-          <p className="text-[#86868b] text-sm mb-8">{t("account.orders_desc") || "Your order history and license key delivery status."}</p>
+          <p className="text-[#6e6e73] text-sm mb-8">{t("account.orders_desc") || "Your order history and license key delivery status."}</p>
 
 
 
@@ -106,7 +106,7 @@ const handleRegister = async (e: any) => {
 
             <div className="text-center py-12">
 
-              <p className="text-[#86868b]">Loading orders...</p>
+              <p className="text-[#6e6e73]">Loading orders...</p>
 
             </div>
 
@@ -124,7 +124,7 @@ const handleRegister = async (e: any) => {
 
             <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] text-center">
 
-              <p className="text-[#86868b]">No orders found.</p>
+              <p className="text-[#6e6e73]">No orders found.</p>
 
             </div>
 
@@ -142,7 +142,7 @@ const handleRegister = async (e: any) => {
 
                       <span className="font-bold text-sm">Order #{o.id}</span>
 
-                      <span className="text-xs text-[#86868b] ml-3">{o.date}</span>
+                      <span className="text-xs text-[#6e6e73] ml-3">{o.date}</span>
 
                     </div>
 
@@ -156,11 +156,11 @@ const handleRegister = async (e: any) => {
 
                       <tr className="border-b border-[#f0f0f2]">
 
-                        <th className="text-left py-2 font-semibold text-[#86868b]">{t("account.product")}</th>
+                        <th className="text-left py-2 font-semibold text-[#6e6e73]">{t("account.product")}</th>
 
-                        <th className="text-right py-2 font-semibold text-[#86868b]">Qty</th>
+                        <th className="text-right py-2 font-semibold text-[#6e6e73]">Qty</th>
 
-                        <th className="text-right py-2 font-semibold text-[#86868b]">{t("account.key_email")}</th>
+                        <th className="text-right py-2 font-semibold text-[#6e6e73]">{t("account.key_email")}</th>
 
                       </tr>
 
@@ -186,7 +186,7 @@ const handleRegister = async (e: any) => {
 
                               <span className="text-yellow-600 font-medium">�?Pending</span>
 
-                            ) : <span className="text-[#86868b]">📦 Physical</span>}
+                            ) : <span className="text-[#6e6e73]">📦 Physical</span>}
 
                           </td>
 
@@ -232,7 +232,7 @@ const handleRegister = async (e: any) => {
 
         <h1 className="text-3xl font-bold text-center mb-2">{t("account.title")}</h1>
 
-        <p className="text-[#86868b] text-center mb-8">{t("account.desc")}</p>
+        <p className="text-[#6e6e73] text-center mb-8">{t("account.desc")}</p>
 
         <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]">
 
@@ -244,7 +244,7 @@ const handleRegister = async (e: any) => {
 
                 <button onClick={()=>setMode("login")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.signin")}</button>
 
-                <button onClick={()=>setMode("register")} className="text-[#86868b] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.register")}</button>
+                <button onClick={()=>setMode("register")} className="text-[#6e6e73] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.register")}</button>
 
               </div>
 
@@ -252,12 +252,12 @@ const handleRegister = async (e: any) => {
                   <input type="hidden" name="redirect_to" value="/account" />
                   <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input name="log" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="text" required autoFocus /></div>
                   <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.password")}</label><input name="pwd" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" type="password" required /></div>
-                  <div className="flex items-center mb-6"><input type="checkbox" name="rememberme" id="remember" className="mr-2" defaultChecked /><label htmlFor="remember" className="text-xs text-[#86868b]">{t("account.remember")}</label></div>
+                  <div className="flex items-center mb-6"><input type="checkbox" name="rememberme" id="remember" className="mr-2" defaultChecked /><label htmlFor="remember" className="text-xs text-[#6e6e73]">{t("account.remember")}</label></div>
                   <a href="/wp-login.php?action=lostpassword" className="text-xs text-[#7c3aed] hover:underline block text-right -mt-4 mb-4">Lost your password?</a>
                   <button type="submit" className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{t("account.signin")}</button>
                   
                 </form>
-              <p className="text-xs text-center text-[#86868b]">{t("account.no_account")} <button onClick={()=>setMode("register")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.register")}</button></p>
+              <p className="text-xs text-center text-[#6e6e73]">{t("account.no_account")} <button onClick={()=>setMode("register")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.register")}</button></p>
 
             </div>
 
@@ -269,7 +269,7 @@ const handleRegister = async (e: any) => {
 
               <div className="text-center space-x-4 mb-6">
 
-                <button onClick={()=>setMode("login")} className="text-[#86868b] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.signin")}</button>
+                <button onClick={()=>setMode("login")} className="text-[#6e6e73] hover:text-[#1d1d1f] bg-transparent border-none cursor-pointer">{t("account.signin")}</button>
 
                 <button onClick={()=>setMode("register")} className="font-semibold text-[#7c3aed] border-b-2 border-[#7c3aed] pb-1 bg-transparent border-none cursor-pointer">{t("account.register")}</button>
 
@@ -278,13 +278,13 @@ const handleRegister = async (e: any) => {
               <h2 className="text-lg font-bold mb-2">{t("account.register")}</h2>
 
                 <div className="mb-4"><label className="text-sm font-semibold block mb-1">{t("account.email")}</label><input type="email" className="w-full p-2.5 border border-[#e8e8ed] rounded-xl text-sm" value={registerEmail} onChange={e=>{setRegisterEmail(e.target.value);setRegisterMsg("");}} required autoFocus /></div>
-                <p className="text-xs text-[#86868b] -mt-2 mb-4">A password will be emailed to you after registration.</p>
+                <p className="text-xs text-[#6e6e73] -mt-2 mb-4">A password will be emailed to you after registration.</p>
 
                 <button onClick={handleRegister} disabled={registerSending} className="w-full bg-[#7c3aed] text-white py-3 rounded-xl font-semibold border-none cursor-pointer hover:bg-[#6d28d9] transition mb-4">{registerSending ? "Creating..." : "Create Account"}</button>
 
                 {registerMsg && <p className={"text-sm text-center mb-4 " + (registerMsg.includes("fail")||registerMsg.includes("error")?"text-red-500":"text-green-600")}>{registerMsg}</p>}
 
-              <p className="text-xs text-center text-[#86868b]">{t("account.has_account")} <button onClick={()=>setMode("login")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.signin")}</button></p>
+              <p className="text-xs text-center text-[#6e6e73]">{t("account.has_account")} <button onClick={()=>setMode("login")} className="text-[#7c3aed] bg-transparent border-none cursor-pointer">{t("account.signin")}</button></p>
 
             </div>
 
