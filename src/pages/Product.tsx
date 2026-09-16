@@ -7,6 +7,7 @@ import { api } from "../site-config";
 import { products } from "../data/products";
 import { useCart } from "../data/CartContext";
 import { PRODUCT_DETAILS } from "../data/product-details";
+import { PRODUCT_SEO_SECTIONS, SEO_H1_OVERRIDES } from "../data/product-seo-sections";
 import { PRODUCT_IMAGES } from "../data/product-images";
 import { GENERIC_FAQS, FAQ_BY_SERIES } from "../data/faq";
 import { COMPARISON_GROUPS, COMPARISON_MAP, FAQ_SERIES_MAP } from "../data/product-comparison";
@@ -97,6 +98,8 @@ const [reviews, setReviews] = useState([]);
   const sKey = FAQ_SERIES_MAP[slug || ""] || "";
   const allFaqs = [...(sKey ? (FAQ_BY_SERIES[sKey] || []) : []), ...GENERIC_FAQS];
   const relatedGuides = slug ? (GUIDE_FAMILY.find(f => f.match(slug))?.guides ?? []) : [];
+  const seoSections = slug ? PRODUCT_SEO_SECTIONS[slug] : undefined;
+  const h1Override = slug ? SEO_H1_OVERRIDES[slug] : undefined;
   // Pre-computed sub-columns (avoids Rolldown brace-nesting issue)
   const leftCol = details ? (
     <div>
@@ -264,7 +267,7 @@ const [reviews, setReviews] = useState([]);
         <div>{imageBlock}</div>
         <div>
           <div className="text-xs text-[#7c3aed] font-semibold uppercase tracking-wider mb-2">{t("product.genuine_digital")}</div>
-          <h1 className="text-3xl font-bold mb-2">{displayProduct!.name}</h1>
+          <h1 className="text-3xl font-bold mb-2">{h1Override || displayProduct!.name}</h1>
           <div className="flex items-center gap-2 mb-4">
             {(() => {
               const reg = displayProduct!.regularPrice;
@@ -310,6 +313,18 @@ const [reviews, setReviews] = useState([]);
             {leftCol}
           {rightCol}
           {reqCol}
+          {seoSections && seoSections.length > 0 && (
+            <div className="md:col-span-2 mt-8">
+              <div className="grid grid-cols-1 gap-7">
+                {seoSections.map(function(s, i) { return (
+                  <section key={i}>
+                    <h2 className="text-lg font-bold mb-2 text-[#1d1d1f]">{s.h}</h2>
+                    <p className="text-sm leading-relaxed text-[#555]" dangerouslySetInnerHTML={{ __html: s.body }} />
+                  </section>
+                ); })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       }
