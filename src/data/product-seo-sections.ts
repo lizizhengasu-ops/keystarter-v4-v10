@@ -47,4 +47,22 @@ export const PRODUCT_SEO_SECTIONS: Record<string, { h: string; body: string }[]>
       body: 'Yes — Office 2019 Professional Plus installs and activates on both Windows 10 and Windows 11, including PCs still running Windows 10 after its October 2025 end of support: that deadline applies to Windows itself, not to Office. Upgrading the OS alongside Office? A <a href="/product/windows-10-pro" class="text-[#6d28d9] font-semibold">Windows 10 Pro key</a> unlocks BitLocker, Remote Desktop host and domain join on the same machine.',
     },
   ],
+  "office-2021-pro-plus": [
+    {
+      h: "Office 2021 Product Key vs License Key: What You Get",
+      body: 'One purchase, two things: the 25-character product key (XXXXX-XXXXX-XXXXX-XXXXX-XXXXX) you enter during setup, and the perpetual license behind it — Word, Excel, PowerPoint, Outlook, Access and Publisher on one PC, no subscription, no expiry. Office 2021 is the current perpetual release, so it carries the longest support runway of the one-time editions. Your key and order email are the license record; keep them and you can reinstall on the same machine any time.',
+    },
+    {
+      h: "How to Activate Office 2021 Professional Plus (Step-by-Step)",
+      body: 'Install Office 2021, open any app (Word is fastest), then enter your product key when prompted — activation completes online in seconds and the subscription-style sign-in is optional for this edition. If an activation banner appears after a hardware change, File > Account > Enter Product Key re-seats the license. The full troubleshooting path lives in our <a href="/guide/activate-office-2021" class="text-[#6d28d9] font-semibold">Office 2021 activation guide</a>, and activation support is included with every KeyStarter order.',
+    },
+    {
+      h: "Office 2021 vs Microsoft 365 vs 2019: Which Is Right for You?",
+      body: 'Office 2021 is the one-time purchase with the longest support runway; Microsoft 365 is the subscription that trades a recurring cost for continuous feature updates and multi-device coverage; <a href="/product/office-2019-pro-plus" class="text-[#6d28d9] font-semibold">Office 2019</a> remains the budget tier for machines that just need the classics. For a new purchase on a PC you plan to keep, 2021 is the default recommendation — same classic apps, fixed cost, no clock ticking on support. For how the editions line up against the subscription, see our <a href="/blog/office-2026-vs-microsoft-365" class="text-[#6d28d9] font-semibold">Office vs Microsoft 365 comparison</a>.',
+    },
+    {
+      h: "Does Office 2021 Work on Windows 10 and 11?",
+      body: 'Yes — Office 2021 Professional Plus installs and activates on both Windows 10 and Windows 11, and it keeps working on PCs still running Windows 10 after its October 2025 end of support: that deadline applies to Windows itself, not to Office. Pairing it with a Pro edition adds BitLocker, Remote Desktop host and domain join to the same machine — see our <a href="/product/windows-11-pro" class="text-[#6d28d9] font-semibold">Windows 11 Pro key</a> if you are upgrading the OS alongside Office.',
+    },
+  ],
 };
