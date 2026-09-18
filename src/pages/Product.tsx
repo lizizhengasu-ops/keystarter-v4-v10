@@ -240,6 +240,27 @@ const [reviews, setReviews] = useState([]);
     // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [product?.slug]);
 
+  // Products outside the edge/SEO index (e.g. the internal "testms" payment-test
+  // SKU) would otherwise keep whatever title the not-found fallback set. Only
+  // replaces fallback titles — never the edge-injected SEO titles.
+  useEffect(() => {
+    if (!product) return;
+    const t = document.title;
+    const isFallback = /Page Not Found/i.test(t) || /\(internal\)/i.test(t) || t === "KeyStarter — Genuine Software Licenses";
+    if (!isFallback) return;
+    document.title = `${product.name} — KeyStarter`;
+    const desc = String(product.description || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 155);
+    if (desc) {
+      let m = document.head.querySelector('meta[name="description"]');
+      if (!m) {
+        m = document.createElement("meta");
+        m.setAttribute("name", "description");
+        document.head.appendChild(m);
+      }
+      m.setAttribute("content", desc);
+    }
+  }, [product]);
+
   return (
     <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
       <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 py-4 text-xs text-[#6e6e73]">
