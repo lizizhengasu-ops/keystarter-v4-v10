@@ -7,6 +7,7 @@ import WooCartFlyout from "./components/WooCartFlyout";
 import SeoManager from "./components/SeoManager";
 import { CartProvider, useCart } from "./data/CartContext";
 import HomePage from "./pages/Home";
+import CategoryLandingPage from "./pages/CategoryLanding";
 const StorePage = lazy(() => import("./pages/Store"));
 const ProductPage = lazy(() => import("./pages/Product"));
 const SupportPage = lazy(() => import("./pages/Support"));
@@ -285,6 +286,7 @@ export default function App() {
             <Route path="/shop" element={<Navigate to="/products" replace />} />
             <Route path="/products" element={KS_TERMINAL ? <TerminalStorePage /> : <StorePage />} />
             <Route path="/product/:slug" element={KS_TERMINAL ? <TerminalProductPage /> : <ProductPage />} />
+            <Route path="/product-category/:slug" element={<CategoryLandingPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/support" element={KS_TERMINAL ? <TerminalSupportPage /> : <SupportPage />} />
             <Route path="/b2b" element={KS_TERMINAL ? <TerminalB2bPage /> : <B2bPage />} />

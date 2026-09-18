@@ -14,6 +14,7 @@ export interface SPAProduct {
    specs: Record<string, string>;
    color: string;
    category?: string;
+   categorySlugs?: string[];
    image?: string;
    rating?: number;
    reviewCount?: number;
@@ -44,6 +45,7 @@ export interface SPAProduct {
    specs: local?.specs || DEFAULT_SPECS,
    color: local?.c || "#7c3aed",
    category: apiItem.categories?.[0]?.name || "",
+   categorySlugs: (apiItem.categories || []).map((c: any) => c.slug).filter(Boolean),
    image: apiItem.images?.[0]?.src || "",
    rating: apiItem.average_rating ? parseFloat(apiItem.average_rating) : undefined,
    reviewCount: apiItem.review_count ? parseInt(apiItem.review_count) : undefined,
@@ -65,6 +67,7 @@ export interface SPAProduct {
      specs: local?.specs || DEFAULT_SPECS,
      color: local?.c || "#7c3aed",
      category: apiItem.categories?.[0]?.name || "",
+     categorySlugs: (apiItem.categories || []).map((c: any) => c.slug).filter(Boolean),
      image: apiItem.images?.[0]?.src || "",
      rating: apiItem.average_rating ? parseFloat(apiItem.average_rating) : undefined,
      reviewCount: apiItem.review_count ? parseInt(apiItem.review_count) : undefined,

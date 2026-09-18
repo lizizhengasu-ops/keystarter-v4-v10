@@ -18,6 +18,22 @@ interface PageMeta {
 
 const ROUTE_META: Record<string, PageMeta> = {
   "/": { title: FALLBACK_TITLE, description: FALLBACK_DESC },
+  "/product-category/windows": {
+    title: "Windows License Keys — Buy Genuine Windows 10/11 | KeyStarter",
+    description: "Genuine Windows 10 and 11 license keys: Home, Pro, Official and IoT editions. Instant email delivery and verified activation.",
+  },
+  "/product-category/office": {
+    title: "Office License Keys — Office 2019 & 2021 Professional Plus | KeyStarter",
+    description: "Genuine Office 2019 and 2021 Professional Plus keys: perpetual licenses, instant delivery and lifetime activation.",
+  },
+  "/product-category/server-sql": {
+    title: "Windows Server & SQL License Keys — Volume Pricing | KeyStarter",
+    description: "Windows Server 2019/2022/2025 and SQL Server runtime keys: IoT editions, volume pricing and compliance documentation.",
+  },
+  "/product-category/iot-enterprise": {
+    title: "Windows IoT Enterprise License Keys — LTSC Editions | KeyStarter",
+    description: "Windows 10/11 IoT Enterprise LTSC keys: Value, High End and Entry editions with 10-year lifecycle support.",
+  },
   "/products": {
     title: "All Products — Genuine Windows, Office, IoT & Server Keys",
     description:
