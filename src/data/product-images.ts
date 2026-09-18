@@ -28,4 +28,5 @@ export const PRODUCT_IMAGES: Record<string, string> = {
   "sql-svr-2019-runtime": "/assets/images/box-sql-2019.webp",
   "sql-svr-2022-runtime": "/assets/images/box-sql-2022.webp"
   ,"testms": "/assets/images/box-win11-pro.webp"
+  ,"testms2": "/assets/images/box-win11-pro.webp"
 };

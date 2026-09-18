@@ -122,6 +122,19 @@ PRODUCT_DETAILS['windows-10-pro'] = {
   ],
 };
 
+PRODUCT_DETAILS['testms2'] = {
+    desc: 'Internal test product (MS2) for checkout and review-flow testing. Not a real license - do not purchase.',
+  tags: ['Internal QA', 'Test checkout', 'Not for resale'],
+  features: [
+    'Used by the team to test cart, checkout and review flows end to end',
+    'Placeholder price - no license is delivered',
+  ],
+  requirements: [
+    { l: 'Purpose', v: 'Internal QA only' },
+    { l: 'License', v: 'None - not a real product' },
+  ],
+};
+
 PRODUCT_DETAILS['windows-11-home'] = {
     desc: 'Windows 11 Home OEM key for everyday use. Snap Layouts, Microsoft Teams, Widgets, DirectX 12 Ultimate, and Windows Hello included with lifetime activation.',
   tags: ['Snap Layouts', 'Microsoft Teams', 'Widgets', 'DirectX 12 Ultimate', 'Windows Hello', 'Lifetime OEM'],
