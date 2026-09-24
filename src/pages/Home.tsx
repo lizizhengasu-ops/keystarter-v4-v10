@@ -9,6 +9,7 @@ import { TESTIMONIALS } from '../data/testimonials';
 import { CLIENTS } from '../data/clients';
 import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { QuickAnswer } from "../components/QuickAnswer";
+import { HOME_FAQS } from "../data/home-faqs";
 import { useCart } from "../data/CartContext";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
@@ -736,50 +737,23 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             
             <div className="space-y-4 divide-y divide-[#f5f5f7]">
               
-              <div className="pt-4 first:pt-0">
-                <button 
-                  onClick={() => toggleFAQ(1)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
-                >
-                  <span>{t("faq.q1.question")}</span>
-                  <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 1 ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                {openFaqId === 1 && (
-                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
-                    Absolutely genuine. We source Volume Licensing and CSP channel keys through Microsoft regional bulk agreements. Microsoft offers steep volume discounts, and we pass those savings to developers. All keys support Microsoft account binding and official ISO downloads — never unauthorized keys.
-                  </p>
-                )}
-              </div>
-
-              <div className="pt-4">
-                <button 
-                  onClick={() => toggleFAQ(2)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
-                >
-                  <span>Q2：After purchasing, can I still use the key after reinstalling or changing devices?</span>
-                  <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 2 ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                {openFaqId === 2 && (
-                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
-                    Yes! Our Retail-grade keys support cloud binding to your Microsoft account. When reinstalling, simply click “I recently changed the hardware on this device”，for seamless reactivation.
-                  </p>
-                )}
-              </div>
-
-              <div className="pt-4">
-                <button 
-                  onClick={() => toggleFAQ(3)} 
-                  className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
-                >
-                  <span>Q3：My company faces a compliance audit. Can these keys pass official SAM Audit?</span>
-                  <span className={`transform transition-transform duration-200 text-xs ${openFaqId === 3 ? 'rotate-180' : ''}`}>▼</span>
-                </button>
-                {openFaqId === 3 && (
-                  <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">
-                    Yes! We provide enterprise procurement with Microsoft compliance statements and authorized receipts (invoices supported). Our compliance team offers one-on-one legal support throughout any audit.
-                  </p>
-                )}
-              </div>
+              {HOME_FAQS.map((item, idx) => {
+                const n = idx + 1;
+                return (
+                  <div key={n} className={idx === 0 ? "pt-4 first:pt-0" : "pt-4"}>
+                    <button
+                      onClick={() => toggleFAQ(n)}
+                      className="w-full flex items-center justify-between font-semibold text-sm text-[#1d1d1f] hover:text-[#7c3aed] focus:outline-none transition"
+                    >
+                      <span>{item.q}</span>
+                      <span className={`transform transition-transform duration-200 text-xs ${openFaqId === n ? 'rotate-180' : ''}`}>▼</span>
+                    </button>
+                    {openFaqId === n && (
+                      <p className="text-xs text-[#6e6e73] mt-3 leading-relaxed">{item.a}</p>
+                    )}
+                  </div>
+                );
+              })}
 
             </div>
           </div>

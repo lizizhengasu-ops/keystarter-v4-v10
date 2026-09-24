@@ -6,6 +6,7 @@ import { BLOG_ARTICLES } from "../data/blog-articles";
 import { EDGE_PRODUCT_META, EDGE_BLOG_INDEX, EDGE_PRODUCTS_INDEX } from "../data/seo-edge";
 import { SITE as SITE_CONFIG } from "../site-config";
 import { SITE_FAQS, B2B_FAQS, GENERIC_FAQS, FAQ_BY_SERIES } from "../data/faq";
+import { HOME_FAQS } from "../data/home-faqs";
 import { FAQ_SERIES_MAP } from "../data/product-comparison";
 import type { FAQItem } from "../data/faq";
 
@@ -312,6 +313,7 @@ export default function SeoManager() {
           url: SITE,
           publisher: { "@id": ORG_ID },
         },
+        faqNode(`${SITE}/#faq`, HOME_FAQS),
       ];
     } else if (article) {
       jsonLd = {
@@ -369,6 +371,10 @@ export default function SeoManager() {
           url: `${SITE}/b2b`,
         },
         faqNode(`${SITE}/b2b#faq`, B2B_FAQS),
+        breadcrumbNode(`${SITE}/b2b#breadcrumb`, [
+          { name: "Home", url: `${SITE}/` },
+          { name: "B2B & Volume Licensing", url: `${SITE}/b2b` },
+        ]),
       ];
     } else if (path === "/faq") {
       jsonLd = [faqNode(`${SITE}/faq#faq`, SITE_FAQS)];
