@@ -5,6 +5,9 @@ import { DEFAULT_OG_IMAGE, PRODUCT_OG_IMAGES } from "../data/product-og-images";
 import { BLOG_ARTICLES } from "../data/blog-articles";
 import { EDGE_PRODUCT_META, EDGE_BLOG_INDEX, EDGE_PRODUCTS_INDEX } from "../data/seo-edge";
 import { SITE as SITE_CONFIG } from "../site-config";
+import { SITE_FAQS, B2B_FAQS, GENERIC_FAQS, FAQ_BY_SERIES } from "../data/faq";
+import { FAQ_SERIES_MAP } from "../data/product-comparison";
+import type { FAQItem } from "../data/faq";
 
 const SITE = SITE_CONFIG.canonicalOrigin;
 const SITE_NAME = SITE_CONFIG.siteName;
@@ -149,30 +152,72 @@ function setCanonical(href: string) {
   el.setAttribute("href", href);
 }
 
-function setJsonLd(data: object | null) {
+function setJsonLd(nodes: object | object[] | null) {
   // Single owner of structured data: drop any JSON-LD injected by the edge
   // Worker or a previous route before appending the current block.
   document.head
     .querySelectorAll('script[type="application/ld+json"]')
     .forEach((el) => el.remove());
-  if (!data) return;
+  if (!nodes || (Array.isArray(nodes) && nodes.length === 0)) return;
+  const payload = Array.isArray(nodes)
+    ? { "@context": "https://schema.org", "@graph": nodes }
+    : { "@context": "https://schema.org", ...nodes };
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.id = "seo-jsonld";
-  script.textContent = JSON.stringify(data);
+  script.textContent = JSON.stringify(payload);
   document.head.appendChild(script);
 }
 
-const ORG_JSONLD = {
-  "@context": "https://schema.org",
+// Stable entity id so every page references the same Organization node.
+const ORG_ID = `${SITE}/#organization`;
+const ORG_NODE = {
   "@type": "Organization",
+  "@id": ORG_ID,
   name: SITE_NAME,
   url: SITE,
+  logo: `${SITE}/keystarter-logo.svg`,
+  description:
+    "KeyStarter is a third-party reseller of genuine Microsoft Windows, Office, IoT and Server license keys, serving individuals and businesses with instant delivery, volume pricing and compliance support.",
+  sameAs: ["https://www.trustpilot.com/review/keys-starter.com"],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: SITE_CONFIG.supportEmail,
+      availableLanguage: ["English"],
+    },
+  ],
 };
+const ORG_JSONLD = ORG_NODE;
+
+const faqNode = (id: string, faqs: FAQItem[]) => ({
+  "@type": "FAQPage",
+  "@id": id,
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+
+const breadcrumbNode = (id: string, items: { name: string; url: string }[]) => ({
+  "@type": "BreadcrumbList",
+  "@id": id,
+  itemListElement: items.map((it, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: it.name,
+    item: it.url,
+  })),
+});
 
 export default function SeoManager() {
   const { pathname } = useLocation();
   const firstRender = useRef(true);
+  // True only on the very first effect run when the edge already injected
+  // title/canonical/og — those stay edge-owned; JSON-LD never does.
+  const firstRenderEdgeOwned = useRef(false);
 
   useEffect(() => {
     // Remove the edge-injected sr-only brand/product H1 so each page has exactly
@@ -180,16 +225,18 @@ export default function SeoManager() {
     document
       .querySelectorAll('h1[style*="position:absolute"], h1[style*="left:-9999px"]')
       .forEach((el) => el.remove());
-    // Keep the server/edge-injected SEO v2 title/meta, canonical and JSON-LD
+    // Keep the server/edge-injected SEO v2 title/meta/canonical/og, but the SPA
+    // is the single owner of structured data: on every route (including the
+    // edge-owned first paint) replace all JSON-LD with the current @graph.
     if (firstRender.current) {
       firstRender.current = false;
       if (document.head.querySelector('link[rel="canonical"]')) {
-        // Edge-injected SEO owns title/canonical/og, but some deployments do
-        // not ship an og:image — never let the page go out without one.
+        firstRenderEdgeOwned.current = true;
+        // Some deployments do not ship an og:image — never let the page go out
+        // without one.
         if (!document.head.querySelector('meta[property="og:image"]')) {
           upsertMeta("property", "og:image", DEFAULT_OG_IMAGE);
         }
-        // Same for the Product JSON-LD image when the edge LD lacks it.
         const prodLd = Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
           .map(s => { try { return { s, j: JSON.parse(s.textContent) }; } catch { return null; } })
           .find(x => x && x.j && x.j["@type"] === "Product" && !x.j.image);
@@ -200,7 +247,7 @@ export default function SeoManager() {
             prodLd.s.textContent = JSON.stringify(prodLd.j);
           } catch { /* leave edge LD untouched */ }
         }
-        return;
+        // fall through to the shared JSON-LD builder below
       }
     }
     const path = pathname.replace(/\/+$/, "") || "/";
@@ -231,59 +278,100 @@ export default function SeoManager() {
               ? EDGE_BLOG_INDEX
               : ROUTE_META[path] ?? NOT_FOUND_META;
 
-    document.title = meta.title;
-    upsertMeta("name", "description", meta.description);
-    setCanonical(`${SITE}${path}`);
-    upsertMeta("property", "og:title", meta.title);
-    upsertMeta("property", "og:description", meta.description);
-    upsertMeta("property", "og:url", `${SITE}${path}`);
-    upsertMeta("property", "og:type", product ? "product" : article ? "article" : "website");
-    upsertMeta("property", "og:site_name", SITE_NAME);
-    upsertMeta("name", "twitter:card", "summary");
-    upsertMeta("name", "twitter:title", meta.title);
-    upsertMeta("name", "twitter:description", meta.description);
-    const ogImage = product
-      ? PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE
-      : DEFAULT_OG_IMAGE;
-    upsertMeta("property", "og:image", ogImage);
-    upsertMeta("name", "twitter:image", ogImage);
+    // SPA owns structured data on every route; title/meta/canonical stay
+    // edge-owned on the first render when the edge already injected them.
+    const edgeOwned = firstRenderEdgeOwned.current;
 
-    let jsonLd: object | null = null;
+    if (!edgeOwned) {
+      document.title = meta.title;
+      upsertMeta("name", "description", meta.description);
+      setCanonical(`${SITE}${path}`);
+      upsertMeta("property", "og:title", meta.title);
+      upsertMeta("property", "og:description", meta.description);
+      upsertMeta("property", "og:url", `${SITE}${path}`);
+      upsertMeta("property", "og:type", product ? "product" : article ? "article" : "website");
+      upsertMeta("property", "og:site_name", SITE_NAME);
+      upsertMeta("name", "twitter:card", "summary");
+      upsertMeta("name", "twitter:title", meta.title);
+      upsertMeta("name", "twitter:description", meta.description);
+      const ogImage = product
+        ? PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE
+        : DEFAULT_OG_IMAGE;
+      upsertMeta("property", "og:image", ogImage);
+      upsertMeta("name", "twitter:image", ogImage);
+    }
+
+    let jsonLd: object | object[] | null = null;
     if (path === "/") {
-      jsonLd = {
-        "@context": "https://schema.org",
-        "@graph": [
-          ORG_JSONLD,
-          { "@type": "WebSite", name: SITE_NAME, url: SITE },
-        ],
-      };
+      jsonLd = [
+        ORG_NODE,
+        {
+          "@type": "WebSite",
+          "@id": `${SITE}/#website`,
+          name: SITE_NAME,
+          url: SITE,
+          publisher: { "@id": ORG_ID },
+        },
+      ];
     } else if (article) {
       jsonLd = {
-        "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: article.title,
         datePublished: article.datePublished,
         dateModified: article.dateModified,
-        author: ORG_JSONLD,
-        publisher: ORG_JSONLD,
+        author: { "@id": ORG_ID },
+        publisher: { "@id": ORG_ID },
         mainEntityOfPage: article.url,
         url: article.url,
       };
     } else if (product) {
-      jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: product.n,
-        description: meta.description,
-        image: PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE,
-        brand: { "@type": "Brand", name: "Microsoft" },
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          url: `${SITE}/product/${product.slug}`,
-          // Price intentionally omitted: WooCommerce is the single source of truth.
+      const productFaqs = [
+        ...(FAQ_SERIES_MAP[product.slug]
+          ? FAQ_BY_SERIES[FAQ_SERIES_MAP[product.slug]] || []
+          : []),
+        ...GENERIC_FAQS,
+      ];
+      const productUrl = `${SITE}/product/${product.slug}`;
+      jsonLd = [
+        {
+          "@type": "Product",
+          "@id": `${productUrl}#product`,
+          name: product.n,
+          description: meta.description,
+          image: PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE,
+          brand: { "@type": "Brand", name: "Microsoft" },
+          category: product.specs.type,
+          offers: {
+            "@type": "Offer",
+            availability: "https://schema.org/InStock",
+            url: productUrl,
+            // Price intentionally omitted: WooCommerce is the single source of truth.
+          },
         },
-      };
+        faqNode(`${productUrl}#faq`, productFaqs),
+        breadcrumbNode(`${productUrl}#breadcrumb`, [
+          { name: "Home", url: `${SITE}/` },
+          { name: "Products", url: `${SITE}/products` },
+          { name: product.n, url: productUrl },
+        ]),
+      ];
+    } else if (path === "/b2b") {
+      jsonLd = [
+        {
+          "@type": "Service",
+          "@id": `${SITE}/b2b#service`,
+          name: "Enterprise Volume Licensing",
+          serviceType: "Microsoft software volume licensing",
+          description:
+            "Volume Microsoft licensing for businesses from 5 to 5,000+ seats: tiered pricing from 5 keys, VAT invoices, PO-based purchasing, wire transfer, CSV key delivery and compliance documentation for SAM audits. Custom quotes within 24 hours.",
+          provider: { "@id": ORG_ID },
+          areaServed: "Worldwide",
+          url: `${SITE}/b2b`,
+        },
+        faqNode(`${SITE}/b2b#faq`, B2B_FAQS),
+      ];
+    } else if (path === "/faq") {
+      jsonLd = [faqNode(`${SITE}/faq#faq`, SITE_FAQS)];
     } else {
       jsonLd = ORG_JSONLD;
     }

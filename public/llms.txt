@@ -1,0 +1,59 @@
+# KeyStarter
+
+> Genuine Microsoft software licenses (Windows, Office, IoT, Server, SQL) with instant email delivery, lifetime support and 14-day refunds. Authorized reseller serving individuals and businesses with volume pricing, VAT invoices and compliance support.
+
+## Core
+- [Home](https://keys-starter.com/): official storefront for genuine Microsoft licenses — retail and enterprise entry points
+- [All Products](https://keys-starter.com/products): Windows, Office, IoT, Server & SQL license keys
+
+## Products
+- [Windows 11 Pro Key](https://keys-starter.com/product/windows-11-pro): genuine OEM license, lifetime activation, instant email delivery
+- [Windows 11 Home Key](https://keys-starter.com/product/windows-11-home): genuine OEM license, lifetime activation
+- [Windows 10 Pro Key](https://keys-starter.com/product/windows-10-pro): genuine OEM license, lifetime activation
+- [Windows 11 Pro Official](https://keys-starter.com/product/windows-11-pro-official): Microsoft direct OEM order with screenshot delivery
+- [Office 2021 Professional Plus](https://keys-starter.com/product/office-2021-pro-plus): lifetime license, no subscription
+- [Office 2019 Professional Plus](https://keys-starter.com/product/office-2019-pro-plus): lifetime license, no subscription
+- [Win 11 IoT LTSC 2024 Entry](https://keys-starter.com/product/win-11-iot-2024-entry): per-device OEM license for kiosk, medical, POS and industrial
+- [Win Svr IoT 2025 16 Core](https://keys-starter.com/product/win-svr-iot-2025): per-core volume license, embedded-ready
+- [Win Svr IoT 2022 16 Core](https://keys-starter.com/product/win-svr-iot-2022): per-core volume license, embedded-ready
+- [SQL Server 2022 Runtime](https://keys-starter.com/product/sql-svr-2022-runtime): volume license, embedded-ready
+
+## Catalog by Category
+- [Windows Licenses](https://keys-starter.com/product-category/windows): Windows 10/11 Home and Pro keys, OEM and official editions
+- [Office Licenses](https://keys-starter.com/product-category/office): Office 2019/2021 Professional Plus perpetual licenses
+- [Server & SQL Licenses](https://keys-starter.com/product-category/server-sql): Windows Server and SQL Server runtime keys
+- [Windows IoT Enterprise](https://keys-starter.com/product-category/iot-enterprise): Windows 10/11 IoT Enterprise LTSC keys for embedded devices
+
+## Guides
+- [Blog](https://keys-starter.com/blog): Windows & Microsoft AI news, licensing guides and how-tos
+- [How to Activate Windows 11](https://keys-starter.com/blog/how-to-activate-windows-11)
+- [Windows Licensing FAQ](https://keys-starter.com/blog/windows-licensing-faq)
+- [Windows 11 Pro vs Home](https://keys-starter.com/blog/windows-11-pro-vs-home-which-one-do-you-need)
+- [Windows IoT Enterprise vs Windows 11 Pro](https://keys-starter.com/blog/windows-iot-enterprise-vs-windows-11-pro)
+- [Best Windows License Buying Guide 2026](https://keys-starter.com/blog/best-windows-license-buying-guide-2026)
+- [OEM vs Retail Windows License](https://keys-starter.com/compare/oem-vs-retail): differences, transfer rights and which to buy
+- [Windows 11 Pro vs Home](https://keys-starter.com/compare/windows-11-pro-vs-home): feature comparison and edition picker
+- [Windows IoT Enterprise vs Windows 11 Pro](https://keys-starter.com/compare/windows-iot-enterprise-vs-windows-11-pro): LTSC lifecycle and embedded use cases
+- [How to Activate Windows 10](https://keys-starter.com/guide/activate-windows-10): step-by-step activation guide
+- [How to Activate Office 2021](https://keys-starter.com/guide/activate-office-2021): activate Office 2021 Pro Plus
+- [How to Activate Office 2019](https://keys-starter.com/guide/activate-office-2019): activate Office 2019 Pro Plus
+- [Windows Activation Error Codes](https://keys-starter.com/guide/activate-windows-error-codes): fix 0xC004C003/0xC004F069/0xC004F074 and more
+- [Office Activation Troubleshooting](https://keys-starter.com/guide/activate-office-troubleshooting): fix unlicensed-product banners
+- [Upgrade Windows Home to Pro](https://keys-starter.com/guide/upgrade-windows-home-to-pro): in-place upgrade guide
+- [VAMT vs KMS vs MAK](https://keys-starter.com/guide/vamt-kms-mak-volume-activation): volume activation methods explained for IT teams
+- [Multilingual & Regional Keys](https://keys-starter.com/guide/multilingual-region-keys): language, region and N-edition rules for Windows and Office keys
+- [SQL Server 2022 Licensing](https://keys-starter.com/guide/sql-server-2022-licensing): Core vs CAL, minimums, virtualization and runtime rules
+- [Windows Server 2025 Licensing](https://keys-starter.com/guide/windows-server-2025-licensing): editions, 16-core rule, hotpatching and upgrade paths
+- [Digital License vs Product Key](https://keys-starter.com/guide/digital-license-vs-product-key): how each activation works and hardware-change rules
+
+## For Business
+- [Enterprise & Volume Licensing](https://keys-starter.com/b2b): bulk pricing from 5 keys, VAT invoices, PO purchasing, quotes in 24h, SAM audit documentation
+- [Licensing](https://keys-starter.com/licensing): license types and terms
+- [Downloads & Delivery](https://keys-starter.com/downloads): official Microsoft installers and delivery instructions
+
+## Company & Support
+- [About](https://keys-starter.com/about): who KeyStarter is
+- [FAQ](https://keys-starter.com/faq): common questions about delivery, activation and licensing
+- [Support](https://keys-starter.com/support): help center
+- [Contact](https://keys-starter.com/contact): reach our team
+- [14-Day Refund Policy](https://keys-starter.com/refund): keys that fail to activate are replaced or refunded within 14 days

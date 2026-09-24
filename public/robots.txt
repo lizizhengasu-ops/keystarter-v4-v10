@@ -1,17 +1,40 @@
 Content-Signal: search=yes, ai-train=no, use=reference
 
-# AI crawlers allowed for citation/reference (training blocked via Content-Signal)
-User-agent: GPTBot
+# AI answer/search crawlers — explicitly allowed for citation & reference
+User-agent: OAI-SearchBot
 Allow: /
-User-agent: ClaudeBot
+User-agent: ChatGPT-User
 Allow: /
 User-agent: PerplexityBot
 Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+# Training crawlers — allowed to crawl, training blocked via Content-Signal above
+User-agent: GPTBot
+Allow: /
 User-agent: Google-Extended
 Allow: /
+User-agent: CCBot
+Allow: /
+
+# Site map + AI-readable content map
+Sitemap: https://keys-starter.com/sitemap.xml
+# llms.txt: https://keys-starter.com/llms.txt
 
 User-agent: *
 Allow: /
-Sitemap: https://keys-starter.com/sitemap.xml
 Disallow: /wp-admin/
 Disallow: /admin/

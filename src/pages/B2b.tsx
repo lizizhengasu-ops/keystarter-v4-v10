@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import SoftwarePortfolio from "../components/SoftwarePortfolio";
 import { pushEvent } from "../tracking";
 import { SITE, api } from "../site-config";
+import { B2B_FAQS } from "../data/faq";
 
 
 const solutions = [
@@ -116,6 +117,14 @@ export default function B2bPage() {
         <p className="text-lg font-light max-w-2xl mx-auto mb-8">{t("b2b.desc")}</p>
         <a href={"mailto:" + SITE.supportEmail + "?subject=Enterprise%20B2B%20Inquiry"} className="inline-block bg-white text-[#6d28d9] px-8 py-3 rounded-xl font-semibold text-sm no-underline hover:bg-gray-100 transition">{t("b2b.contact")}</a>
       </div>
+      <section aria-labelledby="b2b-qa-heading" className="bg-white border-b border-[#e8e8ed]">
+        <div className="max-w-3xl mx-auto px-6 py-10">
+          <h2 id="b2b-qa-heading" className="text-xs font-semibold uppercase tracking-wider text-[#7c3aed] mb-3">Quick Answer</h2>
+          <p className="text-sm leading-relaxed text-[#1d1d1f]">
+            <strong>KeyStarter supplies volume Microsoft licenses to businesses from 5 to 5,000+ seats.</strong> Orders include tiered volume pricing from 5 keys, a VAT invoice for every purchase, PO-based procurement, wire transfer for orders above 20 keys, CSV key delivery for automated provisioning, and compliance documentation for software asset management (SAM) audits. Custom quotes are returned within 24 hours, and keys that fail to activate are replaced free of charge or refunded within 14 days.
+          </p>
+        </div>
+      </section>
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-6 pt-6 text-xs font-medium text-[#1d1d1f]/80">
         <span>Genuine Microsoft licensing channels</span>
         <span>Volume pricing with custom quotes</span>
@@ -208,22 +217,17 @@ export default function B2bPage() {
       <section className="max-w-7xl mx-auto px-6 pb-16">
         <h2 className="text-base font-bold mb-4">B2B &amp; Volume Licensing FAQ</h2>
         <div className="space-y-2">
-          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
-            <summary className="text-sm font-semibold cursor-pointer">What is the minimum order for volume pricing?</summary>
-            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Volume discounts start at 5 keys of the same product and improve with quantity. Mixed-product orders above 10 keys also qualify — request a quote and you will get tiered pricing within one business day.</p>
-          </details>
-          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
-            <summary className="text-sm font-semibold cursor-pointer">Do you provide invoices and purchase orders?</summary>
-            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Yes. Every order includes a VAT invoice, and we support PO-based purchasing for companies that require procurement workflows. Wire transfer is available for orders above 20 keys.</p>
-          </details>
-          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
-            <summary className="text-sm font-semibold cursor-pointer">Which license types fit business deployment?</summary>
-            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">For fixed-function and embedded devices, <a href="/blog/windows-iot-licensing-models-oem-vs-volume" className="text-[#7c3aed] hover:underline">IoT licensing models (OEM vs volume)</a> explain the compliance path; for team desktops, see <a href="/blog/bulk-windows-licenses-business" className="text-[#7c3aed] hover:underline">bulk Windows licenses for business</a> and the <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs retail comparison</a> to pick the right SKU per seat.</p>
-          </details>
-          <details className="bg-white rounded-xl border border-[#e8e8ed] p-4">
-            <summary className="text-sm font-semibold cursor-pointer">How does key delivery work for large orders?</summary>
-            <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">Keys are delivered by email in a formatted list within minutes of payment, and CSV export is available on request for automated provisioning tools.</p>
-          </details>
+          {B2B_FAQS.map((f, i) => (
+            <details key={i} className="bg-white rounded-xl border border-[#e8e8ed] p-4">
+              <summary className="text-sm font-semibold cursor-pointer">{f.q}</summary>
+              <p className="text-xs text-[#6e6e73] mt-2 leading-relaxed">{f.a}</p>
+              {i === 2 && (
+                <p className="text-xs mt-2 leading-relaxed">
+                  <a href="/blog/windows-iot-licensing-models-oem-vs-volume" className="text-[#7c3aed] hover:underline">IoT licensing models (OEM vs volume)</a> · <a href="/blog/bulk-windows-licenses-business" className="text-[#7c3aed] hover:underline">bulk Windows licenses for business</a> · <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs retail comparison</a>
+                </p>
+              )}
+            </details>
+          ))}
         </div>
       </section>
     </div>

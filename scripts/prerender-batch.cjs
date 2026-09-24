@@ -22,7 +22,9 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
-const BASE = 'https://keys-starter.com';
+// BASE_URL override lets non-prod environments (e.g. staging) re-shoot;
+// defaults to production. Uploader must target the matching docroot.
+const BASE = (process.env.BASE_URL || 'https://keys-starter.com').replace(/\/$/, '');
 const ROUTES = ['/', '/products', '/about', '/support', '/b2b', '/faq', '/contact', '/links', '/privacy', '/terms', '/refund', '/changelog'];
 const SLUGS_FILE = 'audit/main/product-slugs.txt';
 
@@ -63,7 +65,9 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       // 3) in-page cleanup of Worker-injected duplicates (edge re-adds them)
       const info = await page.evaluate(() => {
         document.querySelectorAll('h1[style*="position:absolute"], h1[style*="left:-9999px"]').forEach(e => e.remove());
-        document.querySelectorAll('script#seo-jsonld').forEach(e => e.remove());
+        // The SPA (#seo-jsonld) is the single schema owner: drop edge/legacy
+        // ld+json duplicates, keep the SPA block so snapshots carry the @graph.
+        document.querySelectorAll('script[type="application/ld+json"]').forEach(e => { if (e.id !== 'seo-jsonld') e.remove(); });
         const visibleH1 = [...document.querySelectorAll('h1')].filter(e => e.offsetParent !== null).length;
         return { h2: document.querySelectorAll('h2').length, visibleH1, bodyLen: document.body.innerText.length };
       });

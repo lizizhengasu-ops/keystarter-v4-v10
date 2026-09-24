@@ -14,6 +14,7 @@ import { COMPARISON_GROUPS, COMPARISON_MAP, FAQ_SERIES_MAP } from "../data/produ
 import { ProductComparison } from "../components/ProductComparison";
 import { ProductFAQ } from "../components/ProductFAQ";
 import { ProductReviews } from "../components/ProductReviews";
+import { QuickAnswer } from "../components/QuickAnswer";
 import { pushEvent } from "../tracking";
 import ReviewForm from "../components/ReviewForm";
 import { getWooId } from "../data/woo-ids";
@@ -27,6 +28,47 @@ const SECOND_IMAGE_SLUGS = new Set([
   "win-11-iot-2024-high-end",
   "win-11-iot-2024-value",
 ]);
+
+// License-type transparency (AEO trust requirement): what the buyer gets and
+// what the license cannot do, stated per product type instead of vague wording.
+function licenseTypeFor(type: string): { label: string; summary: string; can: string[]; cannot: string[] } {
+  if (type === "Microsoft Direct OEM" || type === "OEM") {
+    return {
+      label: "OEM (Original Equipment Manufacturer) License",
+      summary: "An OEM license is sold per device, activates for the lifetime of that device, and receives official Windows/Office updates. It is sourced through authorized Microsoft partner channels.",
+      can: ["Activate 1 PC for its lifetime", "Receive official security and feature updates", "Reinstall on the same device as often as needed"],
+      cannot: ["Be moved to a different PC after activation", "Be resold or transferred after activation"],
+    };
+  }
+  if (type === "Perpetual License") {
+    return {
+      label: "Perpetual (One-Time Purchase) License",
+      summary: "A perpetual license is a one-time purchase with no subscription or recurring fees. It activates one device for life and includes security updates.",
+      can: ["Activate 1 PC with no subscription", "Use classic Office apps offline", "Receive security updates for the product lifecycle"],
+      cannot: ["Be installed on more than 1 device", "Be used on macOS (Windows PC only)"],
+    };
+  }
+  if (type === "Enterprise IoT") {
+    return {
+      label: "Volume-Channel IoT Enterprise License",
+      summary: "Windows IoT Enterprise licenses are distributed through volume channels for commercial embedded devices. LTSC editions carry a 10-year servicing lifecycle.",
+      can: ["Activate 1 commercial/embedded device", "Run LTSC with 10 years of support (LTSC editions)", "Deploy in commercial products (kiosks, ATMs, medical devices)"],
+      cannot: ["Be used as a general desktop OS for office staff", "Be moved freely between devices (device-bound activation)"],
+    };
+  }
+  return {
+    label: "Volume-Channel Enterprise License",
+    summary: "Server and SQL runtime licenses are delivered through volume channels for business server workloads, licensed per 16-core minimum (2 processors) or as runtime editions bundled with an application.",
+    can: ["License up to 16 cores (2 physical processors)", "Run in virtualized environments", "Include compliance documentation for audits"],
+    cannot: ["Cover additional cores without supplementary licenses", "Be used on end-user desktops"],
+  };
+}
+
+const ACTIVATION_STEPS = [
+  "Activate fails or shows an error code? First confirm you installed from the official Microsoft ISO/installer linked in your delivery email — unofficial media is the most common cause.",
+  "Still failing? Contact support with your order number and the exact error message. Our team responds within 24 hours (priority channel for enterprise orders).",
+  "If the key cannot be activated through no fault of yours, we replace it free of charge — or refund you within 14 days of purchase.",
+];
 
 // Related-guide internal links by product family (P1 #8). All targets verified
 // live-200 on 2026-09-15. Plain <a> on purpose: /guide/* and /compare/* are
@@ -346,10 +388,72 @@ const [reviews, setReviews] = useState([]);
               </div>
             </div>
           )}
+          {displayProduct?.specs?.type && (() => {
+            const lt = licenseTypeFor(displayProduct.specs.type);
+            return (
+              <div className="md:col-span-2 mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <section aria-labelledby="license-type-heading" className="bg-white rounded-2xl border border-[#e8e8ed] p-6">
+                  <h2 id="license-type-heading" className="text-base font-bold mb-1">License Type</h2>
+                  <div className="text-xs text-[#7c3aed] font-semibold mb-2">{lt.label}</div>
+                  <p className="text-xs leading-relaxed text-[#6e6e73] mb-4">{lt.summary}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-xs font-bold text-green-700 mb-1.5">What you can do</div>
+                      <ul className="space-y-1.5">
+                        {lt.can.map((c, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-[#1d1d1f]"><span className="text-green-500 mt-0.5">✓</span>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-[#c2410c] mb-1.5">Limitations</div>
+                      <ul className="space-y-1.5">
+                        {lt.cannot.map((c, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-[#1d1d1f]"><span className="text-[#c2410c] mt-0.5">✕</span>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+                <section aria-labelledby="activation-guarantee-heading" className="bg-white rounded-2xl border border-[#e8e8ed] p-6">
+                  <h2 id="activation-guarantee-heading" className="text-base font-bold mb-1">If Activation Fails</h2>
+                  <div className="text-xs text-[#7c3aed] font-semibold mb-2">Free replacement · 14-day refund · 24h support response</div>
+                  <ol className="space-y-2.5">
+                    {ACTIVATION_STEPS.map((s, i) => (
+                      <li key={i} className="flex items-start gap-3 text-xs leading-relaxed text-[#1d1d1f]">
+                        <span className="w-5 h-5 rounded-full bg-[#7c3aed]/10 text-[#7c3aed] text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{i + 1}</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              </div>
+            );
+          })()}
         </div>
       </div>
       }
       
+      {displayProduct && (
+        <QuickAnswer>
+          <p>
+            <strong>{displayProduct.name} is a genuine {displayProduct.specs?.type || "Microsoft"} license delivered by email within 10 minutes of purchase.</strong> The key activates {displayProduct.specs?.activation === "Digital License" ? "via digital license" : displayProduct.specs?.activation} on {displayProduct.specs?.platform || "your device"}, includes lifetime support, and is covered by our activation guarantee: if the key fails to activate through no fault of yours, we replace it free of charge or refund you within 14 days. Buying for a team? <a href="/b2b" className="text-[#7c3aed] hover:underline">Request a volume quote</a> — 5+ keys qualify for tiered pricing with VAT invoices.
+          </p>
+        </QuickAnswer>
+      )}
+
+      {displayProduct && (
+        <section aria-labelledby="volume-quote-heading" className="max-w-7xl mx-auto px-6 py-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-[#6d28d9] to-[#1a1a2e] text-white px-6 py-6">
+            <div>
+              <h2 id="volume-quote-heading" className="text-base font-bold mb-1">Need 5 or more licenses?</h2>
+              <p className="text-xs text-white/80">Volume pricing from 5 keys · VAT invoices · PO purchasing · CSV bulk delivery · custom quote in 24h</p>
+            </div>
+            <a href="/b2b#enterprise-b2b" className="flex-shrink-0 bg-white text-[#6d28d9] px-6 py-3 rounded-xl text-xs font-bold no-underline hover:bg-gray-100 transition">Get a Volume Quote</a>
+          </div>
+        </section>
+      )}
+
       {displayProduct && relatedGuides.length > 0 && (
         <section aria-labelledby="related-guides-heading" className="bg-[#f5f5f7] max-w-7xl mx-auto px-6 pb-12 pt-2">
           <h2 id="related-guides-heading" className="text-base font-bold mb-3">Related Guides</h2>
