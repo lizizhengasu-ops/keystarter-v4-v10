@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CLIENTS } from "../data/clients";
 import SoftwarePortfolio from "../components/SoftwarePortfolio";
+import { QuickAnswer } from "../components/QuickAnswer";
+import { CONTENT_UPDATED_LABEL } from "../data/content-meta";
 
 const ADVANTAGES = [
   {
@@ -69,7 +71,14 @@ export default function AboutPage() {
             <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#e8e8ed] text-[#515154]">{t("about.badge_integration")}</span>
           </div>
         </div>
-      </section>
+            </section>
+
+      <QuickAnswer title="Our Commitments">
+        <p>
+          <strong>KeyStarter commits to four service standards on every order: keys delivered by email within 10 minutes of payment, activation support responses within 24 hours, free replacement for any key that fails to activate, and a refund within 14 days when a replacement cannot resolve the issue.</strong> Business customers additionally receive VAT invoices, PO-based purchasing and compliance documentation suitable for software asset management audits. These commitments apply to every Windows, Office, IoT and Server license sold on this site, and they are the same standards our <a href="/support">support center</a> and <a href="/refund">refund policy</a> are written against.
+        </p>
+        <p className="text-[11px] text-[#86868b] mt-3">Content last updated: {CONTENT_UPDATED_LABEL}</p>
+      </QuickAnswer>
 
       <section className="px-6 py-16">
         <div className="max-w-4xl mx-auto">

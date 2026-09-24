@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SITE } from "../site-config";
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -134,6 +135,16 @@ export default function ContactPage() {
             <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.email")}</div><div className="text-sm text-[#86868b]">admin@keys-starter.com</div></div>
             <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.chat")}</div><div className="text-sm text-[#86868b]">{t("contact.chat_avail")}</div></div>
             <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]"><div className="font-semibold mb-1">{t("contact.phone")}</div><div className="text-sm text-[#86868b]">{t("contact.hours")}</div></div>
+            <div className="bg-white rounded-2xl p-6 border border-[#e8e8ed]">
+              <div className="font-semibold mb-2">Our service commitments</div>
+              <ul className="text-sm text-[#86868b] space-y-1.5 list-disc pl-4">
+                <li>Reply to every inquiry within 24 hours (business orders: priority channel)</li>
+                <li>License keys delivered by email within 10 minutes of payment</li>
+                <li>Failed activation: free key replacement, or refund within 14 days</li>
+                <li>VAT invoices and compliance documentation on request for business orders</li>
+              </ul>
+              <div className="text-xs mt-3">WhatsApp (business quotes): <a className="text-[#7c3aed] hover:underline" href={"https://wa.me/" + SITE.whatsappNumber} target="_blank" rel="noopener noreferrer">+{SITE.whatsappNumber}</a></div>
+            </div>
           </div>
         </div>
       </div>
