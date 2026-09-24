@@ -25,12 +25,15 @@ const path = require('path');
 // BASE_URL override lets non-prod environments (e.g. staging) re-shoot;
 // defaults to production. Uploader must target the matching docroot.
 const BASE = (process.env.BASE_URL || 'https://keys-starter.com').replace(/\/$/, '');
-const ROUTES = ['/', '/products', '/about', '/support', '/b2b', '/faq', '/contact', '/links', '/privacy', '/terms', '/refund', '/changelog'];
+const ROUTES = ['/', '/products', '/about', '/support', '/b2b', '/faq', '/contact', '/links', '/privacy', '/terms', '/refund', '/changelog',
+  // v2 (2026-09-24, AEO R1): category landing pages — content signal waits for
+  // product cards (WooCommerce API render), gate requires >=3 card links.
+  '/product-category/windows', '/product-category/office', '/product-category/server-sql', '/product-category/iot-enterprise'];
 const SLUGS_FILE = 'audit/main/product-slugs.txt';
 
 (async () => {
   const slugs = fs.readFileSync(SLUGS_FILE, 'utf8').split('\n').map(s => s.trim()).filter(Boolean);
-  let targets = ROUTES.map(r => ({ out: r === '/' ? '' : r.replace(/^\//, ''), url: BASE + r, isProduct: false }))
+  let targets = ROUTES.map(r => ({ out: r === '/' ? '' : r.replace(/^\//, ''), url: BASE + r, isProduct: false, isCategory: r.startsWith('/product-category/') }))
     .concat(slugs.map(s => ({ out: 'product/' + s, url: BASE + '/product/' + s, isProduct: true })));
   // ONLY=<route-out> e.g. ONLY=product/windows-11-pro — spot re-shoot one page
   const only = process.env.ONLY;
@@ -59,6 +62,9 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       if (t.isProduct) {
         await page.waitForSelector('h2', { timeout: 25000 });
         await page.waitForTimeout(2000); // let per-SKU data fetches settle
+      } else if (t.isCategory) {
+        await page.waitForSelector('a[href^="/product/"]', { timeout: 25000 });
+        await page.waitForTimeout(2000); // let remaining card data settle
       } else {
         await page.waitForTimeout(3000);
       }
@@ -69,7 +75,7 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
         // ld+json duplicates, keep the SPA block so snapshots carry the @graph.
         document.querySelectorAll('script[type="application/ld+json"]').forEach(e => { if (e.id !== 'seo-jsonld') e.remove(); });
         const visibleH1 = [...document.querySelectorAll('h1')].filter(e => e.offsetParent !== null).length;
-        return { h2: document.querySelectorAll('h2').length, visibleH1, bodyLen: document.body.innerText.length };
+        return { h2: document.querySelectorAll('h2').length, visibleH1, bodyLen: document.body.innerText.length, cards: document.querySelectorAll('a[href^="/product/"]').length };
       });
       const html = '<!DOCTYPE html>\n' + await page.evaluate(() => document.documentElement.outerHTML);
       // 4) content gate — reject instead of silently shipping a shell.
@@ -78,7 +84,7 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       //    user-correct page (correct H1/title/price) and far better than the
       //    shell it replaces. Shells/error states never pass (they have
       //    !=1 visible H1 or almost no body text).
-      const hydrated = info.visibleH1 === 1 && (t.isProduct ? info.bodyLen >= 1500 : true);
+      const hydrated = info.visibleH1 === 1 && (t.isProduct ? info.bodyLen >= 1500 : (t.isCategory ? info.cards >= 2 : true));
       const rich = t.isProduct && info.h2 >= 5;
       const pass = hydrated;
       if (!pass) {
@@ -93,6 +99,7 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(path.join(dir, 'index.html'), html);
       rec.status = t.isProduct ? (rich ? 'RICH' : 'THIN') : 'OK';
+      if (t.isCategory) rec.cards = info.cards;
       rec.h2 = info.h2; rec.bytes = html.length;
       const idx = manifest.pages.findIndex(p => p.route === rec.route);
       if (idx >= 0) manifest.pages[idx] = rec; else manifest.pages.push(rec);

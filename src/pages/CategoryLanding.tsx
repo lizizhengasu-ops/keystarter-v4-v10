@@ -8,11 +8,13 @@ import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import { SITE, filterBySiteCatalog } from "../site-config";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 // Category landing pages for /product-category/:slug (SEO landing routes).
 // Copy blocks target the commercial keyword clusters; grid reuses the Store card.
 
 interface CatMeta {
+  qa: string;
   h1: string;
   lead: string;
   copyHtml: string;
@@ -20,6 +22,7 @@ interface CatMeta {
 
 const CATEGORIES: Record<string, CatMeta> = {
   windows: {
+    qa: "Genuine Windows 10 and 11 license keys from an authorized Microsoft channel reseller. Every Home and Pro key — OEM, official retail and volume editions — is delivered by email within 10 minutes, activates for the lifetime of one PC, and is covered by a 14-day replacement-or-refund guarantee if activation fails.",
     h1: "Windows License Keys — Windows 10 & 11",
     lead: "Genuine Windows 10 & 11 keys — instant email delivery, verified activation, 14-day refund guarantee.",
     copyHtml: `<p>Genuine <strong>Windows 10 and Windows 11 license keys</strong> for Home and Pro editions, sourced through official Microsoft channels and verified for online or phone activation. Every key is delivered to your email within 2–10 minutes of payment and includes lifetime activation on 1 PC.</p>
@@ -32,6 +35,7 @@ const CATEGORIES: Record<string, CatMeta> = {
 <p>Not sure how to activate after purchase? Follow our <a href="/guide/activate-windows-11">Windows 11 activation guide</a>, or read <a href="/blog">the blog</a> for the latest Windows news and licensing explainers. Every order is covered by our <a href="/refund">14-day refund guarantee</a>.</p>`,
   },
   office: {
+    qa: "Genuine Office 2019 and 2021 Professional Plus keys: one-time purchases, not subscriptions. Each perpetual license activates Word, Excel, PowerPoint, Outlook and more on one Windows PC for life, is delivered by email within 10 minutes, and carries the same 14-day activation guarantee as every KeyStarter license.",
     h1: "Office License Keys — 2019 & 2021 Professional Plus",
     lead: "Perpetual Office 2019/2021 Professional Plus keys — one-time purchase, no Microsoft 365 subscription.",
     copyHtml: `<p>Genuine <strong>Microsoft Office 2019 and Office 2021 Professional Plus</strong> keys — one-time purchase, perpetual license, no Microsoft 365 subscription required. Includes Word, Excel, PowerPoint, Outlook, Access and Publisher, delivered by email within 2–10 minutes and activated through official Microsoft channels.</p>
@@ -43,6 +47,7 @@ const CATEGORIES: Record<string, CatMeta> = {
 <p>Both editions activate online and keep working offline forever — this is a perpetual license, not a subscription. Questions before buying? See <a href="/support">support</a> or our <a href="/blog">Office licensing guides</a>.</p>`,
   },
   "server-sql": {
+    qa: "Windows Server IoT and SQL Server Runtime keys for business workloads, licensed through volume channels. 16-core Standard editions cover two physical processors, runtime editions serve embedded applications, and every order includes compliance documentation — with volume pricing and VAT invoices from 5 keys.",
     h1: "Windows Server & SQL Server Keys — IoT & Runtime Editions",
     lead: "Windows Server IoT & SQL Server Runtime keys with volume pricing and compliance documentation.",
     copyHtml: `<p>Genuine <strong>Windows Server IoT (Standard, 16-core)</strong> and <strong>SQL Server Runtime</strong> keys for 2019 and 2022 — the licensing editions designed for embedded, kiosk, industrial and dedicated-purpose deployments. Keys ship by email in minutes and activate through official Microsoft channels.</p>
@@ -54,6 +59,7 @@ const CATEGORIES: Record<string, CatMeta> = {
 <p>Volume pricing and <strong>compliance documentation</strong> are available for business procurement — contact us through <a href="/b2b">B2B volume licensing</a> for quotes and invoices.</p>`,
   },
   "iot-enterprise": {
+    qa: "Windows 10/11 IoT Enterprise LTSC keys built for commercial embedded devices. Entry, Value and High End tiers activate kiosks, POS terminals, medical and industrial hardware, carry a 10-year LTSC servicing lifecycle, and ship with compliance documentation — volume pricing available from 5 keys.",
     h1: "Windows IoT Enterprise LTSC Keys — 2019 / 2021 / 2024",
     lead: "LTSC long-term servicing keys for kiosks, industrial controllers and embedded fleets.",
     copyHtml: `<p>Genuine <strong>Windows 10/11 IoT Enterprise LTSC</strong> keys in Entry, Value and High End tiers — the long-term servicing editions built for kiosks, POS terminals, industrial controllers, medical and signage devices that must not change underneath you.</p>
@@ -115,6 +121,11 @@ export default function CategoryLandingPage() {
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">{meta.h1}</h1>
         <p className="text-lg font-light max-w-2xl mx-auto">{meta.lead}</p>
       </div>
+
+      <QuickAnswer>
+        <p><strong>{meta.qa.split(".")[0]}.</strong> {meta.qa.slice(meta.qa.indexOf(".") + 1).trim()}</p>
+      </QuickAnswer>
+
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-6 pt-6 text-xs font-medium text-[#1d1d1f]/80">
         <span>Genuine OEM / Retail / Volume keys</span>
         <span>Instant email delivery</span>

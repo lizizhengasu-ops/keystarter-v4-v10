@@ -372,6 +372,40 @@ export default function SeoManager() {
       ];
     } else if (path === "/faq") {
       jsonLd = [faqNode(`${SITE}/faq#faq`, SITE_FAQS)];
+    } else if (path.startsWith("/product-category/")) {
+      const catSlug = path.slice("/product-category/".length);
+      const catNames = {
+        windows: "Windows License Keys",
+        office: "Office License Keys",
+        "server-sql": "Windows Server & SQL License Keys",
+        "iot-enterprise": "Windows IoT Enterprise License Keys",
+      };
+      const catMatch = {
+        windows: (sl: string) => /^windows-1[01]-(pro|home)(-official)?$/.test(sl),
+        office: (sl: string) => /^office-\d{4}-pro-plus$/.test(sl),
+        "server-sql": (sl: string) => /^(win-svr-iot|sql-svr)-/.test(sl),
+        "iot-enterprise": (sl: string) => /^win-1[01]-iot-/.test(sl),
+      }[catSlug];
+      const catName = (catNames as Record<string, string>)[catSlug] || catSlug;
+      const catProducts = catMatch ? products.filter((p) => catMatch(p.slug)) : [];
+      jsonLd = [
+        {
+          "@type": "ItemList",
+          "@id": `${SITE}${path}#list`,
+          name: catName,
+          numberOfItems: catProducts.length,
+          itemListElement: catProducts.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${SITE}/product/${p.slug}`,
+            name: p.n,
+          })),
+        },
+        breadcrumbNode(`${SITE}${path}#breadcrumb`, [
+          { name: "Home", url: `${SITE}/` },
+          { name: catName, url: `${SITE}${path}` },
+        ]),
+      ];
     } else {
       jsonLd = ORG_JSONLD;
     }
