@@ -4,6 +4,7 @@ import SoftwarePortfolio from "../components/SoftwarePortfolio";
 import { pushEvent } from "../tracking";
 import { SITE, api } from "../site-config";
 import { B2B_FAQS } from "../data/faq";
+import { CONTENT_UPDATED_LABEL } from "../data/content-meta";
 
 
 const solutions = [
@@ -123,6 +124,7 @@ export default function B2bPage() {
           <p className="text-sm leading-relaxed text-[#1d1d1f]">
             <strong>KeyStarter supplies volume Microsoft licenses to businesses from 5 to 5,000+ seats.</strong> Orders include tiered volume pricing from 5 keys, a VAT invoice for every purchase, PO-based procurement, wire transfer for orders above 20 keys, CSV key delivery for automated provisioning, and compliance documentation for software asset management (SAM) audits. Custom quotes are returned within 24 hours, and keys that fail to activate are replaced free of charge or refunded within 14 days.
           </p>
+          <div className="text-[11px] text-[#86868b] mt-3">Content last updated: {CONTENT_UPDATED_LABEL}</div>
         </div>
       </section>
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 px-6 pt-6 text-xs font-medium text-[#1d1d1f]/80">

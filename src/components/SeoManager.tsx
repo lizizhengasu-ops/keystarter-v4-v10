@@ -7,6 +7,7 @@ import { EDGE_PRODUCT_META, EDGE_BLOG_INDEX, EDGE_PRODUCTS_INDEX } from "../data
 import { SITE as SITE_CONFIG } from "../site-config";
 import { SITE_FAQS, B2B_FAQS, GENERIC_FAQS, FAQ_BY_SERIES } from "../data/faq";
 import { HOME_FAQS } from "../data/home-faqs";
+import { CONTENT_UPDATED } from "../data/content-meta";
 import { FAQ_SERIES_MAP } from "../data/product-comparison";
 import type { FAQItem } from "../data/faq";
 
@@ -192,9 +193,10 @@ const ORG_NODE = {
 };
 const ORG_JSONLD = ORG_NODE;
 
-const faqNode = (id: string, faqs: FAQItem[]) => ({
+const faqNode = (id: string, faqs: FAQItem[], dateModified?: string) => ({
   "@type": "FAQPage",
   "@id": id,
+  ...(dateModified ? { dateModified } : {}),
   mainEntity: faqs.map((f) => ({
     "@type": "Question",
     name: f.q,
@@ -313,7 +315,15 @@ export default function SeoManager() {
           url: SITE,
           publisher: { "@id": ORG_ID },
         },
-        faqNode(`${SITE}/#faq`, HOME_FAQS),
+        {
+          "@type": "WebPage",
+          "@id": `${SITE}/#webpage`,
+          url: `${SITE}/`,
+          name: SITE_NAME,
+          isPartOf: { "@id": `${SITE}/#website` },
+          dateModified: CONTENT_UPDATED,
+        },
+        faqNode(`${SITE}/#faq`, HOME_FAQS, CONTENT_UPDATED),
       ];
     } else if (article) {
       jsonLd = {
@@ -343,6 +353,7 @@ export default function SeoManager() {
           image: PRODUCT_OG_IMAGES[product.slug] || DEFAULT_OG_IMAGE,
           brand: { "@type": "Brand", name: "Microsoft" },
           category: product.specs.type,
+          dateModified: CONTENT_UPDATED,
           offers: {
             "@type": "Offer",
             availability: "https://schema.org/InStock",
@@ -350,7 +361,7 @@ export default function SeoManager() {
             // Price intentionally omitted: WooCommerce is the single source of truth.
           },
         },
-        faqNode(`${productUrl}#faq`, productFaqs),
+        faqNode(`${productUrl}#faq`, productFaqs, CONTENT_UPDATED),
         breadcrumbNode(`${productUrl}#breadcrumb`, [
           { name: "Home", url: `${SITE}/` },
           { name: "Products", url: `${SITE}/products` },
@@ -369,15 +380,16 @@ export default function SeoManager() {
           provider: { "@id": ORG_ID },
           areaServed: "Worldwide",
           url: `${SITE}/b2b`,
+          dateModified: CONTENT_UPDATED,
         },
-        faqNode(`${SITE}/b2b#faq`, B2B_FAQS),
+        faqNode(`${SITE}/b2b#faq`, B2B_FAQS, CONTENT_UPDATED),
         breadcrumbNode(`${SITE}/b2b#breadcrumb`, [
           { name: "Home", url: `${SITE}/` },
           { name: "B2B & Volume Licensing", url: `${SITE}/b2b` },
         ]),
       ];
     } else if (path === "/faq") {
-      jsonLd = [faqNode(`${SITE}/faq#faq`, SITE_FAQS)];
+      jsonLd = [faqNode(`${SITE}/faq#faq`, SITE_FAQS, CONTENT_UPDATED)];
     } else if (path.startsWith("/product-category/")) {
       const catSlug = path.slice("/product-category/".length);
       const catNames = {
@@ -399,6 +411,7 @@ export default function SeoManager() {
           "@type": "ItemList",
           "@id": `${SITE}${path}#list`,
           name: catName,
+          dateModified: CONTENT_UPDATED,
           numberOfItems: catProducts.length,
           itemListElement: catProducts.map((p, i) => ({
             "@type": "ListItem",

@@ -18,6 +18,7 @@ import { QuickAnswer } from "../components/QuickAnswer";
 import { pushEvent } from "../tracking";
 import ReviewForm from "../components/ReviewForm";
 import { getWooId } from "../data/woo-ids";
+import { CONTENT_UPDATED_LABEL } from "../data/content-meta";
 
 const SECOND_IMAGE_SLUGS = new Set([
   "win-11-iot-2024-entry",
@@ -418,6 +419,7 @@ const [reviews, setReviews] = useState([]);
                 <section aria-labelledby="activation-guarantee-heading" className="bg-white rounded-2xl border border-[#e8e8ed] p-6">
                   <h2 id="activation-guarantee-heading" className="text-base font-bold mb-1">If Activation Fails</h2>
                   <div className="text-xs text-[#7c3aed] font-semibold mb-2">Free replacement · 14-day refund · 24h support response</div>
+                  <div className="text-[11px] text-[#86868b] mb-2">Content last updated: {CONTENT_UPDATED_LABEL}</div>
                   <ol className="space-y-2.5">
                     {ACTIVATION_STEPS.map((s, i) => (
                       <li key={i} className="flex items-start gap-3 text-xs leading-relaxed text-[#1d1d1f]">
