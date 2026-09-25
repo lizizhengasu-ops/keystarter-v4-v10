@@ -28,7 +28,9 @@ const BASE = (process.env.BASE_URL || 'https://keys-starter.com').replace(/\/$/,
 const ROUTES = ['/', '/products', '/about', '/support', '/b2b', '/faq', '/contact', '/links', '/privacy', '/terms', '/refund', '/changelog',
   // v2 (2026-09-24, AEO R1): category landing pages — content signal waits for
   // product cards (WooCommerce API render), gate requires >=3 card links.
-  '/product-category/windows', '/product-category/office', '/product-category/server-sql', '/product-category/iot-enterprise'];
+  '/product-category/windows', '/product-category/office', '/product-category/server-sql', '/product-category/iot-enterprise',
+  // v3 (2026-09-25, full-site audit): secondary routes whose crawler view was a bare shell
+  '/cookies', '/disclaimer', '/downloads', '/licensing', '/store'];
 const SLUGS_FILE = 'audit/main/product-slugs.txt';
 
 (async () => {
@@ -62,7 +64,7 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       if (t.isProduct) {
         await page.waitForSelector('h2', { timeout: 25000 });
         await page.waitForTimeout(2000); // let per-SKU data fetches settle
-      } else if (t.isCategory) {
+      } else if (t.isCategory || t.out === 'products') {
         await page.waitForSelector('a[href^="/product/"]', { timeout: 25000 });
         await page.waitForTimeout(2000); // let remaining card data settle
       } else {
@@ -84,7 +86,7 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       //    user-correct page (correct H1/title/price) and far better than the
       //    shell it replaces. Shells/error states never pass (they have
       //    !=1 visible H1 or almost no body text).
-      const hydrated = info.visibleH1 === 1 && (t.isProduct ? info.bodyLen >= 1500 : (t.isCategory ? info.cards >= 2 : true));
+      const hydrated = info.visibleH1 === 1 && (t.isProduct ? info.bodyLen >= 1500 : ((t.isCategory || t.out === 'products') ? info.cards >= 2 : true));
       const rich = t.isProduct && info.h2 >= 5;
       const pass = hydrated;
       if (!pass) {

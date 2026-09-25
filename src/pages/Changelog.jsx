@@ -19,7 +19,7 @@ export default function ChangelogPage() {
         <p className="text-[#86868b] mb-10">{t("changelog.desc")}</p>
         {versions.map((v,i) => (
           <div key={i} className="bg-white rounded-2xl p-6 border border-[#e8e8ed] mb-4">
-            <div className="text-xs font-bold text-[#0078d4] mb-1">{t("changelog.title")} {v.v}</div>
+            <h2 className="text-xs font-bold text-[#0078d4] mb-1">{t("changelog.title")} {v.v}</h2>
             <p className="text-sm text-[#1d1d1f]">{v.d}</p>
           </div>
         ))}

@@ -1,7 +1,8 @@
-Content-Signal: search=yes, ai-train=no, use=reference
+# 2026-09-25 user decision: BOTH citation AND training crawlers are welcome.
+# Content-Signal declares the same stance at the protocol level.
+Content-Signal: search=yes, ai-train=yes, use=reference
 
-# AI answer/search crawlers — explicitly allowed for citation & reference
-User-agent: OAI-SearchBot
+# AI answer/search crawlers — explicitly allowed for citation & referenceUser-agent: OAI-SearchBot
 Allow: /
 User-agent: ChatGPT-User
 Allow: /

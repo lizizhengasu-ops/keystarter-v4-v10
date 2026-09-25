@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SITE, api } from "../site-config";
+import { QuickAnswer } from "../components/QuickAnswer";
 
 
 const topics = [
@@ -80,6 +81,12 @@ export default function SupportPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-2">{t("support.title")}</h1>
         <p className="text-[#6e6e73] mb-10">{t("support.desc")}</p>
+
+        <QuickAnswer>
+          <p>
+            <strong>KeyStarter support resolves activation, delivery, licensing and refund issues with a 24-hour response commitment.</strong> Activation problems are usually fixed in minutes: install from the official Microsoft installer linked in your delivery email, re-enter the key carefully, and run the built-in Activation Troubleshooter — our guides cover every common error code. If a key cannot be activated through no fault of yours, it is replaced free of charge, or refunded within 14 days. Orders ship by email within 10 minutes of payment, so first check your inbox and spam folder before contacting us. Business customers with volume orders get a priority channel — include your order number when writing to {SITE.supportEmail} or use the contact form below.
+          </p>
+        </QuickAnswer>
         <h2 className="text-xl font-bold mb-4">{t("support.topics")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {topics.map((tp,i) => (
