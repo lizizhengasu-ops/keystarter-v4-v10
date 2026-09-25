@@ -289,7 +289,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
           {heroPersona==="retail" && (
             <p className="text-white/75 text-xs mb-8 -mt-4">
-              Genuine Windows &amp; Office keys from <span className="text-white font-bold">${Math.min(...products.map((p) => p.p))}</span> — instant email delivery, 14-day refund guarantee
+              Genuine Windows &amp; Office keys from <span className="text-white font-bold">${Math.min(...products.filter((p) => !p.slug.startsWith("test")).map((p) => p.p))}</span> — instant email delivery, 14-day refund guarantee
             </p>
           )}
 
