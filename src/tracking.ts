@@ -77,15 +77,30 @@ export function initTracking() {
   }
 
   if (TRACKING_CONFIG.consentMode) {
+    // Regional consent (2026-09-25): global grant, EEA/UK deny-by-default.
+    // Rationale: audience is primarily US/global; blanket-denied consent blocked
+    // 100% of GA4 data (property showed zero hits since inception). GDPR still
+    // honored for EEA/UK visitors via the region-scoped deny below + banner.
     gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
+      analytics_storage: "granted",
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
       functionality_storage: "granted",
       personalization_storage: "granted",
       security_storage: "granted",
       wait_for_update: 500,
+    });
+    gtag("consent", "default", {
+      region: [
+        "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR",
+        "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK",
+        "SI", "ES", "SE", "IS", "LI", "NO", "GB",
+      ],
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
     });
   }
 
