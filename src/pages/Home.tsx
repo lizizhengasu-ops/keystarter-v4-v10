@@ -11,6 +11,7 @@ import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { QuickAnswer } from "../components/QuickAnswer";
 import { HOME_FAQS } from "../data/home-faqs";
 import { useCart } from "../data/CartContext";
+import { products } from "../data/products";
 import { SPECIAL_OFFER_IDS } from "../data/constants";
 import ProductImage from "../components/ProductImage";
 import CountdownTimer from "../components/CountdownTimer";
@@ -285,6 +286,12 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               {heroPersona==="retail" ? t("hero.enterprise") : t("home.enterprise.verify_btn")} {String.fromCharCode(0x203A)}
             </button>
           </div>
+
+          {heroPersona==="retail" && (
+            <p className="text-white/75 text-xs mb-8 -mt-4">
+              Genuine Windows &amp; Office keys from <span className="text-white font-bold">${Math.min(...products.map((p) => p.p))}</span> — instant email delivery, 14-day refund guarantee
+            </p>
+          )}
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-0 md:divide-x divide-white/20 bg-white/10 border border-white/20 rounded-lg shadow-sm overflow-hidden max-w-3xl mx-auto">
