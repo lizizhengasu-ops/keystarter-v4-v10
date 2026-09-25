@@ -191,7 +191,7 @@ function Layout({ children }: { children: any }) {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 mb-8">
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.products")}</h4>
+            <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.products")}</h2>
             <div className="space-y-2">
               <Link to="/products" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">Products</Link>
               <a href="/#store" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("nav.store")}</a>
@@ -199,7 +199,7 @@ function Layout({ children }: { children: any }) {
             </div>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("footer.support")}</h4>
+            <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("footer.support")}</h2>
             <div className="space-y-2">
               <Link to="/support" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.help_center")}</Link>
               <Link to="/faq" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.faq")}</Link>
@@ -208,7 +208,7 @@ function Layout({ children }: { children: any }) {
             </div>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.company")}</h4>
+            <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.company")}</h2>
             <div className="space-y-2">
               <Link to="/blog" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("nav.blog")}</Link>
               <Link to="/links" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">Quick Links</Link>
@@ -217,7 +217,7 @@ function Layout({ children }: { children: any }) {
             </div>
           </div>
           <div>
-            <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.legal")}</h4>
+            <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.legal")}</h2>
             <div className="space-y-2">
               <Link to="/privacy" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.privacy")}</Link>
               <Link to="/terms" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("footer.terms")}</Link>
@@ -226,7 +226,7 @@ function Layout({ children }: { children: any }) {
           </div>
         </div>
         <div className="border-b border-white/10 mb-8 pb-8 text-center">
-          <h4 className="text-[13px] font-bold uppercase tracking-wider text-white mb-3">{t("footer.stay_updated")}</h4>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-3">{t("footer.stay_updated")}</h2>
           <p className="text-sm text-white mb-4">{t("footer.newsletter")}</p>
           <div className="flex max-w-sm mx-auto gap-2">
             <input id="newsletter-email" name="email" aria-label="Email" type="email" placeholder={t("footer.email_placeholder")} className="flex-1 min-h-[44px] px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/15 text-white placeholder-white/80 focus:outline-none focus:border-[#7c3aed]" />
