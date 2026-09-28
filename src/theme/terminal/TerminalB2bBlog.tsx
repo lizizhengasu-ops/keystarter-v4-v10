@@ -165,7 +165,7 @@ export function TerminalBlog() {
           <p className="muted">Articles are being prepared. Check back soon.</p>
         ) : (
           <div className="blog-grid kst-blog-grid" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
-            {posts.map(p => (
+            {posts.filter(p => !!p.slug).map(p => (
               <Link className="blog-card kst-blog-card" to={"/blog/" + p.slug} key={p.id}>
                 <span className="tag kst-tag">{fmt(p.date)}</span>
                 <h3>{strip(p.title.rendered)}</h3>
