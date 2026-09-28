@@ -321,6 +321,20 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </p>
       </QuickAnswer>
 
+      {/* G9 orphan page internal links (R21/R53) */}
+      <div className="max-w-4xl mx-auto px-4 py-3 text-xs text-[#6e6e73]">
+        <span className="font-semibold text-[#1d1d1f]">Guides &amp; Comparisons: </span>
+        <a href="/compare/oem-vs-retail" className="text-[#7c3aed] hover:underline">OEM vs Retail License</a>
+        <span className="mx-1.5">·</span>
+        <a href="/compare/windows-11-pro-vs-home" className="text-[#7c3aed] hover:underline">Windows 11 Pro vs Home</a>
+        <span className="mx-1.5">·</span>
+        <a href="/compare/windows-iot-enterprise-vs-windows-11-pro" className="text-[#7c3aed] hover:underline">IoT Enterprise vs Pro</a>
+        <span className="mx-1.5">·</span>
+        <a href="/guide/activate-windows-error-codes" className="text-[#7c3aed] hover:underline">Activation Error Codes</a>
+        <span className="mx-1.5">·</span>
+        <a href="/guide/digital-license-vs-product-key" className="text-[#7c3aed] hover:underline">Digital License vs Product Key</a>
+      </div>
+
       {heroPersona === "enterprise" && (
       <section className="py-16 bg-[#f3f4f6] border-t border-[#d1d5db] text-center">
         <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mb-4">{t("home.enterprise.cta_title")}</h2>
