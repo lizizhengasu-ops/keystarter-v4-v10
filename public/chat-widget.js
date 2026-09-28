@@ -1,5 +1,5 @@
 (function(){'use strict';
-var C={tenantId:'keystarter',wsEndpoint:'wss://keys-starter.com/ws/',tokenUrl:'/api/token',botName:'Assistant',color:'#1a1a2e'};
+var C={tenantId:'keystarter',wsEndpoint:'wss://aichatbot.keys-starter.com/ws/',tokenUrl:'https://aichatbot.keys-starter.com/api/token',botName:'Assistant',color:'#1a1a2e'};
 // Read data attributes from script tag
 var s=document.currentScript||document.querySelector('script[src*="chat-widget"]');
 if(s){var a=s.dataset;if(a.tenant)C.tenantId=a.tenant;if(a.endpoint)C.wsEndpoint=a.endpoint;if(a.name)C.botName=a.name;if(a.color)C.color=a.color;}
