@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "mimosa-finding-ledger-batch/v1",
+  "batchId": "stop-20260928T114707486Z-24024-0965506641d0",
+  "runId": "20260928T114707486Z-24024-0965506641d0",
+  "runStatus": "inconclusive",
+  "coverage": {
+    "status": "partial",
+    "reasons": [
+      {
+        "code": "bash_discovery_incomplete",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/shuffle-grid.tsx",
+        "detail": "project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline capture had enumeration or snapshot errors",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/shuffle-grid.tsx",
+        "detail": "bash_discovery_incomplete: project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline_partial: baseline capture had enumeration or snapshot errors",
+        "affectsCompletion": true
+      }
+    ]
+  },
+  "source": {
+    "component": "zcode-hook",
+    "operationId": "Stop"
+  },
+  "revision": "fd8f7446ba6a332b9a708098c1336087804d06b6",
+  "diffHash": "9752f691c7922e85a358b39f34ab0e2e989c6cc033e3ae116eaa711e5138c519",
+  "rulesVersion": "unavailable",
+  "sessionHash": "7bab44c01ecef9658ffb98c45237f318b4227554a8a2c0ac301d9389281f770f",
+  "reportRef": ".mimosa/reports/task-review-sess_51c36dca-2d41-43d7-837b-a143e7940245-20260928T114707486Z-24024-0965506641d0.json",
+  "events": [],
+  "observedFindingIds": [],
+  "verifiedFiles": [
+    {
+      "file": "src/components/SeoManager.tsx",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "src/data/home-faqs.ts",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "src/pages/Faq.jsx",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "src/pages/Support.tsx",
+      "direct": "complete",
+      "projectContext": "partial"
+    }
+  ],
+  "recordedAt": "2026-09-28T11:47:07.872Z"
+}

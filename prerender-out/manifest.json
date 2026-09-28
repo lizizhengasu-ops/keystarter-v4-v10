@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-28T11:37:37.081Z",
+ "generatedAt": "2026-09-28T11:59:51.038Z",
  "gate": {
   "product": "h2>=5 && visibleH1==1",
   "route": "visibleH1==1"
@@ -11,7 +11,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 15,
-   "bytes": 370543
+   "bytes": 360676
   },
   {
    "route": "products",
@@ -19,7 +19,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 6,
-   "bytes": 316774
+   "bytes": 305710
   },
   {
    "route": "about",
@@ -27,7 +27,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 12,
-   "bytes": 287428
+   "bytes": 277360
   },
   {
    "route": "support",
@@ -35,7 +35,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 8,
-   "bytes": 255458
+   "bytes": 245390
   },
   {
    "route": "b2b",
@@ -43,7 +43,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 11,
-   "bytes": 279043
+   "bytes": 268988
   },
   {
    "route": "faq",
@@ -51,7 +51,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 6,
-   "bytes": 256971
+   "bytes": 246916
   },
   {
    "route": "contact",
@@ -59,7 +59,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 6,
-   "bytes": 254504
+   "bytes": 244436
   },
   {
    "route": "links",
@@ -67,7 +67,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 6,
-   "bytes": 253093
+   "bytes": 243025
   },
   {
    "route": "privacy",
@@ -75,7 +75,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 17,
-   "bytes": 262964
+   "bytes": 252896
   },
   {
    "route": "terms",
@@ -83,7 +83,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 22,
-   "bytes": 267239
+   "bytes": 257171
   },
   {
    "route": "refund",
@@ -91,15 +91,15 @@
    "isProduct": false,
    "status": "OK",
    "h2": 13,
-   "bytes": 259839
+   "bytes": 249771
   },
   {
    "route": "changelog",
    "url": "https://keys-starter.com/changelog",
    "isProduct": false,
    "status": "OK",
-   "h2": 19,
-   "bytes": 255268
+   "h2": 12,
+   "bytes": 243090
   },
   {
    "route": "product-category/windows",
@@ -108,7 +108,7 @@
    "status": "OK",
    "cards": 8,
    "h2": 7,
-   "bytes": 276469
+   "bytes": 266416
   },
   {
    "route": "product-category/office",
@@ -117,7 +117,7 @@
    "status": "OK",
    "cards": 2,
    "h2": 7,
-   "bytes": 261479
+   "bytes": 251426
   },
   {
    "route": "product-category/server-sql",
@@ -126,7 +126,7 @@
    "status": "OK",
    "cards": 4,
    "h2": 7,
-   "bytes": 262771
+   "bytes": 252718
   },
   {
    "route": "product-category/iot-enterprise",
@@ -135,7 +135,7 @@
    "status": "OK",
    "cards": 12,
    "h2": 7,
-   "bytes": 278459
+   "bytes": 268406
   },
   {
    "route": "cookies",
@@ -143,7 +143,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 11,
-   "bytes": 252941
+   "bytes": 242873
   },
   {
    "route": "disclaimer",
@@ -151,7 +151,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 12,
-   "bytes": 258908
+   "bytes": 248840
   },
   {
    "route": "downloads",
@@ -159,7 +159,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 9,
-   "bytes": 253828
+   "bytes": 243760
   },
   {
    "route": "licensing",
@@ -167,7 +167,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 15,
-   "bytes": 262866
+   "bytes": 252798
   },
   {
    "route": "store",
@@ -175,7 +175,7 @@
    "isProduct": false,
    "status": "OK",
    "h2": 6,
-   "bytes": 315653
+   "bytes": 305585
   },
   {
    "route": "product/sql-svr-2022-runtime",
@@ -183,23 +183,23 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 284174
+   "bytes": 274119
   },
   {
    "route": "product/sql-svr-2019-runtime",
    "url": "https://keys-starter.com/product/sql-svr-2019-runtime",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 286623
+   "h2": 17,
+   "bytes": 274014
   },
   {
    "route": "product/win-svr-iot-2019",
    "url": "https://keys-starter.com/product/win-svr-iot-2019",
    "isProduct": true,
    "status": "RICH",
-   "h2": 17,
-   "bytes": 285383
+   "h2": 18,
+   "bytes": 277972
   },
   {
    "route": "product/win-svr-iot-2022",
@@ -207,7 +207,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 285600
+   "bytes": 275545
   },
   {
    "route": "product/win-svr-iot-2025",
@@ -215,7 +215,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 285770
+   "bytes": 275715
   },
   {
    "route": "product/win-10-iot-2019-value",
@@ -223,7 +223,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 286131
+   "bytes": 276076
   },
   {
    "route": "product/win-10-iot-2019-high-end",
@@ -231,15 +231,15 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 286182
+   "bytes": 276127
   },
   {
    "route": "product/win-11-iot-ml-entry",
    "url": "https://keys-starter.com/product/win-11-iot-ml-entry",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 289946
+   "h2": 17,
+   "bytes": 277203
   },
   {
    "route": "product/win-11-iot-ml-value",
@@ -247,7 +247,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 287291
+   "bytes": 277236
   },
   {
    "route": "product/win-11-iot-ml-high-end",
@@ -255,15 +255,15 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 287341
+   "bytes": 277270
   },
   {
    "route": "product/win-10-iot-2021-value",
    "url": "https://keys-starter.com/product/win-10-iot-2021-value",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 288791
+   "h2": 17,
+   "bytes": 276076
   },
   {
    "route": "product/win-10-iot-2021-high-end",
@@ -271,15 +271,15 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 286203
+   "bytes": 276148
   },
   {
    "route": "product/win-11-iot-2024-value",
    "url": "https://keys-starter.com/product/win-11-iot-2024-value",
    "isProduct": true,
    "status": "RICH",
-   "h2": 17,
-   "bytes": 286701
+   "h2": 18,
+   "bytes": 279268
   },
   {
    "route": "product/win-11-iot-2024-high-end",
@@ -287,7 +287,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 286803
+   "bytes": 276748
   },
   {
    "route": "product/windows-10-home-official",
@@ -295,31 +295,31 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 287337
+   "bytes": 277282
   },
   {
    "route": "product/windows-11-home-official",
    "url": "https://keys-starter.com/product/windows-11-home-official",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 291002
+   "h2": 17,
+   "bytes": 278322
   },
   {
    "route": "product/windows-10-pro-official",
    "url": "https://keys-starter.com/product/windows-10-pro-official",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 290039
+   "h2": 17,
+   "bytes": 277423
   },
   {
    "route": "product/windows-11-pro-official",
    "url": "https://keys-starter.com/product/windows-11-pro-official",
    "isProduct": true,
    "status": "RICH",
-   "h2": 20,
-   "bytes": 292393
+   "h2": 19,
+   "bytes": 279780
   },
   {
    "route": "product/win-10-iot-2019-entry",
@@ -327,23 +327,23 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 286162
+   "bytes": 276107
   },
   {
    "route": "product/win-10-iot-2021-entry",
    "url": "https://keys-starter.com/product/win-10-iot-2021-entry",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 288864
+   "h2": 17,
+   "bytes": 276109
   },
   {
    "route": "product/win-11-iot-2024-entry",
    "url": "https://keys-starter.com/product/win-11-iot-2024-entry",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 289434
+   "h2": 17,
+   "bytes": 276763
   },
   {
    "route": "product/office-2021-pro-plus",
@@ -351,7 +351,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 21,
-   "bytes": 290580
+   "bytes": 280543
   },
   {
    "route": "product/office-2019-pro-plus",
@@ -359,7 +359,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 21,
-   "bytes": 289913
+   "bytes": 279858
   },
   {
    "route": "product/windows-10-home",
@@ -367,7 +367,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 287502
+   "bytes": 277447
   },
   {
    "route": "product/windows-11-home",
@@ -375,15 +375,15 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 17,
-   "bytes": 288708
+   "bytes": 278653
   },
   {
    "route": "product/windows-10-pro",
    "url": "https://keys-starter.com/product/windows-10-pro",
    "isProduct": true,
    "status": "RICH",
-   "h2": 18,
-   "bytes": 290405
+   "h2": 17,
+   "bytes": 277746
   },
   {
    "route": "product/windows-11-pro",
@@ -391,7 +391,7 @@
    "isProduct": true,
    "status": "RICH",
    "h2": 19,
-   "bytes": 290862
+   "bytes": 280807
   }
  ]
 }
