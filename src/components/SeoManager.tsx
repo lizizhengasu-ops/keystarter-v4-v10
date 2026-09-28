@@ -155,15 +155,42 @@ function setCanonical(href: string) {
 }
 
 function setJsonLd(nodes: object | object[] | null) {
-  // Single owner of structured data: drop any JSON-LD injected by the edge
-  // Worker or a previous route before appending the current block.
+  // SPA owns #seo-jsonld. Worker-injected blocks (no id) carry live WP data:
+  // ABSORB their BlogPosting/FAQPage into the rebuilt graph (worker data wins
+  // - it has real dateModified), drop the rest, then rebuild as one owner
+  // block. Pitfall 26 fix: this stops hydration from stripping the worker's
+  // FAQPage on blog articles (crawler view and browser view now agree).
+  const absorbed: Record<string, object> = {};
   document.head
-    .querySelectorAll('script[type="application/ld+json"]')
+    .querySelectorAll('script[type="application/ld+json"]:not(#seo-jsonld)')
+    .forEach((el) => {
+      try {
+        const j = JSON.parse(el.textContent || "") as { "@graph"?: object[] };
+        ((j["@graph"] || [j]) as { "@type"?: string }[]).forEach((n) => {
+          if (
+            n &&
+            (n["@type"] === "BlogPosting" || n["@type"] === "FAQPage") &&
+            !absorbed[n["@type"]]
+          ) {
+            absorbed[n["@type"]] = n;
+          }
+        });
+      } catch {
+        /* malformed external block - ignore */
+      }
+      el.remove();
+    });
+  document.head
+    .querySelectorAll("script#seo-jsonld")
     .forEach((el) => el.remove());
   if (!nodes || (Array.isArray(nodes) && nodes.length === 0)) return;
-  const payload = Array.isArray(nodes)
-    ? { "@context": "https://schema.org", "@graph": nodes }
-    : { "@context": "https://schema.org", ...nodes };
+  let list: object[] = Array.isArray(nodes) ? nodes.slice() : [nodes];
+  list = list.filter(
+    (n) => !absorbed[(n as { "@type"?: string })["@type"] ?? ""]
+  );
+  list = list.concat(Object.values(absorbed));
+  if (list.length === 0) return;
+  const payload = { "@context": "https://schema.org", "@graph": list };
   const script = document.createElement("script");
   script.type = "application/ld+json";
   script.id = "seo-jsonld";
