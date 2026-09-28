@@ -1,0 +1,13 @@
+import { createRoot } from "react-dom/client"
+import "./index.css"
+import "./i18n"
+import "./tracking"
+import App from "./MainApp.tsx"
+
+const startApp = () => {
+  createRoot(document.getElementById("root")!).render(<App />);
+};
+
+// Let the SSR hero paint before React takes over; this keeps the first LCP
+// candidate visible instead of being replaced before the browser paints it.
+setTimeout(startApp, 150);

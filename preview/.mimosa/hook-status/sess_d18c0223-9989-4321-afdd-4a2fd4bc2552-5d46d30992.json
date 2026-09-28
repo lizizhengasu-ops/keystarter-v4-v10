@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-11T05:09:50.733Z",
+  "sessionId": "sess_d18c0223-9989-4321-afdd-4a2fd4bc2552",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\matrix\\generate-design-picker.py",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 14,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

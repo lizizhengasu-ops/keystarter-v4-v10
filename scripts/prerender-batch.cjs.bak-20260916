@@ -1,0 +1,50 @@
+// A1: prerender batch — render 13 routes + 26 product pages from the LIVE
+// deployed build, clean Worker-injected duplicates (hidden H1 + #seo-jsonld),
+// output prerender-out/<route>/index.html for upload.
+// Run AFTER every content deploy (see main-site-seo-execution-plan §2.4).
+const { chromium } = require('playwright');
+const fs = require('fs');
+const path = require('path');
+
+const BASE = 'https://keys-starter.com';
+const ROUTES = ['/', '/products', '/blog', '/about', '/support', '/b2b', '/faq', '/contact', '/links', '/privacy', '/terms', '/refund', '/changelog'];
+const SLUGS_FILE = 'audit/main/product-slugs.txt';
+
+(async () => {
+  const slugs = fs.readFileSync(SLUGS_FILE, 'utf8').split('\n').map(s => s.trim()).filter(Boolean);
+  const targets = ROUTES.map(r => ({ out: r === '/' ? '' : r.replace(/^\//, ''), url: BASE + r }))
+    .concat(slugs.map(s => ({ out: 'product/' + s, url: BASE + '/product/' + s })));
+  fs.mkdirSync('prerender-out', { recursive: true });
+
+  const browser = await chromium.launch();
+  const ctx = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  const manifest = { generatedAt: new Date().toISOString(), pages: [] };
+  let ok = 0, fail = 0;
+
+  for (const t of targets) {
+    try {
+      await page.goto(t.url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => page.waitForTimeout(4000));
+      await page.waitForTimeout(2500);
+      const html = await page.evaluate(() => {
+        // cleanup 1: worker-injected hidden H1 (POC rule)
+        document.querySelectorAll('h1[style*="position:absolute"], h1[style*="left:-9999px"]').forEach(e => e.remove());
+        // cleanup 2: worker-injected JSON-LD block (worker re-adds at exit)
+        document.querySelectorAll('script#seo-jsonld').forEach(e => e.remove());
+        return '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      });
+      const dir = path.join('prerender-out', t.out);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'index.html'), html);
+      manifest.pages.push({ route: t.url.replace(BASE, '') || '/', bytes: html.length });
+      ok++;
+      console.log('OK', t.out || '/');
+    } catch (e) {
+      fail++;
+      console.log('FAIL', t.out || t.url, String(e.message).split('\n')[0].slice(0, 70));
+    }
+  }
+  fs.writeFileSync('prerender-out/manifest.json', JSON.stringify(manifest, null, 1));
+  console.log(`DONE ok=${ok} fail=${fail}`);
+  await browser.close();
+})();

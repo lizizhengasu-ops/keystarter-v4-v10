@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-22T12:30:50.385Z",
+  "sessionId": "sess_c5bfcacf-bfb7-4826-9cfd-31987bda7fd3",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\docs\\seo-optimization\\latest.md",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 6,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

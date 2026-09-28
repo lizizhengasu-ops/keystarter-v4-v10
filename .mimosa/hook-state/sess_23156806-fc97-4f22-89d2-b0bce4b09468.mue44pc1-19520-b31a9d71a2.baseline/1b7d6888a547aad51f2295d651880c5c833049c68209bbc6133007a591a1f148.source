@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TS=$(date +%Y%m%d-%H%M%S)
+FRONT=/var/www/keystarter-frontend
+BK=/var/www/backups/keystarter-frontend-$TS
+
+mkdir -p /var/www/backups
+cp -a "$FRONT" "$BK"
+tar -xzf /tmp/dist-v30.tar.gz -C "$FRONT"
+rm -f "$FRONT/videos/enterprise-bg-v28.mp4" \
+      "$FRONT/videos/enterprise-bg-v28.webm" \
+      "$FRONT/videos/enterprise-bg-v28-poster.png"
+chown -R www-data:www-data "$FRONT"
+find "$FRONT" -type d -exec chmod 755 {} +
+find "$FRONT" -type f -exec chmod 644 {} +
+
+echo "BACKUP=$BK"
+echo "--- VIDEOS ---"
+ls -la "$FRONT/videos/"
+echo "--- MD5 ---"
+md5sum "$FRONT/videos/enterprise-bg-v30.mp4" \
+        "$FRONT/videos/enterprise-bg-v30.webm" \
+        "$FRONT/videos/enterprise-bg-v30-poster.png" \
+        "$FRONT/index.html"

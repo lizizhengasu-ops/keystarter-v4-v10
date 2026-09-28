@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "mimosa-finding-ledger-batch/v1",
+  "batchId": "stop-20260916T034404470Z-22688-7a5647fe63fc",
+  "runId": "20260916T034404470Z-22688-7a5647fe63fc",
+  "runStatus": "inconclusive",
+  "coverage": {
+    "status": "partial",
+    "reasons": [
+      {
+        "code": "bash_discovery_incomplete",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/stack.tsx",
+        "detail": "project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline capture had enumeration or snapshot errors",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/stack.tsx",
+        "detail": "bash_discovery_incomplete: project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline_partial: baseline capture had enumeration or snapshot errors",
+        "affectsCompletion": true
+      }
+    ]
+  },
+  "source": {
+    "component": "zcode-hook",
+    "operationId": "Stop"
+  },
+  "revision": "9fa995dc94dfe2bfbdae073dd72a0c63c8e137ff",
+  "diffHash": "ce21fc2904ac9dfc0c632a76d43a96f3d6493e50b9db2332c917730602e7da15",
+  "rulesVersion": "unavailable",
+  "sessionHash": "6249dc58942eeb01a8eb67d9756b7ca3becf1365b9342f73d01a827f5151bbed",
+  "reportRef": ".mimosa/reports/task-review-sess_60ef6f68-28bb-418c-9b71-68b3f54a805f-20260916T034404470Z-22688-7a5647fe63fc.json",
+  "events": [],
+  "observedFindingIds": [],
+  "verifiedFiles": [
+    {
+      "file": "src/pages/Home.tsx",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "src/tracking.ts",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "scripts/build-image-variants.py",
+      "direct": "complete",
+      "projectContext": "partial"
+    },
+    {
+      "file": "src/components/ProductImage.tsx",
+      "direct": "complete",
+      "projectContext": "partial"
+    }
+  ],
+  "recordedAt": "2026-09-16T03:44:04.896Z"
+}

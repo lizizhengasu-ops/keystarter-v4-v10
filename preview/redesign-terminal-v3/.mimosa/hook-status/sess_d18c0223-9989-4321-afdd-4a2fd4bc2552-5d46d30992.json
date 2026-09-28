@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-11T05:18:00.729Z",
+  "sessionId": "sess_d18c0223-9989-4321-afdd-4a2fd4bc2552",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\matrix\\p2-deploy-terminal-v3.sh",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 9,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

@@ -1,0 +1,126 @@
+import { useState, useEffect } from "react";
+
+const API = "/api/user";
+
+export default function AccountPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [mode, setMode] = useState("login");
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("ks_token");
+    if (saved) { setToken(saved); fetchProfile(saved); }
+  }, []);
+
+  const fetchProfile = async (t) => {
+    try {
+      const r = await fetch(API + "/profile", { headers: { Authorization: "Bearer " + t } });
+      if (r.ok) { const d = await r.json(); if (d.isAdmin) { window.location.href = "/admin/"; return; } setUser(d); }
+      else { localStorage.removeItem("ks_token"); setToken(null); }
+    } catch {}
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setError(""); setLoading(true);
+    try {
+      const ep = mode === "login" ? "/login" : "/register";
+      const body = { email, password };
+      if (mode === "register") body.name = name || email.split("@")[0];
+      const r = await fetch(API + ep, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+      if (!r.ok) { setError(d.error || "Failed"); return; }
+      localStorage.setItem("ks_token", d.token);
+      setToken(d.token);
+      if (d.isAdmin) { window.location.href = "/admin/"; return; }
+      setUser(d);
+    } catch { setError("Network error"); }
+    finally { setLoading(false); }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("ks_token");
+    setToken(null); setUser(null); setEmail(""); setPassword("");
+  };
+
+  if (token && user) {
+    return (
+      <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
+        <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white px-6 py-20 text-center">
+          <h1 className="text-4xl font-bold mb-3">My Account</h1>
+          <p className="text-base font-light text-white/80">Welcome back, {user.name || user.email}</p>
+        </div>
+        <div className="max-w-lg mx-auto px-6 py-12">
+          <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed] space-y-3 text-sm">
+            <h2 className="text-xl font-bold mb-4">Profile</h2>
+            <div><span className="text-[#86868b]">Email:</span> {user.email}</div>
+            <div><span className="text-[#86868b]">Name:</span> {user.name}</div>
+            <div><span className="text-[#86868b]">Member since:</span> {new Date(user.createdAt).toLocaleDateString()}</div>
+            <button onClick={logout}
+              className="w-full mt-6 bg-[#86868b] hover:bg-[#6e6e73] text-white font-semibold py-3 rounded-xl transition cursor-pointer">Sign Out</button>
+          </div>
+          <div className="mt-8">
+            <h3 className="text-lg font-bold mb-4">My Orders</h3>
+            <p className="text-sm text-[#86868b]">Your order history will appear here after your first purchase.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-[#f5f5f7] text-[#1d1d1f] antialiased">
+      <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white px-6 py-20 text-center">
+        <h1 className="text-4xl font-bold mb-3">My Account</h1>
+        <p className="text-base font-light text-white/80">Manage your licenses, orders and settings.</p>
+      </div>
+      <div className="max-w-lg mx-auto px-6 py-12">
+        <div className="bg-white rounded-2xl p-8 border border-[#e8e8ed]">
+          <h2 className="text-xl font-bold mb-6 text-center">{mode === "login" ? "Sign In" : "Create Account"}</h2>
+          {error && <div className="text-sm text-red-500 mb-4 text-center">{error}</div>}
+          <form onSubmit={submit}>
+            <div className="mb-4">
+              <label className="block text-xs font-semibold mb-1.5">Email Address</label>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)}
+                placeholder="you@example.com" required
+                className="w-full p-2.5 border border-[#e8e8ed] rounded-lg text-sm bg-[#f5f5f7] focus:outline-none focus:border-[#0078d4] transition" />
+            </div>
+            {mode === "register" && (
+              <div className="mb-4">
+                <label className="block text-xs font-semibold mb-1.5">Name</label>
+                <input type="text" value={name} onChange={e => setName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full p-2.5 border border-[#e8e8ed] rounded-lg text-sm bg-[#f5f5f7] focus:outline-none focus:border-[#0078d4] transition" />
+              </div>
+            )}
+            <div className="mb-5">
+              <label className="block text-xs font-semibold mb-1.5">Password</label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)}
+                placeholder="Enter your password" required
+                className="w-full p-2.5 border border-[#e8e8ed] rounded-lg text-sm bg-[#f5f5f7] focus:outline-none focus:border-[#0078d4] transition" />
+            </div>
+            <button type="submit" disabled={loading}
+              className="w-full bg-[#0078d4] hover:bg-[#0062b1] text-white font-semibold py-3 rounded-xl transition cursor-pointer disabled:opacity-50">
+              {loading ? "Please wait..." : mode === "login" ? "Sign In" : "Create Account"}
+            </button>
+          </form>
+          <div className="text-center mt-3 text-xs">
+            <button onClick={() => setMode(mode === "login" ? "register" : "login")}
+              className="text-[#0078d4] hover:underline bg-transparent border-none p-0 cursor-pointer">
+              {mode === "login" ? "Create Account" : "Already have an account? Sign In"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

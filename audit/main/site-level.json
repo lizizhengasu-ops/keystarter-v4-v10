@@ -1,0 +1,24 @@
+{
+ "robots": "Content-Signal: search=yes, ai-train=no, use=reference\n\n# AI crawlers allowed for citation/reference (training blocked via Content-Signal)\nUser-agent: GPTBot\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: *\nAllow: /\nSitemap: https://keys-starter.com/sitemap.xml\nDisallow: /wp-admin/\nDisallow: /admin/\n",
+ "sitemapCount": 105,
+ "sitemapSample": [
+  "https://keys-starter.com/",
+  "https://keys-starter.com/products",
+  "https://keys-starter.com/account",
+  "https://keys-starter.com/blog",
+  "https://keys-starter.com/compare/oem-vs-retail",
+  "https://keys-starter.com/compare/windows-11-pro-vs-home"
+ ],
+ "sitemapSampleStatus": [
+  "200 /",
+  "200 /guide/activate-office-2019",
+  "200 /faq",
+  "200 /product/windows-11-pro-official",
+  "200 /product/win-11-iot-2024-entry",
+  "200 /product/win-10-iot-2019-high-end",
+  "200 /blog/2026-09-08-windows-ai-news-roundup",
+  "200 /blog/windows-microsoft-ai-news-2026-08-24",
+  "200 /blog/microsoft-licensing-compliance-device-manufacturers-2026",
+  "200 /blog/windows-microsoft-ai-news-2026-08-11"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-16T03:19:54.139Z",
+  "sessionId": "sess_60ef6f68-28bb-418c-9b71-68b3f54a805f",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\keystarter-v4-v10\\scripts\\build-image-variants.py",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 8,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

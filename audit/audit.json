@@ -1,0 +1,1723 @@
+[
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Genuine licenses,issued with",
+    "tag": "H1",
+    "size": "72px",
+    "weight": "700",
+    "ls": "-2.88px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Most trusted this month",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 Core",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Fresh stock, ready to issue",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "28 premium genuine licenses",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Limited-time deals",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Val",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "h": 19
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "h": 19
+   },
+   {
+    "t": "Office 2021 Professional",
+    "h": 19
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 ",
+    "h": 19
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [
+   {
+    "src": "og-cover.png",
+    "issue": "missing"
+   }
+  ],
+  "maxParaChars": 73,
+  "sectionHeights": [
+   882,
+   708,
+   612,
+   209,
+   396,
+   531,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   600
+  ],
+  "buttons": [
+   "Shop Licenses Now",
+   "Enterprise Licensing",
+   "See all 28 products",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart"
+  ],
+  "route": "/",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "All Products",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key Offic",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Home OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2019 Professional Plu",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 Core",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "SQL Svr Std RUNTIME 2022 IoT",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Val",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Hig",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "SQL Svr Std RUNTIME 2019 IoT",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Windows 11 Pro OEM Key O",
+    "h": 16
+   },
+   {
+    "t": "Windows 11 Home OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Office 2021 Professional",
+    "h": 16
+   },
+   {
+    "t": "Office 2019 Professional",
+    "h": 16
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [
+   587
+  ],
+  "buttons": [
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now"
+  ],
+  "route": "/products",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H1",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "About this license",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 73,
+  "sectionHeights": [
+   200
+  ],
+  "buttons": [
+   "Add to Cart - $18.00",
+   "Buy Now - Get Key in 10 "
+  ],
+  "route": "/product/windows-11-pro",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Genuine software, delivered ",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "A one-stop software and hard",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "One ecosystem, every license",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Experienced engineers across",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/about",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "How can we help?",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Order help",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Activation help",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Refund policy",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "License transfers",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Top questions",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Refund & guarantee",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/support",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Volume Microsoft Licensing, ",
+    "tag": "H1",
+    "size": "72px",
+    "weight": "700",
+    "ls": "-2.88px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows, Office, Server & Io",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Industries we serve",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Tell us what you need",
+    "tag": "H2",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 73,
+  "sectionHeights": [
+   585,
+   216,
+   389,
+   646
+  ],
+  "buttons": [
+   "Get a Free Custom Quote",
+   "Email admin@keys-starter",
+   "Get Quote by WhatsApp",
+   "Get Free Quote"
+  ],
+  "route": "/b2b",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Latest from KeyStarter Edito",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Hello world!",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/blog",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Frequently asked questions",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/faq",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Talk to a human",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Send us a message",
+    "tag": "H3",
+    "size": "20px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [
+   "Send Message"
+  ],
+  "route": "/contact",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Quick links",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Products",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Enterprise / B2B",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Compare",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Blog",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Support",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "FAQ",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Licensing",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Downloads",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/links",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Recent changes",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.2px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 78,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/changelog",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Downloads & delivery",
+    "tag": "H1",
+    "size": "36px",
+    "weight": "700",
+    "ls": "-0.72px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 ISO",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 ISO",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office install",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Server & SQL",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Open Microsoft →",
+    "h": 16
+   },
+   {
+    "t": "Open Microsoft →",
+    "h": 16
+   },
+   {
+    "t": "Open office.com →",
+    "h": 16
+   },
+   {
+    "t": "Open Eval Center →",
+    "h": 16
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 149,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/downloads",
+  "viewport": "desktop",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Genuine licenses,issued with",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.6px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Most trusted this month",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 Core",
+    "tag": "H3",
+    "size": "17px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Fresh stock, ready to issue",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "28 premium genuine licenses",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Limited-time deals",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Val",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "h": 19
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "h": 19
+   },
+   {
+    "t": "Office 2021 Professional",
+    "h": 19
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 ",
+    "h": 19
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [
+   {
+    "src": "og-cover.png",
+    "issue": "missing"
+   }
+  ],
+  "maxParaChars": 49,
+  "sectionHeights": [
+   1016,
+   1796,
+   785,
+   481,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   728,
+   600
+  ],
+  "buttons": [
+   "Shop Licenses Now",
+   "Enterprise Licensing",
+   "See all 28 products",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart"
+  ],
+  "route": "/",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "All Products",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Pro OEM Key Offic",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 Home OEM Key",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2021 Professional Plu",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office 2019 Professional Plu",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win Svr IoT Std 2022 16 Core",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "SQL Svr Std RUNTIME 2022 IoT",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Val",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Win 11 IoT Ent LTSC 2024 Hig",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "SQL Svr Std RUNTIME 2019 IoT",
+    "tag": "H3",
+    "size": "14px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Windows 10 Pro OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Windows 11 Pro OEM Key O",
+    "h": 16
+   },
+   {
+    "t": "Windows 11 Home OEM Key",
+    "h": 16
+   },
+   {
+    "t": "Office 2021 Professional",
+    "h": 16
+   },
+   {
+    "t": "Office 2019 Professional",
+    "h": 16
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [
+   {
+    "src": "box-sql-2019.webp",
+    "issue": "missing"
+   },
+   {
+    "src": "box-win10-home.webp",
+    "issue": "missing"
+   },
+   {
+    "src": "pic-win10-home-official.webp",
+    "issue": "missing"
+   },
+   {
+    "src": "pic-win10-home.webp",
+    "issue": "missing"
+   },
+   {
+    "src": "box-iot-win11-entry.webp",
+    "issue": "missing"
+   },
+   {
+    "src": "box-iot-win10.webp",
+    "issue": "missing"
+   }
+  ],
+  "maxParaChars": 43,
+  "sectionHeights": [
+   684
+  ],
+  "buttons": [
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now",
+   "Add to Cart",
+   "Buy Now"
+  ],
+  "route": "/products",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Windows 11 Pro OEM Key",
+    "tag": "H1",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "About this license",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [
+   185
+  ],
+  "buttons": [
+   "Add to Cart - $18.00",
+   "Buy Now - Get Key in 10 "
+  ],
+  "route": "/product/windows-11-pro",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Genuine software, delivered ",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "A one-stop software and hard",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "One ecosystem, every license",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Experienced engineers across",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 47,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/about",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "How can we help?",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Order help",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Activation help",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Refund policy",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "License transfers",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Top questions",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Refund & guarantee",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 47,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/support",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Volume Microsoft Licensing, ",
+    "tag": "H1",
+    "size": "40px",
+    "weight": "700",
+    "ls": "-1.6px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows, Office, Server & Io",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Industries we serve",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Tell us what you need",
+    "tag": "H2",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [
+   757,
+   229,
+   1020,
+   684
+  ],
+  "buttons": [
+   "Get a Free Custom Quote",
+   "Email admin@keys-starter",
+   "Get Quote by WhatsApp",
+   "Get Free Quote"
+  ],
+  "route": "/b2b",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Latest from KeyStarter Edito",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Hello world!",
+    "tag": "H3",
+    "size": "16px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/blog",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Frequently asked questions",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 47,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/faq",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Talk to a human",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Send us a message",
+    "tag": "H3",
+    "size": "20px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 47,
+  "sectionHeights": [],
+  "buttons": [
+   "Send Message"
+  ],
+  "route": "/contact",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Quick links",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Products",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Enterprise / B2B",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Compare",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Blog",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Support",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "FAQ",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Licensing",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Downloads",
+    "tag": "H3",
+    "size": "15px",
+    "weight": "400",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/links",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Recent changes",
+    "tag": "H1",
+    "size": "26px",
+    "weight": "700",
+    "ls": "-0.78px",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 43,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/changelog",
+  "viewport": "mobile",
+  "consoleErrors": []
+ },
+ {
+  "overflowX": 0,
+  "bodyFont": "Plus Jakarta Sans",
+  "bodySize": "16px",
+  "fontFamilies": [
+   "Plus Jakarta Sans",
+   "IBM Plex Mono"
+  ],
+  "headings": [
+   {
+    "t": "Downloads & delivery",
+    "tag": "H1",
+    "size": "36px",
+    "weight": "700",
+    "ls": "-0.72px",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 11 ISO",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Windows 10 ISO",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Office install",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   },
+   {
+    "t": "Server & SQL",
+    "tag": "H2",
+    "size": "18px",
+    "weight": "700",
+    "ls": "normal",
+    "ff": "Plus Jakarta Sans"
+   }
+  ],
+  "smallTargets": [
+   {
+    "t": "Open Microsoft →",
+    "h": 16
+   },
+   {
+    "t": "Open Microsoft →",
+    "h": 16
+   },
+   {
+    "t": "Open office.com →",
+    "h": 16
+   },
+   {
+    "t": "Open Eval Center →",
+    "h": 16
+   }
+  ],
+  "contrastFails": [],
+  "imgIssues": [],
+  "maxParaChars": 55,
+  "sectionHeights": [],
+  "buttons": [],
+  "route": "/downloads",
+  "viewport": "mobile",
+  "consoleErrors": []
+ }
+]

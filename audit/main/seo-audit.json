@@ -1,0 +1,783 @@
+[
+ {
+  "route": "/",
+  "status": 200,
+  "seo": {
+   "title": "KeyStarter - Buy Genuine Windows & Office Keys Online",
+   "titleLen": 53,
+   "desc": "Buy genuine Windows 11/10 Pro, Office 2021/2019, Server and IoT license keys at KeyStarter - instant email delivery, lifetime activation and 14-day refunds.",
+   "descLen": 156,
+   "canonical": "https://keys-starter.com/",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "KeyStarter - Buy Genuine Windows & Office Keys Online",
+    "og:description": "Buy genuine Windows 11/10 Pro, Office 2021/2019, Server and IoT license keys at KeyStarter - instant email delivery, lifetime activation and 14-day refunds.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Your Trusted Source for Genuine Microsoft Software",
+   "headingSkips": 3,
+   "wordCount": 2570,
+   "imgTotal": 21,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 1,
+   "imgBig": 1,
+   "linksInternal": 51,
+   "linksExternal": 2,
+   "linksNofollow": 0,
+   "widestP": 96
+  },
+  "perf": {
+   "lcpMs": 5824,
+   "ttfb": 246,
+   "load": 734,
+   "kb": 2,
+   "reqs": 22
+  }
+ },
+ {
+  "route": "/products",
+  "status": 200,
+  "seo": {
+   "title": "Buy Windows, Office, Server & SQL Product Keys - Genuine Licenses | KeyStarter",
+   "titleLen": 78,
+   "desc": "Buy genuine Windows 11/10 Pro, Office, IoT, Server and SQL license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout.",
+   "descLen": 145,
+   "canonical": "https://keys-starter.com/products",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Buy Windows, Office, Server & SQL Product Keys - Genuine Licenses | KeyStarter",
+    "og:description": "Buy genuine Windows 11/10 Pro, Office, IoT, Server and SQL license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/products",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 0,
+   "h1": "",
+   "headingSkips": 0,
+   "wordCount": 104,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 28,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 96
+  },
+  "perf": {
+   "lcpMs": 876,
+   "ttfb": 787,
+   "load": 1217,
+   "kb": 2,
+   "reqs": 23
+  }
+ },
+ {
+  "route": "/product/windows-11-pro",
+  "status": 200,
+  "seo": {
+   "title": "Buy Windows 11 Pro Key - Instant Email Delivery | KeyStarter",
+   "titleLen": 60,
+   "desc": "Genuine Windows 11 Pro key for 1 PC - lifetime activation, instant email delivery, no subscription. Authorized reseller.",
+   "descLen": 120,
+   "canonical": "https://keys-starter.com/product/windows-11-pro",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Buy Windows 11 Pro Key - Instant Email Delivery | KeyStarter",
+    "og:description": "Genuine Windows 11 Pro key for 1 PC - lifetime activation, instant email delivery, no subscription. Authorized reseller.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/product/windows-11-pro",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Product",
+    "Product"
+   ],
+   "productSchema": {
+    "hasName": true,
+    "hasImage": false,
+    "hasBrand": true,
+    "offers": {
+     "price": true,
+     "currency": "USD",
+     "availability": "https://schema.org/InStock",
+     "url": true
+    },
+    "hasRating": false
+   },
+   "h1Count": 1,
+   "h1": "Windows 11 Pro OEM Key",
+   "headingSkips": 1,
+   "wordCount": 654,
+   "imgTotal": 1,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 30,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 174
+  },
+  "perf": {
+   "lcpMs": 2160,
+   "ttfb": 203,
+   "load": 706,
+   "kb": 1,
+   "reqs": 18
+  }
+ },
+ {
+  "route": "/blog",
+  "status": 200,
+  "seo": {
+   "title": "KeyStarter Blog - Windows & Microsoft AI News and Guides | KeyStarter",
+   "titleLen": 69,
+   "desc": "Windows and Microsoft AI news, licensing guides, activation tips and buying guides from KeyStarter.",
+   "descLen": 99,
+   "canonical": "https://keys-starter.com/blog",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "KeyStarter Blog - Windows & Microsoft AI News and Guides | KeyStarter",
+    "og:description": "Windows and Microsoft AI news, licensing guides, activation tips and buying guides from KeyStarter.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/blog",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Blog",
+   "headingSkips": 1,
+   "wordCount": 1648,
+   "imgTotal": 49,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 76,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 96
+  },
+  "perf": {
+   "lcpMs": 3328,
+   "ttfb": 2342,
+   "load": 2821,
+   "kb": 2,
+   "reqs": 30
+  }
+ },
+ {
+  "route": "/about",
+  "status": 200,
+  "seo": {
+   "title": "About KeyStarter - Genuine Microsoft License Reseller",
+   "titleLen": 53,
+   "desc": "Learn about KeyStarter: genuine Microsoft license keys, instant email delivery, activation support and a 14-day refund policy.",
+   "descLen": 126,
+   "canonical": "https://keys-starter.com/about",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "About KeyStarter - Genuine Microsoft License Reseller",
+    "og:description": "Learn about KeyStarter: genuine Microsoft license keys, instant email delivery, activation support and a 14-day refund policy.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/about",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "About KeyStarter",
+   "headingSkips": 1,
+   "wordCount": 535,
+   "imgTotal": 56,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 1,
+   "linksInternal": 29,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 97
+  },
+  "perf": {
+   "lcpMs": 1012,
+   "ttfb": 195,
+   "load": 579,
+   "kb": 2,
+   "reqs": 54
+  }
+ },
+ {
+  "route": "/support",
+  "status": 200,
+  "seo": {
+   "title": "Support - KeyStarter",
+   "titleLen": 20,
+   "desc": "KeyStarter activation support and help center for Windows, Office, IoT and Server license keys.",
+   "descLen": 95,
+   "canonical": "https://keys-starter.com/support",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Support - KeyStarter",
+    "og:description": "KeyStarter activation support and help center for Windows, Office, IoT and Server license keys.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/support",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Tech Support",
+   "headingSkips": 1,
+   "wordCount": 136,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 26,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 1500,
+   "ttfb": 195,
+   "load": 592,
+   "kb": 2,
+   "reqs": 15
+  }
+ },
+ {
+  "route": "/b2b",
+  "status": 200,
+  "seo": {
+   "title": "B2B License Keys & Volume Licensing — Custom Quotes | KeyStarter",
+   "titleLen": 64,
+   "desc": "Bulk Windows, Office, IoT and Server license keys for business - genuine OEM volume pricing, compliance support and fast delivery. Get a free custom quote today.",
+   "descLen": 161,
+   "canonical": "https://keys-starter.com/b2b",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "B2B License Keys & Volume Licensing — Custom Quotes | KeyStarter",
+    "og:description": "Bulk Windows, Office, IoT and Server license keys for business - genuine OEM volume pricing, compliance support and fast delivery. Get a free custom quote today.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/b2b",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "B2B License Keys & Volume Microsoft Licensing",
+   "headingSkips": 1,
+   "wordCount": 348,
+   "imgTotal": 47,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 1,
+   "linksInternal": 29,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 96
+  },
+  "perf": {
+   "lcpMs": 1072,
+   "ttfb": 197,
+   "load": 658,
+   "kb": 2,
+   "reqs": 63
+  }
+ },
+ {
+  "route": "/faq",
+  "status": 200,
+  "seo": {
+   "title": "FAQ - Windows, Office, IoT & Server License Questions | KeyStarter",
+   "titleLen": 66,
+   "desc": "Answers to common questions about OEM keys, activation, delivery and refunds at KeyStarter.",
+   "descLen": 91,
+   "canonical": "https://keys-starter.com/faq",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "FAQ - Windows, Office, IoT & Server License Questions | KeyStarter",
+    "og:description": "Answers to common questions about OEM keys, activation, delivery and refunds at KeyStarter.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/faq",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Frequently Asked Questions",
+   "headingSkips": 1,
+   "wordCount": 123,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 26,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 696,
+   "ttfb": 615,
+   "load": 1422,
+   "kb": 2,
+   "reqs": 15
+  }
+ },
+ {
+  "route": "/contact",
+  "status": 200,
+  "seo": {
+   "title": "Contact KeyStarter - Sales & Activation Support",
+   "titleLen": 47,
+   "desc": "Contact KeyStarter for sales, volume licensing quotes and activation support.",
+   "descLen": 77,
+   "canonical": "https://keys-starter.com/contact",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Contact KeyStarter - Sales & Activation Support",
+    "og:description": "Contact KeyStarter for sales, volume licensing quotes and activation support.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/contact",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Contact Us",
+   "headingSkips": 1,
+   "wordCount": 115,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 26,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 676,
+   "ttfb": 203,
+   "load": 469,
+   "kb": 2,
+   "reqs": 16
+  }
+ },
+ {
+  "route": "/links",
+  "status": 200,
+  "seo": {
+   "title": "KeyStarter — Genuine Software Licenses",
+   "titleLen": 38,
+   "desc": "Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout.",
+   "descLen": 140,
+   "canonical": "https://keys-starter.com/links",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "KeyStarter — Genuine Software Licenses",
+    "og:description": "Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": null,
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "KeyStarter",
+   "headingSkips": 1,
+   "wordCount": 105,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 29,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 712,
+   "ttfb": 210,
+   "load": 620,
+   "kb": 2,
+   "reqs": 15
+  }
+ },
+ {
+  "route": "/privacy",
+  "status": 200,
+  "seo": {
+   "title": "Privacy Policy — How KeyStarter Protects Your Data | KeyStarter",
+   "titleLen": 63,
+   "desc": "How KeyStarter collects, uses and protects personal data: order data, analytics, cookies and your GDPR/CCPA rights.",
+   "descLen": 115,
+   "canonical": "https://keys-starter.com/privacy",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Privacy Policy — How KeyStarter Protects Your Data | KeyStarter",
+    "og:description": "How KeyStarter collects, uses and protects personal data: order data, analytics, cookies and your GDPR/CCPA rights.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/privacy",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Privacy Policy",
+   "headingSkips": 1,
+   "wordCount": 573,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 39,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 832,
+   "ttfb": 198,
+   "load": 851,
+   "kb": 2,
+   "reqs": 16
+  }
+ },
+ {
+  "route": "/terms",
+  "status": 200,
+  "seo": {
+   "title": "Terms of Service — KeyStarter Software Licensing",
+   "titleLen": 48,
+   "desc": "KeyStarter terms of service for purchasing Microsoft license keys.",
+   "descLen": 66,
+   "canonical": "https://keys-starter.com/terms",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Terms of Service — KeyStarter Software Licensing",
+    "og:description": "KeyStarter terms of service for purchasing Microsoft license keys.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/terms",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Terms of Service",
+   "headingSkips": 1,
+   "wordCount": 779,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 44,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 1012,
+   "ttfb": 196,
+   "load": 821,
+   "kb": 2,
+   "reqs": 16
+  }
+ },
+ {
+  "route": "/refund",
+  "status": 200,
+  "seo": {
+   "title": "14-Day Refund Policy — KeyStarter License Keys",
+   "titleLen": 46,
+   "desc": "KeyStarter 14-day refund policy for unused genuine Microsoft license keys.",
+   "descLen": 74,
+   "canonical": "https://keys-starter.com/refund",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "14-Day Refund Policy — KeyStarter License Keys",
+    "og:description": "KeyStarter 14-day refund policy for unused genuine Microsoft license keys.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/refund",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Refund Policy",
+   "headingSkips": 1,
+   "wordCount": 415,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 35,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 768,
+   "ttfb": 198,
+   "load": 1238,
+   "kb": 2,
+   "reqs": 16
+  }
+ },
+ {
+  "route": "/changelog",
+  "status": 200,
+  "seo": {
+   "title": "Changelog - KeyStarter",
+   "titleLen": 22,
+   "desc": "KeyStarter site and product changelog.",
+   "descLen": 38,
+   "canonical": "https://keys-starter.com/changelog",
+   "hreflang": [
+    "en",
+    "ja",
+    "ko",
+    "es",
+    "pt",
+    "fr",
+    "x-default"
+   ],
+   "robotsMeta": null,
+   "og": {
+    "og:title": "Changelog - KeyStarter",
+    "og:description": "KeyStarter site and product changelog.",
+    "og:image": "https://keys-starter.com/og-cover.png",
+    "og:url": "https://keys-starter.com/changelog",
+    "og:type": "website"
+   },
+   "twitterCard": "summary",
+   "jsonldTypes": [
+    "Organization",
+    "Organization"
+   ],
+   "h1Count": 1,
+   "h1": "Changelog",
+   "headingSkips": 1,
+   "wordCount": 136,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 26,
+   "linksExternal": 1,
+   "linksNofollow": 0,
+   "widestP": 91
+  },
+  "perf": {
+   "lcpMs": 932,
+   "ttfb": 193,
+   "load": 684,
+   "kb": 2,
+   "reqs": 15
+  }
+ },
+ {
+  "route": "/blog/windows-microsoft-ai-news-2026-09-13",
+  "status": 404,
+  "seo": {
+   "title": "",
+   "titleLen": 0,
+   "desc": null,
+   "descLen": 0,
+   "canonical": null,
+   "hreflang": [],
+   "robotsMeta": null,
+   "og": {
+    "og:title": null,
+    "og:description": null,
+    "og:image": null,
+    "og:url": null,
+    "og:type": null
+   },
+   "twitterCard": null,
+   "jsonldTypes": [],
+   "h1Count": 0,
+   "h1": "",
+   "headingSkips": 0,
+   "wordCount": 3,
+   "imgTotal": 0,
+   "imgNoAlt": 0,
+   "imgEmptyAlt": 0,
+   "imgBig": 0,
+   "linksInternal": 0,
+   "linksExternal": 0,
+   "linksNofollow": 0,
+   "widestP": 0
+  },
+  "perf": {
+   "lcpMs": 3288,
+   "ttfb": 2146,
+   "load": 2156,
+   "kb": 0,
+   "reqs": 0
+  }
+ }
+]

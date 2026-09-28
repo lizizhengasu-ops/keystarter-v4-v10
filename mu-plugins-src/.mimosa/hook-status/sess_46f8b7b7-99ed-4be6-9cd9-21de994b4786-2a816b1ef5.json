@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-15T15:04:24.060Z",
+  "sessionId": "sess_46f8b7b7-99ed-4be6-9cd9-21de994b4786",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\matrix\\tmp-install-reviews-api2.sh",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 7,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

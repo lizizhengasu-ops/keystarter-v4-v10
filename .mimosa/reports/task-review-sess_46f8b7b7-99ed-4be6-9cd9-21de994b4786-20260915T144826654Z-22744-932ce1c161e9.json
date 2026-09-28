@@ -1,0 +1,476 @@
+{
+  "schema_version": "mimosa-task-review/v2",
+  "run_id": "20260915T144826654Z-22744-932ce1c161e9",
+  "run_status": "inconclusive",
+  "errors": [
+    {
+      "stage": "bash-discovery",
+      "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/sticker-peel.tsx",
+      "reason": "bash_discovery_incomplete: project enumeration exceeded 5000 reviewable files"
+    },
+    {
+      "stage": "candidate-select",
+      "target": "src/theme/TerminalChrome.tsx",
+      "reason": "changed_file_unreadable: observed changed file no longer exists or cannot be read"
+    },
+    {
+      "stage": "baseline",
+      "target": ".",
+      "reason": "baseline_partial: baseline capture had enumeration or snapshot errors"
+    }
+  ],
+  "coverage": {
+    "schema_version": "mimosa-hook-coverage/v1",
+    "status": "partial",
+    "scope": "hook_observed_diff",
+    "baseline": {
+      "complete": false,
+      "captured_files": 17,
+      "candidate_limit": 5000,
+      "truncated": false,
+      "enumeration_error_count": 0,
+      "snapshot_error_count": 5,
+      "compensated_target_count": 16
+    },
+    "change_tracking": {
+      "touched_observed": 17,
+      "touched_retained": 17,
+      "truncated": false,
+      "bash_mutation": true,
+      "bash_discovered": 15,
+      "bash_discovery_limit": 80,
+      "bash_discovery_truncated": false
+    },
+    "candidates": {
+      "eligible_files": 16,
+      "selected_files": 16,
+      "limit": 20,
+      "truncated": false
+    },
+    "scanning": {
+      "required_files": 14,
+      "scanned_files": 14,
+      "skipped_files": 0,
+      "failed_files": 0,
+      "project_checks_required": 0,
+      "project_checks_completed": 0
+    },
+    "notification": {
+      "eligible_findings": 0,
+      "detailed_findings": 0,
+      "detail_limit": 3,
+      "truncated": false
+    },
+    "reason_counts": {
+      "bash_discovery_incomplete": 1,
+      "changed_file_unreadable": 1,
+      "baseline_partial": 1,
+      "project_check_failed": 3
+    },
+    "reasons": [
+      {
+        "code": "bash_discovery_incomplete",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/sticker-peel.tsx",
+        "detail": "project enumeration exceeded 5000 reviewable files",
+        "affects_completion": true
+      },
+      {
+        "code": "changed_file_unreadable",
+        "stage": "candidate-select",
+        "target": "src/theme/TerminalChrome.tsx",
+        "detail": "observed changed file no longer exists or cannot be read",
+        "affects_completion": true
+      },
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline capture had enumeration or snapshot errors",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/sticker-peel.tsx",
+        "detail": "bash_discovery_incomplete: project enumeration exceeded 5000 reviewable files",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "candidate-select",
+        "target": "src/theme/TerminalChrome.tsx",
+        "detail": "changed_file_unreadable: observed changed file no longer exists or cannot be read",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": ".",
+        "detail": "baseline_partial: baseline capture had enumeration or snapshot errors",
+        "affects_completion": true
+      }
+    ],
+    "reasons_truncated": false
+  },
+  "generated_at": "2026-09-15T14:48:26.654Z",
+  "session_id": "sess_46f8b7b7-99ed-4be6-9cd9-21de994b4786",
+  "target": ".",
+  "revision": "d8c055ea3c38c8782ff20d34606d9fa52ef113d0",
+  "rules_version": "unavailable",
+  "diff_hash": "dc378a792a2c59af99cb5aa72801fa468ef2c33cb4b1fb912586a91602cc08a4",
+  "diff": {
+    "algorithm": "sha256",
+    "changed_file_count": 14,
+    "changed_files": [
+      {
+        "file": "src/components/SeoManager.tsx",
+        "ranges": [
+          {
+            "start": 37,
+            "end": 37
+          },
+          {
+            "start": 39,
+            "end": 39
+          },
+          {
+            "start": 47,
+            "end": 47
+          },
+          {
+            "start": 49,
+            "end": 49
+          },
+          {
+            "start": 69,
+            "end": 71
+          },
+          {
+            "start": 74,
+            "end": 76
+          },
+          {
+            "start": 79,
+            "end": 81
+          },
+          {
+            "start": 97,
+            "end": 97
+          },
+          {
+            "start": 100,
+            "end": 104
+          },
+          {
+            "start": 170,
+            "end": 188
+          },
+          {
+            "start": 262,
+            "end": 262
+          }
+        ],
+        "before_hash": "a7bd365a451bf5336c41b5edc2548b043c7d3c79f68bff864c57a23657c3c5da",
+        "after_hash": "5eb8c97adfe8f6f6d01edee6378a17ecc9026a98ffe487c5db9bf6623ddbd3d3"
+      },
+      {
+        "file": "src/MainApp.tsx",
+        "ranges": [
+          {
+            "start": 35,
+            "end": 35
+          },
+          {
+            "start": 41,
+            "end": 55
+          },
+          {
+            "start": 101,
+            "end": 110
+          },
+          {
+            "start": 112,
+            "end": 112
+          },
+          {
+            "start": 116,
+            "end": 116
+          },
+          {
+            "start": 119,
+            "end": 123
+          },
+          {
+            "start": 173,
+            "end": 173
+          },
+          {
+            "start": 178,
+            "end": 178
+          },
+          {
+            "start": 184,
+            "end": 188
+          },
+          {
+            "start": 266,
+            "end": 266
+          },
+          {
+            "start": 283,
+            "end": 283
+          },
+          {
+            "start": 286,
+            "end": 287
+          },
+          {
+            "start": 289,
+            "end": 291
+          },
+          {
+            "start": 293,
+            "end": 298
+          }
+        ],
+        "before_hash": "0356e1b7161969f25efcf0b95f96b727c6ba68cc178c6f8a999d07f976422aa5",
+        "after_hash": "4028c21c238a134651db2d71b670d3d9ca3d7c155e0c415d0806db59aa42f860"
+      },
+      {
+        "file": "src/pages/Downloads.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 1
+          },
+          {
+            "start": 4,
+            "end": 14
+          },
+          {
+            "start": 16,
+            "end": 19
+          },
+          {
+            "start": 21,
+            "end": 24
+          },
+          {
+            "start": 26,
+            "end": 29
+          },
+          {
+            "start": 32,
+            "end": 33
+          },
+          {
+            "start": 37,
+            "end": 37
+          }
+        ],
+        "before_hash": "56d4e67176335612ec268e0fe3f54733884de96dfb71bd6b7ce808d6ff67bbd2",
+        "after_hash": "863860c9c4e6fba491235a9f211f85304962879fc83c52e817c4966b3356ec87"
+      },
+      {
+        "file": "src/pages/Store.tsx",
+        "ranges": [
+          {
+            "start": 29,
+            "end": 33
+          },
+          {
+            "start": 35,
+            "end": 36
+          },
+          {
+            "start": 45,
+            "end": 45
+          }
+        ],
+        "before_hash": "ddc2b77b6f0c78a216b0d32fbc9fa6aad0d6e7d28542e28039a7e6db2a5a0d29",
+        "after_hash": "bc2d1f09654c96490aa25990d03eb8f78b47399ace2c2043d57844132b737cea"
+      },
+      {
+        "file": "src/site-config.ts",
+        "ranges": [
+          {
+            "start": 22,
+            "end": 22
+          }
+        ],
+        "before_hash": "a62c8ca60906938d44692655aabba4ab725c693b774a49e7580b9ddac3ba2bd2",
+        "after_hash": "2ae77c8e9407a929c5c26696c72aecd2d57dae61f079f5021dbe5d627155c2a1"
+      },
+      {
+        "file": "src/theme/terminal/terminal-data.ts",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 92
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "8fb40d7a0ec34aadf174803f9874c7a62b13197bc750119f9d277633935f337e"
+      },
+      {
+        "file": "src/theme/terminal/TerminalAbout.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 54
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "61b9b6c3af5b4f13ef42d8691de689d2cc3956358683f25e09998176bd1316c6"
+      },
+      {
+        "file": "src/theme/terminal/TerminalB2bBlog.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 181
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "ef12aaee22019efe5ba0bbd8b2ae6457c6190f3556b710354900f0f60cc7eff6"
+      },
+      {
+        "file": "src/theme/terminal/TerminalChrome.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 130
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "c35f54e0e1eb4352b9524df1f18611d64968473f242db2450da7c2d2a146ea59"
+      },
+      {
+        "file": "src/theme/terminal/TerminalHome.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 361
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "3bfee42929cf35beb2c2f5907b4b50653614c4d7175eb43fd9db907876e837ed"
+      },
+      {
+        "file": "src/theme/terminal/TerminalPages.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 75
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "3eb70be74f4f32317e82c3f421bb4b1f402221cc4f18b60e7f5d9895d3892371"
+      },
+      {
+        "file": "src/theme/terminal/TerminalProduct.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 140
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "3c639fad2c0ccd153b23ebf1b165245e22e40dc790e10e10a11ef552cd33e14b"
+      },
+      {
+        "file": "src/theme/terminal/TerminalStore.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 108
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "4494323a8ceef9ddeaee8b1c0553f9059298bf1c0407d1eb1328497dca86b71d"
+      },
+      {
+        "file": "src/theme/terminal/TerminalSupportContact.tsx",
+        "ranges": [
+          {
+            "start": 1,
+            "end": 139
+          }
+        ],
+        "before_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "after_hash": "44908fb29b43954a7a63ac113383533fcb37c4decfd18913506e2339ac815f2c"
+      }
+    ]
+  },
+  "timing": {
+    "started_at": "2026-09-15T14:48:24.539Z",
+    "completed_at": "2026-09-15T14:48:26.654Z",
+    "duration_ms": 2115,
+    "measurement": "hook_wall_clock"
+  },
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0,
+    "model_calls": 0,
+    "measurement": "known-zero"
+  },
+  "telemetry": {
+    "schemaVersion": "mimosa-gate-telemetry/v1",
+    "profile": "gate",
+    "operation": "Stop",
+    "outcome": "partial/INCONCLUSIVE",
+    "latencyMs": 2115,
+    "peakMemoryBytes": 140079104,
+    "memoryMeasurement": "max-observed-process-rss",
+    "scannedFiles": 14,
+    "cache": {
+      "hits": 0,
+      "misses": 0,
+      "measurement": "not-applicable"
+    },
+    "denyCount": 0,
+    "tokens": {
+      "input": 0,
+      "output": 0,
+      "total": 0,
+      "modelCalls": 0,
+      "measurement": "known-zero"
+    }
+  },
+  "finding_count": 0,
+  "rewake_finding_count": 0,
+  "evidence_boundary": {
+    "scan": "candidate",
+    "static_fix_verification": "observed_static_only",
+    "runtime_verification": "not_performed"
+  },
+  "finding_events": [
+    {
+      "finding_id": "mimosa-63dd2befc922872f9bd200e8",
+      "file": "",
+      "line": 16,
+      "rule_id": "security",
+      "severity": "medium",
+      "category": "命令注入",
+      "status": "candidate",
+      "decision": "advisory",
+      "at": "2026-09-11T09:09:37.114Z",
+      "evidence": {
+        "kind": "source",
+        "boundary": "candidate",
+        "producer": "deterministic",
+        "source": "semgrep",
+        "evidence_hash": "ad73f1929de6177990b936d847f3ab28f9b8d47c941adccea06c8028933c4c39",
+        "runtime_oracle": false
+      }
+    }
+  ],
+  "findings": [],
+  "artifacts": {
+    "immutable_report": ".mimosa/reports/task-review-sess_46f8b7b7-99ed-4be6-9cd9-21de994b4786-20260915T144826654Z-22744-932ce1c161e9.json",
+    "latest_report": ".mimosa/reports/task-review-sess_46f8b7b7-99ed-4be6-9cd9-21de994b4786.json",
+    "history_summary": ".mimosa/history/run-20260915T144826654Z-22744-932ce1c161e9.json"
+  }
+}

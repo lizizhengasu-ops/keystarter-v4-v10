@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "mimosa-finding-ledger-batch/v1",
+  "batchId": "stop-20260909T164719046Z-28428-ffbc2881b75f",
+  "runId": "20260909T164719046Z-28428-ffbc2881b75f",
+  "runStatus": "inconclusive",
+  "coverage": {
+    "status": "partial",
+    "reasons": [
+      {
+        "code": "bash_discovery_incomplete",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/waves.tsx",
+        "detail": "project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/waves.tsx",
+        "detail": "baseline exceeded 5000 candidate files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "bash-discovery",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/waves.tsx",
+        "detail": "bash_discovery_incomplete: project enumeration exceeded 5000 reviewable files",
+        "affectsCompletion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/waves.tsx",
+        "detail": "baseline_partial: baseline exceeded 5000 candidate files",
+        "affectsCompletion": true
+      }
+    ]
+  },
+  "source": {
+    "component": "zcode-hook",
+    "operationId": "Stop"
+  },
+  "revision": "e10245e6e70651f462d4448662b7b096365bb0af",
+  "diffHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "rulesVersion": "unavailable",
+  "sessionHash": "5d46d309923856a0d7edb575038bf707edcc41e0931137f5728a43b30edbd99d",
+  "reportRef": ".mimosa/reports/task-review-sess_d18c0223-9989-4321-afdd-4a2fd4bc2552-20260909T164719046Z-28428-ffbc2881b75f.json",
+  "events": [],
+  "observedFindingIds": [],
+  "verifiedFiles": [],
+  "recordedAt": "2026-09-09T16:47:19.485Z"
+}

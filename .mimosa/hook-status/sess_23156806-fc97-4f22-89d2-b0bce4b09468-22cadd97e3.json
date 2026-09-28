@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-23T12:53:22.059Z",
+  "sessionId": "sess_23156806-fc97-4f22-89d2-b0bce4b09468",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "C:\\Users\\31961\\Documents\\Obsidian Vault\\10 Projects\\zcode-relay\\09-23-daily-blog.md",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 5,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

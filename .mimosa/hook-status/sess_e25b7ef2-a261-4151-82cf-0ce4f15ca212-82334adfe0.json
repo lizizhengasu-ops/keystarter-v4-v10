@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-15T12:57:48.296Z",
+  "sessionId": "sess_e25b7ef2-a261-4151-82cf-0ce4f15ca212",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\docs\\knowledge-base\\07-worklogs\\daily-blog-2026-09-15.md",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 5,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

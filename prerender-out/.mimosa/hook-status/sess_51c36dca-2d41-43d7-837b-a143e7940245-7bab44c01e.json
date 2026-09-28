@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-24T14:21:22.341Z",
+  "sessionId": "sess_51c36dca-2d41-43d7-837b-a143e7940245",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\reshoot-prod-20260924.py",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 12,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

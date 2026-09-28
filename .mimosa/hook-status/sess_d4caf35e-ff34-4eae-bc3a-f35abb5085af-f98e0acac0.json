@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-16T10:50:23.646Z",
+  "sessionId": "sess_d4caf35e-ff34-4eae-bc3a-f35abb5085af",
+  "event": "PostToolUse",
+  "toolName": "Edit",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\daily-blog\\build_payload_compare_20260916.py",
+  "outcome": "inconclusive",
+  "coverage": "partial",
+  "findingCount": 0,
+  "durationMs": 9,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

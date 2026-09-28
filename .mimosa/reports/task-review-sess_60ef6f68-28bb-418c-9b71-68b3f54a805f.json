@@ -1,0 +1,766 @@
+{
+  "schema_version": "mimosa-task-review/v2",
+  "run_id": "20260916T103456426Z-16052-8da295d4ee1a",
+  "run_status": "inconclusive",
+  "errors": [
+    {
+      "stage": "candidate-select",
+      "target": "src/pages/Terms.tsx",
+      "reason": "candidate_limit_exceeded: 5 changed reviewable file(s) were not scanned because the limit is 20"
+    },
+    {
+      "stage": "baseline",
+      "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/stack.tsx",
+      "reason": "baseline_partial: baseline exceeded 5000 candidate files"
+    }
+  ],
+  "coverage": {
+    "schema_version": "mimosa-hook-coverage/v1",
+    "status": "partial",
+    "scope": "hook_observed_diff",
+    "baseline": {
+      "complete": false,
+      "captured_files": 5000,
+      "candidate_limit": 5000,
+      "truncated": true,
+      "enumeration_error_count": 0,
+      "snapshot_error_count": 0,
+      "compensated_target_count": 25
+    },
+    "change_tracking": {
+      "touched_observed": 25,
+      "touched_retained": 25,
+      "truncated": false,
+      "bash_mutation": false,
+      "bash_discovered": 0,
+      "bash_discovery_limit": 80,
+      "bash_discovery_truncated": false
+    },
+    "candidates": {
+      "eligible_files": 25,
+      "selected_files": 20,
+      "limit": 20,
+      "truncated": true
+    },
+    "scanning": {
+      "required_files": 20,
+      "scanned_files": 20,
+      "skipped_files": 0,
+      "failed_files": 0,
+      "project_checks_required": 0,
+      "project_checks_completed": 0
+    },
+    "notification": {
+      "eligible_findings": 0,
+      "detailed_findings": 0,
+      "detail_limit": 3,
+      "truncated": false
+    },
+    "reason_counts": {
+      "candidate_limit_exceeded": 1,
+      "baseline_partial": 1,
+      "project_check_failed": 2
+    },
+    "reasons": [
+      {
+        "code": "candidate_limit_exceeded",
+        "stage": "candidate-select",
+        "target": "src/pages/Terms.tsx",
+        "detail": "5 changed reviewable file(s) were not scanned because the limit is 20",
+        "affects_completion": true
+      },
+      {
+        "code": "baseline_partial",
+        "stage": "baseline",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/stack.tsx",
+        "detail": "baseline exceeded 5000 candidate files",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "candidate-select",
+        "target": "src/pages/Terms.tsx",
+        "detail": "candidate_limit_exceeded: 5 changed reviewable file(s) were not scanned because the limit is 20",
+        "affects_completion": true
+      },
+      {
+        "code": "project_check_failed",
+        "stage": "baseline",
+        "target": "keystarter-v4/backup_v5.2.5_chinese_20260710-104704/src/reactbits/stack.tsx",
+        "detail": "baseline_partial: baseline exceeded 5000 candidate files",
+        "affects_completion": true
+      }
+    ],
+    "reasons_truncated": false
+  },
+  "generated_at": "2026-09-16T10:34:56.426Z",
+  "session_id": "sess_60ef6f68-28bb-418c-9b71-68b3f54a805f",
+  "target": ".",
+  "revision": "b9e020fe7ff2a1a6e9fc3eb391078310fb554084",
+  "rules_version": "unavailable",
+  "diff_hash": "2218ff984e3747c5d142e0c17f67ef2e4d3478221ce846f52a8965b84a605e01",
+  "diff": {
+    "algorithm": "sha256",
+    "changed_file_count": 20,
+    "changed_files": [
+      {
+        "file": "src/components/CookieConsent.tsx",
+        "ranges": [
+          {
+            "start": 45,
+            "end": 45
+          },
+          {
+            "start": 47,
+            "end": 47
+          }
+        ],
+        "before_hash": "538593d464577f5c4bbb44519c2e7ddfd6a0e75489ee6a7e34d94ba7aacebfb1",
+        "after_hash": "0e1eb6554807af7939a122d025ab89d9cab849d2a2ea87c26bcb5d14d9713621"
+      },
+      {
+        "file": "src/components/ProductComparison.tsx",
+        "ranges": [
+          {
+            "start": 12,
+            "end": 12
+          },
+          {
+            "start": 23,
+            "end": 23
+          },
+          {
+            "start": 28,
+            "end": 28
+          }
+        ],
+        "before_hash": "7e88c6610b6c2e5a674cf534d4cefd283da26696cc524aee7a6618b14549f542",
+        "after_hash": "9e9d0a82cc5bb714a13b7764626d44dcf0ceaff63333dc463b02e382bc058034"
+      },
+      {
+        "file": "src/components/ProductReviews.tsx",
+        "ranges": [
+          {
+            "start": 21,
+            "end": 21
+          },
+          {
+            "start": 28,
+            "end": 28
+          },
+          {
+            "start": 32,
+            "end": 32
+          },
+          {
+            "start": 37,
+            "end": 37
+          }
+        ],
+        "before_hash": "3596c6ee7e9407a0e92baad145aa6e59df24ef65878f2909b314730a9411d0ba",
+        "after_hash": "82052ea8f0ded4c32f7a2392eb48c91942e4822ce6c1cd5964d24a03259b7996"
+      },
+      {
+        "file": "src/components/ReviewForm.tsx",
+        "ranges": [
+          {
+            "start": 68,
+            "end": 68
+          }
+        ],
+        "before_hash": "364e5d85b26ecbe71a62384bdc515a15f8dfd39938b2ba29444637b494666239",
+        "after_hash": "681dcb46f90dfda5d6887910446a322af413c0ac68f3613529d0a1137ff2aef2"
+      },
+      {
+        "file": "src/components/SoftwarePortfolio.tsx",
+        "ranges": [
+          {
+            "start": 112,
+            "end": 112
+          }
+        ],
+        "before_hash": "480ecfa5bbd9725d627930cf53e7a95dea744a28ebf3f1c8250a871e919362e9",
+        "after_hash": "185e187ac169741fc33648c5eebb5b6fb7825b75860b31a453433073ecad03ab"
+      },
+      {
+        "file": "src/components/WooCartFlyout.tsx",
+        "ranges": [
+          {
+            "start": 29,
+            "end": 29
+          },
+          {
+            "start": 31,
+            "end": 31
+          },
+          {
+            "start": 43,
+            "end": 43
+          }
+        ],
+        "before_hash": "f332d53270af5ef3b61bbedac9cfeec1c374760846a49355a6fa453d2c8fb89d",
+        "after_hash": "9279e98e13d6b152ded639fff852a5344bc676e6176dd70496b5fe0c8d7c3026"
+      },
+      {
+        "file": "src/MainApp.tsx",
+        "ranges": [
+          {
+            "start": 139,
+            "end": 139
+          }
+        ],
+        "before_hash": "4028c21c238a134651db2d71b670d3d9ca3d7c155e0c415d0806db59aa42f860",
+        "after_hash": "e74c50a100fac50882557f6f444ebbd8806747eb30b72f496d334cb17a4661a8"
+      },
+      {
+        "file": "src/NavDrawer.tsx",
+        "ranges": [
+          {
+            "start": 39,
+            "end": 39
+          }
+        ],
+        "before_hash": "bbff61e583c093f29f35330c28974b3660f491ede7830abc882023ee505345fb",
+        "after_hash": "00044525e782ba7a367745556460a17824db0b0f9e60cb235505235c344847cf"
+      },
+      {
+        "file": "src/pages/Account.tsx",
+        "ranges": [
+          {
+            "start": 74,
+            "end": 74
+          },
+          {
+            "start": 98,
+            "end": 98
+          },
+          {
+            "start": 101,
+            "end": 101
+          },
+          {
+            "start": 109,
+            "end": 109
+          },
+          {
+            "start": 127,
+            "end": 127
+          },
+          {
+            "start": 145,
+            "end": 145
+          },
+          {
+            "start": 159,
+            "end": 159
+          },
+          {
+            "start": 161,
+            "end": 161
+          },
+          {
+            "start": 163,
+            "end": 163
+          },
+          {
+            "start": 189,
+            "end": 189
+          },
+          {
+            "start": 235,
+            "end": 235
+          },
+          {
+            "start": 247,
+            "end": 247
+          },
+          {
+            "start": 255,
+            "end": 255
+          },
+          {
+            "start": 260,
+            "end": 260
+          },
+          {
+            "start": 272,
+            "end": 272
+          },
+          {
+            "start": 281,
+            "end": 281
+          },
+          {
+            "start": 287,
+            "end": 287
+          }
+        ],
+        "before_hash": "a45411b7ae6b9953a6d93cdb31dd396daaa9998a86d70dc87af1a9c8639730f8",
+        "after_hash": "7190197a8f4eea776201f32e44999e40ede6d0b0569666ca18c74b83419d73e1"
+      },
+      {
+        "file": "src/pages/B2b.tsx",
+        "ranges": [
+          {
+            "start": 132,
+            "end": 132
+          },
+          {
+            "start": 138,
+            "end": 138
+          },
+          {
+            "start": 143,
+            "end": 143
+          },
+          {
+            "start": 172,
+            "end": 172
+          },
+          {
+            "start": 178,
+            "end": 178
+          },
+          {
+            "start": 208,
+            "end": 228
+          }
+        ],
+        "before_hash": "76e87a8ccb134e8023d690a61eae21bccdb802375e53747da2c515e0d38f7d58",
+        "after_hash": "475f81bd61f01ebdd7afd75b6c40696f1e00280b6bb1c9466d0ac20b8068abfb"
+      },
+      {
+        "file": "src/pages/Blog.tsx",
+        "ranges": [
+          {
+            "start": 102,
+            "end": 102
+          },
+          {
+            "start": 121,
+            "end": 121
+          },
+          {
+            "start": 161,
+            "end": 161
+          },
+          {
+            "start": 168,
+            "end": 168
+          }
+        ],
+        "before_hash": "af33c6ab28c49028239424a9e2fc964024ea03345d1e747e4708ac0e33814154",
+        "after_hash": "004b3707e1a1757f13d02e186c83a92054dc1a4bbe9deb7a35b13ae4c8ff2bd7"
+      },
+      {
+        "file": "src/pages/BlogArticle.tsx",
+        "ranges": [
+          {
+            "start": 31,
+            "end": 31
+          }
+        ],
+        "before_hash": "bd69cedb9e7f1834287ef88bec2c89b9358b24fa904c6d2d2c8df34171bf5963",
+        "after_hash": "bdcd64534b382553cdb0aa0d2e7932f2a7c205e1d400ee4608d13127e475fb6b"
+      },
+      {
+        "file": "src/pages/Cookies.tsx",
+        "ranges": [
+          {
+            "start": 27,
+            "end": 27
+          }
+        ],
+        "before_hash": "73500a27f528ba67c07a36496c55f0beb0852ee928cb98f18801b720b9c202d0",
+        "after_hash": "a97f8071f9cbaf252d88ee0228ffdce1d29208062ed6110e33f17f7cba855d04"
+      },
+      {
+        "file": "src/pages/Home.tsx",
+        "ranges": [
+          {
+            "start": 71,
+            "end": 71
+          },
+          {
+            "start": 301,
+            "end": 301
+          },
+          {
+            "start": 312,
+            "end": 312
+          },
+          {
+            "start": 340,
+            "end": 340
+          },
+          {
+            "start": 387,
+            "end": 387
+          },
+          {
+            "start": 400,
+            "end": 400
+          },
+          {
+            "start": 404,
+            "end": 404
+          },
+          {
+            "start": 408,
+            "end": 408
+          },
+          {
+            "start": 420,
+            "end": 420
+          },
+          {
+            "start": 427,
+            "end": 427
+          },
+          {
+            "start": 431,
+            "end": 431
+          },
+          {
+            "start": 447,
+            "end": 447
+          },
+          {
+            "start": 455,
+            "end": 455
+          },
+          {
+            "start": 461,
+            "end": 461
+          },
+          {
+            "start": 467,
+            "end": 467
+          },
+          {
+            "start": 473,
+            "end": 473
+          },
+          {
+            "start": 488,
+            "end": 488
+          },
+          {
+            "start": 491,
+            "end": 491
+          },
+          {
+            "start": 494,
+            "end": 494
+          },
+          {
+            "start": 499,
+            "end": 499
+          },
+          {
+            "start": 516,
+            "end": 516
+          },
+          {
+            "start": 562,
+            "end": 562
+          },
+          {
+            "start": 570,
+            "end": 571
+          },
+          {
+            "start": 577,
+            "end": 578
+          },
+          {
+            "start": 587,
+            "end": 587
+          },
+          {
+            "start": 636,
+            "end": 636
+          },
+          {
+            "start": 651,
+            "end": 651
+          },
+          {
+            "start": 679,
+            "end": 681
+          },
+          {
+            "start": 686,
+            "end": 687
+          },
+          {
+            "start": 702,
+            "end": 702
+          },
+          {
+            "start": 708,
+            "end": 709
+          },
+          {
+            "start": 714,
+            "end": 715
+          },
+          {
+            "start": 720,
+            "end": 721
+          },
+          {
+            "start": 741,
+            "end": 741
+          },
+          {
+            "start": 756,
+            "end": 756
+          },
+          {
+            "start": 771,
+            "end": 771
+          },
+          {
+            "start": 790,
+            "end": 790
+          },
+          {
+            "start": 794,
+            "end": 794
+          },
+          {
+            "start": 799,
+            "end": 799
+          },
+          {
+            "start": 819,
+            "end": 819
+          },
+          {
+            "start": 824,
+            "end": 825
+          },
+          {
+            "start": 835,
+            "end": 835
+          },
+          {
+            "start": 852,
+            "end": 852
+          }
+        ],
+        "before_hash": "fe7da8851945272d835eab3764145447b7948ef5f3a0fbab8937b07151129097",
+        "after_hash": "28f87e08f0f68ac0d45ee173becd545a803bd9693cf6e527f2372d28d65502db"
+      },
+      {
+        "file": "src/pages/Links.tsx",
+        "ranges": [
+          {
+            "start": 33,
+            "end": 33
+          },
+          {
+            "start": 49,
+            "end": 49
+          }
+        ],
+        "before_hash": "5035cf2be9c8dd905f3eb29300f70462d085a38a38726a187637261d71a07687",
+        "after_hash": "546b79d647ca126e0ce87f266ce891837c11932385e06e6aa4f3dc6954316c67"
+      },
+      {
+        "file": "src/pages/Privacy.tsx",
+        "ranges": [
+          {
+            "start": 35,
+            "end": 35
+          },
+          {
+            "start": 39,
+            "end": 39
+          },
+          {
+            "start": 137,
+            "end": 137
+          }
+        ],
+        "before_hash": "4e85c22591b735660c980b3bd7e877c334af8a5e9c9be298df8563e8802dfbb3",
+        "after_hash": "7cede4d186dd678aef88d72dd9966071776452275e8acbcdad72e4824b2fdbee"
+      },
+      {
+        "file": "src/pages/Product.tsx",
+        "ranges": [
+          {
+            "start": 42,
+            "end": 42
+          },
+          {
+            "start": 68,
+            "end": 69
+          },
+          {
+            "start": 130,
+            "end": 130
+          },
+          {
+            "start": 145,
+            "end": 145
+          },
+          {
+            "start": 153,
+            "end": 155
+          },
+          {
+            "start": 163,
+            "end": 163
+          },
+          {
+            "start": 242,
+            "end": 242
+          },
+          {
+            "start": 278,
+            "end": 278
+          },
+          {
+            "start": 292,
+            "end": 292
+          },
+          {
+            "start": 330,
+            "end": 330
+          },
+          {
+            "start": 350,
+            "end": 350
+          }
+        ],
+        "before_hash": "18502c73d5bccb9fe39a1bb63e4a1e42beef0f6bfb2f2cdacb8f23cf812e6d9d",
+        "after_hash": "0a9bcdab69997f685046e82cb05e5ee9daa7cc908823b664b39355c950b7aa41"
+      },
+      {
+        "file": "src/pages/Store.tsx",
+        "ranges": [
+          {
+            "start": 94,
+            "end": 94
+          },
+          {
+            "start": 131,
+            "end": 131
+          },
+          {
+            "start": 134,
+            "end": 134
+          },
+          {
+            "start": 136,
+            "end": 136
+          },
+          {
+            "start": 146,
+            "end": 146
+          },
+          {
+            "start": 149,
+            "end": 149
+          },
+          {
+            "start": 155,
+            "end": 155
+          },
+          {
+            "start": 157,
+            "end": 157
+          }
+        ],
+        "before_hash": "fc1a66e79c2c82eee6beb60963ac10d863fab3af2ace697743c4c03a13bae40f",
+        "after_hash": "47ded554f138446a55df5e799402578ce300435c3d709c52e27920628e65275c"
+      },
+      {
+        "file": "src/pages/Support.tsx",
+        "ranges": [
+          {
+            "start": 82,
+            "end": 82
+          },
+          {
+            "start": 88,
+            "end": 88
+          }
+        ],
+        "before_hash": "d54bb0e5ae70e3bf2c5b40221d75f0e54cf25717f7d41d0763fd7adaaf9630fa",
+        "after_hash": "5e0d2f1e9e93832278e2ef700186699c35f0727aa609e9b08793bd8e1281fe47"
+      },
+      {
+        "file": "src/SearchOverlay.tsx",
+        "ranges": [
+          {
+            "start": 55,
+            "end": 55
+          },
+          {
+            "start": 66,
+            "end": 66
+          },
+          {
+            "start": 99,
+            "end": 99
+          }
+        ],
+        "before_hash": "7f3b8a511a8bcb9237c5a8909eb07b45e827c3a205e183a3661177c366e375e5",
+        "after_hash": "893526678c02ec647644aaaac3336764a7708ed69898940ba9cf1ce733d5e682"
+      }
+    ]
+  },
+  "timing": {
+    "started_at": "2026-09-16T10:34:54.260Z",
+    "completed_at": "2026-09-16T10:34:56.426Z",
+    "duration_ms": 2166,
+    "measurement": "hook_wall_clock"
+  },
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0,
+    "model_calls": 0,
+    "measurement": "known-zero"
+  },
+  "telemetry": {
+    "schemaVersion": "mimosa-gate-telemetry/v1",
+    "profile": "gate",
+    "operation": "Stop",
+    "outcome": "partial/INCONCLUSIVE",
+    "latencyMs": 2166,
+    "peakMemoryBytes": 153333760,
+    "memoryMeasurement": "max-observed-process-rss",
+    "scannedFiles": 20,
+    "cache": {
+      "hits": 0,
+      "misses": 0,
+      "measurement": "not-applicable"
+    },
+    "denyCount": 0,
+    "tokens": {
+      "input": 0,
+      "output": 0,
+      "total": 0,
+      "modelCalls": 0,
+      "measurement": "known-zero"
+    }
+  },
+  "finding_count": 0,
+  "rewake_finding_count": 0,
+  "evidence_boundary": {
+    "scan": "candidate",
+    "static_fix_verification": "observed_static_only",
+    "runtime_verification": "not_performed"
+  },
+  "finding_events": [],
+  "findings": [],
+  "artifacts": {
+    "immutable_report": ".mimosa/reports/task-review-sess_60ef6f68-28bb-418c-9b71-68b3f54a805f-20260916T103456426Z-16052-8da295d4ee1a.json",
+    "latest_report": ".mimosa/reports/task-review-sess_60ef6f68-28bb-418c-9b71-68b3f54a805f.json",
+    "history_summary": ".mimosa/history/run-20260916T103456426Z-16052-8da295d4ee1a.json"
+  }
+}

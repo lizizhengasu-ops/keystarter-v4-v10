@@ -1,14 +1,14 @@
 {
   "schemaVersion": "mimosa-hook-status/v1",
-  "recordedAt": "2026-09-09T03:12:26.242Z",
+  "recordedAt": "2026-09-11T05:13:36.704Z",
   "sessionId": "sess_d18c0223-9989-4321-afdd-4a2fd4bc2552",
   "event": "PostToolUse",
   "toolName": "Edit",
-  "file": "src/pages/Home.tsx",
-  "outcome": "clear",
-  "coverage": "complete",
+  "file": "C:\\Users\\31961\\Documents\\zcode-workspace\\microsoft web\\scripts\\matrix\\p3-screenshot-designs.js",
+  "outcome": "inconclusive",
+  "coverage": "partial",
   "findingCount": 0,
-  "durationMs": 14,
+  "durationMs": 9,
   "hostState": "hook_complete",
   "reportHint": ".mimosa/reports/"
 }
