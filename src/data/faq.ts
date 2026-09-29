@@ -4,7 +4,7 @@ import { SITE } from "../site-config";
 export interface FAQItem { q: string; a: string; }
 export const GENERIC_FAQS: FAQItem[] = [
   {q:"How long does delivery take?", a:"Delivery is instant -- your license key is sent via email within minutes after payment confirmation, and in most cases within 10 minutes."},
-  {q:"Is this a genuine license?", a:"Yes. All licenses sold on KeyStarter are 100% genuine. OEM keys are sourced from authorized Microsoft partners."},
+  {q:"Is this a genuine license?", a:"Yes. All licenses sold on KeyStarter are 100% genuine. OEM keys are sourced from vetted Microsoft partners."},
   {q:"Will I receive a physical disc or USB?", a:"No physical media is included. You will receive a digital license key via email."},
   {q:"Can I use this on multiple computers?", a:"Each license is for one device only."},
   {q:"Do you offer refunds?", a:"We offer refunds within 14 days of purchase if your key was not delivered or is invalid and cannot be replaced. Contact " + SITE.supportEmail + " for activation issues."}
@@ -47,7 +47,7 @@ export const FAQ_BY_SERIES: Record<string, FAQItem[]> = {
 // Site-wide FAQ (also rendered by /faq and emitted as FAQPage JSON-LD)
 export const SITE_FAQS: FAQItem[] = [
   {q:"How do I activate my license?", a:"Your license key is emailed immediately after purchase. Follow the activation guide included in the email, or see the activation guides on our blog and support center."},
-  {q:"Is this a genuine Microsoft product?", a:"Yes. KeyStarter is a Microsoft-authorized supply chain partner. All licenses are genuine, verified and activated before delivery."},
+  {q:"Is this a genuine Microsoft product?", a:"Yes. KeyStarter is a Microsoft software supply chain partner. All licenses are genuine, verified and activated before delivery."},
   {q:"How long does delivery take?", a:"Delivery is instant. License keys are sent via email within minutes of payment confirmation, and in most cases within 10 minutes."},
   {q:"Can I get a refund?", a:"Keys that fail to activate through no fault of the buyer are replaced free of charge or refunded within 14 days of purchase."},
   {q:"Do you offer volume pricing?", a:"Yes. Volume discounts start at 5 keys and orders above 10 keys qualify for tiered pricing. Our B2B team delivers custom quotes within 24 hours."},
