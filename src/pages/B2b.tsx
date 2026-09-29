@@ -146,7 +146,7 @@ export default function B2bPage() {
         </div>
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-2">Licensing Portfolio - Windows, Office, Server &amp; IoT</h2>
-          <p className="text-xs text-[#6e6e73] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through authorized channels. All B2B orders include compliance documentation and audit support.</p>
+          <p className="text-xs text-[#6e6e73] mb-8">Windows, Linux, Kylin and UOS operating systems, plus middleware, databases, office and security, backup, CAD and cloud through vetted supply channels. All B2B orders include compliance documentation and audit support.</p>
           <SoftwarePortfolio />
         </div>
         <div className="mb-16">

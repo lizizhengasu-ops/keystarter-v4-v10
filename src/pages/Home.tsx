@@ -317,7 +317,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
 
       <QuickAnswer>
         <p>
-          <strong>KeyStarter is a third-party reseller of genuine Microsoft software licenses for individuals and businesses.</strong> Every Windows, Office, IoT and Server key is sourced through authorized channels, delivered by email within 10 minutes, and backed by a 14-day refund policy if activation fails. Businesses get volume pricing from 5 keys, VAT invoices, PO purchasing and compliance documentation — individuals get instant checkout. Browse the catalog below or request a <a href="/b2b" className="text-[#7c3aed] hover:underline">volume quote</a>.
+          <strong>KeyStarter is a third-party reseller of genuine Microsoft software licenses for individuals and businesses.</strong> Every Windows, Office, IoT and Server key is sourced through vetted supply channels, delivered by email within 10 minutes, and backed by a 14-day refund policy if activation fails. Businesses get volume pricing from 5 keys, VAT invoices, PO purchasing and compliance documentation — individuals get instant checkout. Browse the catalog below or request a <a href="/b2b" className="text-[#7c3aed] hover:underline">volume quote</a>.
         </p>
       </QuickAnswer>
 
