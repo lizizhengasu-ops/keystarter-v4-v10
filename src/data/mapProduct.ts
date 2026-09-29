@@ -78,6 +78,10 @@ export interface SPAProduct {
 export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProduct[]> {
   const langSuffix = lang !== "en" ? `?lang=${lang}&per_page=100` : "?per_page=100";
   const apiPath = useV3 ? "/wp-json/wc/v3/products" : "/wp-json/wc/store/v1/products";
+  // 2026-09-29 data hygiene: QA SKUs must never reach the storefront grid.
+  // The Store API ignores catalog visibility (WC 11.1 verified — hidden
+  // products still returned), so filter at the consumer.
+  const QA_SLUGS = new Set(["testms", "testms2"]);
 
    try {
     const res = await fetch(`${api(apiPath)}${langSuffix}`, {
@@ -85,10 +89,12 @@ export async function fetchProducts(lang = "en", useV3 = false): Promise<SPAProd
     });
      if (!res.ok) throw new Error(`HTTP ${res.status}`);
      const data = await res.json();
-     
+
      if (!Array.isArray(data)) return [];
      const mapper = useV3 ? mapV3Product : mapStoreProduct;
-     return data.map(mapper).filter(Boolean) as SPAProduct[];
+    return (data as { slug?: string }[])
+      .filter((p) => !QA_SLUGS.has(p.slug ?? ""))
+      .map(mapper).filter(Boolean) as SPAProduct[];
    } catch (err) {
      console.warn("fetchProducts failed, using local fallback:", err);
      return localProducts.map(p => ({

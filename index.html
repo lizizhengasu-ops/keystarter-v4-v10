@@ -19,7 +19,8 @@
   <link rel="icon" type="image/svg+xml" href="/keystarter-logo.svg" />
   <link rel="apple-touch-icon" href="/keystarter-logo.svg" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-800.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400.woff2" crossorigin>
+  <!-- 2026-09-29: inter-400 preload removed (PSI ①) — LCP 字体 800 独占关键带宽，400 改由 CSS 发现；
+       桌面 FCP 与手机 CLS 需在 PSI 回归中观察（AGENTS.md PSI/CWV 守护 §6） -->
  <title>KeyStarter — Genuine Software Licenses</title>
   <meta name="description" content="Buy genuine Windows 11/10 Pro, Office, IoT and Server license keys at KeyStarter. Instant email delivery, lifetime support, secure checkout." />
   <meta property="og:site_name" content="KeyStarter" />

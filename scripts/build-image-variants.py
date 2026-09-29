@@ -14,7 +14,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 MAP_FILE = ROOT / "src" / "data" / "product-images.ts"
 IMG_DIR = ROOT / "public" / "assets" / "images"
-WIDTHS = (320, 640)
+WIDTHS = (320, 480, 640)
 
 
 def image_paths():
