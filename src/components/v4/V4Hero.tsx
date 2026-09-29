@@ -12,7 +12,7 @@ export default function V4Hero() {
           Genuine Licenses,<br/>Delivered Instantly.
         </h1>
         <p className="text-lg sm:text-xl text-[#86868b] font-normal mb-8 max-w-2xl mx-auto leading-relaxed">
-          Authorized Microsoft software reseller. 10 core SKUs in stock, delivered within 10 minutes. 
+          Genuine Microsoft software licenses. 10 core SKUs in stock, delivered within 10 minutes.
           Built for enterprise compliance audits and power users.
         </p>
 
