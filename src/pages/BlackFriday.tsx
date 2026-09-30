@@ -66,12 +66,12 @@ export default function BlackFriday(): React.ReactElement {
           ))}
         </div>
 
-        <h2 className="text-2xl font-bold mb-2">What to expect on Black Friday</h2>
-        <p className="text-[#9ca3af] mb-6">
+        <h2 className="text-2xl font-bold mb-2 text-center">What to expect on Black Friday</h2>
+        <p className="text-[#9ca3af] mb-6 text-center">
           Early-access list members get first pick of our limited stock of Windows and Office keys.
           Everyone else sees whatever is left. Deals apply to the catalog below:
         </p>
-        <div className="grid sm:grid-cols-2 gap-4" data-testid="bf-deals">
+        <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto" data-testid="bf-deals">
           {DEALS.map((d) => (
             <Link
               key={d.to}
@@ -85,8 +85,8 @@ export default function BlackFriday(): React.ReactElement {
           ))}
         </div>
 
-        <h2 className="text-2xl font-bold mt-12 mb-4">Black Friday FAQ</h2>
-        <div className="space-y-4 max-w-3xl">
+        <h2 className="text-2xl font-bold mt-12 mb-4 text-center">Black Friday FAQ</h2>
+        <div className="space-y-4 max-w-3xl mx-auto">
           <div className="bg-[#111827] rounded-xl p-4 border border-[#1f2937]">
             <h3 className="font-semibold mb-1">When do the deals go live?</h3>
             <p className="text-sm text-[#9ca3af]">Black Friday, November 27, 2026. Early-access list members receive the links first, by email.</p>
