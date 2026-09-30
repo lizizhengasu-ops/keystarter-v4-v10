@@ -19,6 +19,7 @@ import NavDrawer from "./NavDrawer";
 import WhatsAppButton from "./components/WhatsAppButton";
 const NotFound = lazy(() => import("./pages/NotFound"));
 const FaqPage = lazy(() => import("./pages/Faq"));
+const BlackFridayPage = lazy(() => import("./pages/BlackFriday"));
 const ContactPage = lazy(() => import("./pages/Contact"));
 // B1785212195_1743202026
 const AccountPage = lazy(() => import("./pages/Account"));
@@ -293,6 +294,7 @@ export default function App() {
             <Route path="/blog" element={KS_TERMINAL ? <TerminalBlogPage /> : <BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
             <Route path="/faq" element={KS_TERMINAL ? <TerminalFaqPage /> : <FaqPage />} />
+            <Route path="/black-friday" element={<BlackFridayPage />} />
             <Route path="/contact" element={KS_TERMINAL ? <TerminalContactPage /> : <ContactPage />} />
             <Route path="/about" element={KS_TERMINAL ? <TerminalAboutPage /> : <AboutPage />} />
             <Route path="/changelog" element={KS_TERMINAL ? <TerminalChangelogPage /> : <ChangelogPage />} />
