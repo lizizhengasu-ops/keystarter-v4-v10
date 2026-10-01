@@ -74,6 +74,11 @@ const ROUTE_META: Record<string, PageMeta> = {
     description:
       "Answers to common questions about KeyStarter license keys, delivery and activation.",
   },
+  "/black-friday": {
+    title: "Black Friday 2026 — Microsoft Key Deals, Early Access | KeyStarter",
+    description:
+      "Join the Black Friday 2026 early-access list: genuine Windows and Office license keys at Black Friday prices, instant email delivery and a 14-day refund guarantee.",
+  },
   "/contact": {
     title: "Contact — KeyStarter",
     description: "Contact KeyStarter support for order and licensing questions.",

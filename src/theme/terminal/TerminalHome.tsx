@@ -77,9 +77,9 @@ export default function TerminalHome() {
       {/* HERO */}
       <section className="hero kst-hero" id="kst-hero">
         <div className="wrap kst-hero-in">
-          <span className="eyebrow">Authorized Microsoft partner</span>
+          <span className="eyebrow">Genuine Microsoft licenses</span>
           <h1 className="h1">Genuine licenses,<br /><span style={{ color: "var(--ks-accent)" }}>issued with certainty.</span></h1>
-          <p className="lead">Windows, Office, IoT and Server keys from authorized channels. Verified activation, instant email delivery and a 14-day refund guarantee.</p>
+          <p className="lead">Windows, Office, IoT and Server keys. Verified activation, instant email delivery and a 14-day refund guarantee.</p>
           <div className="kst-cta">
             <Link className="btn btn-accent btn-lg" to="/products">Shop Licenses Now</Link>
             <Link className="btn btn-ghost btn-lg" to="/b2b">Enterprise Licensing</Link>

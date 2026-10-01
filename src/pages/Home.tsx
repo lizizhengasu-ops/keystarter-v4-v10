@@ -9,6 +9,7 @@ import { TESTIMONIALS } from '../data/testimonials';
 import { CLIENTS } from '../data/clients';
 import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { QuickAnswer } from "../components/QuickAnswer";
+import BFHomeModule from "../components/bf/BFHomeModule";
 import { HOME_FAQS } from "../data/home-faqs";
 import { useCart } from "../data/CartContext";
 import { products } from "../data/products";
@@ -241,6 +242,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
               <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : t("home.enterprise.hero_title")}</span>
               <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : t("home.enterprise.hero_desc")}</span>
               <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : t("home.enterprise.hero_cta")}</button>
+              <a href="/black-friday" className="inline-flex items-center gap-1 bg-white text-[#7c3aed] text-xs font-bold px-3.5 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0 whitespace-nowrap">🔥 Black Friday early access →</a>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -288,7 +290,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </div>
 
           {heroPersona==="retail" && (
-            <p className="text-white/75 text-xs mb-8 -mt-4">
+            <p className="text-white/75 text-xs mb-8 -mt-4 mx-auto w-fit text-center">
               Genuine Windows &amp; Office keys from <span className="text-white font-bold">${Math.min(...products.filter((p) => !p.slug.startsWith("test")).map((p) => p.p))}</span> — instant email delivery, 14-day refund guarantee
             </p>
           )}
@@ -315,9 +317,11 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
       </section>
 
+      <BFHomeModule />
+
       <QuickAnswer>
         <p>
-          <strong>KeyStarter is a third-party reseller of genuine Microsoft software licenses for individuals and businesses.</strong> Every Windows, Office, IoT and Server key is sourced through authorized channels, delivered by email within 10 minutes, and backed by a 14-day refund policy if activation fails. Businesses get volume pricing from 5 keys, VAT invoices, PO purchasing and compliance documentation — individuals get instant checkout. Browse the catalog below or request a <a href="/b2b" className="text-[#7c3aed] hover:underline">volume quote</a>.
+          <strong>KeyStarter is a third-party reseller of genuine Microsoft software licenses for individuals and businesses.</strong> Every Windows, Office, IoT and Server key is sourced through vetted supply channels, delivered by email within 10 minutes, and backed by a 14-day refund policy if activation fails. Businesses get volume pricing from 5 keys, VAT invoices, PO purchasing and compliance documentation — individuals get instant checkout. Browse the catalog below or request a <a href="/b2b" className="text-[#7c3aed] hover:underline">volume quote</a>.
         </p>
       </QuickAnswer>
 

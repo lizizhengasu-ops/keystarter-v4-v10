@@ -13,6 +13,6 @@ export const HOME_FAQS: FAQItem[] = [
   },
   {
     q: "My company faces a compliance audit. Can these keys pass official SAM Audit?",
-    a: "Yes! We provide enterprise procurement with Microsoft compliance statements and authorized receipts (invoices supported). Our compliance team offers one-on-one legal support throughout any audit.",
+    a: "Yes! We provide enterprise procurement with Microsoft compliance statements and official receipts (invoices supported). Our compliance team offers one-on-one legal support throughout any audit.",
   },
 ];

@@ -11,7 +11,7 @@ export default function FaqPage() {
         <p className="text-[#86868b] mb-10">{t("faq.desc")}</p>
         <QuickAnswer>
           <p>
-            <strong>KeyStarter answers delivery, licensing, refund and activation questions on this page.</strong> In short: keys arrive by email within minutes of payment, every license is genuine and sourced through authorized channels, each key activates one device, volume discounts start at 5 keys, and keys that fail to activate are replaced free of charge or refunded within 14 days. The full answers are below.
+            <strong>KeyStarter answers delivery, licensing, refund and activation questions on this page.</strong> In short: keys arrive by email within minutes of payment, every license is genuine and sourced through vetted supply channels, each key activates one device, volume discounts start at 5 keys, and keys that fail to activate are replaced free of charge or refunded within 14 days. The full answers are below.
           </p>
         </QuickAnswer>
         <div className="mt-8 space-y-3">
