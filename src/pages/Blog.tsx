@@ -56,9 +56,12 @@ export default function BlogPage() {
   };
 
   const filtered = useMemo(() => {
+    // Posts without a slug (e.g. untranslated polylang copies) would render
+    // /blog/null links that crawlers keep hitting; drop them at the source.
+    const list = posts.filter((p) => !!p.slug);
     const q = query.trim().toLowerCase();
-    if (!q) return posts;
-    return posts.filter((p) =>
+    if (!q) return list;
+    return list.filter((p) =>
       (p.title.rendered + " " + stripTags(p.excerpt.rendered)).toLowerCase().includes(q)
     );
   }, [posts, query]);

@@ -30,7 +30,10 @@ const ROUTES = ['/', '/products', '/about', '/support', '/b2b', '/faq', '/contac
   // product cards (WooCommerce API render), gate requires >=3 card links.
   '/product-category/windows', '/product-category/office', '/product-category/server-sql', '/product-category/iot-enterprise',
   // v3 (2026-09-25, full-site audit): secondary routes whose crawler view was a bare shell
-  '/cookies', '/disclaimer', '/downloads', '/licensing', '/store'];
+  '/cookies', '/disclaimer', '/downloads', '/licensing', '/store',
+  // v4 (2026-09-29): /blog list — was an orphaned stale snapshot outside the
+  // pipeline; cards render client-side from wp-json so they need a content signal.
+  '/blog'];
 const SLUGS_FILE = 'audit/main/product-slugs.txt';
 
 (async () => {
@@ -67,6 +70,11 @@ const SLUGS_FILE = 'audit/main/product-slugs.txt';
       } else if (t.isCategory || t.out === 'products') {
         await page.waitForSelector('a[href^="/product/"]', { timeout: 25000 });
         await page.waitForTimeout(2000); // let remaining card data settle
+      } else if (t.out === 'blog') {
+        // blog list cards render client-side from wp-json; wait for the first
+        // card link or the capture ships an empty list shell.
+        await page.waitForSelector('a[href^="/blog/"]', { timeout: 25000 });
+        await page.waitForTimeout(2000);
       } else {
         await page.waitForTimeout(3000);
       }
