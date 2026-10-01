@@ -255,7 +255,7 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       {/* Hero Section - Platinum Digital Style */}
       <section id="hero" className="relative min-h-[560px] flex items-center justify-center overflow-hidden bg-[#161617] pt-32 pb-20">
         <div className="absolute inset-0 overflow-hidden">
-          <img className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] hero-hd-zoom" src="/videos/enterprise-bg-hd.webp" alt="" fetchPriority="high" />
+          <img className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] hero-hd-zoom" src="/videos/enterprise-bg-hd.webp" alt="" fetchPriority="high" loading={typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches ? "eager" : "lazy"} />
           <div className="absolute inset-0 bg-gradient-to-b from-[#161617]/65 via-[#161617]/50 to-[#161617]/75" />
           <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.45)] pointer-events-none" />
         </div>
