@@ -9,6 +9,7 @@ import { TESTIMONIALS } from '../data/testimonials';
 import { CLIENTS } from '../data/clients';
 import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { QuickAnswer } from "../components/QuickAnswer";
+import BFHomeModule from "../components/bf/BFHomeModule";
 import { HOME_FAQS } from "../data/home-faqs";
 import { useCart } from "../data/CartContext";
 import { products } from "../data/products";
@@ -315,6 +316,8 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
           </div>
         </div>
       </section>
+
+      <BFHomeModule />
 
       <QuickAnswer>
         <p>
