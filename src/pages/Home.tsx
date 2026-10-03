@@ -7,6 +7,7 @@ import Portal from '../Portal';
 import { useTranslation } from 'react-i18next';
 import { TESTIMONIALS } from '../data/testimonials';
 import { CLIENTS } from '../data/clients';
+import { BLOG_ARTICLES } from "../data/blog-articles";
 import SoftwarePortfolio from '../components/SoftwarePortfolio';
 import { QuickAnswer } from "../components/QuickAnswer";
 import BFHomeModule from "../components/bf/BFHomeModule";
@@ -89,7 +90,17 @@ export default function App() {
   }, []);
 const [activeTab, setActiveTab] = useState('all');
  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
- const [blogPosts, setBlogPosts] = useState<any[]>([]);
+ // Render-decoupling (61857242, pageseed 2026-10-01): blog cards render from
+ // the bundled local catalog immediately — the posts API only refreshes them.
+ // Cold-API first visitors no longer see an empty section (cold LCP lever).
+ const [blogPosts, setBlogPosts] = useState<any[]>((() => {
+  try {
+    return Object.entries(BLOG_ARTICLES)
+      .map(([slug, a]) => ({ id: slug, link: a.url, title: { rendered: a.title }, excerpt: { rendered: a.description }, _dm: a.dateModified || "" }))
+      .sort((a, b) => b._dm.localeCompare(a._dm))
+      .slice(0, 3);
+  } catch { return []; }
+ })());
   const [showOffer, setShowOffer] = useState(true);
   useEffect(() => {
     const id = window.requestIdleCallback(() => {
@@ -394,7 +405,10 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         </div>
         <div className="relative">
           <div className="flex animate-scroll gap-4 px-4" style={{width:"max-content"}}>
-            {[...TESTIMONIALS,...TESTIMONIALS].map((t,i) => (
+            {/* Content slimming (2026-10-01, user-approved): 24 reviews x2 marquee
+                copies = 48 cards was the heaviest single chunk of home HTML.
+                6 reviews x2 keeps the loop seamless at ~1/4 the nodes. */}
+            {[...TESTIMONIALS.slice(0,6),...TESTIMONIALS.slice(0,6)].map((t,i) => (
               <div key={i} className="flex-shrink-0 w-[300px] sm:w-[340px] bg-[#f5f5f7] rounded-2xl p-5 border border-[#e8e8ed]">
                 <div className="text-yellow-500 text-sm mb-2">
                   {[...Array(5)].map((_,s) => (
