@@ -174,7 +174,9 @@ function setJsonLd(nodes: object | object[] | null) {
         ((j["@graph"] || [j]) as { "@type"?: string }[]).forEach((n) => {
           if (
             n &&
-            (n["@type"] === "BlogPosting" || n["@type"] === "FAQPage") &&
+            (n["@type"] === "BlogPosting" ||
+              n["@type"] === "FAQPage" ||
+              n["@type"] === "BreadcrumbList") &&
             !absorbed[n["@type"]]
           ) {
             absorbed[n["@type"]] = n;
