@@ -194,6 +194,7 @@ function Layout({ children }: { children: any }) {
           <div>
             <h2 className="text-[13px] font-bold uppercase tracking-wider text-white mb-4">{t("nav.products")}</h2>
             <div className="space-y-2">
+              <Link to="/black-friday" className="block text-sm font-semibold text-orange-400 underline underline-offset-4 decoration-orange-400/40 hover:text-orange-300 hover:decoration-orange-300 transition">{t("footer.black_friday", "🔥 Black Friday early access")}</Link>
               <Link to="/products" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">Products</Link>
               <a href="/#store" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("nav.store")}</a>
               <Link to="/b2b" className="block text-sm font-medium text-white underline underline-offset-4 decoration-white/30 hover:decoration-[#c4b5fd] hover:text-[#c4b5fd] transition">{t("nav.enterprise")}</Link>
