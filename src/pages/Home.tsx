@@ -260,7 +260,6 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
         <div className="relative bg-gradient-to-r from-[#7c3aed] to-[#7c3aed] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3 text-sm">
-             <span className="hidden sm:inline text-lg">🔥</span>
               <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : t("home.enterprise.hero_title")}</span>
               <span className="hidden sm:inline text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : t("home.enterprise.hero_desc")}</span>
               <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : t("home.enterprise.hero_cta")}</button>
