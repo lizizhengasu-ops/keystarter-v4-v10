@@ -79,14 +79,26 @@ const TRUST_ITEMS = [
   { icon: "ssl", bg: "#7c3aed", title: "SSL Encrypted", desc: "256-bit TLS encrypted checkout" }
 ];
 
+// Safari (all versions, incl. iOS 27) never shipped requestIdleCallback — an
+// unguarded call inside the first useEffect throws during React's initial
+// mount and blanks the whole page (iOS Safari white screen, 2026-10-08).
+const whenIdle = (fn: () => void, timeout = 3000): (() => void) => {
+  const w = window as any;
+  if (typeof w.requestIdleCallback === "function") {
+    const id = w.requestIdleCallback(fn, { timeout });
+    return () => { if (typeof w.cancelIdleCallback === "function") w.cancelIdleCallback(id); };
+  }
+  const id = window.setTimeout(fn, 200);
+  return () => window.clearTimeout(id);
+};
+
 export default function App() {
   const { t } = useTranslation();
   const [apiProducts, setApiProducts] = useState<SPAProduct[] | null>(null);
   useEffect(() => {
-    const id = window.requestIdleCallback(() => {
+    return whenIdle(() => {
       fetchProducts().then(setApiProducts).catch(function(e){console.warn("API fetch failed:",e)});
-    }, { timeout: 3000 });
-    return () => window.cancelIdleCallback(id);
+    });
   }, []);
 const [activeTab, setActiveTab] = useState('all');
  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
@@ -103,13 +115,12 @@ const [activeTab, setActiveTab] = useState('all');
  })());
   const [showOffer, setShowOffer] = useState(true);
   useEffect(() => {
-    const id = window.requestIdleCallback(() => {
+    return whenIdle(() => {
       fetch(api("/wp-json/wp/v2/posts?per_page=3"))
         .then((r) => r.json())
         .then(setBlogPosts)
         .catch(() => {});
-    }, { timeout: 3000 });
-    return () => window.cancelIdleCallback(id);
+    });
   }, []);
   
   const { addToCart, buyNow } = useCart();
