@@ -405,21 +405,21 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
       </section>
       )}
 
-{/* Testimonials Carousel */}
-      <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] overflow-hidden ${heroPersona!=="retail"?"persona-hidden":""}`}>
+{/* Testimonials (B-phase2, 2026-10-04 user-approved): marquee replaced by a
+    static grid of 6 reviews — removes the scroll animation and 12 duplicated
+    cards entirely. Full 24-review dataset stays in src/data/testimonials.ts
+    for a future dedicated reviews page. */}
+      <section id="testimonials" className={`py-12 bg-white border-b border-[#f5f5f7] ${heroPersona!=="retail"?"persona-hidden":""}`}>
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="text-xs font-semibold text-[#7c3aed] tracking-wider uppercase">Why Our Customers Trust Us</span>
             <h2 className="text-2xl font-bold tracking-tight text-[#1d1d1f] mt-2">Real reviews from verified buyers</h2>
           </div>
         </div>
-        <div className="relative">
-          <div className="flex animate-scroll gap-4 px-4" style={{width:"max-content"}}>
-            {/* Content slimming (2026-10-01, user-approved): 24 reviews x2 marquee
-                copies = 48 cards was the heaviest single chunk of home HTML.
-                6 reviews x2 keeps the loop seamless at ~1/4 the nodes. */}
-            {[...TESTIMONIALS.slice(0,6),...TESTIMONIALS.slice(0,6)].map((t,i) => (
-              <div key={i} className="flex-shrink-0 w-[300px] sm:w-[340px] bg-[#f5f5f7] rounded-2xl p-5 border border-[#e8e8ed]">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {TESTIMONIALS.slice(0,6).map((t,i) => (
+              <div key={i} className="bg-[#f5f5f7] rounded-2xl p-5 border border-[#e8e8ed]">
                 <div className="text-yellow-500 text-sm mb-2">
                   {[...Array(5)].map((_,s) => (
                     <span key={s} className={s < t.stars ? "text-yellow-500" : "text-gray-300"}>
