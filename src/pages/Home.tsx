@@ -262,9 +262,9 @@ const filteredSkus = PREMIUM_SKUS.filter(sku =>
             <div className="flex items-center gap-3 text-sm">
              <span className="hidden sm:inline text-lg">🔥</span>
               <span className="font-semibold whitespace-nowrap">{heroPersona==="retail" ? t("home.offer.title") : t("home.enterprise.hero_title")}</span>
-              <span className="text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : t("home.enterprise.hero_desc")}</span>
+              <span className="hidden sm:inline text-white/80">{heroPersona==="retail" ? t("home.offer.desc") : t("home.enterprise.hero_desc")}</span>
               <button onClick={() => heroPersona==="retail" ? scrollToSection("special-offer") : window.location.href="/b2b#enterprise-b2b"} className="bg-white text-[#7c3aed] text-xs font-bold px-4 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0">{heroPersona==="retail" ? t("home.offer.cta") : t("home.enterprise.hero_cta")}</button>
-              <a href="/black-friday" className="inline-flex items-center gap-1 bg-white text-[#7c3aed] text-xs font-bold px-3.5 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0 whitespace-nowrap">🔥 Black Friday early access →</a>
+              <a href="/black-friday" className="hidden lg:inline-flex items-center gap-1 bg-white text-[#7c3aed] text-xs font-bold px-3.5 py-1.5 rounded-full hover:bg-blue-50 transition flex-shrink-0 whitespace-nowrap">🔥 Black Friday early access →</a>
             </div>
             <button onClick={() => setShowOffer(false)} className="text-white/50 hover:text-white transition ml-2 flex-shrink-0" aria-label={t("home.offer.dismiss")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
