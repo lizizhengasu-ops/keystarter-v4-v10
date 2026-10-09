@@ -130,7 +130,18 @@ function buildSitemap(baseXml, articles, products) {
       }
     }
   }
-  const articleBlocks = articles.map(
+  // 2026-10-10 (GSC coverage triage): these expired-news slugs are noindexed at
+  // the edge (worker NOINDEX_BLOG_SLUGS + Rank Math) - a sitemap must not list
+  // noindexed URLs, so keep them out of every regeneration.
+  const EXCLUDED_SLUGS = new Set([
+    "windows-microsoft-ai-news-2026-09-15",
+    "windows-microsoft-ai-news-2026-09-18",
+    "windows-microsoft-ai-news-2026-09-21",
+    "windows-11-tips-tricks-2026-09-15",
+  ]);
+  const articleBlocks = articles
+    .filter((a) => !EXCLUDED_SLUGS.has(a.slug))
+    .map(
     (a) =>
       `<url><loc>${a.url}</loc><lastmod>${a.dateModified.slice(0, 10)}</lastmod><priority>0.6</priority></url>`
   );
