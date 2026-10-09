@@ -118,9 +118,22 @@ function buildTs(articles) {
 function buildSitemap(baseXml, articles, products) {
   const base = baseXml.replace(/[\s\S]*<urlset[^>]*>/, "").replace(/<\/urlset>\s*$/, "");
   const blocks = [];
+  // 2026-10-10: these /guide/ pages 301 to their /blog/ twins (GSC coverage
+  // triage) - a sitemap must not list redirecting URLs. The base sitemap in
+  // some worktrees still carries them, so drop them on every regeneration.
+  const EXCLUDED_URLS = new Set([
+    "https://keys-starter.com/guide/digital-license-vs-product-key",
+    "https://keys-starter.com/guide/multilingual-region-keys",
+    "https://keys-starter.com/guide/windows-server-2025-licensing",
+    "https://keys-starter.com/guide/sql-server-2022-licensing",
+    "https://keys-starter.com/guide/activate-windows-error-codes",
+    "https://keys-starter.com/guide/activate-office-2021",
+  ]);
   const prodMod = new Map(products.map((p) => [p.slug, p.lastmod]));
   for (const block of base.matchAll(/<url>[\s\S]*?<\/url>/g)) {
     const b = block[0];
+    const loc = b.match(/<loc>([^<]+)<\/loc>/)?.[1] || "";
+    if (EXCLUDED_URLS.has(loc)) continue;
     if (!/https:\/\/keys-starter\.com\/blog\/[a-z0-9-]+/.test(b)) {
       const pm = b.match(/https:\/\/keys-starter\.com\/product\/([a-z0-9-]+)/);
       if (pm && prodMod.has(pm[1]) && prodMod.get(pm[1])) {
